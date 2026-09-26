@@ -1,0 +1,64 @@
+---
+title: "Qu'est-ce qu'un langage de programmation ?"
+---
+
+Un **langage de programmation** est un ensemble de règles et de symboles qui permettent de donner des instructions à un ordinateur. C'est un intermédiaire entre vous (l'humain) et la machine.
+
+Un ordinateur ne comprend que le **langage binaire** (des suites de 0 et de 1). Écrire directement dans ce langage serait extrêmement fastidieux. Les langages de programmation ont donc été créés pour **s'approcher du langage humain** tout en restant compréhensibles par la machine.
+
+## Ce qu'un langage de programmation permet
+
+- **Automatiser** des tâches répétitives
+- **Traiter** de grandes quantités de données
+- **Créer** des applications, des sites web, des analyses
+- **Résoudre** des problèmes de manière logique et structurée
+
+## Les différents langages de programmation
+
+Il existe des **centaines** de langages, chacun avec ses forces et ses usages. On peut les classer selon plusieurs critères.
+
+### Selon le niveau d'abstraction
+
+| Niveau | Description | Exemples |
+|---|---|---|
+| **Bas niveau** | Proche de la machine, peu abstrait, difficile à lire | Assembleur, C |
+| **Haut niveau** | Proche du langage humain, facile à lire | Python, JavaScript |
+
+Plus un langage est **haut niveau**, plus il est **facile à apprendre** et à écrire.
+
+### Selon le mode d'exécution
+
+| Type | Fonctionnement | Exemples |
+|---|---|---|
+| **Compilé** | Le code est traduit en une fois avant exécution | C, C++, Java |
+| **Interprété** | Le code est traduit ligne par ligne pendant l'exécution | Python, JavaScript, R |
+
+Les langages **interprétés** sont plus **interactifs** et **plus faciles à tester** : on voit immédiatement le résultat.
+
+{{< video https://minio.lab.sspcloud.fr/fabienhos/manim_animations/CompileVsInterprete.mp4 >}}
+
+### Selon le paradigme (la façon de penser le programme)
+
+- **Impératif / Procédural** : on décrit *comment* faire, étape par étape (C, Pascal)
+- **Orienté objet** : on organise le code autour d'objets (Java, C++, Python)
+- **Fonctionnel** : on décrit *quoi* faire, avec des fonctions (OCaml, Haskell)
+- **Déclaratif** : on décrit le problème sans dire comment le résoudre (SQL)
+
+**Python est multi-paradigme** : il supporte l'impératif, l'objet et le fonctionnel.
+
+### Quelques langages courants et leurs usages
+
+| Langage | Usage principal |
+|---|---|
+| **Python** | Data science, IA, scripts, web |
+| **JavaScript** | Sites web interactifs |
+| **Java** | Applications d'entreprise |
+| **C / C++** | Systèmes, jeux vidéo |
+| **R** | Statistiques, recherche |
+| **SQL** | Bases de données |
+
+## Pour aller plus loin
+
+- [Python — Qu'est-ce que Python ? (python.org)](https://www.python.org/doc/essays/blurb/)
+- [Wikipédia — Langage de programmation](https://fr.wikipedia.org/wiki/Langage_de_programmation)
+- [Wikipédia — Paradigme de programmation](https://fr.wikipedia.org/wiki/Paradigme_(programmation))
