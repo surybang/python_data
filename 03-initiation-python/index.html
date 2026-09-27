@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index – Python &amp; data</title>
+<title>Initiation à Python – Python &amp; data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -266,12 +266,16 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Accueil</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../01-introduction/index.html" aria-current="page"> 
+    <a class="nav-link active" href="../01-introduction/01-langages.html" aria-current="page"> 
 <span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../02-environnement/index.html"> 
 <span class="menu-text">Environnement</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../03-initiation-python/index.html"> 
+<span class="menu-text">Initiation Python</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -292,7 +296,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-introduction/index.html">Introduction</a></li><li class="breadcrumb-item"><a href="../01-introduction/index.html">index.html</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation à Python</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -321,12 +325,6 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../01-introduction/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">index.html</span></a>
-  </div>
-</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
@@ -379,12 +377,41 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Pour aller plus loin</span></a>
+ <span class="menu-text">Initiation Python</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Initiation à Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/01-variables-et-types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables et types de base</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/02-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pour aller plus loin</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="https://github.com/surybang/python-data" class="sidebar-item-text sidebar-link">
@@ -398,18 +425,74 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#variables-et-types" id="toc-variables-et-types" class="nav-link active" data-scroll-target="#variables-et-types">1. Variables et types</a></li>
+  <li><a href="#conditions-et-boucles" id="toc-conditions-et-boucles" class="nav-link" data-scroll-target="#conditions-et-boucles">2. Conditions et boucles</a></li>
+  <li><a href="#fonctions" id="toc-fonctions" class="nav-link" data-scroll-target="#fonctions">3. Fonctions</a></li>
+  <li><a href="#listes-dictionnaires-et-fichiers" id="toc-listes-dictionnaires-et-fichiers" class="nav-link" data-scroll-target="#listes-dictionnaires-et-fichiers">4. Listes, dictionnaires et fichiers</a></li>
+  <li><a href="#comment-ce-module-est-organisé" id="toc-comment-ce-module-est-organisé" class="nav-link" data-scroll-target="#comment-ce-module-est-organisé">Comment ce module est organisé</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-introduction/index.html">Introduction</a></li><li class="breadcrumb-item"><a href="../01-introduction/index.html">index.html</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation à Python</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Initiation à Python</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
 
+<section id="variables-et-types" class="level3">
+<h3 class="anchored" data-anchor-id="variables-et-types">1. Variables et types</h3>
+<p>Un programme doit <strong>stocker des informations</strong> : c’est le rôle des variables. Nous verrons ici comment en créer, quels sont les <strong>types de base</strong> en Python (entiers, flottants, chaînes, booléens), et comment les afficher ou les demander à l’utilisateur.</p>
+<p><em>Notions clés : variables, <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>print()</code>, <code>input()</code></em></p>
+</section>
+<section id="conditions-et-boucles" class="level3">
+<h3 class="anchored" data-anchor-id="conditions-et-boucles">2. Conditions et boucles</h3>
+<p>Un programme doit pouvoir <strong>prendre des décisions</strong> et <strong>répéter des actions</strong>. Vous apprendrez les instructions <code>if</code>, <code>elif</code>, <code>else</code>, ainsi que les boucles <code>for</code> et <code>while</code>. C’est le moment où vos programmes deviennent réellement utiles.</p>
+<p><em>Notions clés : <code>if</code>/<code>elif</code>/<code>else</code>, opérateurs logiques, <code>for</code>, <code>while</code>, indentation</em></p>
+</section>
+<section id="fonctions" class="level3">
+<h3 class="anchored" data-anchor-id="fonctions">3. Fonctions</h3>
+<p>Écrire tout son code en vrac devient vite ingérable. Les <strong>fonctions</strong> permettent de découper un programme en blocs réutilisables, nommés et documentés. C’est une étape décisive vers du code propre.</p>
+<p><em>Notions clés : <code>def</code>, paramètres, <code>return</code>, portée des variables, docstrings</em></p>
+</section>
+<section id="listes-dictionnaires-et-fichiers" class="level3">
+<h3 class="anchored" data-anchor-id="listes-dictionnaires-et-fichiers">4. Listes, dictionnaires et fichiers</h3>
+<p>Les données réelles ne sont pas des valeurs isolées : ce sont des <strong>collections</strong>. Vous apprendrez à manipuler des listes et des dictionnaires, et à lire/écrire dans des fichiers. C’est la porte d’entrée vers la manipulation de données.</p>
+<p><em>Notions clés : listes, indexation, slicing, dictionnaires, <code>open()</code>, <code>with</code></em></p>
+</section>
+<section id="comment-ce-module-est-organisé" class="level2">
+<h2 class="anchored" data-anchor-id="comment-ce-module-est-organisé">Comment ce module est organisé</h2>
+<p>Chaque notion est présentée dans une page dédiée, qui contient :</p>
+<ul>
+<li><strong>Une explication courte</strong> du concept, avec des exemples concrets.</li>
+<li><strong>Des cellules de code exécutables</strong>, que vous pouvez modifier et relancer.</li>
+<li><strong>Des exercices</strong> à faire vous-même, avec un squelette de code à compléter.</li>
+<li><strong>Une correction</strong> (à consulter après avoir essayé).</li>
+</ul>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

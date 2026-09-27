@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Environnement de travail – Python &amp; data</title>
+<title>Variables et types de base – Python &amp; data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -296,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-environnement/index.html">Environnement</a></li><li class="breadcrumb-item"><a href="../02-environnement/index.html">Environnement de travail</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/01-variables-et-types.html">Variables et types de base</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -350,7 +385,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Environnement de travail</span></a>
   </div>
 </li>
@@ -391,7 +426,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/01-variables-et-types.html" class="sidebar-item-text sidebar-link">
+  <a href="../03-initiation-python/01-variables-et-types.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Variables et types de base</span></a>
   </div>
 </li>
@@ -430,17 +465,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#au-programme" id="toc-au-programme" class="nav-link active" data-scroll-target="#au-programme">Au programme</a></li>
+  <li><a href="#cest-quoi-une-variable" id="toc-cest-quoi-une-variable" class="nav-link active" data-scroll-target="#cest-quoi-une-variable">C’est quoi une <strong>variable</strong> ?</a>
+  <ul class="collapse">
+  <li><a href="#le-typage-dynamique" id="toc-le-typage-dynamique" class="nav-link" data-scroll-target="#le-typage-dynamique">Le typage dynamique</a></li>
+  </ul></li>
+  <li><a href="#les-types-de-base-en-python" id="toc-les-types-de-base-en-python" class="nav-link" data-scroll-target="#les-types-de-base-en-python">Les types de base en Python</a></li>
+  <li><a href="#opérations-de-base" id="toc-opérations-de-base" class="nav-link" data-scroll-target="#opérations-de-base">Opérations de base</a>
+  <ul class="collapse">
+  <li><a href="#opérations-arithmétiques" id="toc-opérations-arithmétiques" class="nav-link" data-scroll-target="#opérations-arithmétiques">Opérations arithmétiques</a></li>
+  <li><a href="#priorité-des-opérations" id="toc-priorité-des-opérations" class="nav-link" data-scroll-target="#priorité-des-opérations">Priorité des opérations</a></li>
+  </ul></li>
+  <li><a href="#opérations-sur-les-chaînes-de-caractères" id="toc-opérations-sur-les-chaînes-de-caractères" class="nav-link" data-scroll-target="#opérations-sur-les-chaînes-de-caractères">Opérations sur les chaînes de caractères</a>
+  <ul class="collapse">
+  <li><a href="#concaténation-avec" id="toc-concaténation-avec" class="nav-link" data-scroll-target="#concaténation-avec">Concaténation avec <code>+</code></a></li>
+  <li><a href="#répétition-avec" id="toc-répétition-avec" class="nav-link" data-scroll-target="#répétition-avec">Répétition avec *</a></li>
+  </ul></li>
+  <li><a href="#opérations-de-comparaison" id="toc-opérations-de-comparaison" class="nav-link" data-scroll-target="#opérations-de-comparaison">Opérations de comparaison</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="variables-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="variables-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-environnement/index.html">Environnement</a></li><li class="breadcrumb-item"><a href="../02-environnement/index.html">Environnement de travail</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/01-variables-et-types.html">Variables et types de base</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Environnement de travail</h1>
+<h1 class="title">Variables et types de base</h1>
 </div>
 
 
@@ -457,55 +507,305 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Pour écrire et exécuter du code Python, il vous faut un <strong>environnement de travail</strong>. Il en existe deux grandes familles :</p>
-<ol type="1">
-<li><strong>En local</strong> : Python est installé directement sur votre ordinateur.</li>
-<li><strong>Dans le cloud (en ligne)</strong> : Python s’exécute sur un serveur distant, accessible depuis votre navigateur.</li>
-</ol>
-<p>Aucune des deux approches n’est “meilleure” dans l’absolu. Le choix dépend de votre situation :</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Situation</th>
-<th>Recommandation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Vous ne voulez/pouvez rien installer</td>
-<td><strong>Cloud</strong> (Colab, SSPCloud)</td>
-</tr>
-<tr class="even">
-<td>Vous n’avez pas d’ordinateur puissant</td>
-<td><strong>Cloud</strong></td>
-</tr>
-<tr class="odd">
-<td>Vous voulez travailler hors ligne</td>
-<td><strong>Local</strong></td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-tips">
+<p>Pour accéder aux notebooks d’exercices c’est ici 👇</p>
+<p><a href="https://colab.research.google.com/github/surybang/python-data/blob/main/notebooks/02-variables-types-operations.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB01_premiers_pas%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&amp;init.personalInitArgs=%C2%AB02-variables-types-operations%C2%BB"><img src="https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode.png" class="img-fluid" alt="Open In SSP Cloud"></a></p>
+</div>
+<section id="cest-quoi-une-variable" class="level2">
+<h2 class="anchored" data-anchor-id="cest-quoi-une-variable">C’est quoi une <strong>variable</strong> ?</h2>
+<p>Une variable, c’est une <strong>boîte étiquetée</strong> dans laquelle on range une valeur. On lui donne un nom, et ce nom permet de retrouver la valeur plus tard.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Jessica"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>taille <span class="op">=</span> <span class="fl">1.75</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>majeur <span class="op">=</span> <span class="va">True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ici, on a créé quatre variables :</p>
+<ul>
+<li><code>age</code> contient 25</li>
+<li><code>prenom</code> contient “Jessica”</li>
+<li><code>taille</code> contient 1.75</li>
+<li><code>majeur</code> contient True</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Pour ce cours
+<span class="screen-reader-only">Note</span>Le signe = n’est pas une égalité
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Nous utiliserons principalement le <strong>SSPCloud</strong> ou <strong>Google Colab</strong> (un cloud français pour l’enseignement et la recherche), car il est préconfiguré et ne nécessite aucune installation. Mais il est important de connaître les autres options, car vous les rencontrerez dans votre vie professionnelle.</p>
-<p>Vous pourrez accéder aux codes en utilisant les icônes comme ci-dessous.</p>
-<p><a href="https://colab.research.google.com"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/jupyter-python?autoLaunch=true&amp;init.personalInit=..."><img src="https://img.shields.io/badge/SSPCloud-Launch-blue.png" class="img-fluid" alt="Launch SSPCloud"></a></p>
+<p>En Python, <code>age = 25</code> ne veut pas dire « age est égal à 25 », mais « on range 25 dans la variable age ». C’est une affectation.</p>
+<p>C’est pour ça que <code>x = x + 1</code> est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on range le résultat dans x.</p>
 </div>
 </div>
-<section id="au-programme" class="level2">
-<h2 class="anchored" data-anchor-id="au-programme">Au programme</h2>
-<ul>
-<li><strong><a href="../02-environnement/01-local.html">Installer Python en local</a></strong>.</li>
-<li><strong><a href="../02-environnement/02-cloud.html">Les environnements cloud</a></strong>.</li>
-</ul>
+<section id="le-typage-dynamique" class="level3">
+<h3 class="anchored" data-anchor-id="le-typage-dynamique">Le typage dynamique</h3>
+<p>En <code>Python</code>, on ne déclare pas le type d’une variable. On écrit simplement <code>age = 25</code>, et l’interpreteur déduit le type à partir de la valeur.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span>         <span class="co"># x est un entier (int)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">"bonjour"</span> <span class="co"># x est maintenant une chaîne (string)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">3.14</span>      <span class="co"># x est maintenant un flottant (float)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Le type est attaché à la valeur et non pas à la variable.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Une liberté qui a un prix
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Une nuance importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le discours « Python ne vérifie pas les types » est vrai <strong>pour le langage lui-même</strong>. L’interpréteur Python ignore les annotations de type : <code>x: int = "bonjour"</code> ne lève aucune erreur.</p>
+<p>Mais certains <strong>packages</strong> s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de <strong>Pydantic</strong> (très utilisé en data science et dans les API), de <strong>Typeguard</strong> et de <strong>Beartype</strong>. Avec ces outils, une annotation devient une <strong>contrainte réelle</strong> : si la valeur ne respecte pas le type, une erreur est levée.</p>
+<p>Donc : le type hint est un <strong>indice</strong> pour Python, mais il peut devenir une <strong>règle</strong> pour certaines bibliothèques.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="les-types-de-base-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="les-types-de-base-en-python">Les types de base en Python</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Nom Python</th>
+<th>Exemples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nombre entier</td>
+<td><code>int</code></td>
+<td><code>42</code>, <code>-7</code>, <code>0</code></td>
+</tr>
+<tr class="even">
+<td>Nombre à virgule</td>
+<td><code>float</code></td>
+<td><code>3.14</code>, <code>-0.5</code>, <code>2.0</code></td>
+</tr>
+<tr class="odd">
+<td>Chaîne de caractères</td>
+<td><code>str</code></td>
+<td><code>"bonjour"</code>, <code>'Alice'</code></td>
+</tr>
+<tr class="even">
+<td>Booléen</td>
+<td><code>bool</code></td>
+<td><code>True</code>, <code>False</code></td>
+</tr>
+</tbody>
+</table>
+<p>On peut vérifier le type d’une variable avec la fonction <code>type()</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(age))       <span class="co"># &lt;class 'int'&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Jessica"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(prenom))    <span class="co"># &lt;class 'str'&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="opérations-de-base" class="level2">
+<h2 class="anchored" data-anchor-id="opérations-de-base">Opérations de base</h2>
+<p>Une fois qu’on sait stocker des valeurs dans des variables, il faut pouvoir <strong>les manipuler</strong>. Python fournit un ensemble d’opérateurs pour effectuer des calculs, concaténer des chaînes, ou comparer des valeurs.</p>
+<section id="opérations-arithmétiques" class="level3">
+<h3 class="anchored" data-anchor-id="opérations-arithmétiques">Opérations arithmétiques</h3>
+<p>Les opérateurs arithmétiques s’appliquent aux nombres (<code>int</code> et <code>float</code>).</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Opérateur</th>
+<th>Signification</th>
+<th>Exemple</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td>Addition</td>
+<td><code>7 + 3</code></td>
+<td><code>10</code></td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td>Soustraction</td>
+<td><code>7 - 3</code></td>
+<td><code>4</code></td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>Multiplication</td>
+<td><code>7 * 3</code></td>
+<td><code>21</code></td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td>Division</td>
+<td><code>7 / 3</code></td>
+<td><code>2.333...</code></td>
+</tr>
+<tr class="odd">
+<td><code>//</code></td>
+<td>Division entière</td>
+<td><code>7 // 3</code></td>
+<td><code>2</code></td>
+</tr>
+<tr class="even">
+<td><code>%</code></td>
+<td>Modulo (reste)</td>
+<td><code>7 % 3</code></td>
+<td><code>1</code></td>
+</tr>
+<tr class="odd">
+<td><code>**</code></td>
+<td>Puissance</td>
+<td><code>7 ** 3</code></td>
+<td><code>343</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">+</span> b)   <span class="co"># 13</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">-</span> b)   <span class="co"># 7</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">*</span> b)   <span class="co"># 30</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">/</span> b)   <span class="co"># 3.3333333333333335</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">//</span> b)  <span class="co"># 3</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">%</span> b)   <span class="co"># 1</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">**</span> b)  <span class="co"># 1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Division et division entière : deux opérateurs distincts</p>
+<p>En Python, / renvoie toujours un flottant, même quand le résultat est un nombre entier :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span>)   <span class="co"># 5.0 (et non 5)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si vous voulez un résultat entier, utilisez // :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">//</span> <span class="dv">2</span>)  <span class="co"># 5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="priorité-des-opérations" class="level3">
+<h3 class="anchored" data-anchor-id="priorité-des-opérations">Priorité des opérations</h3>
+<p>Python respecte les règles de priorité habituelles des mathématiques :</p>
+<ol type="1">
+<li>Parenthèses ()</li>
+<li>Puissance **</li>
+<li>Multiplication, division, division entière, modulo (*, /, //, %)</li>
+<li>Addition, soustraction (+, -)</li>
+</ol>
+<p>En cas de doute, <strong>utilisez des parenthèses.</strong> Elles ne coûtent rien et rendent le code plus lisible.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span>)      <span class="co"># 14 (et non 20)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((<span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span>) <span class="op">*</span> <span class="dv">4</span>)    <span class="co"># 20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="opérations-sur-les-chaînes-de-caractères" class="level2">
+<h2 class="anchored" data-anchor-id="opérations-sur-les-chaînes-de-caractères">Opérations sur les chaînes de caractères</h2>
+<p>les chaine sde caratères (<code>str</code>) supportent principalement deux types d’opérations : la <strong>concaténation</strong> et la <strong>répétition</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Jessica"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>nom <span class="op">=</span> <span class="st">"Hyde"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="concaténation-avec" class="level3">
+<h3 class="anchored" data-anchor-id="concaténation-avec">Concaténation avec <code>+</code></h3>
+<p>nom_complet = prenom + ” ” + nom print(nom_complet) # Jessica Hyde</p>
+</section>
+<section id="répétition-avec" class="level3">
+<h3 class="anchored" data-anchor-id="répétition-avec">Répétition avec *</h3>
+<p>print(“ha” * 3) # hahaha</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>On ne mélange pas les types</p>
+<p>On ne peut pas additionner une chaine avec un nombre directement.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"J'ai "</span> <span class="op">+</span> age <span class="op">+</span> <span class="st">" ans"</span>) <span class="co"># ❌ TypeError</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Il faut <strong>convertir</strong> l’entier en chaîne avec la méthode <code>str()</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"J'ai "</span> <span class="op">+</span> <span class="bu">str</span>(age) <span class="op">+</span> <span class="st">" ans"</span>)  <span class="co"># 🆗 J'ai 25 ans</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nous verrons les autres conversions de type plus tard dans le cours.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="opérations-de-comparaison" class="level2">
+<h2 class="anchored" data-anchor-id="opérations-de-comparaison">Opérations de comparaison</h2>
+<p>Les opérateurs de comparaison renvoient un booléen (<code>True</code> ou <code>False</code>).</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Opérateur</th>
+<th>Signification</th>
+<th>Exemple</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>Égal à</td>
+<td><code>5 == 5</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>Différent de</td>
+<td><code>5 != 3</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td>Inférieur à</td>
+<td><code>5 &lt; 3</code></td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td><code>&gt;</code></td>
+<td>Supérieur à</td>
+<td><code>5 &gt; 3</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;=</code></td>
+<td>Inférieur ou égal</td>
+<td><code>5 &lt;= 5</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td>Supérieur ou égal</td>
+<td><code>5 &gt;= 6</code></td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">==</span> <span class="dv">5</span>)     <span class="co"># True</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">!=</span> <span class="dv">3</span>)     <span class="co"># True</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">&gt;</span> <span class="dv">3</span>)     <span class="co"># True</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">&lt;=</span> <span class="dv">3</span>)    <span class="co"># False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

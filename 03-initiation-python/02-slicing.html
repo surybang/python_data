@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Environnement de travail – Python &amp; data</title>
+<title>Le slicing – Python &amp; data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -296,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-environnement/index.html">Environnement</a></li><li class="breadcrumb-item"><a href="../02-environnement/index.html">Environnement de travail</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/02-slicing.html">Le slicing</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -350,7 +385,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Environnement de travail</span></a>
   </div>
 </li>
@@ -397,7 +432,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/02-slicing.html" class="sidebar-item-text sidebar-link">
+  <a href="../03-initiation-python/02-slicing.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Le slicing</span></a>
   </div>
 </li>
@@ -430,7 +465,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#au-programme" id="toc-au-programme" class="nav-link active" data-scroll-target="#au-programme">Au programme</a></li>
+  <li><a href="#index-positif-et-index-négatif" id="toc-index-positif-et-index-négatif" class="nav-link active" data-scroll-target="#index-positif-et-index-négatif">Index positif et index négatif</a></li>
+  <li><a href="#slicing-de-base-debutfin" id="toc-slicing-de-base-debutfin" class="nav-link" data-scroll-target="#slicing-de-base-debutfin">Slicing de base : <code>[debut:fin]</code></a></li>
+  <li><a href="#omettre-debut-ou-fin" id="toc-omettre-debut-ou-fin" class="nav-link" data-scroll-target="#omettre-debut-ou-fin">Omettre <code>debut</code> ou <code>fin</code></a></li>
+  <li><a href="#index-négatifs-dans-le-slicing" id="toc-index-négatifs-dans-le-slicing" class="nav-link" data-scroll-target="#index-négatifs-dans-le-slicing">Index négatifs dans le slicing</a></li>
+  <li><a href="#le-pas-debutfinpas" id="toc-le-pas-debutfinpas" class="nav-link" data-scroll-target="#le-pas-debutfinpas">Le pas : <code>[debut:fin:pas]</code></a></li>
+  <li><a href="#slicing-et-copie" id="toc-slicing-et-copie" class="nav-link" data-scroll-target="#slicing-et-copie">Slicing et copie</a></li>
   </ul>
 </nav>
     </div>
@@ -438,9 +478,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-environnement/index.html">Environnement</a></li><li class="breadcrumb-item"><a href="../02-environnement/index.html">Environnement de travail</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/02-slicing.html">Le slicing</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Environnement de travail</h1>
+<h1 class="title">Le slicing</h1>
 </div>
 
 
@@ -457,55 +497,86 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Pour écrire et exécuter du code Python, il vous faut un <strong>environnement de travail</strong>. Il en existe deux grandes familles :</p>
-<ol type="1">
-<li><strong>En local</strong> : Python est installé directement sur votre ordinateur.</li>
-<li><strong>Dans le cloud (en ligne)</strong> : Python s’exécute sur un serveur distant, accessible depuis votre navigateur.</li>
-</ol>
-<p>Aucune des deux approches n’est “meilleure” dans l’absolu. Le choix dépend de votre situation :</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Situation</th>
-<th>Recommandation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Vous ne voulez/pouvez rien installer</td>
-<td><strong>Cloud</strong> (Colab, SSPCloud)</td>
-</tr>
-<tr class="even">
-<td>Vous n’avez pas d’ordinateur puissant</td>
-<td><strong>Cloud</strong></td>
-</tr>
-<tr class="odd">
-<td>Vous voulez travailler hors ligne</td>
-<td><strong>Local</strong></td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-tips">
+<p>Pour accéder aux notebooks d’exercices c’est ici 👇</p>
+<p><a href="https://colab.research.google.com/github/surybang/python-data/blob/main/notebooks/03-slicing.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB01_premiers_pas%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&amp;init.personalInitArgs=%C2%AB03-slicing%C2%BB"><img src="https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode.png" class="img-fluid" alt="Open In SSP Cloud"></a></p>
+</div>
+<p>Le <strong>slicing</strong> (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :</p>
+<pre><code>sequence[debut:fin:pas]</code></pre>
+<ul>
+<li><code>debut</code> : index du premier élément inclus (par défaut : 0)</li>
+<li><code>fin</code> : index du premier élément <strong>exclu</strong> (par défaut : fin de la séquence)</li>
+<li><code>pas</code> : le saut entre chaque élément (par défaut : 1)</li>
+</ul>
+<hr>
+<section id="index-positif-et-index-négatif" class="level2">
+<h2 class="anchored" data-anchor-id="index-positif-et-index-négatif">Index positif et index négatif</h2>
+<p>Chaque élément d’une séquence possède <strong>deux index</strong> : un positif (de gauche à droite, à partir de 0) et un négatif (de droite à gauche, à partir de -1).</p>
+<pre><code>mot   =  P    y    t    h    o    n
+index   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]
+index   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]</code></pre>
+<p>L’index négatif permet d’accéder aux éléments <strong>depuis la fin</strong>, sans connaître la longueur de la séquence.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mot <span class="op">=</span> <span class="st">"Python"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mot[<span class="dv">0</span>]    <span class="co"># 'P'</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mot[<span class="op">-</span><span class="dv">1</span>]   <span class="co"># 'n' (le dernier)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mot[<span class="op">-</span><span class="dv">2</span>]   <span class="co"># 'o' (l'avant-dernier)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="slicing-de-base-debutfin" class="level2">
+<h2 class="anchored" data-anchor-id="slicing-de-base-debutfin">Slicing de base : <code>[debut:fin]</code></h2>
+<p><code>sequence[debut:fin]</code> renvoie les éléments de l’index <code>debut</code> <strong>inclus</strong> jusqu’à <code>fin</code> <strong>exclu</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mot <span class="op">=</span> <span class="st">"Python"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mot[<span class="dv">0</span>:<span class="dv">3</span>]   <span class="co"># "Pyt"  → index 0, 1, 2</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mot[<span class="dv">2</span>:<span class="dv">5</span>]   <span class="co"># "tho"  → index 2, 3, 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Astuce</strong> : <code>fin - debut</code> donne le nombre d’éléments extraits.</p>
+<hr>
+</section>
+<section id="omettre-debut-ou-fin" class="level2">
+<h2 class="anchored" data-anchor-id="omettre-debut-ou-fin">Omettre <code>debut</code> ou <code>fin</code></h2>
+<p>Quand on omet <code>debut</code>, Python part du début. Quand on omet <code>fin</code>, il va jusqu’à la fin.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mot[:<span class="dv">3</span>]    <span class="co"># "Pyt"     → depuis le début</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mot[<span class="dv">3</span>:]    <span class="co"># "hon"     → jusqu'à la fin</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mot[:]     <span class="co"># "Python"  → copie complète</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="index-négatifs-dans-le-slicing" class="level2">
+<h2 class="anchored" data-anchor-id="index-négatifs-dans-le-slicing">Index négatifs dans le slicing</h2>
+<p>Les index négatifs fonctionnent aussi dans les slices. Très pratique pour raisonner « depuis la fin » sans connaître la longueur.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mot[<span class="op">-</span><span class="dv">3</span>:]     <span class="co"># "hon"    → les 3 derniers</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mot[:<span class="op">-</span><span class="dv">3</span>]     <span class="co"># "Pyt"    → tout sauf les 3 derniers</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>mot[<span class="op">-</span><span class="dv">4</span>:<span class="op">-</span><span class="dv">1</span>]   <span class="co"># "tho"    → du 4e au 2e en partant de la fin</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="le-pas-debutfinpas" class="level2">
+<h2 class="anchored" data-anchor-id="le-pas-debutfinpas">Le pas : <code>[debut:fin:pas]</code></h2>
+<p>Le troisième paramètre contrôle le <strong>saut</strong> entre les éléments sélectionnés.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nombres <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>nombres[::<span class="dv">2</span>]    <span class="co"># [0, 2, 4, 6, 8]       → un sur deux</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>nombres[<span class="dv">1</span>::<span class="dv">2</span>]   <span class="co"># [1, 3, 5, 7, 9]       → un sur deux, à partir de 1</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>nombres[::<span class="dv">3</span>]    <span class="co"># [0, 3, 6, 9]          → un sur trois</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>nombres[::<span class="op">-</span><span class="dv">1</span>]   <span class="co"># [9, 8, 7, ..., 0]     → inverser la séquence</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>[::-1]</code> est <strong>l’idiome Python</strong> pour inverser une séquence.</p>
+<hr>
+</section>
+<section id="slicing-et-copie" class="level2">
+<h2 class="anchored" data-anchor-id="slicing-et-copie">Slicing et copie</h2>
+<p>Sur les listes, <code>[:]</code> crée une <strong>copie superficielle</strong>. Utile pour ne pas modifier l’original.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a        <span class="co"># b pointe sur le même objet</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a[:]     <span class="co"># b est une copie indépendante</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Pour ce cours
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Nous utiliserons principalement le <strong>SSPCloud</strong> ou <strong>Google Colab</strong> (un cloud français pour l’enseignement et la recherche), car il est préconfiguré et ne nécessite aucune installation. Mais il est important de connaître les autres options, car vous les rencontrerez dans votre vie professionnelle.</p>
-<p>Vous pourrez accéder aux codes en utilisant les icônes comme ci-dessous.</p>
-<p><a href="https://colab.research.google.com"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/jupyter-python?autoLaunch=true&amp;init.personalInit=..."><img src="https://img.shields.io/badge/SSPCloud-Launch-blue.png" class="img-fluid" alt="Launch SSPCloud"></a></p>
+<p>Le slicing ne modifie <strong>jamais</strong> la séquence originale : il retourne toujours une <strong>nouvelle</strong> séquence.</p>
 </div>
 </div>
-<section id="au-programme" class="level2">
-<h2 class="anchored" data-anchor-id="au-programme">Au programme</h2>
-<ul>
-<li><strong><a href="../02-environnement/01-local.html">Installer Python en local</a></strong>.</li>
-<li><strong><a href="../02-environnement/02-cloud.html">Les environnements cloud</a></strong>.</li>
-</ul>
 
 
 </section>
