@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://surybang.github.io/python-data/01-introduction/02-pourquoi-python.html</loc>
+    <lastmod>2026-09-27T11:55:05.695Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/02-environnement/02-cloud.html</loc>
+    <lastmod>2026-09-27T11:55:05.696Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/02-environnement/index.html</loc>
+    <lastmod>2026-09-27T11:55:05.696Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/notebooks/01-premiers-pas-notebooks.html</loc>
+    <lastmod>2026-09-27T11:55:05.696Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/index.html</loc>
+    <lastmod>2026-09-27T11:55:05.696Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/02-environnement/01-local.html</loc>
+    <lastmod>2026-09-27T11:55:05.695Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/02-environnement/03-premiers-pas-notebooks.html</loc>
+    <lastmod>2026-09-27T11:55:05.696Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/01-introduction/01-langages.html</loc>
+    <lastmod>2026-09-27T11:55:05.695Z</lastmod>
+  </url>
+</urlset>

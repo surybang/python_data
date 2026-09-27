@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Pourquoi Python ? – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9ec74a487b0f7bffdf8907e3024c0954.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../01-introduction/index.html" aria-current="page"> 
+<span class="menu-text">Introduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../02-environnement/index.html"> 
+<span class="menu-text">Environnement</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python-data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-introduction/index.html">Introduction</a></li><li class="breadcrumb-item"><a href="../01-introduction/02-pourquoi-python.html">Pourquoi Python ?</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">index.html</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Qu’est-ce qu’un langage de programmation ?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Environnement</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnement de travail</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer Python en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les environnements en ligne</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/03-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas dans un <em>notebook</em></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pour aller plus loin</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://github.com/surybang/python-data" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GitHub du cours</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#un-peu-dhistoire" id="toc-un-peu-dhistoire" class="nav-link active" data-scroll-target="#un-peu-dhistoire">Un peu d’histoire</a></li>
+  <li><a href="#les-atouts-de-python" id="toc-les-atouts-de-python" class="nav-link" data-scroll-target="#les-atouts-de-python">Les atouts de Python</a>
+  <ul class="collapse">
+  <li><a href="#une-syntaxe-claire-et-lisible" id="toc-une-syntaxe-claire-et-lisible" class="nav-link" data-scroll-target="#une-syntaxe-claire-et-lisible">1. Une syntaxe claire et lisible</a></li>
+  <li><a href="#un-écosystème-open-source-très-riche" id="toc-un-écosystème-open-source-très-riche" class="nav-link" data-scroll-target="#un-écosystème-open-source-très-riche">2. Un écosystème open-source très riche</a></li>
+  </ul></li>
+  <li><a href="#apprendre-python-à-lère-de-lia-générative" id="toc-apprendre-python-à-lère-de-lia-générative" class="nav-link" data-scroll-target="#apprendre-python-à-lère-de-lia-générative">Apprendre Python à l’ère de l’IA générative ?</a>
+  <ul class="collapse">
+  <li><a href="#le-paradoxe-de-la-productivité" id="toc-le-paradoxe-de-la-productivité" class="nav-link" data-scroll-target="#le-paradoxe-de-la-productivité">Le paradoxe de la productivité</a></li>
+  <li><a href="#ce-que-disent-les-développeurs-professionnels" id="toc-ce-que-disent-les-développeurs-professionnels" class="nav-link" data-scroll-target="#ce-que-disent-les-développeurs-professionnels">Ce que disent les développeurs professionnels</a></li>
+  <li><a href="#la-question-du-pourquoi-plutôt-que-du-comment" id="toc-la-question-du-pourquoi-plutôt-que-du-comment" class="nav-link" data-scroll-target="#la-question-du-pourquoi-plutôt-que-du-comment">La question du « pourquoi » plutôt que du « comment »</a></li>
+  <li><a href="#le-piège-de-lillusion-de-compétence" id="toc-le-piège-de-lillusion-de-compétence" class="nav-link" data-scroll-target="#le-piège-de-lillusion-de-compétence">Le piège de l’illusion de compétence</a></li>
+  <li><a href="#ce-que-cela-signifie-pour-vous" id="toc-ce-que-cela-signifie-pour-vous" class="nav-link" data-scroll-target="#ce-que-cela-signifie-pour-vous">Ce que cela signifie pour vous</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-introduction/index.html">Introduction</a></li><li class="breadcrumb-item"><a href="../01-introduction/02-pourquoi-python.html">Pourquoi Python ?</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Pourquoi Python ?</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Python est aujourd’hui <strong>l’un des langages de programmation les plus populaire au monde (selon <a href="https://www.tiobe.com/tiobe-index/">TIOBE</a>)</strong>, et le langage dominant dans l’écosystème de la data science.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/TIOBE_index_python.png" class="img-fluid figure-img"></p>
+<figcaption>Python est le langage le plus populaire</figcaption>
+</figure>
+</div>
+<section id="un-peu-dhistoire" class="level2">
+<h2 class="anchored" data-anchor-id="un-peu-dhistoire">Un peu d’histoire</h2>
+<p>Python a été créé par <strong>Guido van Rossum</strong> à la fin des années 1980<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, et sa première version publique date de <strong>1991</strong>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Guido van Rossum travaillait alors au CWI (<em>Centrum voor Wiskunde en Informatica</em>), à Amsterdam. En <strong>décembre 1989</strong>, pendant les vacances de Noël, l’entreprise était fermée et il cherchait un projet pour s’occuper. C’est ce qu’il appelle lui-même un <strong>« side project »</strong>, mené en marge de son travail officiel. Il raconte : <em>« J’avais deux semaines de vacances de Noël et rien à faire. »</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> En deux semaines, il écrit la première version de l’interpréteur Python.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>Le nom <strong>Python</strong> ne vient pas du serpent 🐍, mais de la troupe de comédie britannique <a href="https://fr.wikipedia.org/wiki/Monty_Python"><strong>Monty Python</strong></a>, que van Rossum appréciait. Il cherchait un nom <strong>court, unique et légèrement mystérieux</strong> et « Python » cochait toutes les cases.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Le Zen de Python
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous tapez <code>import this</code> dans un interpréteur Python, vous verrez s’afficher le <em>Zen de Python</em>, une petite collection de 19 aphorismes qui résument la philosophie du langage. Par exemple :</p>
+<blockquote class="blockquote">
+<p><em>« Beautiful is better than ugly. »</em> <em>« Simple is better than complex. »</em> <em>« Readability counts. »</em></p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="les-atouts-de-python" class="level2">
+<h2 class="anchored" data-anchor-id="les-atouts-de-python">Les atouts de Python</h2>
+<section id="une-syntaxe-claire-et-lisible" class="level3">
+<h3 class="anchored" data-anchor-id="une-syntaxe-claire-et-lisible">1. Une syntaxe claire et lisible</h3>
+<p>Python a été conçu pour être <strong>lisible</strong>. Sa syntaxe utilise des mots-clés proches de l’anglais courant (<code>if</code>, <code>else</code>, <code>for</code>, <code>while</code>, <code>in</code>, <code>not</code>), et l’indentation fait partie intégrante de la grammaire du langage. Cela force à écrire du code structuré.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculer la moyenne de trois notes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>notes <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">8</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>moyenne <span class="op">=</span> <span class="bu">sum</span>(notes) <span class="op">/</span> <span class="bu">len</span>(notes)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"La moyenne est :"</span>, moyenne)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="un-écosystème-open-source-très-riche" class="level3">
+<h3 class="anchored" data-anchor-id="un-écosystème-open-source-très-riche">2. Un écosystème open-source très riche</h3>
+<p>C’est sans doute <strong>l’argument le plus important</strong> pour la data science. Python dispose d’une vaste collection de bibliothèques spécialisées, maintenues par une communauté active et <strong>ouvertes</strong> : on peut les utiliser, les modifier et les redistribuer librement.</p>
+<p>Pour les retrouver, vous pouvez passer par l’index officiel <a href="https://pypi.org/">Pypi</a> (Python Package Index), qui recense l’ensemble des paquets publiés pour Python. Vous pouvez également explorer <a href="https://github.com">GitHub</a>, où la grande majorité de ces bibliothèques sont développées en open source.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>L’écosystème open-source est une cible privilégiée pour les cyberattaques. Un phénomène de plus en plus répandu est la <em>supply chain attack</em> (attaque de chaîne d’approvisionnement) : des attaquants publient des paquets malveillants sur des dépôts officiels comme <code>PyPI</code>, ou compromettent des paquets légitimes en volant les identifiants de leurs mainteneurs.</p>
+<p>Les techniques sont variées :</p>
+<ul>
+<li><p>Typosquatting : publication de paquets aux noms très proches de bibliothèques populaires (par exemple reqeusts au lieu de requests, ou nunpy au lieu de numpy) pour piéger les fautes de frappe.</p></li>
+<li><p>Compromission de mainteneurs : les attaquants volent les identifiants de développeurs légitimes et publient des versions malveillantes de paquets largement utilisés.</p></li>
+<li><p>Slopsquatting : exploitation des hallucinations des assistants IA, qui inventent parfois des noms de paquets inexistants. Les attaquants enregistrent ces noms pour piéger les développeurs qui installent aveuglément ce que l’IA a suggéré.</p></li>
+</ul>
+<p>Les conséquences peuvent être graves : vol de données, installation de logiciels malveillants, compromission de l’ensemble d’une chaîne de <em>build</em>.</p>
+<p><strong>Comment se protéger ?</strong></p>
+<p>Vérifiez le nom exact avant d’installer un paquet. Une faute de frappe peut suffire.</p>
+<p>Regardez les statistiques : un paquet légitime a généralement un historique, des étoiles, des contributeurs.</p>
+<p>Préférez les paquets connus et largement utilisés quand c’est possible.</p>
+<p>Soyez vigilant avec les suggestions de l’IA : un nom de paquet proposé par un assistant doit toujours être vérifié sur PyPI ou GitHub avant installation.</p>
+</div>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Domaine</th>
+<th>Bibliothèques principales</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Calcul numérique</td>
+<td><strong>NumPy</strong></td>
+</tr>
+<tr class="even">
+<td>Manipulation de données</td>
+<td><strong>Pandas</strong>, Polars</td>
+</tr>
+<tr class="odd">
+<td>Visualisation</td>
+<td><strong>Matplotlib</strong>, Seaborn, Plotly</td>
+</tr>
+<tr class="even">
+<td>Machine Learning</td>
+<td><strong>scikit-learn</strong></td>
+</tr>
+<tr class="odd">
+<td>Deep Learning</td>
+<td><strong>PyTorch</strong>, TensorFlow, JAX</td>
+</tr>
+<tr class="even">
+<td>Statistiques</td>
+<td>SciPy, statsmodels</td>
+</tr>
+<tr class="odd">
+<td>Web scraping</td>
+<td>Beautiful Soup, Scrapy</td>
+</tr>
+<tr class="even">
+<td>Automatisation</td>
+<td><strong>Airflow</strong>, scheduler</td>
+</tr>
+</tbody>
+</table>
+<p>Ces bibliothèques sont <strong>interopérables</strong> : elles partagent souvent les mêmes structures de données (par exemple, <code>NumPy</code> est à la base de <code>Pandas</code>, <code>scikit-learn</code> et <code>PyTorch</code>). Cela permet d’enchaîner les étapes d’un projet sans friction : charger → nettoyer → analyser → visualiser → modéliser.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/why_pythonc_cuz_its_magic.JPG" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Python est magique</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="apprendre-python-à-lère-de-lia-générative" class="level2">
+<h2 class="anchored" data-anchor-id="apprendre-python-à-lère-de-lia-générative">Apprendre Python à l’ère de l’IA générative ?</h2>
+<p>L’arrivée des assistants de code basés sur l’IA (GitHub Copilot, ChatGPT, Claude) a profondément transformé le paysage de l’apprentissage de la programmation. La question mérite d’être posée frontalement : <strong>faut-il encore apprendre à coder quand une IA peut générer du code en quelques secondes ?</strong></p>
+<p>La réponse, largement documentée par la recherche, est <strong>oui biensûr, mais pour des raisons différentes qu’avant</strong>.</p>
+<section id="le-paradoxe-de-la-productivité" class="level3">
+<h3 class="anchored" data-anchor-id="le-paradoxe-de-la-productivité">Le paradoxe de la productivité</h3>
+<p>Les études montrent que l’IA accélère considérablement l’écriture de code. Mais cette vitesse cache un risque pour les débutants : celui de <strong>sauter l’étape de l’apprentissage</strong>. Ce phénomène est appelé <strong>« atrophie cognitive »</strong>[^Roxin] : à force de déléguer la syntaxe à l’IA, les apprenants développent une « façade syntaxique », ils produisent du code qui fonctionne, sans posséder les modèles mentaux pour en expliquer la logique ou en maintenir la structure.</p>
+<p>Cette recherche introduit un concept essentiel pour comprendre l’enjeu : le <strong>« Confidence-Competence Gap »</strong> (écart entre confiance et compétence). Les développeurs novices qui utilisent l’IA produisent souvent du code de moindre qualité sécuritaire tout en se sentant plus confiants dans sa qualité. Le code fonctionne, mais l’apprenant n’a pas acquis les compétences sous-jacentes.</p>
+</section>
+<section id="ce-que-disent-les-développeurs-professionnels" class="level3">
+<h3 class="anchored" data-anchor-id="ce-que-disent-les-développeurs-professionnels">Ce que disent les développeurs professionnels</h3>
+<p>L’enquête Stack Overflow 2025, menée auprès de plus de 49 000 développeurs, offre un éclairage précieux.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Les résultats révèlent une tension :</p>
+<ul>
+<li><strong>80 %</strong> des développeurs utilisent des outils d’IA dans leur workflow</li>
+<li>Mais seulement <strong>29 %</strong> font confiance à leur exactitude (contre 40 % les années précédentes)</li>
+<li><strong>66 %</strong> passent plus de temps à corriger du code généré par l’IA qui est « presque correct, mais pas tout à fait »</li>
+<li><strong>75 %</strong> préfèrent demander de l’aide à un humain quand ils ne font pas confiance à l’IA</li>
+</ul>
+<p>La frustration numéro un, citée par 66 % des développeurs, concerne les « solutions IA presque correctes mais pas tout à fait ». Cela signifie que <strong>la compétence de vérification et de correction</strong> devient plus critique que jamais.</p>
+</section>
+<section id="la-question-du-pourquoi-plutôt-que-du-comment" class="level3">
+<h3 class="anchored" data-anchor-id="la-question-du-pourquoi-plutôt-que-du-comment">La question du « pourquoi » plutôt que du « comment »</h3>
+<p>Une enquête menée (Black, 2026) auprès de la communauté tech a posé directement la question : <em>« Si l’IA peut écrire du code, devons-nous encore apprendre à coder ? »</em><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p><strong>80,9 %</strong> des répondants ont dit oui. Mais avec une nuance importante : <em>« oui, mais pas de la même manière »</em>. Le consensus émergent est que le rôle du développeur se déplace :</p>
+<blockquote class="blockquote">
+<p>« Le codage ne disparaît pas, il change. »</p>
+</blockquote>
+<p>Les compétences qui gagnent en importance sont :</p>
+<ul>
+<li><strong>La pensée critique</strong> : savoir si ce que l’IA a produit est correct, sûr, utile</li>
+<li><strong>La décomposition de problèmes</strong> : savoir structurer un problème avant de demander à l’IA de le résoudre</li>
+<li><strong>La vérification</strong> : auditer et contrôler la qualité du code généré</li>
+<li><strong>La pensée systémique</strong> : comprendre comment les composants interagissent</li>
+</ul>
+</section>
+<section id="le-piège-de-lillusion-de-compétence" class="level3">
+<h3 class="anchored" data-anchor-id="le-piège-de-lillusion-de-compétence">Le piège de l’illusion de compétence</h3>
+<p>Une étude sur les apprenants débutants (<em>The Widening Gap</em>, 2024) a observé que les étudiants qui utilisent l’IA de manière passive développent une <strong>« illusion de compétence »</strong> : le code fonctionne, donc ils pensent avoir compris. Mais quand on leur demande d’expliquer ou de modifier le code, ils échouent.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>À l’inverse, les apprenants qui réussissent utilisent l’IA comme <strong>partenaire d’apprentissage</strong>, pas comme substitut. Ils adoptent des stratégies comme :</p>
+<ul>
+<li>Demander des explications sur le code généré</li>
+<li>Décomposer les problèmes et n’utiliser l’IA que pour des parties spécifiques</li>
+<li>Résoudre manuellement d’abord, puis comparer avec la solution de l’IA</li>
+</ul>
+</section>
+<section id="ce-que-cela-signifie-pour-vous" class="level3">
+<h3 class="anchored" data-anchor-id="ce-que-cela-signifie-pour-vous">Ce que cela signifie pour vous</h3>
+<p>Si vous débutez en programmation aujourd’hui :</p>
+<ol type="1">
+<li><p><strong>Apprenez les fondamentaux.</strong> La syntaxe, les types, les boucles, les fonctions, ne vous inquiétez pas, ces concepts ne sont pas obsolètes. Ils sont la base sur laquelle vous construirez votre jugement.</p></li>
+<li><p><strong>Utilisez l’IA, mais activement.</strong> Demandez-lui des explications. Faites-lui vérifier votre code. Ne copiez-collez jamais sans comprendre.</p></li>
+<li><p><strong>Développez votre esprit critique.</strong> La compétence la plus valorisée à l’ère de l’IA n’est pas d’écrire du code, mais de <strong>savoir si le code est correct</strong>.</p></li>
+<li><p><strong>Acceptez l’inconfort.</strong> La « lutte productive », le moment où vous ne comprenez pas et devez chercher est précisément là où l’apprentissage se produit. L’IA peut réduire cet inconfort, mais si elle l’élimine complètement, elle élimine aussi l’apprentissage.</p></li>
+</ol>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>L’IA ne rend pas l’apprentissage de la programmation obsolète. Elle le <strong>recentre</strong> sur ce qui compte vraiment : la capacité à résoudre des problèmes, à penser logiquement, et à porter un jugement critique sur ce que les machines produisent.</p>
+<p>[^Roxin] : <a href="https://www.polytechnique-insights.com/tribunes/neurosciences/ia-generative-le-risque-de-latrophie-cognitive/">IA générative : le risque de l’atrophie cognitive</a></p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://leaderswithouttitle.github.io/PythonLWT/index.html">Python - Historique</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://docs.python.org/3/faq/general.html#why-was-python-created-in-the-first-place">Python Documentation officielle, <em>History of Python</em></a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Guido van Rossum, cité dans <em>Linux Journal</em>, 1998. Voir aussi son blog personnel : <a href="https://python-history.blogspot.com/"><em>The History of Python</em></a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Computer History Museum, <a href="https://computerhistory.org/profile/guido-van-rossum/"><em>Oral History of Guido van Rossum</em></a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://docs.python.org/3/faq/general.html#why-is-it-called-python">Python FAQ — <em>Why is it called Python?</em></a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Stack Overflow Developer Survey (2025). <a href="https://survey.stackoverflow.co/2025/">survey.stackoverflow.co</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><a href="https://ieeexplore-ieee-org.proxybib-pp.cnam.fr/stamp/stamp.jsp?arnumber=11679520&amp;tag=1">Black, S. (2026). <em>The Question: Should We Still Learn to Code in the Age of AI?</em> IEEE Software.</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><a href="https://arxiv.org/abs/2405.17739"><em>The Widening Gap: Novice Learners and Generative AI in Programming Education</em> (2024).</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python-data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python-data">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
