@@ -12,7 +12,7 @@ RAW_URL="https://raw.githubusercontent.com/surybang/python_data/main/notebooks/$
 
 # ── 1. Télécharger le notebook directement ─────────────────
 echo "[init] Téléchargement du notebook ${NOTEBOOK_NAME}..."
-curl -# -o "${WORK_DIR}/${NOTEBOOK_NAME}.ipynb" "${RAW_URL}"
+curl -L "${RAW_URL}" -o "${WORK_DIR}/${NOTEBOOK_NAME}.ipynb"
 
 # ── 2. Installer l'extension Jupyter pour VSCode ───────────
 code-server --install-extension ms-toolsai.jupyter --force
