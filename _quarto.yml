@@ -32,10 +32,12 @@ website:
           - 01-introduction/index.qmd
           - 01-introduction/01-langages.qmd
           - 01-introduction/02-pourquoi-python.qmd
-          - 01-introduction/03-ecosysteme.qmd
       - section: "Environnement"
         contents:
           - 02-environnement/index.qmd
+          - 02-environnement/01-local.qmd
+          - 02-environnement/02-cloud.qmd
+          - 02-environnement/03-premiers-pas-notebooks.qmd
       - section: "Pour aller plus loin"
         contents:
           - text: "GitHub du cours"

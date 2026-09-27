@@ -1,0 +1,29 @@
+---
+title: "Installer Python en local"
+---
+
+Installer Python sur son ordinateur est la façon la plus "classique" de travailler. Une fois installé, vous pouvez coder sans connexion internet, avec vos propres fichiers, dans l'éditeur de votre choix.
+
+## La démarche générale (tous systèmes)
+
+1. **Télécharger Python** depuis le site officiel : [python.org/downloads](https://www.python.org/downloads/)
+2. **Lancer l'installateur**
+   - **Windows** : cochez impérativement **"Add Python to PATH"** au premier écran.
+   - **macOS** : ouvrez le fichier `.pkg` téléchargé et suivez l'assistant.
+   - **Linux** : Python est souvent déjà installé. Sinon : `sudo apt install python3 python3-pip` (Debian/Ubuntu).
+
+3. [Suivre un tuto sur internet](https://lmgtfy.com/?q=comment+installer+python+sur+windows)
+
+::: {.callout-note}
+## Pourquoi je ne détaille pas l'installation
+
+Je ne détaille volontairement pas l'installation de `Python` en local. Ce n'est pas la solution que nous utiliserons dans ce cours. Sur une classe de 30 étudiants, si vous installez tous `Python` d'une manière plus ou moins différente, sur des OS et des versions différents, je passerai plus de temps à jouer au technicien de hotline qu'à vous enseigner des choses 👀.
+
+Nous travaillerons donc dans un **environnement cloud** (voir la page suivante), identique pour tout le monde.
+:::
+
+::: {.callout-tip}
+## Si vous êtes sur Windows
+
+Si vous souhaitez tout de même travailler en local à l'avenir, je ne saurais trop vous conseiller d'installer **WSL** (*Windows Subsystem for Linux*). Cela vous évite de dépendre des bizarreries de `Windows` avec `Python`, et vous rapproche d'un environnement proche de celui utilisé en production (Linux).
+:::
