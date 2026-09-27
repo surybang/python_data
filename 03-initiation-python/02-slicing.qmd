@@ -1,0 +1,112 @@
+---
+title: "Le slicing"
+---
+
+:::{.callout-tips}
+Pour accéder aux notebooks d'exercices c'est ici 👇
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python-data/blob/main/notebooks/03-slicing.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB01_premiers_pas%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%AB03-slicing%C2%BB)
+:::
+
+
+Le **slicing** (découpage) permet d'extraire une portion d'une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :
+
+```
+sequence[debut:fin:pas]
+```
+
+- `debut` : index du premier élément inclus (par défaut : 0)
+- `fin` : index du premier élément **exclu** (par défaut : fin de la séquence)
+- `pas` : le saut entre chaque élément (par défaut : 1)
+
+---
+
+## Index positif et index négatif
+
+Chaque élément d'une séquence possède **deux index** : un positif (de gauche à droite, à partir de 0) et un négatif (de droite à gauche, à partir de -1).
+
+```
+mot   =  P    y    t    h    o    n
+index   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]
+index   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]
+```
+
+L'index négatif permet d'accéder aux éléments **depuis la fin**, sans connaître la longueur de la séquence.
+
+```python
+mot = "Python"
+mot[0]    # 'P'
+mot[-1]   # 'n' (le dernier)
+mot[-2]   # 'o' (l'avant-dernier)
+```
+
+---
+
+## Slicing de base : `[debut:fin]`
+
+`sequence[debut:fin]` renvoie les éléments de l'index `debut` **inclus** jusqu'à `fin` **exclu**.
+
+```python
+mot = "Python"
+mot[0:3]   # "Pyt"  → index 0, 1, 2
+mot[2:5]   # "tho"  → index 2, 3, 4
+```
+
+**Astuce** : `fin - debut` donne le nombre d'éléments extraits.
+
+---
+
+## Omettre `debut` ou `fin`
+
+Quand on omet `debut`, Python part du début. Quand on omet `fin`, il va jusqu'à la fin.
+
+```python
+mot[:3]    # "Pyt"     → depuis le début
+mot[3:]    # "hon"     → jusqu'à la fin
+mot[:]     # "Python"  → copie complète
+```
+
+---
+
+## Index négatifs dans le slicing
+
+Les index négatifs fonctionnent aussi dans les slices. Très pratique pour raisonner « depuis la fin » sans connaître la longueur.
+
+```python
+mot[-3:]     # "hon"    → les 3 derniers
+mot[:-3]     # "Pyt"    → tout sauf les 3 derniers
+mot[-4:-1]   # "tho"    → du 4e au 2e en partant de la fin
+```
+
+---
+
+## Le pas : `[debut:fin:pas]`
+
+Le troisième paramètre contrôle le **saut** entre les éléments sélectionnés.
+
+```python
+nombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+nombres[::2]    # [0, 2, 4, 6, 8]       → un sur deux
+nombres[1::2]   # [1, 3, 5, 7, 9]       → un sur deux, à partir de 1
+nombres[::3]    # [0, 3, 6, 9]          → un sur trois
+nombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence
+```
+
+`[::-1]` est **l'idiome Python** pour inverser une séquence.
+
+---
+
+## Slicing et copie
+
+Sur les listes, `[:]` crée une **copie superficielle**. Utile pour ne pas modifier l'original.
+
+```python
+a = [1, 2, 3]
+b = a        # b pointe sur le même objet
+b = a[:]     # b est une copie indépendante
+```
+
+:::{.callout-warning}
+Le slicing ne modifie **jamais** la séquence originale : il retourne toujours une **nouvelle** séquence.
+:::

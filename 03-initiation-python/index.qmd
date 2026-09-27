@@ -1,0 +1,36 @@
+---
+title: "Initiation à Python"
+---
+
+### 1. Variables et types
+
+Un programme doit **stocker des informations** : c'est le rôle des variables. Nous verrons ici comment en créer, quels sont les **types de base** en Python (entiers, flottants, chaînes, booléens), et comment les afficher ou les demander à l'utilisateur.
+
+*Notions clés : variables, `int`, `float`, `str`, `bool`, `print()`, `input()`*
+
+### 2. Conditions et boucles
+
+Un programme doit pouvoir **prendre des décisions** et **répéter des actions**. Vous apprendrez les instructions `if`, `elif`, `else`, ainsi que les boucles `for` et `while`. C'est le moment où vos programmes deviennent réellement utiles.
+
+*Notions clés : `if`/`elif`/`else`, opérateurs logiques, `for`, `while`, indentation*
+
+### 3. Fonctions
+
+Écrire tout son code en vrac devient vite ingérable. Les **fonctions** permettent de découper un programme en blocs réutilisables, nommés et documentés. C'est une étape décisive vers du code propre.
+
+*Notions clés : `def`, paramètres, `return`, portée des variables, docstrings*
+
+### 4. Listes, dictionnaires et fichiers
+
+Les données réelles ne sont pas des valeurs isolées : ce sont des **collections**. Vous apprendrez à manipuler des listes et des dictionnaires, et à lire/écrire dans des fichiers. C'est la porte d'entrée vers la manipulation de données.
+
+*Notions clés : listes, indexation, slicing, dictionnaires, `open()`, `with`*
+
+## Comment ce module est organisé
+
+Chaque notion est présentée dans une page dédiée, qui contient :
+
+- **Une explication courte** du concept, avec des exemples concrets.
+- **Des cellules de code exécutables**, que vous pouvez modifier et relancer.
+- **Des exercices** à faire vous-même, avec un squelette de code à compléter.
+- **Une correction** (à consulter après avoir essayé).

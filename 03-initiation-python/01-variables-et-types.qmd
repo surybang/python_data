@@ -1,0 +1,214 @@
+---
+title: "Variables et types de base"
+format:
+  html: default
+  revealjs:
+    output-file: variables-slides.html
+    embed-resources: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tips}
+Pour accéder aux notebooks d'exercices c'est ici 👇
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python-data/blob/main/notebooks/02-variables-types-operations.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB01_premiers_pas%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%AB02-variables-types-operations%C2%BB)
+:::
+
+
+## C'est quoi une **variable** ?
+
+Une variable, c'est une **boîte étiquetée** dans laquelle on range une valeur. On lui donne un nom, et ce nom permet de retrouver la valeur plus tard.
+
+```python
+age = 25
+prenom = "Jessica"
+taille = 1.75
+majeur = True
+```
+Ici, on a créé quatre variables :
+
+- `age` contient 25
+- `prenom` contient "Jessica"
+- `taille` contient 1.75
+- `majeur` contient True
+
+::: {.callout-note}
+### Le signe = n'est pas une égalité
+
+En Python, `age = 25` ne veut pas dire « age est égal à 25 », mais « on range 25 dans la variable age ». C'est une affectation.
+
+C'est pour ça que `x = x + 1` est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on range le résultat dans x.
+:::
+
+
+### Le typage dynamique
+
+En `Python`, on ne déclare pas le type d'une variable. On écrit simplement `age = 25`, et l'interpreteur déduit le type à partir de la valeur.
+
+```python
+x = 5         # x est un entier (int)
+x = "bonjour" # x est maintenant une chaîne (string)
+x = 3.14      # x est maintenant un flottant (float)
+```
+
+Le type est attaché à la valeur et non pas à la variable.
+
+:::{.callout-warning}
+### Une liberté qui a un prix
+
+Le typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.
+:::
+
+
+::: {.callout-note}
+### Une nuance importante
+
+Le discours « Python ne vérifie pas les types » est vrai **pour le langage lui-même**. L'interpréteur Python ignore les annotations de type : `x: int = "bonjour"` ne lève aucune erreur.
+
+Mais certains **packages** s'appuient sur ces annotations pour ajouter une vérification à l'exécution. C'est le cas notamment de **Pydantic** (très utilisé en data science et dans les API), de **Typeguard** et de **Beartype**. Avec ces outils, une annotation devient une **contrainte réelle** : si la valeur ne respecte pas le type, une erreur est levée.
+
+Donc : le type hint est un **indice** pour Python, mais il peut devenir une **règle** pour certaines bibliothèques.
+:::
+
+
+## Les types de base en Python
+
+| Type | Nom Python | Exemples |
+|---|---|---|
+| Nombre entier | `int` | `42`, `-7`, `0` |
+| Nombre à virgule | `float` | `3.14`, `-0.5`, `2.0` |
+| Chaîne de caractères | `str` | `"bonjour"`, `'Alice'` |
+| Booléen | `bool` | `True`, `False` |
+
+On peut vérifier le type d'une variable avec la fonction `type()`
+
+```python
+age = 25
+print(type(age))       # <class 'int'>
+
+prenom = "Jessica"
+print(type(prenom))    # <class 'str'>
+```
+
+## Opérations de base
+
+Une fois qu'on sait stocker des valeurs dans des variables, il faut pouvoir **les manipuler**. Python fournit un ensemble d'opérateurs pour effectuer des calculs, concaténer des chaînes, ou comparer des valeurs.
+
+### Opérations arithmétiques
+
+Les opérateurs arithmétiques s'appliquent aux nombres (`int` et `float`).
+
+| Opérateur | Signification | Exemple | Résultat |
+|---|---|---|---|
+| `+` | Addition | `7 + 3` | `10` |
+| `-` | Soustraction | `7 - 3` | `4` |
+| `*` | Multiplication | `7 * 3` | `21` |
+| `/` | Division | `7 / 3` | `2.333...` |
+| `//` | Division entière | `7 // 3` | `2` |
+| `%` | Modulo (reste) | `7 % 3` | `1` |
+| `**` | Puissance | `7 ** 3` | `343` |
+
+```python
+a = 10
+b = 3
+
+print(a + b)   # 13
+print(a - b)   # 7
+print(a * b)   # 30
+print(a / b)   # 3.3333333333333335
+print(a // b)  # 3
+print(a % b)   # 1
+print(a ** b)  # 1000
+```
+::: {.callout-note}
+Division et division entière : deux opérateurs distincts
+
+En Python, / renvoie toujours un flottant, même quand le résultat est un nombre entier :
+
+```python
+print(10 / 2)   # 5.0 (et non 5)
+```
+
+Si vous voulez un résultat entier, utilisez // :
+```python
+print(10 // 2)  # 5
+```
+:::
+
+### Priorité des opérations
+
+Python respecte les règles de priorité habituelles des mathématiques :
+
+1. Parenthèses ()
+2. Puissance **
+3. Multiplication, division, division entière, modulo (*, /, //, %)
+4. Addition, soustraction (+, -)
+
+En cas de doute, **utilisez des parenthèses.** Elles ne coûtent rien et rendent le code plus lisible.
+
+```python
+print(2 + 3 * 4)      # 14 (et non 20)
+print((2 + 3) * 4)    # 20
+```
+
+## Opérations sur les chaînes de caractères
+
+les chaine sde caratères (`str`) supportent principalement deux types d'opérations : la **concaténation** et la **répétition**
+
+```python
+prenom = "Jessica"
+nom = "Hyde"
+```
+
+### Concaténation avec `+`
+nom_complet = prenom + " " + nom
+print(nom_complet)  # Jessica Hyde
+
+### Répétition avec *
+print("ha" * 3)  # hahaha
+
+::: {.callout-warning}
+On ne mélange pas les types
+
+On ne peut pas additionner une chaine avec un nombre directement.
+
+```python
+age = 25
+print("J'ai " + age + " ans") # ❌ TypeError
+```
+
+Il faut **convertir** l'entier en chaîne avec la méthode `str()`
+
+```python
+print("J'ai " + str(age) + " ans")  # 🆗 J'ai 25 ans
+```
+
+Nous verrons les autres conversions de type plus tard dans le cours.
+:::
+
+## Opérations de comparaison
+
+Les opérateurs de comparaison renvoient un booléen (`True` ou `False`).
+
+| Opérateur | Signification | Exemple | Résultat |
+|---|---|---|---|
+| `==` | Égal à | `5 == 5` | `True` |
+| `!=` | Différent de | `5 != 3` | `True` |
+| `<` | Inférieur à | `5 < 3` | `False` |
+| `>` | Supérieur à | `5 > 3` | `True` |
+| `<=` | Inférieur ou égal | `5 <= 5` | `True` |
+| `>=` | Supérieur ou égal | `5 >= 6` | `False` |
+
+
+```python
+print(5 == 5)     # True
+print(5 != 3)     # True
+print(10 > 3)     # True
+print(10 <= 3)    # False
+```
+
+
