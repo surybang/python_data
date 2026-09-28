@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -112,9 +112,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../style.css">
@@ -499,7 +496,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#structure-dun-notebook-propre" id="toc-structure-dun-notebook-propre" class="nav-link" data-scroll-target="#structure-dun-notebook-propre">Structure d’un notebook propre</a></li>
   <li><a href="#les-règles-dor" id="toc-les-règles-dor" class="nav-link" data-scroll-target="#les-règles-dor">Les règles d’or</a></li>
-  <li><a href="#gestion-de-versions" id="toc-gestion-de-versions" class="nav-link" data-scroll-target="#gestion-de-versions">Gestion de versions</a></li>
   </ul></li>
   <li><a href="#exercices-pratiques" id="toc-exercices-pratiques" class="nav-link" data-scroll-target="#exercices-pratiques">11. Exercices pratiques</a>
   <ul class="collapse">
@@ -620,7 +616,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="votre-première-cellule-de-code">3. Votre première cellule de code</h2>
 <p>La cellule suivante est une cellule de code. Remarquez : - Son fond légèrement différent - Le <code>[ ]</code> à gauche (il affichera le numéro d’exécution après le run) - Le bouton ▶ dans la barre d’outils</p>
 <p>Exécutez-la avec <code>Shift + Entrée</code> :</p>
-<div id="8e98a374" class="cell" data-execution_count="9">
+<div id="8e98a374" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Bonjour depuis une cellule de code Python !"</span>)</span>
@@ -629,13 +625,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># La dernière expression d'une cellule est affichée automatiquement</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Bonjour depuis une cellule de code Python !
-Ce texte s'affiche juste en dessous de la cellule.</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>4</code></pre>
-</div>
 </div>
 <p><strong>Ce qui vient de se passer :</strong> - <code>print()</code> produit une <strong>sortie standard</strong> - <code>2 + 2</code> est la dernière expression : Jupyter l’affiche automatiquement comme <strong>Out[n]</strong> - Le numéro entre crochets <code>[1]</code> indique l’ordre d’exécution dans la session</p>
 <blockquote class="blockquote">
@@ -700,44 +689,31 @@ Ce texte s'affiche juste en dessous de la cellule.</code></pre>
 <p>C’est <strong>la chose la plus importante à comprendre</strong> pour éviter des bugs.</p>
 <p>Toutes les cellules d’un notebook <strong>partagent le même espace de noms</strong> (namespace). Une variable définie dans une cellule est accessible dans toutes les autres.</p>
 <p>Exécutez les trois cellules suivantes dans l’ordre :</p>
-<div id="16ea7c0c" class="cell" data-execution_count="10">
+<div id="16ea7c0c" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule A — on définit une variable</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Alice"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Variable 'prenom' créée : </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule A — on définit une variable</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Alice"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Variable 'prenom' créée : </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Variable 'prenom' créée : Alice</code></pre>
 </div>
-</div>
-<div id="5b3eddd9" class="cell" data-execution_count="11">
+<div id="5b3eddd9" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule B — on utilise la variable définie dans A</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (même si cette cellule est physiquement séparée)</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> a obtenu </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss"> points."</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(message)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule B — on utilise la variable définie dans A</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (même si cette cellule est physiquement séparée)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> a obtenu </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss"> points."</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(message)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Alice a obtenu 42 points.</code></pre>
 </div>
-</div>
-<div id="da7b73ed" class="cell" data-execution_count="12">
+<div id="da7b73ed" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule C — inspecter l'état actuel du kernel</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># %whos est une "magic command" qui liste toutes les variables actives</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>whos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule C — inspecter l'état actuel du kernel</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># %whos est une "magic command" qui liste toutes les variables actives</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>whos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Variable   Type    Data/Info
-----------------------------
-message    str     Alice a obtenu 42 points.
-prenom     str     Alice
-score      int     42</code></pre>
-</div>
 </div>
 <section id="le-piège-de-lordre-dexécution" class="level3">
 <h3 class="anchored" data-anchor-id="le-piège-de-lordre-dexécution">⚠️ Le piège de l’ordre d’exécution</h3>
@@ -755,299 +731,159 @@ score      int     42</code></pre>
 <section id="les-magic-commands" class="level2">
 <h2 class="anchored" data-anchor-id="les-magic-commands">6. Les Magic Commands</h2>
 <p>Les magic commands sont des raccourcis spéciaux préfixés par <code>%</code> (ligne) ou <code>%%</code> (cellule entière). Elles ne font pas partie de Python standard — c’est IPython qui les fournit.</p>
-<div id="b9019c03" class="cell" data-execution_count="13">
+<div id="b9019c03" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %time : mesure le temps d'exécution d'une ligne</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>time <span class="bu">sum</span>(<span class="bu">range</span>(<span class="dv">1_000_000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %time : mesure le temps d'exécution d'une ligne</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>time <span class="bu">sum</span>(<span class="bu">range</span>(<span class="dv">1_000_000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>CPU times: user 23.8 ms, sys: 27 μs, total: 23.8 ms
-Wall time: 23.6 ms</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>499999500000</code></pre>
-</div>
-</div>
-<div id="39e27f35" class="cell" data-execution_count="14">
+<div id="39e27f35" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %timeit : répète plusieurs fois pour une mesure fiable</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit <span class="bu">sum</span>(<span class="bu">range</span>(<span class="dv">10_000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %timeit : répète plusieurs fois pour une mesure fiable</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit <span class="bu">sum</span>(<span class="bu">range</span>(<span class="dv">10_000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>135 μs ± 5.44 μs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
-</div>
-<div id="5dba82a7" class="cell" data-execution_count="15">
+<div id="5dba82a7" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %%time : mesure la cellule entière (double %)</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">500_000</span>):</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    total <span class="op">+=</span> i</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total = </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %%time : mesure la cellule entière (double %)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">500_000</span>):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    total <span class="op">+=</span> i</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total = </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>UsageError: Line magic function `%%time` not found.</code></pre>
 </div>
-</div>
-<div id="abc7a29b" class="cell" data-execution_count="16">
+<div id="abc7a29b" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Autres magic commands utiles — décommentez et testez !</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># %pwd          → répertoire courant</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># %ls           → liste les fichiers</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># %history      → historique des commandes exécutées</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># %matplotlib inline  → affiche les graphiques dans le notebook</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># %load_ext autoreload → recharge automatiquement les modules modifiés</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># !commande     → exécute une commande shell (ex: !pip install pandas)</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Lister toutes les magic commands disponibles :</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>lsmagic</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Autres magic commands utiles — décommentez et testez !</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># %pwd          → répertoire courant</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># %ls           → liste les fichiers</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># %history      → historique des commandes exécutées</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># %matplotlib inline  → affiche les graphiques dans le notebook</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># %load_ext autoreload → recharge automatiquement les modules modifiés</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># !commande     → exécute une commande shell (ex: !pip install pandas)</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Lister toutes les magic commands disponibles :</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>lsmagic</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>'Available line magics:\n%alias  %alias_magic  %autoawait  %autocall  %automagic  %autosave  %bookmark  %cat  %cd  %clear  %code_wrap  %colors  %conda  %config  %connect_info  %cp  %debug  %dhist  %dirs  %doctest_mode  %ed  %edit  %env  %gui  %hist  %history  %killbgscripts  %ldir  %less  %lf  %lk  %ll  %load  %load_ext  %loadpy  %logoff  %logon  %logstart  %logstate  %logstop  %ls  %lsmagic  %lx  %macro  %magic  %mamba  %man  %matplotlib  %micromamba  %mkdir  %more  %mv  %notebook  %page  %pastebin  %pdb  %pdef  %pdoc  %pfile  %pinfo  %pinfo2  %pip  %popd  %pprint  %precision  %prun  %psearch  %psource  %pushd  %pwd  %pycat  %pylab  %qtconsole  %quickref  %recall  %rehashx  %reload_ext  %rep  %rerun  %reset  %reset_selective  %rm  %rmdir  %run  %save  %sc  %set_env  %store  %subshell  %sx  %system  %tb  %time  %timeit  %unalias  %unload_ext  %uv  %who  %who_ls  %whos  %xdel  %xmode\n\nAvailable cell magics:\n%%!  %%HTML  %%SVG  %%bash  %%capture  %%code_wrap  %%debug  %%file  %%html  %%javascript  %%js  %%latex  %%markdown  %%perl  %%prun  %%pypy  %%python  %%python2  %%python3  %%ruby  %%script  %%sh  %%svg  %%sx  %%system  %%time  %%timeit  %%writefile\n\nAutomagic is ON, % prefix IS NOT needed for line magics.'</code></pre>
-</div>
 </div>
 </section>
 <section id="afficher-des-données-au-delà-du-print" class="level2">
 <h2 class="anchored" data-anchor-id="afficher-des-données-au-delà-du-print">7. Afficher des données : au-delà du print()</h2>
 <p>Un des grands avantages des notebooks : les objets Python savent <strong>s’afficher eux-mêmes</strong> de façon riche. Pandas, matplotlib, PIL… chacun a son rendu natif.</p>
-<div id="502c210b" class="cell" data-execution_count="17">
+<div id="502c210b" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Un DataFrame s'affiche comme un tableau HTML formaté</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Produit"</span>: [<span class="st">"Café"</span>, <span class="st">"Thé"</span>, <span class="st">"Jus d'orange"</span>, <span class="st">"Eau"</span>],</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prix (€)"</span>: [<span class="fl">1.50</span>, <span class="fl">1.20</span>, <span class="fl">2.00</span>, <span class="fl">0.80</span>],</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Calories"</span>: [<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">110</span>, <span class="dv">0</span>],</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>df  <span class="co"># Pas de print() — Jupyter détecte le DataFrame et le rend en HTML</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Un DataFrame s'affiche comme un tableau HTML formaté</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Produit"</span>: [<span class="st">"Café"</span>, <span class="st">"Thé"</span>, <span class="st">"Jus d'orange"</span>, <span class="st">"Eau"</span>],</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prix (€)"</span>: [<span class="fl">1.50</span>, <span class="fl">1.20</span>, <span class="fl">2.00</span>, <span class="fl">0.80</span>],</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Calories"</span>: [<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">110</span>, <span class="dv">0</span>],</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>df  <span class="co"># Pas de print() — Jupyter détecte le DataFrame et le rend en HTML</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Produit</th>
-<th data-quarto-table-cell-role="th">Prix (€)</th>
-<th data-quarto-table-cell-role="th">Calories</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>Café</td>
-<td>1.5</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>Thé</td>
-<td>1.2</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>Jus d'orange</td>
-<td>2.0</td>
-<td>110</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>Eau</td>
-<td>0.8</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-
 </div>
-</div>
-</div>
-<div id="1c2aaccb" class="cell" data-execution_count="18">
+<div id="1c2aaccb" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Un graphique matplotlib s'affiche inline dans le notebook</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>ax.bar(df[<span class="st">"Produit"</span>], df[<span class="st">"Calories"</span>], color<span class="op">=</span>[<span class="st">"#4C72B0"</span>, <span class="st">"#55A868"</span>, <span class="st">"#C44E52"</span>, <span class="st">"#8172B2"</span>])</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Calories par boisson"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Calories"</span>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Produit"</span>)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Un graphique matplotlib s'affiche inline dans le notebook</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ax.bar(df[<span class="st">"Produit"</span>], df[<span class="st">"Calories"</span>], color<span class="op">=</span>[<span class="st">"#4C72B0"</span>, <span class="st">"#55A868"</span>, <span class="st">"#C44E52"</span>, <span class="st">"#8172B2"</span>])</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Calories par boisson"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Calories"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Produit"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="01-premiers-pas-notebooks_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
-</figure>
 </div>
-</div>
-</div>
-<div id="e9ba44d4" class="cell" data-execution_count="19">
+<div id="e9ba44d4" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML, Markdown</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># IPython.display permet d'afficher n'importe quoi n'importe où dans une cellule</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;b style='color: #2196F3; font-size: 16px;'&gt;Du HTML directement dans le notebook !&lt;/b&gt;"</span>))</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">"Et du **Markdown** rendu dynamiquement depuis du code."</span>))</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># On peut afficher plusieurs outputs dans la même cellule</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Et un print() classique aussi."</span>)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>display(df.describe())  <span class="co"># Statistiques descriptives du DataFrame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML, Markdown</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># IPython.display permet d'afficher n'importe quoi n'importe où dans une cellule</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">"&lt;b style='color: #2196F3; font-size: 16px;'&gt;Du HTML directement dans le notebook !&lt;/b&gt;"</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">"Et du **Markdown** rendu dynamiquement depuis du code."</span>))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># On peut afficher plusieurs outputs dans la même cellule</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Et un print() classique aussi."</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>display(df.describe())  <span class="co"># Statistiques descriptives du DataFrame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display">
-<b style="color: #2196F3; font-size: 16px;">Du HTML directement dans le notebook !</b>
-</div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<p>Et du <strong>Markdown</strong> rendu dynamiquement depuis du code.</p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Et un print() classique aussi.</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Prix (€)</th>
-<th data-quarto-table-cell-role="th">Calories</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">count</th>
-<td>4.0000</td>
-<td>4.000000</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">mean</th>
-<td>1.3750</td>
-<td>29.250000</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">std</th>
-<td>0.5058</td>
-<td>53.872535</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">min</th>
-<td>0.8000</td>
-<td>0.000000</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">25%</th>
-<td>1.1000</td>
-<td>1.500000</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">50%</th>
-<td>1.3500</td>
-<td>3.500000</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">75%</th>
-<td>1.6250</td>
-<td>31.250000</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">max</th>
-<td>2.0000</td>
-<td>110.000000</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
 </div>
 </section>
 <section id="ce-que-contient-vraiment-un-fichier-.ipynb" class="level2">
 <h2 class="anchored" data-anchor-id="ce-que-contient-vraiment-un-fichier-.ipynb">8. Ce que contient vraiment un fichier .ipynb</h2>
 <p>Un <code>.ipynb</code> est du <strong>JSON pur</strong>. Voici à quoi ressemble une cellule dans ce fichier :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"nbformat"</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"nbformat_minor"</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"metadata"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"kernelspec"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"display_name"</span><span class="fu">:</span> <span class="st">"Python 3"</span><span class="fu">,</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"language"</span><span class="fu">:</span> <span class="st">"python"</span><span class="fu">,</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"python3"</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"cells"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"cell_type"</span><span class="fu">:</span> <span class="st">"markdown"</span><span class="fu">,</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"abc123"</span><span class="fu">,</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"metadata"</span><span class="fu">:</span> <span class="fu">{},</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"source"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"# Mon titre</span><span class="ch">\n</span><span class="st">"</span><span class="ot">,</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span><span class="ot">,</span> <span class="st">"Du texte ici."</span><span class="ot">]</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"cell_type"</span><span class="fu">:</span> <span class="st">"code"</span><span class="fu">,</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"def456"</span><span class="fu">,</span></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"execution_count"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"metadata"</span><span class="fu">:</span> <span class="fu">{},</span></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"source"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"x = 42</span><span class="ch">\n</span><span class="st">"</span><span class="ot">,</span> <span class="st">"print(x)"</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"outputs"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>          <span class="dt">"output_type"</span><span class="fu">:</span> <span class="st">"stream"</span><span class="fu">,</span></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>          <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"stdout"</span><span class="fu">,</span></span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>          <span class="dt">"text"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"42</span><span class="ch">\n</span><span class="st">"</span><span class="ot">]</span></span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span></span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>      <span class="ot">]</span></span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"nbformat"</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"nbformat_minor"</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"metadata"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"kernelspec"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"display_name"</span><span class="fu">:</span> <span class="st">"Python 3"</span><span class="fu">,</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"language"</span><span class="fu">:</span> <span class="st">"python"</span><span class="fu">,</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"python3"</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"cells"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"cell_type"</span><span class="fu">:</span> <span class="st">"markdown"</span><span class="fu">,</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"abc123"</span><span class="fu">,</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"metadata"</span><span class="fu">:</span> <span class="fu">{},</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"source"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"# Mon titre</span><span class="ch">\n</span><span class="st">"</span><span class="ot">,</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span><span class="ot">,</span> <span class="st">"Du texte ici."</span><span class="ot">]</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"cell_type"</span><span class="fu">:</span> <span class="st">"code"</span><span class="fu">,</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"def456"</span><span class="fu">,</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"execution_count"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"metadata"</span><span class="fu">:</span> <span class="fu">{},</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"source"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"x = 42</span><span class="ch">\n</span><span class="st">"</span><span class="ot">,</span> <span class="st">"print(x)"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"outputs"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>          <span class="dt">"output_type"</span><span class="fu">:</span> <span class="st">"stream"</span><span class="fu">,</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>          <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"stdout"</span><span class="fu">,</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>          <span class="dt">"text"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"42</span><span class="ch">\n</span><span class="st">"</span><span class="ot">]</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>      <span class="ot">]</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Les clés importantes :</strong> - <code>cell_type</code> : <code>"markdown"</code>, <code>"code"</code>, ou <code>"raw"</code> - <code>source</code> : le contenu de la cellule (liste de strings) - <code>outputs</code> : les résultats stockés après exécution - <code>execution_count</code> : le numéro <code>[n]</code> affiché à gauche</p>
 <blockquote class="blockquote">
 <p>Les outputs sont <strong>sauvegardés dans le fichier</strong>. C’est pourquoi un notebook peut s’afficher avec ses résultats sans avoir été réexécuté.</p>
 </blockquote>
-<div id="4c6d765b" class="cell" data-execution_count="21">
+<div id="4c6d765b" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lire le fichier .ipynb courant et inspecter sa structure</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"01-premiers-pas-notebooks.ipynb"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    nb <span class="op">=</span> json.load(f)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Format du notebook : nbformat </span><span class="sc">{</span>nb[<span class="st">'nbformat'</span>]<span class="sc">}</span><span class="ss">.</span><span class="sc">{</span>nb[<span class="st">'nbformat_minor'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Nombre de cellules : </span><span class="sc">{</span><span class="bu">len</span>(nb[<span class="st">'cells'</span>])<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Résumé des types de cellules</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>types <span class="op">=</span> Counter(c[<span class="st">"cell_type"</span>] <span class="cf">for</span> c <span class="kw">in</span> nb[<span class="st">"cells"</span>])</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cell_type, count <span class="kw">in</span> types.items():</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>cell_type<span class="sc">:10s}</span><span class="ss"> : </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> cellule(s)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Lire le fichier .ipynb courant et inspecter sa structure</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"01-premiers-pas-notebooks.ipynb"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    nb <span class="op">=</span> json.load(f)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Format du notebook : nbformat </span><span class="sc">{</span>nb[<span class="st">'nbformat'</span>]<span class="sc">}</span><span class="ss">.</span><span class="sc">{</span>nb[<span class="st">'nbformat_minor'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Nombre de cellules : </span><span class="sc">{</span><span class="bu">len</span>(nb[<span class="st">'cells'</span>])<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Résumé des types de cellules</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>types <span class="op">=</span> Counter(c[<span class="st">"cell_type"</span>] <span class="cf">for</span> c <span class="kw">in</span> nb[<span class="st">"cells"</span>])</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cell_type, count <span class="kw">in</span> types.items():</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>cell_type<span class="sc">:10s}</span><span class="ss"> : </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss"> cellule(s)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Format du notebook : nbformat 4.5
-Nombre de cellules : 32
-
-  markdown   : 17 cellule(s)
-  code       : 15 cellule(s)</code></pre>
-</div>
 </div>
 </section>
 <section id="raccourcis-clavier-utiles" class="level2">
@@ -1165,10 +1001,6 @@ Nombre de cellules : 32
 <p>❌ <strong>Éviter les cellules de 100 lignes</strong> : difficile à déboguer et à relire</p>
 <p>❌ <strong>Ne pas laisser des outputs obsolètes</strong> : nettoyer avec <code>Kernel → Restart &amp; Clear Output</code> avant de partager</p>
 </section>
-<section id="gestion-de-versions" class="level3">
-<h3 class="anchored" data-anchor-id="gestion-de-versions">Gestion de versions</h3>
-<p>Les <code>.ipynb</code> sont du JSON : les diffs Git sont verbeux. Solutions : - <code>nbstripout</code> : supprime les outputs avant le commit - <code>jupytext</code> : convertit le notebook en <code>.py</code> pour un vrai diff lisible</p>
-</section>
 </section>
 <section id="exercices-pratiques" class="level2">
 <h2 class="anchored" data-anchor-id="exercices-pratiques">11. Exercices pratiques</h2>
@@ -1182,16 +1014,16 @@ Nombre de cellules : 32
 <div id="69d2d255" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercice 2 : complétez ce code</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculez l'IMC (Indice de Masse Corporelle) avec la formule : poids / taille²</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># et affichez une phrase indiquant si l'IMC est normal (entre 18.5 et 25)</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>poids <span class="op">=</span> <span class="dv">70</span>    <span class="co"># kg  modifiez cette valeur</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>taille <span class="op">=</span> <span class="fl">1.75</span> <span class="co"># m   modifiez cette valeur</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Votre code ici :</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># imc = ...</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># print(...)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercice 2 : complétez ce code</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculez l'IMC (Indice de Masse Corporelle) avec la formule : poids / taille²</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># et affichez une phrase indiquant si l'IMC est normal (entre 18.5 et 25)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>poids <span class="op">=</span> <span class="dv">70</span>    <span class="co"># kg  modifiez cette valeur</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>taille <span class="op">=</span> <span class="fl">1.75</span> <span class="co"># m   modifiez cette valeur</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Votre code ici :</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># imc = ...</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># print(...)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -1204,28 +1036,21 @@ Nombre de cellules : 32
 <li>Observez ce que fait la cellule B (qui utilise <code>x</code>)</li>
 <li>Réfléchissez : la cellule B a-t-elle vu le changement ?</li>
 </ol>
-<div id="823b0855" class="cell" data-execution_count="24">
+<div id="823b0855" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule A — modifiez x = 10 en x = 99, puis réexécutez uniquement cette cellule</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">99</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cellule A exécutée. x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule A — modifiez x = 10 en x = 99, puis réexécutez uniquement cette cellule</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">99</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cellule A exécutée. x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Cellule A exécutée. x = 99</code></pre>
 </div>
-</div>
-<div id="d8d64ab9" class="cell" data-execution_count="25">
+<div id="d8d64ab9" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule B — NE TOUCHEZ PAS à cette cellule, ne faites que l'observer</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cellule B voit x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Si x = 99 ici, c'est que le kernel a bien vu le changement."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cellule B — NE TOUCHEZ PAS à cette cellule, ne faites que l'observer</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cellule B voit x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Si x = 99 ici, c'est que le kernel a bien vu le changement."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Cellule B voit x = 99
-Si x = 99 ici, c'est que le kernel a bien vu le changement.</code></pre>
-</div>
 </div>
 </section>
 </section>
