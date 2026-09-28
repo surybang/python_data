@@ -15,17 +15,3 @@ Aucune des deux approches n'est "meilleure" dans l'absolu. Le choix dépend de v
 | Vous n'avez pas d'ordinateur puissant | **Cloud** |
 | Vous voulez travailler hors ligne | **Local** |
 
-::: {.callout-tip}
-## Pour ce cours
-Nous utiliserons principalement le **SSPCloud** ou **Google Colab** (un cloud français pour l'enseignement et la recherche), car il est préconfiguré et ne nécessite aucune installation. Mais il est important de connaître les autres options, car vous les rencontrerez dans votre vie professionnelle.
-
-Vous pourrez accéder aux codes en utilisant les icônes comme ci-dessous.
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com)
-[![Launch SSPCloud](https://img.shields.io/badge/SSPCloud-Launch-blue)](https://datalab.sspcloud.fr/launcher/ide/jupyter-python?autoLaunch=true&init.personalInit=...)
-:::
-
-## Au programme
-
-- **[Installer Python en local](01-local.qmd)**.
-- **[Les environnements cloud](02-cloud.qmd)**.

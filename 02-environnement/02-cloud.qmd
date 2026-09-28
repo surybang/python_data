@@ -19,12 +19,12 @@ Le **SSPCloud** (aussi appelé *Datalab*) est une plateforme de science des donn
 ### Comment y accéder
 
 Vous devez d'abord créer un compte [ici](https://datalab.sspcloud.fr/).
-Pensez à bien utiliser votre adresse mail du CNAM sinon vous ne pourrez pas y accéder.
+Pensez à bien utiliser votre adresse mail étudiante sinon vous ne pourrez pas y accéder.
 
 
 ::: {.callout-warning}
 ## Sauvegardez votre travail
-Le SSPCloud est un environnement cloud : les sessions sont **temporaires**. Si vous fermez l'onglet et que vous ne sauvegardez pas votre code, vous pouvez le perdre. La bonne pratique est de sauvegarder régulièrement votre travail sur `GitHub` ou de le télécharger sur votre poste.
+Le SSPCloud est un environnement cloud : les sessions sont **temporaires**. Si vous fermez l'onglet et que vous ne sauvegardez pas votre code, vous pouvez le perdre. La bonne pratique est de sauvegarder régulièrement votre travail sur `GitHub` (ou une autre *forge*) ou de le télécharger sur votre poste.
 :::
 
 ## Google Colab :
@@ -54,7 +54,7 @@ Si vous êtes en alternance, il est très probable que vous travailliez dans un 
 
 - **Des plateformes complètes** comme **Databricks**, construite sur Apache Spark, qui intègre notebooks, gestion de données et machine learning distribué.
 
-La bonne nouvelle : **toutes les compétences que vous acquérez ici sont transférables**. Que vous écriviez `import numpy as np` dans Colab, dans le SSPCloud, ou dans un notebook Azure, la syntaxe, les bibliothèques et la logique sont **identiques**. Ce qui change, c'est l'interface, le chemin d'accès aux données, et parfois les contraintes de sécurité.
+La bonne nouvelle : **toutes les compétences que vous acquérez ici sont transférables**. Que vous écriviez `import numpy as np` dans Colab, dans le SSPCloud, ou dans un notebook Azure, la syntaxe, les bibliothèques et la logique sont **identiques**. Ce qui change, c'est l'interface, le chemin d'accès aux données, et parfois les contraintes de sécurité (toujours pour être honnête 🙄).
 
 ::: {.callout-tip}
 ## L'essentiel à retenir
