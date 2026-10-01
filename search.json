@@ -6,7 +6,6 @@
     "section": "",
     "text": "Python est aujourd’hui l’un des langages de programmation les plus populaire au monde (selon TIOBE), et le langage dominant dans l’écosystème de la data science.",
     "crumbs": [
-      "Accueil",
       "Introduction",
       "Pourquoi Python ?"
     ]
@@ -18,7 +17,6 @@
     "section": "Un peu d’histoire",
     "text": "Un peu d’histoire\nPython a été créé par Guido van Rossum à la fin des années 19801, et sa première version publique date de 1991.2\nGuido van Rossum travaillait alors au CWI (Centrum voor Wiskunde en Informatica), à Amsterdam. En décembre 1989, pendant les vacances de Noël, l’entreprise était fermée et il cherchait un projet pour s’occuper. C’est ce qu’il appelle lui-même un « side project », mené en marge de son travail officiel. Il raconte : « J’avais deux semaines de vacances de Noël et rien à faire. »3 En deux semaines, il écrit la première version de l’interpréteur Python.4\nLe nom Python ne vient pas du serpent 🐍, mais de la troupe de comédie britannique Monty Python, que van Rossum appréciait. Il cherchait un nom court, unique et légèrement mystérieux et « Python » cochait toutes les cases.5\n\n\n\n\n\n\nNoteLe Zen de Python\n\n\n\nSi vous tapez import this dans un interpréteur Python, vous verrez s’afficher le Zen de Python, une petite collection de 19 aphorismes qui résument la philosophie du langage. Par exemple :\n\n« Beautiful is better than ugly. » « Simple is better than complex. » « Readability counts. »",
     "crumbs": [
-      "Accueil",
       "Introduction",
       "Pourquoi Python ?"
     ]
@@ -30,7 +28,6 @@
     "section": "Les atouts de Python",
     "text": "Les atouts de Python\n\n1. Une syntaxe claire et lisible\nPython a été conçu pour être lisible. Sa syntaxe utilise des mots-clés proches de l’anglais courant (if, else, for, while, in, not), et l’indentation fait partie intégrante de la grammaire du langage. Cela force à écrire du code structuré.\n# Calculer la moyenne de trois notes\nnotes = [12, 15, 8]\nmoyenne = sum(notes) / len(notes)\nprint(\"La moyenne est :\", moyenne)\n\n\n2. Un écosystème open-source très riche\nC’est sans doute l’argument le plus important pour la data science. Python dispose d’une vaste collection de bibliothèques spécialisées, maintenues par une communauté active et ouvertes : on peut les utiliser, les modifier et les redistribuer librement.\nPour les retrouver, vous pouvez passer par l’index officiel Pypi (Python Package Index), qui recense l’ensemble des paquets publiés pour Python. Vous pouvez également explorer GitHub, où la grande majorité de ces bibliothèques sont développées en open source.\n\n\n\n\n\n\nWarning\n\n\n\nL’écosystème open-source est une cible privilégiée pour les cyberattaques. Un phénomène de plus en plus répandu est la supply chain attack (attaque de chaîne d’approvisionnement) : des attaquants publient des paquets malveillants sur des dépôts officiels comme PyPI, ou compromettent des paquets légitimes en volant les identifiants de leurs mainteneurs.\nLes techniques sont variées :\n\nTyposquatting : publication de paquets aux noms très proches de bibliothèques populaires (par exemple reqeusts au lieu de requests, ou nunpy au lieu de numpy) pour piéger les fautes de frappe.\nCompromission de mainteneurs : les attaquants volent les identifiants de développeurs légitimes et publient des versions malveillantes de paquets largement utilisés.\nSlopsquatting : exploitation des hallucinations des assistants IA, qui inventent parfois des noms de paquets inexistants. Les attaquants enregistrent ces noms pour piéger les développeurs qui installent aveuglément ce que l’IA a suggéré.\n\nLes conséquences peuvent être graves : vol de données, installation de logiciels malveillants, compromission de l’ensemble d’une chaîne de build.\nComment se protéger ?\nVérifiez le nom exact avant d’installer un paquet. Une faute de frappe peut suffire.\nRegardez les statistiques : un paquet légitime a généralement un historique, des étoiles, des contributeurs.\nPréférez les paquets connus et largement utilisés quand c’est possible.\nSoyez vigilant avec les suggestions de l’IA : un nom de paquet proposé par un assistant doit toujours être vérifié sur PyPI ou GitHub avant installation.\n\n\n\n\n\nDomaine\nBibliothèques principales\n\n\n\n\nCalcul numérique\nNumPy\n\n\nManipulation de données\nPandas, Polars\n\n\nVisualisation\nMatplotlib, Seaborn, Plotly\n\n\nMachine Learning\nscikit-learn\n\n\nDeep Learning\nPyTorch, TensorFlow, JAX\n\n\nStatistiques\nSciPy, statsmodels\n\n\nWeb scraping\nBeautiful Soup, Scrapy\n\n\nAutomatisation\nAirflow, scheduler\n\n\n\nCes bibliothèques sont interopérables : elles partagent souvent les mêmes structures de données (par exemple, NumPy est à la base de Pandas, scikit-learn et PyTorch). Cela permet d’enchaîner les étapes d’un projet sans friction : charger → nettoyer → analyser → visualiser → modéliser.\n\n\n\nPython est magique",
     "crumbs": [
-      "Accueil",
       "Introduction",
       "Pourquoi Python ?"
     ]
@@ -42,7 +39,6 @@
     "section": "Apprendre Python à l’ère de l’IA générative ?",
     "text": "Apprendre Python à l’ère de l’IA générative ?\nL’arrivée des assistants de code basés sur l’IA (GitHub Copilot, ChatGPT, Claude) a profondément transformé le paysage de l’apprentissage de la programmation. La question mérite d’être posée frontalement : faut-il encore apprendre à coder quand une IA peut générer du code en quelques secondes ?\nLa réponse, largement documentée par la recherche, est oui biensûr, mais pour des raisons différentes qu’avant.\n\nLe paradoxe de la productivité\nLes études montrent que l’IA accélère considérablement l’écriture de code. Mais cette vitesse cache un risque pour les débutants : celui de sauter l’étape de l’apprentissage. Ce phénomène est appelé « atrophie cognitive »[^Roxin] : à force de déléguer la syntaxe à l’IA, les apprenants développent une « façade syntaxique », ils produisent du code qui fonctionne, sans posséder les modèles mentaux pour en expliquer la logique ou en maintenir la structure.\nCette recherche introduit un concept essentiel pour comprendre l’enjeu : le « Confidence-Competence Gap » (écart entre confiance et compétence). Les développeurs novices qui utilisent l’IA produisent souvent du code de moindre qualité sécuritaire tout en se sentant plus confiants dans sa qualité. Le code fonctionne, mais l’apprenant n’a pas acquis les compétences sous-jacentes.\n\n\nCe que disent les développeurs professionnels\nL’enquête Stack Overflow 2025, menée auprès de plus de 49 000 développeurs, offre un éclairage précieux.6 Les résultats révèlent une tension :\n\n80 % des développeurs utilisent des outils d’IA dans leur workflow\nMais seulement 29 % font confiance à leur exactitude (contre 40 % les années précédentes)\n66 % passent plus de temps à corriger du code généré par l’IA qui est « presque correct, mais pas tout à fait »\n75 % préfèrent demander de l’aide à un humain quand ils ne font pas confiance à l’IA\n\nLa frustration numéro un, citée par 66 % des développeurs, concerne les « solutions IA presque correctes mais pas tout à fait ». Cela signifie que la compétence de vérification et de correction devient plus critique que jamais.\n\n\nLa question du « pourquoi » plutôt que du « comment »\nUne enquête menée (Black, 2026) auprès de la communauté tech a posé directement la question : « Si l’IA peut écrire du code, devons-nous encore apprendre à coder ? »7\n80,9 % des répondants ont dit oui. Mais avec une nuance importante : « oui, mais pas de la même manière ». Le consensus émergent est que le rôle du développeur se déplace :\n\n« Le codage ne disparaît pas, il change. »\n\nLes compétences qui gagnent en importance sont :\n\nLa pensée critique : savoir si ce que l’IA a produit est correct, sûr, utile\nLa décomposition de problèmes : savoir structurer un problème avant de demander à l’IA de le résoudre\nLa vérification : auditer et contrôler la qualité du code généré\nLa pensée systémique : comprendre comment les composants interagissent\n\n\n\nLe piège de l’illusion de compétence\nUne étude sur les apprenants débutants (The Widening Gap, 2024) a observé que les étudiants qui utilisent l’IA de manière passive développent une « illusion de compétence » : le code fonctionne, donc ils pensent avoir compris. Mais quand on leur demande d’expliquer ou de modifier le code, ils échouent.8\nÀ l’inverse, les apprenants qui réussissent utilisent l’IA comme partenaire d’apprentissage, pas comme substitut. Ils adoptent des stratégies comme :\n\nDemander des explications sur le code généré\nDécomposer les problèmes et n’utiliser l’IA que pour des parties spécifiques\nRésoudre manuellement d’abord, puis comparer avec la solution de l’IA\n\n\n\nCe que cela signifie pour vous\nSi vous débutez en programmation aujourd’hui :\n\nApprenez les fondamentaux. La syntaxe, les types, les boucles, les fonctions, ne vous inquiétez pas, ces concepts ne sont pas obsolètes. Ils sont la base sur laquelle vous construirez votre jugement.\nUtilisez l’IA, mais activement. Demandez-lui des explications. Faites-lui vérifier votre code. Ne copiez-collez jamais sans comprendre.\nDéveloppez votre esprit critique. La compétence la plus valorisée à l’ère de l’IA n’est pas d’écrire du code, mais de savoir si le code est correct.\nAcceptez l’inconfort. La « lutte productive », le moment où vous ne comprenez pas et devez chercher est précisément là où l’apprentissage se produit. L’IA peut réduire cet inconfort, mais si elle l’élimine complètement, elle élimine aussi l’apprentissage.\n\n\n\nConclusion\nL’IA ne rend pas l’apprentissage de la programmation obsolète. Elle le recentre sur ce qui compte vraiment : la capacité à résoudre des problèmes, à penser logiquement, et à porter un jugement critique sur ce que les machines produisent.\n[^Roxin] : IA générative : le risque de l’atrophie cognitive",
     "crumbs": [
-      "Accueil",
       "Introduction",
       "Pourquoi Python ?"
     ]
@@ -54,117 +50,216 @@
     "section": "Footnotes",
     "text": "Footnotes\n\n\nPython - Historique↩︎\nPython Documentation officielle, History of Python↩︎\nGuido van Rossum, cité dans Linux Journal, 1998. Voir aussi son blog personnel : The History of Python.↩︎\nComputer History Museum, Oral History of Guido van Rossum.↩︎\nPython FAQ — Why is it called Python?↩︎\nStack Overflow Developer Survey (2025). survey.stackoverflow.co↩︎\nBlack, S. (2026). The Question: Should We Still Learn to Code in the Age of AI? IEEE Software.↩︎\nThe Widening Gap: Novice Learners and Generative AI in Programming Education (2024).↩︎",
     "crumbs": [
-      "Accueil",
       "Introduction",
       "Pourquoi Python ?"
     ]
   },
   {
-    "objectID": "02-environnement/03-premiers-pas-notebooks.html",
-    "href": "02-environnement/03-premiers-pas-notebooks.html",
-    "title": "Premiers pas dans un notebook",
+    "objectID": "02-environnement/02-cloud.html",
+    "href": "02-environnement/02-cloud.html",
+    "title": "Les environnements en ligne",
     "section": "",
-    "text": "Il est maintenant l’heure pour nous de découvrir votre prochain outil de travail pour les années à venir 👴.\nCliquez sur l’un des liens ci-dessous pour accéder à la ressource.",
+    "text": "Pour suivre ce cours, vous n’avez rien à installer. Nous allons travailler dans ce qu’on appelle le cloud : le code s’exécute sur un serveur distant, et vous y accédez depuis votre navigateur. C’est plus simple, plus homogène pour tout le monde, et cela nous permet de nous concentrer sur le contenu plutôt que sur l’installation de logiciels.",
     "crumbs": [
-      "Accueil",
       "Environnement",
-      "Premiers pas dans un *notebook*"
+      "Environnements en ligne"
     ]
   },
   {
-    "objectID": "02-environnement/01-local.html",
-    "href": "02-environnement/01-local.html",
-    "title": "Installer Python en local",
+    "objectID": "02-environnement/02-cloud.html#sspcloud-cloud-pour-tous",
+    "href": "02-environnement/02-cloud.html#sspcloud-cloud-pour-tous",
+    "title": "Les environnements en ligne",
+    "section": "SSPCloud : Cloud pour tous",
+    "text": "SSPCloud : Cloud pour tous\nLe SSPCloud (aussi appelé Datalab) est une plateforme de science des données développée par l’Insee. Elle est conçue pour l’enseignement et la recherche ainsi que la Fonction Publique.\n\nCe que ça apporte\n\nEnvironnement préconfiguré : vous vous connectez, et tout est prêt. Les bibliothèques Python, les outils, les notebooks : tout est déjà là.\nOutils professionnels : VS Code, JupyterLab, RStudio, stockage S3, gestion des secrets… C’est un véritable espace de travail.\nReproductibilité : tous les étudiants ont exactement le même environnement. Le code que vous écrivez chez vous fonctionnera de la même manière pour tout le monde (enfin dans la théorie 🥶).\n\n\n\nComment y accéder\nVous devez d’abord créer un compte ici. Pensez à bien utiliser votre adresse mail étudiante sinon vous ne pourrez pas y accéder.\n\n\n\n\n\n\nWarningSauvegardez votre travail\n\n\n\nLe SSPCloud est un environnement cloud : les sessions sont temporaires. Si vous fermez l’onglet et que vous ne sauvegardez pas votre code, vous pouvez le perdre. La bonne pratique est de sauvegarder régulièrement votre travail sur GitHub (ou une autre forge) ou de le télécharger sur votre poste.",
+    "crumbs": [
+      "Environnement",
+      "Environnements en ligne"
+    ]
+  },
+  {
+    "objectID": "02-environnement/02-cloud.html#google-colab",
+    "href": "02-environnement/02-cloud.html#google-colab",
+    "title": "Les environnements en ligne",
+    "section": "Google Colab :",
+    "text": "Google Colab :\nGoogle Colab (pour Colaboratory) est un service freemium de Google qui permet d’exécuter des notebooks Jupyter directement dans le navigateur.\n\nComment y accéder\nEn cliquant sur ce lien et en utilisant un compte Google.\n\n\nCe que ça apporte\n\nZéro configuration : pas d’installation, pas de compte spécial. Un compte Google suffit.\nGPU et TPU gratuits : Colab offre un accès gratuit à des accélérateurs matériels (GPU) pour entraîner des modèles de machine learning.\nIntégration Google Drive : vous pouvez monter votre Drive pour lire et écrire des fichiers de manière persistante.\n\n\n\nLes limites à connaître\n\nSessions temporaires : Colab ferme les sessions inactives après 90 minutes. Les fichiers non sauvegardés sont perdus.\nRessources limitées : le GPU gratuit est partagé et les sessions peuvent être interrompues. Ce n’est pas un environnement de production.",
+    "crumbs": [
+      "Environnement",
+      "Environnements en ligne"
+    ]
+  },
+  {
+    "objectID": "02-environnement/02-cloud.html#en-entreprise-dautres-environnements-les-mêmes-compétences",
+    "href": "02-environnement/02-cloud.html#en-entreprise-dautres-environnements-les-mêmes-compétences",
+    "title": "Les environnements en ligne",
+    "section": "En entreprise : d’autres environnements, les mêmes compétences",
+    "text": "En entreprise : d’autres environnements, les mêmes compétences\nSi vous êtes en alternance, il est très probable que vous travailliez dans un environnement différent de celui de ce cours. Les grandes entreprises utilisent souvent :\n\nLes clouds des grands fournisseurs : Google Cloud Platform (Vertex AI), Amazon Web Services (SageMaker), Microsoft Azure (Azure Machine Learning). Ces plateformes offrent des environnements notebooks managés, souvent avec GPU, et une intégration poussée avec les outils de l’entreprise.\nDes plateformes complètes comme Databricks, construite sur Apache Spark, qui intègre notebooks, gestion de données et machine learning distribué.\n\nLa bonne nouvelle : toutes les compétences que vous acquérez ici sont transférables. Que vous écriviez import numpy as np dans Colab, dans le SSPCloud, ou dans un notebook Azure, la syntaxe, les bibliothèques et la logique sont identiques. Ce qui change, c’est l’interface, le chemin d’accès aux données, et parfois les contraintes de sécurité (toujours pour être honnête 🙄).\n\n\n\n\n\n\nTipL’essentiel à retenir\n\n\n\nLe vrai savoir, ce n’est pas « comment cliquer dans tel outil », c’est comprendre ce que vous faites : pourquoi cette structure de données, pourquoi cette fonction, comment interpréter ce résultat. L’outil, vous l’apprendrez en quelques jours. La logique, elle, se construit sur la durée (Trust the process).",
+    "crumbs": [
+      "Environnement",
+      "Environnements en ligne"
+    ]
+  },
+  {
+    "objectID": "02-environnement/index.html",
+    "href": "02-environnement/index.html",
+    "title": "Environnement de travail",
     "section": "",
-    "text": "Installer Python sur son ordinateur est la façon la plus “classique” de travailler. Une fois installé, vous pouvez coder sans connexion internet, avec vos propres fichiers, dans l’éditeur de votre choix.",
+    "text": "Pour écrire et exécuter du code Python, il vous faut un environnement de travail. Il en existe deux grandes familles :\n\nEn local : Python est installé directement sur votre ordinateur.\nDans le cloud (en ligne) : Python s’exécute sur un serveur distant, accessible depuis votre navigateur.\n\nAucune des deux approches n’est “meilleure” dans l’absolu. Le choix dépend de votre situation :\n\n\n\nSituation\nRecommandation\n\n\n\n\nVous ne voulez/pouvez rien installer\nCloud (Colab, SSPCloud)\n\n\nVous n’avez pas d’ordinateur puissant\nCloud\n\n\nVous voulez travailler hors ligne\nLocal\n\n\n\n\n\n\n Back to top",
     "crumbs": [
-      "Accueil",
-      "Environnement",
-      "Installer Python en local"
+      "Environnement"
     ]
   },
   {
-    "objectID": "02-environnement/01-local.html#la-démarche-générale-tous-systèmes",
-    "href": "02-environnement/01-local.html#la-démarche-générale-tous-systèmes",
-    "title": "Installer Python en local",
-    "section": "La démarche générale (tous systèmes)",
-    "text": "La démarche générale (tous systèmes)\n\nTélécharger Python depuis le site officiel : python.org/downloads\nLancer l’installateur\n\nWindows : cochez impérativement “Add Python to PATH” au premier écran.\nmacOS : ouvrez le fichier .pkg téléchargé et suivez l’assistant.\nLinux : Python est souvent déjà installé. Sinon : sudo apt install python3 python3-pip (Debian/Ubuntu).\n\nSuivre un tuto sur internet\n\n\n\n\n\n\n\nNotePourquoi je ne détaille pas l’installation\n\n\n\nJe ne détaille volontairement pas l’installation de Python en local. Ce n’est pas la solution que nous utiliserons dans ce cours. Sur une classe de 30 étudiants, si vous installez tous Python d’une manière plus ou moins différente, sur des OS et des versions différents, je passerai plus de temps à jouer au technicien de hotline qu’à vous enseigner des choses 👀.\nNous travaillerons donc dans un environnement cloud (voir la page suivante), identique pour tout le monde.\n\n\n\n\n\n\n\n\nTipSi vous êtes sur Windows\n\n\n\nSi vous souhaitez tout de même travailler en local à l’avenir, je ne saurais trop vous conseiller d’installer WSL (Windows Subsystem for Linux). Cela vous évite de dépendre des bizarreries de Windows avec Python, et vous rapproche d’un environnement proche de celui utilisé en production (Linux).",
+    "objectID": "03-initiation-python/07-slicing.html",
+    "href": "03-initiation-python/07-slicing.html",
+    "title": "Le slicing",
+    "section": "",
+    "text": "Tip\n\n\n\nPour accéder aux notebooks d’exercices c’est ici 👇\nLe slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :",
     "crumbs": [
-      "Accueil",
-      "Environnement",
-      "Installer Python en local"
+      "Initiation Python",
+      "Le slicing"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-et-types.html",
-    "href": "03-initiation-python/01-variables-et-types.html",
+    "objectID": "03-initiation-python/07-slicing.html#index-positif-et-index-négatif",
+    "href": "03-initiation-python/07-slicing.html#index-positif-et-index-négatif",
+    "title": "Le slicing",
+    "section": "Index positif et index négatif",
+    "text": "Index positif et index négatif\nChaque élément d’une séquence possède deux index : un positif (de gauche à droite, à partir de 0) et un négatif (de droite à gauche, à partir de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nL’index négatif permet d’accéder aux éléments depuis la fin, sans connaître la longueur de la séquence.\nmot = \"Python\"\nmot[0]    # 'P'\nmot[-1]   # 'n' (le dernier)\nmot[-2]   # 'o' (l'avant-dernier)",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#slicing-de-base-debutfin",
+    "href": "03-initiation-python/07-slicing.html#slicing-de-base-debutfin",
+    "title": "Le slicing",
+    "section": "Slicing de base : [debut:fin]",
+    "text": "Slicing de base : [debut:fin]\nsequence[debut:fin] renvoie les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]   # \"Pyt\"  → index 0, 1, 2\nmot[2:5]   # \"tho\"  → index 2, 3, 4\nAstuce : fin - debut donne le nombre d’éléments extraits.",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#omettre-debut-ou-fin",
+    "href": "03-initiation-python/07-slicing.html#omettre-debut-ou-fin",
+    "title": "Le slicing",
+    "section": "Omettre debut ou fin",
+    "text": "Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin.\nmot[:3]    # \"Pyt\"     → depuis le début\nmot[3:]    # \"hon\"     → jusqu'à la fin\nmot[:]     # \"Python\"  → copie complète",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#index-négatifs-dans-le-slicing",
+    "href": "03-initiation-python/07-slicing.html#index-négatifs-dans-le-slicing",
+    "title": "Le slicing",
+    "section": "Index négatifs dans le slicing",
+    "text": "Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très pratique pour raisonner « depuis la fin » sans connaître la longueur.\nmot[-3:]     # \"hon\"    → les 3 derniers\nmot[:-3]     # \"Pyt\"    → tout sauf les 3 derniers\nmot[-4:-1]   # \"tho\"    → du 4e au 2e en partant de la fin",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#le-pas-debutfinpas",
+    "href": "03-initiation-python/07-slicing.html#le-pas-debutfinpas",
+    "title": "Le slicing",
+    "section": "Le pas : [debut:fin:pas]",
+    "text": "Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    # [0, 2, 4, 6, 8]       → un sur deux\nnombres[1::2]   # [1, 3, 5, 7, 9]       → un sur deux, à partir de 1\nnombres[::3]    # [0, 3, 6, 9]          → un sur trois\nnombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence\n[::-1] est l’idiome Python pour inverser une séquence.",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#slicing-et-copie",
+    "href": "03-initiation-python/07-slicing.html#slicing-et-copie",
+    "title": "Le slicing",
+    "section": "Slicing et copie",
+    "text": "Slicing et copie\nSur les listes, [:] crée une copie superficielle. Utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie\n\n\n\n\n\n\nWarning\n\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence.",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations.html",
+    "href": "03-initiation-python/01-variables-types-operations.html",
     "title": "Variables et types de base",
     "section": "",
-    "text": "Pour accéder aux notebooks d’exercices c’est ici 👇",
+    "text": "Tip\n\n\n\nPour accéder aux notebooks d’exercices c’est ici 👇",
     "crumbs": [
-      "Accueil",
       "Initiation Python",
-      "Variables et types de base"
+      "Variables, types & opérations"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-et-types.html#cest-quoi-une-variable",
-    "href": "03-initiation-python/01-variables-et-types.html#cest-quoi-une-variable",
+    "objectID": "03-initiation-python/01-variables-types-operations.html#cest-quoi-une-variable",
+    "href": "03-initiation-python/01-variables-types-operations.html#cest-quoi-une-variable",
     "title": "Variables et types de base",
     "section": "C’est quoi une variable ?",
-    "text": "C’est quoi une variable ?\nUne variable, c’est une boîte étiquetée dans laquelle on range une valeur. On lui donne un nom, et ce nom permet de retrouver la valeur plus tard.\nage = 25\nprenom = \"Jessica\"\ntaille = 1.75\nmajeur = True\nIci, on a créé quatre variables :\n\nage contient 25\nprenom contient “Jessica”\ntaille contient 1.75\nmajeur contient True\n\n\n\n\n\n\n\nNoteLe signe = n’est pas une égalité\n\n\n\nEn Python, age = 25 ne veut pas dire « age est égal à 25 », mais « on range 25 dans la variable age ». C’est une affectation.\nC’est pour ça que x = x + 1 est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on range le résultat dans x.\n\n\n\nLe typage dynamique\nEn Python, on ne déclare pas le type d’une variable. On écrit simplement age = 25, et l’interpreteur déduit le type à partir de la valeur.\nx = 5         # x est un entier (int)\nx = \"bonjour\" # x est maintenant une chaîne (string)\nx = 3.14      # x est maintenant un flottant (float)\nLe type est attaché à la valeur et non pas à la variable.\n\n\n\n\n\n\nWarningUne liberté qui a un prix\n\n\n\nLe typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.\n\n\n\n\n\n\n\n\nNoteUne nuance importante\n\n\n\nLe discours « Python ne vérifie pas les types » est vrai pour le langage lui-même. L’interpréteur Python ignore les annotations de type : x: int = \"bonjour\" ne lève aucune erreur.\nMais certains packages s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de Pydantic (très utilisé en data science et dans les API), de Typeguard et de Beartype. Avec ces outils, une annotation devient une contrainte réelle : si la valeur ne respecte pas le type, une erreur est levée.\nDonc : le type hint est un indice pour Python, mais il peut devenir une règle pour certaines bibliothèques.",
+    "text": "C’est quoi une variable ?\nUne variable, c’est un nom qu’on associe à une valeur. Ce nom permet de retrouver la valeur plus tard dans le programme.\nage = 25            # age est un entier (int)\nprenom = \"Jessica\"  # prenom est une chaine de caractère (str)\ntaille = 1.75       # taille est un flottant (float)\nmajeur = True       # majeur est un booléen (bool)\nIci, on a créé quatre variables :\n\nage désigne 25\nprenom désigne “Jessica”\ntaille désigne 1.75\nmajeur désigne True\n\n\n\n\n\n\n\nNoteLe signe = n’est pas une égalité\n\n\n\nEn Python, age = 25 ne veut pas dire « age est égal à 25 », mais « on associe le nom age à la valeur 25 ». C’est une affectation.\nC’est pour ça que x = x + 1 est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on associe le résultat au nom x.\n\n\n\nUne variable est une étiquette, pas une boîte\nOn présente souvent une variable comme une boîte dans laquelle on range une valeur. C’est une image pratique pour débuter, mais elle est fausse en Python, et elle finit par provoquer des bugs difficiles à comprendre.\nEn réalité, une variable est une étiquette collée sur un objet stocké dans la mémoire de l’ordinateur (la RAM). Voici ce qui se passe concrètement 👇\n\n\n\nAssignation d’une variable en mémoire\n\n\n\nÉtape 1 : x = 5\nPython crée d’abord un objet de type int de valeur 5 quelque part dans la RAM, à une adresse donnée (ici 0x7f3a...). Ensuite seulement, il associe le nom x à cette adresse.\nAutrement dit, x ne contient pas 5 : x sait où trouver l’objet 5.\nx = 5\nprint(id(x))  # l'adresse mémoire de l'objet désigné par x\n\n\nÉtape 2 : y = x\nOn pourrait penser que Python copie la valeur de x dans une nouvelle boîte y. Ce n’est pas le cas : aucun nouvel objet n’est créé. Le nom y reçoit simplement la même adresse que x.\nOn a donc deux étiquettes collées sur le même objet.\ny = x\nprint(id(x), id(y))  # les deux adresses sont identiques\nprint(x is y)        # True : x et y désignent le même objet\n\n\nÉtape 3 : y += 1\nC’est l’étape clé. Les entiers sont immuables en Python : l’objet 5 ne peut pas être modifié. Python ne transforme donc pas le 5 en 6. À la place, il :\n\nlit la valeur de l’objet désigné par y (5) ;\ncalcule le résultat et crée un nouvel objet 6 à une autre adresse (ici 0x8d4b...) ;\ndécolle l’étiquette y pour la recoller sur ce nouvel objet.\n\nL’étiquette x, elle, n’a pas bougé : elle désigne toujours l’objet 5.\ny += 1\nprint(x, y)          # 5 6\nprint(id(x), id(y))  # les adresses sont désormais différentes\nprint(x is y)        # False\n\n\n\n\n\n\nTipÀ retenir\n\n\n\n\nUne variable est un nom qui désigne un objet en mémoire.\ny = x ne copie rien : les deux noms partagent le même objet.\n« Modifier » un int, un float, un str ou un bool crée toujours un nouvel objet, car ces types sont immuables.\n\n\n\n\n\n\n\n\n\nImportant🧠 À vous de réfléchir : et avec une liste ?\n\n\n\nLes listes, que nous verrons plus en détail plus tard, permettent de regrouper plusieurs valeurs. Observez le code suivant sans l’exécuter :\na = [5]\nb = a\nb.append(6)   # ajoute 6 à la fin de la liste b\nprint(a)\n\nSelon vous, qu’affiche print(a) ?\nDessinez, comme dans le schéma précédent, ce qui se passe en mémoire à chaque ligne.\nExécutez ensuite le code pour vérifier votre hypothèse.\n\n\n\n\n\n\n\n\n\nTip💡 Voir la solution\n\n\n\n\n\na = [5]\nb = a\nb.append(6)\nprint(a)  # [5, 6]\nSurprise : a a été modifiée alors qu’on n’a touché qu’à b !\n\n\n\nModification d’une liste en mémoire\n\n\nContrairement aux entiers, les listes sont mutables : elles peuvent être modifiées sur place.\n\nLigne 1 : Python crée un objet liste [5] en mémoire et lui colle l’étiquette a.\nLigne 2 : b = a ne copie rien, b est une deuxième étiquette sur la même liste.\nLigne 3 : b.append(6) ne crée pas de nouvel objet, il modifie la liste existante. Aucune étiquette ne bouge.\nLigne 4 : a désigne toujours cette même liste, qui contient maintenant [5, 6].\n\nC’est la différence clé avec l’exemple y += 1 : avec un entier, Python crée un nouvel objet et recolle l’étiquette ; avec une liste, il modifie l’objet lui-même, et toutes les étiquettes qui le désignent « voient » le changement.\nPour obtenir une liste indépendante, il faut une copie explicite :\na = [5]\nb = a.copy()\nb.append(6)\nprint(a)  # [5]\nprint(b)  # [5, 6]\n\n\n\n\n\n\nLe typage dynamique\nEn Python, on ne déclare pas le type d’une variable. On écrit simplement age = 25, et l’interpréteur déduit le type à partir de la valeur.\nx = 5         # x est un entier (int)\nx = \"bonjour\" # x est maintenant une chaîne (string)\nx = 3.14      # x est maintenant un flottant (float)\nLe type est attaché à la valeur et non pas à la variable. C’est logique : puisqu’une variable n’est qu’une étiquette, on peut la recoller sur un objet de n’importe quel type.\n\n\n\n\n\n\nWarningUne liberté qui a un prix\n\n\n\nLe typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.\n\n\n\n\n\n\n\n\nNoteUne nuance importante\n\n\n\nLe discours « Python ne vérifie pas les types » est vrai pour le langage lui-même. L’interpréteur Python ignore les annotations de type : x: int = \"bonjour\" ne lève aucune erreur.\nMais certains packages s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de Pydantic (très utilisé en data science et dans les API), de Typeguard et de Beartype. Avec ces outils, une annotation devient une contrainte réelle : si la valeur ne respecte pas le type, une erreur est levée.\nDonc : le type hint est un indice pour Python, mais il peut devenir une règle pour certaines bibliothèques.",
     "crumbs": [
-      "Accueil",
       "Initiation Python",
-      "Variables et types de base"
+      "Variables, types & opérations"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-et-types.html#les-types-de-base-en-python",
-    "href": "03-initiation-python/01-variables-et-types.html#les-types-de-base-en-python",
+    "objectID": "03-initiation-python/01-variables-types-operations.html#les-types-de-base-en-python",
+    "href": "03-initiation-python/01-variables-types-operations.html#les-types-de-base-en-python",
     "title": "Variables et types de base",
     "section": "Les types de base en Python",
     "text": "Les types de base en Python\n\n\n\nType\nNom Python\nExemples\n\n\n\n\nNombre entier\nint\n42, -7, 0\n\n\nNombre à virgule\nfloat\n3.14, -0.5, 2.0\n\n\nChaîne de caractères\nstr\n\"bonjour\", 'Alice'\n\n\nBooléen\nbool\nTrue, False\n\n\n\nOn peut vérifier le type d’une variable avec la fonction type()\nage = 25\nprint(type(age))       # &lt;class 'int'&gt;\n\nprenom = \"Jessica\"\nprint(type(prenom))    # &lt;class 'str'&gt;",
     "crumbs": [
-      "Accueil",
       "Initiation Python",
-      "Variables et types de base"
+      "Variables, types & opérations"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-et-types.html#opérations-de-base",
-    "href": "03-initiation-python/01-variables-et-types.html#opérations-de-base",
+    "objectID": "03-initiation-python/01-variables-types-operations.html#opérations-de-base",
+    "href": "03-initiation-python/01-variables-types-operations.html#opérations-de-base",
     "title": "Variables et types de base",
     "section": "Opérations de base",
-    "text": "Opérations de base\nUne fois qu’on sait stocker des valeurs dans des variables, il faut pouvoir les manipuler. Python fournit un ensemble d’opérateurs pour effectuer des calculs, concaténer des chaînes, ou comparer des valeurs.\n\nOpérations arithmétiques\nLes opérateurs arithmétiques s’appliquent aux nombres (int et float).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n+\nAddition\n7 + 3\n10\n\n\n-\nSoustraction\n7 - 3\n4\n\n\n*\nMultiplication\n7 * 3\n21\n\n\n/\nDivision\n7 / 3\n2.333...\n\n\n//\nDivision entière\n7 // 3\n2\n\n\n%\nModulo (reste)\n7 % 3\n1\n\n\n**\nPuissance\n7 ** 3\n343\n\n\n\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.3333333333333335\nprint(a // b)  # 3\nprint(a % b)   # 1\nprint(a ** b)  # 1000\n\n\n\n\n\n\nNote\n\n\n\nDivision et division entière : deux opérateurs distincts\nEn Python, / renvoie toujours un flottant, même quand le résultat est un nombre entier :\nprint(10 / 2)   # 5.0 (et non 5)\nSi vous voulez un résultat entier, utilisez // :\nprint(10 // 2)  # 5\n\n\n\n\nPriorité des opérations\nPython respecte les règles de priorité habituelles des mathématiques :\n\nParenthèses ()\nPuissance **\nMultiplication, division, division entière, modulo (*, /, //, %)\nAddition, soustraction (+, -)\n\nEn cas de doute, utilisez des parenthèses. Elles ne coûtent rien et rendent le code plus lisible.\nprint(2 + 3 * 4)      # 14 (et non 20)\nprint((2 + 3) * 4)    # 20",
+    "text": "Opérations de base\nUne fois qu’on sait nommer des valeurs, il faut pouvoir les manipuler. Python fournit des opérateurs pour calculer, assembler des chaînes ou comparer des valeurs.\n\nOpérations arithmétiques\nLes opérateurs arithmétiques s’appliquent aux nombres (int et float).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n+\nAddition\n7 + 3\n10\n\n\n-\nSoustraction\n7 - 3\n4\n\n\n*\nMultiplication\n7 * 3\n21\n\n\n/\nDivision\n7 / 3\n2.333...\n\n\n//\nDivision entière (quotient)\n7 // 3\n2\n\n\n%\nModulo (reste)\n7 % 3\n1\n\n\n**\nPuissance\n7 ** 3\n343\n\n\n\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.3333333333333335\nprint(a // b)  # 3\nprint(a % b)   # 1\nprint(a ** b)  # 1000\n\n\n\n\n\n\nNoteDivision et division entière\n\n\n\nEn Python, / renvoie toujours un flottant, même quand le résultat tombe juste :\nprint(10 / 2)   # 5.0 (et non 5)\nprint(10 // 2)  # 5\n\n\n\n\nLes opérateurs d’affectation combinée\nModifier une variable à partir de sa propre valeur est si courant que Python propose des raccourcis (vous avez déjà croisé y += 1 plus haut) :\n\n\n\nRaccourci\nÉquivaut à\n\n\n\n\nx += 1\nx = x + 1\n\n\nx -= 1\nx = x - 1\n\n\nx *= 2\nx = x * 2\n\n\nx /= 2\nx = x / 2\n\n\n\nscore = 10\nscore += 5\nprint(score)  # 15\n\n\nPriorité des opérations\nPython respecte les règles de priorité habituelles des mathématiques :\n\nParenthèses ()\nPuissance **\nMultiplication, division, division entière, modulo (*, /, //, %)\nAddition, soustraction (+, -)\n\nEn cas de doute, utilisez des parenthèses. Elles ne coûtent rien et rendent le code plus lisible.\nprint(2 + 3 * 4)      # 14 (et non 20)\nprint((2 + 3) * 4)    # 20",
     "crumbs": [
-      "Accueil",
       "Initiation Python",
-      "Variables et types de base"
+      "Variables, types & opérations"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-et-types.html#opérations-sur-les-chaînes-de-caractères",
-    "href": "03-initiation-python/01-variables-et-types.html#opérations-sur-les-chaînes-de-caractères",
+    "objectID": "03-initiation-python/01-variables-types-operations.html#opérations-sur-les-chaînes-de-caractères",
+    "href": "03-initiation-python/01-variables-types-operations.html#opérations-sur-les-chaînes-de-caractères",
     "title": "Variables et types de base",
     "section": "Opérations sur les chaînes de caractères",
-    "text": "Opérations sur les chaînes de caractères\nles chaine sde caratères (str) supportent principalement deux types d’opérations : la concaténation et la répétition\nprenom = \"Jessica\"\nnom = \"Hyde\"\n\nConcaténation avec +\nnom_complet = prenom + ” ” + nom print(nom_complet) # Jessica Hyde\n\n\nRépétition avec *\nprint(“ha” * 3) # hahaha\n\n\n\n\n\n\nWarning\n\n\n\nOn ne mélange pas les types\nOn ne peut pas additionner une chaine avec un nombre directement.\nage = 25\nprint(\"J'ai \" + age + \" ans\") # ❌ TypeError\nIl faut convertir l’entier en chaîne avec la méthode str()\nprint(\"J'ai \" + str(age) + \" ans\")  # 🆗 J'ai 25 ans\nNous verrons les autres conversions de type plus tard dans le cours.",
+    "text": "Opérations sur les chaînes de caractères\nprenom = \"Jessica\"\nnom = \"Hyde\"\n\nConcaténation et répétition\nnom_complet = prenom + \" \" + nom\nprint(nom_complet)   # Jessica Hyde\n\nprint(\"ha\" * 3)      # hahaha\n\n\nQuelques outils utiles\n\n\n\n\n\n\n\n\n\nOutil\nRôle\nExemple\nRésultat\n\n\n\n\nlen()\nLongueur\nlen(\"Python\")\n6\n\n\n.upper()\nMajuscules\n\"data\".upper()\n\"DATA\"\n\n\n.lower()\nMinuscules\n\"DATA\".lower()\n\"data\"\n\n\n.capitalize()\n1re lettre en majuscule\n\"alice\".capitalize()\n\"Alice\"\n\n\n.replace(a, b)\nRemplace a par b\n\"chat\".replace(\"c\", \"b\")\n\"bhat\"\n\n\n\n\n\n\n\n\n\nNoteUne chaîne ne se modifie jamais\n\n\n\nComme les entiers, les str sont immuables. .upper() ne modifie pas la chaîne, elle en renvoie une nouvelle. Pour garder le résultat, il faut recoller l’étiquette :\nmot = \"data\"\nmot.upper()\nprint(mot)        # data  → inchangé !\nmot = mot.upper()\nprint(mot)        # DATA\n\n\n\n\nLes f-strings : afficher des variables proprement\nPlutôt que d’enchaîner les +, on préfixe la chaîne par f et on place les variables entre {} :\nage = 25\nprint(f\"{prenom} a {age} ans\")           # Jessica a 25 ans\nprint(f\"Dans 10 ans : {age + 10} ans\")   # calcul possible dans les {}\nC’est la méthode recommandée en Python moderne.\n\n\nContrôler l’affichage\nAprès la valeur, on peut ajouter : suivi d’un code de formatage :\n\n\n\n\n\n\n\n\n\nCode\nEffet\nExemple\nRésultat\n\n\n\n\n.2f\n2 décimales\nf\"{3.14159:.2f}\"\n3.14\n\n\n.1%\npourcentage, 1 décimale\nf\"{0.857:.1%}\"\n85.7%\n\n\n,\nséparateur de milliers\nf\"{1234567:,}\"\n1,234,567\n\n\n_.2f\nséparateur _ et 2 décimales\nf\"{1234567:_.2f}\"\n1_234_567.00\n\n\n&gt;10\naligné à droite sur 10 caractères\nf\"{42:&gt;10}\"\n42\n\n\n&lt;10\naligné à gauche sur 10 caractères\nf\"{42:&lt;10}\"\n42\n\n\n010\ncomplété avec des zéros\nf\"{42:010}\"\n0000000042\n\n\n\nOn peut combiner les codes : f\"{1482300.5:,.2f}\" donne 1,482,300.50.\n\n\n\n\n\n\nNoteLes différentes façons de formater en Python\n\n\n\n\n\nPython a connu trois générations de formatage. Vous les croiserez toutes dans du code existant.\n1. Opérateur % (style C, Python 2)\n\"Bonjour %s, tu as %d ans\" % (\"Alice\", 25)\n\"Prix : %.2f€\" % 3.14159\n%s → chaîne, %d → entier, %f → flottant. Encore très présent dans du code legacy.\n2. .format() (Python 3.0)\n\"Bonjour {}, tu as {} ans\".format(\"Alice\", 25)\n\"Prix : {:.2f}€\".format(3.14159)\n\"{prenom} a {age} ans\".format(prenom=\"Alice\", age=25)\nPlus lisible que %, mais verbeux.\n3. f-strings (Python 3.6)\nprenom, age = \"Alice\", 25\nf\"Bonjour {prenom}, tu as {age} ans\"\nf\"Prix : {3.14159:.2f}€\"\nLe code s’écrit directement dans la chaîne. C’est ce qu’on utilise aujourd’hui.\nLes trois font la même chose :\nprenom = \"Alice\"\nprix = 3.14159\n\nprint(\"Bonjour %s, prix : %.2f€\" % (prenom, prix))\nprint(\"Bonjour {}, prix : {:.2f}€\".format(prenom, prix))\nprint(f\"Bonjour {prenom}, prix : {prix:.2f}€\")\n# Bonjour Alice, prix : 3.14€  (trois fois)\nRemarquez que le code .2f est le même partout : ce que vous apprenez avec les f-strings reste valable pour lire l’ancien code.",
     "crumbs": [
-      "Accueil",
       "Initiation Python",
-      "Variables et types de base"
+      "Variables, types & opérations"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-et-types.html#opérations-de-comparaison",
-    "href": "03-initiation-python/01-variables-et-types.html#opérations-de-comparaison",
+    "objectID": "03-initiation-python/01-variables-types-operations.html#conversions-de-types",
+    "href": "03-initiation-python/01-variables-types-operations.html#conversions-de-types",
+    "title": "Variables et types de base",
+    "section": "Conversions de types",
+    "text": "Conversions de types\nPython ne mélange pas les types automatiquement :\nage = 25\nprint(\"J'ai \" + age + \" ans\")  # ❌ TypeError\nIl faut convertir explicitement :\n\n\n\nFonction\nConvertit en\nExemple\nRésultat\n\n\n\n\nstr()\nchaîne\nstr(25)\n\"25\"\n\n\nint()\nentier\nint(\"25\")\n25\n\n\nfloat()\nflottant\nfloat(\"1.75\")\n1.75\n\n\nbool()\nbooléen\nbool(0)\nFalse\n\n\n\nprint(\"J'ai \" + str(age) + \" ans\")  # 🆗 J'ai 25 ans\n\n\n\n\n\n\nTipVrai ou faux ?\n\n\n\nbool() renvoie False pour les valeurs « vides » : 0, 0.0, \"\" (chaîne vide). Tout le reste vaut True, même -42 ou \"False\".\n\n\n\n\n\n\n\n\nWarning\n\n\n\nint(\"bonjour\") lève une ValueError : on ne peut convertir que ce qui a du sens. Cas fréquent en data : des nombres stockés en texte dans un CSV, à convertir avant de calculer.",
+    "crumbs": [
+      "Initiation Python",
+      "Variables, types & opérations"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations.html#opérations-de-comparaison",
+    "href": "03-initiation-python/01-variables-types-operations.html#opérations-de-comparaison",
     "title": "Variables et types de base",
     "section": "Opérations de comparaison",
     "text": "Opérations de comparaison\nLes opérateurs de comparaison renvoient un booléen (True ou False).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n==\nÉgal à\n5 == 5\nTrue\n\n\n!=\nDifférent de\n5 != 3\nTrue\n\n\n&lt;\nInférieur à\n5 &lt; 3\nFalse\n\n\n&gt;\nSupérieur à\n5 &gt; 3\nTrue\n\n\n&lt;=\nInférieur ou égal\n5 &lt;= 5\nTrue\n\n\n&gt;=\nSupérieur ou égal\n5 &gt;= 6\nFalse\n\n\n\nprint(5 == 5)     # True\nprint(5 != 3)     # True\nprint(10 &gt; 3)     # True\nprint(10 &lt;= 3)    # False",
     "crumbs": [
-      "Accueil",
       "Initiation Python",
-      "Variables et types de base"
+      "Variables, types & opérations"
     ]
   },
   {
@@ -172,7 +267,7 @@
     "href": "03-initiation-python/variables-slides.html#cest-quoi-une-variable",
     "title": "Variables et types de base",
     "section": "C’est quoi une variable ?",
-    "text": "C’est quoi une variable ?\nUne variable, c’est une boîte étiquetée dans laquelle on range une valeur. On lui donne un nom, et ce nom permet de retrouver la valeur plus tard.\nage = 25\nprenom = \"Jessica\"\ntaille = 1.75\nmajeur = True\nIci, on a créé quatre variables :\n\nage contient 25\nprenom contient “Jessica”\ntaille contient 1.75\nmajeur contient True\n\n\n\n\n\n\n\nLe signe = n’est pas une égalité\n\n\nEn Python, age = 25 ne veut pas dire « age est égal à 25 », mais « on range 25 dans la variable age ». C’est une affectation.\nC’est pour ça que x = x + 1 est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on range le résultat dans x.\n\n\n\nLe typage dynamique\nEn Python, on ne déclare pas le type d’une variable. On écrit simplement age = 25, et l’interpreteur déduit le type à partir de la valeur.\nx = 5         # x est un entier (int)\nx = \"bonjour\" # x est maintenant une chaîne (string)\nx = 3.14      # x est maintenant un flottant (float)\nLe type est attaché à la valeur et non pas à la variable.\n\n\n\n\n\n\nUne liberté qui a un prix\n\n\nLe typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.\n\n\n\n\n\n\n\n\n\nUne nuance importante\n\n\nLe discours « Python ne vérifie pas les types » est vrai pour le langage lui-même. L’interpréteur Python ignore les annotations de type : x: int = \"bonjour\" ne lève aucune erreur.\nMais certains packages s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de Pydantic (très utilisé en data science et dans les API), de Typeguard et de Beartype. Avec ces outils, une annotation devient une contrainte réelle : si la valeur ne respecte pas le type, une erreur est levée.\nDonc : le type hint est un indice pour Python, mais il peut devenir une règle pour certaines bibliothèques."
+    "text": "C’est quoi une variable ?\nUne variable, c’est un nom qu’on associe à une valeur. Ce nom permet de retrouver la valeur plus tard dans le programme.\nage = 25            # age est un entier (int)\nprenom = \"Jessica\"  # prenom est une chaine de caractère (str)\ntaille = 1.75       # taille est un flottant (float)\nmajeur = True       # majeur est un booléen (bool)\nIci, on a créé quatre variables :\n\nage désigne 25\nprenom désigne “Jessica”\ntaille désigne 1.75\nmajeur désigne True\n\n\n\n\n\n\n\nLe signe = n’est pas une égalité\n\n\nEn Python, age = 25 ne veut pas dire « age est égal à 25 », mais « on associe le nom age à la valeur 25 ». C’est une affectation.\nC’est pour ça que x = x + 1 est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on associe le résultat au nom x.\n\n\n\nUne variable est une étiquette, pas une boîte\nOn présente souvent une variable comme une boîte dans laquelle on range une valeur. C’est une image pratique pour débuter, mais elle est fausse en Python, et elle finit par provoquer des bugs difficiles à comprendre.\nEn réalité, une variable est une étiquette collée sur un objet stocké dans la mémoire de l’ordinateur (la RAM). Voici ce qui se passe concrètement 👇\n\n\n\nAssignation d’une variable en mémoire\n\n\nÉtape 1 : x = 5\nPython crée d’abord un objet de type int de valeur 5 quelque part dans la RAM, à une adresse donnée (ici 0x7f3a...). Ensuite seulement, il associe le nom x à cette adresse.\nAutrement dit, x ne contient pas 5 : x sait où trouver l’objet 5.\nx = 5\nprint(id(x))  # l'adresse mémoire de l'objet désigné par x\nÉtape 2 : y = x\nOn pourrait penser que Python copie la valeur de x dans une nouvelle boîte y. Ce n’est pas le cas : aucun nouvel objet n’est créé. Le nom y reçoit simplement la même adresse que x.\nOn a donc deux étiquettes collées sur le même objet.\ny = x\nprint(id(x), id(y))  # les deux adresses sont identiques\nprint(x is y)        # True : x et y désignent le même objet\nÉtape 3 : y += 1\nC’est l’étape clé. Les entiers sont immuables en Python : l’objet 5 ne peut pas être modifié. Python ne transforme donc pas le 5 en 6. À la place, il :\n\nlit la valeur de l’objet désigné par y (5) ;\ncalcule le résultat et crée un nouvel objet 6 à une autre adresse (ici 0x8d4b...) ;\ndécolle l’étiquette y pour la recoller sur ce nouvel objet.\n\nL’étiquette x, elle, n’a pas bougé : elle désigne toujours l’objet 5.\ny += 1\nprint(x, y)          # 5 6\nprint(id(x), id(y))  # les adresses sont désormais différentes\nprint(x is y)        # False\n\n\n\n\n\n\nÀ retenir\n\n\n\nUne variable est un nom qui désigne un objet en mémoire.\ny = x ne copie rien : les deux noms partagent le même objet.\n« Modifier » un int, un float, un str ou un bool crée toujours un nouvel objet, car ces types sont immuables.\n\n\n\n\n\n\n\n\n\n\n🧠 À vous de réfléchir : et avec une liste ?\n\n\nLes listes, que nous verrons plus en détail plus tard, permettent de regrouper plusieurs valeurs. Observez le code suivant sans l’exécuter :\na = [5]\nb = a\nb.append(6)   # ajoute 6 à la fin de la liste b\nprint(a)\n\nSelon vous, qu’affiche print(a) ?\nDessinez, comme dans le schéma précédent, ce qui se passe en mémoire à chaque ligne.\nExécutez ensuite le code pour vérifier votre hypothèse.\n\n\n\n\n\n\n\n\n\n\n💡 Voir la solution\n\n\na = [5]\nb = a\nb.append(6)\nprint(a)  # [5, 6]\nSurprise : a a été modifiée alors qu’on n’a touché qu’à b !\n\n\n\nModification d’une liste en mémoire\n\n\nContrairement aux entiers, les listes sont mutables : elles peuvent être modifiées sur place.\n\nLigne 1 : Python crée un objet liste [5] en mémoire et lui colle l’étiquette a.\nLigne 2 : b = a ne copie rien, b est une deuxième étiquette sur la même liste.\nLigne 3 : b.append(6) ne crée pas de nouvel objet, il modifie la liste existante. Aucune étiquette ne bouge.\nLigne 4 : a désigne toujours cette même liste, qui contient maintenant [5, 6].\n\nC’est la différence clé avec l’exemple y += 1 : avec un entier, Python crée un nouvel objet et recolle l’étiquette ; avec une liste, il modifie l’objet lui-même, et toutes les étiquettes qui le désignent « voient » le changement.\nPour obtenir une liste indépendante, il faut une copie explicite :\na = [5]\nb = a.copy()\nb.append(6)\nprint(a)  # [5]\nprint(b)  # [5, 6]\n\n\n\nLe typage dynamique\nEn Python, on ne déclare pas le type d’une variable. On écrit simplement age = 25, et l’interpréteur déduit le type à partir de la valeur.\nx = 5         # x est un entier (int)\nx = \"bonjour\" # x est maintenant une chaîne (string)\nx = 3.14      # x est maintenant un flottant (float)\nLe type est attaché à la valeur et non pas à la variable. C’est logique : puisqu’une variable n’est qu’une étiquette, on peut la recoller sur un objet de n’importe quel type.\n\n\n\n\n\n\nUne liberté qui a un prix\n\n\nLe typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.\n\n\n\n\n\n\n\n\n\nUne nuance importante\n\n\nLe discours « Python ne vérifie pas les types » est vrai pour le langage lui-même. L’interpréteur Python ignore les annotations de type : x: int = \"bonjour\" ne lève aucune erreur.\nMais certains packages s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de Pydantic (très utilisé en data science et dans les API), de Typeguard et de Beartype. Avec ces outils, une annotation devient une contrainte réelle : si la valeur ne respecte pas le type, une erreur est levée.\nDonc : le type hint est un indice pour Python, mais il peut devenir une règle pour certaines bibliothèques."
   },
   {
     "objectID": "03-initiation-python/variables-slides.html#les-types-de-base-en-python",
@@ -186,14 +281,21 @@
     "href": "03-initiation-python/variables-slides.html#opérations-de-base",
     "title": "Variables et types de base",
     "section": "Opérations de base",
-    "text": "Opérations de base\nUne fois qu’on sait stocker des valeurs dans des variables, il faut pouvoir les manipuler. Python fournit un ensemble d’opérateurs pour effectuer des calculs, concaténer des chaînes, ou comparer des valeurs.\nOpérations arithmétiques\nLes opérateurs arithmétiques s’appliquent aux nombres (int et float).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n+\nAddition\n7 + 3\n10\n\n\n-\nSoustraction\n7 - 3\n4\n\n\n*\nMultiplication\n7 * 3\n21\n\n\n/\nDivision\n7 / 3\n2.333...\n\n\n//\nDivision entière\n7 // 3\n2\n\n\n%\nModulo (reste)\n7 % 3\n1\n\n\n**\nPuissance\n7 ** 3\n343\n\n\n\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.3333333333333335\nprint(a // b)  # 3\nprint(a % b)   # 1\nprint(a ** b)  # 1000\n\n\n\n\n\n\nNote\n\n\nDivision et division entière : deux opérateurs distincts\nEn Python, / renvoie toujours un flottant, même quand le résultat est un nombre entier :\nprint(10 / 2)   # 5.0 (et non 5)\nSi vous voulez un résultat entier, utilisez // :\nprint(10 // 2)  # 5\n\n\n\nPriorité des opérations\nPython respecte les règles de priorité habituelles des mathématiques :\n\nParenthèses ()\nPuissance **\nMultiplication, division, division entière, modulo (*, /, //, %)\nAddition, soustraction (+, -)\n\nEn cas de doute, utilisez des parenthèses. Elles ne coûtent rien et rendent le code plus lisible.\nprint(2 + 3 * 4)      # 14 (et non 20)\nprint((2 + 3) * 4)    # 20"
+    "text": "Opérations de base\nUne fois qu’on sait nommer des valeurs, il faut pouvoir les manipuler. Python fournit des opérateurs pour calculer, assembler des chaînes ou comparer des valeurs.\nOpérations arithmétiques\nLes opérateurs arithmétiques s’appliquent aux nombres (int et float).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n+\nAddition\n7 + 3\n10\n\n\n-\nSoustraction\n7 - 3\n4\n\n\n*\nMultiplication\n7 * 3\n21\n\n\n/\nDivision\n7 / 3\n2.333...\n\n\n//\nDivision entière (quotient)\n7 // 3\n2\n\n\n%\nModulo (reste)\n7 % 3\n1\n\n\n**\nPuissance\n7 ** 3\n343\n\n\n\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.3333333333333335\nprint(a // b)  # 3\nprint(a % b)   # 1\nprint(a ** b)  # 1000\n\n\n\n\n\n\nDivision et division entière\n\n\nEn Python, / renvoie toujours un flottant, même quand le résultat tombe juste :\nprint(10 / 2)   # 5.0 (et non 5)\nprint(10 // 2)  # 5\n\n\n\nLes opérateurs d’affectation combinée\nModifier une variable à partir de sa propre valeur est si courant que Python propose des raccourcis (vous avez déjà croisé y += 1 plus haut) :\n\n\n\nRaccourci\nÉquivaut à\n\n\n\n\nx += 1\nx = x + 1\n\n\nx -= 1\nx = x - 1\n\n\nx *= 2\nx = x * 2\n\n\nx /= 2\nx = x / 2\n\n\n\nscore = 10\nscore += 5\nprint(score)  # 15\nPriorité des opérations\nPython respecte les règles de priorité habituelles des mathématiques :\n\nParenthèses ()\nPuissance **\nMultiplication, division, division entière, modulo (*, /, //, %)\nAddition, soustraction (+, -)\n\nEn cas de doute, utilisez des parenthèses. Elles ne coûtent rien et rendent le code plus lisible.\nprint(2 + 3 * 4)      # 14 (et non 20)\nprint((2 + 3) * 4)    # 20"
   },
   {
     "objectID": "03-initiation-python/variables-slides.html#opérations-sur-les-chaînes-de-caractères",
     "href": "03-initiation-python/variables-slides.html#opérations-sur-les-chaînes-de-caractères",
     "title": "Variables et types de base",
     "section": "Opérations sur les chaînes de caractères",
-    "text": "Opérations sur les chaînes de caractères\nles chaine sde caratères (str) supportent principalement deux types d’opérations : la concaténation et la répétition\nprenom = \"Jessica\"\nnom = \"Hyde\"\nConcaténation avec +\nnom_complet = prenom + ” ” + nom print(nom_complet) # Jessica Hyde\nRépétition avec *\nprint(“ha” * 3) # hahaha\n\n\n\n\n\n\nWarning\n\n\nOn ne mélange pas les types\nOn ne peut pas additionner une chaine avec un nombre directement.\nage = 25\nprint(\"J'ai \" + age + \" ans\") # ❌ TypeError\nIl faut convertir l’entier en chaîne avec la méthode str()\nprint(\"J'ai \" + str(age) + \" ans\")  # 🆗 J'ai 25 ans\nNous verrons les autres conversions de type plus tard dans le cours."
+    "text": "Opérations sur les chaînes de caractères\nprenom = \"Jessica\"\nnom = \"Hyde\"\nConcaténation et répétition\nnom_complet = prenom + \" \" + nom\nprint(nom_complet)   # Jessica Hyde\n\nprint(\"ha\" * 3)      # hahaha\nQuelques outils utiles\n\n\n\n\n\n\n\n\n\nOutil\nRôle\nExemple\nRésultat\n\n\n\n\nlen()\nLongueur\nlen(\"Python\")\n6\n\n\n.upper()\nMajuscules\n\"data\".upper()\n\"DATA\"\n\n\n.lower()\nMinuscules\n\"DATA\".lower()\n\"data\"\n\n\n.capitalize()\n1re lettre en majuscule\n\"alice\".capitalize()\n\"Alice\"\n\n\n.replace(a, b)\nRemplace a par b\n\"chat\".replace(\"c\", \"b\")\n\"bhat\"\n\n\n\n\n\n\n\n\n\nUne chaîne ne se modifie jamais\n\n\nComme les entiers, les str sont immuables. .upper() ne modifie pas la chaîne, elle en renvoie une nouvelle. Pour garder le résultat, il faut recoller l’étiquette :\nmot = \"data\"\nmot.upper()\nprint(mot)        # data  → inchangé !\nmot = mot.upper()\nprint(mot)        # DATA\n\n\n\nLes f-strings : afficher des variables proprement\nPlutôt que d’enchaîner les +, on préfixe la chaîne par f et on place les variables entre {} :\nage = 25\nprint(f\"{prenom} a {age} ans\")           # Jessica a 25 ans\nprint(f\"Dans 10 ans : {age + 10} ans\")   # calcul possible dans les {}\nC’est la méthode recommandée en Python moderne.\nContrôler l’affichage\nAprès la valeur, on peut ajouter : suivi d’un code de formatage :\n\n\n\n\n\n\n\n\n\nCode\nEffet\nExemple\nRésultat\n\n\n\n\n.2f\n2 décimales\nf\"{3.14159:.2f}\"\n3.14\n\n\n.1%\npourcentage, 1 décimale\nf\"{0.857:.1%}\"\n85.7%\n\n\n,\nséparateur de milliers\nf\"{1234567:,}\"\n1,234,567\n\n\n_.2f\nséparateur _ et 2 décimales\nf\"{1234567:_.2f}\"\n1_234_567.00\n\n\n&gt;10\naligné à droite sur 10 caractères\nf\"{42:&gt;10}\"\n42\n\n\n&lt;10\naligné à gauche sur 10 caractères\nf\"{42:&lt;10}\"\n42\n\n\n010\ncomplété avec des zéros\nf\"{42:010}\"\n0000000042\n\n\n\nOn peut combiner les codes : f\"{1482300.5:,.2f}\" donne 1,482,300.50.\n\n\n\n\n\n\nLes différentes façons de formater en Python\n\n\nPython a connu trois générations de formatage. Vous les croiserez toutes dans du code existant.\n1. Opérateur % (style C, Python 2)\n\"Bonjour %s, tu as %d ans\" % (\"Alice\", 25)\n\"Prix : %.2f€\" % 3.14159\n%s → chaîne, %d → entier, %f → flottant. Encore très présent dans du code legacy.\n2. .format() (Python 3.0)\n\"Bonjour {}, tu as {} ans\".format(\"Alice\", 25)\n\"Prix : {:.2f}€\".format(3.14159)\n\"{prenom} a {age} ans\".format(prenom=\"Alice\", age=25)\nPlus lisible que %, mais verbeux.\n3. f-strings (Python 3.6)\nprenom, age = \"Alice\", 25\nf\"Bonjour {prenom}, tu as {age} ans\"\nf\"Prix : {3.14159:.2f}€\"\nLe code s’écrit directement dans la chaîne. C’est ce qu’on utilise aujourd’hui.\nLes trois font la même chose :\nprenom = \"Alice\"\nprix = 3.14159\n\nprint(\"Bonjour %s, prix : %.2f€\" % (prenom, prix))\nprint(\"Bonjour {}, prix : {:.2f}€\".format(prenom, prix))\nprint(f\"Bonjour {prenom}, prix : {prix:.2f}€\")\n# Bonjour Alice, prix : 3.14€  (trois fois)\nRemarquez que le code .2f est le même partout : ce que vous apprenez avec les f-strings reste valable pour lire l’ancien code."
+  },
+  {
+    "objectID": "03-initiation-python/variables-slides.html#conversions-de-types",
+    "href": "03-initiation-python/variables-slides.html#conversions-de-types",
+    "title": "Variables et types de base",
+    "section": "Conversions de types",
+    "text": "Conversions de types\nPython ne mélange pas les types automatiquement :\nage = 25\nprint(\"J'ai \" + age + \" ans\")  # ❌ TypeError\nIl faut convertir explicitement :\n\n\n\nFonction\nConvertit en\nExemple\nRésultat\n\n\n\n\nstr()\nchaîne\nstr(25)\n\"25\"\n\n\nint()\nentier\nint(\"25\")\n25\n\n\nfloat()\nflottant\nfloat(\"1.75\")\n1.75\n\n\nbool()\nbooléen\nbool(0)\nFalse\n\n\n\nprint(\"J'ai \" + str(age) + \" ans\")  # 🆗 J'ai 25 ans\n\n\n\n\n\n\nVrai ou faux ?\n\n\nbool() renvoie False pour les valeurs « vides » : 0, 0.0, \"\" (chaîne vide). Tout le reste vaut True, même -42 ou \"False\".\n\n\n\n\n\n\n\n\n\nWarning\n\n\nint(\"bonjour\") lève une ValueError : on ne peut convertir que ce qui a du sens. Cas fréquent en data : des nombres stockés en texte dans un CSV, à convertir avant de calculer."
   },
   {
     "objectID": "03-initiation-python/variables-slides.html#opérations-de-comparaison",
@@ -201,149 +303,6 @@
     "title": "Variables et types de base",
     "section": "Opérations de comparaison",
     "text": "Opérations de comparaison\nLes opérateurs de comparaison renvoient un booléen (True ou False).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n==\nÉgal à\n5 == 5\nTrue\n\n\n!=\nDifférent de\n5 != 3\nTrue\n\n\n&lt;\nInférieur à\n5 &lt; 3\nFalse\n\n\n&gt;\nSupérieur à\n5 &gt; 3\nTrue\n\n\n&lt;=\nInférieur ou égal\n5 &lt;= 5\nTrue\n\n\n&gt;=\nSupérieur ou égal\n5 &gt;= 6\nFalse\n\n\n\nprint(5 == 5)     # True\nprint(5 != 3)     # True\nprint(10 &gt; 3)     # True\nprint(10 &lt;= 3)    # False"
-  },
-  {
-    "objectID": "03-initiation-python/index.html",
-    "href": "03-initiation-python/index.html",
-    "title": "Initiation à Python",
-    "section": "",
-    "text": "Un programme doit stocker des informations : c’est le rôle des variables. Nous verrons ici comment en créer, quels sont les types de base en Python (entiers, flottants, chaînes, booléens), et comment les afficher ou les demander à l’utilisateur.\nNotions clés : variables, int, float, str, bool, print(), input()",
-    "crumbs": [
-      "Accueil",
-      "Initiation Python",
-      "Initiation à Python"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/index.html#comment-ce-module-est-organisé",
-    "href": "03-initiation-python/index.html#comment-ce-module-est-organisé",
-    "title": "Initiation à Python",
-    "section": "Comment ce module est organisé",
-    "text": "Comment ce module est organisé\nChaque notion est présentée dans une page dédiée, qui contient :\n\nUne explication courte du concept, avec des exemples concrets.\nDes cellules de code exécutables, que vous pouvez modifier et relancer.\nDes exercices à faire vous-même, avec un squelette de code à compléter.\nUne correction (à consulter après avoir essayé).",
-    "crumbs": [
-      "Accueil",
-      "Initiation Python",
-      "Initiation à Python"
-    ]
-  },
-  {
-    "objectID": "notebooks/03-slicing.html",
-    "href": "notebooks/03-slicing.html",
-    "title": "Le slicing en Python",
-    "section": "",
-    "text": "Le slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :\nCe notebook est progressif : lis chaque section, exécute les cellules d’exploration, puis complète les exercices."
-  },
-  {
-    "objectID": "notebooks/03-slicing.html#les-index-comment-python-numérote",
-    "href": "notebooks/03-slicing.html#les-index-comment-python-numérote",
-    "title": "Le slicing en Python",
-    "section": "1. Les index : comment Python numérote",
-    "text": "1. Les index : comment Python numérote\nChaque élément d’une séquence a deux index : un positif (de gauche à droite, en partant de 0) et un négatif (de droite à gauche, en partant de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nmot[0] → 'P'\nmot[-1] → 'n' (le dernier, sans connaître la longueur)\n\n\nCode\n# Exploration — exécute et observe\nmot = \"Python\"\n\nprint(mot[0])   # premier caractère\nprint(mot[5])   # sixième caractère\nprint(mot[-1])  # dernier caractère\nprint(mot[-2])  # avant-dernier\n\n\n\n\nCode\n# Exercice 1a — Index\nfruits = [\"pomme\", \"banane\", \"cerise\", \"datte\", \"figue\"]\n\n# TODO : affiche le premier et le dernier fruit avec des index\npremier = ...\ndernier = ...\nprint(premier, dernier)  # attendu : pomme figue\n\n# TODO : affiche l'avant-dernier fruit\navant_dernier = ...\nprint(avant_dernier)  # attendu : datte"
-  },
-  {
-    "objectID": "notebooks/03-slicing.html#le-slicing-de-base-debutfin",
-    "href": "notebooks/03-slicing.html#le-slicing-de-base-debutfin",
-    "title": "Le slicing en Python",
-    "section": "2. Le slicing de base : [debut:fin]",
-    "text": "2. Le slicing de base : [debut:fin]\nsequence[debut:fin] retourne les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]  →  \"Pyt\"   # index 0, 1, 2 (3 exclu)\nmot[2:5]  →  \"tho\"   # index 2, 3, 4\nAstuce : fin - debut = nombre d’éléments extraits.\n\n\nCode\n# Exploration\nmot = \"Python\"\nprint(mot[0:3])   # \"Pyt\"\nprint(mot[2:5])   # \"tho\"\nprint(mot[0:6])   # \"Python\" (tout)\n\nnombres = [10, 20, 30, 40, 50, 60, 70]\nprint(nombres[1:4])   # [20, 30, 40]\nprint(nombres[3:7])   # [40, 50, 60, 70]\n\n\n\n\nCode\n# Exercice 2 — Slicing de base\nphrase = \"data science\"\nscores = [88, 72, 95, 61, 83, 77, 90, 55]\n\n# TODO : extrais \"data\" (les 4 premiers caractères)\ndebut = ...\nprint(debut)  # attendu : data\n\n# TODO : extrais \"science\" (du 5e au dernier)\nfin = ...\nprint(fin)  # attendu : science\n\n# TODO : extrais les 3 premiers scores\npremiers_scores = ...\nprint(premiers_scores)  # attendu : [88, 72, 95]\n\n# TODO : extrais les scores du 3e au 6e (index 2 à 5 inclus)\nmilieu = ...\nprint(milieu)  # attendu : [95, 61, 83, 77]"
-  },
-  {
-    "objectID": "notebooks/03-slicing.html#omettre-debut-ou-fin",
-    "href": "notebooks/03-slicing.html#omettre-debut-ou-fin",
-    "title": "Le slicing en Python",
-    "section": "3. Omettre debut ou fin",
-    "text": "3. Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin. C’est très idiomatique en Python.\nmot = \"Python\"\nmot[:3]   →  \"Pyt\"     # depuis le début jusqu'à 3 (exclu)\nmot[3:]   →  \"hon\"     # depuis 3 jusqu'à la fin\nmot[:]    →  \"Python\"  # copie complète\n\n\nCode\n# Exercice 3 — Omissions\nemail = \"user@example.com\"\ntemperatures = [12, 15, 9, 22, 18, 7, 25, 11, 19]\n\n# TODO : extrais le nom d'utilisateur (tout avant le @)\n# Indice : le @ est à l'index 5\nnom_utilisateur = ...\nprint(nom_utilisateur)  # attendu : alice\n\n# TODO : extrais le domaine (tout après le @)\ndomaine = ...\nprint(domaine)  # attendu : example.com\n\n# TODO : extrais les 4 dernières températures\ndernieres = ...\nprint(dernieres)  # attendu : [7, 25, 11, 19]\n\n# TODO : supprime la première et la dernière température (garde le \"milieu\")\nmilieu = ...\nprint(milieu)  # attendu : [15, 9, 22, 18, 7, 25, 11]\n\n\nEllipsis\nEllipsis\nEllipsis\nEllipsis"
-  },
-  {
-    "objectID": "notebooks/03-slicing.html#index-négatifs-dans-le-slicing",
-    "href": "notebooks/03-slicing.html#index-négatifs-dans-le-slicing",
-    "title": "Le slicing en Python",
-    "section": "4. Index négatifs dans le slicing",
-    "text": "4. Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très utile pour raisonner “depuis la fin” sans connaître la longueur.\nmot = \"Python\"\nmot[-3:]   →  \"hon\"    # les 3 derniers\nmot[:-3]   →  \"Pyt\"   # tout sauf les 3 derniers\nmot[-4:-1] →  \"tho\"   # du 4e en partant de la fin au 2e en partant de la fin\n\n\nCode\n# Exercice 4 — Index négatifs\nfichier = \"rapport_annuel_2024.csv\"\nlogs = [\"INFO\", \"DEBUG\", \"ERROR\", \"WARNING\", \"INFO\", \"ERROR\", \"DEBUG\"]\n\n# TODO : extrais l'extension du fichier (les 3 derniers caractères)\nextension = ...\nprint(extension)  # attendu : csv\n\n# TODO : extrais le nom sans l'extension (tout sauf les 4 derniers caractères : \".csv\")\nnom_sans_ext = ...\nprint(nom_sans_ext)  # attendu : rapport_annuel_2024\n\n# TODO : extrais les 3 derniers logs\nderniers_logs = ...\nprint(derniers_logs)  # attendu : ['INFO', 'ERROR', 'DEBUG']\n\n# TODO : extrais tous les logs sauf le premier et le dernier\nlogs_milieu = ...\nprint(logs_milieu)  # attendu : ['DEBUG', 'ERROR', 'WARNING', 'INFO', 'ERROR']"
-  },
-  {
-    "objectID": "notebooks/03-slicing.html#le-pas-debutfinpas",
-    "href": "notebooks/03-slicing.html#le-pas-debutfinpas",
-    "title": "Le slicing en Python",
-    "section": "5. Le pas : [debut:fin:pas]",
-    "text": "5. Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    →  [0, 2, 4, 6, 8]     # un sur deux\nnombres[1::2]   →  [1, 3, 5, 7, 9]     # un sur deux en partant de 1\nnombres[::3]    →  [0, 3, 6, 9]        # un sur trois\nnombres[::-1]   →  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]  # inverser !\n[::-1] est l’idiome Python pour inverser une séquence.\n\n\nCode\n# Exercice 5 — Le pas\nlettres = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\"]\nmot = \"abracadabra\"\n\n# TODO : extrais une lettre sur deux (index pairs)\npairs = ...\nprint(pairs)  # attendu : ['a', 'c', 'e', 'g', 'i']\n\n# TODO : extrais une lettre sur deux (index impairs)\nimpairs = ...\nprint(impairs)  # attendu : ['b', 'd', 'f', 'h', 'j']\n\n# TODO : inverse le mot \"abracadabra\"\ninverse = ...\nprint(inverse)  # attendu : arbadacarba\n\n# TODO : extrais les lettres de l'index 1 à 7 (exclu), une sur deux\nselection = ...\nprint(selection)  # attendu : ['b', 'd', 'f']"
-  },
-  {
-    "objectID": "notebooks/03-slicing.html#slicing-et-copie",
-    "href": "notebooks/03-slicing.html#slicing-et-copie",
-    "title": "Le slicing en Python",
-    "section": "6. Slicing et copie",
-    "text": "6. Slicing et copie\nSur les listes, [:] crée une copie superficielle — utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie indépendante\n\nAttention : le slicing ne modifie jamais la séquence originale, il retourne toujours une nouvelle séquence.\n\n\n\nCode\n# Exploration — comprendre la différence entre alias et copie\noriginal = [1, 2, 3, 4, 5]\n\nalias = original       # même objet en mémoire\ncopie = original[:]    # objet différent, mêmes valeurs\n\nalias[0] = 999\nprint(\"original après modif de alias :\", original)  # original est modifié !\n\ncopie[0] = 888\nprint(\"original après modif de copie :\", original)  # original intact"
-  },
-  {
-    "objectID": "notebooks/03-slicing.html#mini-projet-analyse-dune-série-temporelle",
-    "href": "notebooks/03-slicing.html#mini-projet-analyse-dune-série-temporelle",
-    "title": "Le slicing en Python",
-    "section": "7. Mini-projet — Analyse d’une série temporelle",
-    "text": "7. Mini-projet — Analyse d’une série temporelle\nTu disposes des ventes journalières d’un produit sur 4 semaines (28 jours). Utilise uniquement le slicing pour répondre aux questions.\n\n\nCode\nventes = [\n    # Semaine 1 : lun-dim\n    142, 98, 115, 130, 201, 245, 189,\n    # Semaine 2\n    155, 102, 121, 145, 198, 267, 201,\n    # Semaine 3\n    148, 95, 118, 139, 210, 255, 195,\n    # Semaine 4\n    162, 108, 125, 151, 215, 278, 212,\n]\n\n# TODO : extrais les ventes de la première semaine\nsemaine_1 = ...\nprint(\"Semaine 1 :\", semaine_1)\n\n# TODO : extrais les ventes de la dernière semaine\nsemaine_4 = ...\nprint(\"Semaine 4 :\", semaine_4)\n\n# TODO : extrais uniquement les lundis (index 0, 7, 14, 21) — utilise le pas\nlundis = ...\nprint(\"Lundis :\", lundis)\n\n# TODO : extrais uniquement les week-ends (samedi=5, dimanche=6 de chaque semaine)\n# Indice : samedi index 5, 12, 19, 26 / dimanche index 6, 13, 20, 27\nsamedis  = ...\ndimanches = ...\nprint(\"Samedis :\", samedis)\nprint(\"Dimanches :\", dimanches)\n\n# TODO : calcule la moyenne de la semaine 1 et de la semaine 4\n# (sum() et len() sont autorisés)\nmoy_s1 = sum(semaine_1) / len(semaine_1)\nmoy_s4 = sum(semaine_4) / len(semaine_4)\nprint(f\"Moyenne semaine 1 : {moy_s1:.1f} — Semaine 4 : {moy_s4:.1f}\")\n\n# TODO : inverse la liste des ventes (pour un affichage du plus récent au plus ancien)\nventes_inversees = ...\nprint(\"3 derniers jours en premier :\", ventes_inversees[:3])"
-  },
-  {
-    "objectID": "notebooks/03-slicing.html#corrigés",
-    "href": "notebooks/03-slicing.html#corrigés",
-    "title": "Le slicing en Python",
-    "section": "Corrigés",
-    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\npremier = fruits[0]\ndernier = fruits[-1]\navant_dernier = fruits[-2]\nExercice 2\ndebut           = phrase[:4]\nfin             = phrase[5:]\npremiers_scores = scores[:3]\nmilieu          = scores[2:6]\nExercice 3\nnom_utilisateur = email[:5]        # ou email.split(\"@\")[0]\ndomaine         = email[6:]        # ou email.split(\"@\")[1]\ndernieres       = temperatures[-4:]\nmilieu          = temperatures[1:-1]\nExercice 4\nextension    = fichier[-3:]\nnom_sans_ext = fichier[:-4]\nderniers_logs = logs[-3:]\nlogs_milieu  = logs[1:-1]\nExercice 5\npairs     = lettres[::2]\nimpairs   = lettres[1::2]\ninverse   = mot[::-1]\nselection = lettres[1:7:2]\nMini-projet\nsemaine_1       = ventes[:7]\nsemaine_4       = ventes[-7:]\nlundis          = ventes[::7]\nsamedis         = ventes[5::7]\ndimanches       = ventes[6::7]\nventes_inversees = ventes[::-1]"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html",
-    "href": "notebooks/02-variables-types-operations.html",
-    "title": "Exercices — Variables, types de base et opérations",
-    "section": "",
-    "text": "Ce notebook accompagne le cours Variables, types de base et opérations. Pour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat."
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
-    "href": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
-    "title": "Exercices — Variables, types de base et opérations",
-    "section": "Exercice 1 — Créer et inspecter des variables",
-    "text": "Exercice 1 — Créer et inspecter des variables\nCrée quatre variables : ton prénom, ton âge, ta taille en mètres, et un booléen qui indique si tu aimes Python. Affiche ensuite le type de chacune.\n\n\nCode\n# TODO : crée tes quatre variables\nprenom = ...\nage = ...\ntaille = ...\naime_python = ...\n\n# Affiche le type de chacune\nprint(type(prenom))\nprint(type(age))\nprint(type(taille))\nprint(type(aime_python))"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-2-opérations-sur-les-entiers-et-flottants",
-    "href": "notebooks/02-variables-types-operations.html#exercice-2-opérations-sur-les-entiers-et-flottants",
-    "title": "Exercices — Variables, types de base et opérations",
-    "section": "Exercice 2 — Opérations sur les entiers et flottants",
-    "text": "Exercice 2 — Opérations sur les entiers et flottants\nPython supporte les opérations arithmétiques classiques, plus quelques-unes moins connues :\n\n\n\n\n\n\n\n\nOpérateur\nDescription\nExemple\n\n\n\n\n+ - * /\nAddition, soustraction, multiplication, division\n10 / 3 → 3.333...\n\n\n//\nDivision entière (quotient)\n10 // 3 → 3\n\n\n%\nModulo (reste)\n10 % 3 → 1\n\n\n**\nPuissance\n2 ** 8 → 256\n\n\n\nCalcule les valeurs suivantes et stocke chacune dans une variable.\n\n\nCode\n# TODO : combien font 17 divisé par 5 ? (division classique, puis division entière, puis reste)\ndivision        = ...   # attendu : 3.4\ndivision_entiere = ...  # attendu : 3\nreste           = ...   # attendu : 2\n\n# TODO : quelle est la surface d'un carré de côté 13 ?\nsurface = ...           # attendu : 169\n\n# TODO : 2 à la puissance 10 ?\npuissance = ...         # attendu : 1024\n\nprint(division, division_entiere, reste)\nprint(surface)\nprint(puissance)"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-chaînes-de-caractères",
-    "href": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-chaînes-de-caractères",
-    "title": "Exercices — Variables, types de base et opérations",
-    "section": "Exercice 3 — Opérations sur les chaînes de caractères",
-    "text": "Exercice 3 — Opérations sur les chaînes de caractères\nLes str ont leurs propres opérations :\n\n+ concatène deux chaînes : \"bon\" + \"jour\" → \"bonjour\"\n* répète une chaîne : \"ha\" * 3 → \"hahaha\"\nlen() renvoie la longueur : len(\"Python\") → 6\n.upper() / .lower() changent la casse\n.replace(a, b) remplace toutes les occurrences de a par b\n\n\n\nCode\nprenom = \"jessica\"\nnom    = \"hyde\"\n\n# TODO : construis le nom complet \"Jessica Hyde\" (majuscule sur la première lettre)\nnom_complet = ...\nprint(nom_complet)  # attendu : Jessica Hyde\n\n# TODO : combien de caractères dans \"data science\" (espace compris) ?\nphrase = \"data science\"\nlongueur = ...\nprint(longueur)  # attendu : 12\n\n# TODO : remplace \"science\" par \"engineering\" dans la phrase\nnouvelle_phrase = ...\nprint(nouvelle_phrase)  # attendu : data engineering\n\n# TODO : affiche \"Python! \" répété 4 fois\nprint(...)  # attendu : Python! Python! Python! Python!"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-4-conversions-de-types",
-    "href": "notebooks/02-variables-types-operations.html#exercice-4-conversions-de-types",
-    "title": "Exercices — Variables, types de base et opérations",
-    "section": "Exercice 4 — Conversions de types",
-    "text": "Exercice 4 — Conversions de types\nPython ne mélange pas les types automatiquement. Pour additionner un int et une str, il faut convertir explicitement avec int(), float(), str(), bool().\n\n\nCode\n# Cette ligne va planter — lis le message d'erreur, puis corrige la ligne suivante\nage_str = \"25\"\n# print(\"Dans 10 ans tu auras \" + age_str + 10 + \" ans\")  # TypeError !\n\n# TODO : corrige en convertissant correctement\nprint(\"Dans 10 ans tu auras \" + ...)  # attendu : Dans 10 ans tu auras 35 ans\n\n\n\n\nCode\n# TODO : que vaut bool() appliqué à ces valeurs ? Devines d'abord, puis vérifie.\nprint(bool(0))        # True ou False ?\nprint(bool(1))\nprint(bool(-42))\nprint(bool(\"\"))       # chaîne vide\nprint(bool(\"Python\"))\nprint(bool(0.0))\nprint(bool(0.1))"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-5-f-strings-le-bon-moyen-dafficher-des-variables",
-    "href": "notebooks/02-variables-types-operations.html#exercice-5-f-strings-le-bon-moyen-dafficher-des-variables",
-    "title": "Exercices — Variables, types de base et opérations",
-    "section": "Exercice 5 — f-strings : le bon moyen d’afficher des variables",
-    "text": "Exercice 5 — f-strings : le bon moyen d’afficher des variables\nPlutôt que de concaténer avec +, Python propose les f-strings : on préfixe la chaîne avec f et on insère des variables entre {}.\nprenom = \"Alice\"\nage = 25\nprint(f\"Je m'appelle {prenom} et j'ai {age} ans.\")\n# → Je m'appelle Alice et j'ai 25 ans.\nOn peut même faire des calculs directement dans les accolades : f\"Dans 10 ans : {age + 10} ans\".\n\n\nCode\nproduit = \"café\"\nprix_unitaire = 2.5\nquantite = 3\n\n# TODO : affiche \"3 café(s) à 2.5€ = 7.5€\" en utilisant une f-string\n# Le total doit être calculé directement dans la f-string\nprint(...)  # attendu : 3 café(s) à 2.5€ = 7.5€\n\n\n\n\nCode\n# Exercice 5b — Formatage dans les f-strings\n#\n# Dans une f-string, on peut contrôler le format d'affichage avec la syntaxe {valeur:.format}\n#\n# Exemples :\n#   f\"{3.14159:.2f}\"        → \"3.14\"          (2 décimales)\n#   f\"{0.857:.1%}\"          → \"85.7%\"         (pourcentage, 1 décimale)\n#   f\"{1234567:,}\"          → \"1,234,567\"     (séparateur milliers, virgule anglaise)\n#   f\"{1234567:_.2f}\"       → \"1_234_567.00\"  (séparateur milliers, style Python)\n#   f\"{42:&gt;10}\"             → \"        42\"    (aligné à droite sur 10 caractères)\n#   f\"{42:&lt;10}\"             → \"42        \"    (aligné à gauche)\n#   f\"{42:010}\"             → \"0000000042\"    (complété avec des zéros)\n\nchiffre_affaires = 1_482_300.5\ntaux_marge = 0.2173\nventes = 42\n\n# TODO : affiche le CA avec 2 décimales et un séparateur de milliers (utilise ,)\n# attendu : 1,482,300.50\nprint(f\"{...}\")\n\n# TODO : affiche le taux de marge en % avec 1 décimale\n# attendu : 21.7%\nprint(f\"{...}\")\n\n# TODO : affiche le nombre de ventes aligné à droite sur 8 caractères, complété de zéros\n# attendu : 00000042\nprint(f\"{...}\")\n\n# TODO : construis un mini-tableau aligné (utilise l'alignement à gauche sur 15 chars)\nproduits = [(\"Café\", 2.5), (\"Thé\", 1.8), (\"Chocolat chaud\", 3.2)]\nfor nom, prix in produits:\n    print(f\"{nom} {prix}€\")\n# attendu :\n# Café            2.50€\n# Thé             1.80€\n# Chocolat chaud  3.20€\n\n\nEllipsis\nEllipsis\nEllipsis\nCafé 2.5€\nThé 1.8€\nChocolat chaud 3.2€\n\n\n\nLes différentes façons de formater en Python\n\nPython a connu trois générations de formatage. Tu les croiseras toutes dans du code existant :\n1. Opérateur % (style C, Python 2)\n\"Bonjour %s, tu as %d ans\" % (\"Alice\", 25)\n\"Prix : %.2f€\" % 3.14159\n%s → string, %d → entier, %f → flottant. Encore très présent dans du code legacy.\n2. .format() (Python 3.0)\n\"Bonjour {}, tu as {} ans\".format(\"Alice\", 25)\n\"Prix : {:.2f}€\".format(3.14159)\n\"{prenom} a {age} ans\".format(prenom=\"Alice\", age=25)\nPlus lisible que %, mais verbeux.\n3. f-strings \nprenom, age = \"Alice\", 25\nf\"Bonjour {prenom}, tu as {age} ans\"\nf\"Prix : {3.14159:.2f}€\"\nLe code s’écrit directement dans la chaîne. C’est ce qu’on utilise aujourd’hui.\n\n\nCode\nprenom = \"Alice\"\nprix = 3.14159\n\n# Les trois font la même chose\nprint(\"Bonjour %s, prix : %.2f€\" % (prenom, prix))\nprint(\"Bonjour {}, prix : {:.2f}€\".format(prenom, prix))\nprint(f\"Bonjour {prenom}, prix : {prix:.2f}€\")\n\n\nBonjour Alice, prix : 3.14€\nBonjour Alice, prix : 3.14€\nBonjour Alice, prix : 3.14€"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-6-convertisseur-de-températures",
-    "href": "notebooks/02-variables-types-operations.html#exercice-6-convertisseur-de-températures",
-    "title": "Exercices — Variables, types de base et opérations",
-    "section": "Exercice 6 — convertisseur de températures",
-    "text": "Exercice 6 — convertisseur de températures\nÉcris convertisseur qui prend une température en Celsius et affiche le résultat en Fahrenheit et en Kelvin.\nFormules : - Fahrenheit : F = C × 9/5 + 32 - Kelvin : K = C + 273.15\n\n\nCode\ncelsius = 100\n\n# TODO : calcule fahrenheit et kelvin\nfahrenheit = ...\nkelvin = ...\n\n# TODO : affiche les résultats avec une f-string\n# attendu :\n# 100°C = 212.0°F = 373.15K\nprint(...)"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#corrigés",
-    "href": "notebooks/02-variables-types-operations.html#corrigés",
-    "title": "Exercices — Variables, types de base et opérations",
-    "section": "Corrigés",
-    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\nprenom = \"Alice\"\nage = 25\ntaille = 1.68\naime_python = True\nExercice 2\ndivision         = 17 / 5    # 3.4\ndivision_entiere = 17 // 5   # 3\nreste            = 17 % 5    # 2\nsurface          = 13 ** 2   # 169\npuissance        = 2 ** 10   # 1024\nExercice 3\nnom_complet    = prenom.capitalize() + \" \" + nom.capitalize()\nlongueur       = len(phrase)\nnouvelle_phrase = phrase.replace(\"science\", \"engineering\")\nprint(\"Python! \" * 4)\nExercice 4\nprint(\"Dans 10 ans tu auras \" + str(int(age_str) + 10) + \" ans\")\n# bool : False, True, True, False, True, False, True\nExercice 5\nprint(f\"{quantite} {produit}(s) à {prix_unitaire}€ = {quantite * prix_unitaire}€\")"
   },
   {
     "objectID": "notebooks/01-premiers-pas-notebooks.html",
@@ -371,7 +330,7 @@
     "href": "notebooks/01-premiers-pas-notebooks.html#votre-première-cellule-de-code",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "3. Votre première cellule de code",
-    "text": "3. Votre première cellule de code\nLa cellule suivante est une cellule de code. Remarquez : - Son fond légèrement différent - Le [ ] à gauche (il affichera le numéro d’exécution après le run) - Le bouton ▶ dans la barre d’outils\nExécutez-la avec Shift + Entrée :\n\n\nCode\nprint(\"Bonjour depuis une cellule de code Python !\")\nprint(\"Ce texte s'affiche juste en dessous de la cellule.\")\n\n# La dernière expression d'une cellule est affichée automatiquement\n2 + 2\n\n\nCe qui vient de se passer : - print() produit une sortie standard - 2 + 2 est la dernière expression : Jupyter l’affiche automatiquement comme Out[n] - Le numéro entre crochets [1] indique l’ordre d’exécution dans la session\n\n🔍 Ce numéro est important. On y revient en section 5."
+    "text": "3. Votre première cellule de code\nLa cellule suivante est une cellule de code. Remarquez : - Son fond légèrement différent - Le [ ] à gauche (il affichera le numéro d’exécution après le run) - Le bouton ▶ dans la barre d’outils\nExécutez-la avec Shift + Entrée :\n\nprint(\"Bonjour depuis une cellule de code Python !\")\nprint(\"Ce texte s'affiche juste en dessous de la cellule.\")\n\n# La dernière expression d'une cellule est affichée automatiquement\n2 + 2\n\nCe qui vient de se passer : - print() produit une sortie standard - 2 + 2 est la dernière expression : Jupyter l’affiche automatiquement comme Out[n] - Le numéro entre crochets [1] indique l’ordre d’exécution dans la session\n\n🔍 Ce numéro est important. On y revient en section 5."
   },
   {
     "objectID": "notebooks/01-premiers-pas-notebooks.html#le-kernel-le-moteur-derrière-le-notebook",
@@ -385,28 +344,28 @@
     "href": "notebooks/01-premiers-pas-notebooks.html#létat-partagé-entre-cellules",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "5. L’état partagé entre cellules",
-    "text": "5. L’état partagé entre cellules\nC’est la chose la plus importante à comprendre pour éviter des bugs.\nToutes les cellules d’un notebook partagent le même espace de noms (namespace). Une variable définie dans une cellule est accessible dans toutes les autres.\nExécutez les trois cellules suivantes dans l’ordre :\n\n\nCode\n# Cellule A — on définit une variable\nprenom = \"Alice\"\nscore = 42\nprint(f\"Variable 'prenom' créée : {prenom}\")\n\n\n\n\nCode\n# Cellule B — on utilise la variable définie dans A\n# (même si cette cellule est physiquement séparée)\nmessage = f\"{prenom} a obtenu {score} points.\"\nprint(message)\n\n\n\n\nCode\n# Cellule C — inspecter l'état actuel du kernel\n# %whos est une \"magic command\" qui liste toutes les variables actives\n%whos\n\n\n\n⚠️ Le piège de l’ordre d’exécution\nLe numéro [n] à gauche de chaque cellule indique quand elle a été exécutée, pas sa position dans le notebook. C’est ce qui peut provoquer des bugs difficiles à déboguer.\nScénario classique du bug :\n\nVous exécutez les cellules de haut en bas (normal)\nVous remontez modifier une cellule du milieu et la réexécutez\nLes cellules du bas utilisent l’ancienne valeur, PAS la nouvelle… sauf si vous les réexécutez aussi\n\nLa règle d’or : un notebook sain peut être réexécuté de haut en bas sans erreur.\nPour vérifier : Kernel → Restart & Run All"
+    "text": "5. L’état partagé entre cellules\nC’est la chose la plus importante à comprendre pour éviter des bugs.\nToutes les cellules d’un notebook partagent le même espace de noms (namespace). Une variable définie dans une cellule est accessible dans toutes les autres.\nExécutez les trois cellules suivantes dans l’ordre :\n\n# Cellule A — on définit une variable\nprenom = \"Alice\"\nscore = 42\nprint(f\"Variable 'prenom' créée : {prenom}\")\n\n\n# Cellule B — on utilise la variable définie dans A\n# (même si cette cellule est physiquement séparée)\nmessage = f\"{prenom} a obtenu {score} points.\"\nprint(message)\n\n\n# Cellule C — inspecter l'état actuel du kernel\n# %whos est une \"magic command\" qui liste toutes les variables actives\n%whos\n\n\n⚠️ Le piège de l’ordre d’exécution\nLe numéro [n] à gauche de chaque cellule indique quand elle a été exécutée, pas sa position dans le notebook. C’est ce qui peut provoquer des bugs difficiles à déboguer.\nScénario classique du bug :\n\nVous exécutez les cellules de haut en bas (normal)\nVous remontez modifier une cellule du milieu et la réexécutez\nLes cellules du bas utilisent l’ancienne valeur, PAS la nouvelle… sauf si vous les réexécutez aussi\n\nLa règle d’or : un notebook sain peut être réexécuté de haut en bas sans erreur.\nPour vérifier : Kernel → Restart & Run All"
   },
   {
     "objectID": "notebooks/01-premiers-pas-notebooks.html#les-magic-commands",
     "href": "notebooks/01-premiers-pas-notebooks.html#les-magic-commands",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "6. Les Magic Commands",
-    "text": "6. Les Magic Commands\nLes magic commands sont des raccourcis spéciaux préfixés par % (ligne) ou %% (cellule entière). Elles ne font pas partie de Python standard — c’est IPython qui les fournit.\n\n\nCode\n# %time : mesure le temps d'exécution d'une ligne\n%time sum(range(1_000_000))\n\n\n\n\nCode\n# %timeit : répète plusieurs fois pour une mesure fiable\n%timeit sum(range(10_000))\n\n\n\n\nCode\n# %%time : mesure la cellule entière (double %)\n%%time\n\ntotal = 0\nfor i in range(500_000):\n    total += i\nprint(f\"Total = {total}\")\n\n\n\n\nCode\n# Autres magic commands utiles — décommentez et testez !\n\n# %pwd          → répertoire courant\n# %ls           → liste les fichiers\n# %history      → historique des commandes exécutées\n# %matplotlib inline  → affiche les graphiques dans le notebook\n# %load_ext autoreload → recharge automatiquement les modules modifiés\n# !commande     → exécute une commande shell (ex: !pip install pandas)\n\n# Lister toutes les magic commands disponibles :\n%lsmagic"
+    "text": "6. Les Magic Commands\nLes magic commands sont des raccourcis spéciaux préfixés par % (ligne) ou %% (cellule entière). Elles ne font pas partie de Python standard — c’est IPython qui les fournit.\n\n# %time : mesure le temps d'exécution d'une ligne\n%time sum(range(1_000_000))\n\n\n# %timeit : répète plusieurs fois pour une mesure fiable\n%timeit sum(range(10_000))\n\n\n# %%time : mesure la cellule entière (double %)\n%%time\n\ntotal = 0\nfor i in range(500_000):\n    total += i\nprint(f\"Total = {total}\")\n\n\n# Autres magic commands utiles — décommentez et testez !\n\n# %pwd          → répertoire courant\n# %ls           → liste les fichiers\n# %history      → historique des commandes exécutées\n# %matplotlib inline  → affiche les graphiques dans le notebook\n# %load_ext autoreload → recharge automatiquement les modules modifiés\n# !commande     → exécute une commande shell (ex: !pip install pandas)\n\n# Lister toutes les magic commands disponibles :\n%lsmagic"
   },
   {
     "objectID": "notebooks/01-premiers-pas-notebooks.html#afficher-des-données-au-delà-du-print",
     "href": "notebooks/01-premiers-pas-notebooks.html#afficher-des-données-au-delà-du-print",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "7. Afficher des données : au-delà du print()",
-    "text": "7. Afficher des données : au-delà du print()\nUn des grands avantages des notebooks : les objets Python savent s’afficher eux-mêmes de façon riche. Pandas, matplotlib, PIL… chacun a son rendu natif.\n\n\nCode\nimport pandas as pd\n\n# Un DataFrame s'affiche comme un tableau HTML formaté\ndata = {\n    \"Produit\": [\"Café\", \"Thé\", \"Jus d'orange\", \"Eau\"],\n    \"Prix (€)\": [1.50, 1.20, 2.00, 0.80],\n    \"Calories\": [5, 2, 110, 0],\n}\ndf = pd.DataFrame(data)\ndf  # Pas de print() — Jupyter détecte le DataFrame et le rend en HTML\n\n\n\n\nCode\nimport matplotlib.pyplot as plt\n\n# Un graphique matplotlib s'affiche inline dans le notebook\nfig, ax = plt.subplots(figsize=(7, 4))\n\nax.bar(df[\"Produit\"], df[\"Calories\"], color=[\"#4C72B0\", \"#55A868\", \"#C44E52\", \"#8172B2\"])\nax.set_title(\"Calories par boisson\", fontsize=14, fontweight=\"bold\")\nax.set_ylabel(\"Calories\")\nax.set_xlabel(\"Produit\")\n\nplt.tight_layout()\nplt.show()\n\n\n\n\nCode\nfrom IPython.display import display, HTML, Markdown\n\n# IPython.display permet d'afficher n'importe quoi n'importe où dans une cellule\ndisplay(HTML(\"&lt;b style='color: #2196F3; font-size: 16px;'&gt;Du HTML directement dans le notebook !&lt;/b&gt;\"))\n\ndisplay(Markdown(\"Et du **Markdown** rendu dynamiquement depuis du code.\"))\n\n# On peut afficher plusieurs outputs dans la même cellule\nprint(\"Et un print() classique aussi.\")\ndisplay(df.describe())  # Statistiques descriptives du DataFrame"
+    "text": "7. Afficher des données : au-delà du print()\nUn des grands avantages des notebooks : les objets Python savent s’afficher eux-mêmes de façon riche. Pandas, matplotlib, PIL… chacun a son rendu natif.\n\nimport pandas as pd\n\n# Un DataFrame s'affiche comme un tableau HTML formaté\ndata = {\n    \"Produit\": [\"Café\", \"Thé\", \"Jus d'orange\", \"Eau\"],\n    \"Prix (€)\": [1.50, 1.20, 2.00, 0.80],\n    \"Calories\": [5, 2, 110, 0],\n}\ndf = pd.DataFrame(data)\ndf  # Pas de print() — Jupyter détecte le DataFrame et le rend en HTML\n\n\nimport matplotlib.pyplot as plt\n\n# Un graphique matplotlib s'affiche inline dans le notebook\nfig, ax = plt.subplots(figsize=(7, 4))\n\nax.bar(df[\"Produit\"], df[\"Calories\"], color=[\"#4C72B0\", \"#55A868\", \"#C44E52\", \"#8172B2\"])\nax.set_title(\"Calories par boisson\", fontsize=14, fontweight=\"bold\")\nax.set_ylabel(\"Calories\")\nax.set_xlabel(\"Produit\")\n\nplt.tight_layout()\nplt.show()\n\n\nfrom IPython.display import display, HTML, Markdown\n\n# IPython.display permet d'afficher n'importe quoi n'importe où dans une cellule\ndisplay(HTML(\"&lt;b style='color: #2196F3; font-size: 16px;'&gt;Du HTML directement dans le notebook !&lt;/b&gt;\"))\n\ndisplay(Markdown(\"Et du **Markdown** rendu dynamiquement depuis du code.\"))\n\n# On peut afficher plusieurs outputs dans la même cellule\nprint(\"Et un print() classique aussi.\")\ndisplay(df.describe())  # Statistiques descriptives du DataFrame"
   },
   {
     "objectID": "notebooks/01-premiers-pas-notebooks.html#ce-que-contient-vraiment-un-fichier-.ipynb",
     "href": "notebooks/01-premiers-pas-notebooks.html#ce-que-contient-vraiment-un-fichier-.ipynb",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "8. Ce que contient vraiment un fichier .ipynb",
-    "text": "8. Ce que contient vraiment un fichier .ipynb\nUn .ipynb est du JSON pur. Voici à quoi ressemble une cellule dans ce fichier :\n{\n  \"nbformat\": 4,\n  \"nbformat_minor\": 5,\n  \"metadata\": {\n    \"kernelspec\": {\n      \"display_name\": \"Python 3\",\n      \"language\": \"python\",\n      \"name\": \"python3\"\n    }\n  },\n  \"cells\": [\n    {\n      \"cell_type\": \"markdown\",\n      \"id\": \"abc123\",\n      \"metadata\": {},\n      \"source\": [\"# Mon titre\\n\", \"\\n\", \"Du texte ici.\"]\n    },\n    {\n      \"cell_type\": \"code\",\n      \"id\": \"def456\",\n      \"execution_count\": 1,\n      \"metadata\": {},\n      \"source\": [\"x = 42\\n\", \"print(x)\"],\n      \"outputs\": [\n        {\n          \"output_type\": \"stream\",\n          \"name\": \"stdout\",\n          \"text\": [\"42\\n\"]\n        }\n      ]\n    }\n  ]\n}\nLes clés importantes : - cell_type : \"markdown\", \"code\", ou \"raw\" - source : le contenu de la cellule (liste de strings) - outputs : les résultats stockés après exécution - execution_count : le numéro [n] affiché à gauche\n\nLes outputs sont sauvegardés dans le fichier. C’est pourquoi un notebook peut s’afficher avec ses résultats sans avoir été réexécuté.\n\n\n\nCode\nimport json\n\n# Lire le fichier .ipynb courant et inspecter sa structure\nwith open(\"01-premiers-pas-notebooks.ipynb\", \"r\", encoding=\"utf-8\") as f:\n    nb = json.load(f)\n\nprint(f\"Format du notebook : nbformat {nb['nbformat']}.{nb['nbformat_minor']}\")\nprint(f\"Nombre de cellules : {len(nb['cells'])}\")\nprint()\n\n# Résumé des types de cellules\nfrom collections import Counter\ntypes = Counter(c[\"cell_type\"] for c in nb[\"cells\"])\nfor cell_type, count in types.items():\n    print(f\"  {cell_type:10s} : {count} cellule(s)\")"
+    "text": "8. Ce que contient vraiment un fichier .ipynb\nUn .ipynb est du JSON pur. Voici à quoi ressemble une cellule dans ce fichier :\n{\n  \"nbformat\": 4,\n  \"nbformat_minor\": 5,\n  \"metadata\": {\n    \"kernelspec\": {\n      \"display_name\": \"Python 3\",\n      \"language\": \"python\",\n      \"name\": \"python3\"\n    }\n  },\n  \"cells\": [\n    {\n      \"cell_type\": \"markdown\",\n      \"id\": \"abc123\",\n      \"metadata\": {},\n      \"source\": [\"# Mon titre\\n\", \"\\n\", \"Du texte ici.\"]\n    },\n    {\n      \"cell_type\": \"code\",\n      \"id\": \"def456\",\n      \"execution_count\": 1,\n      \"metadata\": {},\n      \"source\": [\"x = 42\\n\", \"print(x)\"],\n      \"outputs\": [\n        {\n          \"output_type\": \"stream\",\n          \"name\": \"stdout\",\n          \"text\": [\"42\\n\"]\n        }\n      ]\n    }\n  ]\n}\nLes clés importantes : - cell_type : \"markdown\", \"code\", ou \"raw\" - source : le contenu de la cellule (liste de strings) - outputs : les résultats stockés après exécution - execution_count : le numéro [n] affiché à gauche\n\nLes outputs sont sauvegardés dans le fichier. C’est pourquoi un notebook peut s’afficher avec ses résultats sans avoir été réexécuté.\n\n\nimport json\n\n# Lire le fichier .ipynb courant et inspecter sa structure\nwith open(\"01-premiers-pas-notebooks.ipynb\", \"r\", encoding=\"utf-8\") as f:\n    nb = json.load(f)\n\nprint(f\"Format du notebook : nbformat {nb['nbformat']}.{nb['nbformat_minor']}\")\nprint(f\"Nombre de cellules : {len(nb['cells'])}\")\nprint()\n\n# Résumé des types de cellules\nfrom collections import Counter\ntypes = Counter(c[\"cell_type\"] for c in nb[\"cells\"])\nfor cell_type, count in types.items():\n    print(f\"  {cell_type:10s} : {count} cellule(s)\")"
   },
   {
     "objectID": "notebooks/01-premiers-pas-notebooks.html#raccourcis-clavier-utiles",
@@ -427,7 +386,7 @@
     "href": "notebooks/01-premiers-pas-notebooks.html#exercices-pratiques",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "11. Exercices pratiques",
-    "text": "11. Exercices pratiques\nMettez en pratique ce que vous venez d’apprendre. Les cellules ci-dessous sont vides, à vous de jouer !\n\nExercice 1 : Votre première cellule Markdown\nCréez une cellule Markdown en dessous de celle-ci (B puis M) qui contient : - Un titre de niveau 2 - Une liste de 3 langages de programmation que vous connaissez - Un mot en gras et un mot en italique\n\n\nExercice 2 : Calcul avec variables\n\n\nCode\n# Exercice 2 : complétez ce code\n# Calculez l'IMC (Indice de Masse Corporelle) avec la formule : poids / taille²\n# et affichez une phrase indiquant si l'IMC est normal (entre 18.5 et 25)\n\npoids = 70    # kg  modifiez cette valeur\ntaille = 1.75 # m   modifiez cette valeur\n\n# Votre code ici :\n# imc = ...\n# print(...)\n\n\n\n\nExercice 3 : Comprendre l’ordre d’exécution\n\nExécutez la cellule suivante\nPuis modifiez x = 10 en x = 99 dans la cellule A ci-dessous\nRéexécutez UNIQUEMENT la cellule A\nObservez ce que fait la cellule B (qui utilise x)\nRéfléchissez : la cellule B a-t-elle vu le changement ?\n\n\n\nCode\n# Cellule A — modifiez x = 10 en x = 99, puis réexécutez uniquement cette cellule\nx = 99\nprint(f\"Cellule A exécutée. x = {x}\")\n\n\n\n\nCode\n# Cellule B — NE TOUCHEZ PAS à cette cellule, ne faites que l'observer\nprint(f\"Cellule B voit x = {x}\")\nprint(\"Si x = 99 ici, c'est que le kernel a bien vu le changement.\")"
+    "text": "11. Exercices pratiques\nMettez en pratique ce que vous venez d’apprendre. Les cellules ci-dessous sont vides, à vous de jouer !\n\nExercice 1 : Votre première cellule Markdown\nCréez une cellule Markdown en dessous de celle-ci (B puis M) qui contient : - Un titre de niveau 2 - Une liste de 3 langages de programmation que vous connaissez - Un mot en gras et un mot en italique\n\n\nExercice 2 : Calcul avec variables\n\n# Exercice 2 : complétez ce code\n# Calculez l'IMC (Indice de Masse Corporelle) avec la formule : poids / taille²\n# et affichez une phrase indiquant si l'IMC est normal (entre 18.5 et 25)\n\npoids = 70    # kg  modifiez cette valeur\ntaille = 1.75 # m   modifiez cette valeur\n\n# Votre code ici :\n# imc = ...\n# print(...)\n\n\n\nExercice 3 : Comprendre l’ordre d’exécution\n\nExécutez la cellule suivante\nPuis modifiez x = 10 en x = 99 dans la cellule A ci-dessous\nRéexécutez UNIQUEMENT la cellule A\nObservez ce que fait la cellule B (qui utilise x)\nRéfléchissez : la cellule B a-t-elle vu le changement ?\n\n\n# Cellule A — modifiez x = 10 en x = 99, puis réexécutez uniquement cette cellule\nx = 99\nprint(f\"Cellule A exécutée. x = {x}\")\n\n\n# Cellule B — NE TOUCHEZ PAS à cette cellule, ne faites que l'observer\nprint(f\"Cellule B voit x = {x}\")\nprint(\"Si x = 99 ici, c'est que le kernel a bien vu le changement.\")"
   },
   {
     "objectID": "notebooks/01-premiers-pas-notebooks.html#pour-aller-plus-loin",
@@ -444,175 +403,232 @@
     "text": "Récapitulatif\n\n\n\n\n\n\n\nConcept\nCe qu’il faut retenir\n\n\n\n\nNotebook\nDocument JSON combinant texte, code et résultats\n\n\nCellule Markdown\nTexte formaté, rendu à l’exécution\n\n\nCellule de code\nCode Python exécuté par le kernel\n\n\nKernel\nProcessus séparé qui fait tourner Python\n\n\nÉtat partagé\nToutes les cellules partagent le même namespace\n\n\nOrdre d’exécution\nLes [n] montrent l’ordre réel, pas la position\n\n\nMagic commands\n%time, %whos, %%timeit, !cmd…\n\n\nRègle d’or\nRestart & Run All doit toujours fonctionner"
   },
   {
+    "objectID": "notebooks/07-slicing.html",
+    "href": "notebooks/07-slicing.html",
+    "title": "Le slicing en Python",
+    "section": "",
+    "text": "Le slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :\nCe notebook est progressif : lis chaque section, exécute les cellules d’exploration, puis complète les exercices."
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#les-index-comment-python-numérote",
+    "href": "notebooks/07-slicing.html#les-index-comment-python-numérote",
+    "title": "Le slicing en Python",
+    "section": "1. Les index : comment Python numérote",
+    "text": "1. Les index : comment Python numérote\nChaque élément d’une séquence a deux index : un positif (de gauche à droite, en partant de 0) et un négatif (de droite à gauche, en partant de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nmot[0] → 'P'\nmot[-1] → 'n' (le dernier, sans connaître la longueur)\n\n# Exploration — exécute et observe\nmot = \"Python\"\n\nprint(mot[0])   # premier caractère\nprint(mot[5])   # sixième caractère\nprint(mot[-1])  # dernier caractère\nprint(mot[-2])  # avant-dernier\n\n\n# Exercice 1a — Index\nfruits = [\"pomme\", \"banane\", \"cerise\", \"datte\", \"figue\"]\n\n# TODO : affiche le premier et le dernier fruit avec des index\npremier = ...\ndernier = ...\nprint(premier, dernier)  # attendu : pomme figue\n\n# TODO : affiche l'avant-dernier fruit\navant_dernier = ...\nprint(avant_dernier)  # attendu : datte"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
+    "href": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
+    "title": "Le slicing en Python",
+    "section": "2. Le slicing de base : [debut:fin]",
+    "text": "2. Le slicing de base : [debut:fin]\nsequence[debut:fin] retourne les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]  →  \"Pyt\"   # index 0, 1, 2 (3 exclu)\nmot[2:5]  →  \"tho\"   # index 2, 3, 4\nAstuce : fin - debut = nombre d’éléments extraits.\n\n# Exploration\nmot = \"Python\"\nprint(mot[0:3])   # \"Pyt\"\nprint(mot[2:5])   # \"tho\"\nprint(mot[0:6])   # \"Python\" (tout)\n\nnombres = [10, 20, 30, 40, 50, 60, 70]\nprint(nombres[1:4])   # [20, 30, 40]\nprint(nombres[3:7])   # [40, 50, 60, 70]\n\n\n# Exercice 2 — Slicing de base\nphrase = \"data science\"\nscores = [88, 72, 95, 61, 83, 77, 90, 55]\n\n# TODO : extrais \"data\" (les 4 premiers caractères)\ndebut = ...\nprint(debut)  # attendu : data\n\n# TODO : extrais \"science\" (du 5e au dernier)\nfin = ...\nprint(fin)  # attendu : science\n\n# TODO : extrais les 3 premiers scores\npremiers_scores = ...\nprint(premiers_scores)  # attendu : [88, 72, 95]\n\n# TODO : extrais les scores du 3e au 6e (index 2 à 5 inclus)\nmilieu = ...\nprint(milieu)  # attendu : [95, 61, 83, 77]"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#omettre-debut-ou-fin",
+    "href": "notebooks/07-slicing.html#omettre-debut-ou-fin",
+    "title": "Le slicing en Python",
+    "section": "3. Omettre debut ou fin",
+    "text": "3. Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin. C’est très idiomatique en Python.\nmot = \"Python\"\nmot[:3]   →  \"Pyt\"     # depuis le début jusqu'à 3 (exclu)\nmot[3:]   →  \"hon\"     # depuis 3 jusqu'à la fin\nmot[:]    →  \"Python\"  # copie complète\n\n# Exercice 3 — Omissions\nemail = \"user@example.com\"\ntemperatures = [12, 15, 9, 22, 18, 7, 25, 11, 19]\n\n# TODO : extrais le nom d'utilisateur (tout avant le @)\n# Indice : le @ est à l'index 5\nnom_utilisateur = ...\nprint(nom_utilisateur)  # attendu : alice\n\n# TODO : extrais le domaine (tout après le @)\ndomaine = ...\nprint(domaine)  # attendu : example.com\n\n# TODO : extrais les 4 dernières températures\ndernieres = ...\nprint(dernieres)  # attendu : [7, 25, 11, 19]\n\n# TODO : supprime la première et la dernière température (garde le \"milieu\")\nmilieu = ...\nprint(milieu)  # attendu : [15, 9, 22, 18, 7, 25, 11]\n\nEllipsis\nEllipsis\nEllipsis\nEllipsis"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
+    "href": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
+    "title": "Le slicing en Python",
+    "section": "4. Index négatifs dans le slicing",
+    "text": "4. Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très utile pour raisonner “depuis la fin” sans connaître la longueur.\nmot = \"Python\"\nmot[-3:]   →  \"hon\"    # les 3 derniers\nmot[:-3]   →  \"Pyt\"   # tout sauf les 3 derniers\nmot[-4:-1] →  \"tho\"   # du 4e en partant de la fin au 2e en partant de la fin\n\n# Exercice 4 — Index négatifs\nfichier = \"rapport_annuel_2024.csv\"\nlogs = [\"INFO\", \"DEBUG\", \"ERROR\", \"WARNING\", \"INFO\", \"ERROR\", \"DEBUG\"]\n\n# TODO : extrais l'extension du fichier (les 3 derniers caractères)\nextension = ...\nprint(extension)  # attendu : csv\n\n# TODO : extrais le nom sans l'extension (tout sauf les 4 derniers caractères : \".csv\")\nnom_sans_ext = ...\nprint(nom_sans_ext)  # attendu : rapport_annuel_2024\n\n# TODO : extrais les 3 derniers logs\nderniers_logs = ...\nprint(derniers_logs)  # attendu : ['INFO', 'ERROR', 'DEBUG']\n\n# TODO : extrais tous les logs sauf le premier et le dernier\nlogs_milieu = ...\nprint(logs_milieu)  # attendu : ['DEBUG', 'ERROR', 'WARNING', 'INFO', 'ERROR']"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#le-pas-debutfinpas",
+    "href": "notebooks/07-slicing.html#le-pas-debutfinpas",
+    "title": "Le slicing en Python",
+    "section": "5. Le pas : [debut:fin:pas]",
+    "text": "5. Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    →  [0, 2, 4, 6, 8]     # un sur deux\nnombres[1::2]   →  [1, 3, 5, 7, 9]     # un sur deux en partant de 1\nnombres[::3]    →  [0, 3, 6, 9]        # un sur trois\nnombres[::-1]   →  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]  # inverser !\n[::-1] est l’idiome Python pour inverser une séquence.\n\n# Exercice 5 — Le pas\nlettres = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\"]\nmot = \"abracadabra\"\n\n# TODO : extrais une lettre sur deux (index pairs)\npairs = ...\nprint(pairs)  # attendu : ['a', 'c', 'e', 'g', 'i']\n\n# TODO : extrais une lettre sur deux (index impairs)\nimpairs = ...\nprint(impairs)  # attendu : ['b', 'd', 'f', 'h', 'j']\n\n# TODO : inverse le mot \"abracadabra\"\ninverse = ...\nprint(inverse)  # attendu : arbadacarba\n\n# TODO : extrais les lettres de l'index 1 à 7 (exclu), une sur deux\nselection = ...\nprint(selection)  # attendu : ['b', 'd', 'f']"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#slicing-et-copie",
+    "href": "notebooks/07-slicing.html#slicing-et-copie",
+    "title": "Le slicing en Python",
+    "section": "6. Slicing et copie",
+    "text": "6. Slicing et copie\nSur les listes, [:] crée une copie superficielle — utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie indépendante\n\nAttention : le slicing ne modifie jamais la séquence originale, il retourne toujours une nouvelle séquence.\n\n\n# Exploration — comprendre la différence entre alias et copie\noriginal = [1, 2, 3, 4, 5]\n\nalias = original       # même objet en mémoire\ncopie = original[:]    # objet différent, mêmes valeurs\n\nalias[0] = 999\nprint(\"original après modif de alias :\", original)  # original est modifié !\n\ncopie[0] = 888\nprint(\"original après modif de copie :\", original)  # original intact"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
+    "href": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
+    "title": "Le slicing en Python",
+    "section": "7. Mini-projet — Analyse d’une série temporelle",
+    "text": "7. Mini-projet — Analyse d’une série temporelle\nTu disposes des ventes journalières d’un produit sur 4 semaines (28 jours). Utilise uniquement le slicing pour répondre aux questions.\n\nventes = [\n    # Semaine 1 : lun-dim\n    142, 98, 115, 130, 201, 245, 189,\n    # Semaine 2\n    155, 102, 121, 145, 198, 267, 201,\n    # Semaine 3\n    148, 95, 118, 139, 210, 255, 195,\n    # Semaine 4\n    162, 108, 125, 151, 215, 278, 212,\n]\n\n# TODO : extrais les ventes de la première semaine\nsemaine_1 = ...\nprint(\"Semaine 1 :\", semaine_1)\n\n# TODO : extrais les ventes de la dernière semaine\nsemaine_4 = ...\nprint(\"Semaine 4 :\", semaine_4)\n\n# TODO : extrais uniquement les lundis (index 0, 7, 14, 21) — utilise le pas\nlundis = ...\nprint(\"Lundis :\", lundis)\n\n# TODO : extrais uniquement les week-ends (samedi=5, dimanche=6 de chaque semaine)\n# Indice : samedi index 5, 12, 19, 26 / dimanche index 6, 13, 20, 27\nsamedis  = ...\ndimanches = ...\nprint(\"Samedis :\", samedis)\nprint(\"Dimanches :\", dimanches)\n\n# TODO : calcule la moyenne de la semaine 1 et de la semaine 4\n# (sum() et len() sont autorisés)\nmoy_s1 = sum(semaine_1) / len(semaine_1)\nmoy_s4 = sum(semaine_4) / len(semaine_4)\nprint(f\"Moyenne semaine 1 : {moy_s1:.1f} — Semaine 4 : {moy_s4:.1f}\")\n\n# TODO : inverse la liste des ventes (pour un affichage du plus récent au plus ancien)\nventes_inversees = ...\nprint(\"3 derniers jours en premier :\", ventes_inversees[:3])"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#corrigés",
+    "href": "notebooks/07-slicing.html#corrigés",
+    "title": "Le slicing en Python",
+    "section": "Corrigés",
+    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\npremier = fruits[0]\ndernier = fruits[-1]\navant_dernier = fruits[-2]\nExercice 2\ndebut           = phrase[:4]\nfin             = phrase[5:]\npremiers_scores = scores[:3]\nmilieu          = scores[2:6]\nExercice 3\nnom_utilisateur = email[:5]        # ou email.split(\"@\")[0]\ndomaine         = email[6:]        # ou email.split(\"@\")[1]\ndernieres       = temperatures[-4:]\nmilieu          = temperatures[1:-1]\nExercice 4\nextension    = fichier[-3:]\nnom_sans_ext = fichier[:-4]\nderniers_logs = logs[-3:]\nlogs_milieu  = logs[1:-1]\nExercice 5\npairs     = lettres[::2]\nimpairs   = lettres[1::2]\ninverse   = mot[::-1]\nselection = lettres[1:7:2]\nMini-projet\nsemaine_1       = ventes[:7]\nsemaine_4       = ventes[-7:]\nlundis          = ventes[::7]\nsamedis         = ventes[5::7]\ndimanches       = ventes[6::7]\nventes_inversees = ventes[::-1]"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html",
+    "href": "notebooks/02-variables-types-operations.html",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "",
+    "text": "Ce notebook accompagne le cours Variables, types de base et opérations. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.\nPour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat."
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
+    "href": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 1 : Créer et inspecter des variables",
+    "text": "Exercice 1 : Créer et inspecter des variables\nCrée quatre variables : ton prénom, ton âge, ta taille en mètres, et un booléen qui indique si tu aimes Python. Affiche ensuite le type de chacune.\n\n# TODO : crée tes quatre variables\nprenom = ...\nage = ...\ntaille = ...\naime_python = ...\n\n# Affiche le type de chacune\nprint(type(prenom))\nprint(type(age))\nprint(type(taille))\nprint(type(aime_python))"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
+    "href": "notebooks/02-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 2 : Étiquettes et mémoire",
+    "text": "Exercice 2 : Étiquettes et mémoire\nPour chaque bloc, devine d’abord ce qui va s’afficher (note ta réponse en commentaire), puis exécute pour vérifier.\n\nx = 10\ny = x\n\n# TODO : devine avant d'exécuter\nprint(x is y)          # True ou False ?\nprint(id(x) == id(y))  # True ou False ?\n\n\nx = 10\ny = x\ny += 5\n\n# TODO : devine avant d'exécuter\nprint(x, y)    # ?\nprint(x is y)  # True ou False ?\n\n# TODO : en une phrase, explique pourquoi x n'a pas changé\n# Réponse : ...\n\n\ncourses = [\"pain\", \"lait\"]\npanier = courses\npanier.append(\"oeufs\")\n\n# TODO : devine avant d'exécuter\nprint(courses)  # ?\n\n# TODO : modifie la ligne `panier = courses` pour que `courses` ne soit PAS modifiée,\n# puis réexécute la cellule."
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
+    "href": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 3 : Opérations sur les entiers et flottants",
+    "text": "Exercice 3 : Opérations sur les entiers et flottants\nCalcule les valeurs suivantes et stocke chacune dans une variable.\n\n# TODO : combien font 17 divisé par 5 ? (division classique, puis division entière, puis reste)\ndivision        = ...   # attendu : 3.4\ndivision_entiere = ...  # attendu : 3\nreste           = ...   # attendu : 2\n\n# TODO : quelle est la surface d'un carré de côté 13 ?\nsurface = ...           # attendu : 169\n\n# TODO : 2 à la puissance 10 ?\npuissance = ...         # attendu : 1024\n\nprint(division, division_entiere, reste)\nprint(surface)\nprint(puissance)"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
+    "href": "notebooks/02-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 4 : Opérations sur les chaînes de caractères",
+    "text": "Exercice 4 : Opérations sur les chaînes de caractères\n\nprenom = \"jessica\"\nnom    = \"hyde\"\n\n# TODO : construis le nom complet \"Jessica Hyde\" (majuscule sur la première lettre)\nnom_complet = ...\nprint(nom_complet)  # attendu : Jessica Hyde\n\n# TODO : combien de caractères dans \"data science\" (espace compris) ?\nphrase = \"data science\"\nlongueur = ...\nprint(longueur)  # attendu : 12\n\n# TODO : remplace \"science\" par \"engineering\" dans la phrase\nnouvelle_phrase = ...\nprint(nouvelle_phrase)  # attendu : data engineering\n\n# TODO : affiche \"Python! \" répété 4 fois\nprint(...)  # attendu : Python! Python! Python! Python!"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-5-conversions-de-types",
+    "href": "notebooks/02-variables-types-operations.html#exercice-5-conversions-de-types",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 5 : Conversions de types",
+    "text": "Exercice 5 : Conversions de types\n\n# Cette ligne va planter : lis le message d'erreur, puis corrige la ligne suivante\nage_str = \"25\"\n# print(\"Dans 10 ans tu auras \" + age_str + 10 + \" ans\")  # TypeError !\n\n# TODO : corrige en convertissant correctement\nprint(\"Dans 10 ans tu auras \" + ...)  # attendu : Dans 10 ans tu auras 35 ans\n\n\n# TODO : que vaut bool() appliqué à ces valeurs ? Devines d'abord, puis vérifie.\nprint(bool(0))        # True ou False ?\nprint(bool(1))\nprint(bool(-42))\nprint(bool(\"\"))       # chaîne vide\nprint(bool(\"Python\"))\nprint(bool(0.0))\nprint(bool(0.1))"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-6-f-strings",
+    "href": "notebooks/02-variables-types-operations.html#exercice-6-f-strings",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 6 : f-strings",
+    "text": "Exercice 6 : f-strings\n\nproduit = \"café\"\nprix_unitaire = 2.5\nquantite = 3\n\n# TODO : affiche \"3 café(s) à 2.5€ = 7.5€\" en utilisant une f-string\n# Le total doit être calculé directement dans la f-string\nprint(...)  # attendu : 3 café(s) à 2.5€ = 7.5€\n\n\n# Exercice 6b : formatage dans les f-strings\n# Les codes de formatage ({valeur:...}) sont dans le cours.\n\nchiffre_affaires = 1_482_300.5\ntaux_marge = 0.2173\nventes = 42\n\n# TODO : affiche le CA avec 2 décimales et un séparateur de milliers (utilise ,)\n# attendu : 1,482,300.50\nprint(f\"{...}\")\n\n# TODO : affiche le taux de marge en % avec 1 décimale\n# attendu : 21.7%\nprint(f\"{...}\")\n\n# TODO : affiche le nombre de ventes aligné à droite sur 8 caractères, complété de zéros\n# attendu : 00000042\nprint(f\"{...}\")\n\n# TODO : construis un mini-tableau aligné (utilise l'alignement à gauche sur 15 chars)\nproduits = [(\"Café\", 2.5), (\"Thé\", 1.8), (\"Chocolat chaud\", 3.2)]\nfor nom, prix in produits:\n    print(f\"{nom} {prix}€\")\n# attendu :\n# Café            2.50€\n# Thé             1.80€\n# Chocolat chaud  3.20€"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-7-convertisseur-de-températures",
+    "href": "notebooks/02-variables-types-operations.html#exercice-7-convertisseur-de-températures",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 7 : Convertisseur de températures",
+    "text": "Exercice 7 : Convertisseur de températures\nÉcris un convertisseur qui prend une température en Celsius et affiche le résultat en Fahrenheit et en Kelvin.\nFormules : - Fahrenheit : F = C × 9/5 + 32 - Kelvin : K = C + 273.15\n\ncelsius = 100\n\n# TODO : calcule fahrenheit et kelvin\nfahrenheit = ...\nkelvin = ...\n\n# TODO : affiche les résultats avec une f-string\n# attendu :\n# 100°C = 212.0°F = 373.15K\nprint(...)"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#corrigés",
+    "href": "notebooks/02-variables-types-operations.html#corrigés",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Corrigés",
+    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\nprenom = \"Jessica\"\nage = 25\ntaille = 1.68\naime_python = True\nExercice 2\n# True, True : y = x colle une 2e étiquette sur le même objet\n# 10 15, False : les int sont immuables, y += 5 crée un nouvel objet 15\n#   et recolle l'étiquette y dessus ; x désigne toujours 10\n# ['pain', 'lait', 'oeufs'] : courses et panier désignent la même liste\npanier = courses.copy()   # ou courses[:]\nExercice 3\ndivision         = 17 / 5    # 3.4\ndivision_entiere = 17 // 5   # 3\nreste            = 17 % 5    # 2\nsurface          = 13 ** 2   # 169\npuissance        = 2 ** 10   # 1024\nExercice 4\nnom_complet     = prenom.capitalize() + \" \" + nom.capitalize()\nlongueur        = len(phrase)\nnouvelle_phrase = phrase.replace(\"science\", \"engineering\")\nprint(\"Python! \" * 4)\nExercice 5\nprint(\"Dans 10 ans tu auras \" + str(int(age_str) + 10) + \" ans\")\n# bool : False, True, True, False, True, False, True\nExercice 6\nprint(f\"{quantite} {produit}(s) à {prix_unitaire}€ = {quantite * prix_unitaire}€\")\nExercice 6b\nprint(f\"{chiffre_affaires:,.2f}\")   # 1,482,300.50\nprint(f\"{taux_marge:.1%}\")          # 21.7%\nprint(f\"{ventes:08}\")               # 00000042\n\nfor nom, prix in produits:\n    print(f\"{nom:&lt;15} {prix:.2f}€\")\nExercice 7\nfahrenheit = celsius * 9/5 + 32\nkelvin     = celsius + 273.15\nprint(f\"{celsius}°C = {fahrenheit}°F = {kelvin}K\")"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Python pour la Data 🐍",
+    "title": "Welcome home !",
     "section": "",
-    "text": "Bienvenue dans ce cours d’introduction à la programmation Python et à l’écosystème data."
+    "text": "Chargement de l'historique…",
+    "crumbs": [
+      "Accueil"
+    ]
   },
   {
-    "objectID": "index.html#objectifs",
-    "href": "index.html#objectifs",
-    "title": "Python pour la Data 🐍",
+    "objectID": "index.html#dernières-modifications-du-cours",
+    "href": "index.html#dernières-modifications-du-cours",
+    "title": "Welcome home !",
+    "section": "",
+    "text": "Chargement de l'historique…",
+    "crumbs": [
+      "Accueil"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/index.html",
+    "href": "03-initiation-python/index.html",
+    "title": "Initiation à Python 🐍",
+    "section": "",
+    "text": "Bienvenue dans ce cours d’introduction à la programmation Python.",
+    "crumbs": [
+      "Initiation Python"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/index.html#objectifs",
+    "href": "03-initiation-python/index.html#objectifs",
+    "title": "Initiation à Python 🐍",
     "section": "Objectifs",
-    "text": "Objectifs\nCe cours est conçu pour des débutants complets. Il couvre dans un premier temps :\n\nIntroduction : Qu’est-ce qu’un langage de programmation ? Pourquoi Python ? Apprendre à coder à l’ère de l’IA ?\nL’environnement de développement: Local vs Cloud\nPremiers pas : Apprendre à marcher avec un notebook\nConditions et boucles : Prendre des décisions, répéter des actions\nFonctions : Organiser son code\nStructure de données : Manipuler des données dans des objets appropriés\n\nDans un second temps, nous allons nous concentrer sur les packages Numpy et Pandas, des éléments centraux dans l’écosystème de Python pour la data.\nJe vous invite également à prendre connaissance de la rubrique Tutoriels qui présentera divers packages utiles."
+    "text": "Objectifs\nCe cours est conçu pour des débutants complets. Il couvre dans un premier temps :\n\nPremiers pas : Apprendre à marcher avec un notebook\nVariables types et opérations : Nommer, calculer et manipuler des valeurs\nConditions et boucles : Prendre des décisions, répéter des actions\nFonctions : Organiser son code\nStructure de données : Manipuler des données dans des objets appropriés\nLe slicing : Extraire une portion d’une séquence",
+    "crumbs": [
+      "Initiation Python"
+    ]
   },
   {
-    "objectID": "index.html#comment-utiliser-ce-cours",
-    "href": "index.html#comment-utiliser-ce-cours",
-    "title": "Python pour la Data 🐍",
+    "objectID": "03-initiation-python/index.html#comment-utiliser-ce-cours",
+    "href": "03-initiation-python/index.html#comment-utiliser-ce-cours",
+    "title": "Initiation à Python 🐍",
     "section": "Comment utiliser ce cours",
-    "text": "Comment utiliser ce cours\nSuivez les chapitres dans l’ordre via la barre latérale ou explorez-le comme bon vous semble 😊.\n\n\n\n\n\n\nTipPour ce cours\n\n\n\nNous utiliserons principalement le SSPCloud ou Google Colab, car ils sont préconfigurés et ne nécessitent aucune installation.\nVous pourrez accéder aux notebooks en utilisant les icônes comme ci-dessous.\n \n(ils ne fonctionnent pas volontairement, ne perdez pas de temps à savoir pourquoi 👀)\n\n\n\n\n\n\n\n\nTipL’erreur est normale\n\n\n\nSe tromper fait partie de l’apprentissage. Lisez les messages d’erreur, ils vous guident."
+    "text": "Comment utiliser ce cours\nSuivez les chapitres dans l’ordre via la barre latérale ou explorez-le comme bon vous semble 😊.\n\n\n\n\n\n\nTipPour ce cours\n\n\n\nNous utiliserons principalement le SSPCloud ou Google Colab, car ils sont préconfigurés et ne nécessitent aucune installation.\nVous pourrez accéder aux notebooks en utilisant les icônes comme ci-dessous.\n \n(ils ne fonctionnent pas volontairement, ne perdez pas de temps à savoir pourquoi 👀)\n\n\n\n\n\n\n\n\nTipL’erreur est normale\n\n\n\nSe tromper fait partie de l’apprentissage. Lisez les messages d’erreur, ils vous guident.",
+    "crumbs": [
+      "Initiation Python"
+    ]
   },
   {
-    "objectID": "index.html#ressources",
-    "href": "index.html#ressources",
-    "title": "Python pour la Data 🐍",
+    "objectID": "03-initiation-python/index.html#ressources",
+    "href": "03-initiation-python/index.html#ressources",
+    "title": "Initiation à Python 🐍",
     "section": "Ressources",
-    "text": "Ressources\n\nGitHub du cours\nGaliana, Lino. Python pour la data science.\nChaine de Machine Learnia.\nChaine de Ricco Rakotomalala."
+    "text": "Ressources\n\nGitHub du cours\nGaliana, Lino. Python pour la data science.\nChaine de Machine Learnia.\nChaine de Ricco Rakotomalala. ### 1. Variables et types\n\nUn programme doit stocker des informations : c’est le rôle des variables. Nous verrons ici comment en créer, quels sont les types de base en Python (entiers, flottants, chaînes, booléens), et comment les afficher ou les demander à l’utilisateur.\nNotions clés : variables, int, float, str, bool, print(), input()\n\n2. Conditions et boucles\nUn programme doit pouvoir prendre des décisions et répéter des actions. Vous apprendrez les instructions if, elif, else, ainsi que les boucles for et while. C’est le moment où vos programmes deviennent réellement utiles.\nNotions clés : if/elif/else, opérateurs logiques, for, while, indentation\n\n\n3. Fonctions\nÉcrire tout son code en vrac devient vite ingérable. Les fonctions permettent de découper un programme en blocs réutilisables, nommés et documentés. C’est une étape décisive vers du code propre.\nNotions clés : def, paramètres, return, portée des variables, docstrings\n\n\n4. Listes, dictionnaires et fichiers\nLes données réelles ne sont pas des valeurs isolées : ce sont des collections. Vous apprendrez à manipuler des listes et des dictionnaires, et à lire/écrire dans des fichiers. C’est la porte d’entrée vers la manipulation de données.\nNotions clés : listes, indexation, slicing, dictionnaires, open(), with",
+    "crumbs": [
+      "Initiation Python"
+    ]
   },
   {
-    "objectID": "03-initiation-python/02-slicing.html",
-    "href": "03-initiation-python/02-slicing.html",
-    "title": "Le slicing",
+    "objectID": "03-initiation-python/index.html#comment-ce-module-est-organisé",
+    "href": "03-initiation-python/index.html#comment-ce-module-est-organisé",
+    "title": "Initiation à Python 🐍",
+    "section": "Comment ce module est organisé",
+    "text": "Comment ce module est organisé\nChaque notion est présentée dans une page dédiée, qui contient :\n\nUne explication courte du concept, avec des exemples concrets.\nDes cellules de code exécutables, que vous pouvez modifier et relancer.\nDes exercices à faire vous-même, avec un squelette de code à compléter.\nUne correction (à consulter après avoir essayé).",
+    "crumbs": [
+      "Initiation Python"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/00-premiers-pas-notebooks.html",
+    "href": "03-initiation-python/00-premiers-pas-notebooks.html",
+    "title": "Premiers pas dans un notebook",
     "section": "",
-    "text": "Pour accéder aux notebooks d’exercices c’est ici 👇\nLe slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :",
+    "text": "Il est maintenant l’heure pour nous de découvrir votre prochain outil de travail pour les années à venir 👴.\nCliquez sur l’un des liens ci-dessous pour accéder à la ressource.\n \n\n\n\n Back to top",
     "crumbs": [
-      "Accueil",
       "Initiation Python",
-      "Le slicing"
+      "Premiers pas en notebook"
     ]
   },
   {
-    "objectID": "03-initiation-python/02-slicing.html#index-positif-et-index-négatif",
-    "href": "03-initiation-python/02-slicing.html#index-positif-et-index-négatif",
-    "title": "Le slicing",
-    "section": "Index positif et index négatif",
-    "text": "Index positif et index négatif\nChaque élément d’une séquence possède deux index : un positif (de gauche à droite, à partir de 0) et un négatif (de droite à gauche, à partir de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nL’index négatif permet d’accéder aux éléments depuis la fin, sans connaître la longueur de la séquence.\nmot = \"Python\"\nmot[0]    # 'P'\nmot[-1]   # 'n' (le dernier)\nmot[-2]   # 'o' (l'avant-dernier)",
-    "crumbs": [
-      "Accueil",
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/02-slicing.html#slicing-de-base-debutfin",
-    "href": "03-initiation-python/02-slicing.html#slicing-de-base-debutfin",
-    "title": "Le slicing",
-    "section": "Slicing de base : [debut:fin]",
-    "text": "Slicing de base : [debut:fin]\nsequence[debut:fin] renvoie les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]   # \"Pyt\"  → index 0, 1, 2\nmot[2:5]   # \"tho\"  → index 2, 3, 4\nAstuce : fin - debut donne le nombre d’éléments extraits.",
-    "crumbs": [
-      "Accueil",
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/02-slicing.html#omettre-debut-ou-fin",
-    "href": "03-initiation-python/02-slicing.html#omettre-debut-ou-fin",
-    "title": "Le slicing",
-    "section": "Omettre debut ou fin",
-    "text": "Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin.\nmot[:3]    # \"Pyt\"     → depuis le début\nmot[3:]    # \"hon\"     → jusqu'à la fin\nmot[:]     # \"Python\"  → copie complète",
-    "crumbs": [
-      "Accueil",
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/02-slicing.html#index-négatifs-dans-le-slicing",
-    "href": "03-initiation-python/02-slicing.html#index-négatifs-dans-le-slicing",
-    "title": "Le slicing",
-    "section": "Index négatifs dans le slicing",
-    "text": "Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très pratique pour raisonner « depuis la fin » sans connaître la longueur.\nmot[-3:]     # \"hon\"    → les 3 derniers\nmot[:-3]     # \"Pyt\"    → tout sauf les 3 derniers\nmot[-4:-1]   # \"tho\"    → du 4e au 2e en partant de la fin",
-    "crumbs": [
-      "Accueil",
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/02-slicing.html#le-pas-debutfinpas",
-    "href": "03-initiation-python/02-slicing.html#le-pas-debutfinpas",
-    "title": "Le slicing",
-    "section": "Le pas : [debut:fin:pas]",
-    "text": "Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    # [0, 2, 4, 6, 8]       → un sur deux\nnombres[1::2]   # [1, 3, 5, 7, 9]       → un sur deux, à partir de 1\nnombres[::3]    # [0, 3, 6, 9]          → un sur trois\nnombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence\n[::-1] est l’idiome Python pour inverser une séquence.",
-    "crumbs": [
-      "Accueil",
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/02-slicing.html#slicing-et-copie",
-    "href": "03-initiation-python/02-slicing.html#slicing-et-copie",
-    "title": "Le slicing",
-    "section": "Slicing et copie",
-    "text": "Slicing et copie\nSur les listes, [:] crée une copie superficielle. Utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie indépendante\n\n\n\n\n\n\nWarning\n\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence.",
-    "crumbs": [
-      "Accueil",
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "02-environnement/index.html",
-    "href": "02-environnement/index.html",
-    "title": "Environnement de travail",
+    "objectID": "02-environnement/01-local.html",
+    "href": "02-environnement/01-local.html",
+    "title": "Installer Python en local",
     "section": "",
-    "text": "Pour écrire et exécuter du code Python, il vous faut un environnement de travail. Il en existe deux grandes familles :\n\nEn local : Python est installé directement sur votre ordinateur.\nDans le cloud (en ligne) : Python s’exécute sur un serveur distant, accessible depuis votre navigateur.\n\nAucune des deux approches n’est “meilleure” dans l’absolu. Le choix dépend de votre situation :\n\n\n\nSituation\nRecommandation\n\n\n\n\nVous ne voulez/pouvez rien installer\nCloud (Colab, SSPCloud)\n\n\nVous n’avez pas d’ordinateur puissant\nCloud\n\n\nVous voulez travailler hors ligne\nLocal",
+    "text": "Installer Python sur son ordinateur est la façon la plus “classique” de travailler. Une fois installé, vous pouvez coder sans connexion internet, avec vos propres fichiers, dans l’éditeur de votre choix.",
     "crumbs": [
-      "Accueil",
       "Environnement",
-      "Environnement de travail"
+      "Installer en local"
     ]
   },
   {
-    "objectID": "02-environnement/02-cloud.html",
-    "href": "02-environnement/02-cloud.html",
-    "title": "Les environnements en ligne",
-    "section": "",
-    "text": "Pour suivre ce cours, vous n’avez rien à installer. Nous allons travailler dans ce qu’on appelle le cloud : le code s’exécute sur un serveur distant, et vous y accédez depuis votre navigateur. C’est plus simple, plus homogène pour tout le monde, et cela nous permet de nous concentrer sur le contenu plutôt que sur l’installation de logiciels.",
+    "objectID": "02-environnement/01-local.html#la-démarche-générale-tous-systèmes",
+    "href": "02-environnement/01-local.html#la-démarche-générale-tous-systèmes",
+    "title": "Installer Python en local",
+    "section": "La démarche générale (tous systèmes)",
+    "text": "La démarche générale (tous systèmes)\n\nTélécharger Python depuis le site officiel : python.org/downloads\nLancer l’installateur\n\nWindows : cochez impérativement “Add Python to PATH” au premier écran.\nmacOS : ouvrez le fichier .pkg téléchargé et suivez l’assistant.\nLinux : Python est souvent déjà installé. Sinon : sudo apt install python3 python3-pip (Debian/Ubuntu).\n\nSuivre un tuto sur internet\n\n\n\n\n\n\n\nNotePourquoi je ne détaille pas l’installation\n\n\n\nJe ne détaille volontairement pas l’installation de Python en local. Ce n’est pas la solution que nous utiliserons dans ce cours. Sur une classe de 30 étudiants, si vous installez tous Python d’une manière plus ou moins différente, sur des OS et des versions différents, je passerai plus de temps à jouer au technicien de hotline qu’à vous enseigner des choses 👀.\nNous travaillerons donc dans un environnement cloud (voir la page suivante), identique pour tout le monde.\n\n\n\n\n\n\n\n\nTipSi vous êtes sur Windows\n\n\n\nSi vous souhaitez tout de même travailler en local à l’avenir, je ne saurais trop vous conseiller d’installer WSL (Windows Subsystem for Linux). Cela vous évite de dépendre des bizarreries de Windows avec Python, et vous rapproche d’un environnement proche de celui utilisé en production (Linux).",
     "crumbs": [
-      "Accueil",
       "Environnement",
-      "Les environnements en ligne"
-    ]
-  },
-  {
-    "objectID": "02-environnement/02-cloud.html#sspcloud-cloud-pour-tous",
-    "href": "02-environnement/02-cloud.html#sspcloud-cloud-pour-tous",
-    "title": "Les environnements en ligne",
-    "section": "SSPCloud : Cloud pour tous",
-    "text": "SSPCloud : Cloud pour tous\nLe SSPCloud (aussi appelé Datalab) est une plateforme de science des données développée par l’Insee. Elle est conçue pour l’enseignement et la recherche ainsi que la Fonction Publique.\n\nCe que ça apporte\n\nEnvironnement préconfiguré : vous vous connectez, et tout est prêt. Les bibliothèques Python, les outils, les notebooks : tout est déjà là.\nOutils professionnels : VS Code, JupyterLab, RStudio, stockage S3, gestion des secrets… C’est un véritable espace de travail.\nReproductibilité : tous les étudiants ont exactement le même environnement. Le code que vous écrivez chez vous fonctionnera de la même manière pour tout le monde (enfin dans la théorie 🥶).\n\n\n\nComment y accéder\nVous devez d’abord créer un compte ici. Pensez à bien utiliser votre adresse mail étudiante sinon vous ne pourrez pas y accéder.\n\n\n\n\n\n\nWarningSauvegardez votre travail\n\n\n\nLe SSPCloud est un environnement cloud : les sessions sont temporaires. Si vous fermez l’onglet et que vous ne sauvegardez pas votre code, vous pouvez le perdre. La bonne pratique est de sauvegarder régulièrement votre travail sur GitHub (ou une autre forge) ou de le télécharger sur votre poste.",
-    "crumbs": [
-      "Accueil",
-      "Environnement",
-      "Les environnements en ligne"
-    ]
-  },
-  {
-    "objectID": "02-environnement/02-cloud.html#google-colab",
-    "href": "02-environnement/02-cloud.html#google-colab",
-    "title": "Les environnements en ligne",
-    "section": "Google Colab :",
-    "text": "Google Colab :\nGoogle Colab (pour Colaboratory) est un service freemium de Google qui permet d’exécuter des notebooks Jupyter directement dans le navigateur.\n\nComment y accéder\nEn cliquant sur ce lien et en utilisant un compte Google.\n\n\nCe que ça apporte\n\nZéro configuration : pas d’installation, pas de compte spécial. Un compte Google suffit.\nGPU et TPU gratuits : Colab offre un accès gratuit à des accélérateurs matériels (GPU) pour entraîner des modèles de machine learning.\nIntégration Google Drive : vous pouvez monter votre Drive pour lire et écrire des fichiers de manière persistante.\n\n\n\nLes limites à connaître\n\nSessions temporaires : Colab ferme les sessions inactives après 90 minutes. Les fichiers non sauvegardés sont perdus.\nRessources limitées : le GPU gratuit est partagé et les sessions peuvent être interrompues. Ce n’est pas un environnement de production.",
-    "crumbs": [
-      "Accueil",
-      "Environnement",
-      "Les environnements en ligne"
-    ]
-  },
-  {
-    "objectID": "02-environnement/02-cloud.html#en-entreprise-dautres-environnements-les-mêmes-compétences",
-    "href": "02-environnement/02-cloud.html#en-entreprise-dautres-environnements-les-mêmes-compétences",
-    "title": "Les environnements en ligne",
-    "section": "En entreprise : d’autres environnements, les mêmes compétences",
-    "text": "En entreprise : d’autres environnements, les mêmes compétences\nSi vous êtes en alternance, il est très probable que vous travailliez dans un environnement différent de celui de ce cours. Les grandes entreprises utilisent souvent :\n\nLes clouds des grands fournisseurs : Google Cloud Platform (Vertex AI), Amazon Web Services (SageMaker), Microsoft Azure (Azure Machine Learning). Ces plateformes offrent des environnements notebooks managés, souvent avec GPU, et une intégration poussée avec les outils de l’entreprise.\nDes plateformes complètes comme Databricks, construite sur Apache Spark, qui intègre notebooks, gestion de données et machine learning distribué.\n\nLa bonne nouvelle : toutes les compétences que vous acquérez ici sont transférables. Que vous écriviez import numpy as np dans Colab, dans le SSPCloud, ou dans un notebook Azure, la syntaxe, les bibliothèques et la logique sont identiques. Ce qui change, c’est l’interface, le chemin d’accès aux données, et parfois les contraintes de sécurité (toujours pour être honnête 🙄).\n\n\n\n\n\n\nTipL’essentiel à retenir\n\n\n\nLe vrai savoir, ce n’est pas « comment cliquer dans tel outil », c’est comprendre ce que vous faites : pourquoi cette structure de données, pourquoi cette fonction, comment interpréter ce résultat. L’outil, vous l’apprendrez en quelques jours. La logique, elle, se construit sur la durée (Trust the process).",
-    "crumbs": [
-      "Accueil",
-      "Environnement",
-      "Les environnements en ligne"
+      "Installer en local"
     ]
   },
   {
@@ -622,9 +638,8 @@
     "section": "",
     "text": "Un langage de programmation est un ensemble de règles et de symboles qui permettent de donner des instructions à un ordinateur. C’est un intermédiaire entre vous (l’humain) et la machine.\nUn ordinateur ne comprend que le langage binaire (des suites de 0 et de 1). Écrire directement dans ce langage serait extrêmement fastidieux. Les langages de programmation ont donc été créés pour s’approcher du langage humain tout en restant compréhensibles par la machine.",
     "crumbs": [
-      "Accueil",
       "Introduction",
-      "Qu'est-ce qu'un langage de programmation ?"
+      "Langages de programmation"
     ]
   },
   {
@@ -634,9 +649,8 @@
     "section": "Ce qu’un langage de programmation permet",
     "text": "Ce qu’un langage de programmation permet\n\nAutomatiser des tâches répétitives\nTraiter de grandes quantités de données\nCréer des applications, des sites web, des analyses\nRésoudre des problèmes de manière logique et structurée",
     "crumbs": [
-      "Accueil",
       "Introduction",
-      "Qu'est-ce qu'un langage de programmation ?"
+      "Langages de programmation"
     ]
   },
   {
@@ -646,9 +660,8 @@
     "section": "Les différents langages de programmation",
     "text": "Les différents langages de programmation\nIl existe des centaines de langages, chacun avec ses forces et ses usages. On peut les classer selon plusieurs critères.\n\nSelon le niveau d’abstraction\n\n\n\n\n\n\n\n\nNiveau\nDescription\nExemples\n\n\n\n\nBas niveau\nProche de la machine, peu abstrait, difficile à lire\nAssembleur, C\n\n\nHaut niveau\nProche du langage humain, facile à lire\nPython, JavaScript\n\n\n\nPlus un langage est haut niveau, plus il est facile à apprendre et à écrire.\n\n\nSelon le mode d’exécution\n\n\n\n\n\n\n\n\nType\nFonctionnement\nExemples\n\n\n\n\nCompilé\nLe code est traduit en une fois avant exécution\nC, C++, Java\n\n\nInterprété\nLe code est traduit ligne par ligne pendant l’exécution\nPython, JavaScript, R\n\n\n\nLes langages interprétés sont plus interactifs et plus faciles à tester : on voit immédiatement le résultat.\n\n\n\nSelon le paradigme (la façon de penser le programme)\n\nImpératif / Procédural : on décrit comment faire, étape par étape (C, Pascal)\nOrienté objet : on organise le code autour d’objets (Java, C++, Python)\nFonctionnel : on décrit quoi faire, avec des fonctions (OCaml, Haskell)\nDéclaratif : on décrit le problème sans dire comment le résoudre (SQL)\n\nPython est multi-paradigme : il supporte l’impératif, l’objet et le fonctionnel.\n\n\nQuelques langages courants et leurs usages\n\n\n\nLangage\nUsage principal\n\n\n\n\nPython\nData science, IA, scripts, web\n\n\nJavaScript\nSites web interactifs\n\n\nJava\nApplications d’entreprise\n\n\nC / C++\nSystèmes, jeux vidéo\n\n\nR\nStatistiques, recherche\n\n\nSQL\nBases de données",
     "crumbs": [
-      "Accueil",
       "Introduction",
-      "Qu'est-ce qu'un langage de programmation ?"
+      "Langages de programmation"
     ]
   },
   {
@@ -658,9 +671,8 @@
     "section": "Pour aller plus loin",
     "text": "Pour aller plus loin\n\nPython — Qu’est-ce que Python ? (python.org)\nWikipédia — Langage de programmation\nWikipédia — Paradigme de programmation",
     "crumbs": [
-      "Accueil",
       "Introduction",
-      "Qu'est-ce qu'un langage de programmation ?"
+      "Langages de programmation"
     ]
   }
 ]

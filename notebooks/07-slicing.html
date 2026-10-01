@@ -295,24 +295,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Accueil</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="../01-introduction/01-langages.html" aria-current="page"> 
-<span class="menu-text">Introduction</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../02-environnement/index.html"> 
-<span class="menu-text">Environnement</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../03-initiation-python/index.html"> 
-<span class="menu-text">Initiation Python</span></a>
-  </li>  
-</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/surybang/python-data"> <i class="bi bi-github" role="img" aria-label="GitHub">
@@ -334,9 +316,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Le slicing en Python</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
     </div>
   </nav>
 </header>
@@ -344,26 +323,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Qu’est-ce qu’un langage de programmation ?</span></a>
+ <span class="menu-text">Langages de programmation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -376,81 +356,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Environnement</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Environnement de travail</span></a>
-  </div>
-</li>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installer Python en local</span></a>
+ <span class="menu-text">Installer en local</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Les environnements en ligne</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../02-environnement/03-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Premiers pas dans un <em>notebook</em></span></a>
+ <span class="menu-text">Environnements en ligne</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Initiation Python</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Initiation à Python</span></a>
+  <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/01-variables-et-types.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Variables et types de base</span></a>
+  <a href="../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/02-slicing.html" class="sidebar-item-text sidebar-link">
+  <a href="../03-initiation-python/07-slicing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Le slicing</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Pour aller plus loin</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://github.com/surybang/python-data" class="sidebar-item-text sidebar-link">
- <span class="menu-text">GitHub du cours</span></a>
   </div>
 </li>
       </ul>
@@ -474,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#mini-projet-analyse-dune-série-temporelle" id="toc-mini-projet-analyse-dune-série-temporelle" class="nav-link" data-scroll-target="#mini-projet-analyse-dune-série-temporelle">7. Mini-projet — Analyse d’une série temporelle</a></li>
   <li><a href="#corrigés" id="toc-corrigés" class="nav-link" data-scroll-target="#corrigés">Corrigés</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/surybang/python-data/blob/main/notebooks/07-slicing.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -517,8 +468,6 @@ index   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]</code></pre>
 <p><code>mot[0]</code> → <code>'P'</code><br>
 <code>mot[-1]</code> → <code>'n'</code> (le dernier, sans connaître la longueur)</p>
 <div id="6fd421ab" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploration — exécute et observe</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mot <span class="op">=</span> <span class="st">"Python"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -526,11 +475,8 @@ index   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]</code></pre>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mot[<span class="dv">5</span>])   <span class="co"># sixième caractère</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mot[<span class="op">-</span><span class="dv">1</span>])  <span class="co"># dernier caractère</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mot[<span class="op">-</span><span class="dv">2</span>])  <span class="co"># avant-dernier</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <div id="69ddc0ba" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercice 1a — Index</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fruits <span class="op">=</span> [<span class="st">"pomme"</span>, <span class="st">"banane"</span>, <span class="st">"cerise"</span>, <span class="st">"datte"</span>, <span class="st">"figue"</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -542,7 +488,6 @@ index   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]</code></pre>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : affiche l'avant-dernier fruit</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>avant_dernier <span class="op">=</span> ...</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(avant_dernier)  <span class="co"># attendu : datte</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <hr>
 </section>
@@ -554,8 +499,6 @@ mot[0:3]  →  "Pyt"   # index 0, 1, 2 (3 exclu)
 mot[2:5]  →  "tho"   # index 2, 3, 4</code></pre>
 <p>Astuce : <code>fin - debut</code> = nombre d’éléments extraits.</p>
 <div id="80f65769" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploration</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mot <span class="op">=</span> <span class="st">"Python"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mot[<span class="dv">0</span>:<span class="dv">3</span>])   <span class="co"># "Pyt"</span></span>
@@ -565,11 +508,8 @@ mot[2:5]  →  "tho"   # index 2, 3, 4</code></pre>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>nombres <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>]</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nombres[<span class="dv">1</span>:<span class="dv">4</span>])   <span class="co"># [20, 30, 40]</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nombres[<span class="dv">3</span>:<span class="dv">7</span>])   <span class="co"># [40, 50, 60, 70]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <div id="65bff621" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercice 2 — Slicing de base</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>phrase <span class="op">=</span> <span class="st">"data science"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> [<span class="dv">88</span>, <span class="dv">72</span>, <span class="dv">95</span>, <span class="dv">61</span>, <span class="dv">83</span>, <span class="dv">77</span>, <span class="dv">90</span>, <span class="dv">55</span>]</span>
@@ -589,7 +529,6 @@ mot[2:5]  →  "tho"   # index 2, 3, 4</code></pre>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : extrais les scores du 3e au 6e (index 2 à 5 inclus)</span></span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>milieu <span class="op">=</span> ...</span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(milieu)  <span class="co"># attendu : [95, 61, 83, 77]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <hr>
 </section>
@@ -601,8 +540,6 @@ mot[2:5]  →  "tho"   # index 2, 3, 4</code></pre>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mot[<span class="dv">3</span>:]   →  <span class="st">"hon"</span>     <span class="co"># depuis 3 jusqu'à la fin</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>mot[:]    →  <span class="st">"Python"</span>  <span class="co"># copie complète</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="cd4a4ae6" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercice 3 — Omissions</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>email <span class="op">=</span> <span class="st">"user@example.com"</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">9</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">7</span>, <span class="dv">25</span>, <span class="dv">11</span>, <span class="dv">19</span>]</span>
@@ -623,7 +560,6 @@ mot[2:5]  →  "tho"   # index 2, 3, 4</code></pre>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : supprime la première et la dernière température (garde le "milieu")</span></span>
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>milieu <span class="op">=</span> ...</span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(milieu)  <span class="co"># attendu : [15, 9, 22, 18, 7, 25, 11]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ellipsis
 Ellipsis
@@ -641,8 +577,6 @@ Ellipsis</code></pre>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mot[:<span class="op">-</span><span class="dv">3</span>]   →  <span class="st">"Pyt"</span>   <span class="co"># tout sauf les 3 derniers</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>mot[<span class="op">-</span><span class="dv">4</span>:<span class="op">-</span><span class="dv">1</span>] →  <span class="st">"tho"</span>   <span class="co"># du 4e en partant de la fin au 2e en partant de la fin</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="8c4b9697" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercice 4 — Index négatifs</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fichier <span class="op">=</span> <span class="st">"rapport_annuel_2024.csv"</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> [<span class="st">"INFO"</span>, <span class="st">"DEBUG"</span>, <span class="st">"ERROR"</span>, <span class="st">"WARNING"</span>, <span class="st">"INFO"</span>, <span class="st">"ERROR"</span>, <span class="st">"DEBUG"</span>]</span>
@@ -662,7 +596,6 @@ Ellipsis</code></pre>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : extrais tous les logs sauf le premier et le dernier</span></span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>logs_milieu <span class="op">=</span> ...</span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(logs_milieu)  <span class="co"># attendu : ['DEBUG', 'ERROR', 'WARNING', 'INFO', 'ERROR']</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <hr>
 </section>
@@ -676,8 +609,6 @@ Ellipsis</code></pre>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>nombres[::<span class="op">-</span><span class="dv">1</span>]   →  [<span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>]  <span class="co"># inverser !</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>[::-1]</code> est l’idiome Python pour <strong>inverser</strong> une séquence.</p>
 <div id="045db808" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercice 5 — Le pas</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>lettres <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span>, <span class="st">"f"</span>, <span class="st">"g"</span>, <span class="st">"h"</span>, <span class="st">"i"</span>, <span class="st">"j"</span>]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mot <span class="op">=</span> <span class="st">"abracadabra"</span></span>
@@ -697,7 +628,6 @@ Ellipsis</code></pre>
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : extrais les lettres de l'index 1 à 7 (exclu), une sur deux</span></span>
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>selection <span class="op">=</span> ...</span>
 <span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selection)  <span class="co"># attendu : ['b', 'd', 'f']</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <hr>
 </section>
@@ -711,8 +641,6 @@ Ellipsis</code></pre>
 <p><strong>Attention</strong> : le slicing ne modifie jamais la séquence originale, il retourne toujours une nouvelle séquence.</p>
 </blockquote>
 <div id="93305a60" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploration — comprendre la différence entre alias et copie</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>original <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -724,7 +652,6 @@ Ellipsis</code></pre>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>copie[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">888</span></span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"original après modif de copie :"</span>, original)  <span class="co"># original intact</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <hr>
 </section>
@@ -732,8 +659,6 @@ Ellipsis</code></pre>
 <h2 class="anchored" data-anchor-id="mini-projet-analyse-dune-série-temporelle">7. Mini-projet — Analyse d’une série temporelle</h2>
 <p>Tu disposes des ventes journalières d’un produit sur 4 semaines (28 jours). Utilise uniquement le slicing pour répondre aux questions.</p>
 <div id="245f2ce9" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> [</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Semaine 1 : lun-dim</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">142</span>, <span class="dv">98</span>, <span class="dv">115</span>, <span class="dv">130</span>, <span class="dv">201</span>, <span class="dv">245</span>, <span class="dv">189</span>,</span>
@@ -773,7 +698,6 @@ Ellipsis</code></pre>
 <span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : inverse la liste des ventes (pour un affichage du plus récent au plus ancien)</span></span>
 <span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>ventes_inversees <span class="op">=</span> ...</span>
 <span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"3 derniers jours en premier :"</span>, ventes_inversees[:<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <hr>
 </section>
@@ -819,7 +743,7 @@ Afficher les corrigés
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1241,16 +1165,9 @@ Afficher les corrigés
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/surybang/python-data/blob/main/notebooks/07-slicing.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
-      <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/surybang/python-data">
-      <i class="bi bi-github" role="img">
-</i> 
-    </a>
-  </li>  
-</ul>
+      &nbsp;
     </div>
   </div>
 </footer>

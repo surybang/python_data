@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Variables et types de base – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../03-initiation-python/07-slicing.html" rel="next">
+<link href="../03-initiation-python/00-premiers-pas-notebooks.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9ec74a487b0f7bffdf8907e3024c0954.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python-data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/01-variables-types-operations.html">Variables, types &amp; opérations</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Langages de programmation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnement</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnements en ligne</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Initiation Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/07-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cest-quoi-une-variable" id="toc-cest-quoi-une-variable" class="nav-link active" data-scroll-target="#cest-quoi-une-variable">C’est quoi une <strong>variable</strong> ?</a>
+  <ul class="collapse">
+  <li><a href="#une-variable-est-une-étiquette-pas-une-boîte" id="toc-une-variable-est-une-étiquette-pas-une-boîte" class="nav-link" data-scroll-target="#une-variable-est-une-étiquette-pas-une-boîte">Une variable est une étiquette, pas une boîte</a></li>
+  <li><a href="#le-typage-dynamique" id="toc-le-typage-dynamique" class="nav-link" data-scroll-target="#le-typage-dynamique">Le typage dynamique</a></li>
+  </ul></li>
+  <li><a href="#les-types-de-base-en-python" id="toc-les-types-de-base-en-python" class="nav-link" data-scroll-target="#les-types-de-base-en-python">Les types de base en Python</a></li>
+  <li><a href="#opérations-de-base" id="toc-opérations-de-base" class="nav-link" data-scroll-target="#opérations-de-base">Opérations de base</a>
+  <ul class="collapse">
+  <li><a href="#opérations-arithmétiques" id="toc-opérations-arithmétiques" class="nav-link" data-scroll-target="#opérations-arithmétiques">Opérations arithmétiques</a></li>
+  <li><a href="#les-opérateurs-daffectation-combinée" id="toc-les-opérateurs-daffectation-combinée" class="nav-link" data-scroll-target="#les-opérateurs-daffectation-combinée">Les opérateurs d’affectation combinée</a></li>
+  <li><a href="#priorité-des-opérations" id="toc-priorité-des-opérations" class="nav-link" data-scroll-target="#priorité-des-opérations">Priorité des opérations</a></li>
+  </ul></li>
+  <li><a href="#opérations-sur-les-chaînes-de-caractères" id="toc-opérations-sur-les-chaînes-de-caractères" class="nav-link" data-scroll-target="#opérations-sur-les-chaînes-de-caractères">Opérations sur les chaînes de caractères</a>
+  <ul class="collapse">
+  <li><a href="#concaténation-et-répétition" id="toc-concaténation-et-répétition" class="nav-link" data-scroll-target="#concaténation-et-répétition">Concaténation et répétition</a></li>
+  <li><a href="#quelques-outils-utiles" id="toc-quelques-outils-utiles" class="nav-link" data-scroll-target="#quelques-outils-utiles">Quelques outils utiles</a></li>
+  <li><a href="#les-f-strings-afficher-des-variables-proprement" id="toc-les-f-strings-afficher-des-variables-proprement" class="nav-link" data-scroll-target="#les-f-strings-afficher-des-variables-proprement">Les f-strings : afficher des variables proprement</a></li>
+  <li><a href="#contrôler-laffichage" id="toc-contrôler-laffichage" class="nav-link" data-scroll-target="#contrôler-laffichage">Contrôler l’affichage</a></li>
+  </ul></li>
+  <li><a href="#conversions-de-types" id="toc-conversions-de-types" class="nav-link" data-scroll-target="#conversions-de-types">Conversions de types</a></li>
+  <li><a href="#opérations-de-comparaison" id="toc-opérations-de-comparaison" class="nav-link" data-scroll-target="#opérations-de-comparaison">Opérations de comparaison</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/01-variables-types-operations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="variables-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="variables-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/01-variables-types-operations.html">Variables, types &amp; opérations</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Variables et types de base</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour accéder aux notebooks d’exercices c’est ici 👇</p>
+<p><a href="https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/02-variables-types-operations.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB01_premiers_pas%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&amp;init.personalInitArgs=%C2%AB02-variables-types-operations%C2%BB"><img src="https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode.png" class="img-fluid" alt="Open In SSP Cloud"></a></p>
+</div>
+</div>
+<section id="cest-quoi-une-variable" class="level2">
+<h2 class="anchored" data-anchor-id="cest-quoi-une-variable">C’est quoi une <strong>variable</strong> ?</h2>
+<p>Une variable, c’est un <strong>nom</strong> qu’on associe à une valeur. Ce nom permet de retrouver la valeur plus tard dans le programme.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">25</span>            <span class="co"># age est un entier (int)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Jessica"</span>  <span class="co"># prenom est une chaine de caractère (str)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>taille <span class="op">=</span> <span class="fl">1.75</span>       <span class="co"># taille est un flottant (float)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>majeur <span class="op">=</span> <span class="va">True</span>       <span class="co"># majeur est un booléen (bool)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ici, on a créé quatre variables :</p>
+<ul>
+<li><code>age</code> désigne 25</li>
+<li><code>prenom</code> désigne “Jessica”</li>
+<li><code>taille</code> désigne 1.75</li>
+<li><code>majeur</code> désigne True</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Le signe = n’est pas une égalité
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En Python, <code>age = 25</code> ne veut pas dire « age est égal à 25 », mais « on associe le nom age à la valeur 25 ». C’est une <strong>affectation</strong>.</p>
+<p>C’est pour ça que <code>x = x + 1</code> est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on associe le résultat au nom x.</p>
+</div>
+</div>
+<section id="une-variable-est-une-étiquette-pas-une-boîte" class="level3">
+<h3 class="anchored" data-anchor-id="une-variable-est-une-étiquette-pas-une-boîte">Une variable est une étiquette, pas une boîte</h3>
+<p>On présente souvent une variable comme une boîte dans laquelle on range une valeur. C’est une image pratique pour débuter, mais elle est <strong>fausse en Python</strong>, et elle finit par provoquer des bugs difficiles à comprendre.</p>
+<p>En réalité, une variable est une <strong>étiquette</strong> collée sur un objet stocké dans la mémoire de l’ordinateur (la RAM). Voici ce qui se passe concrètement 👇</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/variable_memoire.JPG" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Assignation d’une variable en mémoire</figcaption>
+</figure>
+</div>
+<section id="étape-1-x-5" class="level4">
+<h4 class="anchored" data-anchor-id="étape-1-x-5">Étape 1 : <code>x = 5</code></h4>
+<p>Python crée d’abord un objet de type <code>int</code> de valeur <code>5</code> quelque part dans la RAM, à une adresse donnée (ici <code>0x7f3a...</code>). Ensuite seulement, il associe le nom <code>x</code> à cette adresse.</p>
+<p>Autrement dit, <code>x</code> ne contient pas <code>5</code> : <code>x</code> sait <strong>où trouver</strong> l’objet <code>5</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(x))  <span class="co"># l'adresse mémoire de l'objet désigné par x</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="étape-2-y-x" class="level4">
+<h4 class="anchored" data-anchor-id="étape-2-y-x">Étape 2 : <code>y = x</code></h4>
+<p>On pourrait penser que Python copie la valeur de <code>x</code> dans une nouvelle boîte <code>y</code>. Ce n’est pas le cas : <strong>aucun nouvel objet n’est créé</strong>. Le nom <code>y</code> reçoit simplement la même adresse que <code>x</code>.</p>
+<p>On a donc deux étiquettes collées sur le même objet.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(x), <span class="bu">id</span>(y))  <span class="co"># les deux adresses sont identiques</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x <span class="kw">is</span> y)        <span class="co"># True : x et y désignent le même objet</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="étape-3-y-1" class="level4">
+<h4 class="anchored" data-anchor-id="étape-3-y-1">Étape 3 : <code>y += 1</code></h4>
+<p>C’est l’étape clé. Les entiers sont <strong>immuables</strong> en Python : l’objet <code>5</code> ne peut pas être modifié. Python ne transforme donc pas le <code>5</code> en <code>6</code>. À la place, il :</p>
+<ol type="1">
+<li>lit la valeur de l’objet désigné par <code>y</code> (5) ;</li>
+<li>calcule le résultat et crée <strong>un nouvel objet</strong> <code>6</code> à une autre adresse (ici <code>0x8d4b...</code>) ;</li>
+<li>décolle l’étiquette <code>y</code> pour la recoller sur ce nouvel objet.</li>
+</ol>
+<p>L’étiquette <code>x</code>, elle, n’a pas bougé : elle désigne toujours l’objet <code>5</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x, y)          <span class="co"># 5 6</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(x), <span class="bu">id</span>(y))  <span class="co"># les adresses sont désormais différentes</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x <span class="kw">is</span> y)        <span class="co"># False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>À retenir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Une variable est un <strong>nom</strong> qui désigne un objet en mémoire.</li>
+<li><code>y = x</code> ne copie rien : les deux noms partagent le même objet.</li>
+<li>« Modifier » un <code>int</code>, un <code>float</code>, un <code>str</code> ou un <code>bool</code> crée toujours un <strong>nouvel objet</strong>, car ces types sont immuables.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>🧠 À vous de réfléchir : et avec une liste ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Les listes, que nous verrons plus en détail plus tard, permettent de regrouper plusieurs valeurs. Observez le code suivant <strong>sans l’exécuter</strong> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">5</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>b.append(<span class="dv">6</span>)   <span class="co"># ajoute 6 à la fin de la liste b</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Selon vous, qu’affiche <code>print(a)</code> ?</li>
+<li>Dessinez, comme dans le schéma précédent, ce qui se passe en mémoire à chaque ligne.</li>
+<li>Exécutez ensuite le code pour vérifier votre hypothèse.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Voir la solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">5</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>b.append(<span class="dv">6</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)  <span class="co"># [5, 6]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Surprise : <code>a</code> a été modifiée alors qu’on n’a touché qu’à <code>b</code> !</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/liste_memoire.JPG" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Modification d’une liste en mémoire</figcaption>
+</figure>
+</div>
+<p>Contrairement aux entiers, les listes sont <strong>mutables</strong> : elles peuvent être modifiées sur place.</p>
+<ul>
+<li><strong>Ligne 1</strong> : Python crée un objet liste <code>[5]</code> en mémoire et lui colle l’étiquette <code>a</code>.</li>
+<li><strong>Ligne 2</strong> : <code>b = a</code> ne copie rien, <code>b</code> est une deuxième étiquette sur <strong>la même liste</strong>.</li>
+<li><strong>Ligne 3</strong> : <code>b.append(6)</code> ne crée pas de nouvel objet, il <strong>modifie la liste existante</strong>. Aucune étiquette ne bouge.</li>
+<li><strong>Ligne 4</strong> : <code>a</code> désigne toujours cette même liste, qui contient maintenant <code>[5, 6]</code>.</li>
+</ul>
+<p>C’est la différence clé avec l’exemple <code>y += 1</code> : avec un entier, Python crée un nouvel objet et recolle l’étiquette ; avec une liste, il modifie l’objet lui-même, et <strong>toutes les étiquettes</strong> qui le désignent « voient » le changement.</p>
+<p>Pour obtenir une liste indépendante, il faut une copie explicite :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">5</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a.copy()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>b.append(<span class="dv">6</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)  <span class="co"># [5]</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)  <span class="co"># [5, 6]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="le-typage-dynamique" class="level3">
+<h3 class="anchored" data-anchor-id="le-typage-dynamique">Le typage dynamique</h3>
+<p>En <code>Python</code>, on ne déclare pas le type d’une variable. On écrit simplement <code>age = 25</code>, et l’interpréteur déduit le type à partir de la valeur.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span>         <span class="co"># x est un entier (int)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="st">"bonjour"</span> <span class="co"># x est maintenant une chaîne (string)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">3.14</span>      <span class="co"># x est maintenant un flottant (float)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Le type est attaché à la valeur et non pas à la variable. C’est logique : puisqu’une variable n’est qu’une étiquette, on peut la recoller sur un objet de n’importe quel type.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Une liberté qui a un prix
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Une nuance importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le discours « Python ne vérifie pas les types » est vrai <strong>pour le langage lui-même</strong>. L’interpréteur Python ignore les annotations de type : <code>x: int = "bonjour"</code> ne lève aucune erreur.</p>
+<p>Mais certains <strong>packages</strong> s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de <strong>Pydantic</strong> (très utilisé en data science et dans les API), de <strong>Typeguard</strong> et de <strong>Beartype</strong>. Avec ces outils, une annotation devient une <strong>contrainte réelle</strong> : si la valeur ne respecte pas le type, une erreur est levée.</p>
+<p>Donc : le type hint est un <strong>indice</strong> pour Python, mais il peut devenir une <strong>règle</strong> pour certaines bibliothèques.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="les-types-de-base-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="les-types-de-base-en-python">Les types de base en Python</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Nom Python</th>
+<th>Exemples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nombre entier</td>
+<td><code>int</code></td>
+<td><code>42</code>, <code>-7</code>, <code>0</code></td>
+</tr>
+<tr class="even">
+<td>Nombre à virgule</td>
+<td><code>float</code></td>
+<td><code>3.14</code>, <code>-0.5</code>, <code>2.0</code></td>
+</tr>
+<tr class="odd">
+<td>Chaîne de caractères</td>
+<td><code>str</code></td>
+<td><code>"bonjour"</code>, <code>'Alice'</code></td>
+</tr>
+<tr class="even">
+<td>Booléen</td>
+<td><code>bool</code></td>
+<td><code>True</code>, <code>False</code></td>
+</tr>
+</tbody>
+</table>
+<p>On peut vérifier le type d’une variable avec la fonction <code>type()</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(age))       <span class="co"># &lt;class 'int'&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Jessica"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(prenom))    <span class="co"># &lt;class 'str'&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="opérations-de-base" class="level2">
+<h2 class="anchored" data-anchor-id="opérations-de-base">Opérations de base</h2>
+<p>Une fois qu’on sait nommer des valeurs, il faut pouvoir <strong>les manipuler</strong>. Python fournit des opérateurs pour calculer, assembler des chaînes ou comparer des valeurs.</p>
+<section id="opérations-arithmétiques" class="level3">
+<h3 class="anchored" data-anchor-id="opérations-arithmétiques">Opérations arithmétiques</h3>
+<p>Les opérateurs arithmétiques s’appliquent aux nombres (<code>int</code> et <code>float</code>).</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Opérateur</th>
+<th>Signification</th>
+<th>Exemple</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td>Addition</td>
+<td><code>7 + 3</code></td>
+<td><code>10</code></td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td>Soustraction</td>
+<td><code>7 - 3</code></td>
+<td><code>4</code></td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>Multiplication</td>
+<td><code>7 * 3</code></td>
+<td><code>21</code></td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td>Division</td>
+<td><code>7 / 3</code></td>
+<td><code>2.333...</code></td>
+</tr>
+<tr class="odd">
+<td><code>//</code></td>
+<td>Division entière (quotient)</td>
+<td><code>7 // 3</code></td>
+<td><code>2</code></td>
+</tr>
+<tr class="even">
+<td><code>%</code></td>
+<td>Modulo (reste)</td>
+<td><code>7 % 3</code></td>
+<td><code>1</code></td>
+</tr>
+<tr class="odd">
+<td><code>**</code></td>
+<td>Puissance</td>
+<td><code>7 ** 3</code></td>
+<td><code>343</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">+</span> b)   <span class="co"># 13</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">-</span> b)   <span class="co"># 7</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">*</span> b)   <span class="co"># 30</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">/</span> b)   <span class="co"># 3.3333333333333335</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">//</span> b)  <span class="co"># 3</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">%</span> b)   <span class="co"># 1</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">**</span> b)  <span class="co"># 1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Division et division entière
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En Python, <code>/</code> renvoie <strong>toujours</strong> un flottant, même quand le résultat tombe juste :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span>)   <span class="co"># 5.0 (et non 5)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">//</span> <span class="dv">2</span>)  <span class="co"># 5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="les-opérateurs-daffectation-combinée" class="level3">
+<h3 class="anchored" data-anchor-id="les-opérateurs-daffectation-combinée">Les opérateurs d’affectation combinée</h3>
+<p>Modifier une variable à partir de sa propre valeur est si courant que Python propose des raccourcis (vous avez déjà croisé <code>y += 1</code> plus haut) :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Raccourci</th>
+<th>Équivaut à</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x += 1</code></td>
+<td><code>x = x + 1</code></td>
+</tr>
+<tr class="even">
+<td><code>x -= 1</code></td>
+<td><code>x = x - 1</code></td>
+</tr>
+<tr class="odd">
+<td><code>x *= 2</code></td>
+<td><code>x = x * 2</code></td>
+</tr>
+<tr class="even">
+<td><code>x /= 2</code></td>
+<td><code>x = x / 2</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>score <span class="op">+=</span> <span class="dv">5</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(score)  <span class="co"># 15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="priorité-des-opérations" class="level3">
+<h3 class="anchored" data-anchor-id="priorité-des-opérations">Priorité des opérations</h3>
+<p>Python respecte les règles de priorité habituelles des mathématiques :</p>
+<ol type="1">
+<li>Parenthèses <code>()</code></li>
+<li>Puissance <code>**</code></li>
+<li>Multiplication, division, division entière, modulo (<code>*</code>, <code>/</code>, <code>//</code>, <code>%</code>)</li>
+<li>Addition, soustraction (<code>+</code>, <code>-</code>)</li>
+</ol>
+<p>En cas de doute, <strong>utilisez des parenthèses.</strong> Elles ne coûtent rien et rendent le code plus lisible.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span>)      <span class="co"># 14 (et non 20)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((<span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span>) <span class="op">*</span> <span class="dv">4</span>)    <span class="co"># 20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="opérations-sur-les-chaînes-de-caractères" class="level2">
+<h2 class="anchored" data-anchor-id="opérations-sur-les-chaînes-de-caractères">Opérations sur les chaînes de caractères</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Jessica"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>nom <span class="op">=</span> <span class="st">"Hyde"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="concaténation-et-répétition" class="level3">
+<h3 class="anchored" data-anchor-id="concaténation-et-répétition">Concaténation et répétition</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>nom_complet <span class="op">=</span> prenom <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> nom</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nom_complet)   <span class="co"># Jessica Hyde</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ha"</span> <span class="op">*</span> <span class="dv">3</span>)      <span class="co"># hahaha</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="quelques-outils-utiles" class="level3">
+<h3 class="anchored" data-anchor-id="quelques-outils-utiles">Quelques outils utiles</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Outil</th>
+<th>Rôle</th>
+<th>Exemple</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>len()</code></td>
+<td>Longueur</td>
+<td><code>len("Python")</code></td>
+<td><code>6</code></td>
+</tr>
+<tr class="even">
+<td><code>.upper()</code></td>
+<td>Majuscules</td>
+<td><code>"data".upper()</code></td>
+<td><code>"DATA"</code></td>
+</tr>
+<tr class="odd">
+<td><code>.lower()</code></td>
+<td>Minuscules</td>
+<td><code>"DATA".lower()</code></td>
+<td><code>"data"</code></td>
+</tr>
+<tr class="even">
+<td><code>.capitalize()</code></td>
+<td>1re lettre en majuscule</td>
+<td><code>"alice".capitalize()</code></td>
+<td><code>"Alice"</code></td>
+</tr>
+<tr class="odd">
+<td><code>.replace(a, b)</code></td>
+<td>Remplace a par b</td>
+<td><code>"chat".replace("c", "b")</code></td>
+<td><code>"bhat"</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Une chaîne ne se modifie jamais
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Comme les entiers, les <code>str</code> sont <strong>immuables</strong>. <code>.upper()</code> ne modifie pas la chaîne, elle en renvoie une <strong>nouvelle</strong>. Pour garder le résultat, il faut recoller l’étiquette :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mot <span class="op">=</span> <span class="st">"data"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mot.upper()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mot)        <span class="co"># data  → inchangé !</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>mot <span class="op">=</span> mot.upper()</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mot)        <span class="co"># DATA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="les-f-strings-afficher-des-variables-proprement" class="level3">
+<h3 class="anchored" data-anchor-id="les-f-strings-afficher-des-variables-proprement">Les f-strings : afficher des variables proprement</h3>
+<p>Plutôt que d’enchaîner les <code>+</code>, on préfixe la chaîne par <code>f</code> et on place les variables entre <code>{}</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> a </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss"> ans"</span>)           <span class="co"># Jessica a 25 ans</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dans 10 ans : </span><span class="sc">{</span>age <span class="op">+</span> <span class="dv">10</span><span class="sc">}</span><span class="ss"> ans"</span>)   <span class="co"># calcul possible dans les {}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>C’est la méthode recommandée en Python moderne.</p>
+</section>
+<section id="contrôler-laffichage" class="level3">
+<h3 class="anchored" data-anchor-id="contrôler-laffichage">Contrôler l’affichage</h3>
+<p>Après la valeur, on peut ajouter <code>:</code> suivi d’un <strong>code de formatage</strong> :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Effet</th>
+<th>Exemple</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.2f</code></td>
+<td>2 décimales</td>
+<td><code>f"{3.14159:.2f}"</code></td>
+<td><code>3.14</code></td>
+</tr>
+<tr class="even">
+<td><code>.1%</code></td>
+<td>pourcentage, 1 décimale</td>
+<td><code>f"{0.857:.1%}"</code></td>
+<td><code>85.7%</code></td>
+</tr>
+<tr class="odd">
+<td><code>,</code></td>
+<td>séparateur de milliers</td>
+<td><code>f"{1234567:,}"</code></td>
+<td><code>1,234,567</code></td>
+</tr>
+<tr class="even">
+<td><code>_.2f</code></td>
+<td>séparateur <code>_</code> et 2 décimales</td>
+<td><code>f"{1234567:_.2f}"</code></td>
+<td><code>1_234_567.00</code></td>
+</tr>
+<tr class="odd">
+<td><code>&gt;10</code></td>
+<td>aligné à droite sur 10 caractères</td>
+<td><code>f"{42:&gt;10}"</code></td>
+<td><code>42</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;10</code></td>
+<td>aligné à gauche sur 10 caractères</td>
+<td><code>f"{42:&lt;10}"</code></td>
+<td><code>42</code></td>
+</tr>
+<tr class="odd">
+<td><code>010</code></td>
+<td>complété avec des zéros</td>
+<td><code>f"{42:010}"</code></td>
+<td><code>0000000042</code></td>
+</tr>
+</tbody>
+</table>
+<p>On peut combiner les codes : <code>f"{1482300.5:,.2f}"</code> donne <code>1,482,300.50</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Les différentes façons de formater en Python
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Python a connu trois générations de formatage. Vous les croiserez toutes dans du code existant.</p>
+<p><strong>1. Opérateur <code>%</code> (style C, Python 2)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Bonjour %s, tu as %d ans"</span> <span class="op">%</span> (<span class="st">"Alice"</span>, <span class="dv">25</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">"Prix : %.2f€"</span> <span class="op">%</span> <span class="fl">3.14159</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>%s</code> → chaîne, <code>%d</code> → entier, <code>%f</code> → flottant. Encore très présent dans du code <em>legacy</em>.</p>
+<p><strong>2. <code>.format()</code> (Python 3.0)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Bonjour {}, tu as {} ans"</span>.<span class="bu">format</span>(<span class="st">"Alice"</span>, <span class="dv">25</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">"Prix : {:.2f}€"</span>.<span class="bu">format</span>(<span class="fl">3.14159</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">"{prenom} a {age} ans"</span>.<span class="bu">format</span>(prenom<span class="op">=</span><span class="st">"Alice"</span>, age<span class="op">=</span><span class="dv">25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Plus lisible que <code>%</code>, mais verbeux.</p>
+<p><strong>3. f-strings (Python 3.6)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>prenom, age <span class="op">=</span> <span class="st">"Alice"</span>, <span class="dv">25</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ss">f"Bonjour </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss">, tu as </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss"> ans"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="ss">f"Prix : </span><span class="sc">{</span><span class="fl">3.14159</span><span class="sc">:.2f}</span><span class="ss">€"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Le code s’écrit directement dans la chaîne. C’est ce qu’on utilise aujourd’hui.</p>
+<p><strong>Les trois font la même chose :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Alice"</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>prix <span class="op">=</span> <span class="fl">3.14159</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Bonjour </span><span class="sc">%s</span><span class="st">, prix : </span><span class="sc">%.2f</span><span class="st">€"</span> <span class="op">%</span> (prenom, prix))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Bonjour </span><span class="sc">{}</span><span class="st">, prix : </span><span class="sc">{:.2f}</span><span class="st">€"</span>.<span class="bu">format</span>(prenom, prix))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bonjour </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss">, prix : </span><span class="sc">{</span>prix<span class="sc">:.2f}</span><span class="ss">€"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Bonjour Alice, prix : 3.14€  (trois fois)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Remarquez que le code <code>.2f</code> est le même partout : ce que vous apprenez avec les f-strings reste valable pour lire l’ancien code.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conversions-de-types" class="level2">
+<h2 class="anchored" data-anchor-id="conversions-de-types">Conversions de types</h2>
+<p>Python ne mélange pas les types automatiquement :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"J'ai "</span> <span class="op">+</span> age <span class="op">+</span> <span class="st">" ans"</span>)  <span class="co"># ❌ TypeError</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Il faut <strong>convertir</strong> explicitement :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Fonction</th>
+<th>Convertit en</th>
+<th>Exemple</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>str()</code></td>
+<td>chaîne</td>
+<td><code>str(25)</code></td>
+<td><code>"25"</code></td>
+</tr>
+<tr class="even">
+<td><code>int()</code></td>
+<td>entier</td>
+<td><code>int("25")</code></td>
+<td><code>25</code></td>
+</tr>
+<tr class="odd">
+<td><code>float()</code></td>
+<td>flottant</td>
+<td><code>float("1.75")</code></td>
+<td><code>1.75</code></td>
+</tr>
+<tr class="even">
+<td><code>bool()</code></td>
+<td>booléen</td>
+<td><code>bool(0)</code></td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"J'ai "</span> <span class="op">+</span> <span class="bu">str</span>(age) <span class="op">+</span> <span class="st">" ans"</span>)  <span class="co"># 🆗 J'ai 25 ans</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Vrai ou faux ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>bool()</code> renvoie <code>False</code> pour les valeurs « vides » : <code>0</code>, <code>0.0</code>, <code>""</code> (chaîne vide). Tout le reste vaut <code>True</code>, même <code>-42</code> ou <code>"False"</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>int("bonjour")</code> lève une <code>ValueError</code> : on ne peut convertir que ce qui a du sens. Cas fréquent en data : des nombres stockés en texte dans un CSV, à convertir avant de calculer.</p>
+</div>
+</div>
+</section>
+<section id="opérations-de-comparaison" class="level2">
+<h2 class="anchored" data-anchor-id="opérations-de-comparaison">Opérations de comparaison</h2>
+<p>Les opérateurs de comparaison renvoient un booléen (<code>True</code> ou <code>False</code>).</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Opérateur</th>
+<th>Signification</th>
+<th>Exemple</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>Égal à</td>
+<td><code>5 == 5</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>Différent de</td>
+<td><code>5 != 3</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td>Inférieur à</td>
+<td><code>5 &lt; 3</code></td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td><code>&gt;</code></td>
+<td>Supérieur à</td>
+<td><code>5 &gt; 3</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;=</code></td>
+<td>Inférieur ou égal</td>
+<td><code>5 &lt;= 5</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td>Supérieur ou égal</td>
+<td><code>5 &gt;= 6</code></td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">==</span> <span class="dv">5</span>)     <span class="co"># True</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">!=</span> <span class="dv">3</span>)     <span class="co"># True</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">&gt;</span> <span class="dv">3</span>)     <span class="co"># True</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">&lt;=</span> <span class="dv">3</span>)    <span class="co"># False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python-data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="pagination-link" aria-label="Premiers pas en notebook">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Premiers pas en notebook</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../03-initiation-python/07-slicing.html" class="pagination-link" aria-label="Le slicing">
+        <span class="nav-page-text">Le slicing</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/01-variables-types-operations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

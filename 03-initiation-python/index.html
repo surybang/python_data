@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Initiation à Python – Python &amp; data</title>
+<title>Initiation à Python 🐍 – Python &amp; data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,6 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../03-initiation-python/00-premiers-pas-notebooks.html" rel="next">
+<link href="../02-environnement/02-cloud.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -260,24 +262,6 @@ ul.task-list li input[type="checkbox"] {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Accueil</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="../01-introduction/01-langages.html" aria-current="page"> 
-<span class="menu-text">Introduction</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../02-environnement/index.html"> 
-<span class="menu-text">Environnement</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../03-initiation-python/index.html"> 
-<span class="menu-text">Initiation Python</span></a>
-  </li>  
-</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/surybang/python-data"> <i class="bi bi-github" role="img" aria-label="GitHub">
@@ -296,12 +280,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation à Python</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
     </div>
   </nav>
 </header>
@@ -309,26 +290,27 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Qu’est-ce qu’un langage de programmation ?</span></a>
+ <span class="menu-text">Langages de programmation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -341,42 +323,30 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Environnement</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Environnement de travail</span></a>
-  </div>
-</li>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installer Python en local</span></a>
+ <span class="menu-text">Installer en local</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Les environnements en ligne</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../02-environnement/03-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Premiers pas dans un <em>notebook</em></span></a>
+ <span class="menu-text">Environnements en ligne</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Initiation Python</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -385,37 +355,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Initiation à Python</span></a>
+  <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/01-variables-et-types.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Variables et types de base</span></a>
+  <a href="../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/02-slicing.html" class="sidebar-item-text sidebar-link">
+  <a href="../03-initiation-python/07-slicing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Le slicing</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Pour aller plus loin</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://github.com/surybang/python-data" class="sidebar-item-text sidebar-link">
- <span class="menu-text">GitHub du cours</span></a>
   </div>
 </li>
       </ul>
@@ -430,21 +383,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#variables-et-types" id="toc-variables-et-types" class="nav-link active" data-scroll-target="#variables-et-types">1. Variables et types</a></li>
+  <li><a href="#objectifs" id="toc-objectifs" class="nav-link active" data-scroll-target="#objectifs">Objectifs</a></li>
+  <li><a href="#comment-utiliser-ce-cours" id="toc-comment-utiliser-ce-cours" class="nav-link" data-scroll-target="#comment-utiliser-ce-cours">Comment utiliser ce cours</a></li>
+  <li><a href="#ressources" id="toc-ressources" class="nav-link" data-scroll-target="#ressources">Ressources</a>
+  <ul class="collapse">
   <li><a href="#conditions-et-boucles" id="toc-conditions-et-boucles" class="nav-link" data-scroll-target="#conditions-et-boucles">2. Conditions et boucles</a></li>
   <li><a href="#fonctions" id="toc-fonctions" class="nav-link" data-scroll-target="#fonctions">3. Fonctions</a></li>
   <li><a href="#listes-dictionnaires-et-fichiers" id="toc-listes-dictionnaires-et-fichiers" class="nav-link" data-scroll-target="#listes-dictionnaires-et-fichiers">4. Listes, dictionnaires et fichiers</a></li>
+  </ul></li>
   <li><a href="#comment-ce-module-est-organisé" id="toc-comment-ce-module-est-organisé" class="nav-link" data-scroll-target="#comment-ce-module-est-organisé">Comment ce module est organisé</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation à Python</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Initiation à Python</h1>
+<h1 class="title">Initiation à Python 🐍</h1>
 </div>
 
 
@@ -461,11 +418,62 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="variables-et-types" class="level3">
-<h3 class="anchored" data-anchor-id="variables-et-types">1. Variables et types</h3>
+<p>Bienvenue dans ce cours d’introduction à la programmation <code>Python</code>.</p>
+<section id="objectifs" class="level2">
+<h2 class="anchored" data-anchor-id="objectifs">Objectifs</h2>
+<p>Ce cours est conçu pour des <strong>débutants complets</strong>. Il couvre dans un premier temps :</p>
+<ol type="1">
+<li><strong>Premiers pas</strong> : Apprendre à marcher avec un notebook</li>
+<li><strong>Variables types et opérations</strong> : Nommer, calculer et manipuler des valeurs</li>
+<li><strong>Conditions et boucles</strong> : Prendre des décisions, répéter des actions</li>
+<li><strong>Fonctions</strong> : Organiser son code</li>
+<li><strong>Structure de données</strong> : Manipuler des données dans des objets appropriés</li>
+<li><strong>Le slicing</strong> : Extraire une portion d’une séquence</li>
+</ol>
+</section>
+<section id="comment-utiliser-ce-cours" class="level2">
+<h2 class="anchored" data-anchor-id="comment-utiliser-ce-cours">Comment utiliser ce cours</h2>
+<p>Suivez les chapitres dans l’ordre via la barre latérale ou explorez-le comme bon vous semble 😊.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Pour ce cours
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nous utiliserons principalement le <strong>SSPCloud</strong> ou <strong>Google Colab</strong>, car ils sont préconfigurés et ne nécessitent aucune installation.</p>
+<p>Vous pourrez accéder aux notebooks en utilisant les icônes comme ci-dessous.</p>
+<p><a href="https://colab.research.google.com"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/jupyter-python?autoLaunch=true&amp;init.personalInit=..."><img src="https://img.shields.io/badge/SSPCloud-Launch-blue.png" class="img-fluid" alt="Launch SSPCloud"></a></p>
+<p>(ils ne fonctionnent pas volontairement, ne perdez pas de temps à savoir pourquoi 👀)</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>L’erreur est normale
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se tromper fait partie de l’apprentissage. Lisez les messages d’erreur, ils vous guident.</p>
+</div>
+</div>
+</section>
+<section id="ressources" class="level2">
+<h2 class="anchored" data-anchor-id="ressources">Ressources</h2>
+<ul>
+<li><a href="https://github.com/surybang/python-data">GitHub du cours</a></li>
+<li><a href="https://doi.org/10.5281/zenodo.8229676.">Galiana, Lino. Python pour la data science.</a></li>
+<li><a href="https://www.youtube.com/c/MachineLearnia">Chaine de Machine Learnia.</a></li>
+<li><a href="https://www.youtube.com/@master2sisedatascience">Chaine de Ricco Rakotomalala.</a> ### 1. Variables et types</li>
+</ul>
 <p>Un programme doit <strong>stocker des informations</strong> : c’est le rôle des variables. Nous verrons ici comment en créer, quels sont les <strong>types de base</strong> en Python (entiers, flottants, chaînes, booléens), et comment les afficher ou les demander à l’utilisateur.</p>
 <p><em>Notions clés : variables, <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>print()</code>, <code>input()</code></em></p>
-</section>
 <section id="conditions-et-boucles" class="level3">
 <h3 class="anchored" data-anchor-id="conditions-et-boucles">2. Conditions et boucles</h3>
 <p>Un programme doit pouvoir <strong>prendre des décisions</strong> et <strong>répéter des actions</strong>. Vous apprendrez les instructions <code>if</code>, <code>elif</code>, <code>else</code>, ainsi que les boucles <code>for</code> et <code>while</code>. C’est le moment où vos programmes deviennent réellement utiles.</p>
@@ -481,6 +489,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Les données réelles ne sont pas des valeurs isolées : ce sont des <strong>collections</strong>. Vous apprendrez à manipuler des listes et des dictionnaires, et à lire/écrire dans des fichiers. C’est la porte d’entrée vers la manipulation de données.</p>
 <p><em>Notions clés : listes, indexation, slicing, dictionnaires, <code>open()</code>, <code>with</code></em></p>
 </section>
+</section>
 <section id="comment-ce-module-est-organisé" class="level2">
 <h2 class="anchored" data-anchor-id="comment-ce-module-est-organisé">Comment ce module est organisé</h2>
 <p>Chaque notion est présentée dans une page dédiée, qui contient :</p>
@@ -494,7 +503,7 @@ ul.task-list li input[type="checkbox"] {
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -908,6 +917,18 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../02-environnement/02-cloud.html" class="pagination-link" aria-label="Environnements en ligne">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Environnements en ligne</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="pagination-link" aria-label="Premiers pas en notebook">
+        <span class="nav-page-text">Premiers pas en notebook</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -916,16 +937,9 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
-      <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/surybang/python-data">
-      <i class="bi bi-github" role="img">
-</i> 
-    </a>
-  </li>  
-</ul>
+      &nbsp;
     </div>
   </div>
 </footer>
