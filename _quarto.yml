@@ -7,53 +7,49 @@ website:
   description: "Introduction à la programmation Python et à l'écosystème data"
   site-url: https://surybang.github.io/python-data/
   repo-url: https://github.com/surybang/python-data
+  repo-actions: [edit, issue]
+  page-navigation: true
+  back-to-top-navigation: true
 
   navbar:
     background: primary
     search: true
-    left:
-      - text: "Accueil"
-        href: index.qmd
-      - text: "Introduction"
-        href: 01-introduction/01-langages.qmd
-      - text: "Environnement"
-        href: 02-environnement/index.qmd
-      - text: "Initiation Python"
-        href: 03-initiation-python/index.qmd
     right:
       - icon: github
         href: https://github.com/surybang/python-data
         aria-label: GitHub
 
   sidebar:
-    style: "docked"
-    search: true
+    style: docked
+    collapse-level: 1
     contents:
+      - href: index.qmd
+        text: Accueil
       - section: "Introduction"
         contents:
-          - 01-introduction/01-langages.qmd
-          - 01-introduction/02-pourquoi-python.qmd
+          - text: "Langages de programmation"
+            href: 01-introduction/01-langages.qmd
+          - text: "Pourquoi Python ?"
+            href: 01-introduction/02-pourquoi-python.qmd
       - section: "Environnement"
+        href: 02-environnement/index.qmd
         contents:
-          - 02-environnement/index.qmd
-          - 02-environnement/01-local.qmd
-          - 02-environnement/02-cloud.qmd
-          - 02-environnement/03-premiers-pas-notebooks.qmd
+          - text: "Installer en local"
+            href: 02-environnement/01-local.qmd
+          - text: "Environnements en ligne"
+            href: 02-environnement/02-cloud.qmd
       - section: "Initiation Python"
+        href: 03-initiation-python/index.qmd
         contents:
-          - 03-initiation-python/index.qmd
-          - 03-initiation-python/01-variables-et-types.qmd
-          - 03-initiation-python/02-slicing.qmd
-      - section: "Pour aller plus loin"
-        contents:
-          - text: "GitHub du cours"
-            href: https://github.com/surybang/python-data
+          - text: "Premiers pas en notebook"
+            href: 03-initiation-python/00-premiers-pas-notebooks.qmd
+          - text: "Variables, types & opérations"
+            href: 03-initiation-python/01-variables-types-operations.qmd
+          - text: "Le slicing"
+            href: 03-initiation-python/07-slicing.qmd
 
   page-footer:
     left: "Fabien HOS 👩🏻‍💻"
-    right:
-      - icon: github
-        href: https://github.com/surybang/python-data
 
 format:
   html:
@@ -62,11 +58,8 @@ format:
       dark: darkly
     css: style.css
     toc: true
-    code-fold: true
     code-copy: true
     fig-align: center
 
 execute:
   freeze: auto
-
-jupyter: python3
