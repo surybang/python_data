@@ -2,7 +2,7 @@
 title: "Le slicing"
 ---
 
-:::{.callout-tips}
+:::{.callout-tip}
 Pour accéder aux notebooks d'exercices c'est ici 👇
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/03-slicing.ipynb)
@@ -104,7 +104,7 @@ Sur les listes, `[:]` crée une **copie superficielle**. Utile pour ne pas modif
 ```python
 a = [1, 2, 3]
 b = a        # b pointe sur le même objet
-b = a[:]     # b est une copie indépendante
+b = a[:]     # b est une copie
 ```
 
 :::{.callout-warning}
