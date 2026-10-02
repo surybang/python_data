@@ -91,7 +91,7 @@ La réponse, largement documentée par la recherche, est **oui biensûr, mais po
 
 ### Le paradoxe de la productivité
 
-Les études montrent que l'IA accélère considérablement l'écriture de code. Mais cette vitesse cache un risque pour les débutants : celui de **sauter l'étape de l'apprentissage**. Ce phénomène est appelé **« atrophie cognitive »**[^Roxin] : à force de déléguer la syntaxe à l'IA, les apprenants développent une « façade syntaxique », ils produisent du code qui fonctionne, sans posséder les modèles mentaux pour en expliquer la logique ou en maintenir la structure.
+Les études montrent que l'IA accélère considérablement l'écriture de code. Mais cette vitesse cache un risque pour les débutants : celui de **sauter l'étape de l'apprentissage**. Ce phénomène est appelé **« atrophie cognitive »**[^roxin] : à force de déléguer la syntaxe à l'IA, les apprenants développent une « façade syntaxique », ils produisent du code qui fonctionne, sans posséder les modèles mentaux pour en expliquer la logique ou en maintenir la structure.
 
 Cette recherche introduit un concept essentiel pour comprendre l'enjeu : le **« Confidence-Competence Gap »** (écart entre confiance et compétence). Les développeurs novices qui utilisent l'IA produisent souvent du code de moindre qualité sécuritaire tout en se sentant plus confiants dans sa qualité. Le code fonctionne, mais l'apprenant n'a pas acquis les compétences sous-jacentes.
 
@@ -165,4 +165,4 @@ L'IA ne rend pas l'apprentissage de la programmation obsolète. Elle le **recent
 
 [^widening]: [*The Widening Gap: Novice Learners and Generative AI in Programming Education* (2024).](https://arxiv.org/abs/2405.17739)
 
-[^Roxin] : [IA générative : le risque de l’atrophie cognitive](https://www.polytechnique-insights.com/tribunes/neurosciences/ia-generative-le-risque-de-latrophie-cognitive/)
+[^roxin]: [IA générative : le risque de l’atrophie cognitive](https://www.polytechnique-insights.com/tribunes/neurosciences/ia-generative-le-risque-de-latrophie-cognitive/)
