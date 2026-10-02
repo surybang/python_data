@@ -3,7 +3,7 @@ title: "Variables et types de base"
 format:
   html: default
   revealjs:
-    output-file: variables-slides.html
+    output-file: 01-variables-types-operations-slides.html
     embed-resources: true
     scrollable: true
 format-links:

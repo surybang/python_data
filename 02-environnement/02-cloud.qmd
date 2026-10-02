@@ -3,7 +3,7 @@ title: "Les environnements en ligne"
 format:
   html: default
   revealjs:
-    output-file: variables-slides.html
+    output-file: 02-cloud-slides.html
     embed-resources: true
     scrollable: true
 format-links:

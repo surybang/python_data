@@ -3,7 +3,7 @@ title: "Environnement de travail"
 format:
   html: default
   revealjs:
-    output-file: variables-slides.html
+    output-file: index-slides.html
     embed-resources: true
     scrollable: true
 format-links:

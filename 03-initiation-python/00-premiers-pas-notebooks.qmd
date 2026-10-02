@@ -3,7 +3,7 @@ title: "Premiers pas dans un *notebook*"
 format:
   html: default
   revealjs:
-    output-file: variables-slides.html
+    output-file: 00-premiers-pas-notebooks-slides.html
     embed-resources: true
     scrollable: true
 format-links:

@@ -3,7 +3,7 @@ title: "Le slicing"
 format:
   html: default
   revealjs:
-    output-file: variables-slides.html
+    output-file: 07-slicing-slides.html
     embed-resources: true
     scrollable: true
 format-links:

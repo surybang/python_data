@@ -3,7 +3,7 @@ title: "Pourquoi Python ?"
 format:
   html: default
   revealjs:
-    output-file: variables-slides.html
+    output-file: 02-pourquoi-python-slides.html
     embed-resources: true
     scrollable: true
 format-links:

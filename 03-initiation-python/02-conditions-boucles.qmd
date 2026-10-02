@@ -3,7 +3,7 @@ title: "Conditions et boucles"
 format:
   html: default
   revealjs:
-    output-file: conditions-boucles-slides.html
+    output-file: 02-conditions-boucles-slides.html
     embed-resources: true
     scrollable: true
 format-links:
