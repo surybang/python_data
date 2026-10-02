@@ -1,0 +1,505 @@
+---
+title: "Conditions et boucles"
+format:
+  html: default
+  revealjs:
+    output-file: conditions-boucles-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tip}
+Pour accéder aux notebooks d'exercices c'est ici 👇
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/02-conditions-boucles.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB01_premiers_pas%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%AB02-conditions-boucles%C2%BB)
+:::
+
+
+## Pourquoi des conditions ?
+
+Jusqu'ici, nos programmes exécutent toutes les lignes, dans l'ordre, sans exception. Mais un vrai programme doit **prendre des décisions** :
+
+- si le solde est insuffisant, refuser le paiement ;
+- si la note est supérieure à 10, valider le module ;
+- si le fichier est vide, afficher un message d'erreur.
+
+C'est le rôle des **conditions** : exécuter un bloc de code **seulement si** une affirmation est vraie.
+
+## Rappel : une comparaison renvoie un booléen
+
+Vous avez vu les opérateurs de comparaison dans la page précédente. Ce sont eux qui alimentent les conditions, car ils renvoient toujours `True` ou `False`.
+
+```python
+note = 14
+print(note >= 10)   # True
+print(note == 20)   # False
+print(type(note >= 10))  # <class 'bool'>
+```
+
+Une condition, c'est donc simplement une expression qui vaut `True` ou `False`.
+
+## L'instruction `if`
+
+```python
+note = 14
+
+if note >= 10:
+    print("Module validé 🎉")
+
+print("Fin du programme")
+```
+
+Lisez-la comme une phrase : « **si** la note est supérieure ou égale à 10, **alors** affiche "Module validé" ».
+
+Trois éléments de syntaxe à ne pas oublier :
+
+1. le mot-clé `if` ;
+2. les **deux-points** `:` à la fin de la ligne ;
+3. l'**indentation** (4 espaces) des lignes qui dépendent de la condition.
+
+La dernière ligne, `print("Fin du programme")`, n'est pas indentée : elle s'exécute dans tous les cas.
+
+::: {.callout-important}
+### L'indentation n'est pas décorative
+
+Dans beaucoup de langages, on délimite un bloc avec des accolades `{ }`. En Python, ce sont les **espaces en début de ligne** qui indiquent ce qui fait partie du bloc.
+
+```python
+note = 8
+
+if note >= 10:
+    print("Module validé")
+    print("Bravo !")      # dans le bloc : ne s'affiche pas
+
+print("Fin")              # hors du bloc : s'affiche toujours
+```
+
+Un décalage oublié ou en trop provoque soit une `IndentationError`, soit, pire, un programme qui tourne mais ne fait pas ce que vous voulez. La convention est de **4 espaces** ; les éditeurs (VS Code, Jupyter) les insèrent automatiquement après les `:`.
+:::
+
+## `else` : sinon
+
+`else` permet de prévoir ce qui se passe quand la condition est fausse.
+
+```python
+note = 8
+
+if note >= 10:
+    print("Module validé 🎉")
+else:
+    print("Rattrapage 📚")
+```
+
+Un seul des deux blocs est exécuté, jamais les deux. `else` n'a pas de condition : il récupère « tout le reste ».
+
+## `elif` : sinon, si
+
+Quand il y a plus de deux cas, on enchaîne les tests avec `elif` (contraction de *else if*).
+
+```python
+note = 15
+
+if note >= 16:
+    mention = "Très bien"
+elif note >= 14:
+    mention = "Bien"
+elif note >= 12:
+    mention = "Assez bien"
+elif note >= 10:
+    mention = "Passable"
+else:
+    mention = "Non admis"
+
+print(f"Note : {note} → {mention}")   # Note : 15 → Bien
+```
+
+Python teste les conditions **de haut en bas** et s'arrête à la **première** qui est vraie. Les suivantes ne sont même pas évaluées.
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : l'ordre compte
+
+Un collègue a écrit cette version. Observez-la **sans l'exécuter** :
+
+```python
+note = 18
+
+if note >= 10:
+    mention = "Passable"
+elif note >= 12:
+    mention = "Assez bien"
+elif note >= 14:
+    mention = "Bien"
+elif note >= 16:
+    mention = "Très bien"
+
+print(mention)
+```
+
+1. Selon vous, qu'affiche ce programme ?
+2. Pour quelles notes ce code donne-t-il la bonne mention ?
+3. Exécutez-le pour vérifier, puis corrigez-le.
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+Le programme affiche `Passable`, alors que 18 mérite « Très bien ».
+
+Python teste `note >= 10` en premier : c'est vrai pour 18, donc il entre dans ce bloc et **ignore tous les `elif` suivants**. En fait, ce code donne « Passable » à toute note supérieure ou égale à 10 : les trois autres branches ne servent jamais.
+
+Il y a deux corrections possibles :
+
+- tester du **plus restrictif au plus large** (`>= 16` d'abord, comme dans l'exemple du cours) ;
+- ou rendre chaque condition **exclusive** avec des intervalles :
+
+```python
+if 10 <= note < 12:
+    mention = "Passable"
+elif 12 <= note < 14:
+    mention = "Assez bien"
+# ...
+```
+
+Remarquez au passage `10 <= note < 12` : Python accepte d'enchaîner les comparaisons, comme en mathématiques.
+
+Enfin, ce code plante si la note est inférieure à 10 : aucune branche ne s'exécute, et `mention` n'existe pas au moment du `print`. Un `else` final aurait évité le problème.
+:::
+
+## Combiner des conditions : `and`, `or`, `not`
+
+On a souvent besoin de vérifier plusieurs choses à la fois.
+
+| Opérateur | Signification | Vrai quand… |
+|---|---|---|
+| `and` | et | les **deux** conditions sont vraies |
+| `or` | ou | **au moins une** des conditions est vraie |
+| `not` | non | la condition est **fausse** |
+
+```python
+age = 22
+etudiant = True
+
+if age < 26 and etudiant:
+    print("Tarif réduit")
+
+if age < 18 or age > 65:
+    print("Entrée gratuite")
+
+if not etudiant:
+    print("Pensez à votre carte étudiante")
+```
+
+::: {.callout-note}
+### Priorité des opérateurs logiques
+
+Comme pour les opérations arithmétiques, il y a un ordre : `not` d'abord, puis `and`, puis `or`.
+
+```python
+print(True or False and False)    # True  → and est évalué en premier
+print((True or False) and False)  # False
+```
+
+Même conseil que pour les calculs : **en cas de doute, mettez des parenthèses.**
+:::
+
+::: {.callout-warning}
+### Le piège du `or` « à la française »
+
+En français, on dit « si la note vaut 10 ou 15 ». La traduction mot à mot est fausse :
+
+```python
+note = 12
+
+if note == 10 or 15:
+    print("Gagné !")    # s'affiche… alors que note vaut 12 !
+```
+
+Python lit `(note == 10) or (15)`. La première partie est `False`, mais la seconde est simplement `15`, qui vaut `True` (souvenez-vous de `bool(15)`). La condition est donc **toujours vraie**.
+
+Il faut répéter la comparaison :
+
+```python
+if note == 10 or note == 15:
+    print("Gagné !")
+```
+:::
+
+## Les valeurs « vraies » et « fausses »
+
+Une condition n'est pas obligée de contenir une comparaison. Python accepte n'importe quelle valeur et la convertit en booléen, exactement comme `bool()` dans la page précédente.
+
+Rappel : `0`, `0.0` et `""` (chaîne vide) valent `False`. Tout le reste vaut `True`.
+
+```python
+prenom = ""
+
+if prenom:
+    print(f"Bonjour {prenom} !")
+else:
+    print("Vous n'avez pas saisi de prénom")
+```
+
+`if prenom:` se lit « si prenom n'est pas vide ». C'est une écriture très courante en Python, que vous croiserez souvent, notamment pour tester si une liste contient des éléments.
+
+## `match` / `case` : choisir parmi des valeurs précises
+
+Quand on compare **une même variable** à une liste de valeurs précises, la chaîne de `elif` devient vite répétitive :
+
+```python
+jour = "samedi"
+
+if jour == "samedi" or jour == "dimanche":
+    print("Week-end 😎")
+elif jour == "lundi":
+    print("Courage ☕")
+else:
+    print("Jour de semaine")
+```
+
+Depuis Python 3.10, l'instruction `match` permet d'écrire la même chose plus lisiblement :
+
+```python
+jour = "samedi"
+
+match jour:
+    case "samedi" | "dimanche":
+        print("Week-end 😎")
+    case "lundi":
+        print("Courage ☕")
+    case _:
+        print("Jour de semaine")
+```
+
+- `match` indique la valeur à examiner ;
+- chaque `case` propose une valeur possible, testée **de haut en bas** comme les `elif` ;
+- `|` signifie « ou » entre plusieurs valeurs ;
+- `case _:` attrape tout le reste, comme un `else`.
+
+::: {.callout-note}
+### `match` ou `if` ?
+
+`match` sert à comparer une valeur à des **valeurs fixes** (un code, un statut, un choix de menu). Dès qu'il faut un intervalle (`note >= 14`) ou combiner plusieurs variables, restez sur `if` / `elif`.
+
+Comme `match` est récent (2021), vous verrez encore beaucoup de code qui ne l'utilise pas. Et il sait faire bien plus que ce qu'on montre ici (*pattern matching* sur des structures), mais c'est hors du périmètre de ce cours.
+:::
+
+---
+
+## Pourquoi des boucles ?
+
+Les conditions permettent de **choisir**. Les boucles permettent de **répéter**.
+
+Imaginez devoir afficher les 100 premières lignes d'un fichier, ou vérifier chaque transaction d'une journée : écrire 100 fois le même `print` n'est pas une option. Une boucle exécute un bloc de code **plusieurs fois**, avec la même syntaxe que les conditions : `:` et indentation.
+
+Python propose deux boucles :
+
+| Boucle | Quand l'utiliser |
+|---|---|
+| `for` | on sait **sur quoi** on boucle (un nombre de tours, les lettres d'un mot…) |
+| `while` | on boucle **tant qu'**une condition est vraie, sans savoir combien de tours il faudra |
+
+## La boucle `for`
+
+### Répéter un nombre de fois avec `range()`
+
+```python
+for i in range(5):
+    print(f"Tour numéro {i}")
+```
+
+```
+Tour numéro 0
+Tour numéro 1
+Tour numéro 2
+Tour numéro 3
+Tour numéro 4
+```
+
+À chaque tour, la variable `i` prend la valeur suivante. `range()` s'utilise comme le slicing :
+
+```python
+range(5)          # 0, 1, 2, 3, 4
+range(1, 6)       # 1, 2, 3, 4, 5
+range(0, 10, 2)   # 0, 2, 4, 6, 8
+range(5, 0, -1)   # 5, 4, 3, 2, 1
+```
+
+::: {.callout-warning}
+### La borne de fin est exclue
+`range(1, 10)` s'arrête à **9**, pas à 10. Si vous voulez aller jusqu'à 10 inclus, écrivez `range(1, 11)`. C'est la même règle que `sequence[debut:fin]` : début inclus, fin exclue.
+:::
+
+### Parcourir une chaîne de caractères
+
+`for` ne sert pas qu'à compter : il parcourt **n'importe quelle séquence**, élément par élément.
+
+```python
+for lettre in "Python":
+    print(lettre)
+```
+
+Vous l'utiliserez constamment avec les listes, que nous verrons plus tard. Le principe sera exactement le même.
+
+::: {.callout-tip}
+### Il n'y a pas que `range()`
+
+Un réflexe venu d'autres langages consiste à boucler sur les **positions** pour récupérer les éléments :
+
+```python
+mot = "Python"
+for i in range(len(mot)):   # 😕 fonctionne, mais peu lisible
+    print(mot[i])
+```
+
+En Python, on boucle **directement sur les éléments** : `for lettre in mot:`. Et si vous avez besoin de la position en plus de l'élément, utilisez `enumerate()` :
+
+```python
+for position, lettre in enumerate("Python"):
+    print(f"{position} → {lettre}")
+# 0 → P
+# 1 → y
+# ...
+```
+
+Retenez la règle : `range()` pour **compter**, `for element in sequence` pour **parcourir**, `enumerate()` quand il faut **les deux**. Vous croiserez aussi `zip()` (parcourir deux séquences en parallèle) et `reversed()` (parcourir à l'envers) : nous les verrons avec les listes.
+:::
+
+## La boucle `while`
+
+`while` répète un bloc **tant que** sa condition est vraie. Elle est vérifiée avant chaque tour.
+
+```python
+solde = 100
+mois = 0
+
+while solde > 0:
+    solde -= 30
+    mois += 1
+
+print(f"Compte vide après {mois} mois (solde : {solde} €)")
+# Compte vide après 4 mois (solde : -20 €)
+```
+
+::: {.callout-warning}
+### La boucle infinie
+Si la condition ne devient jamais fausse, la boucle ne s'arrête jamais :
+
+```python
+compteur = 0
+while compteur < 5:
+    print(compteur)
+    # oubli de compteur += 1 → tourne à l'infini
+```
+
+Dans un notebook, cliquez sur le bouton ⏹ (*Interrupt*) pour arrêter l'exécution. Le réflexe à avoir : **vérifier que quelque chose change dans la boucle** et rapproche la condition de `False`.
+:::
+
+## `break` et `continue`
+
+Deux mots-clés modifient le déroulement d'une boucle :
+
+- `break` **sort** immédiatement de la boucle ;
+- `continue` **passe** directement au tour suivant.
+
+```python
+# Trouver le premier multiple de 7 supérieur à 50
+for n in range(51, 100):
+    if n % 7 == 0:
+        print(f"Trouvé : {n}")   # Trouvé : 56
+        break
+```
+
+```python
+# Afficher les nombres de 1 à 10, sauf les multiples de 3
+for n in range(1, 11):
+    if n % 3 == 0:
+        continue
+    print(n)
+```
+
+Remarquez que conditions et boucles s'imbriquent naturellement : un `if` dans un `for`, c'est simplement un bloc indenté dans un autre.
+
+## Le motif de l'accumulateur
+
+C'est **le** schéma le plus utile : on initialise une variable **avant** la boucle, et on la met à jour **à chaque tour**.
+
+```python
+total = 0                  # 1. initialisation, avant la boucle
+
+for n in range(1, 6):
+    total += n             # 2. mise à jour, à chaque tour
+
+print(total)               # 3. résultat, après la boucle → 15
+```
+
+Le même motif sert à compter, à chercher un maximum, à construire une chaîne… C'est un schéma de base en algorithmique.
+
+::: {.callout-note}
+### Et en analyse de données ?
+
+En pratique, vous écrirez rarement ce genre de boucle sur des données : avec **pandas** ou **numpy**, une somme s'écrit `df["montant"].sum()`, et c'est beaucoup plus rapide qu'une boucle Python sur des millions de lignes. On parle d'opérations **vectorisées**.
+
+Alors pourquoi l'apprendre ? Parce que `.sum()`, `.max()` ou `.count()` font exactement cela en coulisse. Comprendre l'accumulateur, c'est comprendre ce que vous demanderez plus tard à `pandas`.
+:::
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : où est passé le total ?
+
+Ce code devait calculer la somme des notes de 1 à 3. Observez-le **sans l'exécuter** :
+
+```python
+for note in range(1, 4):
+    total = 0
+    total += note
+
+print(total)
+```
+
+1. Selon vous, qu'affiche ce programme ?
+2. Déroulez la boucle tour par tour sur papier : que vaut `total` à la fin de chaque tour ?
+3. Exécutez-le, puis corrigez-le pour obtenir 6.
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+Le programme affiche `3`, et non `6`.
+
+| Tour | `note` | `total = 0` | `total += note` |
+|---|---|---|---|
+| 1 | 1 | 0 | 1 |
+| 2 | 2 | 0 | 2 |
+| 3 | 3 | 0 | 3 |
+
+`total = 0` est **dans** la boucle : il est remis à zéro à chaque tour, et seul le dernier ajout survit. L'initialisation doit être faite **une seule fois, avant** la boucle :
+
+```python
+total = 0
+for note in range(1, 4):
+    total += note
+
+print(total)  # 6
+```
+
+Une ligne décalée de 4 espaces, et le programme change de sens : l'indentation, encore elle.
+:::
+
+::: {.callout-tip}
+### À retenir
+- `if`, `elif`, `else` permettent d'exécuter un bloc **seulement si** une condition est vraie.
+- Les `:` et l'**indentation** délimitent les blocs. Ils ne sont pas optionnels.
+- Les conditions sont testées **de haut en bas**, et seule la **première** vraie s'exécute.
+- `and`, `or` et `not` combinent des conditions. Répétez la comparaison de chaque côté du `or`.
+- Toute valeur peut servir de condition : `0` et `""` valent `False`, le reste vaut `True`.
+- `match` / `case` compare une valeur à des valeurs fixes, plus lisiblement qu'une chaîne de `elif`.
+- `for` parcourt une séquence (`range()`, une chaîne…), `while` répète tant qu'une condition est vraie.
+- `range(debut, fin)` exclut `fin`, comme le slicing.
+- On boucle directement sur les éléments (`for lettre in mot`), et `enumerate()` donne la position en plus.
+- `break` sort de la boucle, `continue` passe au tour suivant.
+- Un accumulateur s'initialise **avant** la boucle et se met à jour **dedans**.
+:::
