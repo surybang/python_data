@@ -37,7 +37,7 @@
     "href": "01-introduction/02-pourquoi-python.html#apprendre-python-à-lère-de-lia-générative",
     "title": "Pourquoi Python ?",
     "section": "Apprendre Python à l’ère de l’IA générative ?",
-    "text": "Apprendre Python à l’ère de l’IA générative ?\nL’arrivée des assistants de code basés sur l’IA (GitHub Copilot, ChatGPT, Claude) a profondément transformé le paysage de l’apprentissage de la programmation. La question mérite d’être posée frontalement : faut-il encore apprendre à coder quand une IA peut générer du code en quelques secondes ?\nLa réponse, largement documentée par la recherche, est oui biensûr, mais pour des raisons différentes qu’avant.\n\nLe paradoxe de la productivité\nLes études montrent que l’IA accélère considérablement l’écriture de code. Mais cette vitesse cache un risque pour les débutants : celui de sauter l’étape de l’apprentissage. Ce phénomène est appelé « atrophie cognitive »[^Roxin] : à force de déléguer la syntaxe à l’IA, les apprenants développent une « façade syntaxique », ils produisent du code qui fonctionne, sans posséder les modèles mentaux pour en expliquer la logique ou en maintenir la structure.\nCette recherche introduit un concept essentiel pour comprendre l’enjeu : le « Confidence-Competence Gap » (écart entre confiance et compétence). Les développeurs novices qui utilisent l’IA produisent souvent du code de moindre qualité sécuritaire tout en se sentant plus confiants dans sa qualité. Le code fonctionne, mais l’apprenant n’a pas acquis les compétences sous-jacentes.\n\n\nCe que disent les développeurs professionnels\nL’enquête Stack Overflow 2025, menée auprès de plus de 49 000 développeurs, offre un éclairage précieux.6 Les résultats révèlent une tension :\n\n80 % des développeurs utilisent des outils d’IA dans leur workflow\nMais seulement 29 % font confiance à leur exactitude (contre 40 % les années précédentes)\n66 % passent plus de temps à corriger du code généré par l’IA qui est « presque correct, mais pas tout à fait »\n75 % préfèrent demander de l’aide à un humain quand ils ne font pas confiance à l’IA\n\nLa frustration numéro un, citée par 66 % des développeurs, concerne les « solutions IA presque correctes mais pas tout à fait ». Cela signifie que la compétence de vérification et de correction devient plus critique que jamais.\n\n\nLa question du « pourquoi » plutôt que du « comment »\nUne enquête menée (Black, 2026) auprès de la communauté tech a posé directement la question : « Si l’IA peut écrire du code, devons-nous encore apprendre à coder ? »7\n80,9 % des répondants ont dit oui. Mais avec une nuance importante : « oui, mais pas de la même manière ». Le consensus émergent est que le rôle du développeur se déplace :\n\n« Le codage ne disparaît pas, il change. »\n\nLes compétences qui gagnent en importance sont :\n\nLa pensée critique : savoir si ce que l’IA a produit est correct, sûr, utile\nLa décomposition de problèmes : savoir structurer un problème avant de demander à l’IA de le résoudre\nLa vérification : auditer et contrôler la qualité du code généré\nLa pensée systémique : comprendre comment les composants interagissent\n\n\n\nLe piège de l’illusion de compétence\nUne étude sur les apprenants débutants (The Widening Gap, 2024) a observé que les étudiants qui utilisent l’IA de manière passive développent une « illusion de compétence » : le code fonctionne, donc ils pensent avoir compris. Mais quand on leur demande d’expliquer ou de modifier le code, ils échouent.8\nÀ l’inverse, les apprenants qui réussissent utilisent l’IA comme partenaire d’apprentissage, pas comme substitut. Ils adoptent des stratégies comme :\n\nDemander des explications sur le code généré\nDécomposer les problèmes et n’utiliser l’IA que pour des parties spécifiques\nRésoudre manuellement d’abord, puis comparer avec la solution de l’IA\n\n\n\nCe que cela signifie pour vous\nSi vous débutez en programmation aujourd’hui :\n\nApprenez les fondamentaux. La syntaxe, les types, les boucles, les fonctions, ne vous inquiétez pas, ces concepts ne sont pas obsolètes. Ils sont la base sur laquelle vous construirez votre jugement.\nUtilisez l’IA, mais activement. Demandez-lui des explications. Faites-lui vérifier votre code. Ne copiez-collez jamais sans comprendre.\nDéveloppez votre esprit critique. La compétence la plus valorisée à l’ère de l’IA n’est pas d’écrire du code, mais de savoir si le code est correct.\nAcceptez l’inconfort. La « lutte productive », le moment où vous ne comprenez pas et devez chercher est précisément là où l’apprentissage se produit. L’IA peut réduire cet inconfort, mais si elle l’élimine complètement, elle élimine aussi l’apprentissage.\n\n\n\nConclusion\nL’IA ne rend pas l’apprentissage de la programmation obsolète. Elle le recentre sur ce qui compte vraiment : la capacité à résoudre des problèmes, à penser logiquement, et à porter un jugement critique sur ce que les machines produisent.\n[^Roxin] : IA générative : le risque de l’atrophie cognitive",
+    "text": "Apprendre Python à l’ère de l’IA générative ?\nL’arrivée des assistants de code basés sur l’IA (GitHub Copilot, ChatGPT, Claude) a profondément transformé le paysage de l’apprentissage de la programmation. La question mérite d’être posée frontalement : faut-il encore apprendre à coder quand une IA peut générer du code en quelques secondes ?\nLa réponse, largement documentée par la recherche, est oui biensûr, mais pour des raisons différentes qu’avant.\n\nLe paradoxe de la productivité\nLes études montrent que l’IA accélère considérablement l’écriture de code. Mais cette vitesse cache un risque pour les débutants : celui de sauter l’étape de l’apprentissage. Ce phénomène est appelé « atrophie cognitive »6 : à force de déléguer la syntaxe à l’IA, les apprenants développent une « façade syntaxique », ils produisent du code qui fonctionne, sans posséder les modèles mentaux pour en expliquer la logique ou en maintenir la structure.\nCette recherche introduit un concept essentiel pour comprendre l’enjeu : le « Confidence-Competence Gap » (écart entre confiance et compétence). Les développeurs novices qui utilisent l’IA produisent souvent du code de moindre qualité sécuritaire tout en se sentant plus confiants dans sa qualité. Le code fonctionne, mais l’apprenant n’a pas acquis les compétences sous-jacentes.\n\n\nCe que disent les développeurs professionnels\nL’enquête Stack Overflow 2025, menée auprès de plus de 49 000 développeurs, offre un éclairage précieux.7 Les résultats révèlent une tension :\n\n80 % des développeurs utilisent des outils d’IA dans leur workflow\nMais seulement 29 % font confiance à leur exactitude (contre 40 % les années précédentes)\n66 % passent plus de temps à corriger du code généré par l’IA qui est « presque correct, mais pas tout à fait »\n75 % préfèrent demander de l’aide à un humain quand ils ne font pas confiance à l’IA\n\nLa frustration numéro un, citée par 66 % des développeurs, concerne les « solutions IA presque correctes mais pas tout à fait ». Cela signifie que la compétence de vérification et de correction devient plus critique que jamais.\n\n\nLa question du « pourquoi » plutôt que du « comment »\nUne enquête menée (Black, 2026) auprès de la communauté tech a posé directement la question : « Si l’IA peut écrire du code, devons-nous encore apprendre à coder ? »8\n80,9 % des répondants ont dit oui. Mais avec une nuance importante : « oui, mais pas de la même manière ». Le consensus émergent est que le rôle du développeur se déplace :\n\n« Le codage ne disparaît pas, il change. »\n\nLes compétences qui gagnent en importance sont :\n\nLa pensée critique : savoir si ce que l’IA a produit est correct, sûr, utile\nLa décomposition de problèmes : savoir structurer un problème avant de demander à l’IA de le résoudre\nLa vérification : auditer et contrôler la qualité du code généré\nLa pensée systémique : comprendre comment les composants interagissent\n\n\n\nLe piège de l’illusion de compétence\nUne étude sur les apprenants débutants (The Widening Gap, 2024) a observé que les étudiants qui utilisent l’IA de manière passive développent une « illusion de compétence » : le code fonctionne, donc ils pensent avoir compris. Mais quand on leur demande d’expliquer ou de modifier le code, ils échouent.9\nÀ l’inverse, les apprenants qui réussissent utilisent l’IA comme partenaire d’apprentissage, pas comme substitut. Ils adoptent des stratégies comme :\n\nDemander des explications sur le code généré\nDécomposer les problèmes et n’utiliser l’IA que pour des parties spécifiques\nRésoudre manuellement d’abord, puis comparer avec la solution de l’IA\n\n\n\nCe que cela signifie pour vous\nSi vous débutez en programmation aujourd’hui :\n\nApprenez les fondamentaux. La syntaxe, les types, les boucles, les fonctions, ne vous inquiétez pas, ces concepts ne sont pas obsolètes. Ils sont la base sur laquelle vous construirez votre jugement.\nUtilisez l’IA, mais activement. Demandez-lui des explications. Faites-lui vérifier votre code. Ne copiez-collez jamais sans comprendre.\nDéveloppez votre esprit critique. La compétence la plus valorisée à l’ère de l’IA n’est pas d’écrire du code, mais de savoir si le code est correct.\nAcceptez l’inconfort. La « lutte productive », le moment où vous ne comprenez pas et devez chercher est précisément là où l’apprentissage se produit. L’IA peut réduire cet inconfort, mais si elle l’élimine complètement, elle élimine aussi l’apprentissage.\n\n\n\nConclusion\nL’IA ne rend pas l’apprentissage de la programmation obsolète. Elle le recentre sur ce qui compte vraiment : la capacité à résoudre des problèmes, à penser logiquement, et à porter un jugement critique sur ce que les machines produisent.",
     "crumbs": [
       "Introduction",
       "Pourquoi Python ?"
@@ -48,11 +48,32 @@
     "href": "01-introduction/02-pourquoi-python.html#footnotes",
     "title": "Pourquoi Python ?",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nPython - Historique↩︎\nPython Documentation officielle, History of Python↩︎\nGuido van Rossum, cité dans Linux Journal, 1998. Voir aussi son blog personnel : The History of Python.↩︎\nComputer History Museum, Oral History of Guido van Rossum.↩︎\nPython FAQ — Why is it called Python?↩︎\nStack Overflow Developer Survey (2025). survey.stackoverflow.co↩︎\nBlack, S. (2026). The Question: Should We Still Learn to Code in the Age of AI? IEEE Software.↩︎\nThe Widening Gap: Novice Learners and Generative AI in Programming Education (2024).↩︎",
+    "text": "Footnotes\n\n\nPython - Historique↩︎\nPython Documentation officielle, History of Python↩︎\nGuido van Rossum, cité dans Linux Journal, 1998. Voir aussi son blog personnel : The History of Python.↩︎\nComputer History Museum, Oral History of Guido van Rossum.↩︎\nPython FAQ — Why is it called Python?↩︎\nIA générative : le risque de l’atrophie cognitive↩︎\nStack Overflow Developer Survey (2025). survey.stackoverflow.co↩︎\nBlack, S. (2026). The Question: Should We Still Learn to Code in the Age of AI? IEEE Software.↩︎\nThe Widening Gap: Novice Learners and Generative AI in Programming Education (2024).↩︎",
     "crumbs": [
       "Introduction",
       "Pourquoi Python ?"
     ]
+  },
+  {
+    "objectID": "01-introduction/02-pourquoi-python-slides.html#un-peu-dhistoire",
+    "href": "01-introduction/02-pourquoi-python-slides.html#un-peu-dhistoire",
+    "title": "Pourquoi Python ?",
+    "section": "Un peu d’histoire",
+    "text": "Un peu d’histoire\nPython a été créé par Guido van Rossum à la fin des années 19801, et sa première version publique date de 1991.2\nGuido van Rossum travaillait alors au CWI (Centrum voor Wiskunde en Informatica), à Amsterdam. En décembre 1989, pendant les vacances de Noël, l’entreprise était fermée et il cherchait un projet pour s’occuper. C’est ce qu’il appelle lui-même un « side project », mené en marge de son travail officiel. Il raconte : « J’avais deux semaines de vacances de Noël et rien à faire. »3 En deux semaines, il écrit la première version de l’interpréteur Python.4\nLe nom Python ne vient pas du serpent 🐍, mais de la troupe de comédie britannique Monty Python, que van Rossum appréciait. Il cherchait un nom court, unique et légèrement mystérieux et « Python » cochait toutes les cases.5\n\n\n\n\n\n\nLe Zen de Python\n\n\nSi vous tapez import this dans un interpréteur Python, vous verrez s’afficher le Zen de Python, une petite collection de 19 aphorismes qui résument la philosophie du langage. Par exemple :\n\n« Beautiful is better than ugly. » « Simple is better than complex. » « Readability counts. »\n\n\n\n\nPython - HistoriquePython Documentation officielle, History of PythonGuido van Rossum, cité dans Linux Journal, 1998. Voir aussi son blog personnel : The History of Python.Computer History Museum, Oral History of Guido van Rossum.Python FAQ — Why is it called Python?"
+  },
+  {
+    "objectID": "01-introduction/02-pourquoi-python-slides.html#les-atouts-de-python",
+    "href": "01-introduction/02-pourquoi-python-slides.html#les-atouts-de-python",
+    "title": "Pourquoi Python ?",
+    "section": "Les atouts de Python",
+    "text": "Les atouts de Python\n1. Une syntaxe claire et lisible\nPython a été conçu pour être lisible. Sa syntaxe utilise des mots-clés proches de l’anglais courant (if, else, for, while, in, not), et l’indentation fait partie intégrante de la grammaire du langage. Cela force à écrire du code structuré.\n# Calculer la moyenne de trois notes\nnotes = [12, 15, 8]\nmoyenne = sum(notes) / len(notes)\nprint(\"La moyenne est :\", moyenne)\n2. Un écosystème open-source très riche\nC’est sans doute l’argument le plus important pour la data science. Python dispose d’une vaste collection de bibliothèques spécialisées, maintenues par une communauté active et ouvertes : on peut les utiliser, les modifier et les redistribuer librement.\nPour les retrouver, vous pouvez passer par l’index officiel Pypi (Python Package Index), qui recense l’ensemble des paquets publiés pour Python. Vous pouvez également explorer GitHub, où la grande majorité de ces bibliothèques sont développées en open source.\n\n\n\n\n\n\nWarning\n\n\nL’écosystème open-source est une cible privilégiée pour les cyberattaques. Un phénomène de plus en plus répandu est la supply chain attack (attaque de chaîne d’approvisionnement) : des attaquants publient des paquets malveillants sur des dépôts officiels comme PyPI, ou compromettent des paquets légitimes en volant les identifiants de leurs mainteneurs.\nLes techniques sont variées :\n\nTyposquatting : publication de paquets aux noms très proches de bibliothèques populaires (par exemple reqeusts au lieu de requests, ou nunpy au lieu de numpy) pour piéger les fautes de frappe.\nCompromission de mainteneurs : les attaquants volent les identifiants de développeurs légitimes et publient des versions malveillantes de paquets largement utilisés.\nSlopsquatting : exploitation des hallucinations des assistants IA, qui inventent parfois des noms de paquets inexistants. Les attaquants enregistrent ces noms pour piéger les développeurs qui installent aveuglément ce que l’IA a suggéré.\n\nLes conséquences peuvent être graves : vol de données, installation de logiciels malveillants, compromission de l’ensemble d’une chaîne de build.\nComment se protéger ?\nVérifiez le nom exact avant d’installer un paquet. Une faute de frappe peut suffire.\nRegardez les statistiques : un paquet légitime a généralement un historique, des étoiles, des contributeurs.\nPréférez les paquets connus et largement utilisés quand c’est possible.\nSoyez vigilant avec les suggestions de l’IA : un nom de paquet proposé par un assistant doit toujours être vérifié sur PyPI ou GitHub avant installation.\n\n\n\n\n\n\nDomaine\nBibliothèques principales\n\n\n\n\nCalcul numérique\nNumPy\n\n\nManipulation de données\nPandas, Polars\n\n\nVisualisation\nMatplotlib, Seaborn, Plotly\n\n\nMachine Learning\nscikit-learn\n\n\nDeep Learning\nPyTorch, TensorFlow, JAX\n\n\nStatistiques\nSciPy, statsmodels\n\n\nWeb scraping\nBeautiful Soup, Scrapy\n\n\nAutomatisation\nAirflow, scheduler\n\n\n\nCes bibliothèques sont interopérables : elles partagent souvent les mêmes structures de données (par exemple, NumPy est à la base de Pandas, scikit-learn et PyTorch). Cela permet d’enchaîner les étapes d’un projet sans friction : charger → nettoyer → analyser → visualiser → modéliser.\n\nPython est magique"
+  },
+  {
+    "objectID": "01-introduction/02-pourquoi-python-slides.html#apprendre-python-à-lère-de-lia-générative",
+    "href": "01-introduction/02-pourquoi-python-slides.html#apprendre-python-à-lère-de-lia-générative",
+    "title": "Pourquoi Python ?",
+    "section": "Apprendre Python à l’ère de l’IA générative ?",
+    "text": "Apprendre Python à l’ère de l’IA générative ?\nL’arrivée des assistants de code basés sur l’IA (GitHub Copilot, ChatGPT, Claude) a profondément transformé le paysage de l’apprentissage de la programmation. La question mérite d’être posée frontalement : faut-il encore apprendre à coder quand une IA peut générer du code en quelques secondes ?\nLa réponse, largement documentée par la recherche, est oui biensûr, mais pour des raisons différentes qu’avant.\nLe paradoxe de la productivité\nLes études montrent que l’IA accélère considérablement l’écriture de code. Mais cette vitesse cache un risque pour les débutants : celui de sauter l’étape de l’apprentissage. Ce phénomène est appelé « atrophie cognitive »1 : à force de déléguer la syntaxe à l’IA, les apprenants développent une « façade syntaxique », ils produisent du code qui fonctionne, sans posséder les modèles mentaux pour en expliquer la logique ou en maintenir la structure.\nCette recherche introduit un concept essentiel pour comprendre l’enjeu : le « Confidence-Competence Gap » (écart entre confiance et compétence). Les développeurs novices qui utilisent l’IA produisent souvent du code de moindre qualité sécuritaire tout en se sentant plus confiants dans sa qualité. Le code fonctionne, mais l’apprenant n’a pas acquis les compétences sous-jacentes.\nCe que disent les développeurs professionnels\nL’enquête Stack Overflow 2025, menée auprès de plus de 49 000 développeurs, offre un éclairage précieux.2 Les résultats révèlent une tension :\n\n80 % des développeurs utilisent des outils d’IA dans leur workflow\nMais seulement 29 % font confiance à leur exactitude (contre 40 % les années précédentes)\n66 % passent plus de temps à corriger du code généré par l’IA qui est « presque correct, mais pas tout à fait »\n75 % préfèrent demander de l’aide à un humain quand ils ne font pas confiance à l’IA\n\nLa frustration numéro un, citée par 66 % des développeurs, concerne les « solutions IA presque correctes mais pas tout à fait ». Cela signifie que la compétence de vérification et de correction devient plus critique que jamais.\nLa question du « pourquoi » plutôt que du « comment »\nUne enquête menée (Black, 2026) auprès de la communauté tech a posé directement la question : « Si l’IA peut écrire du code, devons-nous encore apprendre à coder ? »3\n80,9 % des répondants ont dit oui. Mais avec une nuance importante : « oui, mais pas de la même manière ». Le consensus émergent est que le rôle du développeur se déplace :\n\n« Le codage ne disparaît pas, il change. »\n\nLes compétences qui gagnent en importance sont :\n\nLa pensée critique : savoir si ce que l’IA a produit est correct, sûr, utile\nLa décomposition de problèmes : savoir structurer un problème avant de demander à l’IA de le résoudre\nLa vérification : auditer et contrôler la qualité du code généré\nLa pensée systémique : comprendre comment les composants interagissent\n\nLe piège de l’illusion de compétence\nUne étude sur les apprenants débutants (The Widening Gap, 2024) a observé que les étudiants qui utilisent l’IA de manière passive développent une « illusion de compétence » : le code fonctionne, donc ils pensent avoir compris. Mais quand on leur demande d’expliquer ou de modifier le code, ils échouent.4\nÀ l’inverse, les apprenants qui réussissent utilisent l’IA comme partenaire d’apprentissage, pas comme substitut. Ils adoptent des stratégies comme :\n\nDemander des explications sur le code généré\nDécomposer les problèmes et n’utiliser l’IA que pour des parties spécifiques\nRésoudre manuellement d’abord, puis comparer avec la solution de l’IA\n\nCe que cela signifie pour vous\nSi vous débutez en programmation aujourd’hui :\n\nApprenez les fondamentaux. La syntaxe, les types, les boucles, les fonctions, ne vous inquiétez pas, ces concepts ne sont pas obsolètes. Ils sont la base sur laquelle vous construirez votre jugement.\nUtilisez l’IA, mais activement. Demandez-lui des explications. Faites-lui vérifier votre code. Ne copiez-collez jamais sans comprendre.\nDéveloppez votre esprit critique. La compétence la plus valorisée à l’ère de l’IA n’est pas d’écrire du code, mais de savoir si le code est correct.\nAcceptez l’inconfort. La « lutte productive », le moment où vous ne comprenez pas et devez chercher est précisément là où l’apprentissage se produit. L’IA peut réduire cet inconfort, mais si elle l’élimine complètement, elle élimine aussi l’apprentissage.\n\nConclusion\nL’IA ne rend pas l’apprentissage de la programmation obsolète. Elle le recentre sur ce qui compte vraiment : la capacité à résoudre des problèmes, à penser logiquement, et à porter un jugement critique sur ce que les machines produisent.\n\n\nIA générative : le risque de l’atrophie cognitiveStack Overflow Developer Survey (2025). survey.stackoverflow.coBlack, S. (2026). The Question: Should We Still Learn to Code in the Age of AI? IEEE Software.The Widening Gap: Novice Learners and Generative AI in Programming Education (2024)."
   },
   {
     "objectID": "02-environnement/02-cloud.html",
@@ -99,6 +120,27 @@
     ]
   },
   {
+    "objectID": "02-environnement/02-cloud-slides.html#sspcloud-cloud-pour-tous",
+    "href": "02-environnement/02-cloud-slides.html#sspcloud-cloud-pour-tous",
+    "title": "Les environnements en ligne",
+    "section": "SSPCloud : Cloud pour tous",
+    "text": "SSPCloud : Cloud pour tous\nLe SSPCloud (aussi appelé Datalab) est une plateforme de science des données développée par l’Insee. Elle est conçue pour l’enseignement et la recherche ainsi que la Fonction Publique.\nCe que ça apporte\n\nEnvironnement préconfiguré : vous vous connectez, et tout est prêt. Les bibliothèques Python, les outils, les notebooks : tout est déjà là.\nOutils professionnels : VS Code, JupyterLab, RStudio, stockage S3, gestion des secrets… C’est un véritable espace de travail.\nReproductibilité : tous les étudiants ont exactement le même environnement. Le code que vous écrivez chez vous fonctionnera de la même manière pour tout le monde (enfin dans la théorie 🥶).\n\nComment y accéder\nVous devez d’abord créer un compte ici. Pensez à bien utiliser votre adresse mail étudiante sinon vous ne pourrez pas y accéder.\n\n\n\n\n\n\nSauvegardez votre travail\n\n\nLe SSPCloud est un environnement cloud : les sessions sont temporaires. Si vous fermez l’onglet et que vous ne sauvegardez pas votre code, vous pouvez le perdre. La bonne pratique est de sauvegarder régulièrement votre travail sur GitHub (ou une autre forge) ou de le télécharger sur votre poste."
+  },
+  {
+    "objectID": "02-environnement/02-cloud-slides.html#google-colab",
+    "href": "02-environnement/02-cloud-slides.html#google-colab",
+    "title": "Les environnements en ligne",
+    "section": "Google Colab :",
+    "text": "Google Colab :\nGoogle Colab (pour Colaboratory) est un service freemium de Google qui permet d’exécuter des notebooks Jupyter directement dans le navigateur.\nComment y accéder\nEn cliquant sur ce lien et en utilisant un compte Google.\nCe que ça apporte\n\nZéro configuration : pas d’installation, pas de compte spécial. Un compte Google suffit.\nGPU et TPU gratuits : Colab offre un accès gratuit à des accélérateurs matériels (GPU) pour entraîner des modèles de machine learning.\nIntégration Google Drive : vous pouvez monter votre Drive pour lire et écrire des fichiers de manière persistante.\n\nLes limites à connaître\n\nSessions temporaires : Colab ferme les sessions inactives après 90 minutes. Les fichiers non sauvegardés sont perdus.\nRessources limitées : le GPU gratuit est partagé et les sessions peuvent être interrompues. Ce n’est pas un environnement de production."
+  },
+  {
+    "objectID": "02-environnement/02-cloud-slides.html#en-entreprise-dautres-environnements-les-mêmes-compétences",
+    "href": "02-environnement/02-cloud-slides.html#en-entreprise-dautres-environnements-les-mêmes-compétences",
+    "title": "Les environnements en ligne",
+    "section": "En entreprise : d’autres environnements, les mêmes compétences",
+    "text": "En entreprise : d’autres environnements, les mêmes compétences\nSi vous êtes en alternance, il est très probable que vous travailliez dans un environnement différent de celui de ce cours. Les grandes entreprises utilisent souvent :\n\nLes clouds des grands fournisseurs : Google Cloud Platform (Vertex AI), Amazon Web Services (SageMaker), Microsoft Azure (Azure Machine Learning). Ces plateformes offrent des environnements notebooks managés, souvent avec GPU, et une intégration poussée avec les outils de l’entreprise.\nDes plateformes complètes comme Databricks, construite sur Apache Spark, qui intègre notebooks, gestion de données et machine learning distribué.\n\nLa bonne nouvelle : toutes les compétences que vous acquérez ici sont transférables. Que vous écriviez import numpy as np dans Colab, dans le SSPCloud, ou dans un notebook Azure, la syntaxe, les bibliothèques et la logique sont identiques. Ce qui change, c’est l’interface, le chemin d’accès aux données, et parfois les contraintes de sécurité (toujours pour être honnête 🙄).\n\n\n\n\n\n\nL’essentiel à retenir\n\n\nLe vrai savoir, ce n’est pas « comment cliquer dans tel outil », c’est comprendre ce que vous faites : pourquoi cette structure de données, pourquoi cette fonction, comment interpréter ce résultat. L’outil, vous l’apprendrez en quelques jours. La logique, elle, se construit sur la durée (Trust the process)."
+  },
+  {
     "objectID": "02-environnement/index.html",
     "href": "02-environnement/index.html",
     "title": "Environnement de travail",
@@ -109,200 +151,211 @@
     ]
   },
   {
-    "objectID": "03-initiation-python/07-slicing.html",
-    "href": "03-initiation-python/07-slicing.html",
-    "title": "Le slicing",
+    "objectID": "03-initiation-python/00-premiers-pas-notebooks.html",
+    "href": "03-initiation-python/00-premiers-pas-notebooks.html",
+    "title": "Premiers pas dans un notebook",
     "section": "",
-    "text": "Tip\n\n\n\nPour accéder aux notebooks d’exercices c’est ici 👇\nLe slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :",
+    "text": "Il est maintenant l’heure pour nous de découvrir votre prochain outil de travail pour les années à venir 👴.\nCliquez sur l’un des liens ci-dessous pour accéder à la ressource.\n \n\n\n\n Back to top",
     "crumbs": [
       "Initiation Python",
-      "Le slicing"
+      "Premiers pas en notebook"
     ]
   },
   {
-    "objectID": "03-initiation-python/07-slicing.html#index-positif-et-index-négatif",
-    "href": "03-initiation-python/07-slicing.html#index-positif-et-index-négatif",
-    "title": "Le slicing",
-    "section": "Index positif et index négatif",
-    "text": "Index positif et index négatif\nChaque élément d’une séquence possède deux index : un positif (de gauche à droite, à partir de 0) et un négatif (de droite à gauche, à partir de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nL’index négatif permet d’accéder aux éléments depuis la fin, sans connaître la longueur de la séquence.\nmot = \"Python\"\nmot[0]    # 'P'\nmot[-1]   # 'n' (le dernier)\nmot[-2]   # 'o' (l'avant-dernier)",
-    "crumbs": [
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/07-slicing.html#slicing-de-base-debutfin",
-    "href": "03-initiation-python/07-slicing.html#slicing-de-base-debutfin",
-    "title": "Le slicing",
-    "section": "Slicing de base : [debut:fin]",
-    "text": "Slicing de base : [debut:fin]\nsequence[debut:fin] renvoie les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]   # \"Pyt\"  → index 0, 1, 2\nmot[2:5]   # \"tho\"  → index 2, 3, 4\nAstuce : fin - debut donne le nombre d’éléments extraits.",
-    "crumbs": [
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/07-slicing.html#omettre-debut-ou-fin",
-    "href": "03-initiation-python/07-slicing.html#omettre-debut-ou-fin",
-    "title": "Le slicing",
-    "section": "Omettre debut ou fin",
-    "text": "Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin.\nmot[:3]    # \"Pyt\"     → depuis le début\nmot[3:]    # \"hon\"     → jusqu'à la fin\nmot[:]     # \"Python\"  → copie complète",
-    "crumbs": [
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/07-slicing.html#index-négatifs-dans-le-slicing",
-    "href": "03-initiation-python/07-slicing.html#index-négatifs-dans-le-slicing",
-    "title": "Le slicing",
-    "section": "Index négatifs dans le slicing",
-    "text": "Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très pratique pour raisonner « depuis la fin » sans connaître la longueur.\nmot[-3:]     # \"hon\"    → les 3 derniers\nmot[:-3]     # \"Pyt\"    → tout sauf les 3 derniers\nmot[-4:-1]   # \"tho\"    → du 4e au 2e en partant de la fin",
-    "crumbs": [
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/07-slicing.html#le-pas-debutfinpas",
-    "href": "03-initiation-python/07-slicing.html#le-pas-debutfinpas",
-    "title": "Le slicing",
-    "section": "Le pas : [debut:fin:pas]",
-    "text": "Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    # [0, 2, 4, 6, 8]       → un sur deux\nnombres[1::2]   # [1, 3, 5, 7, 9]       → un sur deux, à partir de 1\nnombres[::3]    # [0, 3, 6, 9]          → un sur trois\nnombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence\n[::-1] est l’idiome Python pour inverser une séquence.",
-    "crumbs": [
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/07-slicing.html#slicing-et-copie",
-    "href": "03-initiation-python/07-slicing.html#slicing-et-copie",
-    "title": "Le slicing",
-    "section": "Slicing et copie",
-    "text": "Slicing et copie\nSur les listes, [:] crée une copie superficielle. Utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie\n\n\n\n\n\n\nWarning\n\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence.",
-    "crumbs": [
-      "Initiation Python",
-      "Le slicing"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/01-variables-types-operations.html",
-    "href": "03-initiation-python/01-variables-types-operations.html",
-    "title": "Variables et types de base",
+    "objectID": "03-initiation-python/index.html",
+    "href": "03-initiation-python/index.html",
+    "title": "Initiation à Python 🐍",
     "section": "",
-    "text": "Tip\n\n\n\nPour accéder aux notebooks d’exercices c’est ici 👇",
+    "text": "Bienvenue dans ce cours d’introduction à la programmation Python.",
     "crumbs": [
-      "Initiation Python",
-      "Variables, types & opérations"
+      "Initiation Python"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-types-operations.html#cest-quoi-une-variable",
-    "href": "03-initiation-python/01-variables-types-operations.html#cest-quoi-une-variable",
-    "title": "Variables et types de base",
-    "section": "C’est quoi une variable ?",
-    "text": "C’est quoi une variable ?\nUne variable, c’est un nom qu’on associe à une valeur. Ce nom permet de retrouver la valeur plus tard dans le programme.\nage = 25            # age est un entier (int)\nprenom = \"Jessica\"  # prenom est une chaine de caractère (str)\ntaille = 1.75       # taille est un flottant (float)\nmajeur = True       # majeur est un booléen (bool)\nIci, on a créé quatre variables :\n\nage désigne 25\nprenom désigne “Jessica”\ntaille désigne 1.75\nmajeur désigne True\n\n\n\n\n\n\n\nNoteLe signe = n’est pas une égalité\n\n\n\nEn Python, age = 25 ne veut pas dire « age est égal à 25 », mais « on associe le nom age à la valeur 25 ». C’est une affectation.\nC’est pour ça que x = x + 1 est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on associe le résultat au nom x.\n\n\n\nUne variable est une étiquette, pas une boîte\nOn présente souvent une variable comme une boîte dans laquelle on range une valeur. C’est une image pratique pour débuter, mais elle est fausse en Python, et elle finit par provoquer des bugs difficiles à comprendre.\nEn réalité, une variable est une étiquette collée sur un objet stocké dans la mémoire de l’ordinateur (la RAM). Voici ce qui se passe concrètement 👇\n\n\n\nAssignation d’une variable en mémoire\n\n\n\nÉtape 1 : x = 5\nPython crée d’abord un objet de type int de valeur 5 quelque part dans la RAM, à une adresse donnée (ici 0x7f3a...). Ensuite seulement, il associe le nom x à cette adresse.\nAutrement dit, x ne contient pas 5 : x sait où trouver l’objet 5.\nx = 5\nprint(id(x))  # l'adresse mémoire de l'objet désigné par x\n\n\nÉtape 2 : y = x\nOn pourrait penser que Python copie la valeur de x dans une nouvelle boîte y. Ce n’est pas le cas : aucun nouvel objet n’est créé. Le nom y reçoit simplement la même adresse que x.\nOn a donc deux étiquettes collées sur le même objet.\ny = x\nprint(id(x), id(y))  # les deux adresses sont identiques\nprint(x is y)        # True : x et y désignent le même objet\n\n\nÉtape 3 : y += 1\nC’est l’étape clé. Les entiers sont immuables en Python : l’objet 5 ne peut pas être modifié. Python ne transforme donc pas le 5 en 6. À la place, il :\n\nlit la valeur de l’objet désigné par y (5) ;\ncalcule le résultat et crée un nouvel objet 6 à une autre adresse (ici 0x8d4b...) ;\ndécolle l’étiquette y pour la recoller sur ce nouvel objet.\n\nL’étiquette x, elle, n’a pas bougé : elle désigne toujours l’objet 5.\ny += 1\nprint(x, y)          # 5 6\nprint(id(x), id(y))  # les adresses sont désormais différentes\nprint(x is y)        # False\n\n\n\n\n\n\nTipÀ retenir\n\n\n\n\nUne variable est un nom qui désigne un objet en mémoire.\ny = x ne copie rien : les deux noms partagent le même objet.\n« Modifier » un int, un float, un str ou un bool crée toujours un nouvel objet, car ces types sont immuables.\n\n\n\n\n\n\n\n\n\nImportant🧠 À vous de réfléchir : et avec une liste ?\n\n\n\nLes listes, que nous verrons plus en détail plus tard, permettent de regrouper plusieurs valeurs. Observez le code suivant sans l’exécuter :\na = [5]\nb = a\nb.append(6)   # ajoute 6 à la fin de la liste b\nprint(a)\n\nSelon vous, qu’affiche print(a) ?\nDessinez, comme dans le schéma précédent, ce qui se passe en mémoire à chaque ligne.\nExécutez ensuite le code pour vérifier votre hypothèse.\n\n\n\n\n\n\n\n\n\nTip💡 Voir la solution\n\n\n\n\n\na = [5]\nb = a\nb.append(6)\nprint(a)  # [5, 6]\nSurprise : a a été modifiée alors qu’on n’a touché qu’à b !\n\n\n\nModification d’une liste en mémoire\n\n\nContrairement aux entiers, les listes sont mutables : elles peuvent être modifiées sur place.\n\nLigne 1 : Python crée un objet liste [5] en mémoire et lui colle l’étiquette a.\nLigne 2 : b = a ne copie rien, b est une deuxième étiquette sur la même liste.\nLigne 3 : b.append(6) ne crée pas de nouvel objet, il modifie la liste existante. Aucune étiquette ne bouge.\nLigne 4 : a désigne toujours cette même liste, qui contient maintenant [5, 6].\n\nC’est la différence clé avec l’exemple y += 1 : avec un entier, Python crée un nouvel objet et recolle l’étiquette ; avec une liste, il modifie l’objet lui-même, et toutes les étiquettes qui le désignent « voient » le changement.\nPour obtenir une liste indépendante, il faut une copie explicite :\na = [5]\nb = a.copy()\nb.append(6)\nprint(a)  # [5]\nprint(b)  # [5, 6]\n\n\n\n\n\n\nLe typage dynamique\nEn Python, on ne déclare pas le type d’une variable. On écrit simplement age = 25, et l’interpréteur déduit le type à partir de la valeur.\nx = 5         # x est un entier (int)\nx = \"bonjour\" # x est maintenant une chaîne (string)\nx = 3.14      # x est maintenant un flottant (float)\nLe type est attaché à la valeur et non pas à la variable. C’est logique : puisqu’une variable n’est qu’une étiquette, on peut la recoller sur un objet de n’importe quel type.\n\n\n\n\n\n\nWarningUne liberté qui a un prix\n\n\n\nLe typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.\n\n\n\n\n\n\n\n\nNoteUne nuance importante\n\n\n\nLe discours « Python ne vérifie pas les types » est vrai pour le langage lui-même. L’interpréteur Python ignore les annotations de type : x: int = \"bonjour\" ne lève aucune erreur.\nMais certains packages s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de Pydantic (très utilisé en data science et dans les API), de Typeguard et de Beartype. Avec ces outils, une annotation devient une contrainte réelle : si la valeur ne respecte pas le type, une erreur est levée.\nDonc : le type hint est un indice pour Python, mais il peut devenir une règle pour certaines bibliothèques.",
+    "objectID": "03-initiation-python/index.html#objectifs",
+    "href": "03-initiation-python/index.html#objectifs",
+    "title": "Initiation à Python 🐍",
+    "section": "Objectifs",
+    "text": "Objectifs\nCe cours est conçu pour des débutants complets. Il couvre dans un premier temps :\n\nPremiers pas : Apprendre à marcher avec un notebook\nVariables types et opérations : Nommer, calculer et manipuler des valeurs\nConditions et boucles : Prendre des décisions, répéter des actions\nFonctions : Organiser son code\nStructure de données : Manipuler des données dans des objets appropriés\nLe slicing : Extraire une portion d’une séquence",
     "crumbs": [
-      "Initiation Python",
-      "Variables, types & opérations"
+      "Initiation Python"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-types-operations.html#les-types-de-base-en-python",
-    "href": "03-initiation-python/01-variables-types-operations.html#les-types-de-base-en-python",
-    "title": "Variables et types de base",
-    "section": "Les types de base en Python",
-    "text": "Les types de base en Python\n\n\n\nType\nNom Python\nExemples\n\n\n\n\nNombre entier\nint\n42, -7, 0\n\n\nNombre à virgule\nfloat\n3.14, -0.5, 2.0\n\n\nChaîne de caractères\nstr\n\"bonjour\", 'Alice'\n\n\nBooléen\nbool\nTrue, False\n\n\n\nOn peut vérifier le type d’une variable avec la fonction type()\nage = 25\nprint(type(age))       # &lt;class 'int'&gt;\n\nprenom = \"Jessica\"\nprint(type(prenom))    # &lt;class 'str'&gt;",
+    "objectID": "03-initiation-python/index.html#comment-utiliser-ce-cours",
+    "href": "03-initiation-python/index.html#comment-utiliser-ce-cours",
+    "title": "Initiation à Python 🐍",
+    "section": "Comment utiliser ce cours",
+    "text": "Comment utiliser ce cours\nSuivez les chapitres dans l’ordre via la barre latérale ou explorez-le comme bon vous semble 😊.\n\n\n\n\n\n\nTipPour ce cours\n\n\n\nNous utiliserons principalement le SSPCloud ou Google Colab, car ils sont préconfigurés et ne nécessitent aucune installation.\nVous pourrez accéder aux notebooks en utilisant les icônes comme ci-dessous.\n \n(ils ne fonctionnent pas volontairement, ne perdez pas de temps à savoir pourquoi 👀)\n\n\n\n\n\n\n\n\nTipL’erreur est normale\n\n\n\nSe tromper fait partie de l’apprentissage. Lisez les messages d’erreur, ils vous guident.",
     "crumbs": [
-      "Initiation Python",
-      "Variables, types & opérations"
+      "Initiation Python"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-types-operations.html#opérations-de-base",
-    "href": "03-initiation-python/01-variables-types-operations.html#opérations-de-base",
-    "title": "Variables et types de base",
-    "section": "Opérations de base",
-    "text": "Opérations de base\nUne fois qu’on sait nommer des valeurs, il faut pouvoir les manipuler. Python fournit des opérateurs pour calculer, assembler des chaînes ou comparer des valeurs.\n\nOpérations arithmétiques\nLes opérateurs arithmétiques s’appliquent aux nombres (int et float).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n+\nAddition\n7 + 3\n10\n\n\n-\nSoustraction\n7 - 3\n4\n\n\n*\nMultiplication\n7 * 3\n21\n\n\n/\nDivision\n7 / 3\n2.333...\n\n\n//\nDivision entière (quotient)\n7 // 3\n2\n\n\n%\nModulo (reste)\n7 % 3\n1\n\n\n**\nPuissance\n7 ** 3\n343\n\n\n\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.3333333333333335\nprint(a // b)  # 3\nprint(a % b)   # 1\nprint(a ** b)  # 1000\n\n\n\n\n\n\nNoteDivision et division entière\n\n\n\nEn Python, / renvoie toujours un flottant, même quand le résultat tombe juste :\nprint(10 / 2)   # 5.0 (et non 5)\nprint(10 // 2)  # 5\n\n\n\n\nLes opérateurs d’affectation combinée\nModifier une variable à partir de sa propre valeur est si courant que Python propose des raccourcis (vous avez déjà croisé y += 1 plus haut) :\n\n\n\nRaccourci\nÉquivaut à\n\n\n\n\nx += 1\nx = x + 1\n\n\nx -= 1\nx = x - 1\n\n\nx *= 2\nx = x * 2\n\n\nx /= 2\nx = x / 2\n\n\n\nscore = 10\nscore += 5\nprint(score)  # 15\n\n\nPriorité des opérations\nPython respecte les règles de priorité habituelles des mathématiques :\n\nParenthèses ()\nPuissance **\nMultiplication, division, division entière, modulo (*, /, //, %)\nAddition, soustraction (+, -)\n\nEn cas de doute, utilisez des parenthèses. Elles ne coûtent rien et rendent le code plus lisible.\nprint(2 + 3 * 4)      # 14 (et non 20)\nprint((2 + 3) * 4)    # 20",
+    "objectID": "03-initiation-python/index.html#ressources",
+    "href": "03-initiation-python/index.html#ressources",
+    "title": "Initiation à Python 🐍",
+    "section": "Ressources",
+    "text": "Ressources\n\nGitHub du cours\nGaliana, Lino. Python pour la data science.\nChaine de Machine Learnia.\nChaine de Ricco Rakotomalala. ### 1. Variables et types\n\nUn programme doit stocker des informations : c’est le rôle des variables. Nous verrons ici comment en créer, quels sont les types de base en Python (entiers, flottants, chaînes, booléens), et comment les afficher ou les demander à l’utilisateur.\nNotions clés : variables, int, float, str, bool, print(), input()\n\n2. Conditions et boucles\nUn programme doit pouvoir prendre des décisions et répéter des actions. Vous apprendrez les instructions if, elif, else, ainsi que les boucles for et while. C’est le moment où vos programmes deviennent réellement utiles.\nNotions clés : if/elif/else, opérateurs logiques, for, while, indentation\n\n\n3. Fonctions\nÉcrire tout son code en vrac devient vite ingérable. Les fonctions permettent de découper un programme en blocs réutilisables, nommés et documentés. C’est une étape décisive vers du code propre.\nNotions clés : def, paramètres, return, portée des variables, docstrings\n\n\n4. Listes, dictionnaires et fichiers\nLes données réelles ne sont pas des valeurs isolées : ce sont des collections. Vous apprendrez à manipuler des listes et des dictionnaires, et à lire/écrire dans des fichiers. C’est la porte d’entrée vers la manipulation de données.\nNotions clés : listes, indexation, slicing, dictionnaires, open(), with",
     "crumbs": [
-      "Initiation Python",
-      "Variables, types & opérations"
+      "Initiation Python"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-types-operations.html#opérations-sur-les-chaînes-de-caractères",
-    "href": "03-initiation-python/01-variables-types-operations.html#opérations-sur-les-chaînes-de-caractères",
-    "title": "Variables et types de base",
-    "section": "Opérations sur les chaînes de caractères",
-    "text": "Opérations sur les chaînes de caractères\nprenom = \"Jessica\"\nnom = \"Hyde\"\n\nConcaténation et répétition\nnom_complet = prenom + \" \" + nom\nprint(nom_complet)   # Jessica Hyde\n\nprint(\"ha\" * 3)      # hahaha\n\n\nQuelques outils utiles\n\n\n\n\n\n\n\n\n\nOutil\nRôle\nExemple\nRésultat\n\n\n\n\nlen()\nLongueur\nlen(\"Python\")\n6\n\n\n.upper()\nMajuscules\n\"data\".upper()\n\"DATA\"\n\n\n.lower()\nMinuscules\n\"DATA\".lower()\n\"data\"\n\n\n.capitalize()\n1re lettre en majuscule\n\"alice\".capitalize()\n\"Alice\"\n\n\n.replace(a, b)\nRemplace a par b\n\"chat\".replace(\"c\", \"b\")\n\"bhat\"\n\n\n\n\n\n\n\n\n\nNoteUne chaîne ne se modifie jamais\n\n\n\nComme les entiers, les str sont immuables. .upper() ne modifie pas la chaîne, elle en renvoie une nouvelle. Pour garder le résultat, il faut recoller l’étiquette :\nmot = \"data\"\nmot.upper()\nprint(mot)        # data  → inchangé !\nmot = mot.upper()\nprint(mot)        # DATA\n\n\n\n\nLes f-strings : afficher des variables proprement\nPlutôt que d’enchaîner les +, on préfixe la chaîne par f et on place les variables entre {} :\nage = 25\nprint(f\"{prenom} a {age} ans\")           # Jessica a 25 ans\nprint(f\"Dans 10 ans : {age + 10} ans\")   # calcul possible dans les {}\nC’est la méthode recommandée en Python moderne.\n\n\nContrôler l’affichage\nAprès la valeur, on peut ajouter : suivi d’un code de formatage :\n\n\n\n\n\n\n\n\n\nCode\nEffet\nExemple\nRésultat\n\n\n\n\n.2f\n2 décimales\nf\"{3.14159:.2f}\"\n3.14\n\n\n.1%\npourcentage, 1 décimale\nf\"{0.857:.1%}\"\n85.7%\n\n\n,\nséparateur de milliers\nf\"{1234567:,}\"\n1,234,567\n\n\n_.2f\nséparateur _ et 2 décimales\nf\"{1234567:_.2f}\"\n1_234_567.00\n\n\n&gt;10\naligné à droite sur 10 caractères\nf\"{42:&gt;10}\"\n42\n\n\n&lt;10\naligné à gauche sur 10 caractères\nf\"{42:&lt;10}\"\n42\n\n\n010\ncomplété avec des zéros\nf\"{42:010}\"\n0000000042\n\n\n\nOn peut combiner les codes : f\"{1482300.5:,.2f}\" donne 1,482,300.50.\n\n\n\n\n\n\nNoteLes différentes façons de formater en Python\n\n\n\n\n\nPython a connu trois générations de formatage. Vous les croiserez toutes dans du code existant.\n1. Opérateur % (style C, Python 2)\n\"Bonjour %s, tu as %d ans\" % (\"Alice\", 25)\n\"Prix : %.2f€\" % 3.14159\n%s → chaîne, %d → entier, %f → flottant. Encore très présent dans du code legacy.\n2. .format() (Python 3.0)\n\"Bonjour {}, tu as {} ans\".format(\"Alice\", 25)\n\"Prix : {:.2f}€\".format(3.14159)\n\"{prenom} a {age} ans\".format(prenom=\"Alice\", age=25)\nPlus lisible que %, mais verbeux.\n3. f-strings (Python 3.6)\nprenom, age = \"Alice\", 25\nf\"Bonjour {prenom}, tu as {age} ans\"\nf\"Prix : {3.14159:.2f}€\"\nLe code s’écrit directement dans la chaîne. C’est ce qu’on utilise aujourd’hui.\nLes trois font la même chose :\nprenom = \"Alice\"\nprix = 3.14159\n\nprint(\"Bonjour %s, prix : %.2f€\" % (prenom, prix))\nprint(\"Bonjour {}, prix : {:.2f}€\".format(prenom, prix))\nprint(f\"Bonjour {prenom}, prix : {prix:.2f}€\")\n# Bonjour Alice, prix : 3.14€  (trois fois)\nRemarquez que le code .2f est le même partout : ce que vous apprenez avec les f-strings reste valable pour lire l’ancien code.",
+    "objectID": "03-initiation-python/index.html#comment-ce-module-est-organisé",
+    "href": "03-initiation-python/index.html#comment-ce-module-est-organisé",
+    "title": "Initiation à Python 🐍",
+    "section": "Comment ce module est organisé",
+    "text": "Comment ce module est organisé\nChaque notion est présentée dans une page dédiée, qui contient :\n\nUne explication courte du concept, avec des exemples concrets.\nDes cellules de code exécutables, que vous pouvez modifier et relancer.\nDes exercices à faire vous-même, avec un squelette de code à compléter.\nUne correction (à consulter après avoir essayé).",
     "crumbs": [
-      "Initiation Python",
-      "Variables, types & opérations"
+      "Initiation Python"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-types-operations.html#conversions-de-types",
-    "href": "03-initiation-python/01-variables-types-operations.html#conversions-de-types",
-    "title": "Variables et types de base",
-    "section": "Conversions de types",
-    "text": "Conversions de types\nPython ne mélange pas les types automatiquement :\nage = 25\nprint(\"J'ai \" + age + \" ans\")  # ❌ TypeError\nIl faut convertir explicitement :\n\n\n\nFonction\nConvertit en\nExemple\nRésultat\n\n\n\n\nstr()\nchaîne\nstr(25)\n\"25\"\n\n\nint()\nentier\nint(\"25\")\n25\n\n\nfloat()\nflottant\nfloat(\"1.75\")\n1.75\n\n\nbool()\nbooléen\nbool(0)\nFalse\n\n\n\nprint(\"J'ai \" + str(age) + \" ans\")  # 🆗 J'ai 25 ans\n\n\n\n\n\n\nTipVrai ou faux ?\n\n\n\nbool() renvoie False pour les valeurs « vides » : 0, 0.0, \"\" (chaîne vide). Tout le reste vaut True, même -42 ou \"False\".\n\n\n\n\n\n\n\n\nWarning\n\n\n\nint(\"bonjour\") lève une ValueError : on ne peut convertir que ce qui a du sens. Cas fréquent en data : des nombres stockés en texte dans un CSV, à convertir avant de calculer.",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome home !",
+    "section": "",
+    "text": "Chargement de l'historique…",
     "crumbs": [
-      "Initiation Python",
-      "Variables, types & opérations"
+      "Accueil"
     ]
   },
   {
-    "objectID": "03-initiation-python/01-variables-types-operations.html#opérations-de-comparaison",
-    "href": "03-initiation-python/01-variables-types-operations.html#opérations-de-comparaison",
-    "title": "Variables et types de base",
-    "section": "Opérations de comparaison",
-    "text": "Opérations de comparaison\nLes opérateurs de comparaison renvoient un booléen (True ou False).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n==\nÉgal à\n5 == 5\nTrue\n\n\n!=\nDifférent de\n5 != 3\nTrue\n\n\n&lt;\nInférieur à\n5 &lt; 3\nFalse\n\n\n&gt;\nSupérieur à\n5 &gt; 3\nTrue\n\n\n&lt;=\nInférieur ou égal\n5 &lt;= 5\nTrue\n\n\n&gt;=\nSupérieur ou égal\n5 &gt;= 6\nFalse\n\n\n\nprint(5 == 5)     # True\nprint(5 != 3)     # True\nprint(10 &gt; 3)     # True\nprint(10 &lt;= 3)    # False",
+    "objectID": "index.html#dernières-modifications-du-cours",
+    "href": "index.html#dernières-modifications-du-cours",
+    "title": "Welcome home !",
+    "section": "",
+    "text": "Chargement de l'historique…",
     "crumbs": [
-      "Initiation Python",
-      "Variables, types & opérations"
+      "Accueil"
     ]
   },
   {
-    "objectID": "03-initiation-python/variables-slides.html#cest-quoi-une-variable",
-    "href": "03-initiation-python/variables-slides.html#cest-quoi-une-variable",
-    "title": "Variables et types de base",
-    "section": "C’est quoi une variable ?",
-    "text": "C’est quoi une variable ?\nUne variable, c’est un nom qu’on associe à une valeur. Ce nom permet de retrouver la valeur plus tard dans le programme.\nage = 25            # age est un entier (int)\nprenom = \"Jessica\"  # prenom est une chaine de caractère (str)\ntaille = 1.75       # taille est un flottant (float)\nmajeur = True       # majeur est un booléen (bool)\nIci, on a créé quatre variables :\n\nage désigne 25\nprenom désigne “Jessica”\ntaille désigne 1.75\nmajeur désigne True\n\n\n\n\n\n\n\nLe signe = n’est pas une égalité\n\n\nEn Python, age = 25 ne veut pas dire « age est égal à 25 », mais « on associe le nom age à la valeur 25 ». C’est une affectation.\nC’est pour ça que x = x + 1 est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on associe le résultat au nom x.\n\n\n\nUne variable est une étiquette, pas une boîte\nOn présente souvent une variable comme une boîte dans laquelle on range une valeur. C’est une image pratique pour débuter, mais elle est fausse en Python, et elle finit par provoquer des bugs difficiles à comprendre.\nEn réalité, une variable est une étiquette collée sur un objet stocké dans la mémoire de l’ordinateur (la RAM). Voici ce qui se passe concrètement 👇\n\n\n\nAssignation d’une variable en mémoire\n\n\nÉtape 1 : x = 5\nPython crée d’abord un objet de type int de valeur 5 quelque part dans la RAM, à une adresse donnée (ici 0x7f3a...). Ensuite seulement, il associe le nom x à cette adresse.\nAutrement dit, x ne contient pas 5 : x sait où trouver l’objet 5.\nx = 5\nprint(id(x))  # l'adresse mémoire de l'objet désigné par x\nÉtape 2 : y = x\nOn pourrait penser que Python copie la valeur de x dans une nouvelle boîte y. Ce n’est pas le cas : aucun nouvel objet n’est créé. Le nom y reçoit simplement la même adresse que x.\nOn a donc deux étiquettes collées sur le même objet.\ny = x\nprint(id(x), id(y))  # les deux adresses sont identiques\nprint(x is y)        # True : x et y désignent le même objet\nÉtape 3 : y += 1\nC’est l’étape clé. Les entiers sont immuables en Python : l’objet 5 ne peut pas être modifié. Python ne transforme donc pas le 5 en 6. À la place, il :\n\nlit la valeur de l’objet désigné par y (5) ;\ncalcule le résultat et crée un nouvel objet 6 à une autre adresse (ici 0x8d4b...) ;\ndécolle l’étiquette y pour la recoller sur ce nouvel objet.\n\nL’étiquette x, elle, n’a pas bougé : elle désigne toujours l’objet 5.\ny += 1\nprint(x, y)          # 5 6\nprint(id(x), id(y))  # les adresses sont désormais différentes\nprint(x is y)        # False\n\n\n\n\n\n\nÀ retenir\n\n\n\nUne variable est un nom qui désigne un objet en mémoire.\ny = x ne copie rien : les deux noms partagent le même objet.\n« Modifier » un int, un float, un str ou un bool crée toujours un nouvel objet, car ces types sont immuables.\n\n\n\n\n\n\n\n\n\n\n🧠 À vous de réfléchir : et avec une liste ?\n\n\nLes listes, que nous verrons plus en détail plus tard, permettent de regrouper plusieurs valeurs. Observez le code suivant sans l’exécuter :\na = [5]\nb = a\nb.append(6)   # ajoute 6 à la fin de la liste b\nprint(a)\n\nSelon vous, qu’affiche print(a) ?\nDessinez, comme dans le schéma précédent, ce qui se passe en mémoire à chaque ligne.\nExécutez ensuite le code pour vérifier votre hypothèse.\n\n\n\n\n\n\n\n\n\n\n💡 Voir la solution\n\n\na = [5]\nb = a\nb.append(6)\nprint(a)  # [5, 6]\nSurprise : a a été modifiée alors qu’on n’a touché qu’à b !\n\n\n\nModification d’une liste en mémoire\n\n\nContrairement aux entiers, les listes sont mutables : elles peuvent être modifiées sur place.\n\nLigne 1 : Python crée un objet liste [5] en mémoire et lui colle l’étiquette a.\nLigne 2 : b = a ne copie rien, b est une deuxième étiquette sur la même liste.\nLigne 3 : b.append(6) ne crée pas de nouvel objet, il modifie la liste existante. Aucune étiquette ne bouge.\nLigne 4 : a désigne toujours cette même liste, qui contient maintenant [5, 6].\n\nC’est la différence clé avec l’exemple y += 1 : avec un entier, Python crée un nouvel objet et recolle l’étiquette ; avec une liste, il modifie l’objet lui-même, et toutes les étiquettes qui le désignent « voient » le changement.\nPour obtenir une liste indépendante, il faut une copie explicite :\na = [5]\nb = a.copy()\nb.append(6)\nprint(a)  # [5]\nprint(b)  # [5, 6]\n\n\n\nLe typage dynamique\nEn Python, on ne déclare pas le type d’une variable. On écrit simplement age = 25, et l’interpréteur déduit le type à partir de la valeur.\nx = 5         # x est un entier (int)\nx = \"bonjour\" # x est maintenant une chaîne (string)\nx = 3.14      # x est maintenant un flottant (float)\nLe type est attaché à la valeur et non pas à la variable. C’est logique : puisqu’une variable n’est qu’une étiquette, on peut la recoller sur un objet de n’importe quel type.\n\n\n\n\n\n\nUne liberté qui a un prix\n\n\nLe typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.\n\n\n\n\n\n\n\n\n\nUne nuance importante\n\n\nLe discours « Python ne vérifie pas les types » est vrai pour le langage lui-même. L’interpréteur Python ignore les annotations de type : x: int = \"bonjour\" ne lève aucune erreur.\nMais certains packages s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de Pydantic (très utilisé en data science et dans les API), de Typeguard et de Beartype. Avec ces outils, une annotation devient une contrainte réelle : si la valeur ne respecte pas le type, une erreur est levée.\nDonc : le type hint est un indice pour Python, mais il peut devenir une règle pour certaines bibliothèques."
+    "objectID": "notebooks/02-variables-types-operations.html",
+    "href": "notebooks/02-variables-types-operations.html",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "",
+    "text": "Ce notebook accompagne le cours Variables, types de base et opérations. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.\nPour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat."
   },
   {
-    "objectID": "03-initiation-python/variables-slides.html#les-types-de-base-en-python",
-    "href": "03-initiation-python/variables-slides.html#les-types-de-base-en-python",
-    "title": "Variables et types de base",
-    "section": "Les types de base en Python",
-    "text": "Les types de base en Python\n\n\n\nType\nNom Python\nExemples\n\n\n\n\nNombre entier\nint\n42, -7, 0\n\n\nNombre à virgule\nfloat\n3.14, -0.5, 2.0\n\n\nChaîne de caractères\nstr\n\"bonjour\", 'Alice'\n\n\nBooléen\nbool\nTrue, False\n\n\n\nOn peut vérifier le type d’une variable avec la fonction type()\nage = 25\nprint(type(age))       # &lt;class 'int'&gt;\n\nprenom = \"Jessica\"\nprint(type(prenom))    # &lt;class 'str'&gt;"
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
+    "href": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 1 : Créer et inspecter des variables",
+    "text": "Exercice 1 : Créer et inspecter des variables\nCrée quatre variables : ton prénom, ton âge, ta taille en mètres, et un booléen qui indique si tu aimes Python. Affiche ensuite le type de chacune.\n\n# TODO : crée tes quatre variables\nprenom = ...\nage = ...\ntaille = ...\naime_python = ...\n\n# Affiche le type de chacune\nprint(type(prenom))\nprint(type(age))\nprint(type(taille))\nprint(type(aime_python))"
   },
   {
-    "objectID": "03-initiation-python/variables-slides.html#opérations-de-base",
-    "href": "03-initiation-python/variables-slides.html#opérations-de-base",
-    "title": "Variables et types de base",
-    "section": "Opérations de base",
-    "text": "Opérations de base\nUne fois qu’on sait nommer des valeurs, il faut pouvoir les manipuler. Python fournit des opérateurs pour calculer, assembler des chaînes ou comparer des valeurs.\nOpérations arithmétiques\nLes opérateurs arithmétiques s’appliquent aux nombres (int et float).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n+\nAddition\n7 + 3\n10\n\n\n-\nSoustraction\n7 - 3\n4\n\n\n*\nMultiplication\n7 * 3\n21\n\n\n/\nDivision\n7 / 3\n2.333...\n\n\n//\nDivision entière (quotient)\n7 // 3\n2\n\n\n%\nModulo (reste)\n7 % 3\n1\n\n\n**\nPuissance\n7 ** 3\n343\n\n\n\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.3333333333333335\nprint(a // b)  # 3\nprint(a % b)   # 1\nprint(a ** b)  # 1000\n\n\n\n\n\n\nDivision et division entière\n\n\nEn Python, / renvoie toujours un flottant, même quand le résultat tombe juste :\nprint(10 / 2)   # 5.0 (et non 5)\nprint(10 // 2)  # 5\n\n\n\nLes opérateurs d’affectation combinée\nModifier une variable à partir de sa propre valeur est si courant que Python propose des raccourcis (vous avez déjà croisé y += 1 plus haut) :\n\n\n\nRaccourci\nÉquivaut à\n\n\n\n\nx += 1\nx = x + 1\n\n\nx -= 1\nx = x - 1\n\n\nx *= 2\nx = x * 2\n\n\nx /= 2\nx = x / 2\n\n\n\nscore = 10\nscore += 5\nprint(score)  # 15\nPriorité des opérations\nPython respecte les règles de priorité habituelles des mathématiques :\n\nParenthèses ()\nPuissance **\nMultiplication, division, division entière, modulo (*, /, //, %)\nAddition, soustraction (+, -)\n\nEn cas de doute, utilisez des parenthèses. Elles ne coûtent rien et rendent le code plus lisible.\nprint(2 + 3 * 4)      # 14 (et non 20)\nprint((2 + 3) * 4)    # 20"
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
+    "href": "notebooks/02-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 2 : Étiquettes et mémoire",
+    "text": "Exercice 2 : Étiquettes et mémoire\nPour chaque bloc, devine d’abord ce qui va s’afficher (note ta réponse en commentaire), puis exécute pour vérifier.\n\nx = 10\ny = x\n\n# TODO : devine avant d'exécuter\nprint(x is y)          # True ou False ?\nprint(id(x) == id(y))  # True ou False ?\n\n\nx = 10\ny = x\ny += 5\n\n# TODO : devine avant d'exécuter\nprint(x, y)    # ?\nprint(x is y)  # True ou False ?\n\n# TODO : en une phrase, explique pourquoi x n'a pas changé\n# Réponse : ...\n\n\ncourses = [\"pain\", \"lait\"]\npanier = courses\npanier.append(\"oeufs\")\n\n# TODO : devine avant d'exécuter\nprint(courses)  # ?\n\n# TODO : modifie la ligne `panier = courses` pour que `courses` ne soit PAS modifiée,\n# puis réexécute la cellule."
   },
   {
-    "objectID": "03-initiation-python/variables-slides.html#opérations-sur-les-chaînes-de-caractères",
-    "href": "03-initiation-python/variables-slides.html#opérations-sur-les-chaînes-de-caractères",
-    "title": "Variables et types de base",
-    "section": "Opérations sur les chaînes de caractères",
-    "text": "Opérations sur les chaînes de caractères\nprenom = \"Jessica\"\nnom = \"Hyde\"\nConcaténation et répétition\nnom_complet = prenom + \" \" + nom\nprint(nom_complet)   # Jessica Hyde\n\nprint(\"ha\" * 3)      # hahaha\nQuelques outils utiles\n\n\n\n\n\n\n\n\n\nOutil\nRôle\nExemple\nRésultat\n\n\n\n\nlen()\nLongueur\nlen(\"Python\")\n6\n\n\n.upper()\nMajuscules\n\"data\".upper()\n\"DATA\"\n\n\n.lower()\nMinuscules\n\"DATA\".lower()\n\"data\"\n\n\n.capitalize()\n1re lettre en majuscule\n\"alice\".capitalize()\n\"Alice\"\n\n\n.replace(a, b)\nRemplace a par b\n\"chat\".replace(\"c\", \"b\")\n\"bhat\"\n\n\n\n\n\n\n\n\n\nUne chaîne ne se modifie jamais\n\n\nComme les entiers, les str sont immuables. .upper() ne modifie pas la chaîne, elle en renvoie une nouvelle. Pour garder le résultat, il faut recoller l’étiquette :\nmot = \"data\"\nmot.upper()\nprint(mot)        # data  → inchangé !\nmot = mot.upper()\nprint(mot)        # DATA\n\n\n\nLes f-strings : afficher des variables proprement\nPlutôt que d’enchaîner les +, on préfixe la chaîne par f et on place les variables entre {} :\nage = 25\nprint(f\"{prenom} a {age} ans\")           # Jessica a 25 ans\nprint(f\"Dans 10 ans : {age + 10} ans\")   # calcul possible dans les {}\nC’est la méthode recommandée en Python moderne.\nContrôler l’affichage\nAprès la valeur, on peut ajouter : suivi d’un code de formatage :\n\n\n\n\n\n\n\n\n\nCode\nEffet\nExemple\nRésultat\n\n\n\n\n.2f\n2 décimales\nf\"{3.14159:.2f}\"\n3.14\n\n\n.1%\npourcentage, 1 décimale\nf\"{0.857:.1%}\"\n85.7%\n\n\n,\nséparateur de milliers\nf\"{1234567:,}\"\n1,234,567\n\n\n_.2f\nséparateur _ et 2 décimales\nf\"{1234567:_.2f}\"\n1_234_567.00\n\n\n&gt;10\naligné à droite sur 10 caractères\nf\"{42:&gt;10}\"\n42\n\n\n&lt;10\naligné à gauche sur 10 caractères\nf\"{42:&lt;10}\"\n42\n\n\n010\ncomplété avec des zéros\nf\"{42:010}\"\n0000000042\n\n\n\nOn peut combiner les codes : f\"{1482300.5:,.2f}\" donne 1,482,300.50.\n\n\n\n\n\n\nLes différentes façons de formater en Python\n\n\nPython a connu trois générations de formatage. Vous les croiserez toutes dans du code existant.\n1. Opérateur % (style C, Python 2)\n\"Bonjour %s, tu as %d ans\" % (\"Alice\", 25)\n\"Prix : %.2f€\" % 3.14159\n%s → chaîne, %d → entier, %f → flottant. Encore très présent dans du code legacy.\n2. .format() (Python 3.0)\n\"Bonjour {}, tu as {} ans\".format(\"Alice\", 25)\n\"Prix : {:.2f}€\".format(3.14159)\n\"{prenom} a {age} ans\".format(prenom=\"Alice\", age=25)\nPlus lisible que %, mais verbeux.\n3. f-strings (Python 3.6)\nprenom, age = \"Alice\", 25\nf\"Bonjour {prenom}, tu as {age} ans\"\nf\"Prix : {3.14159:.2f}€\"\nLe code s’écrit directement dans la chaîne. C’est ce qu’on utilise aujourd’hui.\nLes trois font la même chose :\nprenom = \"Alice\"\nprix = 3.14159\n\nprint(\"Bonjour %s, prix : %.2f€\" % (prenom, prix))\nprint(\"Bonjour {}, prix : {:.2f}€\".format(prenom, prix))\nprint(f\"Bonjour {prenom}, prix : {prix:.2f}€\")\n# Bonjour Alice, prix : 3.14€  (trois fois)\nRemarquez que le code .2f est le même partout : ce que vous apprenez avec les f-strings reste valable pour lire l’ancien code."
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
+    "href": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 3 : Opérations sur les entiers et flottants",
+    "text": "Exercice 3 : Opérations sur les entiers et flottants\nCalcule les valeurs suivantes et stocke chacune dans une variable.\n\n# TODO : combien font 17 divisé par 5 ? (division classique, puis division entière, puis reste)\ndivision        = ...   # attendu : 3.4\ndivision_entiere = ...  # attendu : 3\nreste           = ...   # attendu : 2\n\n# TODO : quelle est la surface d'un carré de côté 13 ?\nsurface = ...           # attendu : 169\n\n# TODO : 2 à la puissance 10 ?\npuissance = ...         # attendu : 1024\n\nprint(division, division_entiere, reste)\nprint(surface)\nprint(puissance)"
   },
   {
-    "objectID": "03-initiation-python/variables-slides.html#conversions-de-types",
-    "href": "03-initiation-python/variables-slides.html#conversions-de-types",
-    "title": "Variables et types de base",
-    "section": "Conversions de types",
-    "text": "Conversions de types\nPython ne mélange pas les types automatiquement :\nage = 25\nprint(\"J'ai \" + age + \" ans\")  # ❌ TypeError\nIl faut convertir explicitement :\n\n\n\nFonction\nConvertit en\nExemple\nRésultat\n\n\n\n\nstr()\nchaîne\nstr(25)\n\"25\"\n\n\nint()\nentier\nint(\"25\")\n25\n\n\nfloat()\nflottant\nfloat(\"1.75\")\n1.75\n\n\nbool()\nbooléen\nbool(0)\nFalse\n\n\n\nprint(\"J'ai \" + str(age) + \" ans\")  # 🆗 J'ai 25 ans\n\n\n\n\n\n\nVrai ou faux ?\n\n\nbool() renvoie False pour les valeurs « vides » : 0, 0.0, \"\" (chaîne vide). Tout le reste vaut True, même -42 ou \"False\".\n\n\n\n\n\n\n\n\n\nWarning\n\n\nint(\"bonjour\") lève une ValueError : on ne peut convertir que ce qui a du sens. Cas fréquent en data : des nombres stockés en texte dans un CSV, à convertir avant de calculer."
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
+    "href": "notebooks/02-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 4 : Opérations sur les chaînes de caractères",
+    "text": "Exercice 4 : Opérations sur les chaînes de caractères\n\nprenom = \"jessica\"\nnom    = \"hyde\"\n\n# TODO : construis le nom complet \"Jessica Hyde\" (majuscule sur la première lettre)\nnom_complet = ...\nprint(nom_complet)  # attendu : Jessica Hyde\n\n# TODO : combien de caractères dans \"data science\" (espace compris) ?\nphrase = \"data science\"\nlongueur = ...\nprint(longueur)  # attendu : 12\n\n# TODO : remplace \"science\" par \"engineering\" dans la phrase\nnouvelle_phrase = ...\nprint(nouvelle_phrase)  # attendu : data engineering\n\n# TODO : affiche \"Python! \" répété 4 fois\nprint(...)  # attendu : Python! Python! Python! Python!"
   },
   {
-    "objectID": "03-initiation-python/variables-slides.html#opérations-de-comparaison",
-    "href": "03-initiation-python/variables-slides.html#opérations-de-comparaison",
-    "title": "Variables et types de base",
-    "section": "Opérations de comparaison",
-    "text": "Opérations de comparaison\nLes opérateurs de comparaison renvoient un booléen (True ou False).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n==\nÉgal à\n5 == 5\nTrue\n\n\n!=\nDifférent de\n5 != 3\nTrue\n\n\n&lt;\nInférieur à\n5 &lt; 3\nFalse\n\n\n&gt;\nSupérieur à\n5 &gt; 3\nTrue\n\n\n&lt;=\nInférieur ou égal\n5 &lt;= 5\nTrue\n\n\n&gt;=\nSupérieur ou égal\n5 &gt;= 6\nFalse\n\n\n\nprint(5 == 5)     # True\nprint(5 != 3)     # True\nprint(10 &gt; 3)     # True\nprint(10 &lt;= 3)    # False"
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-5-conversions-de-types",
+    "href": "notebooks/02-variables-types-operations.html#exercice-5-conversions-de-types",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 5 : Conversions de types",
+    "text": "Exercice 5 : Conversions de types\n\n# Cette ligne va planter : lis le message d'erreur, puis corrige la ligne suivante\nage_str = \"25\"\n# print(\"Dans 10 ans tu auras \" + age_str + 10 + \" ans\")  # TypeError !\n\n# TODO : corrige en convertissant correctement\nprint(\"Dans 10 ans tu auras \" + ...)  # attendu : Dans 10 ans tu auras 35 ans\n\n\n# TODO : que vaut bool() appliqué à ces valeurs ? Devines d'abord, puis vérifie.\nprint(bool(0))        # True ou False ?\nprint(bool(1))\nprint(bool(-42))\nprint(bool(\"\"))       # chaîne vide\nprint(bool(\"Python\"))\nprint(bool(0.0))\nprint(bool(0.1))"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-6-f-strings",
+    "href": "notebooks/02-variables-types-operations.html#exercice-6-f-strings",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 6 : f-strings",
+    "text": "Exercice 6 : f-strings\n\nproduit = \"café\"\nprix_unitaire = 2.5\nquantite = 3\n\n# TODO : affiche \"3 café(s) à 2.5€ = 7.5€\" en utilisant une f-string\n# Le total doit être calculé directement dans la f-string\nprint(...)  # attendu : 3 café(s) à 2.5€ = 7.5€\n\n\n# Exercice 6b : formatage dans les f-strings\n# Les codes de formatage ({valeur:...}) sont dans le cours.\n\nchiffre_affaires = 1_482_300.5\ntaux_marge = 0.2173\nventes = 42\n\n# TODO : affiche le CA avec 2 décimales et un séparateur de milliers (utilise ,)\n# attendu : 1,482,300.50\nprint(f\"{...}\")\n\n# TODO : affiche le taux de marge en % avec 1 décimale\n# attendu : 21.7%\nprint(f\"{...}\")\n\n# TODO : affiche le nombre de ventes aligné à droite sur 8 caractères, complété de zéros\n# attendu : 00000042\nprint(f\"{...}\")\n\n# TODO : construis un mini-tableau aligné (utilise l'alignement à gauche sur 15 chars)\nproduits = [(\"Café\", 2.5), (\"Thé\", 1.8), (\"Chocolat chaud\", 3.2)]\nfor nom, prix in produits:\n    print(f\"{nom} {prix}€\")\n# attendu :\n# Café            2.50€\n# Thé             1.80€\n# Chocolat chaud  3.20€"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#exercice-7-convertisseur-de-températures",
+    "href": "notebooks/02-variables-types-operations.html#exercice-7-convertisseur-de-températures",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 7 : Convertisseur de températures",
+    "text": "Exercice 7 : Convertisseur de températures\nÉcris un convertisseur qui prend une température en Celsius et affiche le résultat en Fahrenheit et en Kelvin.\nFormules : - Fahrenheit : F = C × 9/5 + 32 - Kelvin : K = C + 273.15\n\ncelsius = 100\n\n# TODO : calcule fahrenheit et kelvin\nfahrenheit = ...\nkelvin = ...\n\n# TODO : affiche les résultats avec une f-string\n# attendu :\n# 100°C = 212.0°F = 373.15K\nprint(...)"
+  },
+  {
+    "objectID": "notebooks/02-variables-types-operations.html#corrigés",
+    "href": "notebooks/02-variables-types-operations.html#corrigés",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Corrigés",
+    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\nprenom = \"Jessica\"\nage = 25\ntaille = 1.68\naime_python = True\nExercice 2\n# True, True : y = x colle une 2e étiquette sur le même objet\n# 10 15, False : les int sont immuables, y += 5 crée un nouvel objet 15\n#   et recolle l'étiquette y dessus ; x désigne toujours 10\n# ['pain', 'lait', 'oeufs'] : courses et panier désignent la même liste\npanier = courses.copy()   # ou courses[:]\nExercice 3\ndivision         = 17 / 5    # 3.4\ndivision_entiere = 17 // 5   # 3\nreste            = 17 % 5    # 2\nsurface          = 13 ** 2   # 169\npuissance        = 2 ** 10   # 1024\nExercice 4\nnom_complet     = prenom.capitalize() + \" \" + nom.capitalize()\nlongueur        = len(phrase)\nnouvelle_phrase = phrase.replace(\"science\", \"engineering\")\nprint(\"Python! \" * 4)\nExercice 5\nprint(\"Dans 10 ans tu auras \" + str(int(age_str) + 10) + \" ans\")\n# bool : False, True, True, False, True, False, True\nExercice 6\nprint(f\"{quantite} {produit}(s) à {prix_unitaire}€ = {quantite * prix_unitaire}€\")\nExercice 6b\nprint(f\"{chiffre_affaires:,.2f}\")   # 1,482,300.50\nprint(f\"{taux_marge:.1%}\")          # 21.7%\nprint(f\"{ventes:08}\")               # 00000042\n\nfor nom, prix in produits:\n    print(f\"{nom:&lt;15} {prix:.2f}€\")\nExercice 7\nfahrenheit = celsius * 9/5 + 32\nkelvin     = celsius + 273.15\nprint(f\"{celsius}°C = {fahrenheit}°F = {kelvin}K\")"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html",
+    "href": "notebooks/07-slicing.html",
+    "title": "Le slicing en Python",
+    "section": "",
+    "text": "Le slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :\nCe notebook est progressif : lis chaque section, exécute les cellules d’exploration, puis complète les exercices."
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#les-index-comment-python-numérote",
+    "href": "notebooks/07-slicing.html#les-index-comment-python-numérote",
+    "title": "Le slicing en Python",
+    "section": "1. Les index : comment Python numérote",
+    "text": "1. Les index : comment Python numérote\nChaque élément d’une séquence a deux index : un positif (de gauche à droite, en partant de 0) et un négatif (de droite à gauche, en partant de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nmot[0] → 'P'\nmot[-1] → 'n' (le dernier, sans connaître la longueur)\n\n# Exploration — exécute et observe\nmot = \"Python\"\n\nprint(mot[0])   # premier caractère\nprint(mot[5])   # sixième caractère\nprint(mot[-1])  # dernier caractère\nprint(mot[-2])  # avant-dernier\n\n\n# Exercice 1a — Index\nfruits = [\"pomme\", \"banane\", \"cerise\", \"datte\", \"figue\"]\n\n# TODO : affiche le premier et le dernier fruit avec des index\npremier = ...\ndernier = ...\nprint(premier, dernier)  # attendu : pomme figue\n\n# TODO : affiche l'avant-dernier fruit\navant_dernier = ...\nprint(avant_dernier)  # attendu : datte"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
+    "href": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
+    "title": "Le slicing en Python",
+    "section": "2. Le slicing de base : [debut:fin]",
+    "text": "2. Le slicing de base : [debut:fin]\nsequence[debut:fin] retourne les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]  →  \"Pyt\"   # index 0, 1, 2 (3 exclu)\nmot[2:5]  →  \"tho\"   # index 2, 3, 4\nAstuce : fin - debut = nombre d’éléments extraits.\n\n# Exploration\nmot = \"Python\"\nprint(mot[0:3])   # \"Pyt\"\nprint(mot[2:5])   # \"tho\"\nprint(mot[0:6])   # \"Python\" (tout)\n\nnombres = [10, 20, 30, 40, 50, 60, 70]\nprint(nombres[1:4])   # [20, 30, 40]\nprint(nombres[3:7])   # [40, 50, 60, 70]\n\n\n# Exercice 2 — Slicing de base\nphrase = \"data science\"\nscores = [88, 72, 95, 61, 83, 77, 90, 55]\n\n# TODO : extrais \"data\" (les 4 premiers caractères)\ndebut = ...\nprint(debut)  # attendu : data\n\n# TODO : extrais \"science\" (du 5e au dernier)\nfin = ...\nprint(fin)  # attendu : science\n\n# TODO : extrais les 3 premiers scores\npremiers_scores = ...\nprint(premiers_scores)  # attendu : [88, 72, 95]\n\n# TODO : extrais les scores du 3e au 6e (index 2 à 5 inclus)\nmilieu = ...\nprint(milieu)  # attendu : [95, 61, 83, 77]"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#omettre-debut-ou-fin",
+    "href": "notebooks/07-slicing.html#omettre-debut-ou-fin",
+    "title": "Le slicing en Python",
+    "section": "3. Omettre debut ou fin",
+    "text": "3. Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin. C’est très idiomatique en Python.\nmot = \"Python\"\nmot[:3]   →  \"Pyt\"     # depuis le début jusqu'à 3 (exclu)\nmot[3:]   →  \"hon\"     # depuis 3 jusqu'à la fin\nmot[:]    →  \"Python\"  # copie complète\n\n# Exercice 3 — Omissions\nemail = \"user@example.com\"\ntemperatures = [12, 15, 9, 22, 18, 7, 25, 11, 19]\n\n# TODO : extrais le nom d'utilisateur (tout avant le @)\n# Indice : le @ est à l'index 5\nnom_utilisateur = ...\nprint(nom_utilisateur)  # attendu : alice\n\n# TODO : extrais le domaine (tout après le @)\ndomaine = ...\nprint(domaine)  # attendu : example.com\n\n# TODO : extrais les 4 dernières températures\ndernieres = ...\nprint(dernieres)  # attendu : [7, 25, 11, 19]\n\n# TODO : supprime la première et la dernière température (garde le \"milieu\")\nmilieu = ...\nprint(milieu)  # attendu : [15, 9, 22, 18, 7, 25, 11]\n\nEllipsis\nEllipsis\nEllipsis\nEllipsis"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
+    "href": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
+    "title": "Le slicing en Python",
+    "section": "4. Index négatifs dans le slicing",
+    "text": "4. Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très utile pour raisonner “depuis la fin” sans connaître la longueur.\nmot = \"Python\"\nmot[-3:]   →  \"hon\"    # les 3 derniers\nmot[:-3]   →  \"Pyt\"   # tout sauf les 3 derniers\nmot[-4:-1] →  \"tho\"   # du 4e en partant de la fin au 2e en partant de la fin\n\n# Exercice 4 — Index négatifs\nfichier = \"rapport_annuel_2024.csv\"\nlogs = [\"INFO\", \"DEBUG\", \"ERROR\", \"WARNING\", \"INFO\", \"ERROR\", \"DEBUG\"]\n\n# TODO : extrais l'extension du fichier (les 3 derniers caractères)\nextension = ...\nprint(extension)  # attendu : csv\n\n# TODO : extrais le nom sans l'extension (tout sauf les 4 derniers caractères : \".csv\")\nnom_sans_ext = ...\nprint(nom_sans_ext)  # attendu : rapport_annuel_2024\n\n# TODO : extrais les 3 derniers logs\nderniers_logs = ...\nprint(derniers_logs)  # attendu : ['INFO', 'ERROR', 'DEBUG']\n\n# TODO : extrais tous les logs sauf le premier et le dernier\nlogs_milieu = ...\nprint(logs_milieu)  # attendu : ['DEBUG', 'ERROR', 'WARNING', 'INFO', 'ERROR']"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#le-pas-debutfinpas",
+    "href": "notebooks/07-slicing.html#le-pas-debutfinpas",
+    "title": "Le slicing en Python",
+    "section": "5. Le pas : [debut:fin:pas]",
+    "text": "5. Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    →  [0, 2, 4, 6, 8]     # un sur deux\nnombres[1::2]   →  [1, 3, 5, 7, 9]     # un sur deux en partant de 1\nnombres[::3]    →  [0, 3, 6, 9]        # un sur trois\nnombres[::-1]   →  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]  # inverser !\n[::-1] est l’idiome Python pour inverser une séquence.\n\n# Exercice 5 — Le pas\nlettres = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\"]\nmot = \"abracadabra\"\n\n# TODO : extrais une lettre sur deux (index pairs)\npairs = ...\nprint(pairs)  # attendu : ['a', 'c', 'e', 'g', 'i']\n\n# TODO : extrais une lettre sur deux (index impairs)\nimpairs = ...\nprint(impairs)  # attendu : ['b', 'd', 'f', 'h', 'j']\n\n# TODO : inverse le mot \"abracadabra\"\ninverse = ...\nprint(inverse)  # attendu : arbadacarba\n\n# TODO : extrais les lettres de l'index 1 à 7 (exclu), une sur deux\nselection = ...\nprint(selection)  # attendu : ['b', 'd', 'f']"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#slicing-et-copie",
+    "href": "notebooks/07-slicing.html#slicing-et-copie",
+    "title": "Le slicing en Python",
+    "section": "6. Slicing et copie",
+    "text": "6. Slicing et copie\nSur les listes, [:] crée une copie superficielle — utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie indépendante\n\nAttention : le slicing ne modifie jamais la séquence originale, il retourne toujours une nouvelle séquence.\n\n\n# Exploration — comprendre la différence entre alias et copie\noriginal = [1, 2, 3, 4, 5]\n\nalias = original       # même objet en mémoire\ncopie = original[:]    # objet différent, mêmes valeurs\n\nalias[0] = 999\nprint(\"original après modif de alias :\", original)  # original est modifié !\n\ncopie[0] = 888\nprint(\"original après modif de copie :\", original)  # original intact"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
+    "href": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
+    "title": "Le slicing en Python",
+    "section": "7. Mini-projet — Analyse d’une série temporelle",
+    "text": "7. Mini-projet — Analyse d’une série temporelle\nTu disposes des ventes journalières d’un produit sur 4 semaines (28 jours). Utilise uniquement le slicing pour répondre aux questions.\n\nventes = [\n    # Semaine 1 : lun-dim\n    142, 98, 115, 130, 201, 245, 189,\n    # Semaine 2\n    155, 102, 121, 145, 198, 267, 201,\n    # Semaine 3\n    148, 95, 118, 139, 210, 255, 195,\n    # Semaine 4\n    162, 108, 125, 151, 215, 278, 212,\n]\n\n# TODO : extrais les ventes de la première semaine\nsemaine_1 = ...\nprint(\"Semaine 1 :\", semaine_1)\n\n# TODO : extrais les ventes de la dernière semaine\nsemaine_4 = ...\nprint(\"Semaine 4 :\", semaine_4)\n\n# TODO : extrais uniquement les lundis (index 0, 7, 14, 21) — utilise le pas\nlundis = ...\nprint(\"Lundis :\", lundis)\n\n# TODO : extrais uniquement les week-ends (samedi=5, dimanche=6 de chaque semaine)\n# Indice : samedi index 5, 12, 19, 26 / dimanche index 6, 13, 20, 27\nsamedis  = ...\ndimanches = ...\nprint(\"Samedis :\", samedis)\nprint(\"Dimanches :\", dimanches)\n\n# TODO : calcule la moyenne de la semaine 1 et de la semaine 4\n# (sum() et len() sont autorisés)\nmoy_s1 = sum(semaine_1) / len(semaine_1)\nmoy_s4 = sum(semaine_4) / len(semaine_4)\nprint(f\"Moyenne semaine 1 : {moy_s1:.1f} — Semaine 4 : {moy_s4:.1f}\")\n\n# TODO : inverse la liste des ventes (pour un affichage du plus récent au plus ancien)\nventes_inversees = ...\nprint(\"3 derniers jours en premier :\", ventes_inversees[:3])"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#corrigés",
+    "href": "notebooks/07-slicing.html#corrigés",
+    "title": "Le slicing en Python",
+    "section": "Corrigés",
+    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\npremier = fruits[0]\ndernier = fruits[-1]\navant_dernier = fruits[-2]\nExercice 2\ndebut           = phrase[:4]\nfin             = phrase[5:]\npremiers_scores = scores[:3]\nmilieu          = scores[2:6]\nExercice 3\nnom_utilisateur = email[:5]        # ou email.split(\"@\")[0]\ndomaine         = email[6:]        # ou email.split(\"@\")[1]\ndernieres       = temperatures[-4:]\nmilieu          = temperatures[1:-1]\nExercice 4\nextension    = fichier[-3:]\nnom_sans_ext = fichier[:-4]\nderniers_logs = logs[-3:]\nlogs_milieu  = logs[1:-1]\nExercice 5\npairs     = lettres[::2]\nimpairs   = lettres[1::2]\ninverse   = mot[::-1]\nselection = lettres[1:7:2]\nMini-projet\nsemaine_1       = ventes[:7]\nsemaine_4       = ventes[-7:]\nlundis          = ventes[::7]\nsamedis         = ventes[5::7]\ndimanches       = ventes[6::7]\nventes_inversees = ventes[::-1]"
   },
   {
     "objectID": "notebooks/01-premiers-pas-notebooks.html",
@@ -403,211 +456,438 @@
     "text": "Récapitulatif\n\n\n\n\n\n\n\nConcept\nCe qu’il faut retenir\n\n\n\n\nNotebook\nDocument JSON combinant texte, code et résultats\n\n\nCellule Markdown\nTexte formaté, rendu à l’exécution\n\n\nCellule de code\nCode Python exécuté par le kernel\n\n\nKernel\nProcessus séparé qui fait tourner Python\n\n\nÉtat partagé\nToutes les cellules partagent le même namespace\n\n\nOrdre d’exécution\nLes [n] montrent l’ordre réel, pas la position\n\n\nMagic commands\n%time, %whos, %%timeit, !cmd…\n\n\nRègle d’or\nRestart & Run All doit toujours fonctionner"
   },
   {
-    "objectID": "notebooks/07-slicing.html",
-    "href": "notebooks/07-slicing.html",
-    "title": "Le slicing en Python",
+    "objectID": "03-initiation-python/01-variables-types-operations-slides.html#cest-quoi-une-variable",
+    "href": "03-initiation-python/01-variables-types-operations-slides.html#cest-quoi-une-variable",
+    "title": "Variables et types de base",
+    "section": "C’est quoi une variable ?",
+    "text": "C’est quoi une variable ?\nUne variable, c’est un nom qu’on associe à une valeur. Ce nom permet de retrouver la valeur plus tard dans le programme.\nage = 25            # age est un entier (int)\nprenom = \"Jessica\"  # prenom est une chaine de caractère (str)\ntaille = 1.75       # taille est un flottant (float)\nmajeur = True       # majeur est un booléen (bool)\nIci, on a créé quatre variables :\n\nage désigne 25\nprenom désigne “Jessica”\ntaille désigne 1.75\nmajeur désigne True\n\n\n\n\n\n\n\nLe signe = n’est pas une égalité\n\n\nEn Python, age = 25 ne veut pas dire « age est égal à 25 », mais « on associe le nom age à la valeur 25 ». C’est une affectation.\nC’est pour ça que x = x + 1 est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on associe le résultat au nom x.\n\n\n\nUne variable est une étiquette, pas une boîte\nOn présente souvent une variable comme une boîte dans laquelle on range une valeur. C’est une image pratique pour débuter, mais elle est fausse en Python, et elle finit par provoquer des bugs difficiles à comprendre.\nEn réalité, une variable est une étiquette collée sur un objet stocké dans la mémoire de l’ordinateur (la RAM). Voici ce qui se passe concrètement 👇\n\n\n\nAssignation d’une variable en mémoire\n\n\nÉtape 1 : x = 5\nPython crée d’abord un objet de type int de valeur 5 quelque part dans la RAM, à une adresse donnée (ici 0x7f3a...). Ensuite seulement, il associe le nom x à cette adresse.\nAutrement dit, x ne contient pas 5 : x sait où trouver l’objet 5.\nx = 5\nprint(id(x))  # l'adresse mémoire de l'objet désigné par x\nÉtape 2 : y = x\nOn pourrait penser que Python copie la valeur de x dans une nouvelle boîte y. Ce n’est pas le cas : aucun nouvel objet n’est créé. Le nom y reçoit simplement la même adresse que x.\nOn a donc deux étiquettes collées sur le même objet.\ny = x\nprint(id(x), id(y))  # les deux adresses sont identiques\nprint(x is y)        # True : x et y désignent le même objet\nÉtape 3 : y += 1\nC’est l’étape clé. Les entiers sont immuables en Python : l’objet 5 ne peut pas être modifié. Python ne transforme donc pas le 5 en 6. À la place, il :\n\nlit la valeur de l’objet désigné par y (5) ;\ncalcule le résultat et crée un nouvel objet 6 à une autre adresse (ici 0x8d4b...) ;\ndécolle l’étiquette y pour la recoller sur ce nouvel objet.\n\nL’étiquette x, elle, n’a pas bougé : elle désigne toujours l’objet 5.\ny += 1\nprint(x, y)          # 5 6\nprint(id(x), id(y))  # les adresses sont désormais différentes\nprint(x is y)        # False\n\n\n\n\n\n\nÀ retenir\n\n\n\nUne variable est un nom qui désigne un objet en mémoire.\ny = x ne copie rien : les deux noms partagent le même objet.\n« Modifier » un int, un float, un str ou un bool crée toujours un nouvel objet, car ces types sont immuables.\n\n\n\n\n\n\n\n\n\n\n🧠 À vous de réfléchir : et avec une liste ?\n\n\nLes listes, que nous verrons plus en détail plus tard, permettent de regrouper plusieurs valeurs. Observez le code suivant sans l’exécuter :\na = [5]\nb = a\nb.append(6)   # ajoute 6 à la fin de la liste b\nprint(a)\n\nSelon vous, qu’affiche print(a) ?\nDessinez, comme dans le schéma précédent, ce qui se passe en mémoire à chaque ligne.\nExécutez ensuite le code pour vérifier votre hypothèse.\n\n\n\n\n\n\n\n\n\n\n💡 Voir la solution\n\n\na = [5]\nb = a\nb.append(6)\nprint(a)  # [5, 6]\nSurprise : a a été modifiée alors qu’on n’a touché qu’à b !\n\n\n\nModification d’une liste en mémoire\n\n\nContrairement aux entiers, les listes sont mutables : elles peuvent être modifiées sur place.\n\nLigne 1 : Python crée un objet liste [5] en mémoire et lui colle l’étiquette a.\nLigne 2 : b = a ne copie rien, b est une deuxième étiquette sur la même liste.\nLigne 3 : b.append(6) ne crée pas de nouvel objet, il modifie la liste existante. Aucune étiquette ne bouge.\nLigne 4 : a désigne toujours cette même liste, qui contient maintenant [5, 6].\n\nC’est la différence clé avec l’exemple y += 1 : avec un entier, Python crée un nouvel objet et recolle l’étiquette ; avec une liste, il modifie l’objet lui-même, et toutes les étiquettes qui le désignent « voient » le changement.\nPour obtenir une liste indépendante, il faut une copie explicite :\na = [5]\nb = a.copy()\nb.append(6)\nprint(a)  # [5]\nprint(b)  # [5, 6]\n\n\n\nLe typage dynamique\nEn Python, on ne déclare pas le type d’une variable. On écrit simplement age = 25, et l’interpréteur déduit le type à partir de la valeur.\nx = 5         # x est un entier (int)\nx = \"bonjour\" # x est maintenant une chaîne (string)\nx = 3.14      # x est maintenant un flottant (float)\nLe type est attaché à la valeur et non pas à la variable. C’est logique : puisqu’une variable n’est qu’une étiquette, on peut la recoller sur un objet de n’importe quel type.\n\n\n\n\n\n\nUne liberté qui a un prix\n\n\nLe typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.\n\n\n\n\n\n\n\n\n\nUne nuance importante\n\n\nLe discours « Python ne vérifie pas les types » est vrai pour le langage lui-même. L’interpréteur Python ignore les annotations de type : x: int = \"bonjour\" ne lève aucune erreur.\nMais certains packages s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de Pydantic (très utilisé en data science et dans les API), de Typeguard et de Beartype. Avec ces outils, une annotation devient une contrainte réelle : si la valeur ne respecte pas le type, une erreur est levée.\nDonc : le type hint est un indice pour Python, mais il peut devenir une règle pour certaines bibliothèques."
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations-slides.html#les-types-de-base-en-python",
+    "href": "03-initiation-python/01-variables-types-operations-slides.html#les-types-de-base-en-python",
+    "title": "Variables et types de base",
+    "section": "Les types de base en Python",
+    "text": "Les types de base en Python\n\n\n\nType\nNom Python\nExemples\n\n\n\n\nNombre entier\nint\n42, -7, 0\n\n\nNombre à virgule\nfloat\n3.14, -0.5, 2.0\n\n\nChaîne de caractères\nstr\n\"bonjour\", 'Alice'\n\n\nBooléen\nbool\nTrue, False\n\n\n\nOn peut vérifier le type d’une variable avec la fonction type()\nage = 25\nprint(type(age))       # &lt;class 'int'&gt;\n\nprenom = \"Jessica\"\nprint(type(prenom))    # &lt;class 'str'&gt;"
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations-slides.html#opérations-de-base",
+    "href": "03-initiation-python/01-variables-types-operations-slides.html#opérations-de-base",
+    "title": "Variables et types de base",
+    "section": "Opérations de base",
+    "text": "Opérations de base\nUne fois qu’on sait nommer des valeurs, il faut pouvoir les manipuler. Python fournit des opérateurs pour calculer, assembler des chaînes ou comparer des valeurs.\nOpérations arithmétiques\nLes opérateurs arithmétiques s’appliquent aux nombres (int et float).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n+\nAddition\n7 + 3\n10\n\n\n-\nSoustraction\n7 - 3\n4\n\n\n*\nMultiplication\n7 * 3\n21\n\n\n/\nDivision\n7 / 3\n2.333...\n\n\n//\nDivision entière (quotient)\n7 // 3\n2\n\n\n%\nModulo (reste)\n7 % 3\n1\n\n\n**\nPuissance\n7 ** 3\n343\n\n\n\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.3333333333333335\nprint(a // b)  # 3\nprint(a % b)   # 1\nprint(a ** b)  # 1000\n\n\n\n\n\n\nDivision et division entière\n\n\nEn Python, / renvoie toujours un flottant, même quand le résultat tombe juste :\nprint(10 / 2)   # 5.0 (et non 5)\nprint(10 // 2)  # 5\n\n\n\nLes opérateurs d’affectation combinée\nModifier une variable à partir de sa propre valeur est si courant que Python propose des raccourcis (vous avez déjà croisé y += 1 plus haut) :\n\n\n\nRaccourci\nÉquivaut à\n\n\n\n\nx += 1\nx = x + 1\n\n\nx -= 1\nx = x - 1\n\n\nx *= 2\nx = x * 2\n\n\nx /= 2\nx = x / 2\n\n\n\nscore = 10\nscore += 5\nprint(score)  # 15\nPriorité des opérations\nPython respecte les règles de priorité habituelles des mathématiques :\n\nParenthèses ()\nPuissance **\nMultiplication, division, division entière, modulo (*, /, //, %)\nAddition, soustraction (+, -)\n\nEn cas de doute, utilisez des parenthèses. Elles ne coûtent rien et rendent le code plus lisible.\nprint(2 + 3 * 4)      # 14 (et non 20)\nprint((2 + 3) * 4)    # 20"
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations-slides.html#opérations-sur-les-chaînes-de-caractères",
+    "href": "03-initiation-python/01-variables-types-operations-slides.html#opérations-sur-les-chaînes-de-caractères",
+    "title": "Variables et types de base",
+    "section": "Opérations sur les chaînes de caractères",
+    "text": "Opérations sur les chaînes de caractères\nprenom = \"Jessica\"\nnom = \"Hyde\"\nConcaténation et répétition\nnom_complet = prenom + \" \" + nom\nprint(nom_complet)   # Jessica Hyde\n\nprint(\"ha\" * 3)      # hahaha\nQuelques outils utiles\n\n\n\n\n\n\n\n\n\nOutil\nRôle\nExemple\nRésultat\n\n\n\n\nlen()\nLongueur\nlen(\"Python\")\n6\n\n\n.upper()\nMajuscules\n\"data\".upper()\n\"DATA\"\n\n\n.lower()\nMinuscules\n\"DATA\".lower()\n\"data\"\n\n\n.capitalize()\n1re lettre en majuscule\n\"alice\".capitalize()\n\"Alice\"\n\n\n.replace(a, b)\nRemplace a par b\n\"chat\".replace(\"c\", \"b\")\n\"bhat\"\n\n\n\n\n\n\n\n\n\nUne chaîne ne se modifie jamais\n\n\nComme les entiers, les str sont immuables. .upper() ne modifie pas la chaîne, elle en renvoie une nouvelle. Pour garder le résultat, il faut recoller l’étiquette :\nmot = \"data\"\nmot.upper()\nprint(mot)        # data  → inchangé !\nmot = mot.upper()\nprint(mot)        # DATA\n\n\n\nLes f-strings : afficher des variables proprement\nPlutôt que d’enchaîner les +, on préfixe la chaîne par f et on place les variables entre {} :\nage = 25\nprint(f\"{prenom} a {age} ans\")           # Jessica a 25 ans\nprint(f\"Dans 10 ans : {age + 10} ans\")   # calcul possible dans les {}\nC’est la méthode recommandée en Python moderne.\nContrôler l’affichage\nAprès la valeur, on peut ajouter : suivi d’un code de formatage :\n\n\n\n\n\n\n\n\n\nCode\nEffet\nExemple\nRésultat\n\n\n\n\n.2f\n2 décimales\nf\"{3.14159:.2f}\"\n3.14\n\n\n.1%\npourcentage, 1 décimale\nf\"{0.857:.1%}\"\n85.7%\n\n\n,\nséparateur de milliers\nf\"{1234567:,}\"\n1,234,567\n\n\n_.2f\nséparateur _ et 2 décimales\nf\"{1234567:_.2f}\"\n1_234_567.00\n\n\n&gt;10\naligné à droite sur 10 caractères\nf\"{42:&gt;10}\"\n42\n\n\n&lt;10\naligné à gauche sur 10 caractères\nf\"{42:&lt;10}\"\n42\n\n\n010\ncomplété avec des zéros\nf\"{42:010}\"\n0000000042\n\n\n\nOn peut combiner les codes : f\"{1482300.5:,.2f}\" donne 1,482,300.50.\n\n\n\n\n\n\nLes différentes façons de formater en Python\n\n\nPython a connu trois générations de formatage. Vous les croiserez toutes dans du code existant.\n1. Opérateur % (style C, Python 2)\n\"Bonjour %s, tu as %d ans\" % (\"Alice\", 25)\n\"Prix : %.2f€\" % 3.14159\n%s → chaîne, %d → entier, %f → flottant. Encore très présent dans du code legacy.\n2. .format() (Python 3.0)\n\"Bonjour {}, tu as {} ans\".format(\"Alice\", 25)\n\"Prix : {:.2f}€\".format(3.14159)\n\"{prenom} a {age} ans\".format(prenom=\"Alice\", age=25)\nPlus lisible que %, mais verbeux.\n3. f-strings (Python 3.6)\nprenom, age = \"Alice\", 25\nf\"Bonjour {prenom}, tu as {age} ans\"\nf\"Prix : {3.14159:.2f}€\"\nLe code s’écrit directement dans la chaîne. C’est ce qu’on utilise aujourd’hui.\nLes trois font la même chose :\nprenom = \"Alice\"\nprix = 3.14159\n\nprint(\"Bonjour %s, prix : %.2f€\" % (prenom, prix))\nprint(\"Bonjour {}, prix : {:.2f}€\".format(prenom, prix))\nprint(f\"Bonjour {prenom}, prix : {prix:.2f}€\")\n# Bonjour Alice, prix : 3.14€  (trois fois)\nRemarquez que le code .2f est le même partout : ce que vous apprenez avec les f-strings reste valable pour lire l’ancien code."
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations-slides.html#conversions-de-types",
+    "href": "03-initiation-python/01-variables-types-operations-slides.html#conversions-de-types",
+    "title": "Variables et types de base",
+    "section": "Conversions de types",
+    "text": "Conversions de types\nPython ne mélange pas les types automatiquement :\nage = 25\nprint(\"J'ai \" + age + \" ans\")  # ❌ TypeError\nIl faut convertir explicitement :\n\n\n\nFonction\nConvertit en\nExemple\nRésultat\n\n\n\n\nstr()\nchaîne\nstr(25)\n\"25\"\n\n\nint()\nentier\nint(\"25\")\n25\n\n\nfloat()\nflottant\nfloat(\"1.75\")\n1.75\n\n\nbool()\nbooléen\nbool(0)\nFalse\n\n\n\nprint(\"J'ai \" + str(age) + \" ans\")  # 🆗 J'ai 25 ans\n\n\n\n\n\n\nVrai ou faux ?\n\n\nbool() renvoie False pour les valeurs « vides » : 0, 0.0, \"\" (chaîne vide). Tout le reste vaut True, même -42 ou \"False\".\n\n\n\n\n\n\n\n\n\nWarning\n\n\nint(\"bonjour\") lève une ValueError : on ne peut convertir que ce qui a du sens. Cas fréquent en data : des nombres stockés en texte dans un CSV, à convertir avant de calculer."
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations-slides.html#opérations-de-comparaison",
+    "href": "03-initiation-python/01-variables-types-operations-slides.html#opérations-de-comparaison",
+    "title": "Variables et types de base",
+    "section": "Opérations de comparaison",
+    "text": "Opérations de comparaison\nLes opérateurs de comparaison renvoient un booléen (True ou False).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n==\nÉgal à\n5 == 5\nTrue\n\n\n!=\nDifférent de\n5 != 3\nTrue\n\n\n&lt;\nInférieur à\n5 &lt; 3\nFalse\n\n\n&gt;\nSupérieur à\n5 &gt; 3\nTrue\n\n\n&lt;=\nInférieur ou égal\n5 &lt;= 5\nTrue\n\n\n&gt;=\nSupérieur ou égal\n5 &gt;= 6\nFalse\n\n\n\nprint(5 == 5)     # True\nprint(5 != 3)     # True\nprint(10 &gt; 3)     # True\nprint(10 &lt;= 3)    # False"
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations.html",
+    "href": "03-initiation-python/01-variables-types-operations.html",
+    "title": "Variables et types de base",
     "section": "",
-    "text": "Le slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :\nCe notebook est progressif : lis chaque section, exécute les cellules d’exploration, puis complète les exercices."
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#les-index-comment-python-numérote",
-    "href": "notebooks/07-slicing.html#les-index-comment-python-numérote",
-    "title": "Le slicing en Python",
-    "section": "1. Les index : comment Python numérote",
-    "text": "1. Les index : comment Python numérote\nChaque élément d’une séquence a deux index : un positif (de gauche à droite, en partant de 0) et un négatif (de droite à gauche, en partant de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nmot[0] → 'P'\nmot[-1] → 'n' (le dernier, sans connaître la longueur)\n\n# Exploration — exécute et observe\nmot = \"Python\"\n\nprint(mot[0])   # premier caractère\nprint(mot[5])   # sixième caractère\nprint(mot[-1])  # dernier caractère\nprint(mot[-2])  # avant-dernier\n\n\n# Exercice 1a — Index\nfruits = [\"pomme\", \"banane\", \"cerise\", \"datte\", \"figue\"]\n\n# TODO : affiche le premier et le dernier fruit avec des index\npremier = ...\ndernier = ...\nprint(premier, dernier)  # attendu : pomme figue\n\n# TODO : affiche l'avant-dernier fruit\navant_dernier = ...\nprint(avant_dernier)  # attendu : datte"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
-    "href": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
-    "title": "Le slicing en Python",
-    "section": "2. Le slicing de base : [debut:fin]",
-    "text": "2. Le slicing de base : [debut:fin]\nsequence[debut:fin] retourne les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]  →  \"Pyt\"   # index 0, 1, 2 (3 exclu)\nmot[2:5]  →  \"tho\"   # index 2, 3, 4\nAstuce : fin - debut = nombre d’éléments extraits.\n\n# Exploration\nmot = \"Python\"\nprint(mot[0:3])   # \"Pyt\"\nprint(mot[2:5])   # \"tho\"\nprint(mot[0:6])   # \"Python\" (tout)\n\nnombres = [10, 20, 30, 40, 50, 60, 70]\nprint(nombres[1:4])   # [20, 30, 40]\nprint(nombres[3:7])   # [40, 50, 60, 70]\n\n\n# Exercice 2 — Slicing de base\nphrase = \"data science\"\nscores = [88, 72, 95, 61, 83, 77, 90, 55]\n\n# TODO : extrais \"data\" (les 4 premiers caractères)\ndebut = ...\nprint(debut)  # attendu : data\n\n# TODO : extrais \"science\" (du 5e au dernier)\nfin = ...\nprint(fin)  # attendu : science\n\n# TODO : extrais les 3 premiers scores\npremiers_scores = ...\nprint(premiers_scores)  # attendu : [88, 72, 95]\n\n# TODO : extrais les scores du 3e au 6e (index 2 à 5 inclus)\nmilieu = ...\nprint(milieu)  # attendu : [95, 61, 83, 77]"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#omettre-debut-ou-fin",
-    "href": "notebooks/07-slicing.html#omettre-debut-ou-fin",
-    "title": "Le slicing en Python",
-    "section": "3. Omettre debut ou fin",
-    "text": "3. Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin. C’est très idiomatique en Python.\nmot = \"Python\"\nmot[:3]   →  \"Pyt\"     # depuis le début jusqu'à 3 (exclu)\nmot[3:]   →  \"hon\"     # depuis 3 jusqu'à la fin\nmot[:]    →  \"Python\"  # copie complète\n\n# Exercice 3 — Omissions\nemail = \"user@example.com\"\ntemperatures = [12, 15, 9, 22, 18, 7, 25, 11, 19]\n\n# TODO : extrais le nom d'utilisateur (tout avant le @)\n# Indice : le @ est à l'index 5\nnom_utilisateur = ...\nprint(nom_utilisateur)  # attendu : alice\n\n# TODO : extrais le domaine (tout après le @)\ndomaine = ...\nprint(domaine)  # attendu : example.com\n\n# TODO : extrais les 4 dernières températures\ndernieres = ...\nprint(dernieres)  # attendu : [7, 25, 11, 19]\n\n# TODO : supprime la première et la dernière température (garde le \"milieu\")\nmilieu = ...\nprint(milieu)  # attendu : [15, 9, 22, 18, 7, 25, 11]\n\nEllipsis\nEllipsis\nEllipsis\nEllipsis"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
-    "href": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
-    "title": "Le slicing en Python",
-    "section": "4. Index négatifs dans le slicing",
-    "text": "4. Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très utile pour raisonner “depuis la fin” sans connaître la longueur.\nmot = \"Python\"\nmot[-3:]   →  \"hon\"    # les 3 derniers\nmot[:-3]   →  \"Pyt\"   # tout sauf les 3 derniers\nmot[-4:-1] →  \"tho\"   # du 4e en partant de la fin au 2e en partant de la fin\n\n# Exercice 4 — Index négatifs\nfichier = \"rapport_annuel_2024.csv\"\nlogs = [\"INFO\", \"DEBUG\", \"ERROR\", \"WARNING\", \"INFO\", \"ERROR\", \"DEBUG\"]\n\n# TODO : extrais l'extension du fichier (les 3 derniers caractères)\nextension = ...\nprint(extension)  # attendu : csv\n\n# TODO : extrais le nom sans l'extension (tout sauf les 4 derniers caractères : \".csv\")\nnom_sans_ext = ...\nprint(nom_sans_ext)  # attendu : rapport_annuel_2024\n\n# TODO : extrais les 3 derniers logs\nderniers_logs = ...\nprint(derniers_logs)  # attendu : ['INFO', 'ERROR', 'DEBUG']\n\n# TODO : extrais tous les logs sauf le premier et le dernier\nlogs_milieu = ...\nprint(logs_milieu)  # attendu : ['DEBUG', 'ERROR', 'WARNING', 'INFO', 'ERROR']"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#le-pas-debutfinpas",
-    "href": "notebooks/07-slicing.html#le-pas-debutfinpas",
-    "title": "Le slicing en Python",
-    "section": "5. Le pas : [debut:fin:pas]",
-    "text": "5. Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    →  [0, 2, 4, 6, 8]     # un sur deux\nnombres[1::2]   →  [1, 3, 5, 7, 9]     # un sur deux en partant de 1\nnombres[::3]    →  [0, 3, 6, 9]        # un sur trois\nnombres[::-1]   →  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]  # inverser !\n[::-1] est l’idiome Python pour inverser une séquence.\n\n# Exercice 5 — Le pas\nlettres = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\"]\nmot = \"abracadabra\"\n\n# TODO : extrais une lettre sur deux (index pairs)\npairs = ...\nprint(pairs)  # attendu : ['a', 'c', 'e', 'g', 'i']\n\n# TODO : extrais une lettre sur deux (index impairs)\nimpairs = ...\nprint(impairs)  # attendu : ['b', 'd', 'f', 'h', 'j']\n\n# TODO : inverse le mot \"abracadabra\"\ninverse = ...\nprint(inverse)  # attendu : arbadacarba\n\n# TODO : extrais les lettres de l'index 1 à 7 (exclu), une sur deux\nselection = ...\nprint(selection)  # attendu : ['b', 'd', 'f']"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#slicing-et-copie",
-    "href": "notebooks/07-slicing.html#slicing-et-copie",
-    "title": "Le slicing en Python",
-    "section": "6. Slicing et copie",
-    "text": "6. Slicing et copie\nSur les listes, [:] crée une copie superficielle — utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie indépendante\n\nAttention : le slicing ne modifie jamais la séquence originale, il retourne toujours une nouvelle séquence.\n\n\n# Exploration — comprendre la différence entre alias et copie\noriginal = [1, 2, 3, 4, 5]\n\nalias = original       # même objet en mémoire\ncopie = original[:]    # objet différent, mêmes valeurs\n\nalias[0] = 999\nprint(\"original après modif de alias :\", original)  # original est modifié !\n\ncopie[0] = 888\nprint(\"original après modif de copie :\", original)  # original intact"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
-    "href": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
-    "title": "Le slicing en Python",
-    "section": "7. Mini-projet — Analyse d’une série temporelle",
-    "text": "7. Mini-projet — Analyse d’une série temporelle\nTu disposes des ventes journalières d’un produit sur 4 semaines (28 jours). Utilise uniquement le slicing pour répondre aux questions.\n\nventes = [\n    # Semaine 1 : lun-dim\n    142, 98, 115, 130, 201, 245, 189,\n    # Semaine 2\n    155, 102, 121, 145, 198, 267, 201,\n    # Semaine 3\n    148, 95, 118, 139, 210, 255, 195,\n    # Semaine 4\n    162, 108, 125, 151, 215, 278, 212,\n]\n\n# TODO : extrais les ventes de la première semaine\nsemaine_1 = ...\nprint(\"Semaine 1 :\", semaine_1)\n\n# TODO : extrais les ventes de la dernière semaine\nsemaine_4 = ...\nprint(\"Semaine 4 :\", semaine_4)\n\n# TODO : extrais uniquement les lundis (index 0, 7, 14, 21) — utilise le pas\nlundis = ...\nprint(\"Lundis :\", lundis)\n\n# TODO : extrais uniquement les week-ends (samedi=5, dimanche=6 de chaque semaine)\n# Indice : samedi index 5, 12, 19, 26 / dimanche index 6, 13, 20, 27\nsamedis  = ...\ndimanches = ...\nprint(\"Samedis :\", samedis)\nprint(\"Dimanches :\", dimanches)\n\n# TODO : calcule la moyenne de la semaine 1 et de la semaine 4\n# (sum() et len() sont autorisés)\nmoy_s1 = sum(semaine_1) / len(semaine_1)\nmoy_s4 = sum(semaine_4) / len(semaine_4)\nprint(f\"Moyenne semaine 1 : {moy_s1:.1f} — Semaine 4 : {moy_s4:.1f}\")\n\n# TODO : inverse la liste des ventes (pour un affichage du plus récent au plus ancien)\nventes_inversees = ...\nprint(\"3 derniers jours en premier :\", ventes_inversees[:3])"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#corrigés",
-    "href": "notebooks/07-slicing.html#corrigés",
-    "title": "Le slicing en Python",
-    "section": "Corrigés",
-    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\npremier = fruits[0]\ndernier = fruits[-1]\navant_dernier = fruits[-2]\nExercice 2\ndebut           = phrase[:4]\nfin             = phrase[5:]\npremiers_scores = scores[:3]\nmilieu          = scores[2:6]\nExercice 3\nnom_utilisateur = email[:5]        # ou email.split(\"@\")[0]\ndomaine         = email[6:]        # ou email.split(\"@\")[1]\ndernieres       = temperatures[-4:]\nmilieu          = temperatures[1:-1]\nExercice 4\nextension    = fichier[-3:]\nnom_sans_ext = fichier[:-4]\nderniers_logs = logs[-3:]\nlogs_milieu  = logs[1:-1]\nExercice 5\npairs     = lettres[::2]\nimpairs   = lettres[1::2]\ninverse   = mot[::-1]\nselection = lettres[1:7:2]\nMini-projet\nsemaine_1       = ventes[:7]\nsemaine_4       = ventes[-7:]\nlundis          = ventes[::7]\nsamedis         = ventes[5::7]\ndimanches       = ventes[6::7]\nventes_inversees = ventes[::-1]"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html",
-    "href": "notebooks/02-variables-types-operations.html",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "",
-    "text": "Ce notebook accompagne le cours Variables, types de base et opérations. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.\nPour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat."
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
-    "href": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 1 : Créer et inspecter des variables",
-    "text": "Exercice 1 : Créer et inspecter des variables\nCrée quatre variables : ton prénom, ton âge, ta taille en mètres, et un booléen qui indique si tu aimes Python. Affiche ensuite le type de chacune.\n\n# TODO : crée tes quatre variables\nprenom = ...\nage = ...\ntaille = ...\naime_python = ...\n\n# Affiche le type de chacune\nprint(type(prenom))\nprint(type(age))\nprint(type(taille))\nprint(type(aime_python))"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
-    "href": "notebooks/02-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 2 : Étiquettes et mémoire",
-    "text": "Exercice 2 : Étiquettes et mémoire\nPour chaque bloc, devine d’abord ce qui va s’afficher (note ta réponse en commentaire), puis exécute pour vérifier.\n\nx = 10\ny = x\n\n# TODO : devine avant d'exécuter\nprint(x is y)          # True ou False ?\nprint(id(x) == id(y))  # True ou False ?\n\n\nx = 10\ny = x\ny += 5\n\n# TODO : devine avant d'exécuter\nprint(x, y)    # ?\nprint(x is y)  # True ou False ?\n\n# TODO : en une phrase, explique pourquoi x n'a pas changé\n# Réponse : ...\n\n\ncourses = [\"pain\", \"lait\"]\npanier = courses\npanier.append(\"oeufs\")\n\n# TODO : devine avant d'exécuter\nprint(courses)  # ?\n\n# TODO : modifie la ligne `panier = courses` pour que `courses` ne soit PAS modifiée,\n# puis réexécute la cellule."
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
-    "href": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 3 : Opérations sur les entiers et flottants",
-    "text": "Exercice 3 : Opérations sur les entiers et flottants\nCalcule les valeurs suivantes et stocke chacune dans une variable.\n\n# TODO : combien font 17 divisé par 5 ? (division classique, puis division entière, puis reste)\ndivision        = ...   # attendu : 3.4\ndivision_entiere = ...  # attendu : 3\nreste           = ...   # attendu : 2\n\n# TODO : quelle est la surface d'un carré de côté 13 ?\nsurface = ...           # attendu : 169\n\n# TODO : 2 à la puissance 10 ?\npuissance = ...         # attendu : 1024\n\nprint(division, division_entiere, reste)\nprint(surface)\nprint(puissance)"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
-    "href": "notebooks/02-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 4 : Opérations sur les chaînes de caractères",
-    "text": "Exercice 4 : Opérations sur les chaînes de caractères\n\nprenom = \"jessica\"\nnom    = \"hyde\"\n\n# TODO : construis le nom complet \"Jessica Hyde\" (majuscule sur la première lettre)\nnom_complet = ...\nprint(nom_complet)  # attendu : Jessica Hyde\n\n# TODO : combien de caractères dans \"data science\" (espace compris) ?\nphrase = \"data science\"\nlongueur = ...\nprint(longueur)  # attendu : 12\n\n# TODO : remplace \"science\" par \"engineering\" dans la phrase\nnouvelle_phrase = ...\nprint(nouvelle_phrase)  # attendu : data engineering\n\n# TODO : affiche \"Python! \" répété 4 fois\nprint(...)  # attendu : Python! Python! Python! Python!"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-5-conversions-de-types",
-    "href": "notebooks/02-variables-types-operations.html#exercice-5-conversions-de-types",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 5 : Conversions de types",
-    "text": "Exercice 5 : Conversions de types\n\n# Cette ligne va planter : lis le message d'erreur, puis corrige la ligne suivante\nage_str = \"25\"\n# print(\"Dans 10 ans tu auras \" + age_str + 10 + \" ans\")  # TypeError !\n\n# TODO : corrige en convertissant correctement\nprint(\"Dans 10 ans tu auras \" + ...)  # attendu : Dans 10 ans tu auras 35 ans\n\n\n# TODO : que vaut bool() appliqué à ces valeurs ? Devines d'abord, puis vérifie.\nprint(bool(0))        # True ou False ?\nprint(bool(1))\nprint(bool(-42))\nprint(bool(\"\"))       # chaîne vide\nprint(bool(\"Python\"))\nprint(bool(0.0))\nprint(bool(0.1))"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-6-f-strings",
-    "href": "notebooks/02-variables-types-operations.html#exercice-6-f-strings",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 6 : f-strings",
-    "text": "Exercice 6 : f-strings\n\nproduit = \"café\"\nprix_unitaire = 2.5\nquantite = 3\n\n# TODO : affiche \"3 café(s) à 2.5€ = 7.5€\" en utilisant une f-string\n# Le total doit être calculé directement dans la f-string\nprint(...)  # attendu : 3 café(s) à 2.5€ = 7.5€\n\n\n# Exercice 6b : formatage dans les f-strings\n# Les codes de formatage ({valeur:...}) sont dans le cours.\n\nchiffre_affaires = 1_482_300.5\ntaux_marge = 0.2173\nventes = 42\n\n# TODO : affiche le CA avec 2 décimales et un séparateur de milliers (utilise ,)\n# attendu : 1,482,300.50\nprint(f\"{...}\")\n\n# TODO : affiche le taux de marge en % avec 1 décimale\n# attendu : 21.7%\nprint(f\"{...}\")\n\n# TODO : affiche le nombre de ventes aligné à droite sur 8 caractères, complété de zéros\n# attendu : 00000042\nprint(f\"{...}\")\n\n# TODO : construis un mini-tableau aligné (utilise l'alignement à gauche sur 15 chars)\nproduits = [(\"Café\", 2.5), (\"Thé\", 1.8), (\"Chocolat chaud\", 3.2)]\nfor nom, prix in produits:\n    print(f\"{nom} {prix}€\")\n# attendu :\n# Café            2.50€\n# Thé             1.80€\n# Chocolat chaud  3.20€"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-7-convertisseur-de-températures",
-    "href": "notebooks/02-variables-types-operations.html#exercice-7-convertisseur-de-températures",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 7 : Convertisseur de températures",
-    "text": "Exercice 7 : Convertisseur de températures\nÉcris un convertisseur qui prend une température en Celsius et affiche le résultat en Fahrenheit et en Kelvin.\nFormules : - Fahrenheit : F = C × 9/5 + 32 - Kelvin : K = C + 273.15\n\ncelsius = 100\n\n# TODO : calcule fahrenheit et kelvin\nfahrenheit = ...\nkelvin = ...\n\n# TODO : affiche les résultats avec une f-string\n# attendu :\n# 100°C = 212.0°F = 373.15K\nprint(...)"
-  },
-  {
-    "objectID": "notebooks/02-variables-types-operations.html#corrigés",
-    "href": "notebooks/02-variables-types-operations.html#corrigés",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Corrigés",
-    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\nprenom = \"Jessica\"\nage = 25\ntaille = 1.68\naime_python = True\nExercice 2\n# True, True : y = x colle une 2e étiquette sur le même objet\n# 10 15, False : les int sont immuables, y += 5 crée un nouvel objet 15\n#   et recolle l'étiquette y dessus ; x désigne toujours 10\n# ['pain', 'lait', 'oeufs'] : courses et panier désignent la même liste\npanier = courses.copy()   # ou courses[:]\nExercice 3\ndivision         = 17 / 5    # 3.4\ndivision_entiere = 17 // 5   # 3\nreste            = 17 % 5    # 2\nsurface          = 13 ** 2   # 169\npuissance        = 2 ** 10   # 1024\nExercice 4\nnom_complet     = prenom.capitalize() + \" \" + nom.capitalize()\nlongueur        = len(phrase)\nnouvelle_phrase = phrase.replace(\"science\", \"engineering\")\nprint(\"Python! \" * 4)\nExercice 5\nprint(\"Dans 10 ans tu auras \" + str(int(age_str) + 10) + \" ans\")\n# bool : False, True, True, False, True, False, True\nExercice 6\nprint(f\"{quantite} {produit}(s) à {prix_unitaire}€ = {quantite * prix_unitaire}€\")\nExercice 6b\nprint(f\"{chiffre_affaires:,.2f}\")   # 1,482,300.50\nprint(f\"{taux_marge:.1%}\")          # 21.7%\nprint(f\"{ventes:08}\")               # 00000042\n\nfor nom, prix in produits:\n    print(f\"{nom:&lt;15} {prix:.2f}€\")\nExercice 7\nfahrenheit = celsius * 9/5 + 32\nkelvin     = celsius + 273.15\nprint(f\"{celsius}°C = {fahrenheit}°F = {kelvin}K\")"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome home !",
-    "section": "",
-    "text": "Chargement de l'historique…",
-    "crumbs": [
-      "Accueil"
-    ]
-  },
-  {
-    "objectID": "index.html#dernières-modifications-du-cours",
-    "href": "index.html#dernières-modifications-du-cours",
-    "title": "Welcome home !",
-    "section": "",
-    "text": "Chargement de l'historique…",
-    "crumbs": [
-      "Accueil"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/index.html",
-    "href": "03-initiation-python/index.html",
-    "title": "Initiation à Python 🐍",
-    "section": "",
-    "text": "Bienvenue dans ce cours d’introduction à la programmation Python.",
-    "crumbs": [
-      "Initiation Python"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/index.html#objectifs",
-    "href": "03-initiation-python/index.html#objectifs",
-    "title": "Initiation à Python 🐍",
-    "section": "Objectifs",
-    "text": "Objectifs\nCe cours est conçu pour des débutants complets. Il couvre dans un premier temps :\n\nPremiers pas : Apprendre à marcher avec un notebook\nVariables types et opérations : Nommer, calculer et manipuler des valeurs\nConditions et boucles : Prendre des décisions, répéter des actions\nFonctions : Organiser son code\nStructure de données : Manipuler des données dans des objets appropriés\nLe slicing : Extraire une portion d’une séquence",
-    "crumbs": [
-      "Initiation Python"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/index.html#comment-utiliser-ce-cours",
-    "href": "03-initiation-python/index.html#comment-utiliser-ce-cours",
-    "title": "Initiation à Python 🐍",
-    "section": "Comment utiliser ce cours",
-    "text": "Comment utiliser ce cours\nSuivez les chapitres dans l’ordre via la barre latérale ou explorez-le comme bon vous semble 😊.\n\n\n\n\n\n\nTipPour ce cours\n\n\n\nNous utiliserons principalement le SSPCloud ou Google Colab, car ils sont préconfigurés et ne nécessitent aucune installation.\nVous pourrez accéder aux notebooks en utilisant les icônes comme ci-dessous.\n \n(ils ne fonctionnent pas volontairement, ne perdez pas de temps à savoir pourquoi 👀)\n\n\n\n\n\n\n\n\nTipL’erreur est normale\n\n\n\nSe tromper fait partie de l’apprentissage. Lisez les messages d’erreur, ils vous guident.",
-    "crumbs": [
-      "Initiation Python"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/index.html#ressources",
-    "href": "03-initiation-python/index.html#ressources",
-    "title": "Initiation à Python 🐍",
-    "section": "Ressources",
-    "text": "Ressources\n\nGitHub du cours\nGaliana, Lino. Python pour la data science.\nChaine de Machine Learnia.\nChaine de Ricco Rakotomalala. ### 1. Variables et types\n\nUn programme doit stocker des informations : c’est le rôle des variables. Nous verrons ici comment en créer, quels sont les types de base en Python (entiers, flottants, chaînes, booléens), et comment les afficher ou les demander à l’utilisateur.\nNotions clés : variables, int, float, str, bool, print(), input()\n\n2. Conditions et boucles\nUn programme doit pouvoir prendre des décisions et répéter des actions. Vous apprendrez les instructions if, elif, else, ainsi que les boucles for et while. C’est le moment où vos programmes deviennent réellement utiles.\nNotions clés : if/elif/else, opérateurs logiques, for, while, indentation\n\n\n3. Fonctions\nÉcrire tout son code en vrac devient vite ingérable. Les fonctions permettent de découper un programme en blocs réutilisables, nommés et documentés. C’est une étape décisive vers du code propre.\nNotions clés : def, paramètres, return, portée des variables, docstrings\n\n\n4. Listes, dictionnaires et fichiers\nLes données réelles ne sont pas des valeurs isolées : ce sont des collections. Vous apprendrez à manipuler des listes et des dictionnaires, et à lire/écrire dans des fichiers. C’est la porte d’entrée vers la manipulation de données.\nNotions clés : listes, indexation, slicing, dictionnaires, open(), with",
-    "crumbs": [
-      "Initiation Python"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/index.html#comment-ce-module-est-organisé",
-    "href": "03-initiation-python/index.html#comment-ce-module-est-organisé",
-    "title": "Initiation à Python 🐍",
-    "section": "Comment ce module est organisé",
-    "text": "Comment ce module est organisé\nChaque notion est présentée dans une page dédiée, qui contient :\n\nUne explication courte du concept, avec des exemples concrets.\nDes cellules de code exécutables, que vous pouvez modifier et relancer.\nDes exercices à faire vous-même, avec un squelette de code à compléter.\nUne correction (à consulter après avoir essayé).",
-    "crumbs": [
-      "Initiation Python"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/00-premiers-pas-notebooks.html",
-    "href": "03-initiation-python/00-premiers-pas-notebooks.html",
-    "title": "Premiers pas dans un notebook",
-    "section": "",
-    "text": "Il est maintenant l’heure pour nous de découvrir votre prochain outil de travail pour les années à venir 👴.\nCliquez sur l’un des liens ci-dessous pour accéder à la ressource.\n \n\n\n\n Back to top",
+    "text": "Tip\n\n\n\nPour accéder aux notebooks d’exercices c’est ici 👇",
     "crumbs": [
       "Initiation Python",
-      "Premiers pas en notebook"
+      "Variables, types & opérations"
     ]
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations.html#cest-quoi-une-variable",
+    "href": "03-initiation-python/01-variables-types-operations.html#cest-quoi-une-variable",
+    "title": "Variables et types de base",
+    "section": "C’est quoi une variable ?",
+    "text": "C’est quoi une variable ?\nUne variable, c’est un nom qu’on associe à une valeur. Ce nom permet de retrouver la valeur plus tard dans le programme.\nage = 25            # age est un entier (int)\nprenom = \"Jessica\"  # prenom est une chaine de caractère (str)\ntaille = 1.75       # taille est un flottant (float)\nmajeur = True       # majeur est un booléen (bool)\nIci, on a créé quatre variables :\n\nage désigne 25\nprenom désigne “Jessica”\ntaille désigne 1.75\nmajeur désigne True\n\n\n\n\n\n\n\nNoteLe signe = n’est pas une égalité\n\n\n\nEn Python, age = 25 ne veut pas dire « age est égal à 25 », mais « on associe le nom age à la valeur 25 ». C’est une affectation.\nC’est pour ça que x = x + 1 est parfaitement valide : on prend la valeur actuelle de x, on ajoute 1, et on associe le résultat au nom x.\n\n\n\nUne variable est une étiquette, pas une boîte\nOn présente souvent une variable comme une boîte dans laquelle on range une valeur. C’est une image pratique pour débuter, mais elle est fausse en Python, et elle finit par provoquer des bugs difficiles à comprendre.\nEn réalité, une variable est une étiquette collée sur un objet stocké dans la mémoire de l’ordinateur (la RAM). Voici ce qui se passe concrètement 👇\n\n\n\nAssignation d’une variable en mémoire\n\n\n\nÉtape 1 : x = 5\nPython crée d’abord un objet de type int de valeur 5 quelque part dans la RAM, à une adresse donnée (ici 0x7f3a...). Ensuite seulement, il associe le nom x à cette adresse.\nAutrement dit, x ne contient pas 5 : x sait où trouver l’objet 5.\nx = 5\nprint(id(x))  # l'adresse mémoire de l'objet désigné par x\n\n\nÉtape 2 : y = x\nOn pourrait penser que Python copie la valeur de x dans une nouvelle boîte y. Ce n’est pas le cas : aucun nouvel objet n’est créé. Le nom y reçoit simplement la même adresse que x.\nOn a donc deux étiquettes collées sur le même objet.\ny = x\nprint(id(x), id(y))  # les deux adresses sont identiques\nprint(x is y)        # True : x et y désignent le même objet\n\n\nÉtape 3 : y += 1\nC’est l’étape clé. Les entiers sont immuables en Python : l’objet 5 ne peut pas être modifié. Python ne transforme donc pas le 5 en 6. À la place, il :\n\nlit la valeur de l’objet désigné par y (5) ;\ncalcule le résultat et crée un nouvel objet 6 à une autre adresse (ici 0x8d4b...) ;\ndécolle l’étiquette y pour la recoller sur ce nouvel objet.\n\nL’étiquette x, elle, n’a pas bougé : elle désigne toujours l’objet 5.\ny += 1\nprint(x, y)          # 5 6\nprint(id(x), id(y))  # les adresses sont désormais différentes\nprint(x is y)        # False\n\n\n\n\n\n\nTipÀ retenir\n\n\n\n\nUne variable est un nom qui désigne un objet en mémoire.\ny = x ne copie rien : les deux noms partagent le même objet.\n« Modifier » un int, un float, un str ou un bool crée toujours un nouvel objet, car ces types sont immuables.\n\n\n\n\n\n\n\n\n\nImportant🧠 À vous de réfléchir : et avec une liste ?\n\n\n\nLes listes, que nous verrons plus en détail plus tard, permettent de regrouper plusieurs valeurs. Observez le code suivant sans l’exécuter :\na = [5]\nb = a\nb.append(6)   # ajoute 6 à la fin de la liste b\nprint(a)\n\nSelon vous, qu’affiche print(a) ?\nDessinez, comme dans le schéma précédent, ce qui se passe en mémoire à chaque ligne.\nExécutez ensuite le code pour vérifier votre hypothèse.\n\n\n\n\n\n\n\n\n\nTip💡 Voir la solution\n\n\n\n\n\na = [5]\nb = a\nb.append(6)\nprint(a)  # [5, 6]\nSurprise : a a été modifiée alors qu’on n’a touché qu’à b !\n\n\n\nModification d’une liste en mémoire\n\n\nContrairement aux entiers, les listes sont mutables : elles peuvent être modifiées sur place.\n\nLigne 1 : Python crée un objet liste [5] en mémoire et lui colle l’étiquette a.\nLigne 2 : b = a ne copie rien, b est une deuxième étiquette sur la même liste.\nLigne 3 : b.append(6) ne crée pas de nouvel objet, il modifie la liste existante. Aucune étiquette ne bouge.\nLigne 4 : a désigne toujours cette même liste, qui contient maintenant [5, 6].\n\nC’est la différence clé avec l’exemple y += 1 : avec un entier, Python crée un nouvel objet et recolle l’étiquette ; avec une liste, il modifie l’objet lui-même, et toutes les étiquettes qui le désignent « voient » le changement.\nPour obtenir une liste indépendante, il faut une copie explicite :\na = [5]\nb = a.copy()\nb.append(6)\nprint(a)  # [5]\nprint(b)  # [5, 6]\n\n\n\n\n\n\nLe typage dynamique\nEn Python, on ne déclare pas le type d’une variable. On écrit simplement age = 25, et l’interpréteur déduit le type à partir de la valeur.\nx = 5         # x est un entier (int)\nx = \"bonjour\" # x est maintenant une chaîne (string)\nx = 3.14      # x est maintenant un flottant (float)\nLe type est attaché à la valeur et non pas à la variable. C’est logique : puisqu’une variable n’est qu’une étiquette, on peut la recoller sur un objet de n’importe quel type.\n\n\n\n\n\n\nWarningUne liberté qui a un prix\n\n\n\nLe typage dynamique rend Python souple, mais il peut introduire des bugs silencieux. Une variable devrait avoir un rôle stable dans un programme.\n\n\n\n\n\n\n\n\nNoteUne nuance importante\n\n\n\nLe discours « Python ne vérifie pas les types » est vrai pour le langage lui-même. L’interpréteur Python ignore les annotations de type : x: int = \"bonjour\" ne lève aucune erreur.\nMais certains packages s’appuient sur ces annotations pour ajouter une vérification à l’exécution. C’est le cas notamment de Pydantic (très utilisé en data science et dans les API), de Typeguard et de Beartype. Avec ces outils, une annotation devient une contrainte réelle : si la valeur ne respecte pas le type, une erreur est levée.\nDonc : le type hint est un indice pour Python, mais il peut devenir une règle pour certaines bibliothèques.",
+    "crumbs": [
+      "Initiation Python",
+      "Variables, types & opérations"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations.html#les-types-de-base-en-python",
+    "href": "03-initiation-python/01-variables-types-operations.html#les-types-de-base-en-python",
+    "title": "Variables et types de base",
+    "section": "Les types de base en Python",
+    "text": "Les types de base en Python\n\n\n\nType\nNom Python\nExemples\n\n\n\n\nNombre entier\nint\n42, -7, 0\n\n\nNombre à virgule\nfloat\n3.14, -0.5, 2.0\n\n\nChaîne de caractères\nstr\n\"bonjour\", 'Alice'\n\n\nBooléen\nbool\nTrue, False\n\n\n\nOn peut vérifier le type d’une variable avec la fonction type()\nage = 25\nprint(type(age))       # &lt;class 'int'&gt;\n\nprenom = \"Jessica\"\nprint(type(prenom))    # &lt;class 'str'&gt;",
+    "crumbs": [
+      "Initiation Python",
+      "Variables, types & opérations"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations.html#opérations-de-base",
+    "href": "03-initiation-python/01-variables-types-operations.html#opérations-de-base",
+    "title": "Variables et types de base",
+    "section": "Opérations de base",
+    "text": "Opérations de base\nUne fois qu’on sait nommer des valeurs, il faut pouvoir les manipuler. Python fournit des opérateurs pour calculer, assembler des chaînes ou comparer des valeurs.\n\nOpérations arithmétiques\nLes opérateurs arithmétiques s’appliquent aux nombres (int et float).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n+\nAddition\n7 + 3\n10\n\n\n-\nSoustraction\n7 - 3\n4\n\n\n*\nMultiplication\n7 * 3\n21\n\n\n/\nDivision\n7 / 3\n2.333...\n\n\n//\nDivision entière (quotient)\n7 // 3\n2\n\n\n%\nModulo (reste)\n7 % 3\n1\n\n\n**\nPuissance\n7 ** 3\n343\n\n\n\na = 10\nb = 3\n\nprint(a + b)   # 13\nprint(a - b)   # 7\nprint(a * b)   # 30\nprint(a / b)   # 3.3333333333333335\nprint(a // b)  # 3\nprint(a % b)   # 1\nprint(a ** b)  # 1000\n\n\n\n\n\n\nNoteDivision et division entière\n\n\n\nEn Python, / renvoie toujours un flottant, même quand le résultat tombe juste :\nprint(10 / 2)   # 5.0 (et non 5)\nprint(10 // 2)  # 5\n\n\n\n\nLes opérateurs d’affectation combinée\nModifier une variable à partir de sa propre valeur est si courant que Python propose des raccourcis (vous avez déjà croisé y += 1 plus haut) :\n\n\n\nRaccourci\nÉquivaut à\n\n\n\n\nx += 1\nx = x + 1\n\n\nx -= 1\nx = x - 1\n\n\nx *= 2\nx = x * 2\n\n\nx /= 2\nx = x / 2\n\n\n\nscore = 10\nscore += 5\nprint(score)  # 15\n\n\nPriorité des opérations\nPython respecte les règles de priorité habituelles des mathématiques :\n\nParenthèses ()\nPuissance **\nMultiplication, division, division entière, modulo (*, /, //, %)\nAddition, soustraction (+, -)\n\nEn cas de doute, utilisez des parenthèses. Elles ne coûtent rien et rendent le code plus lisible.\nprint(2 + 3 * 4)      # 14 (et non 20)\nprint((2 + 3) * 4)    # 20",
+    "crumbs": [
+      "Initiation Python",
+      "Variables, types & opérations"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations.html#opérations-sur-les-chaînes-de-caractères",
+    "href": "03-initiation-python/01-variables-types-operations.html#opérations-sur-les-chaînes-de-caractères",
+    "title": "Variables et types de base",
+    "section": "Opérations sur les chaînes de caractères",
+    "text": "Opérations sur les chaînes de caractères\nprenom = \"Jessica\"\nnom = \"Hyde\"\n\nConcaténation et répétition\nnom_complet = prenom + \" \" + nom\nprint(nom_complet)   # Jessica Hyde\n\nprint(\"ha\" * 3)      # hahaha\n\n\nQuelques outils utiles\n\n\n\n\n\n\n\n\n\nOutil\nRôle\nExemple\nRésultat\n\n\n\n\nlen()\nLongueur\nlen(\"Python\")\n6\n\n\n.upper()\nMajuscules\n\"data\".upper()\n\"DATA\"\n\n\n.lower()\nMinuscules\n\"DATA\".lower()\n\"data\"\n\n\n.capitalize()\n1re lettre en majuscule\n\"alice\".capitalize()\n\"Alice\"\n\n\n.replace(a, b)\nRemplace a par b\n\"chat\".replace(\"c\", \"b\")\n\"bhat\"\n\n\n\n\n\n\n\n\n\nNoteUne chaîne ne se modifie jamais\n\n\n\nComme les entiers, les str sont immuables. .upper() ne modifie pas la chaîne, elle en renvoie une nouvelle. Pour garder le résultat, il faut recoller l’étiquette :\nmot = \"data\"\nmot.upper()\nprint(mot)        # data  → inchangé !\nmot = mot.upper()\nprint(mot)        # DATA\n\n\n\n\nLes f-strings : afficher des variables proprement\nPlutôt que d’enchaîner les +, on préfixe la chaîne par f et on place les variables entre {} :\nage = 25\nprint(f\"{prenom} a {age} ans\")           # Jessica a 25 ans\nprint(f\"Dans 10 ans : {age + 10} ans\")   # calcul possible dans les {}\nC’est la méthode recommandée en Python moderne.\n\n\nContrôler l’affichage\nAprès la valeur, on peut ajouter : suivi d’un code de formatage :\n\n\n\n\n\n\n\n\n\nCode\nEffet\nExemple\nRésultat\n\n\n\n\n.2f\n2 décimales\nf\"{3.14159:.2f}\"\n3.14\n\n\n.1%\npourcentage, 1 décimale\nf\"{0.857:.1%}\"\n85.7%\n\n\n,\nséparateur de milliers\nf\"{1234567:,}\"\n1,234,567\n\n\n_.2f\nséparateur _ et 2 décimales\nf\"{1234567:_.2f}\"\n1_234_567.00\n\n\n&gt;10\naligné à droite sur 10 caractères\nf\"{42:&gt;10}\"\n42\n\n\n&lt;10\naligné à gauche sur 10 caractères\nf\"{42:&lt;10}\"\n42\n\n\n010\ncomplété avec des zéros\nf\"{42:010}\"\n0000000042\n\n\n\nOn peut combiner les codes : f\"{1482300.5:,.2f}\" donne 1,482,300.50.\n\n\n\n\n\n\nNoteLes différentes façons de formater en Python\n\n\n\n\n\nPython a connu trois générations de formatage. Vous les croiserez toutes dans du code existant.\n1. Opérateur % (style C, Python 2)\n\"Bonjour %s, tu as %d ans\" % (\"Alice\", 25)\n\"Prix : %.2f€\" % 3.14159\n%s → chaîne, %d → entier, %f → flottant. Encore très présent dans du code legacy.\n2. .format() (Python 3.0)\n\"Bonjour {}, tu as {} ans\".format(\"Alice\", 25)\n\"Prix : {:.2f}€\".format(3.14159)\n\"{prenom} a {age} ans\".format(prenom=\"Alice\", age=25)\nPlus lisible que %, mais verbeux.\n3. f-strings (Python 3.6)\nprenom, age = \"Alice\", 25\nf\"Bonjour {prenom}, tu as {age} ans\"\nf\"Prix : {3.14159:.2f}€\"\nLe code s’écrit directement dans la chaîne. C’est ce qu’on utilise aujourd’hui.\nLes trois font la même chose :\nprenom = \"Alice\"\nprix = 3.14159\n\nprint(\"Bonjour %s, prix : %.2f€\" % (prenom, prix))\nprint(\"Bonjour {}, prix : {:.2f}€\".format(prenom, prix))\nprint(f\"Bonjour {prenom}, prix : {prix:.2f}€\")\n# Bonjour Alice, prix : 3.14€  (trois fois)\nRemarquez que le code .2f est le même partout : ce que vous apprenez avec les f-strings reste valable pour lire l’ancien code.",
+    "crumbs": [
+      "Initiation Python",
+      "Variables, types & opérations"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations.html#conversions-de-types",
+    "href": "03-initiation-python/01-variables-types-operations.html#conversions-de-types",
+    "title": "Variables et types de base",
+    "section": "Conversions de types",
+    "text": "Conversions de types\nPython ne mélange pas les types automatiquement :\nage = 25\nprint(\"J'ai \" + age + \" ans\")  # ❌ TypeError\nIl faut convertir explicitement :\n\n\n\nFonction\nConvertit en\nExemple\nRésultat\n\n\n\n\nstr()\nchaîne\nstr(25)\n\"25\"\n\n\nint()\nentier\nint(\"25\")\n25\n\n\nfloat()\nflottant\nfloat(\"1.75\")\n1.75\n\n\nbool()\nbooléen\nbool(0)\nFalse\n\n\n\nprint(\"J'ai \" + str(age) + \" ans\")  # 🆗 J'ai 25 ans\n\n\n\n\n\n\nTipVrai ou faux ?\n\n\n\nbool() renvoie False pour les valeurs « vides » : 0, 0.0, \"\" (chaîne vide). Tout le reste vaut True, même -42 ou \"False\".\n\n\n\n\n\n\n\n\nWarning\n\n\n\nint(\"bonjour\") lève une ValueError : on ne peut convertir que ce qui a du sens. Cas fréquent en data : des nombres stockés en texte dans un CSV, à convertir avant de calculer.",
+    "crumbs": [
+      "Initiation Python",
+      "Variables, types & opérations"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/01-variables-types-operations.html#opérations-de-comparaison",
+    "href": "03-initiation-python/01-variables-types-operations.html#opérations-de-comparaison",
+    "title": "Variables et types de base",
+    "section": "Opérations de comparaison",
+    "text": "Opérations de comparaison\nLes opérateurs de comparaison renvoient un booléen (True ou False).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n==\nÉgal à\n5 == 5\nTrue\n\n\n!=\nDifférent de\n5 != 3\nTrue\n\n\n&lt;\nInférieur à\n5 &lt; 3\nFalse\n\n\n&gt;\nSupérieur à\n5 &gt; 3\nTrue\n\n\n&lt;=\nInférieur ou égal\n5 &lt;= 5\nTrue\n\n\n&gt;=\nSupérieur ou égal\n5 &gt;= 6\nFalse\n\n\n\nprint(5 == 5)     # True\nprint(5 != 3)     # True\nprint(10 &gt; 3)     # True\nprint(10 &lt;= 3)    # False",
+    "crumbs": [
+      "Initiation Python",
+      "Variables, types & opérations"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing-slides.html#index-positif-et-index-négatif",
+    "href": "03-initiation-python/07-slicing-slides.html#index-positif-et-index-négatif",
+    "title": "Le slicing",
+    "section": "Index positif et index négatif",
+    "text": "Index positif et index négatif\nChaque élément d’une séquence possède deux index : un positif (de gauche à droite, à partir de 0) et un négatif (de droite à gauche, à partir de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nL’index négatif permet d’accéder aux éléments depuis la fin, sans connaître la longueur de la séquence.\nmot = \"Python\"\nmot[0]    # 'P'\nmot[-1]   # 'n' (le dernier)\nmot[-2]   # 'o' (l'avant-dernier)"
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing-slides.html#slicing-de-base-debutfin",
+    "href": "03-initiation-python/07-slicing-slides.html#slicing-de-base-debutfin",
+    "title": "Le slicing",
+    "section": "Slicing de base : [debut:fin]",
+    "text": "Slicing de base : [debut:fin]\nsequence[debut:fin] renvoie les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]   # \"Pyt\"  → index 0, 1, 2\nmot[2:5]   # \"tho\"  → index 2, 3, 4\nAstuce : fin - debut donne le nombre d’éléments extraits."
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing-slides.html#omettre-debut-ou-fin",
+    "href": "03-initiation-python/07-slicing-slides.html#omettre-debut-ou-fin",
+    "title": "Le slicing",
+    "section": "Omettre debut ou fin",
+    "text": "Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin.\nmot[:3]    # \"Pyt\"     → depuis le début\nmot[3:]    # \"hon\"     → jusqu'à la fin\nmot[:]     # \"Python\"  → copie complète"
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing-slides.html#index-négatifs-dans-le-slicing",
+    "href": "03-initiation-python/07-slicing-slides.html#index-négatifs-dans-le-slicing",
+    "title": "Le slicing",
+    "section": "Index négatifs dans le slicing",
+    "text": "Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très pratique pour raisonner « depuis la fin » sans connaître la longueur.\nmot[-3:]     # \"hon\"    → les 3 derniers\nmot[:-3]     # \"Pyt\"    → tout sauf les 3 derniers\nmot[-4:-1]   # \"tho\"    → du 4e au 2e en partant de la fin"
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing-slides.html#le-pas-debutfinpas",
+    "href": "03-initiation-python/07-slicing-slides.html#le-pas-debutfinpas",
+    "title": "Le slicing",
+    "section": "Le pas : [debut:fin:pas]",
+    "text": "Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    # [0, 2, 4, 6, 8]       → un sur deux\nnombres[1::2]   # [1, 3, 5, 7, 9]       → un sur deux, à partir de 1\nnombres[::3]    # [0, 3, 6, 9]          → un sur trois\nnombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence\n[::-1] est l’idiome Python pour inverser une séquence."
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing-slides.html#slicing-et-copie",
+    "href": "03-initiation-python/07-slicing-slides.html#slicing-et-copie",
+    "title": "Le slicing",
+    "section": "Slicing et copie",
+    "text": "Slicing et copie\nSur les listes, [:] crée une copie superficielle. Utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie\n\n\n\n\n\n\nWarning\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence."
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html",
+    "href": "03-initiation-python/07-slicing.html",
+    "title": "Le slicing",
+    "section": "",
+    "text": "Tip\n\n\n\nPour accéder aux notebooks d’exercices c’est ici 👇\nLe slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#index-positif-et-index-négatif",
+    "href": "03-initiation-python/07-slicing.html#index-positif-et-index-négatif",
+    "title": "Le slicing",
+    "section": "Index positif et index négatif",
+    "text": "Index positif et index négatif\nChaque élément d’une séquence possède deux index : un positif (de gauche à droite, à partir de 0) et un négatif (de droite à gauche, à partir de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nL’index négatif permet d’accéder aux éléments depuis la fin, sans connaître la longueur de la séquence.\nmot = \"Python\"\nmot[0]    # 'P'\nmot[-1]   # 'n' (le dernier)\nmot[-2]   # 'o' (l'avant-dernier)",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#slicing-de-base-debutfin",
+    "href": "03-initiation-python/07-slicing.html#slicing-de-base-debutfin",
+    "title": "Le slicing",
+    "section": "Slicing de base : [debut:fin]",
+    "text": "Slicing de base : [debut:fin]\nsequence[debut:fin] renvoie les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]   # \"Pyt\"  → index 0, 1, 2\nmot[2:5]   # \"tho\"  → index 2, 3, 4\nAstuce : fin - debut donne le nombre d’éléments extraits.",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#omettre-debut-ou-fin",
+    "href": "03-initiation-python/07-slicing.html#omettre-debut-ou-fin",
+    "title": "Le slicing",
+    "section": "Omettre debut ou fin",
+    "text": "Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin.\nmot[:3]    # \"Pyt\"     → depuis le début\nmot[3:]    # \"hon\"     → jusqu'à la fin\nmot[:]     # \"Python\"  → copie complète",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#index-négatifs-dans-le-slicing",
+    "href": "03-initiation-python/07-slicing.html#index-négatifs-dans-le-slicing",
+    "title": "Le slicing",
+    "section": "Index négatifs dans le slicing",
+    "text": "Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très pratique pour raisonner « depuis la fin » sans connaître la longueur.\nmot[-3:]     # \"hon\"    → les 3 derniers\nmot[:-3]     # \"Pyt\"    → tout sauf les 3 derniers\nmot[-4:-1]   # \"tho\"    → du 4e au 2e en partant de la fin",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#le-pas-debutfinpas",
+    "href": "03-initiation-python/07-slicing.html#le-pas-debutfinpas",
+    "title": "Le slicing",
+    "section": "Le pas : [debut:fin:pas]",
+    "text": "Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    # [0, 2, 4, 6, 8]       → un sur deux\nnombres[1::2]   # [1, 3, 5, 7, 9]       → un sur deux, à partir de 1\nnombres[::3]    # [0, 3, 6, 9]          → un sur trois\nnombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence\n[::-1] est l’idiome Python pour inverser une séquence.",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/07-slicing.html#slicing-et-copie",
+    "href": "03-initiation-python/07-slicing.html#slicing-et-copie",
+    "title": "Le slicing",
+    "section": "Slicing et copie",
+    "text": "Slicing et copie\nSur les listes, [:] crée une copie superficielle. Utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie\n\n\n\n\n\n\nWarning\n\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence.",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#pourquoi-des-conditions",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#pourquoi-des-conditions",
+    "title": "Conditions et boucles",
+    "section": "Pourquoi des conditions ?",
+    "text": "Pourquoi des conditions ?\nJusqu’ici, nos programmes exécutent toutes les lignes, dans l’ordre, sans exception. Mais un vrai programme doit prendre des décisions :\n\nsi le solde est insuffisant, refuser le paiement ;\nsi la note est supérieure à 10, valider le module ;\nsi le fichier est vide, afficher un message d’erreur.\n\nC’est le rôle des conditions : exécuter un bloc de code seulement si une affirmation est vraie."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#rappel-une-comparaison-renvoie-un-booléen",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#rappel-une-comparaison-renvoie-un-booléen",
+    "title": "Conditions et boucles",
+    "section": "Rappel : une comparaison renvoie un booléen",
+    "text": "Rappel : une comparaison renvoie un booléen\nVous avez vu les opérateurs de comparaison dans la page précédente. Ce sont eux qui alimentent les conditions, car ils renvoient toujours True ou False.\nnote = 14\nprint(note &gt;= 10)   # True\nprint(note == 20)   # False\nprint(type(note &gt;= 10))  # &lt;class 'bool'&gt;\nUne condition, c’est donc simplement une expression qui vaut True ou False."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#linstruction-if",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#linstruction-if",
+    "title": "Conditions et boucles",
+    "section": "L’instruction if",
+    "text": "L’instruction if\nnote = 14\n\nif note &gt;= 10:\n    print(\"Module validé 🎉\")\n\nprint(\"Fin du programme\")\nLisez-la comme une phrase : « si la note est supérieure ou égale à 10, alors affiche “Module validé” ».\nTrois éléments de syntaxe à ne pas oublier :\n\nle mot-clé if ;\nles deux-points : à la fin de la ligne ;\nl’indentation (4 espaces) des lignes qui dépendent de la condition.\n\nLa dernière ligne, print(\"Fin du programme\"), n’est pas indentée : elle s’exécute dans tous les cas.\n\n\n\n\n\n\nL’indentation n’est pas décorative\n\n\nDans beaucoup de langages, on délimite un bloc avec des accolades { }. En Python, ce sont les espaces en début de ligne qui indiquent ce qui fait partie du bloc.\nnote = 8\n\nif note &gt;= 10:\n    print(\"Module validé\")\n    print(\"Bravo !\")      # dans le bloc : ne s'affiche pas\n\nprint(\"Fin\")              # hors du bloc : s'affiche toujours\nUn décalage oublié ou en trop provoque soit une IndentationError, soit, pire, un programme qui tourne mais ne fait pas ce que vous voulez. La convention est de 4 espaces ; les éditeurs (VS Code, Jupyter) les insèrent automatiquement après les :."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#else-sinon",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#else-sinon",
+    "title": "Conditions et boucles",
+    "section": "else : sinon",
+    "text": "else : sinon\nelse permet de prévoir ce qui se passe quand la condition est fausse.\nnote = 8\n\nif note &gt;= 10:\n    print(\"Module validé 🎉\")\nelse:\n    print(\"Rattrapage 📚\")\nUn seul des deux blocs est exécuté, jamais les deux. else n’a pas de condition : il récupère « tout le reste »."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#elif-sinon-si",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#elif-sinon-si",
+    "title": "Conditions et boucles",
+    "section": "elif : sinon, si",
+    "text": "elif : sinon, si\nQuand il y a plus de deux cas, on enchaîne les tests avec elif (contraction de else if).\nnote = 15\n\nif note &gt;= 16:\n    mention = \"Très bien\"\nelif note &gt;= 14:\n    mention = \"Bien\"\nelif note &gt;= 12:\n    mention = \"Assez bien\"\nelif note &gt;= 10:\n    mention = \"Passable\"\nelse:\n    mention = \"Non admis\"\n\nprint(f\"Note : {note} → {mention}\")   # Note : 15 → Bien\nPython teste les conditions de haut en bas et s’arrête à la première qui est vraie. Les suivantes ne sont même pas évaluées.\n\n\n\n\n\n\n🧠 À vous de réfléchir : l’ordre compte\n\n\nUn collègue a écrit cette version. Observez-la sans l’exécuter :\nnote = 18\n\nif note &gt;= 10:\n    mention = \"Passable\"\nelif note &gt;= 12:\n    mention = \"Assez bien\"\nelif note &gt;= 14:\n    mention = \"Bien\"\nelif note &gt;= 16:\n    mention = \"Très bien\"\n\nprint(mention)\n\nSelon vous, qu’affiche ce programme ?\nPour quelles notes ce code donne-t-il la bonne mention ?\nExécutez-le pour vérifier, puis corrigez-le.\n\n\n\n\n\n\n\n\n\n\n💡 Voir la solution\n\n\nLe programme affiche Passable, alors que 18 mérite « Très bien ».\nPython teste note &gt;= 10 en premier : c’est vrai pour 18, donc il entre dans ce bloc et ignore tous les elif suivants. En fait, ce code donne « Passable » à toute note supérieure ou égale à 10 : les trois autres branches ne servent jamais.\nIl y a deux corrections possibles :\n\ntester du plus restrictif au plus large (&gt;= 16 d’abord, comme dans l’exemple du cours) ;\nou rendre chaque condition exclusive avec des intervalles :\n\nif 10 &lt;= note &lt; 12:\n    mention = \"Passable\"\nelif 12 &lt;= note &lt; 14:\n    mention = \"Assez bien\"\n# ...\nRemarquez au passage 10 &lt;= note &lt; 12 : Python accepte d’enchaîner les comparaisons, comme en mathématiques.\nEnfin, ce code plante si la note est inférieure à 10 : aucune branche ne s’exécute, et mention n’existe pas au moment du print. Un else final aurait évité le problème."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#combiner-des-conditions-and-or-not",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#combiner-des-conditions-and-or-not",
+    "title": "Conditions et boucles",
+    "section": "Combiner des conditions : and, or, not",
+    "text": "Combiner des conditions : and, or, not\nOn a souvent besoin de vérifier plusieurs choses à la fois.\n\n\n\nOpérateur\nSignification\nVrai quand…\n\n\n\n\nand\net\nles deux conditions sont vraies\n\n\nor\nou\nau moins une des conditions est vraie\n\n\nnot\nnon\nla condition est fausse\n\n\n\nage = 22\netudiant = True\n\nif age &lt; 26 and etudiant:\n    print(\"Tarif réduit\")\n\nif age &lt; 18 or age &gt; 65:\n    print(\"Entrée gratuite\")\n\nif not etudiant:\n    print(\"Pensez à votre carte étudiante\")\n\n\n\n\n\n\nPriorité des opérateurs logiques\n\n\nComme pour les opérations arithmétiques, il y a un ordre : not d’abord, puis and, puis or.\nprint(True or False and False)    # True  → and est évalué en premier\nprint((True or False) and False)  # False\nMême conseil que pour les calculs : en cas de doute, mettez des parenthèses.\n\n\n\n\n\n\n\n\n\nLe piège du or « à la française »\n\n\nEn français, on dit « si la note vaut 10 ou 15 ». La traduction mot à mot est fausse :\nnote = 12\n\nif note == 10 or 15:\n    print(\"Gagné !\")    # s'affiche… alors que note vaut 12 !\nPython lit (note == 10) or (15). La première partie est False, mais la seconde est simplement 15, qui vaut True (souvenez-vous de bool(15)). La condition est donc toujours vraie.\nIl faut répéter la comparaison :\nif note == 10 or note == 15:\n    print(\"Gagné !\")"
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#les-valeurs-vraies-et-fausses",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#les-valeurs-vraies-et-fausses",
+    "title": "Conditions et boucles",
+    "section": "Les valeurs « vraies » et « fausses »",
+    "text": "Les valeurs « vraies » et « fausses »\nUne condition n’est pas obligée de contenir une comparaison. Python accepte n’importe quelle valeur et la convertit en booléen, exactement comme bool() dans la page précédente.\nRappel : 0, 0.0 et \"\" (chaîne vide) valent False. Tout le reste vaut True.\nprenom = \"\"\n\nif prenom:\n    print(f\"Bonjour {prenom} !\")\nelse:\n    print(\"Vous n'avez pas saisi de prénom\")\nif prenom: se lit « si prenom n’est pas vide ». C’est une écriture très courante en Python, que vous croiserez souvent, notamment pour tester si une liste contient des éléments."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#match-case-choisir-parmi-des-valeurs-précises",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#match-case-choisir-parmi-des-valeurs-précises",
+    "title": "Conditions et boucles",
+    "section": "match / case : choisir parmi des valeurs précises",
+    "text": "match / case : choisir parmi des valeurs précises\nQuand on compare une même variable à une liste de valeurs précises, la chaîne de elif devient vite répétitive :\njour = \"samedi\"\n\nif jour == \"samedi\" or jour == \"dimanche\":\n    print(\"Week-end 😎\")\nelif jour == \"lundi\":\n    print(\"Courage ☕\")\nelse:\n    print(\"Jour de semaine\")\nDepuis Python 3.10, l’instruction match permet d’écrire la même chose plus lisiblement :\njour = \"samedi\"\n\nmatch jour:\n    case \"samedi\" | \"dimanche\":\n        print(\"Week-end 😎\")\n    case \"lundi\":\n        print(\"Courage ☕\")\n    case _:\n        print(\"Jour de semaine\")\n\nmatch indique la valeur à examiner ;\nchaque case propose une valeur possible, testée de haut en bas comme les elif ;\n| signifie « ou » entre plusieurs valeurs ;\ncase _: attrape tout le reste, comme un else.\n\n\n\n\n\n\n\nmatch ou if ?\n\n\nmatch sert à comparer une valeur à des valeurs fixes (un code, un statut, un choix de menu). Dès qu’il faut un intervalle (note &gt;= 14) ou combiner plusieurs variables, restez sur if / elif.\nComme match est récent (2021), vous verrez encore beaucoup de code qui ne l’utilise pas. Et il sait faire bien plus que ce qu’on montre ici (pattern matching sur des structures), mais c’est hors du périmètre de ce cours."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#pourquoi-des-boucles",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#pourquoi-des-boucles",
+    "title": "Conditions et boucles",
+    "section": "Pourquoi des boucles ?",
+    "text": "Pourquoi des boucles ?\nLes conditions permettent de choisir. Les boucles permettent de répéter.\nImaginez devoir afficher les 100 premières lignes d’un fichier, ou vérifier chaque transaction d’une journée : écrire 100 fois le même print n’est pas une option. Une boucle exécute un bloc de code plusieurs fois, avec la même syntaxe que les conditions : : et indentation.\nPython propose deux boucles :\n\n\n\n\n\n\n\nBoucle\nQuand l’utiliser\n\n\n\n\nfor\non sait sur quoi on boucle (un nombre de tours, les lettres d’un mot…)\n\n\nwhile\non boucle tant qu’une condition est vraie, sans savoir combien de tours il faudra"
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#la-boucle-for",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#la-boucle-for",
+    "title": "Conditions et boucles",
+    "section": "La boucle for",
+    "text": "La boucle for\nRépéter un nombre de fois avec range()\nfor i in range(5):\n    print(f\"Tour numéro {i}\")\nTour numéro 0\nTour numéro 1\nTour numéro 2\nTour numéro 3\nTour numéro 4\nÀ chaque tour, la variable i prend la valeur suivante. range() s’utilise comme le slicing :\nrange(5)          # 0, 1, 2, 3, 4\nrange(1, 6)       # 1, 2, 3, 4, 5\nrange(0, 10, 2)   # 0, 2, 4, 6, 8\nrange(5, 0, -1)   # 5, 4, 3, 2, 1\n\n\n\n\n\n\nLa borne de fin est exclue\n\n\nrange(1, 10) s’arrête à 9, pas à 10. Si vous voulez aller jusqu’à 10 inclus, écrivez range(1, 11). C’est la même règle que sequence[debut:fin] : début inclus, fin exclue.\n\n\n\nParcourir une chaîne de caractères\nfor ne sert pas qu’à compter : il parcourt n’importe quelle séquence, élément par élément.\nfor lettre in \"Python\":\n    print(lettre)\nVous l’utiliserez constamment avec les listes, que nous verrons plus tard. Le principe sera exactement le même.\n\n\n\n\n\n\nIl n’y a pas que range()\n\n\nUn réflexe venu d’autres langages consiste à boucler sur les positions pour récupérer les éléments :\nmot = \"Python\"\nfor i in range(len(mot)):   # 😕 fonctionne, mais peu lisible\n    print(mot[i])\nEn Python, on boucle directement sur les éléments : for lettre in mot:. Et si vous avez besoin de la position en plus de l’élément, utilisez enumerate() :\nfor position, lettre in enumerate(\"Python\"):\n    print(f\"{position} → {lettre}\")\n# 0 → P\n# 1 → y\n# ...\nRetenez la règle : range() pour compter, for element in sequence pour parcourir, enumerate() quand il faut les deux. Vous croiserez aussi zip() (parcourir deux séquences en parallèle) et reversed() (parcourir à l’envers) : nous les verrons avec les listes."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#la-boucle-while",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#la-boucle-while",
+    "title": "Conditions et boucles",
+    "section": "La boucle while",
+    "text": "La boucle while\nwhile répète un bloc tant que sa condition est vraie. Elle est vérifiée avant chaque tour.\nsolde = 100\nmois = 0\n\nwhile solde &gt; 0:\n    solde -= 30\n    mois += 1\n\nprint(f\"Compte vide après {mois} mois (solde : {solde} €)\")\n# Compte vide après 4 mois (solde : -20 €)\n\n\n\n\n\n\nLa boucle infinie\n\n\nSi la condition ne devient jamais fausse, la boucle ne s’arrête jamais :\ncompteur = 0\nwhile compteur &lt; 5:\n    print(compteur)\n    # oubli de compteur += 1 → tourne à l'infini\nDans un notebook, cliquez sur le bouton ⏹ (Interrupt) pour arrêter l’exécution. Le réflexe à avoir : vérifier que quelque chose change dans la boucle et rapproche la condition de False."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#break-et-continue",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#break-et-continue",
+    "title": "Conditions et boucles",
+    "section": "break et continue",
+    "text": "break et continue\nDeux mots-clés modifient le déroulement d’une boucle :\n\nbreak sort immédiatement de la boucle ;\ncontinue passe directement au tour suivant.\n\n# Trouver le premier multiple de 7 supérieur à 50\nfor n in range(51, 100):\n    if n % 7 == 0:\n        print(f\"Trouvé : {n}\")   # Trouvé : 56\n        break\n# Afficher les nombres de 1 à 10, sauf les multiples de 3\nfor n in range(1, 11):\n    if n % 3 == 0:\n        continue\n    print(n)\nRemarquez que conditions et boucles s’imbriquent naturellement : un if dans un for, c’est simplement un bloc indenté dans un autre."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles-slides.html#le-motif-de-laccumulateur",
+    "href": "03-initiation-python/02-conditions-boucles-slides.html#le-motif-de-laccumulateur",
+    "title": "Conditions et boucles",
+    "section": "Le motif de l’accumulateur",
+    "text": "Le motif de l’accumulateur\nC’est le schéma le plus utile : on initialise une variable avant la boucle, et on la met à jour à chaque tour.\ntotal = 0                  # 1. initialisation, avant la boucle\n\nfor n in range(1, 6):\n    total += n             # 2. mise à jour, à chaque tour\n\nprint(total)               # 3. résultat, après la boucle → 15\nLe même motif sert à compter, à chercher un maximum, à construire une chaîne… C’est un schéma de base en algorithmique.\n\n\n\n\n\n\nEt en analyse de données ?\n\n\nEn pratique, vous écrirez rarement ce genre de boucle sur des données : avec pandas ou numpy, une somme s’écrit df[\"montant\"].sum(), et c’est beaucoup plus rapide qu’une boucle Python sur des millions de lignes. On parle d’opérations vectorisées.\nAlors pourquoi l’apprendre ? Parce que .sum(), .max() ou .count() font exactement cela en coulisse. Comprendre l’accumulateur, c’est comprendre ce que vous demanderez plus tard à pandas.\n\n\n\n\n\n\n\n\n\n🧠 À vous de réfléchir : où est passé le total ?\n\n\nCe code devait calculer la somme des notes de 1 à 3. Observez-le sans l’exécuter :\nfor note in range(1, 4):\n    total = 0\n    total += note\n\nprint(total)\n\nSelon vous, qu’affiche ce programme ?\nDéroulez la boucle tour par tour sur papier : que vaut total à la fin de chaque tour ?\nExécutez-le, puis corrigez-le pour obtenir 6.\n\n\n\n\n\n\n\n\n\n\n💡 Voir la solution\n\n\nLe programme affiche 3, et non 6.\n\n\n\nTour\nnote\ntotal = 0\ntotal += note\n\n\n\n\n1\n1\n0\n1\n\n\n2\n2\n0\n2\n\n\n3\n3\n0\n3\n\n\n\ntotal = 0 est dans la boucle : il est remis à zéro à chaque tour, et seul le dernier ajout survit. L’initialisation doit être faite une seule fois, avant la boucle :\ntotal = 0\nfor note in range(1, 4):\n    total += note\n\nprint(total)  # 6\nUne ligne décalée de 4 espaces, et le programme change de sens : l’indentation, encore elle.\n\n\n\n\n\n\n\n\n\nÀ retenir\n\n\n\nif, elif, else permettent d’exécuter un bloc seulement si une condition est vraie.\nLes : et l’indentation délimitent les blocs. Ils ne sont pas optionnels.\nLes conditions sont testées de haut en bas, et seule la première vraie s’exécute.\nand, or et not combinent des conditions. Répétez la comparaison de chaque côté du or.\nToute valeur peut servir de condition : 0 et \"\" valent False, le reste vaut True.\nmatch / case compare une valeur à des valeurs fixes, plus lisiblement qu’une chaîne de elif.\nfor parcourt une séquence (range(), une chaîne…), while répète tant qu’une condition est vraie.\nrange(debut, fin) exclut fin, comme le slicing.\nOn boucle directement sur les éléments (for lettre in mot), et enumerate() donne la position en plus.\nbreak sort de la boucle, continue passe au tour suivant.\nUn accumulateur s’initialise avant la boucle et se met à jour dedans."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html",
+    "href": "03-initiation-python/02-conditions-boucles.html",
+    "title": "Conditions et boucles",
+    "section": "",
+    "text": "Tip\n\n\n\nPour accéder aux notebooks d’exercices c’est ici 👇"
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#pourquoi-des-conditions",
+    "href": "03-initiation-python/02-conditions-boucles.html#pourquoi-des-conditions",
+    "title": "Conditions et boucles",
+    "section": "Pourquoi des conditions ?",
+    "text": "Pourquoi des conditions ?\nJusqu’ici, nos programmes exécutent toutes les lignes, dans l’ordre, sans exception. Mais un vrai programme doit prendre des décisions :\n\nsi le solde est insuffisant, refuser le paiement ;\nsi la note est supérieure à 10, valider le module ;\nsi le fichier est vide, afficher un message d’erreur.\n\nC’est le rôle des conditions : exécuter un bloc de code seulement si une affirmation est vraie."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#rappel-une-comparaison-renvoie-un-booléen",
+    "href": "03-initiation-python/02-conditions-boucles.html#rappel-une-comparaison-renvoie-un-booléen",
+    "title": "Conditions et boucles",
+    "section": "Rappel : une comparaison renvoie un booléen",
+    "text": "Rappel : une comparaison renvoie un booléen\nVous avez vu les opérateurs de comparaison dans la page précédente. Ce sont eux qui alimentent les conditions, car ils renvoient toujours True ou False.\nnote = 14\nprint(note &gt;= 10)   # True\nprint(note == 20)   # False\nprint(type(note &gt;= 10))  # &lt;class 'bool'&gt;\nUne condition, c’est donc simplement une expression qui vaut True ou False."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#linstruction-if",
+    "href": "03-initiation-python/02-conditions-boucles.html#linstruction-if",
+    "title": "Conditions et boucles",
+    "section": "L’instruction if",
+    "text": "L’instruction if\nnote = 14\n\nif note &gt;= 10:\n    print(\"Module validé 🎉\")\n\nprint(\"Fin du programme\")\nLisez-la comme une phrase : « si la note est supérieure ou égale à 10, alors affiche “Module validé” ».\nTrois éléments de syntaxe à ne pas oublier :\n\nle mot-clé if ;\nles deux-points : à la fin de la ligne ;\nl’indentation (4 espaces) des lignes qui dépendent de la condition.\n\nLa dernière ligne, print(\"Fin du programme\"), n’est pas indentée : elle s’exécute dans tous les cas.\n\n\n\n\n\n\nImportantL’indentation n’est pas décorative\n\n\n\nDans beaucoup de langages, on délimite un bloc avec des accolades { }. En Python, ce sont les espaces en début de ligne qui indiquent ce qui fait partie du bloc.\nnote = 8\n\nif note &gt;= 10:\n    print(\"Module validé\")\n    print(\"Bravo !\")      # dans le bloc : ne s'affiche pas\n\nprint(\"Fin\")              # hors du bloc : s'affiche toujours\nUn décalage oublié ou en trop provoque soit une IndentationError, soit, pire, un programme qui tourne mais ne fait pas ce que vous voulez. La convention est de 4 espaces ; les éditeurs (VS Code, Jupyter) les insèrent automatiquement après les :."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#else-sinon",
+    "href": "03-initiation-python/02-conditions-boucles.html#else-sinon",
+    "title": "Conditions et boucles",
+    "section": "else : sinon",
+    "text": "else : sinon\nelse permet de prévoir ce qui se passe quand la condition est fausse.\nnote = 8\n\nif note &gt;= 10:\n    print(\"Module validé 🎉\")\nelse:\n    print(\"Rattrapage 📚\")\nUn seul des deux blocs est exécuté, jamais les deux. else n’a pas de condition : il récupère « tout le reste »."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#elif-sinon-si",
+    "href": "03-initiation-python/02-conditions-boucles.html#elif-sinon-si",
+    "title": "Conditions et boucles",
+    "section": "elif : sinon, si",
+    "text": "elif : sinon, si\nQuand il y a plus de deux cas, on enchaîne les tests avec elif (contraction de else if).\nnote = 15\n\nif note &gt;= 16:\n    mention = \"Très bien\"\nelif note &gt;= 14:\n    mention = \"Bien\"\nelif note &gt;= 12:\n    mention = \"Assez bien\"\nelif note &gt;= 10:\n    mention = \"Passable\"\nelse:\n    mention = \"Non admis\"\n\nprint(f\"Note : {note} → {mention}\")   # Note : 15 → Bien\nPython teste les conditions de haut en bas et s’arrête à la première qui est vraie. Les suivantes ne sont même pas évaluées.\n\n\n\n\n\n\nImportant🧠 À vous de réfléchir : l’ordre compte\n\n\n\nUn collègue a écrit cette version. Observez-la sans l’exécuter :\nnote = 18\n\nif note &gt;= 10:\n    mention = \"Passable\"\nelif note &gt;= 12:\n    mention = \"Assez bien\"\nelif note &gt;= 14:\n    mention = \"Bien\"\nelif note &gt;= 16:\n    mention = \"Très bien\"\n\nprint(mention)\n\nSelon vous, qu’affiche ce programme ?\nPour quelles notes ce code donne-t-il la bonne mention ?\nExécutez-le pour vérifier, puis corrigez-le.\n\n\n\n\n\n\n\n\n\nTip💡 Voir la solution\n\n\n\n\n\nLe programme affiche Passable, alors que 18 mérite « Très bien ».\nPython teste note &gt;= 10 en premier : c’est vrai pour 18, donc il entre dans ce bloc et ignore tous les elif suivants. En fait, ce code donne « Passable » à toute note supérieure ou égale à 10 : les trois autres branches ne servent jamais.\nIl y a deux corrections possibles :\n\ntester du plus restrictif au plus large (&gt;= 16 d’abord, comme dans l’exemple du cours) ;\nou rendre chaque condition exclusive avec des intervalles :\n\nif 10 &lt;= note &lt; 12:\n    mention = \"Passable\"\nelif 12 &lt;= note &lt; 14:\n    mention = \"Assez bien\"\n# ...\nRemarquez au passage 10 &lt;= note &lt; 12 : Python accepte d’enchaîner les comparaisons, comme en mathématiques.\nEnfin, ce code plante si la note est inférieure à 10 : aucune branche ne s’exécute, et mention n’existe pas au moment du print. Un else final aurait évité le problème."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#combiner-des-conditions-and-or-not",
+    "href": "03-initiation-python/02-conditions-boucles.html#combiner-des-conditions-and-or-not",
+    "title": "Conditions et boucles",
+    "section": "Combiner des conditions : and, or, not",
+    "text": "Combiner des conditions : and, or, not\nOn a souvent besoin de vérifier plusieurs choses à la fois.\n\n\n\nOpérateur\nSignification\nVrai quand…\n\n\n\n\nand\net\nles deux conditions sont vraies\n\n\nor\nou\nau moins une des conditions est vraie\n\n\nnot\nnon\nla condition est fausse\n\n\n\nage = 22\netudiant = True\n\nif age &lt; 26 and etudiant:\n    print(\"Tarif réduit\")\n\nif age &lt; 18 or age &gt; 65:\n    print(\"Entrée gratuite\")\n\nif not etudiant:\n    print(\"Pensez à votre carte étudiante\")\n\n\n\n\n\n\nNotePriorité des opérateurs logiques\n\n\n\nComme pour les opérations arithmétiques, il y a un ordre : not d’abord, puis and, puis or.\nprint(True or False and False)    # True  → and est évalué en premier\nprint((True or False) and False)  # False\nMême conseil que pour les calculs : en cas de doute, mettez des parenthèses.\n\n\n\n\n\n\n\n\nWarningLe piège du or « à la française »\n\n\n\nEn français, on dit « si la note vaut 10 ou 15 ». La traduction mot à mot est fausse :\nnote = 12\n\nif note == 10 or 15:\n    print(\"Gagné !\")    # s'affiche… alors que note vaut 12 !\nPython lit (note == 10) or (15). La première partie est False, mais la seconde est simplement 15, qui vaut True (souvenez-vous de bool(15)). La condition est donc toujours vraie.\nIl faut répéter la comparaison :\nif note == 10 or note == 15:\n    print(\"Gagné !\")"
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#les-valeurs-vraies-et-fausses",
+    "href": "03-initiation-python/02-conditions-boucles.html#les-valeurs-vraies-et-fausses",
+    "title": "Conditions et boucles",
+    "section": "Les valeurs « vraies » et « fausses »",
+    "text": "Les valeurs « vraies » et « fausses »\nUne condition n’est pas obligée de contenir une comparaison. Python accepte n’importe quelle valeur et la convertit en booléen, exactement comme bool() dans la page précédente.\nRappel : 0, 0.0 et \"\" (chaîne vide) valent False. Tout le reste vaut True.\nprenom = \"\"\n\nif prenom:\n    print(f\"Bonjour {prenom} !\")\nelse:\n    print(\"Vous n'avez pas saisi de prénom\")\nif prenom: se lit « si prenom n’est pas vide ». C’est une écriture très courante en Python, que vous croiserez souvent, notamment pour tester si une liste contient des éléments."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#match-case-choisir-parmi-des-valeurs-précises",
+    "href": "03-initiation-python/02-conditions-boucles.html#match-case-choisir-parmi-des-valeurs-précises",
+    "title": "Conditions et boucles",
+    "section": "match / case : choisir parmi des valeurs précises",
+    "text": "match / case : choisir parmi des valeurs précises\nQuand on compare une même variable à une liste de valeurs précises, la chaîne de elif devient vite répétitive :\njour = \"samedi\"\n\nif jour == \"samedi\" or jour == \"dimanche\":\n    print(\"Week-end 😎\")\nelif jour == \"lundi\":\n    print(\"Courage ☕\")\nelse:\n    print(\"Jour de semaine\")\nDepuis Python 3.10, l’instruction match permet d’écrire la même chose plus lisiblement :\njour = \"samedi\"\n\nmatch jour:\n    case \"samedi\" | \"dimanche\":\n        print(\"Week-end 😎\")\n    case \"lundi\":\n        print(\"Courage ☕\")\n    case _:\n        print(\"Jour de semaine\")\n\nmatch indique la valeur à examiner ;\nchaque case propose une valeur possible, testée de haut en bas comme les elif ;\n| signifie « ou » entre plusieurs valeurs ;\ncase _: attrape tout le reste, comme un else.\n\n\n\n\n\n\n\nNotematch ou if ?\n\n\n\nmatch sert à comparer une valeur à des valeurs fixes (un code, un statut, un choix de menu). Dès qu’il faut un intervalle (note &gt;= 14) ou combiner plusieurs variables, restez sur if / elif.\nComme match est récent (2021), vous verrez encore beaucoup de code qui ne l’utilise pas. Et il sait faire bien plus que ce qu’on montre ici (pattern matching sur des structures), mais c’est hors du périmètre de ce cours."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#pourquoi-des-boucles",
+    "href": "03-initiation-python/02-conditions-boucles.html#pourquoi-des-boucles",
+    "title": "Conditions et boucles",
+    "section": "Pourquoi des boucles ?",
+    "text": "Pourquoi des boucles ?\nLes conditions permettent de choisir. Les boucles permettent de répéter.\nImaginez devoir afficher les 100 premières lignes d’un fichier, ou vérifier chaque transaction d’une journée : écrire 100 fois le même print n’est pas une option. Une boucle exécute un bloc de code plusieurs fois, avec la même syntaxe que les conditions : : et indentation.\nPython propose deux boucles :\n\n\n\n\n\n\n\nBoucle\nQuand l’utiliser\n\n\n\n\nfor\non sait sur quoi on boucle (un nombre de tours, les lettres d’un mot…)\n\n\nwhile\non boucle tant qu’une condition est vraie, sans savoir combien de tours il faudra"
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#la-boucle-for",
+    "href": "03-initiation-python/02-conditions-boucles.html#la-boucle-for",
+    "title": "Conditions et boucles",
+    "section": "La boucle for",
+    "text": "La boucle for\n\nRépéter un nombre de fois avec range()\nfor i in range(5):\n    print(f\"Tour numéro {i}\")\nTour numéro 0\nTour numéro 1\nTour numéro 2\nTour numéro 3\nTour numéro 4\nÀ chaque tour, la variable i prend la valeur suivante. range() s’utilise comme le slicing :\nrange(5)          # 0, 1, 2, 3, 4\nrange(1, 6)       # 1, 2, 3, 4, 5\nrange(0, 10, 2)   # 0, 2, 4, 6, 8\nrange(5, 0, -1)   # 5, 4, 3, 2, 1\n\n\n\n\n\n\nWarningLa borne de fin est exclue\n\n\n\nrange(1, 10) s’arrête à 9, pas à 10. Si vous voulez aller jusqu’à 10 inclus, écrivez range(1, 11). C’est la même règle que sequence[debut:fin] : début inclus, fin exclue.\n\n\n\n\nParcourir une chaîne de caractères\nfor ne sert pas qu’à compter : il parcourt n’importe quelle séquence, élément par élément.\nfor lettre in \"Python\":\n    print(lettre)\nVous l’utiliserez constamment avec les listes, que nous verrons plus tard. Le principe sera exactement le même.\n\n\n\n\n\n\nTipIl n’y a pas que range()\n\n\n\nUn réflexe venu d’autres langages consiste à boucler sur les positions pour récupérer les éléments :\nmot = \"Python\"\nfor i in range(len(mot)):   # 😕 fonctionne, mais peu lisible\n    print(mot[i])\nEn Python, on boucle directement sur les éléments : for lettre in mot:. Et si vous avez besoin de la position en plus de l’élément, utilisez enumerate() :\nfor position, lettre in enumerate(\"Python\"):\n    print(f\"{position} → {lettre}\")\n# 0 → P\n# 1 → y\n# ...\nRetenez la règle : range() pour compter, for element in sequence pour parcourir, enumerate() quand il faut les deux. Vous croiserez aussi zip() (parcourir deux séquences en parallèle) et reversed() (parcourir à l’envers) : nous les verrons avec les listes."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#la-boucle-while",
+    "href": "03-initiation-python/02-conditions-boucles.html#la-boucle-while",
+    "title": "Conditions et boucles",
+    "section": "La boucle while",
+    "text": "La boucle while\nwhile répète un bloc tant que sa condition est vraie. Elle est vérifiée avant chaque tour.\nsolde = 100\nmois = 0\n\nwhile solde &gt; 0:\n    solde -= 30\n    mois += 1\n\nprint(f\"Compte vide après {mois} mois (solde : {solde} €)\")\n# Compte vide après 4 mois (solde : -20 €)\n\n\n\n\n\n\nWarningLa boucle infinie\n\n\n\nSi la condition ne devient jamais fausse, la boucle ne s’arrête jamais :\ncompteur = 0\nwhile compteur &lt; 5:\n    print(compteur)\n    # oubli de compteur += 1 → tourne à l'infini\nDans un notebook, cliquez sur le bouton ⏹ (Interrupt) pour arrêter l’exécution. Le réflexe à avoir : vérifier que quelque chose change dans la boucle et rapproche la condition de False."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#break-et-continue",
+    "href": "03-initiation-python/02-conditions-boucles.html#break-et-continue",
+    "title": "Conditions et boucles",
+    "section": "break et continue",
+    "text": "break et continue\nDeux mots-clés modifient le déroulement d’une boucle :\n\nbreak sort immédiatement de la boucle ;\ncontinue passe directement au tour suivant.\n\n# Trouver le premier multiple de 7 supérieur à 50\nfor n in range(51, 100):\n    if n % 7 == 0:\n        print(f\"Trouvé : {n}\")   # Trouvé : 56\n        break\n# Afficher les nombres de 1 à 10, sauf les multiples de 3\nfor n in range(1, 11):\n    if n % 3 == 0:\n        continue\n    print(n)\nRemarquez que conditions et boucles s’imbriquent naturellement : un if dans un for, c’est simplement un bloc indenté dans un autre."
+  },
+  {
+    "objectID": "03-initiation-python/02-conditions-boucles.html#le-motif-de-laccumulateur",
+    "href": "03-initiation-python/02-conditions-boucles.html#le-motif-de-laccumulateur",
+    "title": "Conditions et boucles",
+    "section": "Le motif de l’accumulateur",
+    "text": "Le motif de l’accumulateur\nC’est le schéma le plus utile : on initialise une variable avant la boucle, et on la met à jour à chaque tour.\ntotal = 0                  # 1. initialisation, avant la boucle\n\nfor n in range(1, 6):\n    total += n             # 2. mise à jour, à chaque tour\n\nprint(total)               # 3. résultat, après la boucle → 15\nLe même motif sert à compter, à chercher un maximum, à construire une chaîne… C’est un schéma de base en algorithmique.\n\n\n\n\n\n\nNoteEt en analyse de données ?\n\n\n\nEn pratique, vous écrirez rarement ce genre de boucle sur des données : avec pandas ou numpy, une somme s’écrit df[\"montant\"].sum(), et c’est beaucoup plus rapide qu’une boucle Python sur des millions de lignes. On parle d’opérations vectorisées.\nAlors pourquoi l’apprendre ? Parce que .sum(), .max() ou .count() font exactement cela en coulisse. Comprendre l’accumulateur, c’est comprendre ce que vous demanderez plus tard à pandas.\n\n\n\n\n\n\n\n\nImportant🧠 À vous de réfléchir : où est passé le total ?\n\n\n\nCe code devait calculer la somme des notes de 1 à 3. Observez-le sans l’exécuter :\nfor note in range(1, 4):\n    total = 0\n    total += note\n\nprint(total)\n\nSelon vous, qu’affiche ce programme ?\nDéroulez la boucle tour par tour sur papier : que vaut total à la fin de chaque tour ?\nExécutez-le, puis corrigez-le pour obtenir 6.\n\n\n\n\n\n\n\n\n\nTip💡 Voir la solution\n\n\n\n\n\nLe programme affiche 3, et non 6.\n\n\n\nTour\nnote\ntotal = 0\ntotal += note\n\n\n\n\n1\n1\n0\n1\n\n\n2\n2\n0\n2\n\n\n3\n3\n0\n3\n\n\n\ntotal = 0 est dans la boucle : il est remis à zéro à chaque tour, et seul le dernier ajout survit. L’initialisation doit être faite une seule fois, avant la boucle :\ntotal = 0\nfor note in range(1, 4):\n    total += note\n\nprint(total)  # 6\nUne ligne décalée de 4 espaces, et le programme change de sens : l’indentation, encore elle.\n\n\n\n\n\n\n\n\n\nTipÀ retenir\n\n\n\n\nif, elif, else permettent d’exécuter un bloc seulement si une condition est vraie.\nLes : et l’indentation délimitent les blocs. Ils ne sont pas optionnels.\nLes conditions sont testées de haut en bas, et seule la première vraie s’exécute.\nand, or et not combinent des conditions. Répétez la comparaison de chaque côté du or.\nToute valeur peut servir de condition : 0 et \"\" valent False, le reste vaut True.\nmatch / case compare une valeur à des valeurs fixes, plus lisiblement qu’une chaîne de elif.\nfor parcourt une séquence (range(), une chaîne…), while répète tant qu’une condition est vraie.\nrange(debut, fin) exclut fin, comme le slicing.\nOn boucle directement sur les éléments (for lettre in mot), et enumerate() donne la position en plus.\nbreak sort de la boucle, continue passe au tour suivant.\nUn accumulateur s’initialise avant la boucle et se met à jour dedans."
+  },
+  {
+    "objectID": "02-environnement/01-local-slides.html#la-démarche-générale-tous-systèmes",
+    "href": "02-environnement/01-local-slides.html#la-démarche-générale-tous-systèmes",
+    "title": "Installer Python en local",
+    "section": "La démarche générale (tous systèmes)",
+    "text": "La démarche générale (tous systèmes)\n\nTélécharger Python depuis le site officiel : python.org/downloads\nLancer l’installateur\n\nWindows : cochez impérativement “Add Python to PATH” au premier écran.\nmacOS : ouvrez le fichier .pkg téléchargé et suivez l’assistant.\nLinux : Python est souvent déjà installé. Sinon : sudo apt install python3 python3-pip (Debian/Ubuntu).\n\nSuivre un tuto sur internet\n\n\n\n\n\n\n\nPourquoi je ne détaille pas l’installation\n\n\nJe ne détaille volontairement pas l’installation de Python en local. Ce n’est pas la solution que nous utiliserons dans ce cours. Sur une classe de 30 étudiants, si vous installez tous Python d’une manière plus ou moins différente, sur des OS et des versions différents, je passerai plus de temps à jouer au technicien de hotline qu’à vous enseigner des choses 👀.\nNous travaillerons donc dans un environnement cloud (voir la page suivante), identique pour tout le monde.\n\n\n\n\n\n\n\n\n\nSi vous êtes sur Windows\n\n\nSi vous souhaitez tout de même travailler en local à l’avenir, je ne saurais trop vous conseiller d’installer WSL (Windows Subsystem for Linux). Cela vous évite de dépendre des bizarreries de Windows avec Python, et vous rapproche d’un environnement proche de celui utilisé en production (Linux)."
   },
   {
     "objectID": "02-environnement/01-local.html",
@@ -630,6 +910,27 @@
       "Environnement",
       "Installer en local"
     ]
+  },
+  {
+    "objectID": "01-introduction/01-langages-slides.html#ce-quun-langage-de-programmation-permet",
+    "href": "01-introduction/01-langages-slides.html#ce-quun-langage-de-programmation-permet",
+    "title": "Qu’est-ce qu’un langage de programmation ?",
+    "section": "Ce qu’un langage de programmation permet",
+    "text": "Ce qu’un langage de programmation permet\n\nAutomatiser des tâches répétitives\nTraiter de grandes quantités de données\nCréer des applications, des sites web, des analyses\nRésoudre des problèmes de manière logique et structurée"
+  },
+  {
+    "objectID": "01-introduction/01-langages-slides.html#les-différents-langages-de-programmation",
+    "href": "01-introduction/01-langages-slides.html#les-différents-langages-de-programmation",
+    "title": "Qu’est-ce qu’un langage de programmation ?",
+    "section": "Les différents langages de programmation",
+    "text": "Les différents langages de programmation\nIl existe des centaines de langages, chacun avec ses forces et ses usages. On peut les classer selon plusieurs critères.\nSelon le niveau d’abstraction\n\n\n\n\n\n\n\n\nNiveau\nDescription\nExemples\n\n\n\n\nBas niveau\nProche de la machine, peu abstrait, difficile à lire\nAssembleur, C\n\n\nHaut niveau\nProche du langage humain, facile à lire\nPython, JavaScript\n\n\n\nPlus un langage est haut niveau, plus il est facile à apprendre et à écrire.\nSelon le mode d’exécution\n\n\n\n\n\n\n\n\nType\nFonctionnement\nExemples\n\n\n\n\nCompilé\nLe code est traduit en une fois avant exécution\nC, C++, Java\n\n\nInterprété\nLe code est traduit ligne par ligne pendant l’exécution\nPython, JavaScript, R\n\n\n\nLes langages interprétés sont plus interactifs et plus faciles à tester : on voit immédiatement le résultat.\n\nSelon le paradigme (la façon de penser le programme)\n\nImpératif / Procédural : on décrit comment faire, étape par étape (C, Pascal)\nOrienté objet : on organise le code autour d’objets (Java, C++, Python)\nFonctionnel : on décrit quoi faire, avec des fonctions (OCaml, Haskell)\nDéclaratif : on décrit le problème sans dire comment le résoudre (SQL)\n\nPython est multi-paradigme : il supporte l’impératif, l’objet et le fonctionnel.\nQuelques langages courants et leurs usages\n\n\n\nLangage\nUsage principal\n\n\n\n\nPython\nData science, IA, scripts, web\n\n\nJavaScript\nSites web interactifs\n\n\nJava\nApplications d’entreprise\n\n\nC / C++\nSystèmes, jeux vidéo\n\n\nR\nStatistiques, recherche\n\n\nSQL\nBases de données"
+  },
+  {
+    "objectID": "01-introduction/01-langages-slides.html#pour-aller-plus-loin",
+    "href": "01-introduction/01-langages-slides.html#pour-aller-plus-loin",
+    "title": "Qu’est-ce qu’un langage de programmation ?",
+    "section": "Pour aller plus loin",
+    "text": "Pour aller plus loin\n\nPython — Qu’est-ce que Python ? (python.org)\nWikipédia — Langage de programmation\nWikipédia — Paradigme de programmation"
   },
   {
     "objectID": "01-introduction/01-langages.html",
