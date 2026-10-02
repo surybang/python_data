@@ -1,5 +1,15 @@
 ---
 title: "Les environnements en ligne"
+format:
+  html: default
+  revealjs:
+    output-file: variables-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
 ---
 
 Pour suivre ce cours, vous n'avez **rien à installer**. Nous allons travailler dans ce qu'on appelle le *cloud* : le code s'exécute sur un serveur distant, et vous y accédez depuis votre navigateur. C'est plus simple, plus homogène pour tout le monde, et cela nous permet de nous concentrer sur le contenu plutôt que sur l'installation de logiciels.

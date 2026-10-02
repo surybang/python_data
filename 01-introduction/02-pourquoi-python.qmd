@@ -1,5 +1,15 @@
 ---
 title: "Pourquoi Python ?"
+format:
+  html: default
+  revealjs:
+    output-file: variables-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
 ---
 
 Python est aujourd'hui **l'un des langages de programmation les plus populaire au monde (selon [TIOBE](https://www.tiobe.com/tiobe-index/))**, et le langage dominant dans l'écosystème de la data science.

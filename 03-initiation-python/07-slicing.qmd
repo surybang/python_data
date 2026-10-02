@@ -1,5 +1,15 @@
 ---
 title: "Le slicing"
+format:
+  html: default
+  revealjs:
+    output-file: variables-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
 ---
 
 :::{.callout-tip}

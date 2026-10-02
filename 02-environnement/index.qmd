@@ -1,5 +1,15 @@
 ---
 title: "Environnement de travail"
+format:
+  html: default
+  revealjs:
+    output-file: variables-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
 ---
 
 Pour écrire et exécuter du code Python, il vous faut un **environnement de travail**. Il en existe deux grandes familles :

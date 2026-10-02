@@ -1,5 +1,15 @@
 ---
 title: "Installer Python en local"
+format:
+  html: default
+  revealjs:
+    output-file: variables-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
 ---
 
 Installer Python sur son ordinateur est la façon la plus "classique" de travailler. Une fois installé, vous pouvez coder sans connexion internet, avec vos propres fichiers, dans l'éditeur de votre choix.

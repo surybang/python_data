@@ -1,5 +1,15 @@
 ---
 title: "Qu'est-ce qu'un langage de programmation ?"
+format:
+  html: default
+  revealjs:
+    output-file: variables-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
 ---
 
 Un **langage de programmation** est un ensemble de règles et de symboles qui permettent de donner des instructions à un ordinateur. C'est un intermédiaire entre vous (l'humain) et la machine.

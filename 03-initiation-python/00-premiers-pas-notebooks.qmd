@@ -1,5 +1,15 @@
 ---
 title: "Premiers pas dans un *notebook*"
+format:
+  html: default
+  revealjs:
+    output-file: variables-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
 ---
 
 Il est maintenant l'heure pour nous de découvrir votre prochain outil de travail pour les années à venir 👴.
