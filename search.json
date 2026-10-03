@@ -1055,37 +1055,17 @@
     "href": "03-initiation-python/index.html",
     "title": "Initiation à Python 🐍",
     "section": "",
-    "text": "Bienvenue dans ce cours d’introduction à la programmation Python.",
+    "text": "Bienvenue dans ce module d’introduction à la programmation Python.\nIl est conçu pour des débutants complets : aucune connaissance préalable en programmation n’est nécessaire. À la fin du module, vous saurez écrire de petits programmes qui manipulent des données, et vous aurez les bases pour aborder l’analyse de données.",
     "crumbs": [
       "Initiation Python"
     ]
   },
   {
-    "objectID": "03-initiation-python/index.html#objectifs",
-    "href": "03-initiation-python/index.html#objectifs",
+    "objectID": "03-initiation-python/index.html#au-programme",
+    "href": "03-initiation-python/index.html#au-programme",
     "title": "Initiation à Python 🐍",
-    "section": "Objectifs",
-    "text": "Objectifs\nCe cours est conçu pour des débutants complets. Il couvre dans un premier temps :\n\nPremiers pas : Apprendre à marcher avec un notebook\nVariables types et opérations : Nommer, calculer et manipuler des valeurs\nConditions et boucles : Prendre des décisions, répéter des actions\nFonctions : Organiser son code\nStructure de données : Manipuler des données dans des objets appropriés\nLe slicing : Extraire une portion d’une séquence",
-    "crumbs": [
-      "Initiation Python"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/index.html#comment-utiliser-ce-cours",
-    "href": "03-initiation-python/index.html#comment-utiliser-ce-cours",
-    "title": "Initiation à Python 🐍",
-    "section": "Comment utiliser ce cours",
-    "text": "Comment utiliser ce cours\nSuivez les chapitres dans l’ordre via la barre latérale ou explorez-le comme bon vous semble 😊.\n\n\n\n\n\n\nTipPour ce cours\n\n\n\nNous utiliserons principalement le SSPCloud ou Google Colab, car ils sont préconfigurés et ne nécessitent aucune installation.\nVous pourrez accéder aux notebooks en utilisant les icônes comme ci-dessous.\n \n(ils ne fonctionnent pas volontairement, ne perdez pas de temps à savoir pourquoi 👀)\n\n\n\n\n\n\n\n\nTipL’erreur est normale\n\n\n\nSe tromper fait partie de l’apprentissage. Lisez les messages d’erreur, ils vous guident.",
-    "crumbs": [
-      "Initiation Python"
-    ]
-  },
-  {
-    "objectID": "03-initiation-python/index.html#ressources",
-    "href": "03-initiation-python/index.html#ressources",
-    "title": "Initiation à Python 🐍",
-    "section": "Ressources",
-    "text": "Ressources\n\nGitHub du cours\nGaliana, Lino. Python pour la data science.\nChaine de Machine Learnia.\nChaine de Ricco Rakotomalala. ### 1. Variables et types\n\nUn programme doit stocker des informations : c’est le rôle des variables. Nous verrons ici comment en créer, quels sont les types de base en Python (entiers, flottants, chaînes, booléens), et comment les afficher ou les demander à l’utilisateur.\nNotions clés : variables, int, float, str, bool, print(), input()\n\n2. Conditions et boucles\nUn programme doit pouvoir prendre des décisions et répéter des actions. Vous apprendrez les instructions if, elif, else, ainsi que les boucles for et while. C’est le moment où vos programmes deviennent réellement utiles.\nNotions clés : if/elif/else, opérateurs logiques, for, while, indentation\n\n\n3. Fonctions\nÉcrire tout son code en vrac devient vite ingérable. Les fonctions permettent de découper un programme en blocs réutilisables, nommés et documentés. C’est une étape décisive vers du code propre.\nNotions clés : def, paramètres, return, portée des variables, docstrings\n\n\n4. Listes, dictionnaires et fichiers\nLes données réelles ne sont pas des valeurs isolées : ce sont des collections. Vous apprendrez à manipuler des listes et des dictionnaires, et à lire/écrire dans des fichiers. C’est la porte d’entrée vers la manipulation de données.\nNotions clés : listes, indexation, slicing, dictionnaires, open(), with",
+    "section": "Au programme",
+    "text": "Au programme\n\n\n\n\nChapitre\nCe que vous apprendrez\n\n\n\n\n0\nPremiers pas dans un notebook\nPrendre en main l’outil de travail : cellules, exécution, Markdown\n\n\n1\nVariables, types et opérations\nNommer des valeurs, comprendre ce qui se passe en mémoire, calculer et manipuler du texte\n\n\n2\nConditions et boucles\nPrendre des décisions et répéter des actions\n\n\n3\nStructures de données\nRegrouper des valeurs dans des listes, tuples, dictionnaires et ensembles\n\n\n4\nLe slicing\nExtraire une portion d’une liste ou d’une chaîne\n\n\n5\nLes fonctions\nOrganiser son code en blocs réutilisables, et distinguer fonctions et méthodes\n\n\n6\nEntrées/sorties et premier script (à venir)\nDialoguer avec l’utilisateur et écrire un vrai programme : le jeu « Devine le nombre »\n\n\n\nChaque chapitre s’appuie sur les précédents : suivez-les dans l’ordre, via la barre latérale ou les liens en bas de chaque page.",
     "crumbs": [
       "Initiation Python"
     ]
@@ -1095,7 +1075,17 @@
     "href": "03-initiation-python/index.html#comment-ce-module-est-organisé",
     "title": "Initiation à Python 🐍",
     "section": "Comment ce module est organisé",
-    "text": "Comment ce module est organisé\nChaque notion est présentée dans une page dédiée, qui contient :\n\nUne explication courte du concept, avec des exemples concrets.\nDes cellules de code exécutables, que vous pouvez modifier et relancer.\nDes exercices à faire vous-même, avec un squelette de code à compléter.\nUne correction (à consulter après avoir essayé).",
+    "text": "Comment ce module est organisé\nChaque chapitre se compose de deux parties.\nUne page de cours, sur ce site, qui contient :\n\ndes explications illustrées d’exemples concrets ;\ndes encadrés 🧠 À vous de réfléchir : un petit code à analyser avant de l’exécuter, avec sa solution repliée. Jouez le jeu, c’est là que se trouvent les pièges les plus fréquents ;\nun encadré À retenir en fin de page.\n\nChaque page est aussi disponible en slides, via le lien « Voir les slides ».\nUn notebook d’exercices, accessible en haut de chaque page de cours, avec :\n\ndes cellules # TODO à compléter, et le résultat attendu pour vous vérifier ;\nun mini-projet en fin de notebook, qui combine les notions du chapitre ;\ndes corrigés à consulter après avoir cherché.\n\n\n\n\n\n\n\nTipOù travailler ?\n\n\n\nNous utiliserons principalement SSP Cloud ou Google Colab : ils sont préconfigurés et ne nécessitent aucune installation. Ils sont présentés dans la partie Environnement.\nEn haut de chaque page de cours, deux boutons ouvrent directement le notebook d’exercices :\n \n(ceux-ci sont des exemples et ne mènent à aucun notebook 👀)\n\n\n\n\n\n\n\n\nTipL’erreur est normale\n\n\n\nSe tromper fait partie de l’apprentissage. Lisez les messages d’erreur : ils indiquent la ligne en cause et le type de problème, et vous apprendrez vite à les déchiffrer.",
+    "crumbs": [
+      "Initiation Python"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/index.html#ressources",
+    "href": "03-initiation-python/index.html#ressources",
+    "title": "Initiation à Python 🐍",
+    "section": "Ressources",
+    "text": "Ressources\n\nGitHub du cours\nGaliana, Lino. Python pour la data science.\nChaîne YouTube Machine Learnia\nChaîne YouTube de Ricco Rakotomalala",
     "crumbs": [
       "Initiation Python"
     ]
