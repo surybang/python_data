@@ -578,6 +578,300 @@
     "text": "Opérations de comparaison\nLes opérateurs de comparaison renvoient un booléen (True ou False).\n\n\n\nOpérateur\nSignification\nExemple\nRésultat\n\n\n\n\n==\nÉgal à\n5 == 5\nTrue\n\n\n!=\nDifférent de\n5 != 3\nTrue\n\n\n&lt;\nInférieur à\n5 &lt; 3\nFalse\n\n\n&gt;\nSupérieur à\n5 &gt; 3\nTrue\n\n\n&lt;=\nInférieur ou égal\n5 &lt;= 5\nTrue\n\n\n&gt;=\nSupérieur ou égal\n5 &gt;= 6\nFalse\n\n\n\nprint(5 == 5)     # True\nprint(5 != 3)     # True\nprint(10 &gt; 3)     # True\nprint(10 &lt;= 3)    # False"
   },
   {
+    "objectID": "notebooks/03-structures-donnees.html",
+    "href": "notebooks/03-structures-donnees.html",
+    "title": "Exercices : Structures de données",
+    "section": "",
+    "text": "Ce notebook accompagne le cours Structures de données. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.\nPour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat."
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-1-premiers-pas-avec-les-listes",
+    "href": "notebooks/03-structures-donnees.html#exercice-1-premiers-pas-avec-les-listes",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 1 : Premiers pas avec les listes",
+    "text": "Exercice 1 : Premiers pas avec les listes\n\nnotes = [12, 15, 8, 17, 10, 14]\n\n# TODO : récupère la première note, la dernière note et le nombre de notes\npremiere = ...\nderniere = ...\nnb_notes = ...\n\n# TODO : calcule la moyenne (sans boucle)\nmoyenne = ...\n\nprint(premiere, derniere, nb_notes)   # attendu : 12 14 6\nprint(f\"Moyenne : {moyenne:.2f}\")     # attendu : Moyenne : 12.67"
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-2-gérer-un-panier",
+    "href": "notebooks/03-structures-donnees.html#exercice-2-gérer-un-panier",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 2 : Gérer un panier",
+    "text": "Exercice 2 : Gérer un panier\nApplique les opérations dans l’ordre, en modifiant la liste panier à chaque étape.\n\npanier = [\"pain\", \"lait\", \"beurre\"]\n\n# TODO 1 : ajoute \"oeufs\" à la fin\n...\n\n# TODO 2 : insère \"café\" en première position\n...\n\n# TODO 3 : retire \"lait\"\n...\n\n# TODO 4 : remplace \"beurre\" par \"confiture\" (en passant par son index)\n...\n\nprint(panier)\n# attendu : ['café', 'pain', 'confiture', 'oeufs']\n\n# TODO 5 : affiche \"Il faut acheter du pain\" seulement si \"pain\" est dans le panier\n..."
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-3-trier-sans-rien-perdre",
+    "href": "notebooks/03-structures-donnees.html#exercice-3-trier-sans-rien-perdre",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 3 : Trier sans rien perdre",
+    "text": "Exercice 3 : Trier sans rien perdre\nDevine d’abord ce qu’affiche ce code, puis exécute-le.\n\nventes = [340, 120, 560, 90]\nclassement = ventes.sort()\n\nprint(classement)   # ?\nprint(ventes)       # ?\n\n\nventes = [340, 120, 560, 90]\n\n# TODO : crée `classement`, une NOUVELLE liste triée du plus grand au plus petit,\n# sans modifier `ventes`\n# Indice : sorted() accepte un paramètre reverse=True\nclassement = ...\n\nprint(classement)   # attendu : [560, 340, 120, 90]\nprint(ventes)       # attendu : [340, 120, 560, 90]"
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-4-filtrer-des-transactions",
+    "href": "notebooks/03-structures-donnees.html#exercice-4-filtrer-des-transactions",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 4 : Filtrer des transactions",
+    "text": "Exercice 4 : Filtrer des transactions\nConstruis la liste des débits (montants négatifs), puis calcule leur total.\n\ntransactions = [120.0, -45.5, 300.0, -12.0, -80.25, 50.0]\n\n# TODO : accumulateur qui construit une liste\ndebits = ...\n\nprint(debits)        # attendu : [-45.5, -12.0, -80.25]\nprint(sum(debits))   # attendu : -137.75\n\n[-45.5, -12.0, -80.25]\n-137.75\n\n\n\n# Bonus : refais la même chose en une ligne avec une liste en compréhension\ndebits = ...\nprint(debits)"
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-5-deux-listes-en-parallèle",
+    "href": "notebooks/03-structures-donnees.html#exercice-5-deux-listes-en-parallèle",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 5 : Deux listes en parallèle",
+    "text": "Exercice 5 : Deux listes en parallèle\nAffiche le résultat de chaque étudiant avec zip().\n\nprenoms = [\"Jessica\", \"Wilson\", \"Ian\", \"Becky\"]\nnotes = [14, 9, 17, 10]\n\n# TODO\n...\n# attendu :\n# Jessica : 14 → admis\n# Wilson : 9 → recalé\n# Ian : 17 → admis\n# Becky : 10 → admis"
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-6-les-tuples",
+    "href": "notebooks/03-structures-donnees.html#exercice-6-les-tuples",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 6 : Les tuples",
+    "text": "Exercice 6 : Les tuples\n\npoint = (3, 7)\n\n# TODO 1 : déballe le tuple dans deux variables x et y\n...\nprint(x, y)   # attendu : 3 7\n\n# TODO 2 : essaie de modifier point[0] = 10. Que se passe-t-il ? Lis le message d'erreur.\n...\n\n\na = 1\nb = 2\n\n# TODO 3 : échange les valeurs de a et b en UNE seule ligne, sans variable intermédiaire\n# Indice : pense au déballage de tuple\n...\n\nprint(a, b)   # attendu : 2 1"
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-7-fiche-produit",
+    "href": "notebooks/03-structures-donnees.html#exercice-7-fiche-produit",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 7 : Fiche produit",
+    "text": "Exercice 7 : Fiche produit\n\nproduit = {\n    \"nom\": \"Clavier\",\n    \"prix\": 49.9,\n    \"stock\": 12,\n}\n\n# TODO 1 : affiche \"Clavier : 49.9 €\"\n...\n\n# TODO 2 : une vente a lieu, diminue le stock de 1\n...\n\n# TODO 3 : ajoute une clé \"categorie\" avec la valeur \"informatique\"\n...\n\n# TODO 4 : affiche la marque avec .get(), et \"non renseignée\" si la clé n'existe pas\n...\n\n# TODO 5 : affiche chaque champ sous la forme \"clé : valeur\"\n...\n# attendu :\n# nom : Clavier\n# prix : 49.9\n# stock : 11\n# categorie : informatique"
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-8-compter-les-moyens-de-paiement",
+    "href": "notebooks/03-structures-donnees.html#exercice-8-compter-les-moyens-de-paiement",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 8 : Compter les moyens de paiement",
+    "text": "Exercice 8 : Compter les moyens de paiement\n\nConstruis un dictionnaire qui compte chaque moyen de paiement.\nTrouve le moyen de paiement le plus utilisé, avec une boucle sur le dictionnaire.\n\n\npaiements = [\"CB\", \"espèces\", \"CB\", \"chèque\", \"CB\", \"espèces\", \"virement\", \"CB\"]\n\n# TODO 1\ncompteur = ...\nprint(compteur)\n# attendu : {'CB': 4, 'espèces': 2, 'chèque': 1, 'virement': 1}\n\n# TODO 2\n...\n# attendu : Le plus utilisé : CB (4 fois)"
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-9-clients-distincts",
+    "href": "notebooks/03-structures-donnees.html#exercice-9-clients-distincts",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 9 : Clients distincts",
+    "text": "Exercice 9 : Clients distincts\n\nvisites = [\"C042\", \"C017\", \"C042\", \"C103\", \"C017\", \"C042\", \"C256\"]\n\n# TODO 1 : combien de visites au total ? combien de clients différents ?\nnb_visites = ...\nnb_clients = ...\nprint(f\"{nb_visites} visites pour {nb_clients} clients\")\n# attendu : 7 visites pour 4 clients\n\n# TODO 2 : le client \"C999\" est-il déjà venu ?\n...  # attendu : False"
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#exercice-10-mini-projet-analyse-des-ventes",
+    "href": "notebooks/03-structures-donnees.html#exercice-10-mini-projet-analyse-des-ventes",
+    "title": "Exercices : Structures de données",
+    "section": "Exercice 10 : Mini-projet : analyse des ventes",
+    "text": "Exercice 10 : Mini-projet : analyse des ventes\nOn dispose d’une liste de dictionnaires, comme un petit tableau de données. Réponds aux questions sans pandas, uniquement avec ce que tu as vu jusqu’ici.\n\nventes = [\n    {\"produit\": \"Clavier\", \"ville\": \"Lyon\",   \"montant\": 49.9},\n    {\"produit\": \"Souris\",  \"ville\": \"Paris\",  \"montant\": 19.9},\n    {\"produit\": \"Écran\",   \"ville\": \"Lyon\",   \"montant\": 189.0},\n    {\"produit\": \"Clavier\", \"ville\": \"Nantes\", \"montant\": 49.9},\n    {\"produit\": \"Écran\",   \"ville\": \"Paris\",  \"montant\": 189.0},\n    {\"produit\": \"Souris\",  \"ville\": \"Lyon\",   \"montant\": 19.9},\n]\n\n# TODO 1 : chiffre d'affaires total\nca_total = ...\nprint(f\"CA total : {ca_total:.2f} €\")       # attendu : CA total : 517.60 €\n\n# TODO 2 : liste des villes distinctes, triée par ordre alphabétique\nvilles = ...\nprint(villes)                               # attendu : ['Lyon', 'Nantes', 'Paris']\n\n# TODO 3 : chiffre d'affaires par ville (dictionnaire)\nca_par_ville = ...\nprint(ca_par_ville)\n# attendu : {'Lyon': 258.8, 'Paris': 208.9, 'Nantes': 49.9}  (aux arrondis près)\n\n# TODO 4 : produits vendus à Lyon\nproduits_lyon = ...\nprint(produits_lyon)                        # attendu : ['Clavier', 'Écran', 'Souris']"
+  },
+  {
+    "objectID": "notebooks/03-structures-donnees.html#corrigés",
+    "href": "notebooks/03-structures-donnees.html#corrigés",
+    "title": "Exercices : Structures de données",
+    "section": "Corrigés",
+    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\npremiere = notes[0]\nderniere = notes[-1]\nnb_notes = len(notes)\nmoyenne = sum(notes) / len(notes)\nExercice 2\npanier.append(\"oeufs\")\npanier.insert(0, \"café\")\npanier.remove(\"lait\")\npanier[panier.index(\"beurre\")] = \"confiture\"\n\nif \"pain\" in panier:\n    print(\"Il faut acheter du pain\")\nExercice 3\n# Le premier bloc affiche None, puis [90, 120, 340, 560] :\n# .sort() trie `ventes` sur place et renvoie None.\n\nclassement = sorted(ventes, reverse=True)\nExercice 4\ndebits = []\nfor montant in transactions:\n    if montant &lt; 0:\n        debits.append(montant)\n\n# Bonus\ndebits = [montant for montant in transactions if montant &lt; 0]\nExercice 5\nfor prenom, note in zip(prenoms, notes):\n    if note &gt;= 10:\n        print(f\"{prenom} : {note} → admis\")\n    else:\n        print(f\"{prenom} : {note} → recalé\")\nExercice 6\nx, y = point\n# point[0] = 10 → TypeError: 'tuple' object does not support item assignment\na, b = b, a\nExercice 7\nprint(f\"{produit['nom']} : {produit['prix']} €\")\nproduit[\"stock\"] -= 1\nproduit[\"categorie\"] = \"informatique\"\nprint(produit.get(\"marque\", \"non renseignée\"))\n\nfor cle, valeur in produit.items():\n    print(f\"{cle} : {valeur}\")\nAttention aux guillemets : dans une f-string entre \", on écrit les clés avec '.\nExercice 8\ncompteur = {}\nfor p in paiements:\n    compteur[p] = compteur.get(p, 0) + 1\n\nmeilleur = None\nmaximum = 0\nfor moyen, nb in compteur.items():\n    if nb &gt; maximum:\n        meilleur = moyen\n        maximum = nb\n\nprint(f\"Le plus utilisé : {meilleur} ({maximum} fois)\")\nExercice 9\nnb_visites = len(visites)\nnb_clients = len(set(visites))\nprint(\"C999\" in visites)\nExercice 10\n# 1\nca_total = 0\nfor v in ventes:\n    ca_total += v[\"montant\"]\n\n# 2\nvilles = []\nfor v in ventes:\n    villes.append(v[\"ville\"])\nvilles = sorted(set(villes))\n\n# 3\nca_par_ville = {}\nfor v in ventes:\n    ville = v[\"ville\"]\n    ca_par_ville[ville] = ca_par_ville.get(ville, 0) + v[\"montant\"]\n\n# 4\nproduits_lyon = []\nfor v in ventes:\n    if v[\"ville\"] == \"Lyon\":\n        produits_lyon.append(v[\"produit\"])\nAvec pandas, ces quatre questions s’écriront df[\"montant\"].sum(), sorted(df[\"ville\"].unique()), df.groupby(\"ville\")[\"montant\"].sum() et df[df[\"ville\"] == \"Lyon\"][\"produit\"]. Vous venez de les coder à la main !"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html",
+    "href": "notebooks/02-conditions-boucles.html",
+    "title": "Exercices : Conditions et boucles",
+    "section": "",
+    "text": "Ce notebook accompagne le cours Conditions et boucles. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.\nPour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat. Change les valeurs de départ pour tester plusieurs cas."
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-1-tarif-de-cinéma",
+    "href": "notebooks/02-conditions-boucles.html#exercice-1-tarif-de-cinéma",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 1 : Tarif de cinéma",
+    "text": "Exercice 1 : Tarif de cinéma\nÉcris un programme qui affiche le prix d’une place selon l’âge :\n\nmoins de 12 ans : 5 €\nde 12 à 25 ans inclus : 7 €\n65 ans et plus : 6 €\nsinon : 10 €\n\n\nage = 30\n\n# TODO : calcule le prix avec if / elif / else\nprix = ...\n\nprint(f\"{age} ans → {prix} €\")\n# attendu : 30 ans → 10 €   (teste aussi 8, 25, 26, 70)\n\n30 ans → 10 €"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-2-année-bissextile",
+    "href": "notebooks/02-conditions-boucles.html#exercice-2-année-bissextile",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 2 : Année bissextile",
+    "text": "Exercice 2 : Année bissextile\nUne année est bissextile si elle est divisible par 4, sauf si elle est divisible par 100… sauf si elle est aussi divisible par 400.\nIndice : « divisible par 4 » se traduit par annee % 4 == 0.\n\nannee = 1900\n\n# TODO : écris la condition en une seule ligne, avec and / or / not\nbissextile = ...\n\nprint(f\"{annee} bissextile ? {bissextile}\")\n# attendu : 1900 → False, 2000 → True, 2024 → True, 2025 → False\n\n1900 bissextile ? False"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-3-suivi-de-commande-avec-match",
+    "href": "notebooks/02-conditions-boucles.html#exercice-3-suivi-de-commande-avec-match",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 3 : Suivi de commande avec match",
+    "text": "Exercice 3 : Suivi de commande avec match\nUn site e-commerce stocke le statut d’une commande sous forme de code. Affiche le message correspondant :\n\n\n\nCode\nMessage\n\n\n\n\n\"P\"\nEn préparation 📦\n\n\n\"E\"\nExpédiée 🚚\n\n\n\"L\"\nLivrée ✅\n\n\n\"A\" ou \"R\"\nAnnulée ou remboursée ❌\n\n\nautre\nStatut inconnu\n\n\n\n\nstatut = \"R\"\n\n# TODO : utilise match / case\n...\n# attendu : Annulée ou remboursée ❌"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-4-table-de-multiplication",
+    "href": "notebooks/02-conditions-boucles.html#exercice-4-table-de-multiplication",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 4 : Table de multiplication",
+    "text": "Exercice 4 : Table de multiplication\nAffiche la table de multiplication de n, de 1 à 10 inclus.\n\nn = 7\n\n# TODO : boucle for avec range()\n...\n# attendu :\n# 7 x 1 = 7\n# 7 x 2 = 14\n# ...\n# 7 x 10 = 70"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-5-compter-une-lettre",
+    "href": "notebooks/02-conditions-boucles.html#exercice-5-compter-une-lettre",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 5 : Compter une lettre",
+    "text": "Exercice 5 : Compter une lettre\nCompte le nombre de \"s\" dans un mot, en bouclant directement sur les lettres (sans range).\n\nmot = \"Mississippi\"\n\n# TODO : accumulateur + boucle for sur le mot\nnb_s = ...\n\nprint(f\"Il y a {nb_s} 's' dans {mot}\")\n# attendu : Il y a 4 's' dans Mississippi"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-6-rendre-le-code-pythonique",
+    "href": "notebooks/02-conditions-boucles.html#exercice-6-rendre-le-code-pythonique",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 6 : Rendre le code « pythonique »",
+    "text": "Exercice 6 : Rendre le code « pythonique »\nCe code fonctionne, mais il n’est pas écrit comme on le ferait en Python. Réécris-le avec enumerate().\n\nmot = \"Python\"\n\n# Version à améliorer\nfor i in range(len(mot)):\n    print(f\"Lettre n°{i + 1} : {mot[i]}\")\n\n# TODO : même affichage avec enumerate()\n...\n# attendu :\n# Lettre n°1 : P\n# Lettre n°2 : y\n# ..."
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-7-objectif-épargne-avec-while",
+    "href": "notebooks/02-conditions-boucles.html#exercice-7-objectif-épargne-avec-while",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 7 : Objectif épargne avec while",
+    "text": "Exercice 7 : Objectif épargne avec while\nTu places 1 000 € sur un livret à 3 % par an. Combien d’années faut-il pour atteindre au moins 1 500 € ?\n\ncapital = 1000\nobjectif = 1500\ntaux = 0.03\nannees = 0\n\n# TODO : boucle while\n...\n\nprint(f\"{annees} ans → {capital:.2f} €\")\n# attendu : 14 ans → 1512.59 €"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-8-break-et-continue",
+    "href": "notebooks/02-conditions-boucles.html#exercice-8-break-et-continue",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 8 : break et continue",
+    "text": "Exercice 8 : break et continue\n\nTrouve le premier nombre supérieur à 100 divisible à la fois par 7 et par 11, puis arrête la boucle.\nAffiche les nombres de 1 à 20, sauf les multiples de 4.\n\n\n# TODO 1 : break\n...\n# attendu : 154\n\n\n# TODO 2 : continue\n...\n# attendu : 1 2 3 5 6 7 9 10 11 13 14 15 17 18 19 (un par ligne)"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-9-trouve-le-bug",
+    "href": "notebooks/02-conditions-boucles.html#exercice-9-trouve-le-bug",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 9 : Trouve le bug 🐛",
+    "text": "Exercice 9 : Trouve le bug 🐛\nCe programme doit afficher la somme des nombres pairs de 1 à 100. Il contient trois erreurs. Devine d’abord ce qu’il affiche, puis corrige-le.\n\nfor n in range(1, 100):\n    total = 0\n    if n % 2 == 1:\n        total += n\n\nprint(total)\n# attendu après correction : 2550\n\n2500"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#exercice-10-mini-projet-fizzbuzz",
+    "href": "notebooks/02-conditions-boucles.html#exercice-10-mini-projet-fizzbuzz",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Exercice 10 : Mini-projet FizzBuzz",
+    "text": "Exercice 10 : Mini-projet FizzBuzz\nUn grand classique des entretiens techniques ! Pour chaque nombre de 1 à 30 :\n\ns’il est divisible par 3 et par 5, affiche FizzBuzz ;\ns’il est divisible par 3, affiche Fizz ;\ns’il est divisible par 5, affiche Buzz ;\nsinon, affiche le nombre.\n\nRéfléchis bien à l’ordre de tes conditions…\n\n# TODO\n...\n# attendu : 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16...\n\nBuzz"
+  },
+  {
+    "objectID": "notebooks/02-conditions-boucles.html#corrigés",
+    "href": "notebooks/02-conditions-boucles.html#corrigés",
+    "title": "Exercices : Conditions et boucles",
+    "section": "Corrigés",
+    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\nif age &lt; 12:\n    prix = 5\nelif age &lt;= 25:\n    prix = 7\nelif age &gt;= 65:\n    prix = 6\nelse:\n    prix = 10\nExercice 2\nbissextile = (annee % 4 == 0 and annee % 100 != 0) or annee % 400 == 0\nExercice 3\nmatch statut:\n    case \"P\":\n        print(\"En préparation 📦\")\n    case \"E\":\n        print(\"Expédiée 🚚\")\n    case \"L\":\n        print(\"Livrée ✅\")\n    case \"A\" | \"R\":\n        print(\"Annulée ou remboursée ❌\")\n    case _:\n        print(\"Statut inconnu\")\nExercice 4\nfor i in range(1, 11):\n    print(f\"{n} x {i} = {n * i}\")\nExercice 5\nnb_s = 0\nfor lettre in mot:\n    if lettre == \"s\":\n        nb_s += 1\nExercice 6\nfor i, lettre in enumerate(mot):\n    print(f\"Lettre n°{i + 1} : {lettre}\")\n\n# Bonus : enumerate accepte un point de départ\nfor i, lettre in enumerate(mot, start=1):\n    print(f\"Lettre n°{i} : {lettre}\")\nExercice 7\nwhile capital &lt; objectif:\n    capital *= 1 + taux\n    annees += 1\nExercice 8\nfor n in range(101, 1000):\n    if n % 7 == 0 and n % 11 == 0:\n        print(n)\n        break\n\nfor n in range(1, 21):\n    if n % 4 == 0:\n        continue\n    print(n)\nExercice 9\ntotal = 0                    # 1. initialisation AVANT la boucle\nfor n in range(1, 101):      # 2. range(1, 100) s'arrête à 99\n    if n % 2 == 0:           # 3. pair : reste 0, pas 1\n        total += n\n\nprint(total)  # 2550\nLa version bugguée affiche 99 : total est remis à zéro à chaque tour, et seul le dernier impair survit.\nExercice 10\nfor n in range(1, 31):\n    if n % 3 == 0 and n % 5 == 0:   # le cas le plus restrictif en premier !\n        print(\"FizzBuzz\")\n    elif n % 3 == 0:\n        print(\"Fizz\")\n    elif n % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(n)\nSi on teste n % 3 == 0 en premier, 15 affiche Fizz et la branche FizzBuzz n’est jamais atteinte : c’est le même piège que l’exercice des mentions dans le cours."
+  },
+  {
+    "objectID": "notebooks/07-slicing.html",
+    "href": "notebooks/07-slicing.html",
+    "title": "Le slicing en Python",
+    "section": "",
+    "text": "Le slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :\nCe notebook est progressif : lis chaque section, exécute les cellules d’exploration, puis complète les exercices."
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#les-index-comment-python-numérote",
+    "href": "notebooks/07-slicing.html#les-index-comment-python-numérote",
+    "title": "Le slicing en Python",
+    "section": "1. Les index : comment Python numérote",
+    "text": "1. Les index : comment Python numérote\nChaque élément d’une séquence a deux index : un positif (de gauche à droite, en partant de 0) et un négatif (de droite à gauche, en partant de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nmot[0] → 'P'\nmot[-1] → 'n' (le dernier, sans connaître la longueur)\n\n# Exploration — exécute et observe\nmot = \"Python\"\n\nprint(mot[0])   # premier caractère\nprint(mot[5])   # sixième caractère\nprint(mot[-1])  # dernier caractère\nprint(mot[-2])  # avant-dernier\n\n\n# Exercice 1a — Index\nfruits = [\"pomme\", \"banane\", \"cerise\", \"datte\", \"figue\"]\n\n# TODO : affiche le premier et le dernier fruit avec des index\npremier = ...\ndernier = ...\nprint(premier, dernier)  # attendu : pomme figue\n\n# TODO : affiche l'avant-dernier fruit\navant_dernier = ...\nprint(avant_dernier)  # attendu : datte"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
+    "href": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
+    "title": "Le slicing en Python",
+    "section": "2. Le slicing de base : [debut:fin]",
+    "text": "2. Le slicing de base : [debut:fin]\nsequence[debut:fin] retourne les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]  →  \"Pyt\"   # index 0, 1, 2 (3 exclu)\nmot[2:5]  →  \"tho\"   # index 2, 3, 4\nAstuce : fin - debut = nombre d’éléments extraits.\n\n# Exploration\nmot = \"Python\"\nprint(mot[0:3])   # \"Pyt\"\nprint(mot[2:5])   # \"tho\"\nprint(mot[0:6])   # \"Python\" (tout)\n\nnombres = [10, 20, 30, 40, 50, 60, 70]\nprint(nombres[1:4])   # [20, 30, 40]\nprint(nombres[3:7])   # [40, 50, 60, 70]\n\n\n# Exercice 2 — Slicing de base\nphrase = \"data science\"\nscores = [88, 72, 95, 61, 83, 77, 90, 55]\n\n# TODO : extrais \"data\" (les 4 premiers caractères)\ndebut = ...\nprint(debut)  # attendu : data\n\n# TODO : extrais \"science\" (du 5e au dernier)\nfin = ...\nprint(fin)  # attendu : science\n\n# TODO : extrais les 3 premiers scores\npremiers_scores = ...\nprint(premiers_scores)  # attendu : [88, 72, 95]\n\n# TODO : extrais les scores du 3e au 6e (index 2 à 5 inclus)\nmilieu = ...\nprint(milieu)  # attendu : [95, 61, 83, 77]"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#omettre-debut-ou-fin",
+    "href": "notebooks/07-slicing.html#omettre-debut-ou-fin",
+    "title": "Le slicing en Python",
+    "section": "3. Omettre debut ou fin",
+    "text": "3. Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin. C’est très idiomatique en Python.\nmot = \"Python\"\nmot[:3]   →  \"Pyt\"     # depuis le début jusqu'à 3 (exclu)\nmot[3:]   →  \"hon\"     # depuis 3 jusqu'à la fin\nmot[:]    →  \"Python\"  # copie complète\n\n# Exercice 3 — Omissions\nemail = \"user@example.com\"\ntemperatures = [12, 15, 9, 22, 18, 7, 25, 11, 19]\n\n# TODO : extrais le nom d'utilisateur (tout avant le @)\n# Indice : le @ est à l'index 5\nnom_utilisateur = ...\nprint(nom_utilisateur)  # attendu : alice\n\n# TODO : extrais le domaine (tout après le @)\ndomaine = ...\nprint(domaine)  # attendu : example.com\n\n# TODO : extrais les 4 dernières températures\ndernieres = ...\nprint(dernieres)  # attendu : [7, 25, 11, 19]\n\n# TODO : supprime la première et la dernière température (garde le \"milieu\")\nmilieu = ...\nprint(milieu)  # attendu : [15, 9, 22, 18, 7, 25, 11]\n\nEllipsis\nEllipsis\nEllipsis\nEllipsis"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
+    "href": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
+    "title": "Le slicing en Python",
+    "section": "4. Index négatifs dans le slicing",
+    "text": "4. Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très utile pour raisonner “depuis la fin” sans connaître la longueur.\nmot = \"Python\"\nmot[-3:]   →  \"hon\"    # les 3 derniers\nmot[:-3]   →  \"Pyt\"   # tout sauf les 3 derniers\nmot[-4:-1] →  \"tho\"   # du 4e en partant de la fin au 2e en partant de la fin\n\n# Exercice 4 — Index négatifs\nfichier = \"rapport_annuel_2024.csv\"\nlogs = [\"INFO\", \"DEBUG\", \"ERROR\", \"WARNING\", \"INFO\", \"ERROR\", \"DEBUG\"]\n\n# TODO : extrais l'extension du fichier (les 3 derniers caractères)\nextension = ...\nprint(extension)  # attendu : csv\n\n# TODO : extrais le nom sans l'extension (tout sauf les 4 derniers caractères : \".csv\")\nnom_sans_ext = ...\nprint(nom_sans_ext)  # attendu : rapport_annuel_2024\n\n# TODO : extrais les 3 derniers logs\nderniers_logs = ...\nprint(derniers_logs)  # attendu : ['INFO', 'ERROR', 'DEBUG']\n\n# TODO : extrais tous les logs sauf le premier et le dernier\nlogs_milieu = ...\nprint(logs_milieu)  # attendu : ['DEBUG', 'ERROR', 'WARNING', 'INFO', 'ERROR']"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#le-pas-debutfinpas",
+    "href": "notebooks/07-slicing.html#le-pas-debutfinpas",
+    "title": "Le slicing en Python",
+    "section": "5. Le pas : [debut:fin:pas]",
+    "text": "5. Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    →  [0, 2, 4, 6, 8]     # un sur deux\nnombres[1::2]   →  [1, 3, 5, 7, 9]     # un sur deux en partant de 1\nnombres[::3]    →  [0, 3, 6, 9]        # un sur trois\nnombres[::-1]   →  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]  # inverser !\n[::-1] est l’idiome Python pour inverser une séquence.\n\n# Exercice 5 — Le pas\nlettres = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\"]\nmot = \"abracadabra\"\n\n# TODO : extrais une lettre sur deux (index pairs)\npairs = ...\nprint(pairs)  # attendu : ['a', 'c', 'e', 'g', 'i']\n\n# TODO : extrais une lettre sur deux (index impairs)\nimpairs = ...\nprint(impairs)  # attendu : ['b', 'd', 'f', 'h', 'j']\n\n# TODO : inverse le mot \"abracadabra\"\ninverse = ...\nprint(inverse)  # attendu : arbadacarba\n\n# TODO : extrais les lettres de l'index 1 à 7 (exclu), une sur deux\nselection = ...\nprint(selection)  # attendu : ['b', 'd', 'f']"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#slicing-et-copie",
+    "href": "notebooks/07-slicing.html#slicing-et-copie",
+    "title": "Le slicing en Python",
+    "section": "6. Slicing et copie",
+    "text": "6. Slicing et copie\nSur les listes, [:] crée une copie superficielle — utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie indépendante\n\nAttention : le slicing ne modifie jamais la séquence originale, il retourne toujours une nouvelle séquence.\n\n\n# Exploration — comprendre la différence entre alias et copie\noriginal = [1, 2, 3, 4, 5]\n\nalias = original       # même objet en mémoire\ncopie = original[:]    # objet différent, mêmes valeurs\n\nalias[0] = 999\nprint(\"original après modif de alias :\", original)  # original est modifié !\n\ncopie[0] = 888\nprint(\"original après modif de copie :\", original)  # original intact"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
+    "href": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
+    "title": "Le slicing en Python",
+    "section": "7. Mini-projet — Analyse d’une série temporelle",
+    "text": "7. Mini-projet — Analyse d’une série temporelle\nTu disposes des ventes journalières d’un produit sur 4 semaines (28 jours). Utilise uniquement le slicing pour répondre aux questions.\n\nventes = [\n    # Semaine 1 : lun-dim\n    142, 98, 115, 130, 201, 245, 189,\n    # Semaine 2\n    155, 102, 121, 145, 198, 267, 201,\n    # Semaine 3\n    148, 95, 118, 139, 210, 255, 195,\n    # Semaine 4\n    162, 108, 125, 151, 215, 278, 212,\n]\n\n# TODO : extrais les ventes de la première semaine\nsemaine_1 = ...\nprint(\"Semaine 1 :\", semaine_1)\n\n# TODO : extrais les ventes de la dernière semaine\nsemaine_4 = ...\nprint(\"Semaine 4 :\", semaine_4)\n\n# TODO : extrais uniquement les lundis (index 0, 7, 14, 21) — utilise le pas\nlundis = ...\nprint(\"Lundis :\", lundis)\n\n# TODO : extrais uniquement les week-ends (samedi=5, dimanche=6 de chaque semaine)\n# Indice : samedi index 5, 12, 19, 26 / dimanche index 6, 13, 20, 27\nsamedis  = ...\ndimanches = ...\nprint(\"Samedis :\", samedis)\nprint(\"Dimanches :\", dimanches)\n\n# TODO : calcule la moyenne de la semaine 1 et de la semaine 4\n# (sum() et len() sont autorisés)\nmoy_s1 = sum(semaine_1) / len(semaine_1)\nmoy_s4 = sum(semaine_4) / len(semaine_4)\nprint(f\"Moyenne semaine 1 : {moy_s1:.1f} — Semaine 4 : {moy_s4:.1f}\")\n\n# TODO : inverse la liste des ventes (pour un affichage du plus récent au plus ancien)\nventes_inversees = ...\nprint(\"3 derniers jours en premier :\", ventes_inversees[:3])"
+  },
+  {
+    "objectID": "notebooks/07-slicing.html#corrigés",
+    "href": "notebooks/07-slicing.html#corrigés",
+    "title": "Le slicing en Python",
+    "section": "Corrigés",
+    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\npremier = fruits[0]\ndernier = fruits[-1]\navant_dernier = fruits[-2]\nExercice 2\ndebut           = phrase[:4]\nfin             = phrase[5:]\npremiers_scores = scores[:3]\nmilieu          = scores[2:6]\nExercice 3\nnom_utilisateur = email[:5]        # ou email.split(\"@\")[0]\ndomaine         = email[6:]        # ou email.split(\"@\")[1]\ndernieres       = temperatures[-4:]\nmilieu          = temperatures[1:-1]\nExercice 4\nextension    = fichier[-3:]\nnom_sans_ext = fichier[:-4]\nderniers_logs = logs[-3:]\nlogs_milieu  = logs[1:-1]\nExercice 5\npairs     = lettres[::2]\nimpairs   = lettres[1::2]\ninverse   = mot[::-1]\nselection = lettres[1:7:2]\nMini-projet\nsemaine_1       = ventes[:7]\nsemaine_4       = ventes[-7:]\nlundis          = ventes[::7]\nsamedis         = ventes[5::7]\ndimanches       = ventes[6::7]\nventes_inversees = ventes[::-1]"
+  },
+  {
+    "objectID": "notebooks/01-variables-types-operations.html",
+    "href": "notebooks/01-variables-types-operations.html",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "",
+    "text": "Ce notebook accompagne le cours Variables, types de base et opérations. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.\nPour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat."
+  },
+  {
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
+    "href": "notebooks/01-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 1 : Créer et inspecter des variables",
+    "text": "Exercice 1 : Créer et inspecter des variables\nCrée quatre variables : ton prénom, ton âge, ta taille en mètres, et un booléen qui indique si tu aimes Python. Affiche ensuite le type de chacune.\n\n# TODO : crée tes quatre variables\nprenom = ...\nage = ...\ntaille = ...\naime_python = ...\n\n# Affiche le type de chacune\nprint(type(prenom))\nprint(type(age))\nprint(type(taille))\nprint(type(aime_python))"
+  },
+  {
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
+    "href": "notebooks/01-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 2 : Étiquettes et mémoire",
+    "text": "Exercice 2 : Étiquettes et mémoire\nPour chaque bloc, devine d’abord ce qui va s’afficher (note ta réponse en commentaire), puis exécute pour vérifier.\n\nx = 10\ny = x\n\n# TODO : devine avant d'exécuter\nprint(x is y)          # True ou False ?\nprint(id(x) == id(y))  # True ou False ?\n\n\nx = 10\ny = x\ny += 5\n\n# TODO : devine avant d'exécuter\nprint(x, y)    # ?\nprint(x is y)  # True ou False ?\n\n# TODO : en une phrase, explique pourquoi x n'a pas changé\n# Réponse : ...\n\n\ncourses = [\"pain\", \"lait\"]\npanier = courses\npanier.append(\"oeufs\")\n\n# TODO : devine avant d'exécuter\nprint(courses)  # ?\n\n# TODO : modifie la ligne `panier = courses` pour que `courses` ne soit PAS modifiée,\n# puis réexécute la cellule."
+  },
+  {
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
+    "href": "notebooks/01-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 3 : Opérations sur les entiers et flottants",
+    "text": "Exercice 3 : Opérations sur les entiers et flottants\nCalcule les valeurs suivantes et stocke chacune dans une variable.\n\n# TODO : combien font 17 divisé par 5 ? (division classique, puis division entière, puis reste)\ndivision        = ...   # attendu : 3.4\ndivision_entiere = ...  # attendu : 3\nreste           = ...   # attendu : 2\n\n# TODO : quelle est la surface d'un carré de côté 13 ?\nsurface = ...           # attendu : 169\n\n# TODO : 2 à la puissance 10 ?\npuissance = ...         # attendu : 1024\n\nprint(division, division_entiere, reste)\nprint(surface)\nprint(puissance)"
+  },
+  {
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
+    "href": "notebooks/01-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 4 : Opérations sur les chaînes de caractères",
+    "text": "Exercice 4 : Opérations sur les chaînes de caractères\n\nprenom = \"jessica\"\nnom    = \"hyde\"\n\n# TODO : construis le nom complet \"Jessica Hyde\" (majuscule sur la première lettre)\nnom_complet = ...\nprint(nom_complet)  # attendu : Jessica Hyde\n\n# TODO : combien de caractères dans \"data science\" (espace compris) ?\nphrase = \"data science\"\nlongueur = ...\nprint(longueur)  # attendu : 12\n\n# TODO : remplace \"science\" par \"engineering\" dans la phrase\nnouvelle_phrase = ...\nprint(nouvelle_phrase)  # attendu : data engineering\n\n# TODO : affiche \"Python! \" répété 4 fois\nprint(...)  # attendu : Python! Python! Python! Python!"
+  },
+  {
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-5-conversions-de-types",
+    "href": "notebooks/01-variables-types-operations.html#exercice-5-conversions-de-types",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 5 : Conversions de types",
+    "text": "Exercice 5 : Conversions de types\n\n# Cette ligne va planter : lis le message d'erreur, puis corrige la ligne suivante\nage_str = \"25\"\n# print(\"Dans 10 ans tu auras \" + age_str + 10 + \" ans\")  # TypeError !\n\n# TODO : corrige en convertissant correctement\nprint()  # attendu : Dans 10 ans tu auras 35 ans\n\n\n# TODO : que vaut bool() appliqué à ces valeurs ? Devines d'abord, puis vérifie.\nprint(bool(0))        # True ou False ?\nprint(bool(1))\nprint(bool(-42))\nprint(bool(\"\"))       # chaîne vide\nprint(bool(\"Python\"))\nprint(bool(0.0))\nprint(bool(0.1))"
+  },
+  {
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-6-f-strings",
+    "href": "notebooks/01-variables-types-operations.html#exercice-6-f-strings",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 6 : f-strings",
+    "text": "Exercice 6 : f-strings\n\nproduit = \"café\"\nprix_unitaire = 2.5\nquantite = 3\n\n# TODO : affiche \"3 café(s) à 2.5€ = 7.5€\" en utilisant une f-string\n# Le total doit être calculé directement dans la f-string\nprint(...)  # attendu : 3 café(s) à 2.5€ = 7.5€\n\n\n# Exercice 6b : formatage dans les f-strings\n# Les codes de formatage ({valeur:...}) sont dans le cours.\n\nchiffre_affaires = 1_482_300.5\ntaux_marge = 0.2173\nventes = 42\n\n# TODO : affiche le CA avec 2 décimales et un séparateur de milliers (utilise ,)\n# attendu : 1,482,300.50\nprint(f\"{...}\")\n\n# TODO : affiche le taux de marge en % avec 1 décimale\n# attendu : 21.7%\nprint(f\"{...}\")\n\n# TODO : affiche le nombre de ventes aligné à droite sur 8 caractères, complété de zéros\n# attendu : 00000042\nprint(f\"{...}\")\n\n# TODO : construis un mini-tableau aligné (utilise l'alignement à gauche sur 15 chars)\nproduits = [(\"Café\", 2.5), (\"Thé\", 1.8), (\"Chocolat chaud\", 3.2)]\nfor nom, prix in produits:\n    print(f\"{nom} {prix}€\")\n# attendu :\n# Café            2.50€\n# Thé             1.80€\n# Chocolat chaud  3.20€"
+  },
+  {
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-7-convertisseur-de-températures",
+    "href": "notebooks/01-variables-types-operations.html#exercice-7-convertisseur-de-températures",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Exercice 7 : Convertisseur de températures",
+    "text": "Exercice 7 : Convertisseur de températures\nÉcris un convertisseur qui prend une température en Celsius et affiche le résultat en Fahrenheit et en Kelvin.\nFormules : - Fahrenheit : F = C × 9/5 + 32 - Kelvin : K = C + 273.15\n\ncelsius = 100\n\n# TODO : calcule fahrenheit et kelvin\nfahrenheit = ...\nkelvin = ...\n\n# TODO : affiche les résultats avec une f-string\n# attendu :\n# 100°C = 212.0°F = 373.15K\nprint(...)"
+  },
+  {
+    "objectID": "notebooks/01-variables-types-operations.html#corrigés",
+    "href": "notebooks/01-variables-types-operations.html#corrigés",
+    "title": "Exercices : Variables, types de base et opérations",
+    "section": "Corrigés",
+    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\nprenom = \"Jessica\"\nage = 25\ntaille = 1.68\naime_python = True\nExercice 2\n# True, True : y = x colle une 2e étiquette sur le même objet\n# 10 15, False : les int sont immuables, y += 5 crée un nouvel objet 15\n#   et recolle l'étiquette y dessus ; x désigne toujours 10\n# ['pain', 'lait', 'oeufs'] : courses et panier désignent la même liste\npanier = courses.copy()   # ou courses[:]\nExercice 3\ndivision         = 17 / 5    # 3.4\ndivision_entiere = 17 // 5   # 3\nreste            = 17 % 5    # 2\nsurface          = 13 ** 2   # 169\npuissance        = 2 ** 10   # 1024\nExercice 4\nnom_complet     = prenom.capitalize() + \" \" + nom.capitalize()\nlongueur        = len(phrase)\nnouvelle_phrase = phrase.replace(\"science\", \"engineering\")\nprint(\"Python! \" * 4)\nExercice 5\nprint(\"Dans 10 ans tu auras \" + str(int(age_str) + 10) + \" ans\")\n# bool : False, True, True, False, True, False, True\nExercice 6\nprint(f\"{quantite} {produit}(s) à {prix_unitaire}€ = {quantite * prix_unitaire}€\")\nExercice 6b\nprint(f\"{chiffre_affaires:,.2f}\")   # 1,482,300.50\nprint(f\"{taux_marge:.1%}\")          # 21.7%\nprint(f\"{ventes:08}\")               # 00000042\n\nfor nom, prix in produits:\n    print(f\"{nom:&lt;15} {prix:.2f}€\")\nExercice 7\nfahrenheit = celsius * 9/5 + 32\nkelvin     = celsius + 273.15\nprint(f\"{celsius}°C = {fahrenheit}°F = {kelvin}K\")"
+  },
+  {
     "objectID": "notebooks/00-premiers-pas-notebooks.html",
     "href": "notebooks/00-premiers-pas-notebooks.html",
     "title": "📓 Découverte des Notebooks Jupyter",
@@ -674,216 +968,6 @@
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "Récapitulatif",
     "text": "Récapitulatif\n\n\n\n\n\n\n\nConcept\nCe qu’il faut retenir\n\n\n\n\nNotebook\nDocument JSON combinant texte, code et résultats\n\n\nCellule Markdown\nTexte formaté, rendu à l’exécution\n\n\nCellule de code\nCode Python exécuté par le kernel\n\n\nKernel\nProcessus séparé qui fait tourner Python\n\n\nÉtat partagé\nToutes les cellules partagent le même namespace\n\n\nOrdre d’exécution\nLes [n] montrent l’ordre réel, pas la position\n\n\nMagic commands\n%time, %whos, %%timeit, !cmd…\n\n\nRègle d’or\nRestart & Run All doit toujours fonctionner"
-  },
-  {
-    "objectID": "notebooks/01-variables-types-operations.html",
-    "href": "notebooks/01-variables-types-operations.html",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "",
-    "text": "Ce notebook accompagne le cours Variables, types de base et opérations. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.\nPour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat."
-  },
-  {
-    "objectID": "notebooks/01-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
-    "href": "notebooks/01-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 1 : Créer et inspecter des variables",
-    "text": "Exercice 1 : Créer et inspecter des variables\nCrée quatre variables : ton prénom, ton âge, ta taille en mètres, et un booléen qui indique si tu aimes Python. Affiche ensuite le type de chacune.\n\n# TODO : crée tes quatre variables\nprenom = ...\nage = ...\ntaille = ...\naime_python = ...\n\n# Affiche le type de chacune\nprint(type(prenom))\nprint(type(age))\nprint(type(taille))\nprint(type(aime_python))"
-  },
-  {
-    "objectID": "notebooks/01-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
-    "href": "notebooks/01-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 2 : Étiquettes et mémoire",
-    "text": "Exercice 2 : Étiquettes et mémoire\nPour chaque bloc, devine d’abord ce qui va s’afficher (note ta réponse en commentaire), puis exécute pour vérifier.\n\nx = 10\ny = x\n\n# TODO : devine avant d'exécuter\nprint(x is y)          # True ou False ?\nprint(id(x) == id(y))  # True ou False ?\n\n\nx = 10\ny = x\ny += 5\n\n# TODO : devine avant d'exécuter\nprint(x, y)    # ?\nprint(x is y)  # True ou False ?\n\n# TODO : en une phrase, explique pourquoi x n'a pas changé\n# Réponse : ...\n\n\ncourses = [\"pain\", \"lait\"]\npanier = courses\npanier.append(\"oeufs\")\n\n# TODO : devine avant d'exécuter\nprint(courses)  # ?\n\n# TODO : modifie la ligne `panier = courses` pour que `courses` ne soit PAS modifiée,\n# puis réexécute la cellule."
-  },
-  {
-    "objectID": "notebooks/01-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
-    "href": "notebooks/01-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 3 : Opérations sur les entiers et flottants",
-    "text": "Exercice 3 : Opérations sur les entiers et flottants\nCalcule les valeurs suivantes et stocke chacune dans une variable.\n\n# TODO : combien font 17 divisé par 5 ? (division classique, puis division entière, puis reste)\ndivision        = ...   # attendu : 3.4\ndivision_entiere = ...  # attendu : 3\nreste           = ...   # attendu : 2\n\n# TODO : quelle est la surface d'un carré de côté 13 ?\nsurface = ...           # attendu : 169\n\n# TODO : 2 à la puissance 10 ?\npuissance = ...         # attendu : 1024\n\nprint(division, division_entiere, reste)\nprint(surface)\nprint(puissance)"
-  },
-  {
-    "objectID": "notebooks/01-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
-    "href": "notebooks/01-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 4 : Opérations sur les chaînes de caractères",
-    "text": "Exercice 4 : Opérations sur les chaînes de caractères\n\nprenom = \"jessica\"\nnom    = \"hyde\"\n\n# TODO : construis le nom complet \"Jessica Hyde\" (majuscule sur la première lettre)\nnom_complet = ...\nprint(nom_complet)  # attendu : Jessica Hyde\n\n# TODO : combien de caractères dans \"data science\" (espace compris) ?\nphrase = \"data science\"\nlongueur = ...\nprint(longueur)  # attendu : 12\n\n# TODO : remplace \"science\" par \"engineering\" dans la phrase\nnouvelle_phrase = ...\nprint(nouvelle_phrase)  # attendu : data engineering\n\n# TODO : affiche \"Python! \" répété 4 fois\nprint(...)  # attendu : Python! Python! Python! Python!"
-  },
-  {
-    "objectID": "notebooks/01-variables-types-operations.html#exercice-5-conversions-de-types",
-    "href": "notebooks/01-variables-types-operations.html#exercice-5-conversions-de-types",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 5 : Conversions de types",
-    "text": "Exercice 5 : Conversions de types\n\n# Cette ligne va planter : lis le message d'erreur, puis corrige la ligne suivante\nage_str = \"25\"\n# print(\"Dans 10 ans tu auras \" + age_str + 10 + \" ans\")  # TypeError !\n\n# TODO : corrige en convertissant correctement\nprint()  # attendu : Dans 10 ans tu auras 35 ans\n\n\n# TODO : que vaut bool() appliqué à ces valeurs ? Devines d'abord, puis vérifie.\nprint(bool(0))        # True ou False ?\nprint(bool(1))\nprint(bool(-42))\nprint(bool(\"\"))       # chaîne vide\nprint(bool(\"Python\"))\nprint(bool(0.0))\nprint(bool(0.1))"
-  },
-  {
-    "objectID": "notebooks/01-variables-types-operations.html#exercice-6-f-strings",
-    "href": "notebooks/01-variables-types-operations.html#exercice-6-f-strings",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 6 : f-strings",
-    "text": "Exercice 6 : f-strings\n\nproduit = \"café\"\nprix_unitaire = 2.5\nquantite = 3\n\n# TODO : affiche \"3 café(s) à 2.5€ = 7.5€\" en utilisant une f-string\n# Le total doit être calculé directement dans la f-string\nprint(...)  # attendu : 3 café(s) à 2.5€ = 7.5€\n\n\n# Exercice 6b : formatage dans les f-strings\n# Les codes de formatage ({valeur:...}) sont dans le cours.\n\nchiffre_affaires = 1_482_300.5\ntaux_marge = 0.2173\nventes = 42\n\n# TODO : affiche le CA avec 2 décimales et un séparateur de milliers (utilise ,)\n# attendu : 1,482,300.50\nprint(f\"{...}\")\n\n# TODO : affiche le taux de marge en % avec 1 décimale\n# attendu : 21.7%\nprint(f\"{...}\")\n\n# TODO : affiche le nombre de ventes aligné à droite sur 8 caractères, complété de zéros\n# attendu : 00000042\nprint(f\"{...}\")\n\n# TODO : construis un mini-tableau aligné (utilise l'alignement à gauche sur 15 chars)\nproduits = [(\"Café\", 2.5), (\"Thé\", 1.8), (\"Chocolat chaud\", 3.2)]\nfor nom, prix in produits:\n    print(f\"{nom} {prix}€\")\n# attendu :\n# Café            2.50€\n# Thé             1.80€\n# Chocolat chaud  3.20€"
-  },
-  {
-    "objectID": "notebooks/01-variables-types-operations.html#exercice-7-convertisseur-de-températures",
-    "href": "notebooks/01-variables-types-operations.html#exercice-7-convertisseur-de-températures",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Exercice 7 : Convertisseur de températures",
-    "text": "Exercice 7 : Convertisseur de températures\nÉcris un convertisseur qui prend une température en Celsius et affiche le résultat en Fahrenheit et en Kelvin.\nFormules : - Fahrenheit : F = C × 9/5 + 32 - Kelvin : K = C + 273.15\n\ncelsius = 100\n\n# TODO : calcule fahrenheit et kelvin\nfahrenheit = ...\nkelvin = ...\n\n# TODO : affiche les résultats avec une f-string\n# attendu :\n# 100°C = 212.0°F = 373.15K\nprint(...)"
-  },
-  {
-    "objectID": "notebooks/01-variables-types-operations.html#corrigés",
-    "href": "notebooks/01-variables-types-operations.html#corrigés",
-    "title": "Exercices : Variables, types de base et opérations",
-    "section": "Corrigés",
-    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\nprenom = \"Jessica\"\nage = 25\ntaille = 1.68\naime_python = True\nExercice 2\n# True, True : y = x colle une 2e étiquette sur le même objet\n# 10 15, False : les int sont immuables, y += 5 crée un nouvel objet 15\n#   et recolle l'étiquette y dessus ; x désigne toujours 10\n# ['pain', 'lait', 'oeufs'] : courses et panier désignent la même liste\npanier = courses.copy()   # ou courses[:]\nExercice 3\ndivision         = 17 / 5    # 3.4\ndivision_entiere = 17 // 5   # 3\nreste            = 17 % 5    # 2\nsurface          = 13 ** 2   # 169\npuissance        = 2 ** 10   # 1024\nExercice 4\nnom_complet     = prenom.capitalize() + \" \" + nom.capitalize()\nlongueur        = len(phrase)\nnouvelle_phrase = phrase.replace(\"science\", \"engineering\")\nprint(\"Python! \" * 4)\nExercice 5\nprint(\"Dans 10 ans tu auras \" + str(int(age_str) + 10) + \" ans\")\n# bool : False, True, True, False, True, False, True\nExercice 6\nprint(f\"{quantite} {produit}(s) à {prix_unitaire}€ = {quantite * prix_unitaire}€\")\nExercice 6b\nprint(f\"{chiffre_affaires:,.2f}\")   # 1,482,300.50\nprint(f\"{taux_marge:.1%}\")          # 21.7%\nprint(f\"{ventes:08}\")               # 00000042\n\nfor nom, prix in produits:\n    print(f\"{nom:&lt;15} {prix:.2f}€\")\nExercice 7\nfahrenheit = celsius * 9/5 + 32\nkelvin     = celsius + 273.15\nprint(f\"{celsius}°C = {fahrenheit}°F = {kelvin}K\")"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html",
-    "href": "notebooks/07-slicing.html",
-    "title": "Le slicing en Python",
-    "section": "",
-    "text": "Le slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :\nCe notebook est progressif : lis chaque section, exécute les cellules d’exploration, puis complète les exercices."
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#les-index-comment-python-numérote",
-    "href": "notebooks/07-slicing.html#les-index-comment-python-numérote",
-    "title": "Le slicing en Python",
-    "section": "1. Les index : comment Python numérote",
-    "text": "1. Les index : comment Python numérote\nChaque élément d’une séquence a deux index : un positif (de gauche à droite, en partant de 0) et un négatif (de droite à gauche, en partant de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nmot[0] → 'P'\nmot[-1] → 'n' (le dernier, sans connaître la longueur)\n\n# Exploration — exécute et observe\nmot = \"Python\"\n\nprint(mot[0])   # premier caractère\nprint(mot[5])   # sixième caractère\nprint(mot[-1])  # dernier caractère\nprint(mot[-2])  # avant-dernier\n\n\n# Exercice 1a — Index\nfruits = [\"pomme\", \"banane\", \"cerise\", \"datte\", \"figue\"]\n\n# TODO : affiche le premier et le dernier fruit avec des index\npremier = ...\ndernier = ...\nprint(premier, dernier)  # attendu : pomme figue\n\n# TODO : affiche l'avant-dernier fruit\navant_dernier = ...\nprint(avant_dernier)  # attendu : datte"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
-    "href": "notebooks/07-slicing.html#le-slicing-de-base-debutfin",
-    "title": "Le slicing en Python",
-    "section": "2. Le slicing de base : [debut:fin]",
-    "text": "2. Le slicing de base : [debut:fin]\nsequence[debut:fin] retourne les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]  →  \"Pyt\"   # index 0, 1, 2 (3 exclu)\nmot[2:5]  →  \"tho\"   # index 2, 3, 4\nAstuce : fin - debut = nombre d’éléments extraits.\n\n# Exploration\nmot = \"Python\"\nprint(mot[0:3])   # \"Pyt\"\nprint(mot[2:5])   # \"tho\"\nprint(mot[0:6])   # \"Python\" (tout)\n\nnombres = [10, 20, 30, 40, 50, 60, 70]\nprint(nombres[1:4])   # [20, 30, 40]\nprint(nombres[3:7])   # [40, 50, 60, 70]\n\n\n# Exercice 2 — Slicing de base\nphrase = \"data science\"\nscores = [88, 72, 95, 61, 83, 77, 90, 55]\n\n# TODO : extrais \"data\" (les 4 premiers caractères)\ndebut = ...\nprint(debut)  # attendu : data\n\n# TODO : extrais \"science\" (du 5e au dernier)\nfin = ...\nprint(fin)  # attendu : science\n\n# TODO : extrais les 3 premiers scores\npremiers_scores = ...\nprint(premiers_scores)  # attendu : [88, 72, 95]\n\n# TODO : extrais les scores du 3e au 6e (index 2 à 5 inclus)\nmilieu = ...\nprint(milieu)  # attendu : [95, 61, 83, 77]"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#omettre-debut-ou-fin",
-    "href": "notebooks/07-slicing.html#omettre-debut-ou-fin",
-    "title": "Le slicing en Python",
-    "section": "3. Omettre debut ou fin",
-    "text": "3. Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin. C’est très idiomatique en Python.\nmot = \"Python\"\nmot[:3]   →  \"Pyt\"     # depuis le début jusqu'à 3 (exclu)\nmot[3:]   →  \"hon\"     # depuis 3 jusqu'à la fin\nmot[:]    →  \"Python\"  # copie complète\n\n# Exercice 3 — Omissions\nemail = \"user@example.com\"\ntemperatures = [12, 15, 9, 22, 18, 7, 25, 11, 19]\n\n# TODO : extrais le nom d'utilisateur (tout avant le @)\n# Indice : le @ est à l'index 5\nnom_utilisateur = ...\nprint(nom_utilisateur)  # attendu : alice\n\n# TODO : extrais le domaine (tout après le @)\ndomaine = ...\nprint(domaine)  # attendu : example.com\n\n# TODO : extrais les 4 dernières températures\ndernieres = ...\nprint(dernieres)  # attendu : [7, 25, 11, 19]\n\n# TODO : supprime la première et la dernière température (garde le \"milieu\")\nmilieu = ...\nprint(milieu)  # attendu : [15, 9, 22, 18, 7, 25, 11]\n\nEllipsis\nEllipsis\nEllipsis\nEllipsis"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
-    "href": "notebooks/07-slicing.html#index-négatifs-dans-le-slicing",
-    "title": "Le slicing en Python",
-    "section": "4. Index négatifs dans le slicing",
-    "text": "4. Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très utile pour raisonner “depuis la fin” sans connaître la longueur.\nmot = \"Python\"\nmot[-3:]   →  \"hon\"    # les 3 derniers\nmot[:-3]   →  \"Pyt\"   # tout sauf les 3 derniers\nmot[-4:-1] →  \"tho\"   # du 4e en partant de la fin au 2e en partant de la fin\n\n# Exercice 4 — Index négatifs\nfichier = \"rapport_annuel_2024.csv\"\nlogs = [\"INFO\", \"DEBUG\", \"ERROR\", \"WARNING\", \"INFO\", \"ERROR\", \"DEBUG\"]\n\n# TODO : extrais l'extension du fichier (les 3 derniers caractères)\nextension = ...\nprint(extension)  # attendu : csv\n\n# TODO : extrais le nom sans l'extension (tout sauf les 4 derniers caractères : \".csv\")\nnom_sans_ext = ...\nprint(nom_sans_ext)  # attendu : rapport_annuel_2024\n\n# TODO : extrais les 3 derniers logs\nderniers_logs = ...\nprint(derniers_logs)  # attendu : ['INFO', 'ERROR', 'DEBUG']\n\n# TODO : extrais tous les logs sauf le premier et le dernier\nlogs_milieu = ...\nprint(logs_milieu)  # attendu : ['DEBUG', 'ERROR', 'WARNING', 'INFO', 'ERROR']"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#le-pas-debutfinpas",
-    "href": "notebooks/07-slicing.html#le-pas-debutfinpas",
-    "title": "Le slicing en Python",
-    "section": "5. Le pas : [debut:fin:pas]",
-    "text": "5. Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    →  [0, 2, 4, 6, 8]     # un sur deux\nnombres[1::2]   →  [1, 3, 5, 7, 9]     # un sur deux en partant de 1\nnombres[::3]    →  [0, 3, 6, 9]        # un sur trois\nnombres[::-1]   →  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]  # inverser !\n[::-1] est l’idiome Python pour inverser une séquence.\n\n# Exercice 5 — Le pas\nlettres = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\"]\nmot = \"abracadabra\"\n\n# TODO : extrais une lettre sur deux (index pairs)\npairs = ...\nprint(pairs)  # attendu : ['a', 'c', 'e', 'g', 'i']\n\n# TODO : extrais une lettre sur deux (index impairs)\nimpairs = ...\nprint(impairs)  # attendu : ['b', 'd', 'f', 'h', 'j']\n\n# TODO : inverse le mot \"abracadabra\"\ninverse = ...\nprint(inverse)  # attendu : arbadacarba\n\n# TODO : extrais les lettres de l'index 1 à 7 (exclu), une sur deux\nselection = ...\nprint(selection)  # attendu : ['b', 'd', 'f']"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#slicing-et-copie",
-    "href": "notebooks/07-slicing.html#slicing-et-copie",
-    "title": "Le slicing en Python",
-    "section": "6. Slicing et copie",
-    "text": "6. Slicing et copie\nSur les listes, [:] crée une copie superficielle — utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie indépendante\n\nAttention : le slicing ne modifie jamais la séquence originale, il retourne toujours une nouvelle séquence.\n\n\n# Exploration — comprendre la différence entre alias et copie\noriginal = [1, 2, 3, 4, 5]\n\nalias = original       # même objet en mémoire\ncopie = original[:]    # objet différent, mêmes valeurs\n\nalias[0] = 999\nprint(\"original après modif de alias :\", original)  # original est modifié !\n\ncopie[0] = 888\nprint(\"original après modif de copie :\", original)  # original intact"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
-    "href": "notebooks/07-slicing.html#mini-projet-analyse-dune-série-temporelle",
-    "title": "Le slicing en Python",
-    "section": "7. Mini-projet — Analyse d’une série temporelle",
-    "text": "7. Mini-projet — Analyse d’une série temporelle\nTu disposes des ventes journalières d’un produit sur 4 semaines (28 jours). Utilise uniquement le slicing pour répondre aux questions.\n\nventes = [\n    # Semaine 1 : lun-dim\n    142, 98, 115, 130, 201, 245, 189,\n    # Semaine 2\n    155, 102, 121, 145, 198, 267, 201,\n    # Semaine 3\n    148, 95, 118, 139, 210, 255, 195,\n    # Semaine 4\n    162, 108, 125, 151, 215, 278, 212,\n]\n\n# TODO : extrais les ventes de la première semaine\nsemaine_1 = ...\nprint(\"Semaine 1 :\", semaine_1)\n\n# TODO : extrais les ventes de la dernière semaine\nsemaine_4 = ...\nprint(\"Semaine 4 :\", semaine_4)\n\n# TODO : extrais uniquement les lundis (index 0, 7, 14, 21) — utilise le pas\nlundis = ...\nprint(\"Lundis :\", lundis)\n\n# TODO : extrais uniquement les week-ends (samedi=5, dimanche=6 de chaque semaine)\n# Indice : samedi index 5, 12, 19, 26 / dimanche index 6, 13, 20, 27\nsamedis  = ...\ndimanches = ...\nprint(\"Samedis :\", samedis)\nprint(\"Dimanches :\", dimanches)\n\n# TODO : calcule la moyenne de la semaine 1 et de la semaine 4\n# (sum() et len() sont autorisés)\nmoy_s1 = sum(semaine_1) / len(semaine_1)\nmoy_s4 = sum(semaine_4) / len(semaine_4)\nprint(f\"Moyenne semaine 1 : {moy_s1:.1f} — Semaine 4 : {moy_s4:.1f}\")\n\n# TODO : inverse la liste des ventes (pour un affichage du plus récent au plus ancien)\nventes_inversees = ...\nprint(\"3 derniers jours en premier :\", ventes_inversees[:3])"
-  },
-  {
-    "objectID": "notebooks/07-slicing.html#corrigés",
-    "href": "notebooks/07-slicing.html#corrigés",
-    "title": "Le slicing en Python",
-    "section": "Corrigés",
-    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\npremier = fruits[0]\ndernier = fruits[-1]\navant_dernier = fruits[-2]\nExercice 2\ndebut           = phrase[:4]\nfin             = phrase[5:]\npremiers_scores = scores[:3]\nmilieu          = scores[2:6]\nExercice 3\nnom_utilisateur = email[:5]        # ou email.split(\"@\")[0]\ndomaine         = email[6:]        # ou email.split(\"@\")[1]\ndernieres       = temperatures[-4:]\nmilieu          = temperatures[1:-1]\nExercice 4\nextension    = fichier[-3:]\nnom_sans_ext = fichier[:-4]\nderniers_logs = logs[-3:]\nlogs_milieu  = logs[1:-1]\nExercice 5\npairs     = lettres[::2]\nimpairs   = lettres[1::2]\ninverse   = mot[::-1]\nselection = lettres[1:7:2]\nMini-projet\nsemaine_1       = ventes[:7]\nsemaine_4       = ventes[-7:]\nlundis          = ventes[::7]\nsamedis         = ventes[5::7]\ndimanches       = ventes[6::7]\nventes_inversees = ventes[::-1]"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html",
-    "href": "notebooks/02-conditions-boucles.html",
-    "title": "Exercices : Conditions et boucles",
-    "section": "",
-    "text": "Ce notebook accompagne le cours Conditions et boucles. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.\nPour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat. Change les valeurs de départ pour tester plusieurs cas."
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-1-tarif-de-cinéma",
-    "href": "notebooks/02-conditions-boucles.html#exercice-1-tarif-de-cinéma",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 1 : Tarif de cinéma",
-    "text": "Exercice 1 : Tarif de cinéma\nÉcris un programme qui affiche le prix d’une place selon l’âge :\n\nmoins de 12 ans : 5 €\nde 12 à 25 ans inclus : 7 €\n65 ans et plus : 6 €\nsinon : 10 €\n\n\nage = 30\n\n# TODO : calcule le prix avec if / elif / else\nprix = ...\n\nprint(f\"{age} ans → {prix} €\")\n# attendu : 30 ans → 10 €   (teste aussi 8, 25, 26, 70)\n\n30 ans → 10 €"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-2-année-bissextile",
-    "href": "notebooks/02-conditions-boucles.html#exercice-2-année-bissextile",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 2 : Année bissextile",
-    "text": "Exercice 2 : Année bissextile\nUne année est bissextile si elle est divisible par 4, sauf si elle est divisible par 100… sauf si elle est aussi divisible par 400.\nIndice : « divisible par 4 » se traduit par annee % 4 == 0.\n\nannee = 1900\n\n# TODO : écris la condition en une seule ligne, avec and / or / not\nbissextile = ...\n\nprint(f\"{annee} bissextile ? {bissextile}\")\n# attendu : 1900 → False, 2000 → True, 2024 → True, 2025 → False\n\n1900 bissextile ? False"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-3-suivi-de-commande-avec-match",
-    "href": "notebooks/02-conditions-boucles.html#exercice-3-suivi-de-commande-avec-match",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 3 : Suivi de commande avec match",
-    "text": "Exercice 3 : Suivi de commande avec match\nUn site e-commerce stocke le statut d’une commande sous forme de code. Affiche le message correspondant :\n\n\n\nCode\nMessage\n\n\n\n\n\"P\"\nEn préparation 📦\n\n\n\"E\"\nExpédiée 🚚\n\n\n\"L\"\nLivrée ✅\n\n\n\"A\" ou \"R\"\nAnnulée ou remboursée ❌\n\n\nautre\nStatut inconnu\n\n\n\n\nstatut = \"R\"\n\n# TODO : utilise match / case\n...\n# attendu : Annulée ou remboursée ❌"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-4-table-de-multiplication",
-    "href": "notebooks/02-conditions-boucles.html#exercice-4-table-de-multiplication",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 4 : Table de multiplication",
-    "text": "Exercice 4 : Table de multiplication\nAffiche la table de multiplication de n, de 1 à 10 inclus.\n\nn = 7\n\n# TODO : boucle for avec range()\n...\n# attendu :\n# 7 x 1 = 7\n# 7 x 2 = 14\n# ...\n# 7 x 10 = 70"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-5-compter-une-lettre",
-    "href": "notebooks/02-conditions-boucles.html#exercice-5-compter-une-lettre",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 5 : Compter une lettre",
-    "text": "Exercice 5 : Compter une lettre\nCompte le nombre de \"s\" dans un mot, en bouclant directement sur les lettres (sans range).\n\nmot = \"Mississippi\"\n\n# TODO : accumulateur + boucle for sur le mot\nnb_s = ...\n\nprint(f\"Il y a {nb_s} 's' dans {mot}\")\n# attendu : Il y a 4 's' dans Mississippi"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-6-rendre-le-code-pythonique",
-    "href": "notebooks/02-conditions-boucles.html#exercice-6-rendre-le-code-pythonique",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 6 : Rendre le code « pythonique »",
-    "text": "Exercice 6 : Rendre le code « pythonique »\nCe code fonctionne, mais il n’est pas écrit comme on le ferait en Python. Réécris-le avec enumerate().\n\nmot = \"Python\"\n\n# Version à améliorer\nfor i in range(len(mot)):\n    print(f\"Lettre n°{i + 1} : {mot[i]}\")\n\n# TODO : même affichage avec enumerate()\n...\n# attendu :\n# Lettre n°1 : P\n# Lettre n°2 : y\n# ..."
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-7-objectif-épargne-avec-while",
-    "href": "notebooks/02-conditions-boucles.html#exercice-7-objectif-épargne-avec-while",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 7 : Objectif épargne avec while",
-    "text": "Exercice 7 : Objectif épargne avec while\nTu places 1 000 € sur un livret à 3 % par an. Combien d’années faut-il pour atteindre au moins 1 500 € ?\n\ncapital = 1000\nobjectif = 1500\ntaux = 0.03\nannees = 0\n\n# TODO : boucle while\n...\n\nprint(f\"{annees} ans → {capital:.2f} €\")\n# attendu : 14 ans → 1512.59 €"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-8-break-et-continue",
-    "href": "notebooks/02-conditions-boucles.html#exercice-8-break-et-continue",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 8 : break et continue",
-    "text": "Exercice 8 : break et continue\n\nTrouve le premier nombre supérieur à 100 divisible à la fois par 7 et par 11, puis arrête la boucle.\nAffiche les nombres de 1 à 20, sauf les multiples de 4.\n\n\n# TODO 1 : break\n...\n# attendu : 154\n\n\n# TODO 2 : continue\n...\n# attendu : 1 2 3 5 6 7 9 10 11 13 14 15 17 18 19 (un par ligne)"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-9-trouve-le-bug",
-    "href": "notebooks/02-conditions-boucles.html#exercice-9-trouve-le-bug",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 9 : Trouve le bug 🐛",
-    "text": "Exercice 9 : Trouve le bug 🐛\nCe programme doit afficher la somme des nombres pairs de 1 à 100. Il contient trois erreurs. Devine d’abord ce qu’il affiche, puis corrige-le.\n\nfor n in range(1, 100):\n    total = 0\n    if n % 2 == 1:\n        total += n\n\nprint(total)\n# attendu après correction : 2550\n\n2500"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#exercice-10-mini-projet-fizzbuzz",
-    "href": "notebooks/02-conditions-boucles.html#exercice-10-mini-projet-fizzbuzz",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Exercice 10 : Mini-projet FizzBuzz",
-    "text": "Exercice 10 : Mini-projet FizzBuzz\nUn grand classique des entretiens techniques ! Pour chaque nombre de 1 à 30 :\n\ns’il est divisible par 3 et par 5, affiche FizzBuzz ;\ns’il est divisible par 3, affiche Fizz ;\ns’il est divisible par 5, affiche Buzz ;\nsinon, affiche le nombre.\n\nRéfléchis bien à l’ordre de tes conditions…\n\n# TODO\n...\n# attendu : 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16...\n\nBuzz"
-  },
-  {
-    "objectID": "notebooks/02-conditions-boucles.html#corrigés",
-    "href": "notebooks/02-conditions-boucles.html#corrigés",
-    "title": "Exercices : Conditions et boucles",
-    "section": "Corrigés",
-    "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\nif age &lt; 12:\n    prix = 5\nelif age &lt;= 25:\n    prix = 7\nelif age &gt;= 65:\n    prix = 6\nelse:\n    prix = 10\nExercice 2\nbissextile = (annee % 4 == 0 and annee % 100 != 0) or annee % 400 == 0\nExercice 3\nmatch statut:\n    case \"P\":\n        print(\"En préparation 📦\")\n    case \"E\":\n        print(\"Expédiée 🚚\")\n    case \"L\":\n        print(\"Livrée ✅\")\n    case \"A\" | \"R\":\n        print(\"Annulée ou remboursée ❌\")\n    case _:\n        print(\"Statut inconnu\")\nExercice 4\nfor i in range(1, 11):\n    print(f\"{n} x {i} = {n * i}\")\nExercice 5\nnb_s = 0\nfor lettre in mot:\n    if lettre == \"s\":\n        nb_s += 1\nExercice 6\nfor i, lettre in enumerate(mot):\n    print(f\"Lettre n°{i + 1} : {lettre}\")\n\n# Bonus : enumerate accepte un point de départ\nfor i, lettre in enumerate(mot, start=1):\n    print(f\"Lettre n°{i} : {lettre}\")\nExercice 7\nwhile capital &lt; objectif:\n    capital *= 1 + taux\n    annees += 1\nExercice 8\nfor n in range(101, 1000):\n    if n % 7 == 0 and n % 11 == 0:\n        print(n)\n        break\n\nfor n in range(1, 21):\n    if n % 4 == 0:\n        continue\n    print(n)\nExercice 9\ntotal = 0                    # 1. initialisation AVANT la boucle\nfor n in range(1, 101):      # 2. range(1, 100) s'arrête à 99\n    if n % 2 == 0:           # 3. pair : reste 0, pas 1\n        total += n\n\nprint(total)  # 2550\nLa version bugguée affiche 99 : total est remis à zéro à chaque tour, et seul le dernier impair survit.\nExercice 10\nfor n in range(1, 31):\n    if n % 3 == 0 and n % 5 == 0:   # le cas le plus restrictif en premier !\n        print(\"FizzBuzz\")\n    elif n % 3 == 0:\n        print(\"Fizz\")\n    elif n % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(n)\nSi on teste n % 3 == 0 en premier, 15 affiche Fizz et la branche FizzBuzz n’est jamais atteinte : c’est le même piège que l’exercice des mentions dans le cours."
   },
   {
     "objectID": "index.html",
