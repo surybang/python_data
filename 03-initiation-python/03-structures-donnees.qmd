@@ -1,0 +1,372 @@
+---
+title: "Structures de données"
+format:
+  html: default
+  revealjs:
+    output-file: 03-structures-donnees-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tip}
+Pour accéder aux notebooks d'exercices c'est ici 👇
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/03-structures-donnees.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB01_premiers_pas%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%AB03-structures-donnees%C2%BB)
+:::
+
+
+## Pourquoi des structures de données ?
+
+Jusqu'ici, chaque variable désignait **une seule valeur** : un âge, un prénom, une note. Mais les données réelles arrivent rarement seules :
+
+- les notes de toute une promotion ;
+- les transactions d'une journée ;
+- la fiche d'un client, avec son nom, son âge et sa ville.
+
+Créer `note1`, `note2`, `note3`… n'est pas une option. Python propose des **structures de données** : des objets qui regroupent plusieurs valeurs sous un seul nom. Nous en verrons quatre :
+
+| Structure | Syntaxe | En une phrase |
+|---|---|---|
+| Liste | `[1, 2, 3]` | une suite ordonnée et modifiable |
+| Tuple | `(1, 2, 3)` | une suite ordonnée et **non** modifiable |
+| Dictionnaire | `{"nom": "Hyde"}` | des valeurs rangées par **clé** |
+| Ensemble | `{1, 2, 3}` | une collection **sans doublons** |
+
+---
+
+## Les listes
+
+### Créer et lire une liste
+
+Une liste s'écrit entre **crochets**, avec des éléments séparés par des virgules.
+
+```python
+notes = [12, 15, 8, 17, 10]
+prenoms = ["Jessica", "Wilson", "Ian"]
+vide = []
+```
+
+Chaque élément a une **position** (un index), qui commence à **0**, comme pour les chaînes de caractères :
+
+```python
+print(notes[0])    # 12 → le premier
+print(notes[2])    # 8
+print(notes[-1])   # 10 → le dernier
+print(len(notes))  # 5  → le nombre d'éléments
+```
+
+::: {.callout-warning}
+`notes[5]` lève une `IndexError` : la liste a 5 éléments, numérotés de 0 à 4. Le dernier index vaut toujours `len(notes) - 1`.
+:::
+
+### Modifier une liste
+
+Contrairement aux chaînes, les listes sont **mutables** : on peut les modifier sur place.
+
+```python
+notes = [12, 15, 8]
+
+notes[0] = 13         # remplace le premier élément → [13, 15, 8]
+notes.append(17)      # ajoute à la fin             → [13, 15, 8, 17]
+notes.insert(1, 9)    # insère à la position 1      → [13, 9, 15, 8, 17]
+notes.remove(8)       # supprime la première valeur 8 → [13, 9, 15, 17]
+derniere = notes.pop()  # retire et renvoie le dernier → 17
+```
+
+::: {.callout-note}
+### Souvenez-vous du schéma mémoire
+Vous avez déjà rencontré ce comportement dans l'exercice « et avec une liste ? » de la page sur les variables : `b = a` ne copie pas une liste, les deux noms désignent **le même objet**. Pour une copie indépendante, utilisez `a.copy()`.
+:::
+
+### Tester la présence d'un élément : `in`
+
+```python
+prenoms = ["Jessica", "Wilson", "Ian"]
+
+print("Ian" in prenoms)       # True
+print("Becky" not in prenoms) # True
+
+if "Wilson" in prenoms:
+    print("Wilson est inscrit")
+```
+
+`in` fonctionne aussi sur les chaînes : `"y" in "Python"` vaut `True`.
+
+### Quelques outils utiles
+
+| Outil | Rôle | Exemple avec `notes = [12, 15, 8]` | Résultat |
+|---|---|---|---|
+| `len()` | nombre d'éléments | `len(notes)` | `3` |
+| `sum()` | somme | `sum(notes)` | `35` |
+| `min()` / `max()` | plus petit / plus grand | `max(notes)` | `15` |
+| `sorted()` | **nouvelle** liste triée | `sorted(notes)` | `[8, 12, 15]` |
+| `.sort()` | trie **la liste elle-même** | `notes.sort()` | `None` (la liste est modifiée) |
+| `.count(x)` | nombre d'occurrences | `notes.count(8)` | `1` |
+| `.index(x)` | position de la 1re occurrence | `notes.index(15)` | `1` |
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : où est passée ma liste ?
+
+Observez le code suivant **sans l'exécuter** :
+
+```python
+notes = [12, 15, 8]
+notes = notes.sort()
+print(notes)
+```
+
+1. Selon vous, qu'affiche ce programme ?
+2. Comparez avec `mot = mot.upper()` vu dans la page sur les variables. Qu'est-ce qui change ?
+3. Exécutez-le pour vérifier, puis proposez deux corrections.
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+Le programme affiche `None` : la liste a disparu !
+
+`.sort()` **modifie la liste sur place** et ne renvoie rien (`None`). En écrivant `notes = notes.sort()`, on trie bien la liste… puis on recolle l'étiquette `notes` sur `None`. La liste triée n'a plus aucun nom pour la désigner.
+
+C'est l'inverse des chaînes : une `str` est immuable, donc `.upper()` est **obligée** de renvoyer une nouvelle chaîne, qu'il faut récupérer. Une liste est mutable, donc ses méthodes la modifient directement.
+
+Deux corrections possibles :
+
+```python
+# 1. Trier sur place, sans réaffecter
+notes = [12, 15, 8]
+notes.sort()
+print(notes)            # [8, 12, 15]
+
+# 2. Créer une nouvelle liste triée
+notes = [12, 15, 8]
+notes_triees = sorted(notes)
+print(notes)            # [12, 15, 8]  → l'originale est intacte
+print(notes_triees)     # [8, 12, 15]
+```
+
+Règle à retenir : une méthode qui **modifie** une liste (`append`, `sort`, `remove`…) renvoie `None`. Ne réaffectez jamais son résultat.
+:::
+
+### Parcourir une liste
+
+Tout ce que vous avez vu dans la page sur les boucles s'applique directement :
+
+```python
+notes = [12, 15, 8, 17]
+
+for note in notes:
+    print(note)
+
+for position, note in enumerate(notes, start=1):
+    print(f"Étudiant {position} : {note}/20")
+```
+
+Comme promis, deux outils de plus :
+
+```python
+prenoms = ["Jessica", "Wilson", "Ian"]
+notes = [12, 15, 8]
+
+# zip() : parcourir deux listes en parallèle
+for prenom, note in zip(prenoms, notes):
+    print(f"{prenom} a obtenu {note}")
+
+# reversed() : parcourir à l'envers
+for prenom in reversed(prenoms):
+    print(prenom)       # Ian, Wilson, Jessica
+```
+
+Et le motif de l'accumulateur sert aussi à **construire** une liste :
+
+```python
+notes = [12, 15, 8, 17, 9]
+admis = []
+
+for note in notes:
+    if note >= 10:
+        admis.append(note)
+
+print(admis)  # [12, 15, 17]
+```
+
+::: {.callout-note collapse="true"}
+### Pour aller plus loin : les listes en compréhension
+
+Python propose une écriture compacte pour ce dernier motif, que vous croiserez souvent :
+
+```python
+admis = [note for note in notes if note >= 10]
+```
+
+Elle se lit presque comme une phrase : « les notes, pour chaque note de `notes`, si la note est au moins 10 ». Pratique, mais pas indispensable : la version avec la boucle fait exactement la même chose.
+:::
+
+---
+
+## Les tuples
+
+Un tuple ressemble à une liste, mais s'écrit entre **parenthèses** et ne peut **pas** être modifié après sa création.
+
+```python
+coordonnees = (48.85, 2.35)   # latitude, longitude de Paris
+
+print(coordonnees[0])          # 48.85
+coordonnees[0] = 50            # ❌ TypeError : un tuple est immuable
+```
+
+À quoi bon une liste qu'on ne peut pas modifier ? Justement : un tuple signale que ces valeurs **vont ensemble** et ne doivent pas bouger (des coordonnées, une date, une couleur RGB).
+
+On les utilise aussi pour **déballer** plusieurs valeurs d'un coup :
+
+```python
+latitude, longitude = coordonnees
+print(latitude)    # 48.85
+```
+
+Vous l'avez déjà fait sans le savoir : `for position, lettre in enumerate(...)` déballe un tuple à chaque tour.
+
+---
+
+## Les dictionnaires
+
+### Des valeurs rangées par clé
+
+Dans une liste, on retrouve un élément par sa **position**. Dans un dictionnaire, on le retrouve par son **nom**, appelé **clé**.
+
+```python
+client = {
+    "nom": "Hyde",
+    "prenom": "Jessica",
+    "age": 32,
+    "ville": "Lyon",
+}
+
+print(client["prenom"])   # Jessica
+print(client["age"])      # 32
+```
+
+Chaque élément est une paire `clé: valeur`. C'est la structure idéale pour décrire **une fiche** : un client, un produit, une transaction.
+
+### Modifier un dictionnaire
+
+```python
+client["age"] = 33            # modifie une valeur existante
+client["email"] = "j@hyde.fr" # ajoute une nouvelle clé
+del client["ville"]           # supprime une clé
+
+print("email" in client)      # True → in teste les clés
+```
+
+### Accéder sans planter : `.get()`
+
+```python
+print(client["telephone"])           # ❌ KeyError : la clé n'existe pas
+print(client.get("telephone"))        # None
+print(client.get("telephone", "inconnu"))  # inconnu → valeur par défaut
+```
+
+`.get()` est très utile avec des données incomplètes, où certaines fiches n'ont pas tous les champs.
+
+### Parcourir un dictionnaire
+
+```python
+for cle, valeur in client.items():
+    print(f"{cle} : {valeur}")
+```
+
+| Méthode | Renvoie |
+|---|---|
+| `.keys()` | les clés |
+| `.values()` | les valeurs |
+| `.items()` | les paires `(clé, valeur)`, sous forme de tuples |
+
+::: {.callout-tip}
+### Compter avec un dictionnaire
+Un usage très courant : compter des occurrences.
+
+```python
+villes = ["Lyon", "Paris", "Lyon", "Nantes", "Paris", "Lyon"]
+compteur = {}
+
+for ville in villes:
+    compteur[ville] = compteur.get(ville, 0) + 1
+
+print(compteur)  # {'Lyon': 3, 'Paris': 2, 'Nantes': 1}
+```
+
+C'est exactement ce que fait `value_counts()` en pandas.
+:::
+
+---
+
+## Les ensembles
+
+Un ensemble (`set`) est une collection **sans doublons** et **sans ordre**. Son usage le plus courant : dédoublonner.
+
+```python
+villes = ["Lyon", "Paris", "Lyon", "Nantes", "Paris"]
+villes_uniques = set(villes)
+
+print(villes_uniques)       # {'Nantes', 'Lyon', 'Paris'} (ordre non garanti)
+print(len(villes_uniques))  # 3
+```
+
+Comme il n'y a pas d'ordre, il n'y a pas d'index : `villes_uniques[0]` lève une erreur.
+
+::: {.callout-warning}
+`{}` crée un **dictionnaire** vide, pas un ensemble vide. Pour un ensemble vide, écrivez `set()`.
+:::
+
+---
+
+## Quelle structure choisir ?
+
+| Besoin | Structure | Exemple |
+|---|---|---|
+| Une suite de valeurs, qui va évoluer | liste | les notes d'une promo |
+| Quelques valeurs qui vont ensemble et ne bougent pas | tuple | des coordonnées GPS |
+| Une fiche avec des champs nommés | dictionnaire | un client |
+| Supprimer les doublons, tester l'appartenance | ensemble | les villes distinctes |
+
+Et elles se combinent ! Une **liste de dictionnaires** est la façon la plus naturelle de représenter un tableau de données en Python pur :
+
+```python
+clients = [
+    {"nom": "Hyde", "age": 32, "ville": "Lyon"},
+    {"nom": "Wilson", "age": 45, "ville": "Paris"},
+    {"nom": "Ian", "age": 28, "ville": "Lyon"},
+]
+
+for c in clients:
+    if c["ville"] == "Lyon":
+        print(c["nom"])
+```
+
+::: {.callout-note}
+### Et en analyse de données ?
+Cette liste de dictionnaires, c'est déjà un tableau : chaque dictionnaire est une ligne, chaque clé une colonne. Avec pandas, une seule ligne suffit pour le transformer en DataFrame :
+
+```python
+import pandas as pd
+df = pd.DataFrame(clients)
+```
+
+Et le filtre ci-dessus s'écrira `df[df["ville"] == "Lyon"]`. Comprendre les listes et les dictionnaires, c'est comprendre de quoi est fait un DataFrame.
+:::
+
+::: {.callout-tip}
+### À retenir
+- Une **liste** `[ ]` est ordonnée et modifiable. On accède aux éléments par leur index, qui commence à 0.
+- Les méthodes qui modifient une liste (`append`, `sort`…) renvoient `None` : ne réaffectez pas leur résultat.
+- `b = a` ne copie pas une liste : utilisez `a.copy()`.
+- Un **tuple** `( )` est une liste immuable, idéal pour des valeurs qui vont ensemble.
+- Un **dictionnaire** `{clé: valeur}` range les valeurs par nom. `.get()` évite les `KeyError`, `.items()` permet de le parcourir.
+- Un **ensemble** `set()` supprime les doublons.
+- `in` teste la présence d'un élément dans une liste, une chaîne, un ensemble, ou une clé dans un dictionnaire.
+- Une liste de dictionnaires, c'est déjà un tableau de données.
+:::
