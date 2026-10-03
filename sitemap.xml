@@ -2,94 +2,106 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://surybang.github.io/python-data/01-introduction/02-pourquoi-python.html</loc>
-    <lastmod>2026-10-03T08:48:42.143Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.219Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/01-introduction/02-pourquoi-python-slides.html</loc>
-    <lastmod>2026-10-03T08:48:42.143Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.219Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/02-environnement/02-cloud.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/02-environnement/02-cloud-slides.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/02-environnement/index.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/02-environnement/index-slides.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/03-initiation-python/00-premiers-pas-notebooks.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/03-initiation-python/00-premiers-pas-notebooks-slides.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/03-initiation-python/index.html</loc>
-    <lastmod>2026-10-03T08:48:42.145Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/index.html</loc>
-    <lastmod>2026-10-03T08:48:42.145Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/notebooks/01-variables-types-operations.html</loc>
-    <lastmod>2026-10-03T08:48:42.145Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/notebooks/07-slicing.html</loc>
-    <lastmod>2026-10-03T08:48:42.145Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/notebooks/00-premiers-pas-notebooks.html</loc>
-    <lastmod>2026-10-03T08:48:42.145Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/03-initiation-python/01-variables-types-operations-slides.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/03-initiation-python/01-variables-types-operations.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/03-initiation-python/07-slicing-slides.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/03-initiation-python/07-slicing.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://surybang.github.io/python-data/03-initiation-python/02-conditions-boucles-slides.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/03-initiation-python/02-conditions-boucles.html</loc>
-    <lastmod>2026-10-03T08:48:42.144Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/02-conditions-boucles-slides.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/07-slicing.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/07-slicing-slides.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/01-variables-types-operations.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/01-variables-types-operations-slides.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/notebooks/00-premiers-pas-notebooks.html</loc>
+    <lastmod>2026-10-03T10:56:14.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/notebooks/01-variables-types-operations.html</loc>
+    <lastmod>2026-10-03T10:56:14.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/notebooks/07-slicing.html</loc>
+    <lastmod>2026-10-03T10:56:14.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/notebooks/02-conditions-boucles.html</loc>
+    <lastmod>2026-10-03T10:56:14.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/index.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/index.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/00-premiers-pas-notebooks-slides.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/00-premiers-pas-notebooks.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/03-structures-donnees-slides.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
+  </url>
+  <url>
+    <loc>https://surybang.github.io/python-data/03-initiation-python/03-structures-donnees.html</loc>
+    <lastmod>2026-10-03T10:56:14.220Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/02-environnement/01-local-slides.html</loc>
-    <lastmod>2026-10-03T08:48:42.143Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.219Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/02-environnement/01-local.html</loc>
-    <lastmod>2026-10-03T08:48:42.143Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.219Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/01-introduction/01-langages-slides.html</loc>
-    <lastmod>2026-10-03T08:48:42.142Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.218Z</lastmod>
   </url>
   <url>
     <loc>https://surybang.github.io/python-data/01-introduction/01-langages.html</loc>
-    <lastmod>2026-10-03T08:48:42.142Z</lastmod>
+    <lastmod>2026-10-03T10:56:14.218Z</lastmod>
   </url>
 </urlset>

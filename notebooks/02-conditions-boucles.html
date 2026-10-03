@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercices : Variables, types de base et opérations – Python &amp; data</title>
+<title>Exercices : Conditions et boucles – Python &amp; data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -313,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Exercices : Variables, types de base et opérations</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Exercices : Conditions et boucles</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -422,16 +422,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#exercice-1-créer-et-inspecter-des-variables" id="toc-exercice-1-créer-et-inspecter-des-variables" class="nav-link active" data-scroll-target="#exercice-1-créer-et-inspecter-des-variables">Exercice 1 : Créer et inspecter des variables</a></li>
-  <li><a href="#exercice-2-étiquettes-et-mémoire" id="toc-exercice-2-étiquettes-et-mémoire" class="nav-link" data-scroll-target="#exercice-2-étiquettes-et-mémoire">Exercice 2 : Étiquettes et mémoire</a></li>
-  <li><a href="#exercice-3-opérations-sur-les-entiers-et-flottants" id="toc-exercice-3-opérations-sur-les-entiers-et-flottants" class="nav-link" data-scroll-target="#exercice-3-opérations-sur-les-entiers-et-flottants">Exercice 3 : Opérations sur les entiers et flottants</a></li>
-  <li><a href="#exercice-4-opérations-sur-les-chaînes-de-caractères" id="toc-exercice-4-opérations-sur-les-chaînes-de-caractères" class="nav-link" data-scroll-target="#exercice-4-opérations-sur-les-chaînes-de-caractères">Exercice 4 : Opérations sur les chaînes de caractères</a></li>
-  <li><a href="#exercice-5-conversions-de-types" id="toc-exercice-5-conversions-de-types" class="nav-link" data-scroll-target="#exercice-5-conversions-de-types">Exercice 5 : Conversions de types</a></li>
-  <li><a href="#exercice-6-f-strings" id="toc-exercice-6-f-strings" class="nav-link" data-scroll-target="#exercice-6-f-strings">Exercice 6 : f-strings</a></li>
-  <li><a href="#exercice-7-convertisseur-de-températures" id="toc-exercice-7-convertisseur-de-températures" class="nav-link" data-scroll-target="#exercice-7-convertisseur-de-températures">Exercice 7 : Convertisseur de températures</a></li>
+  <li><a href="#exercice-1-tarif-de-cinéma" id="toc-exercice-1-tarif-de-cinéma" class="nav-link active" data-scroll-target="#exercice-1-tarif-de-cinéma">Exercice 1 : Tarif de cinéma</a></li>
+  <li><a href="#exercice-2-année-bissextile" id="toc-exercice-2-année-bissextile" class="nav-link" data-scroll-target="#exercice-2-année-bissextile">Exercice 2 : Année bissextile</a></li>
+  <li><a href="#exercice-3-suivi-de-commande-avec-match" id="toc-exercice-3-suivi-de-commande-avec-match" class="nav-link" data-scroll-target="#exercice-3-suivi-de-commande-avec-match">Exercice 3 : Suivi de commande avec <code>match</code></a></li>
+  <li><a href="#exercice-4-table-de-multiplication" id="toc-exercice-4-table-de-multiplication" class="nav-link" data-scroll-target="#exercice-4-table-de-multiplication">Exercice 4 : Table de multiplication</a></li>
+  <li><a href="#exercice-5-compter-une-lettre" id="toc-exercice-5-compter-une-lettre" class="nav-link" data-scroll-target="#exercice-5-compter-une-lettre">Exercice 5 : Compter une lettre</a></li>
+  <li><a href="#exercice-6-rendre-le-code-pythonique" id="toc-exercice-6-rendre-le-code-pythonique" class="nav-link" data-scroll-target="#exercice-6-rendre-le-code-pythonique">Exercice 6 : Rendre le code « pythonique »</a></li>
+  <li><a href="#exercice-7-objectif-épargne-avec-while" id="toc-exercice-7-objectif-épargne-avec-while" class="nav-link" data-scroll-target="#exercice-7-objectif-épargne-avec-while">Exercice 7 : Objectif épargne avec <code>while</code></a></li>
+  <li><a href="#exercice-8-break-et-continue" id="toc-exercice-8-break-et-continue" class="nav-link" data-scroll-target="#exercice-8-break-et-continue">Exercice 8 : <code>break</code> et <code>continue</code></a></li>
+  <li><a href="#exercice-9-trouve-le-bug" id="toc-exercice-9-trouve-le-bug" class="nav-link" data-scroll-target="#exercice-9-trouve-le-bug">Exercice 9 : Trouve le bug 🐛</a></li>
+  <li><a href="#exercice-10-mini-projet-fizzbuzz" id="toc-exercice-10-mini-projet-fizzbuzz" class="nav-link" data-scroll-target="#exercice-10-mini-projet-fizzbuzz">Exercice 10 : Mini-projet FizzBuzz</a></li>
   <li><a href="#corrigés" id="toc-corrigés" class="nav-link" data-scroll-target="#corrigés">Corrigés</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.dev/surybang/python-data/blob/main/notebooks/01-variables-types-operations.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/surybang/python-data/blob/main/notebooks/02-conditions-boucles.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -439,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercices : Variables, types de base et opérations</h1>
+<h1 class="title">Exercices : Conditions et boucles</h1>
 </div>
 
 
@@ -456,187 +459,210 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Ce notebook accompagne le cours <strong>Variables, types de base et opérations</strong>. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.</p>
-<p>Pour chaque exercice, complète les cellules marquées <code># TODO</code> et exécute-les pour vérifier ton résultat.</p>
+<p>Ce notebook accompagne le cours <strong>Conditions et boucles</strong>. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.</p>
+<p>Pour chaque exercice, complète les cellules marquées <code># TODO</code> et exécute-les pour vérifier ton résultat. Change les valeurs de départ pour tester plusieurs cas.</p>
 <hr>
-<section id="exercice-1-créer-et-inspecter-des-variables" class="level2">
-<h2 class="anchored" data-anchor-id="exercice-1-créer-et-inspecter-des-variables">Exercice 1 : Créer et inspecter des variables</h2>
-<p>Crée quatre variables : ton prénom, ton âge, ta taille en mètres, et un booléen qui indique si tu aimes Python. Affiche ensuite le type de chacune.</p>
-<div id="8200f49d" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : crée tes quatre variables</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> ...</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> ...</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>taille <span class="op">=</span> ...</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>aime_python <span class="op">=</span> ...</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Affiche le type de chacune</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(prenom))</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(age))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(taille))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(aime_python))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercice-1-tarif-de-cinéma" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-1-tarif-de-cinéma">Exercice 1 : Tarif de cinéma</h2>
+<p>Écris un programme qui affiche le prix d’une place selon l’âge :</p>
+<ul>
+<li>moins de 12 ans : 5 €</li>
+<li>de 12 à 25 ans inclus : 7 €</li>
+<li>65 ans et plus : 6 €</li>
+<li>sinon : 10 €</li>
+</ul>
+<div id="cb0002" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : calcule le prix avec if / elif / else</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>prix <span class="op">=</span> ...</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>age<span class="sc">}</span><span class="ss"> ans → </span><span class="sc">{</span>prix<span class="sc">}</span><span class="ss"> €"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : 30 ans → 10 €   (teste aussi 8, 25, 26, 70)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>30 ans → 10 €</code></pre>
 </div>
-<hr>
-</section>
-<section id="exercice-2-étiquettes-et-mémoire" class="level2">
-<h2 class="anchored" data-anchor-id="exercice-2-étiquettes-et-mémoire">Exercice 2 : Étiquettes et mémoire</h2>
-<p>Pour chaque bloc, <strong>devine d’abord</strong> ce qui va s’afficher (note ta réponse en commentaire), puis exécute pour vérifier.</p>
-<div id="a1b2c3d5" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : devine avant d'exécuter</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x <span class="kw">is</span> y)          <span class="co"># True ou False ?</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(x) <span class="op">==</span> <span class="bu">id</span>(y))  <span class="co"># True ou False ?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="a1b2c3d6" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">+=</span> <span class="dv">5</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : devine avant d'exécuter</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x, y)    <span class="co"># ?</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x <span class="kw">is</span> y)  <span class="co"># True ou False ?</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : en une phrase, explique pourquoi x n'a pas changé</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Réponse : ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="a1b2c3d7" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>courses <span class="op">=</span> [<span class="st">"pain"</span>, <span class="st">"lait"</span>]</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>panier <span class="op">=</span> courses</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>panier.append(<span class="st">"oeufs"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : devine avant d'exécuter</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(courses)  <span class="co"># ?</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : modifie la ligne `panier = courses` pour que `courses` ne soit PAS modifiée,</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># puis réexécute la cellule.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 </section>
-<section id="exercice-3-opérations-sur-les-entiers-et-flottants" class="level2">
-<h2 class="anchored" data-anchor-id="exercice-3-opérations-sur-les-entiers-et-flottants">Exercice 3 : Opérations sur les entiers et flottants</h2>
-<p>Calcule les valeurs suivantes et stocke chacune dans une variable.</p>
-<div id="5031ca34" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : combien font 17 divisé par 5 ? (division classique, puis division entière, puis reste)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>division        <span class="op">=</span> ...   <span class="co"># attendu : 3.4</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>division_entiere <span class="op">=</span> ...  <span class="co"># attendu : 3</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>reste           <span class="op">=</span> ...   <span class="co"># attendu : 2</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : quelle est la surface d'un carré de côté 13 ?</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>surface <span class="op">=</span> ...           <span class="co"># attendu : 169</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : 2 à la puissance 10 ?</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>puissance <span class="op">=</span> ...         <span class="co"># attendu : 1024</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(division, division_entiere, reste)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(surface)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(puissance)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercice-2-année-bissextile" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-2-année-bissextile">Exercice 2 : Année bissextile</h2>
+<p>Une année est bissextile si elle est divisible par 4, <strong>sauf</strong> si elle est divisible par 100… <strong>sauf</strong> si elle est aussi divisible par 400.</p>
+<p>Indice : « divisible par 4 » se traduit par <code>annee % 4 == 0</code>.</p>
+<div id="cb0004" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>annee <span class="op">=</span> <span class="dv">1900</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : écris la condition en une seule ligne, avec and / or / not</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>bissextile <span class="op">=</span> ...</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>annee<span class="sc">}</span><span class="ss"> bissextile ? </span><span class="sc">{</span>bissextile<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : 1900 → False, 2000 → True, 2024 → True, 2025 → False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1900 bissextile ? False</code></pre>
+</div>
 </div>
 <hr>
 </section>
-<section id="exercice-4-opérations-sur-les-chaînes-de-caractères" class="level2">
-<h2 class="anchored" data-anchor-id="exercice-4-opérations-sur-les-chaînes-de-caractères">Exercice 4 : Opérations sur les chaînes de caractères</h2>
-<div id="6aaa1a62" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"jessica"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>nom    <span class="op">=</span> <span class="st">"hyde"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : construis le nom complet "Jessica Hyde" (majuscule sur la première lettre)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>nom_complet <span class="op">=</span> ...</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nom_complet)  <span class="co"># attendu : Jessica Hyde</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : combien de caractères dans "data science" (espace compris) ?</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>phrase <span class="op">=</span> <span class="st">"data science"</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>longueur <span class="op">=</span> ...</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(longueur)  <span class="co"># attendu : 12</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : remplace "science" par "engineering" dans la phrase</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>nouvelle_phrase <span class="op">=</span> ...</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nouvelle_phrase)  <span class="co"># attendu : data engineering</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : affiche "Python! " répété 4 fois</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(...)  <span class="co"># attendu : Python! Python! Python! Python!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercice-3-suivi-de-commande-avec-match" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-3-suivi-de-commande-avec-match">Exercice 3 : Suivi de commande avec <code>match</code></h2>
+<p>Un site e-commerce stocke le statut d’une commande sous forme de code. Affiche le message correspondant :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"P"</code></td>
+<td>En préparation 📦</td>
+</tr>
+<tr class="even">
+<td><code>"E"</code></td>
+<td>Expédiée 🚚</td>
+</tr>
+<tr class="odd">
+<td><code>"L"</code></td>
+<td>Livrée ✅</td>
+</tr>
+<tr class="even">
+<td><code>"A"</code> ou <code>"R"</code></td>
+<td>Annulée ou remboursée ❌</td>
+</tr>
+<tr class="odd">
+<td>autre</td>
+<td>Statut inconnu</td>
+</tr>
+</tbody>
+</table>
+<div id="cb0006" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>statut <span class="op">=</span> <span class="st">"R"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : utilise match / case</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : Annulée ou remboursée ❌</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 </section>
-<section id="exercice-5-conversions-de-types" class="level2">
-<h2 class="anchored" data-anchor-id="exercice-5-conversions-de-types">Exercice 5 : Conversions de types</h2>
-<div id="16bb2b64" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cette ligne va planter : lis le message d'erreur, puis corrige la ligne suivante</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>age_str <span class="op">=</span> <span class="st">"25"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print("Dans 10 ans tu auras " + age_str + 10 + " ans")  # TypeError !</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : corrige en convertissant correctement</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()  <span class="co"># attendu : Dans 10 ans tu auras 35 ans</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="d35a474d" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : que vaut bool() appliqué à ces valeurs ? Devines d'abord, puis vérifie.</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>(<span class="dv">0</span>))        <span class="co"># True ou False ?</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>(<span class="dv">1</span>))</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>(<span class="op">-</span><span class="dv">42</span>))</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>(<span class="st">""</span>))       <span class="co"># chaîne vide</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>(<span class="st">"Python"</span>))</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>(<span class="fl">0.0</span>))</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>(<span class="fl">0.1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercice-4-table-de-multiplication" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-4-table-de-multiplication">Exercice 4 : Table de multiplication</h2>
+<p>Affiche la table de multiplication de <code>n</code>, de 1 à 10 <strong>inclus</strong>.</p>
+<div id="cb0008" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : boucle for avec range()</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 7 x 1 = 7</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 7 x 2 = 14</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 7 x 10 = 70</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 </section>
-<section id="exercice-6-f-strings" class="level2">
-<h2 class="anchored" data-anchor-id="exercice-6-f-strings">Exercice 6 : f-strings</h2>
-<div id="46e169bf" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>produit <span class="op">=</span> <span class="st">"café"</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>prix_unitaire <span class="op">=</span> <span class="fl">2.5</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>quantite <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : affiche "3 café(s) à 2.5€ = 7.5€" en utilisant une f-string</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Le total doit être calculé directement dans la f-string</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(...)  <span class="co"># attendu : 3 café(s) à 2.5€ = 7.5€</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="47433ac9" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercice 6b : formatage dans les f-strings</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Les codes de formatage ({valeur:...}) sont dans le cours.</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>chiffre_affaires <span class="op">=</span> <span class="fl">1_482_300.5</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>taux_marge <span class="op">=</span> <span class="fl">0.2173</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : affiche le CA avec 2 décimales et un séparateur de milliers (utilise ,)</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : 1,482,300.50</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{...}</span><span class="ss">"</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : affiche le taux de marge en % avec 1 décimale</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : 21.7%</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{...}</span><span class="ss">"</span>)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : affiche le nombre de ventes aligné à droite sur 8 caractères, complété de zéros</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : 00000042</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{...}</span><span class="ss">"</span>)</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : construis un mini-tableau aligné (utilise l'alignement à gauche sur 15 chars)</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>produits <span class="op">=</span> [(<span class="st">"Café"</span>, <span class="fl">2.5</span>), (<span class="st">"Thé"</span>, <span class="fl">1.8</span>), (<span class="st">"Chocolat chaud"</span>, <span class="fl">3.2</span>)]</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nom, prix <span class="kw">in</span> produits:</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>nom<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>prix<span class="sc">}</span><span class="ss">€"</span>)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Café            2.50€</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Thé             1.80€</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Chocolat chaud  3.20€</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercice-5-compter-une-lettre" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-5-compter-une-lettre">Exercice 5 : Compter une lettre</h2>
+<p>Compte le nombre de <code>"s"</code> dans un mot, en <strong>bouclant directement sur les lettres</strong> (sans <code>range</code>).</p>
+<div id="cb0010" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mot <span class="op">=</span> <span class="st">"Mississippi"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : accumulateur + boucle for sur le mot</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>nb_s <span class="op">=</span> ...</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Il y a </span><span class="sc">{</span>nb_s<span class="sc">}</span><span class="ss"> 's' dans </span><span class="sc">{</span>mot<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : Il y a 4 's' dans Mississippi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 </section>
-<section id="exercice-7-convertisseur-de-températures" class="level2">
-<h2 class="anchored" data-anchor-id="exercice-7-convertisseur-de-températures">Exercice 7 : Convertisseur de températures</h2>
-<p>Écris un convertisseur qui prend une température en Celsius et affiche le résultat en Fahrenheit et en Kelvin.</p>
-<p>Formules : - Fahrenheit : <code>F = C × 9/5 + 32</code> - Kelvin : <code>K = C + 273.15</code></p>
-<div id="e1a6214e" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>celsius <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : calcule fahrenheit et kelvin</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>fahrenheit <span class="op">=</span> ...</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>kelvin <span class="op">=</span> ...</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : affiche les résultats avec une f-string</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 100°C = 212.0°F = 373.15K</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercice-6-rendre-le-code-pythonique" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-6-rendre-le-code-pythonique">Exercice 6 : Rendre le code « pythonique »</h2>
+<p>Ce code fonctionne, mais il n’est pas écrit comme on le ferait en Python. Réécris-le avec <code>enumerate()</code>.</p>
+<div id="cb0012" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mot <span class="op">=</span> <span class="st">"Python"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Version à améliorer</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(mot)):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Lettre n°</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> : </span><span class="sc">{</span>mot[i]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : même affichage avec enumerate()</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Lettre n°1 : P</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Lettre n°2 : y</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="exercice-7-objectif-épargne-avec-while" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-7-objectif-épargne-avec-while">Exercice 7 : Objectif épargne avec <code>while</code></h2>
+<p>Tu places 1 000 € sur un livret à 3 % par an. Combien d’années faut-il pour atteindre <strong>au moins</strong> 1 500 € ?</p>
+<div id="cb0014" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>capital <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>objectif <span class="op">=</span> <span class="dv">1500</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>taux <span class="op">=</span> <span class="fl">0.03</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>annees <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : boucle while</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>annees<span class="sc">}</span><span class="ss"> ans → </span><span class="sc">{</span>capital<span class="sc">:.2f}</span><span class="ss"> €"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : 14 ans → 1512.59 €</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="exercice-8-break-et-continue" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-8-break-et-continue">Exercice 8 : <code>break</code> et <code>continue</code></h2>
+<ol type="1">
+<li>Trouve le <strong>premier</strong> nombre supérieur à 100 divisible à la fois par 7 et par 11, puis arrête la boucle.</li>
+<li>Affiche les nombres de 1 à 20, <strong>sauf</strong> les multiples de 4.</li>
+</ol>
+<div id="cb0016" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> 1 : break</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : 154</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cb0017" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> 2 : continue</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : 1 2 3 5 6 7 9 10 11 13 14 15 17 18 19 (un par ligne)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="exercice-9-trouve-le-bug" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-9-trouve-le-bug">Exercice 9 : Trouve le bug 🐛</h2>
+<p>Ce programme doit afficher la somme des nombres pairs de 1 à 100. Il contient <strong>trois</strong> erreurs. Devine d’abord ce qu’il affiche, puis corrige-le.</p>
+<div id="cb0019" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">100</span>):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> n</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(total)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu après correction : 2550</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2500</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="exercice-10-mini-projet-fizzbuzz" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-10-mini-projet-fizzbuzz">Exercice 10 : Mini-projet FizzBuzz</h2>
+<p>Un grand classique des entretiens techniques ! Pour chaque nombre de 1 à 30 :</p>
+<ul>
+<li>s’il est divisible par 3 <strong>et</strong> par 5, affiche <code>FizzBuzz</code> ;</li>
+<li>s’il est divisible par 3, affiche <code>Fizz</code> ;</li>
+<li>s’il est divisible par 5, affiche <code>Buzz</code> ;</li>
+<li>sinon, affiche le nombre.</li>
+</ul>
+<p>Réfléchis bien à l’ordre de tes conditions…</p>
+<div id="cb0021" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu : 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Buzz</code></pre>
+</div>
 </div>
 <hr>
 </section>
@@ -647,43 +673,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Afficher les corrigés
 </summary>
 <p><strong>Exercice 1</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Jessica"</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>taille <span class="op">=</span> <span class="fl">1.68</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>aime_python <span class="op">=</span> <span class="va">True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> age <span class="op">&lt;</span> <span class="dv">12</span>:</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    prix <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> age <span class="op">&lt;=</span> <span class="dv">25</span>:</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    prix <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> age <span class="op">&gt;=</span> <span class="dv">65</span>:</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    prix <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    prix <span class="op">=</span> <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Exercice 2</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># True, True : y = x colle une 2e étiquette sur le même objet</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 15, False : les int sont immuables, y += 5 crée un nouvel objet 15</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   et recolle l'étiquette y dessus ; x désigne toujours 10</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ['pain', 'lait', 'oeufs'] : courses et panier désignent la même liste</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>panier <span class="op">=</span> courses.copy()   <span class="co"># ou courses[:]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bissextile <span class="op">=</span> (annee <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> annee <span class="op">%</span> <span class="dv">100</span> <span class="op">!=</span> <span class="dv">0</span>) <span class="kw">or</span> annee <span class="op">%</span> <span class="dv">400</span> <span class="op">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Exercice 3</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>division         <span class="op">=</span> <span class="dv">17</span> <span class="op">/</span> <span class="dv">5</span>    <span class="co"># 3.4</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>division_entiere <span class="op">=</span> <span class="dv">17</span> <span class="op">//</span> <span class="dv">5</span>   <span class="co"># 3</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>reste            <span class="op">=</span> <span class="dv">17</span> <span class="op">%</span> <span class="dv">5</span>    <span class="co"># 2</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>surface          <span class="op">=</span> <span class="dv">13</span> <span class="op">**</span> <span class="dv">2</span>   <span class="co"># 169</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>puissance        <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> <span class="dv">10</span>   <span class="co"># 1024</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">match</span> statut:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="st">"P"</span>:</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"En préparation 📦"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="st">"E"</span>:</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Expédiée 🚚"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="st">"L"</span>:</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Livrée ✅"</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="st">"A"</span> <span class="op">|</span> <span class="st">"R"</span>:</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Annulée ou remboursée ❌"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> _:</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Statut inconnu"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Exercice 4</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>nom_complet     <span class="op">=</span> prenom.capitalize() <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> nom.capitalize()</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>longueur        <span class="op">=</span> <span class="bu">len</span>(phrase)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>nouvelle_phrase <span class="op">=</span> phrase.replace(<span class="st">"science"</span>, <span class="st">"engineering"</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Python! "</span> <span class="op">*</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> x </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>n <span class="op">*</span> i<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Exercice 5</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dans 10 ans tu auras "</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(age_str) <span class="op">+</span> <span class="dv">10</span>) <span class="op">+</span> <span class="st">" ans"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bool : False, True, True, False, True, False, True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>nb_s <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lettre <span class="kw">in</span> mot:</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> lettre <span class="op">==</span> <span class="st">"s"</span>:</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        nb_s <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Exercice 6</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>quantite<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>produit<span class="sc">}</span><span class="ss">(s) à </span><span class="sc">{</span>prix_unitaire<span class="sc">}</span><span class="ss">€ = </span><span class="sc">{</span>quantite <span class="op">*</span> prix_unitaire<span class="sc">}</span><span class="ss">€"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Exercice 6b</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>chiffre_affaires<span class="sc">:,.2f}</span><span class="ss">"</span>)   <span class="co"># 1,482,300.50</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>taux_marge<span class="sc">:.1%}</span><span class="ss">"</span>)          <span class="co"># 21.7%</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>ventes<span class="sc">:08}</span><span class="ss">"</span>)               <span class="co"># 00000042</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nom, prix <span class="kw">in</span> produits:</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>nom<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>prix<span class="sc">:.2f}</span><span class="ss">€"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lettre <span class="kw">in</span> <span class="bu">enumerate</span>(mot):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Lettre n°</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> : </span><span class="sc">{</span>lettre<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Bonus : enumerate accepte un point de départ</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, lettre <span class="kw">in</span> <span class="bu">enumerate</span>(mot, start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Lettre n°</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> : </span><span class="sc">{</span>lettre<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Exercice 7</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fahrenheit <span class="op">=</span> celsius <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>kelvin     <span class="op">=</span> celsius <span class="op">+</span> <span class="fl">273.15</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>celsius<span class="sc">}</span><span class="ss">°C = </span><span class="sc">{</span>fahrenheit<span class="sc">}</span><span class="ss">°F = </span><span class="sc">{</span>kelvin<span class="sc">}</span><span class="ss">K"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> capital <span class="op">&lt;</span> objectif:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    capital <span class="op">*=</span> <span class="dv">1</span> <span class="op">+</span> taux</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    annees <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Exercice 8</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">101</span>, <span class="dv">1000</span>):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">%</span> <span class="dv">7</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> n <span class="op">%</span> <span class="dv">11</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(n)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">21</span>):</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Exercice 9</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">0</span>                    <span class="co"># 1. initialisation AVANT la boucle</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">101</span>):      <span class="co"># 2. range(1, 100) s'arrête à 99</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:           <span class="co"># 3. pair : reste 0, pas 1</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> n</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(total)  <span class="co"># 2550</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La version bugguée affiche <code>99</code> : <code>total</code> est remis à zéro à chaque tour, et seul le dernier impair survit.</p>
+<p><strong>Exercice 10</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">31</span>):</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> n <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>:   <span class="co"># le cas le plus restrictif en premier !</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"FizzBuzz"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> n <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Fizz"</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> n <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Buzz"</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+Si on teste <code>n % 3 == 0</code> en premier, 15 affiche <code>Fizz</code> et la branche <code>FizzBuzz</code> n’est jamais atteinte : c’est le même piège que l’exercice des mentions dans le cours.
 </details>
 
 
@@ -1111,7 +1170,7 @@ Afficher les corrigés
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/surybang/python-data/blob/main/notebooks/01-variables-types-operations.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/surybang/python-data/blob/main/notebooks/02-conditions-boucles.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
