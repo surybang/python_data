@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../03-initiation-python/05-fonctions.html" rel="next">
 <link href="../03-initiation-python/03-structures-donnees.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -314,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/07-slicing.html">Le slicing</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/04-slicing.html">Le slicing</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -413,8 +414,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/07-slicing.html" class="sidebar-item-text sidebar-link active">
+  <a href="../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les fonctions</span></a>
   </div>
 </li>
       </ul>
@@ -436,13 +443,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#le-pas-debutfinpas" id="toc-le-pas-debutfinpas" class="nav-link" data-scroll-target="#le-pas-debutfinpas">Le pas : <code>[debut:fin:pas]</code></a></li>
   <li><a href="#slicing-et-copie" id="toc-slicing-et-copie" class="nav-link" data-scroll-target="#slicing-et-copie">Slicing et copie</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/07-slicing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="07-slicing-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="07-slicing-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/04-slicing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="07-slicing-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="07-slicing-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/07-slicing.html">Le slicing</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/04-slicing.html">Le slicing</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Le slicing</h1>
 </div>
@@ -976,6 +983,9 @@ Warning
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../03-initiation-python/05-fonctions.html" class="pagination-link" aria-label="Les fonctions">
+        <span class="nav-page-text">Les fonctions</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -986,7 +996,7 @@ Warning
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/07-slicing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/04-slicing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
