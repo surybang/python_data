@@ -232,64 +232,64 @@
     ]
   },
   {
-    "objectID": "notebooks/02-variables-types-operations.html",
-    "href": "notebooks/02-variables-types-operations.html",
+    "objectID": "notebooks/01-variables-types-operations.html",
+    "href": "notebooks/01-variables-types-operations.html",
     "title": "Exercices : Variables, types de base et opérations",
     "section": "",
     "text": "Ce notebook accompagne le cours Variables, types de base et opérations. Les exercices ne réexpliquent pas les notions : si tu bloques, retourne voir le cours.\nPour chaque exercice, complète les cellules marquées # TODO et exécute-les pour vérifier ton résultat."
   },
   {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
-    "href": "notebooks/02-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
+    "href": "notebooks/01-variables-types-operations.html#exercice-1-créer-et-inspecter-des-variables",
     "title": "Exercices : Variables, types de base et opérations",
     "section": "Exercice 1 : Créer et inspecter des variables",
     "text": "Exercice 1 : Créer et inspecter des variables\nCrée quatre variables : ton prénom, ton âge, ta taille en mètres, et un booléen qui indique si tu aimes Python. Affiche ensuite le type de chacune.\n\n# TODO : crée tes quatre variables\nprenom = ...\nage = ...\ntaille = ...\naime_python = ...\n\n# Affiche le type de chacune\nprint(type(prenom))\nprint(type(age))\nprint(type(taille))\nprint(type(aime_python))"
   },
   {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
-    "href": "notebooks/02-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
+    "href": "notebooks/01-variables-types-operations.html#exercice-2-étiquettes-et-mémoire",
     "title": "Exercices : Variables, types de base et opérations",
     "section": "Exercice 2 : Étiquettes et mémoire",
     "text": "Exercice 2 : Étiquettes et mémoire\nPour chaque bloc, devine d’abord ce qui va s’afficher (note ta réponse en commentaire), puis exécute pour vérifier.\n\nx = 10\ny = x\n\n# TODO : devine avant d'exécuter\nprint(x is y)          # True ou False ?\nprint(id(x) == id(y))  # True ou False ?\n\n\nx = 10\ny = x\ny += 5\n\n# TODO : devine avant d'exécuter\nprint(x, y)    # ?\nprint(x is y)  # True ou False ?\n\n# TODO : en une phrase, explique pourquoi x n'a pas changé\n# Réponse : ...\n\n\ncourses = [\"pain\", \"lait\"]\npanier = courses\npanier.append(\"oeufs\")\n\n# TODO : devine avant d'exécuter\nprint(courses)  # ?\n\n# TODO : modifie la ligne `panier = courses` pour que `courses` ne soit PAS modifiée,\n# puis réexécute la cellule."
   },
   {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
-    "href": "notebooks/02-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
+    "href": "notebooks/01-variables-types-operations.html#exercice-3-opérations-sur-les-entiers-et-flottants",
     "title": "Exercices : Variables, types de base et opérations",
     "section": "Exercice 3 : Opérations sur les entiers et flottants",
     "text": "Exercice 3 : Opérations sur les entiers et flottants\nCalcule les valeurs suivantes et stocke chacune dans une variable.\n\n# TODO : combien font 17 divisé par 5 ? (division classique, puis division entière, puis reste)\ndivision        = ...   # attendu : 3.4\ndivision_entiere = ...  # attendu : 3\nreste           = ...   # attendu : 2\n\n# TODO : quelle est la surface d'un carré de côté 13 ?\nsurface = ...           # attendu : 169\n\n# TODO : 2 à la puissance 10 ?\npuissance = ...         # attendu : 1024\n\nprint(division, division_entiere, reste)\nprint(surface)\nprint(puissance)"
   },
   {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
-    "href": "notebooks/02-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
+    "href": "notebooks/01-variables-types-operations.html#exercice-4-opérations-sur-les-chaînes-de-caractères",
     "title": "Exercices : Variables, types de base et opérations",
     "section": "Exercice 4 : Opérations sur les chaînes de caractères",
     "text": "Exercice 4 : Opérations sur les chaînes de caractères\n\nprenom = \"jessica\"\nnom    = \"hyde\"\n\n# TODO : construis le nom complet \"Jessica Hyde\" (majuscule sur la première lettre)\nnom_complet = ...\nprint(nom_complet)  # attendu : Jessica Hyde\n\n# TODO : combien de caractères dans \"data science\" (espace compris) ?\nphrase = \"data science\"\nlongueur = ...\nprint(longueur)  # attendu : 12\n\n# TODO : remplace \"science\" par \"engineering\" dans la phrase\nnouvelle_phrase = ...\nprint(nouvelle_phrase)  # attendu : data engineering\n\n# TODO : affiche \"Python! \" répété 4 fois\nprint(...)  # attendu : Python! Python! Python! Python!"
   },
   {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-5-conversions-de-types",
-    "href": "notebooks/02-variables-types-operations.html#exercice-5-conversions-de-types",
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-5-conversions-de-types",
+    "href": "notebooks/01-variables-types-operations.html#exercice-5-conversions-de-types",
     "title": "Exercices : Variables, types de base et opérations",
     "section": "Exercice 5 : Conversions de types",
     "text": "Exercice 5 : Conversions de types\n\n# Cette ligne va planter : lis le message d'erreur, puis corrige la ligne suivante\nage_str = \"25\"\n# print(\"Dans 10 ans tu auras \" + age_str + 10 + \" ans\")  # TypeError !\n\n# TODO : corrige en convertissant correctement\nprint(\"Dans 10 ans tu auras \" + ...)  # attendu : Dans 10 ans tu auras 35 ans\n\n\n# TODO : que vaut bool() appliqué à ces valeurs ? Devines d'abord, puis vérifie.\nprint(bool(0))        # True ou False ?\nprint(bool(1))\nprint(bool(-42))\nprint(bool(\"\"))       # chaîne vide\nprint(bool(\"Python\"))\nprint(bool(0.0))\nprint(bool(0.1))"
   },
   {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-6-f-strings",
-    "href": "notebooks/02-variables-types-operations.html#exercice-6-f-strings",
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-6-f-strings",
+    "href": "notebooks/01-variables-types-operations.html#exercice-6-f-strings",
     "title": "Exercices : Variables, types de base et opérations",
     "section": "Exercice 6 : f-strings",
     "text": "Exercice 6 : f-strings\n\nproduit = \"café\"\nprix_unitaire = 2.5\nquantite = 3\n\n# TODO : affiche \"3 café(s) à 2.5€ = 7.5€\" en utilisant une f-string\n# Le total doit être calculé directement dans la f-string\nprint(...)  # attendu : 3 café(s) à 2.5€ = 7.5€\n\n\n# Exercice 6b : formatage dans les f-strings\n# Les codes de formatage ({valeur:...}) sont dans le cours.\n\nchiffre_affaires = 1_482_300.5\ntaux_marge = 0.2173\nventes = 42\n\n# TODO : affiche le CA avec 2 décimales et un séparateur de milliers (utilise ,)\n# attendu : 1,482,300.50\nprint(f\"{...}\")\n\n# TODO : affiche le taux de marge en % avec 1 décimale\n# attendu : 21.7%\nprint(f\"{...}\")\n\n# TODO : affiche le nombre de ventes aligné à droite sur 8 caractères, complété de zéros\n# attendu : 00000042\nprint(f\"{...}\")\n\n# TODO : construis un mini-tableau aligné (utilise l'alignement à gauche sur 15 chars)\nproduits = [(\"Café\", 2.5), (\"Thé\", 1.8), (\"Chocolat chaud\", 3.2)]\nfor nom, prix in produits:\n    print(f\"{nom} {prix}€\")\n# attendu :\n# Café            2.50€\n# Thé             1.80€\n# Chocolat chaud  3.20€"
   },
   {
-    "objectID": "notebooks/02-variables-types-operations.html#exercice-7-convertisseur-de-températures",
-    "href": "notebooks/02-variables-types-operations.html#exercice-7-convertisseur-de-températures",
+    "objectID": "notebooks/01-variables-types-operations.html#exercice-7-convertisseur-de-températures",
+    "href": "notebooks/01-variables-types-operations.html#exercice-7-convertisseur-de-températures",
     "title": "Exercices : Variables, types de base et opérations",
     "section": "Exercice 7 : Convertisseur de températures",
     "text": "Exercice 7 : Convertisseur de températures\nÉcris un convertisseur qui prend une température en Celsius et affiche le résultat en Fahrenheit et en Kelvin.\nFormules : - Fahrenheit : F = C × 9/5 + 32 - Kelvin : K = C + 273.15\n\ncelsius = 100\n\n# TODO : calcule fahrenheit et kelvin\nfahrenheit = ...\nkelvin = ...\n\n# TODO : affiche les résultats avec une f-string\n# attendu :\n# 100°C = 212.0°F = 373.15K\nprint(...)"
   },
   {
-    "objectID": "notebooks/02-variables-types-operations.html#corrigés",
-    "href": "notebooks/02-variables-types-operations.html#corrigés",
+    "objectID": "notebooks/01-variables-types-operations.html#corrigés",
+    "href": "notebooks/01-variables-types-operations.html#corrigés",
     "title": "Exercices : Variables, types de base et opérations",
     "section": "Corrigés",
     "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\nprenom = \"Jessica\"\nage = 25\ntaille = 1.68\naime_python = True\nExercice 2\n# True, True : y = x colle une 2e étiquette sur le même objet\n# 10 15, False : les int sont immuables, y += 5 crée un nouvel objet 15\n#   et recolle l'étiquette y dessus ; x désigne toujours 10\n# ['pain', 'lait', 'oeufs'] : courses et panier désignent la même liste\npanier = courses.copy()   # ou courses[:]\nExercice 3\ndivision         = 17 / 5    # 3.4\ndivision_entiere = 17 // 5   # 3\nreste            = 17 % 5    # 2\nsurface          = 13 ** 2   # 169\npuissance        = 2 ** 10   # 1024\nExercice 4\nnom_complet     = prenom.capitalize() + \" \" + nom.capitalize()\nlongueur        = len(phrase)\nnouvelle_phrase = phrase.replace(\"science\", \"engineering\")\nprint(\"Python! \" * 4)\nExercice 5\nprint(\"Dans 10 ans tu auras \" + str(int(age_str) + 10) + \" ans\")\n# bool : False, True, True, False, True, False, True\nExercice 6\nprint(f\"{quantite} {produit}(s) à {prix_unitaire}€ = {quantite * prix_unitaire}€\")\nExercice 6b\nprint(f\"{chiffre_affaires:,.2f}\")   # 1,482,300.50\nprint(f\"{taux_marge:.1%}\")          # 21.7%\nprint(f\"{ventes:08}\")               # 00000042\n\nfor nom, prix in produits:\n    print(f\"{nom:&lt;15} {prix:.2f}€\")\nExercice 7\nfahrenheit = celsius * 9/5 + 32\nkelvin     = celsius + 273.15\nprint(f\"{celsius}°C = {fahrenheit}°F = {kelvin}K\")"
@@ -358,99 +358,99 @@
     "text": "Corrigés\n\n\nAfficher les corrigés\n\nExercice 1\npremier = fruits[0]\ndernier = fruits[-1]\navant_dernier = fruits[-2]\nExercice 2\ndebut           = phrase[:4]\nfin             = phrase[5:]\npremiers_scores = scores[:3]\nmilieu          = scores[2:6]\nExercice 3\nnom_utilisateur = email[:5]        # ou email.split(\"@\")[0]\ndomaine         = email[6:]        # ou email.split(\"@\")[1]\ndernieres       = temperatures[-4:]\nmilieu          = temperatures[1:-1]\nExercice 4\nextension    = fichier[-3:]\nnom_sans_ext = fichier[:-4]\nderniers_logs = logs[-3:]\nlogs_milieu  = logs[1:-1]\nExercice 5\npairs     = lettres[::2]\nimpairs   = lettres[1::2]\ninverse   = mot[::-1]\nselection = lettres[1:7:2]\nMini-projet\nsemaine_1       = ventes[:7]\nsemaine_4       = ventes[-7:]\nlundis          = ventes[::7]\nsamedis         = ventes[5::7]\ndimanches       = ventes[6::7]\nventes_inversees = ventes[::-1]"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html",
-    "href": "notebooks/01-premiers-pas-notebooks.html",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html",
+    "href": "notebooks/00-premiers-pas-notebooks.html",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "",
     "text": "Bienvenue ! Ce notebook est lui-même l’exemple. En le lisant et en exécutant ses cellules, vous allez comprendre le fonctionnement des notebooks de l’intérieur.\n\n💡 Comment naviguer : utilisez Shift + Entrée pour exécuter une cellule et passer à la suivante. Essayez sur toutes les cellules de code que vous croiserez !"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#quest-ce-quun-notebook",
-    "href": "notebooks/01-premiers-pas-notebooks.html#quest-ce-quun-notebook",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#quest-ce-quun-notebook",
+    "href": "notebooks/00-premiers-pas-notebooks.html#quest-ce-quun-notebook",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "1. Qu’est-ce qu’un notebook ?",
     "text": "1. Qu’est-ce qu’un notebook ?\nUn notebook Jupyter est un document interactif qui mélange trois choses dans un seul fichier :\n\n📝 Du texte formaté (titres, paragraphes, équations, images)\n💻 Du code exécutable (Python, R, SQL…)\n📊 Les résultats de l’exécution (tableaux, graphiques, sorties texte)\n\n\n\n\n\n\n\n\nContexte\nAvantage\n\n\n\n\nExploration de données\nOn voit le résultat immédiatement, on itère\n\n\nEnseignement\nOn peut expliquer ET montrer en même temps\n\n\nRapport d’analyse\nLe code et les conclusions vivent au même endroit\n\n\nPrototypage ML\nOn teste des idées rapidement, cellule par cellule\n\n\n\nLe fichier sous-jacent est un simple JSON avec l’extension .ipynb (IPython Notebook). Tout y est stocké : le texte, le code, ET les résultats des exécutions précédentes."
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#anatomie-dun-notebook-les-cellules",
-    "href": "notebooks/01-premiers-pas-notebooks.html#anatomie-dun-notebook-les-cellules",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#anatomie-dun-notebook-les-cellules",
+    "href": "notebooks/00-premiers-pas-notebooks.html#anatomie-dun-notebook-les-cellules",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "2. Anatomie d’un notebook : les cellules",
     "text": "2. Anatomie d’un notebook : les cellules\nUn notebook est une séquence de cellules. Il en existe trois types principaux.\n\nType 1: Cellule Markdown (comme celle-ci)\nLa cellule que vous lisez en ce moment EST une cellule Markdown. Elle contient du texte enrichi :\n\nGras avec **texte**\nItalique avec *texte*\nCode inline avec des backticks\nDes titres avec #, ##, ###…\nDes listes, tableaux, liens, images, équations LaTeX…\n\nQuand vous “exécutez” une cellule Markdown, Jupyter la rend visuellement : le balisage devient mise en forme.\n\nDouble-cliquez sur cette cellule pour voir le Markdown brut, puis CTRL + Entrée pour la re-rendre.\n\n\n\n\nType 2: Cellule de code\nElle contient du code Python (ou autre). Quand vous l’exécutez, le résultat s’affiche juste en dessous.\n\n\n\nType 3: Cellule Raw\nRarement utilisée. Le contenu n’est ni rendu ni exécuté. Utile pour du contenu destiné à un convertisseur externe (nbconvert)."
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#votre-première-cellule-de-code",
-    "href": "notebooks/01-premiers-pas-notebooks.html#votre-première-cellule-de-code",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#votre-première-cellule-de-code",
+    "href": "notebooks/00-premiers-pas-notebooks.html#votre-première-cellule-de-code",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "3. Votre première cellule de code",
     "text": "3. Votre première cellule de code\nLa cellule suivante est une cellule de code. Remarquez : - Son fond légèrement différent - Le [ ] à gauche (il affichera le numéro d’exécution après le run) - Le bouton ▶ dans la barre d’outils\nExécutez-la avec Shift + Entrée :\n\nprint(\"Bonjour depuis une cellule de code Python !\")\nprint(\"Ce texte s'affiche juste en dessous de la cellule.\")\n\n# La dernière expression d'une cellule est affichée automatiquement\n2 + 2\n\nCe qui vient de se passer : - print() produit une sortie standard - 2 + 2 est la dernière expression : Jupyter l’affiche automatiquement comme Out[n] - Le numéro entre crochets [1] indique l’ordre d’exécution dans la session\n\n🔍 Ce numéro est important. On y revient en section 5."
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#le-kernel-le-moteur-derrière-le-notebook",
-    "href": "notebooks/01-premiers-pas-notebooks.html#le-kernel-le-moteur-derrière-le-notebook",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#le-kernel-le-moteur-derrière-le-notebook",
+    "href": "notebooks/00-premiers-pas-notebooks.html#le-kernel-le-moteur-derrière-le-notebook",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "4. Le Kernel : le moteur derrière le notebook",
     "text": "4. Le Kernel : le moteur derrière le notebook\n\nQu’est-ce que le kernel ?\nLe kernel est un processus séparé qui tourne en arrière-plan. C’est lui qui exécute réellement votre code.\n┌─────────────────────────────────────┐\n│           Votre navigateur           │\n│   ┌─────────────────────────────┐   │\n│   │       Interface Jupyter      │   │\n│   │  (affichage, édition, UI)   │   │\n│   └──────────────┬──────────────┘   │\n│                  │ ZeroMQ (sockets)  │\n│   ┌──────────────▼──────────────┐   │\n│   │         Kernel Python        │   │\n│   │  (interpréteur Python réel) │   │\n│   └─────────────────────────────┘   │\n└─────────────────────────────────────┘\nLa communication se fait via des sockets ZeroMQ : le navigateur envoie le code, le kernel l’exécute et renvoie les résultats.\n\n\nÉtats du kernel\n\n\n\nIcône / Indicateur\nSignification\n\n\n\n\n⚪ Cercle vide\nKernel prêt (idle)\n\n\n⚫ Cercle plein\nKernel en train d’exécuter\n\n\n💀 Skull / Dead\nKernel mort, il faut le relancer\n\n\n\n\n\nActions disponibles sur le kernel\n\nInterrupt (I, I) : stoppe une exécution en cours (équivalent de Ctrl+C)\nRestart : redémarre le kernel toutes les variables sont perdues\nRestart & Run All : repart de zéro et réexécute tout le notebook dans l’ordre"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#létat-partagé-entre-cellules",
-    "href": "notebooks/01-premiers-pas-notebooks.html#létat-partagé-entre-cellules",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#létat-partagé-entre-cellules",
+    "href": "notebooks/00-premiers-pas-notebooks.html#létat-partagé-entre-cellules",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "5. L’état partagé entre cellules",
     "text": "5. L’état partagé entre cellules\nC’est la chose la plus importante à comprendre pour éviter des bugs.\nToutes les cellules d’un notebook partagent le même espace de noms (namespace). Une variable définie dans une cellule est accessible dans toutes les autres.\nExécutez les trois cellules suivantes dans l’ordre :\n\n# Cellule A — on définit une variable\nprenom = \"Alice\"\nscore = 42\nprint(f\"Variable 'prenom' créée : {prenom}\")\n\n\n# Cellule B — on utilise la variable définie dans A\n# (même si cette cellule est physiquement séparée)\nmessage = f\"{prenom} a obtenu {score} points.\"\nprint(message)\n\n\n# Cellule C — inspecter l'état actuel du kernel\n# %whos est une \"magic command\" qui liste toutes les variables actives\n%whos\n\n\n⚠️ Le piège de l’ordre d’exécution\nLe numéro [n] à gauche de chaque cellule indique quand elle a été exécutée, pas sa position dans le notebook. C’est ce qui peut provoquer des bugs difficiles à déboguer.\nScénario classique du bug :\n\nVous exécutez les cellules de haut en bas (normal)\nVous remontez modifier une cellule du milieu et la réexécutez\nLes cellules du bas utilisent l’ancienne valeur, PAS la nouvelle… sauf si vous les réexécutez aussi\n\nLa règle d’or : un notebook sain peut être réexécuté de haut en bas sans erreur.\nPour vérifier : Kernel → Restart & Run All"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#les-magic-commands",
-    "href": "notebooks/01-premiers-pas-notebooks.html#les-magic-commands",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#les-magic-commands",
+    "href": "notebooks/00-premiers-pas-notebooks.html#les-magic-commands",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "6. Les Magic Commands",
     "text": "6. Les Magic Commands\nLes magic commands sont des raccourcis spéciaux préfixés par % (ligne) ou %% (cellule entière). Elles ne font pas partie de Python standard — c’est IPython qui les fournit.\n\n# %time : mesure le temps d'exécution d'une ligne\n%time sum(range(1_000_000))\n\n\n# %timeit : répète plusieurs fois pour une mesure fiable\n%timeit sum(range(10_000))\n\n\n# %%time : mesure la cellule entière (double %)\n%%time\n\ntotal = 0\nfor i in range(500_000):\n    total += i\nprint(f\"Total = {total}\")\n\n\n# Autres magic commands utiles — décommentez et testez !\n\n# %pwd          → répertoire courant\n# %ls           → liste les fichiers\n# %history      → historique des commandes exécutées\n# %matplotlib inline  → affiche les graphiques dans le notebook\n# %load_ext autoreload → recharge automatiquement les modules modifiés\n# !commande     → exécute une commande shell (ex: !pip install pandas)\n\n# Lister toutes les magic commands disponibles :\n%lsmagic"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#afficher-des-données-au-delà-du-print",
-    "href": "notebooks/01-premiers-pas-notebooks.html#afficher-des-données-au-delà-du-print",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#afficher-des-données-au-delà-du-print",
+    "href": "notebooks/00-premiers-pas-notebooks.html#afficher-des-données-au-delà-du-print",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "7. Afficher des données : au-delà du print()",
     "text": "7. Afficher des données : au-delà du print()\nUn des grands avantages des notebooks : les objets Python savent s’afficher eux-mêmes de façon riche. Pandas, matplotlib, PIL… chacun a son rendu natif.\n\nimport pandas as pd\n\n# Un DataFrame s'affiche comme un tableau HTML formaté\ndata = {\n    \"Produit\": [\"Café\", \"Thé\", \"Jus d'orange\", \"Eau\"],\n    \"Prix (€)\": [1.50, 1.20, 2.00, 0.80],\n    \"Calories\": [5, 2, 110, 0],\n}\ndf = pd.DataFrame(data)\ndf  # Pas de print() — Jupyter détecte le DataFrame et le rend en HTML\n\n\nimport matplotlib.pyplot as plt\n\n# Un graphique matplotlib s'affiche inline dans le notebook\nfig, ax = plt.subplots(figsize=(7, 4))\n\nax.bar(df[\"Produit\"], df[\"Calories\"], color=[\"#4C72B0\", \"#55A868\", \"#C44E52\", \"#8172B2\"])\nax.set_title(\"Calories par boisson\", fontsize=14, fontweight=\"bold\")\nax.set_ylabel(\"Calories\")\nax.set_xlabel(\"Produit\")\n\nplt.tight_layout()\nplt.show()\n\n\nfrom IPython.display import display, HTML, Markdown\n\n# IPython.display permet d'afficher n'importe quoi n'importe où dans une cellule\ndisplay(HTML(\"&lt;b style='color: #2196F3; font-size: 16px;'&gt;Du HTML directement dans le notebook !&lt;/b&gt;\"))\n\ndisplay(Markdown(\"Et du **Markdown** rendu dynamiquement depuis du code.\"))\n\n# On peut afficher plusieurs outputs dans la même cellule\nprint(\"Et un print() classique aussi.\")\ndisplay(df.describe())  # Statistiques descriptives du DataFrame"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#ce-que-contient-vraiment-un-fichier-.ipynb",
-    "href": "notebooks/01-premiers-pas-notebooks.html#ce-que-contient-vraiment-un-fichier-.ipynb",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#ce-que-contient-vraiment-un-fichier-.ipynb",
+    "href": "notebooks/00-premiers-pas-notebooks.html#ce-que-contient-vraiment-un-fichier-.ipynb",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "8. Ce que contient vraiment un fichier .ipynb",
     "text": "8. Ce que contient vraiment un fichier .ipynb\nUn .ipynb est du JSON pur. Voici à quoi ressemble une cellule dans ce fichier :\n{\n  \"nbformat\": 4,\n  \"nbformat_minor\": 5,\n  \"metadata\": {\n    \"kernelspec\": {\n      \"display_name\": \"Python 3\",\n      \"language\": \"python\",\n      \"name\": \"python3\"\n    }\n  },\n  \"cells\": [\n    {\n      \"cell_type\": \"markdown\",\n      \"id\": \"abc123\",\n      \"metadata\": {},\n      \"source\": [\"# Mon titre\\n\", \"\\n\", \"Du texte ici.\"]\n    },\n    {\n      \"cell_type\": \"code\",\n      \"id\": \"def456\",\n      \"execution_count\": 1,\n      \"metadata\": {},\n      \"source\": [\"x = 42\\n\", \"print(x)\"],\n      \"outputs\": [\n        {\n          \"output_type\": \"stream\",\n          \"name\": \"stdout\",\n          \"text\": [\"42\\n\"]\n        }\n      ]\n    }\n  ]\n}\nLes clés importantes : - cell_type : \"markdown\", \"code\", ou \"raw\" - source : le contenu de la cellule (liste de strings) - outputs : les résultats stockés après exécution - execution_count : le numéro [n] affiché à gauche\n\nLes outputs sont sauvegardés dans le fichier. C’est pourquoi un notebook peut s’afficher avec ses résultats sans avoir été réexécuté.\n\n\nimport json\n\n# Lire le fichier .ipynb courant et inspecter sa structure\nwith open(\"01-premiers-pas-notebooks.ipynb\", \"r\", encoding=\"utf-8\") as f:\n    nb = json.load(f)\n\nprint(f\"Format du notebook : nbformat {nb['nbformat']}.{nb['nbformat_minor']}\")\nprint(f\"Nombre de cellules : {len(nb['cells'])}\")\nprint()\n\n# Résumé des types de cellules\nfrom collections import Counter\ntypes = Counter(c[\"cell_type\"] for c in nb[\"cells\"])\nfor cell_type, count in types.items():\n    print(f\"  {cell_type:10s} : {count} cellule(s)\")"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#raccourcis-clavier-utiles",
-    "href": "notebooks/01-premiers-pas-notebooks.html#raccourcis-clavier-utiles",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#raccourcis-clavier-utiles",
+    "href": "notebooks/00-premiers-pas-notebooks.html#raccourcis-clavier-utiles",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "9. Raccourcis clavier utiles",
     "text": "9. Raccourcis clavier utiles\nJupyter a deux modes : - Mode Commande (cellule sélectionnée en bleu) : naviguer entre cellules, ajouter/supprimer - Mode Édition (cellule sélectionnée en vert) : écrire dans la cellule\nEchap → mode commande | Entrée → mode édition\n\nMode Commande\n\n\n\nRaccourci\nAction\n\n\n\n\nShift + Entrée\nExécuter et passer à la suivante\n\n\nCtrl + Entrée\nExécuter sans bouger\n\n\nAlt + Entrée\nExécuter et insérer une cellule en dessous\n\n\nA\nInsérer une cellule Au-dessus\n\n\nB\nInsérer une cellule en-dessous (Below)\n\n\nD, D\nSupprimer la cellule (deux fois D)\n\n\nZ\nAnnuler la suppression\n\n\nM\nConvertir en Markdown\n\n\nY\nConvertir en code (PYthon)\n\n\nCtrl + Shift + -\nCouper la cellule à la position du curseur\n\n\nShift + ↑/↓\nSélectionner plusieurs cellules\n\n\n\n\n\nMode Édition\n\n\n\nRaccourci\nAction\n\n\n\n\nTab\nAutocomplétion\n\n\nShift + Tab\nAfficher la documentation\n\n\nCtrl + /\nCommenter/décommenter\n\n\nCtrl + Z\nAnnuler dans la cellule"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#bonnes-pratiques",
-    "href": "notebooks/01-premiers-pas-notebooks.html#bonnes-pratiques",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#bonnes-pratiques",
+    "href": "notebooks/00-premiers-pas-notebooks.html#bonnes-pratiques",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "10. Bonnes pratiques",
     "text": "10. Bonnes pratiques\n\nStructure d’un notebook propre\n1. Titre + description (Markdown)\n2. Imports (toutes les bibliothèques en haut)\n3. Configuration / constantes\n4. Chargement des données\n5. Exploration (EDA)\n6. Traitement / Modélisation\n7. Résultats et conclusions\n\n\nLes règles d’or\n✅ Réexécutable de A à Z : Restart & Run All ne doit pas planter\n✅ Imports tous en haut : ne pas importer une librairie au milieu du notebook\n✅ Cellules courtes et ciblées : une idée = une cellule (ou peu)\n✅ Markdown entre les blocs de code : expliquer POURQUOI, pas juste QUOI\n✅ Nommer les variables clairement : df_clients plutôt que df2\n\n❌ Éviter les effets de bord globaux : modifier une variable globale dans une fonction appelée depuis plusieurs endroits\n❌ Éviter les cellules de 100 lignes : difficile à déboguer et à relire\n❌ Ne pas laisser des outputs obsolètes : nettoyer avec Kernel → Restart & Clear Output avant de partager"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#exercices-pratiques",
-    "href": "notebooks/01-premiers-pas-notebooks.html#exercices-pratiques",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#exercices-pratiques",
+    "href": "notebooks/00-premiers-pas-notebooks.html#exercices-pratiques",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "11. Exercices pratiques",
     "text": "11. Exercices pratiques\nMettez en pratique ce que vous venez d’apprendre. Les cellules ci-dessous sont vides, à vous de jouer !\n\nExercice 1 : Votre première cellule Markdown\nCréez une cellule Markdown en dessous de celle-ci (B puis M) qui contient : - Un titre de niveau 2 - Une liste de 3 langages de programmation que vous connaissez - Un mot en gras et un mot en italique\n\n\nExercice 2 : Calcul avec variables\n\n# Exercice 2 : complétez ce code\n# Calculez l'IMC (Indice de Masse Corporelle) avec la formule : poids / taille²\n# et affichez une phrase indiquant si l'IMC est normal (entre 18.5 et 25)\n\npoids = 70    # kg  modifiez cette valeur\ntaille = 1.75 # m   modifiez cette valeur\n\n# Votre code ici :\n# imc = ...\n# print(...)\n\n\n\nExercice 3 : Comprendre l’ordre d’exécution\n\nExécutez la cellule suivante\nPuis modifiez x = 10 en x = 99 dans la cellule A ci-dessous\nRéexécutez UNIQUEMENT la cellule A\nObservez ce que fait la cellule B (qui utilise x)\nRéfléchissez : la cellule B a-t-elle vu le changement ?\n\n\n# Cellule A — modifiez x = 10 en x = 99, puis réexécutez uniquement cette cellule\nx = 99\nprint(f\"Cellule A exécutée. x = {x}\")\n\n\n# Cellule B — NE TOUCHEZ PAS à cette cellule, ne faites que l'observer\nprint(f\"Cellule B voit x = {x}\")\nprint(\"Si x = 99 ici, c'est que le kernel a bien vu le changement.\")"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#pour-aller-plus-loin",
-    "href": "notebooks/01-premiers-pas-notebooks.html#pour-aller-plus-loin",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#pour-aller-plus-loin",
+    "href": "notebooks/00-premiers-pas-notebooks.html#pour-aller-plus-loin",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "12. Pour aller plus loin",
     "text": "12. Pour aller plus loin\n\nExtensions et outils utiles\n\n\n\n\n\n\n\nOutil\nUtilité\n\n\n\n\nJupyterLab\nInterface plus moderne que Jupyter Notebook classique\n\n\nVS Code + extension Jupyter\nNotebooks directement dans VS Code\n\n\nnbconvert\nExporter en HTML, PDF, slides, script Python…\n\n\npapermill\nExécuter des notebooks avec des paramètres (pipelines)\n\n\nnbformat\nManipuler des .ipynb par programme\n\n\nVoilà\nTransformer un notebook en web app interactive\n\n\nnbgrader\nCréer et corriger des notebooks d’exercices\n\n\n\n\n\nRessources\n\nDocumentation officielle Jupyter\nThe Jupyter Book : transformer des notebooks en livres\nnbviewer : afficher des notebooks sans les exécuter"
   },
   {
-    "objectID": "notebooks/01-premiers-pas-notebooks.html#récapitulatif",
-    "href": "notebooks/01-premiers-pas-notebooks.html#récapitulatif",
+    "objectID": "notebooks/00-premiers-pas-notebooks.html#récapitulatif",
+    "href": "notebooks/00-premiers-pas-notebooks.html#récapitulatif",
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "Récapitulatif",
     "text": "Récapitulatif\n\n\n\n\n\n\n\nConcept\nCe qu’il faut retenir\n\n\n\n\nNotebook\nDocument JSON combinant texte, code et résultats\n\n\nCellule Markdown\nTexte formaté, rendu à l’exécution\n\n\nCellule de code\nCode Python exécuté par le kernel\n\n\nKernel\nProcessus séparé qui fait tourner Python\n\n\nÉtat partagé\nToutes les cellules partagent le même namespace\n\n\nOrdre d’exécution\nLes [n] montrent l’ordre réel, pas la position\n\n\nMagic commands\n%time, %whos, %%timeit, !cmd…\n\n\nRègle d’or\nRestart & Run All doit toujours fonctionner"
