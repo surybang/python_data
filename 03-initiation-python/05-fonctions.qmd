@@ -1,0 +1,448 @@
+---
+title: "Les fonctions"
+format:
+  html: default
+  revealjs:
+    output-file: 05-fonctions-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tip}
+Pour accéder aux notebooks d'exercices c'est ici 👇
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/05-fonctions.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB01_premiers_pas%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%AB05-fonctions%C2%BB)
+:::
+
+
+## Pourquoi des fonctions ?
+
+Imaginez que vous deviez calculer la moyenne des notes de trois promotions :
+
+```python
+promo_a = [12, 15, 8, 17]
+promo_b = [10, 9, 14]
+promo_c = [16, 11, 13, 7, 15]
+
+moyenne_a = sum(promo_a) / len(promo_a)
+moyenne_b = sum(promo_b) / len(promo_b)
+moyenne_c = sum(promo_c) / len(promo_c)
+```
+
+Le même calcul, copié trois fois. Et si vous découvrez une erreur, ou s'il faut gérer le cas d'une promo vide, il faudra corriger les trois lignes… sans en oublier une.
+
+Une **fonction** permet d'écrire un traitement **une seule fois**, de lui donner un **nom**, puis de le réutiliser autant de fois que nécessaire.
+
+Vous en utilisez d'ailleurs depuis le début du cours : `print()`, `len()`, `sum()`, `type()` sont des fonctions fournies par Python. Il est temps d'écrire les vôtres.
+
+---
+
+## Définir et appeler une fonction
+
+```python
+def moyenne(notes):
+    total = sum(notes)
+    return total / len(notes)
+```
+
+Décortiquons :
+
+- `def` annonce la **définition** d'une fonction ;
+- `moyenne` est son **nom** (mêmes règles que pour les variables) ;
+- `notes` est un **paramètre** : une variable qui recevra la valeur transmise lors de l'appel ;
+- les `:` et l'**indentation** délimitent le corps de la fonction, comme pour `if` et `for` ;
+- `return` **renvoie** le résultat à celui qui a appelé la fonction.
+
+Définir une fonction n'exécute rien : on l'a seulement rangée, prête à servir. Pour l'utiliser, on l'**appelle** :
+
+```python
+moyenne_a = moyenne(promo_a)
+moyenne_b = moyenne(promo_b)
+
+print(f"{moyenne_a:.2f}")   # 13.00
+print(f"{moyenne_b:.2f}")   # 11.00
+```
+
+Lors de l'appel `moyenne(promo_a)`, le paramètre `notes` devient une étiquette collée sur la liste `promo_a`, le corps s'exécute, et `return` renvoie le résultat, qu'on récupère dans `moyenne_a`.
+
+::: {.callout-note}
+### Paramètre ou argument ?
+On appelle **paramètre** le nom utilisé dans la définition (`notes`), et **argument** la valeur transmise lors de l'appel (`promo_a`). Dans la pratique, les deux mots sont souvent employés l'un pour l'autre.
+:::
+
+---
+
+## `return` ou `print` ?
+
+C'est la confusion la plus fréquente avec les fonctions.
+
+- `print()` **affiche** une valeur à l'écran, pour un humain.
+- `return` **renvoie** une valeur au programme, qui peut la stocker et la réutiliser.
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : la fonction qui ne renvoie rien
+
+Observez le code suivant **sans l'exécuter** :
+
+```python
+def prix_ttc(prix_ht):
+    print(prix_ht * 1.2)
+
+total = prix_ttc(100) + prix_ttc(50)
+print(total)
+```
+
+1. Selon vous, que se passe-t-il ?
+2. Qu'est-ce qui s'affiche avant l'éventuelle erreur ?
+3. Exécutez-le, lisez le message d'erreur, puis corrigez la fonction.
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+Le programme affiche `120.0`, puis `60.0`, puis plante :
+
+```
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'NoneType'
+```
+
+La fonction **affiche** le prix, mais ne le **renvoie** pas. Une fonction sans `return` renvoie automatiquement `None`. On essaie donc de calculer `None + None`.
+
+C'est le même piège que `notes = notes.sort()` dans la page précédente : le résultat qu'on croit récupérer vaut `None`.
+
+```python
+def prix_ttc(prix_ht):
+    return prix_ht * 1.2
+
+total = prix_ttc(100) + prix_ttc(50)
+print(total)   # 180.0
+```
+
+Règle pratique : une fonction **calcule et renvoie**. C'est à celui qui l'appelle de décider s'il veut afficher le résultat, le stocker ou le réutiliser.
+:::
+
+::: {.callout-note}
+`return` **arrête** immédiatement la fonction : les lignes qui suivent ne sont pas exécutées. On s'en sert souvent avec une condition :
+
+```python
+def mention(note):
+    if note >= 16:
+        return "Très bien"
+    if note >= 14:
+        return "Bien"
+    if note >= 10:
+        return "Passable"
+    return "Non admis"
+```
+
+Pas besoin de `elif` ici : dès qu'un `return` s'exécute, on est sorti de la fonction.
+:::
+
+---
+
+## Plusieurs paramètres
+
+Une fonction peut recevoir plusieurs valeurs, séparées par des virgules :
+
+```python
+def prix_ttc(prix_ht, taux_tva):
+    return prix_ht * (1 + taux_tva)
+
+print(prix_ttc(100, 0.2))    # 120.0
+print(prix_ttc(100, 0.055))  # 105.5
+```
+
+### Valeurs par défaut
+
+On peut donner une valeur par défaut à un paramètre. Il devient alors **facultatif** lors de l'appel :
+
+```python
+def prix_ttc(prix_ht, taux_tva=0.2):
+    return prix_ht * (1 + taux_tva)
+
+print(prix_ttc(100))         # 120.0  → taux par défaut
+print(prix_ttc(100, 0.055))  # 105.5  → taux précisé
+```
+
+::: {.callout-warning}
+Les paramètres avec valeur par défaut se placent **après** ceux qui n'en ont pas. `def prix_ttc(taux_tva=0.2, prix_ht):` lève une `SyntaxError`.
+:::
+
+### Arguments nommés
+
+À l'appel, on peut préciser le nom du paramètre. L'ordre n'a alors plus d'importance, et le code devient plus lisible :
+
+```python
+prix_ttc(prix_ht=100, taux_tva=0.055)
+prix_ttc(taux_tva=0.055, prix_ht=100)   # même résultat
+```
+
+Vous l'avez déjà fait sans le savoir avec `enumerate(notes, start=1)` ou `sorted(ventes, reverse=True)`. Vous le ferez constamment avec pandas : `pd.read_csv("ventes.csv", sep=";", encoding="utf-8")`.
+
+---
+
+## Renvoyer plusieurs valeurs
+
+Une fonction ne renvoie qu'un seul objet… mais cet objet peut être un **tuple** :
+
+```python
+def min_max(valeurs):
+    return min(valeurs), max(valeurs)
+
+plus_bas, plus_haut = min_max([12, 15, 8, 17])
+print(plus_bas, plus_haut)   # 8 17
+```
+
+`return min(valeurs), max(valeurs)` renvoie le tuple `(8, 17)`, qu'on déballe aussitôt dans deux variables, comme vu dans la page sur les structures de données.
+
+---
+
+## La portée des variables
+
+Les variables créées **à l'intérieur** d'une fonction n'existent **que** pendant son exécution. On dit qu'elles sont **locales**.
+
+```python
+def moyenne(notes):
+    total = sum(notes)
+    return total / len(notes)
+
+moyenne([12, 15])
+print(total)   # ❌ NameError: name 'total' is not defined
+```
+
+C'est voulu : chaque fonction travaille dans sa propre « bulle », sans risquer d'écraser les variables du reste du programme. Pour récupérer une valeur calculée dans une fonction, il n'y a qu'un chemin : `return`.
+
+::: {.callout-warning}
+### Attention aux listes passées en argument
+Souvenez-vous du schéma mémoire : le paramètre est une **étiquette** collée sur le même objet que l'argument. Si la fonction **modifie** une liste reçue, la liste d'origine est modifiée aussi :
+
+```python
+def ajouter_bonus(notes):
+    notes.append(20)
+
+mes_notes = [12, 15]
+ajouter_bonus(mes_notes)
+print(mes_notes)   # [12, 15, 20] → l'originale a changé !
+```
+
+Ce n'est pas un bug de Python, c'est la conséquence directe de « une variable est une étiquette ». En règle générale, préférez des fonctions qui **renvoient une nouvelle liste** plutôt que de modifier celle qu'on leur donne.
+:::
+
+---
+
+## Fonctions natives et méthodes
+
+Depuis le début du cours, vous utilisez deux écritures différentes :
+
+```python
+len(notes)       # une fonction : le nom, puis l'objet entre parenthèses
+notes.append(5)  # une méthode : l'objet, un point, puis le nom
+```
+
+Ce n'est pas un hasard de syntaxe : ce sont deux familles d'outils.
+
+### Les fonctions natives
+
+Ce sont des fonctions fournies par Python, disponibles partout sans rien importer. On leur **passe l'objet en argument**, exactement comme les fonctions que vous venez d'écrire.
+
+Elles sont **génériques** : la même fonction marche sur plusieurs types d'objets.
+
+```python
+len("Python")           # 6  → une chaîne
+len([12, 15, 8])        # 3  → une liste
+len({"nom": "Hyde"})    # 1  → un dictionnaire
+```
+
+Les plus courantes :
+
+| Famille | Fonctions |
+|---|---|
+| Afficher, saisir | `print()`, `input()` |
+| Inspecter | `type()`, `len()`, `help()` |
+| Convertir | `int()`, `float()`, `str()`, `bool()`, `list()`, `set()` |
+| Calculer | `sum()`, `min()`, `max()`, `round()`, `abs()` |
+| Parcourir | `range()`, `enumerate()`, `zip()`, `reversed()`, `sorted()` |
+
+### Les méthodes
+
+Une méthode est une fonction **rattachée à un type d'objet**. On l'appelle **sur** l'objet, avec un point.
+
+Elles sont **spécifiques** : chaque type a les siennes.
+
+```python
+"python".upper()        # 'PYTHON' → méthode des chaînes
+[12, 15, 8].append(10)  # méthode des listes
+{"nom": "Hyde"}.get("nom")  # méthode des dictionnaires
+
+[12, 15, 8].upper()     # ❌ AttributeError : une liste n'a pas de méthode upper
+```
+
+Le message `AttributeError: 'list' object has no attribute 'upper'` signifie justement : « ce type d'objet ne possède pas cette méthode ».
+
+### Comment savoir lequel utiliser ?
+
+| Question | Plutôt une fonction native | Plutôt une méthode |
+|---|---|---|
+| L'opération a-t-elle un sens pour beaucoup de types ? | oui : longueur, type, conversion… | non : mettre en majuscules n'a de sens que pour du texte |
+| Modifie-t-elle l'objet ? | jamais, elle renvoie un résultat | parfois (`append`, `sort`) |
+| Comment l'écrire ? | `fonction(objet)` | `objet.methode()` |
+
+Le cas `sorted()` / `.sort()`, vu dans la page sur les structures de données, résume bien la différence :
+
+```python
+notes = [12, 15, 8]
+
+triees = sorted(notes)  # fonction : renvoie une NOUVELLE liste, notes est intacte
+notes.sort()            # méthode : trie notes elle-même, renvoie None
+```
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : fonction ou méthode ?
+
+Pour chaque ligne, devinez **sans l'exécuter** si elle fonctionne ou si elle lève une erreur :
+
+```python
+mot = "Python"
+notes = [12, 15, 8]
+
+len(mot)            # 1
+mot.len()           # 2
+sum(notes)          # 3
+notes.sum()         # 4
+mot.upper()         # 5
+upper(mot)          # 6
+sorted(notes)       # 7
+max(mot)            # 8
+```
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+| Ligne | Résultat | Pourquoi |
+|---|---|---|
+| 1 | `6` | `len` est une fonction native |
+| 2 | ❌ `AttributeError` | les chaînes n'ont pas de méthode `len` |
+| 3 | `35` | `sum` est une fonction native |
+| 4 | ❌ `AttributeError` | les listes n'ont pas de méthode `sum` |
+| 5 | `'PYTHON'` | `upper` est une méthode des chaînes |
+| 6 | ❌ `NameError` | `upper` n'existe pas en tant que fonction |
+| 7 | `[8, 12, 15]` | `sorted` est une fonction native |
+| 8 | `'y'` | `max` marche aussi sur une chaîne : il compare les lettres (`y` est la plus « grande » dans l'ordre des caractères) |
+
+Remarquez la différence entre les erreurs : `AttributeError` signifie « cet objet n'a pas cette méthode », `NameError` signifie « ce nom n'existe pas du tout ».
+:::
+
+### Trouver les méthodes disponibles
+
+Personne ne connaît toutes les méthodes par cœur. Trois réflexes :
+
+- dans un notebook ou VS Code, tapez `mot.` puis **Tab** : la liste des méthodes s'affiche ;
+- `dir(mot)` liste toutes les méthodes d'un objet (ignorez celles qui commencent par `__`) ;
+- `help(str.upper)` affiche la documentation d'une méthode.
+
+::: {.callout-note}
+### Et en analyse de données ?
+Avec pandas, vous utiliserez surtout des **méthodes** : `df.head()`, `df["note"].mean()`, `df.groupby("ville").sum()`. C'est pour ça que `.mean()` existe sur une colonne pandas, alors qu'il n'existe pas sur une liste : c'est pandas qui l'a rattachée à ses objets.
+
+Les fonctions natives restent utiles sur un DataFrame : `len(df)` donne son nombre de lignes, `type(df)` confirme que c'est bien un DataFrame.
+:::
+
+---
+
+## Documenter ses fonctions
+
+Une fonction est faite pour être réutilisée, souvent par quelqu'un d'autre (ou par vous dans six mois). Deux outils aident à la rendre compréhensible.
+
+### La docstring
+
+Une chaîne entre triples guillemets, placée juste sous le `def`, décrit ce que fait la fonction :
+
+```python
+def moyenne(notes):
+    """Calcule la moyenne d'une liste de notes.
+
+    Renvoie None si la liste est vide.
+    """
+    if not notes:
+        return None
+    return sum(notes) / len(notes)
+```
+
+Elle s'affiche avec `help(moyenne)`, ou au survol de la fonction dans VS Code et Jupyter.
+
+::: {.callout-tip}
+### Plusieurs styles de docstrings
+
+Il existe des **conventions** pour structurer une docstring, avec une section par paramètre, le résultat et les erreurs possibles. Les trois plus répandues :
+
+- le **style Google**, le plus lisible, très utilisé en data ;
+- le **style NumPy**, celui de numpy, pandas ou scikit-learn ;
+- le **style reStructuredText** (reST), historiquement associé à Sphinx.
+
+Voici la même fonction au style Google :
+
+```python
+def prix_ttc(prix_ht: float, taux_tva: float = 0.2) -> float:
+    """Calcule un prix toutes taxes comprises.
+
+    Args:
+        prix_ht: Prix hors taxes, en euros.
+        taux_tva: Taux de TVA, entre 0 et 1. Par défaut 0.2.
+
+    Returns:
+        Le prix TTC, en euros.
+
+    Raises:
+        ValueError: Si le taux de TVA est négatif.
+    """
+    if taux_tva < 0:
+        raise ValueError("Le taux de TVA ne peut pas être négatif")
+    return prix_ht * (1 + taux_tva)
+```
+
+Pas besoin de tout écrire à la main : dans VS Code, l'extension **autoDocstring** génère le squelette dès que vous tapez `"""` sous un `def`, dans le style de votre choix.
+
+Pourquoi s'embêter avec un format précis ?
+
+- **Générer un site de documentation** : des outils comme **Sphinx** (avec son extension `napoleon` pour les styles Google et NumPy) ou **mkdocstrings** lisent les docstrings et produisent automatiquement des pages web. C'est ainsi qu'est construite la documentation de pandas ou de scikit-learn.
+- **Aider les assistants IA** : une docstring structurée décrit précisément ce que fait la fonction, ce qu'elle attend et ce qu'elle renvoie. Les assistants de code s'en servent pour comprendre votre projet, et proposent des suggestions bien plus justes.
+
+L'important n'est pas le style choisi, mais de **s'y tenir** dans tout un projet.
+:::
+
+### Les annotations de type
+
+Vous les avez croisées dans la page sur les variables : on peut indiquer le type attendu des paramètres et du résultat.
+
+```python
+def prix_ttc(prix_ht: float, taux_tva: float = 0.2) -> float:
+    return prix_ht * (1 + taux_tva)
+```
+
+Python ne vérifie pas ces annotations à l'exécution, mais elles documentent le code et permettent à votre éditeur de signaler des erreurs avant même de lancer le programme.
+
+::: {.callout-note}
+### Et en analyse de données ?
+Les fonctions sont partout dans un projet data : une fonction pour charger les données, une pour les nettoyer, une pour calculer un indicateur. Un notebook bien organisé ressemble souvent à une suite d'appels de fonctions courts et bien nommés.
+
+Vous passerez aussi vos propres fonctions à pandas, par exemple `df["note"].apply(mention)` pour appliquer la fonction `mention` à chaque ligne d'une colonne.
+:::
+
+::: {.callout-tip}
+### À retenir
+- `def nom(parametres):` définit une fonction ; l'**appeler** avec `nom(arguments)` l'exécute.
+- `return` **renvoie** une valeur et arrête la fonction. Sans `return`, la fonction renvoie `None`.
+- `print` affiche, `return` transmet : une fonction calcule et renvoie, l'appelant décide quoi en faire.
+- Les paramètres peuvent avoir des **valeurs par défaut**, et les arguments peuvent être **nommés** à l'appel.
+- Pour renvoyer plusieurs valeurs, on renvoie un **tuple** qu'on déballe.
+- Les variables d'une fonction sont **locales** : elles disparaissent à la fin de l'appel.
+- Une liste passée en argument peut être modifiée par la fonction : c'est la même étiquette.
+- Une **fonction native** s'écrit `fonction(objet)` et marche sur plusieurs types ; une **méthode** s'écrit `objet.methode()` et dépend du type de l'objet.
+- Une **docstring** et des **annotations de type** rendent la fonction compréhensible.
+:::
