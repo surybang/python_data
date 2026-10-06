@@ -206,6 +206,51 @@ admis = [note for note in notes if note >= 10]
 Elle se lit presque comme une phrase : « les notes, pour chaque note de `notes`, si la note est au moins 10 ». Pratique, mais pas indispensable : la version avec la boucle fait exactement la même chose.
 :::
 
+::: {.callout-important}
+### 🧠 À vous de réfléchir : supprimer pendant qu'on parcourt
+
+On veut retirer les notes inférieures à 10. Observez ce code **sans l'exécuter** :
+
+```python
+notes = [8, 5, 12, 9, 3, 15]
+
+for note in notes:
+    if note < 10:
+        notes.remove(note)
+
+print(notes)
+```
+
+1. Selon vous, qu'affiche ce programme ?
+2. Exécutez-le. Le résultat est-il celui attendu ?
+3. Essayez avec `notes = [8, 12, 5, 15, 9, 17]`. Que remarquez-vous ?
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+Le programme affiche `[5, 12, 3, 15]` : le 5 et le 3 ont survécu !
+
+La boucle `for` avance **position par position**. Au premier tour, elle est à la position 0 et supprime le 8. Tous les éléments reculent d'une case : le 5 passe en position 0. Mais la boucle passe à la position 1, où se trouve maintenant le 12. Le 5 n'a jamais été examiné.
+
+Avec la deuxième liste, le résultat est correct… par hasard, parce qu'aucune note inférieure à 10 n'en suit directement une autre. C'est ce qui rend ce bug dangereux : **aucune erreur, et un résultat parfois juste**.
+
+La règle : **ne jamais ajouter ou supprimer d'éléments dans une liste qu'on est en train de parcourir.** Construisez plutôt une nouvelle liste, avec le motif de l'accumulateur vu juste au-dessus :
+
+```python
+notes = [8, 5, 12, 9, 3, 15]
+notes_gardees = []
+
+for note in notes:
+    if note >= 10:
+        notes_gardees.append(note)
+
+print(notes_gardees)   # [12, 15]
+```
+
+Les dictionnaires, eux, sont plus stricts : supprimer une clé pendant qu'on les parcourt lève directement une erreur, `RuntimeError: dictionary changed size during iteration`.
+:::
+
 ---
 
 ## Les tuples
