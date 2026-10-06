@@ -16,7 +16,7 @@ Il est conçu pour des **débutants complets** : aucune connaissance préalable 
 | 3 | [Structures de données](03-structures-donnees.qmd) | Regrouper des valeurs dans des listes, tuples, dictionnaires et ensembles |
 | 4 | [Le slicing](04-slicing.qmd) | Extraire une portion d'une liste ou d'une chaîne |
 | 5 | [Les fonctions](05-fonctions.qmd) | Organiser son code en blocs réutilisables, et distinguer fonctions et méthodes |
-| 6 | Entrées/sorties et premier script *(à venir)* | Dialoguer avec l'utilisateur et écrire un vrai programme : le jeu « Devine le nombre » |
+| 6 | Scripts et jeux (06-scripts-jeux.qmd)| Sortir du notebook, dialoguer avec l'utilisateur et coder des jeux classiques pour l'algorithmie |
 
 Chaque chapitre s'appuie sur les précédents : suivez-les **dans l'ordre**, via la barre latérale ou les liens en bas de chaque page.
 
