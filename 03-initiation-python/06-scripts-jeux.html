@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Scripts et jeux – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9ec74a487b0f7bffdf8907e3024c0954.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python-data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Scripts et jeux</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Langages de programmation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnement</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnements en ligne</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Initiation Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditions &amp; boucles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structures de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les fonctions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#pourquoi-sortir-du-notebook" id="toc-pourquoi-sortir-du-notebook" class="nav-link active" data-scroll-target="#pourquoi-sortir-du-notebook">Pourquoi sortir du notebook ?</a></li>
+  <li><a href="#du-notebook-au-script" id="toc-du-notebook-au-script" class="nav-link" data-scroll-target="#du-notebook-au-script">Du notebook au script</a>
+  <ul class="collapse">
+  <li><a href="#créer-et-lancer-un-script" id="toc-créer-et-lancer-un-script" class="nav-link" data-scroll-target="#créer-et-lancer-un-script">Créer et lancer un script</a></li>
+  <li><a href="#dialoguer-avec-lutilisateur-input" id="toc-dialoguer-avec-lutilisateur-input" class="nav-link" data-scroll-target="#dialoguer-avec-lutilisateur-input">Dialoguer avec l’utilisateur : <code>input()</code></a></li>
+  <li><a href="#utiliser-une-bibliothèque-random" id="toc-utiliser-une-bibliothèque-random" class="nav-link" data-scroll-target="#utiliser-une-bibliothèque-random">Utiliser une bibliothèque : <code>random</code></a></li>
+  <li><a href="#organiser-un-script" id="toc-organiser-un-script" class="nav-link" data-scroll-target="#organiser-un-script">Organiser un script</a></li>
+  </ul></li>
+  <li><a href="#projet-guidé-le-génie" id="toc-projet-guidé-le-génie" class="nav-link" data-scroll-target="#projet-guidé-le-génie">Projet guidé : le génie 🧞</a>
+  <ul class="collapse">
+  <li><a href="#v1-une-seule-tentative" id="toc-v1-une-seule-tentative" class="nav-link" data-scroll-target="#v1-une-seule-tentative">V1 : une seule tentative</a></li>
+  <li><a href="#v2-jouer-jusquà-trouver" id="toc-v2-jouer-jusquà-trouver" class="nav-link" data-scroll-target="#v2-jouer-jusquà-trouver">V2 : jouer jusqu’à trouver</a></li>
+  <li><a href="#v3-un-nombre-dessais-limité" id="toc-v3-un-nombre-dessais-limité" class="nav-link" data-scroll-target="#v3-un-nombre-dessais-limité">V3 : un nombre d’essais limité</a></li>
+  <li><a href="#v4-du-code-propre" id="toc-v4-du-code-propre" class="nav-link" data-scroll-target="#v4-du-code-propre">V4 : du code propre</a></li>
+  <li><a href="#et-si-cétait-lordinateur-qui-devinait" id="toc-et-si-cétait-lordinateur-qui-devinait" class="nav-link" data-scroll-target="#et-si-cétait-lordinateur-qui-devinait">Et si c’était l’ordinateur qui devinait ?</a></li>
+  </ul></li>
+  <li><a href="#à-vous-de-jouer-le-catalogue" id="toc-à-vous-de-jouer-le-catalogue" class="nav-link" data-scroll-target="#à-vous-de-jouer-le-catalogue">À vous de jouer 🎲 : le catalogue</a>
+  <ul class="collapse">
+  <li><a href="#pierre-feuille-ciseaux" id="toc-pierre-feuille-ciseaux" class="nav-link" data-scroll-target="#pierre-feuille-ciseaux">Pierre-feuille-ciseaux</a></li>
+  <li><a href="#le-pendu" id="toc-le-pendu" class="nav-link" data-scroll-target="#le-pendu">Le pendu</a></li>
+  <li><a href="#blackjack" id="toc-blackjack" class="nav-link" data-scroll-target="#blackjack">Blackjack</a></li>
+  <li><a href="#mastermind" id="toc-mastermind" class="nav-link" data-scroll-target="#mastermind">Mastermind</a></li>
+  <li><a href="#morpion" id="toc-morpion" class="nav-link" data-scroll-target="#morpion">Morpion</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/06-scripts-jeux.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="06-scripts-jeux-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="06-scripts-jeux-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Scripts et jeux</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour ce chapitre, pas de notebook : vous allez écrire de <strong>vrais scripts</strong> <code>.py</code>. Les corrigés sont dans le dossier <a href="https://github.com/surybang/python_data/tree/main/jeux"><code>jeux/</code> du dépôt</a>.</p>
+<p>Travaillez de préférence sur <strong>SSP Cloud</strong> (service VS Code), qui dispose d’un terminal, ou sur votre propre machine.</p>
+</div>
+</div>
+<section id="pourquoi-sortir-du-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="pourquoi-sortir-du-notebook">Pourquoi sortir du notebook ?</h2>
+<p>Le notebook est parfait pour <strong>explorer</strong> : on exécute une cellule, on regarde le résultat, on ajuste. Mais un programme qu’on veut <strong>lancer</strong>, partager ou automatiser (un traitement à exécuter chaque matin, un outil pour un collègue, un jeu…) s’écrit dans un <strong>script</strong> : un simple fichier texte qui se termine par <code>.py</code>.</p>
+<p>Bonne nouvelle : vous savez déjà tout écrire. Un script, c’est le contenu de vos cellules, mis bout à bout dans un fichier.</p>
+<p>Ce chapitre vous fait passer au script en codant des <strong>jeux classiques</strong>. Chaque jeu réutilise tout ce que vous avez vu : variables, conditions, boucles, structures de données et fonctions.</p>
+<hr>
+</section>
+<section id="du-notebook-au-script" class="level2">
+<h2 class="anchored" data-anchor-id="du-notebook-au-script">Du notebook au script</h2>
+<section id="créer-et-lancer-un-script" class="level3">
+<h3 class="anchored" data-anchor-id="créer-et-lancer-un-script">Créer et lancer un script</h3>
+<ol type="1">
+<li>Dans <code>VS Code</code>, créez un fichier <code>bonjour.py</code> ;</li>
+<li>écrivez-y :</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Jessica"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bonjour </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> !"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>ouvrez un terminal (assurez-vous d’être dans le bon répertoire au niveau du terminal) (menu <em>Terminal</em> → <em>New Terminal</em>) et lancez :</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> bonjour.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Python exécute le fichier <strong>de haut en bas, en une seule fois</strong>, puis s’arrête. Pas de cellules, pas d’ordre d’exécution à gérer.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dans un script, une valeur n’est affichée que si vous écrivez <code>print()</code>. La « magie » du notebook, qui affiche automatiquement la dernière ligne d’une cellule, n’existe pas ici.</p>
+</div>
+</div>
+</section>
+<section id="dialoguer-avec-lutilisateur-input" class="level3">
+<h3 class="anchored" data-anchor-id="dialoguer-avec-lutilisateur-input">Dialoguer avec l’utilisateur : <code>input()</code></h3>
+<p><code>print()</code> affiche une information. Son pendant, <code>input()</code>, <strong>demande</strong> une information à l’utilisateur et attend qu’il tape quelque chose puis appuie sur Entrée.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Comment t'appelles-tu ? "</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Enchanté </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> !"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span><code>input()</code> renvoie toujours une chaîne
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Même si l’utilisateur tape <code>25</code>, <code>input()</code> renvoie la chaîne <code>"25"</code>. Pour calculer, il faut convertir, comme vu dans la page sur les variables :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Ton âge ? "</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(age <span class="op">+</span> <span class="dv">1</span>)        <span class="co"># ❌ TypeError : on ne peut pas ajouter un int à une str</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"Ton âge ? "</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(age <span class="op">+</span> <span class="dv">1</span>)        <span class="co"># ✅</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Et si l’utilisateur tape <code>vingt</code> ? <code>int("vingt")</code> plante. On vérifie donc la saisie <strong>avant</strong> de la convertir, avec une boucle <code>while</code> et la méthode <code>.isdigit()</code>, qui renvoie <code>True</code> si la chaîne ne contient que des chiffres :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>saisie <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Ton âge ? "</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="kw">not</span> saisie.isdigit():</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    saisie <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Merci de taper un nombre : "</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="bu">int</span>(saisie)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>C’est un motif que vous retrouverez dans tous les jeux : <strong>ne jamais faire confiance à une saisie utilisateur</strong>.</p>
+</section>
+<section id="utiliser-une-bibliothèque-random" class="level3">
+<h3 class="anchored" data-anchor-id="utiliser-une-bibliothèque-random">Utiliser une bibliothèque : <code>random</code></h3>
+<p>Pour un jeu, il faut du hasard. Python le fournit dans le module <code>random</code>, qu’on <strong>importe</strong> en haut du script :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>random.randint(<span class="dv">1</span>, <span class="dv">100</span>)                     <span class="co"># un entier entre 1 et 100, bornes INCLUSES</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>random.choice([<span class="st">"pierre"</span>, <span class="st">"feuille"</span>, <span class="st">"ciseaux"</span>])  <span class="co"># un élément au hasard d'une liste</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cartes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>random.shuffle(cartes)                     <span class="co"># mélange la liste sur place (renvoie None !)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Attention : contrairement à <code>range()</code>, <code>randint(1, 100)</code> peut renvoyer 100.</p>
+</section>
+<section id="organiser-un-script" class="level3">
+<h3 class="anchored" data-anchor-id="organiser-un-script">Organiser un script</h3>
+<p>Un script bien écrit suit toujours la même structure :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Une docstring en haut du fichier, qui explique ce que fait le script."""</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random                  <span class="co"># 1. les imports</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ESSAIS_MAX <span class="op">=</span> <span class="dv">10</span>                <span class="co"># 2. les constantes, en MAJUSCULES par convention</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jouer():                   <span class="co"># 3. les fonctions</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:     <span class="co"># 4. le point d'entrée</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    jouer()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La dernière ligne mérite une explication. <code>if __name__ == "__main__":</code> signifie : « exécute ce bloc <strong>seulement si</strong> ce fichier est lancé directement avec <code>python fichier.py</code> ». Si un autre script fait <code>import fichier</code> pour réutiliser ses fonctions, le jeu ne se lance pas tout seul. Retenez-le comme une formule : toute la logique dans des fonctions, et l’appel principal sous ce <code>if</code>.</p>
+<hr>
+</section>
+</section>
+<section id="projet-guidé-le-génie" class="level2">
+<h2 class="anchored" data-anchor-id="projet-guidé-le-génie">Projet guidé : le génie 🧞</h2>
+<p>Le génie pense à un nombre entre 1 et 100. À chaque proposition, il répond « plus grand » ou « plus petit ». Construisez le jeu <strong>par étapes</strong>, dans un fichier <code>devine_nombre.py</code> : chaque version ajoute une notion du cours.</p>
+<section id="v1-une-seule-tentative" class="level3">
+<h3 class="anchored" data-anchor-id="v1-une-seule-tentative">V1 : une seule tentative</h3>
+<ul>
+<li>tirer un nombre secret avec <code>random.randint</code> ;</li>
+<li>demander un nombre au joueur avec <code>input()</code> et le convertir ;</li>
+<li>afficher « gagné » ou « perdu », et le nombre secret.</li>
+</ul>
+</section>
+<section id="v2-jouer-jusquà-trouver" class="level3">
+<h3 class="anchored" data-anchor-id="v2-jouer-jusquà-trouver">V2 : jouer jusqu’à trouver</h3>
+<ul>
+<li>ajouter une boucle <code>while</code> qui continue tant que le nombre n’est pas trouvé ;</li>
+<li>répondre « plus grand » ou « plus petit » à chaque essai.</li>
+</ul>
+</section>
+<section id="v3-un-nombre-dessais-limité" class="level3">
+<h3 class="anchored" data-anchor-id="v3-un-nombre-dessais-limité">V3 : un nombre d’essais limité</h3>
+<ul>
+<li>compter les essais (accumulateur) ;</li>
+<li>s’arrêter après 10 essais avec un message de défaite ;</li>
+<li>valider la saisie : redemander si ce n’est pas un nombre.</li>
+</ul>
+</section>
+<section id="v4-du-code-propre" class="level3">
+<h3 class="anchored" data-anchor-id="v4-du-code-propre">V4 : du code propre</h3>
+<ul>
+<li>ranger la saisie dans une fonction <code>demander_nombre(message)</code> et la partie dans une fonction <code>jouer()</code> ;</li>
+<li>garder la liste de tous les essais du joueur et l’afficher à la fin ;</li>
+<li>ajouter le <code>if __name__ == "__main__":</code>.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Indice : la boucle <code>while ... else</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Une boucle <code>while</code> peut avoir un <code>else</code>, exécuté <strong>seulement si la boucle s’est terminée sans <code>break</code></strong>. C’est pratique ici : le <code>break</code> correspond à la victoire, le <code>else</code> à la défaite.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(historique) <span class="op">&lt;</span> ESSAIS_MAX:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> essai <span class="op">==</span> secret:</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Gagné !"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Perdu !"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="et-si-cétait-lordinateur-qui-devinait" class="level3">
+<h3 class="anchored" data-anchor-id="et-si-cétait-lordinateur-qui-devinait">Et si c’était l’ordinateur qui devinait ?</h3>
+<p>Inversons les rôles : l’ordinateur doit trouver un nombre secret, en recevant les mêmes indices « plus grand / plus petit ».</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>🧠 À vous de réfléchir : quelle est la meilleure stratégie ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Si l’ordinateur propose 1, puis 2, puis 3…, combien d’essais lui faut-il <strong>au pire</strong> ? En moyenne ?</li>
+<li>Imaginez une stratégie plus maline. Avec elle, en combien d’essais au maximum peut-on être <strong>sûr</strong> de trouver un nombre entre 1 et 100 ?</li>
+<li>Et entre 1 et 1 000 000 ?</li>
+</ol>
+<p>Réfléchissez avant de lire la suite !</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Voir la solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La meilleure stratégie consiste à toujours proposer <strong>le milieu</strong> de l’intervalle encore possible. Chaque réponse élimine alors la moitié des nombres restants : 100, puis 50, 25, 12, 6, 3, 1. C’est la <strong>recherche par dichotomie</strong>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Stratégie</th>
+<th>Essais en moyenne</th>
+<th>Pire cas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1, 2, 3… dans l’ordre</td>
+<td>50,5</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>Dichotomie</td>
+<td>5,8</td>
+<td><strong>7</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Entre 1 et 1 000 000, il faut au pire… <strong>20 essais</strong>. Doubler la taille de l’intervalle ne coûte qu’<strong>un essai de plus</strong>.</p>
+<p>Attention aux bornes en la codant : après « plus grand », le nouvel intervalle commence à <code>milieu + 1</code>, pas à <code>milieu</code>. Sinon, la boucle peut tourner à l’infini.</p>
+</div>
+</div>
+</div>
+<p><strong>À coder</strong> : écrivez une fonction <code>devine_auto(secret, strategie)</code> qui fait deviner l’ordinateur et renvoie le nombre d’essais, puis faites jouer chaque stratégie (dans l’ordre, au hasard, par dichotomie) sur <strong>1 000 parties</strong> et comparez la moyenne d’essais. Vous venez de comparer des algorithmes avec des données plutôt qu’à l’intuition : c’est la démarche d’un data scientist.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>La dichotomie est partout
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chercher un mot dans un dictionnaire papier, retrouver avec <code>git bisect</code> le commit qui a introduit un bug, chercher une valeur dans une colonne triée ou un index de base de données : c’est toujours le même principe, couper en deux.</p>
+</div>
+</div>
+<p><a href="https://github.com/surybang/python_data/blob/main/jeux/devine_nombre.py">Voir le corrigé</a></p>
+<hr>
+</section>
+</section>
+<section id="à-vous-de-jouer-le-catalogue" class="level2">
+<h2 class="anchored" data-anchor-id="à-vous-de-jouer-le-catalogue">À vous de jouer 🎲 : le catalogue</h2>
+<p>Choisissez <strong>au moins un jeu</strong> dans la liste ci-dessous, selon votre niveau et vos envies.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Jeu</th>
+<th>Difficulté</th>
+<th>Notions clés</th>
+<th>Le défi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#pierre-feuille-ciseaux">Pierre-feuille-ciseaux</a></td>
+<td>⭐</td>
+<td><code>random.choice</code>, dictionnaires</td>
+<td>Un système qui apprend vos habitudes</td>
+</tr>
+<tr class="even">
+<td><a href="#blackjack">Blackjack</a></td>
+<td>⭐⭐</td>
+<td>listes, tuples, <code>random.shuffle</code></td>
+<td>Quand faut-il s’arrêter de tirer ?</td>
+</tr>
+<tr class="odd">
+<td><a href="#mastermind">Mastermind</a></td>
+<td>⭐⭐⭐</td>
+<td>comparaison position par position, <code>zip</code></td>
+<td>Un solveur automatique</td>
+</tr>
+<tr class="even">
+<td><a href="#morpion">Morpion</a></td>
+<td>⭐⭐⭐⭐</td>
+<td>listes de listes, fonctions de vérification</td>
+<td>Une IA difficile à battre</td>
+</tr>
+</tbody>
+</table>
+<p>Pour chaque jeu, les indices sont repliés : essayez d’abord sans !</p>
+<section id="pierre-feuille-ciseaux" class="level3">
+<h3 class="anchored" data-anchor-id="pierre-feuille-ciseaux">Pierre-feuille-ciseaux</h3>
+<p><strong>Règles</strong> : la pierre bat les ciseaux, les ciseaux battent la feuille, la feuille bat la pierre.</p>
+<p><strong>Cahier des charges</strong></p>
+<ol type="1">
+<li>L’ordinateur choisit un coup au hasard, le joueur saisit le sien (saisie validée).</li>
+<li>Le programme annonce le vainqueur de la manche.</li>
+<li>La partie se joue en 5 manches, avec un score affiché à la fin.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Indices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Un dictionnaire <code>BAT = {"pierre": "ciseaux", ...}</code> (« la clé bat la valeur ») évite une longue série de <code>if</code>.</li>
+<li>Pour le système, comptez les coups du joueur dans un dictionnaire, comme dans l’exemple <code>compteur</code> de la page sur les structures de données.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><a href="https://github.com/surybang/python_data/blob/main/jeux/pierre_feuille_ciseaux.py">Voir le corrigé</a></p>
+</section>
+<section id="le-pendu" class="level3">
+<h3 class="anchored" data-anchor-id="le-pendu">Le pendu</h3>
+<p><strong>Règles</strong> : l’ordinateur choisit un mot secret, le joueur propose des lettres une à une. Au bout de 7 erreurs, il est pendu.</p>
+<p><strong>Cahier des charges</strong></p>
+<ol type="1">
+<li>Choisir un mot au hasard dans une liste.</li>
+<li>Afficher le mot avec des <code>_</code> à la place des lettres non trouvées : <code>p _ t h _ n</code>.</li>
+<li>Refuser une saisie qui n’est pas une lettre, ou une lettre déjà proposée.</li>
+<li>Annoncer la victoire ou la défaite.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Indices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Un <strong>ensemble</strong> est idéal pour stocker les lettres déjà jouées : pas de doublons, et <code>in</code> est très rapide.</li>
+<li><code>" ".join(liste)</code> assemble une liste de chaînes en les séparant par un espace.</li>
+<li><code>.isalpha()</code> vérifie qu’une chaîne ne contient que des lettres.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><a href="https://github.com/surybang/python_data/blob/main/jeux/pendu.py">Voir le corrigé</a></p>
+</section>
+<section id="blackjack" class="level3">
+<h3 class="anchored" data-anchor-id="blackjack">Blackjack</h3>
+<p><strong>Règles simplifiées</strong> : le but est de s’approcher de 21 sans le dépasser. Les figures valent 10, l’as vaut 1 ou 11 (au choix le plus avantageux). Le joueur tire des cartes tant qu’il le souhaite, puis le croupier tire jusqu’à atteindre au moins 17. Celui qui est le plus proche de 21 gagne. Au-delà de 21, on perd immédiatement.</p>
+<p><strong>Cahier des charges</strong></p>
+<ol type="1">
+<li>Créer un paquet de 52 cartes et le mélanger.</li>
+<li>Distribuer deux cartes au joueur et au croupier, et montrer une seule carte du croupier.</li>
+<li>Laisser le joueur tirer ou rester.</li>
+<li>Faire jouer le croupier, puis annoncer le résultat.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Indices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Une carte peut être un tuple <code>("R", "♥")</code>, et le paquet une liste de tuples construite avec deux boucles imbriquées.</li>
+<li><code>paquet.pop()</code> retire et renvoie la dernière carte : parfait pour tirer une carte.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><a href="https://github.com/surybang/python_data/blob/main/jeux/blackjack.py">Voir le corrigé</a></p>
+</section>
+<section id="mastermind" class="level3">
+<h3 class="anchored" data-anchor-id="mastermind">Mastermind</h3>
+<p><strong>Règles</strong> : l’ordinateur choisit une combinaison secrète de 4 couleurs parmi 6 (une couleur peut apparaître plusieurs fois). Le joueur a 10 essais. Après chaque essai, il apprend combien de couleurs sont <strong>bien placées</strong> et combien sont <strong>présentes mais mal placées</strong>.</p>
+<p><strong>Cahier des charges</strong></p>
+<ol type="1">
+<li>Générer la combinaison secrète.</li>
+<li>Saisir et valider une proposition, par exemple <code>RVBJ</code>.</li>
+<li>Calculer et afficher les bien placées et les mal placées.</li>
+<li>Gérer la victoire et la défaite.</li>
+</ol>
+<p><strong>🎯 Défi</strong> : écrivez un solveur. À chaque tour, il propose une combinaison <strong>compatible avec tous les indices reçus</strong> jusque-là. En combien d’essais trouve-t-il en moyenne ?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Indices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Calculez d’abord les bien placées avec <code>zip(secret, essai)</code>, et mettez de côté les couleurs restantes des deux côtés.</li>
+<li>Pour les mal placées, parcourez les couleurs restantes de l’essai : si l’une est dans les restes du secret, comptez-la et <strong>retirez-la</strong> (<code>.remove()</code>) pour ne pas la compter deux fois.</li>
+<li>Pour le solveur : générez les 6⁴ = 1 296 combinaisons, puis ne gardez après chaque essai que celles qui auraient donné exactement la même réponse.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><a href="https://github.com/surybang/python_data/blob/main/jeux/mastermind.py">Voir le corrigé</a></p>
+</section>
+<section id="morpion" class="level3">
+<h3 class="anchored" data-anchor-id="morpion">Morpion</h3>
+<p><strong>Règles</strong> : deux joueurs placent tour à tour un <code>X</code> ou un <code>O</code> sur une grille 3×3. Le premier qui aligne trois symboles (en ligne, en colonne ou en diagonale) gagne.</p>
+<p><strong>Cahier des charges</strong></p>
+<ol type="1">
+<li>Représenter la grille par une <strong>liste de 3 listes</strong> et l’afficher proprement.</li>
+<li>Faire saisir une case de 1 à 9 au joueur, en refusant les cases occupées.</li>
+<li>Détecter la victoire et le match nul.</li>
+<li>Faire jouer l’ordinateur.</li>
+</ol>
+<p><strong>🎯 Défi</strong> : rendez l’ordinateur difficile à battre avec des règles simples, dans cet ordre : gagner s’il le peut, sinon bloquer le joueur, sinon prendre le centre, sinon un coin. Arrivez-vous encore à le battre ? Pour aller encore plus loin, renseignez-vous sur l’algorithme <strong>minimax</strong>, qui rend l’ordinateur imbattable.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Indices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>grille[ligne][colonne]</code> accède à une case. La case numéro <code>n</code> (de 1 à 9) correspond à la ligne <code>(n - 1) // 3</code> et à la colonne <code>(n - 1) % 3</code>.</li>
+<li>Écrivez une fonction qui renvoie les 8 alignements possibles (3 lignes, 3 colonnes, 2 diagonales) : la détection de victoire devient une simple boucle.</li>
+<li>Pour savoir si un coup est gagnant, jouez-le « pour de faux », testez la victoire, puis annulez-le.</li>
+<li>Oui, le système du corrigé a une faille : à vous de la trouver !</li>
+</ul>
+</div>
+</div>
+</div>
+<p><a href="https://github.com/surybang/python_data/blob/main/jeux/morpion.py">Voir le corrigé</a></p>
+<hr>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>À retenir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Un <strong>script</strong> <code>.py</code> s’exécute de haut en bas avec <code>python fichier.py</code>. Seul <code>print()</code> affiche quelque chose.</li>
+<li><code>input()</code> renvoie <strong>toujours une chaîne</strong> : convertissez-la, et validez-la avant (<code>.isdigit()</code>, boucle <code>while</code>).</li>
+<li><code>import random</code> donne accès au hasard : <code>randint</code> (bornes incluses), <code>choice</code>, <code>shuffle</code>.</li>
+<li>Un script bien organisé : docstring, imports, constantes, fonctions, puis <code>if __name__ == "__main__":</code>.</li>
+<li>La <strong>dichotomie</strong> trouve un nombre parmi 100 en 7 essais au plus, et parmi un million en 20.</li>
+<li><strong>Simuler</strong> des milliers de parties permet de comparer des stratégies avec des données plutôt qu’avec l’intuition.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python-data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python-data/edit/main/03-initiation-python/06-scripts-jeux.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
