@@ -1,0 +1,338 @@
+---
+title: "Scripts et jeux"
+format:
+  html: default
+  revealjs:
+    output-file: 06-scripts-jeux-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tip}
+Pour ce chapitre, pas de notebook : vous allez écrire de **vrais scripts** `.py`. Les corrigés sont dans le dossier [`jeux/` du dépôt](https://github.com/surybang/python_data/tree/main/jeux).
+
+Travaillez de préférence sur **SSP Cloud** (service VS Code), qui dispose d'un terminal, ou sur votre propre machine.
+:::
+
+
+## Pourquoi sortir du notebook ?
+
+Le notebook est parfait pour **explorer** : on exécute une cellule, on regarde le résultat, on ajuste. Mais un programme qu'on veut **lancer**, partager ou automatiser (un traitement à exécuter chaque matin, un outil pour un collègue, un jeu…) s'écrit dans un **script** : un simple fichier texte qui se termine par `.py`.
+
+Bonne nouvelle : vous savez déjà tout écrire. Un script, c'est le contenu de vos cellules, mis bout à bout dans un fichier.
+
+Ce chapitre vous fait passer au script en codant des **jeux classiques**. Chaque jeu réutilise tout ce que vous avez vu : variables, conditions, boucles, structures de données et fonctions.
+
+---
+
+## Du notebook au script
+
+### Créer et lancer un script
+
+1. Dans `VS Code`, créez un fichier `bonjour.py` ;
+2. écrivez-y :
+
+```python
+prenom = "Jessica"
+print(f"Bonjour {prenom} !")
+```
+
+3. ouvrez un terminal (assurez-vous d'être dans le bon répertoire au niveau du terminal) (menu *Terminal* → *New Terminal*) et lancez :
+
+```bash
+python bonjour.py
+```
+
+Python exécute le fichier **de haut en bas, en une seule fois**, puis s'arrête. Pas de cellules, pas d'ordre d'exécution à gérer.
+
+::: {.callout-note}
+Dans un script, une valeur n'est affichée que si vous écrivez `print()`. La « magie » du notebook, qui affiche automatiquement la dernière ligne d'une cellule, n'existe pas ici.
+:::
+
+### Dialoguer avec l'utilisateur : `input()`
+
+`print()` affiche une information. Son pendant, `input()`, **demande** une information à l'utilisateur et attend qu'il tape quelque chose puis appuie sur Entrée.
+
+```python
+prenom = input("Comment t'appelles-tu ? ")
+print(f"Enchanté {prenom} !")
+```
+
+::: {.callout-warning}
+### `input()` renvoie toujours une chaîne
+
+Même si l'utilisateur tape `25`, `input()` renvoie la chaîne `"25"`. Pour calculer, il faut convertir, comme vu dans la page sur les variables :
+
+```python
+age = input("Ton âge ? ")
+print(age + 1)        # ❌ TypeError : on ne peut pas ajouter un int à une str
+
+age = int(input("Ton âge ? "))
+print(age + 1)        # ✅
+```
+:::
+
+Et si l'utilisateur tape `vingt` ? `int("vingt")` plante. On vérifie donc la saisie **avant** de la convertir, avec une boucle `while` et la méthode `.isdigit()`, qui renvoie `True` si la chaîne ne contient que des chiffres :
+
+```python
+saisie = input("Ton âge ? ")
+while not saisie.isdigit():
+    saisie = input("Merci de taper un nombre : ")
+age = int(saisie)
+```
+
+C'est un motif que vous retrouverez dans tous les jeux : **ne jamais faire confiance à une saisie utilisateur**.
+
+### Utiliser une bibliothèque : `random`
+
+Pour un jeu, il faut du hasard. Python le fournit dans le module `random`, qu'on **importe** en haut du script :
+
+```python
+import random
+
+random.randint(1, 100)                     # un entier entre 1 et 100, bornes INCLUSES
+random.choice(["pierre", "feuille", "ciseaux"])  # un élément au hasard d'une liste
+cartes = [1, 2, 3, 4, 5]
+random.shuffle(cartes)                     # mélange la liste sur place (renvoie None !)
+```
+
+Attention : contrairement à `range()`, `randint(1, 100)` peut renvoyer 100.
+
+### Organiser un script
+
+Un script bien écrit suit toujours la même structure :
+
+```python
+"""Une docstring en haut du fichier, qui explique ce que fait le script."""
+
+import random                  # 1. les imports
+
+ESSAIS_MAX = 10                # 2. les constantes, en MAJUSCULES par convention
+
+
+def jouer():                   # 3. les fonctions
+    ...
+
+
+if __name__ == "__main__":     # 4. le point d'entrée
+    jouer()
+```
+
+La dernière ligne mérite une explication. `if __name__ == "__main__":` signifie : « exécute ce bloc **seulement si** ce fichier est lancé directement avec `python fichier.py` ». Si un autre script fait `import fichier` pour réutiliser ses fonctions, le jeu ne se lance pas tout seul. Retenez-le comme une formule : toute la logique dans des fonctions, et l'appel principal sous ce `if`.
+
+---
+
+## Projet guidé : le génie 🧞
+
+Le génie pense à un nombre entre 1 et 100. À chaque proposition, il répond « plus grand » ou « plus petit ». Construisez le jeu **par étapes**, dans un fichier `devine_nombre.py` : chaque version ajoute une notion du cours.
+
+### V1 : une seule tentative
+
+- tirer un nombre secret avec `random.randint` ;
+- demander un nombre au joueur avec `input()` et le convertir ;
+- afficher « gagné » ou « perdu », et le nombre secret.
+
+### V2 : jouer jusqu'à trouver
+
+- ajouter une boucle `while` qui continue tant que le nombre n'est pas trouvé ;
+- répondre « plus grand » ou « plus petit » à chaque essai.
+
+### V3 : un nombre d'essais limité
+
+- compter les essais (accumulateur) ;
+- s'arrêter après 10 essais avec un message de défaite ;
+- valider la saisie : redemander si ce n'est pas un nombre.
+
+### V4 : du code propre
+
+- ranger la saisie dans une fonction `demander_nombre(message)` et la partie dans une fonction `jouer()` ;
+- garder la liste de tous les essais du joueur et l'afficher à la fin ;
+- ajouter le `if __name__ == "__main__":`.
+
+::: {.callout-tip collapse="true"}
+### 💡 Indice : la boucle `while ... else`
+
+Une boucle `while` peut avoir un `else`, exécuté **seulement si la boucle s'est terminée sans `break`**. C'est pratique ici : le `break` correspond à la victoire, le `else` à la défaite.
+
+```python
+while len(historique) < ESSAIS_MAX:
+    ...
+    if essai == secret:
+        print("Gagné !")
+        break
+else:
+    print("Perdu !")
+```
+:::
+
+### Et si c'était l'ordinateur qui devinait ?
+
+Inversons les rôles : l'ordinateur doit trouver un nombre secret, en recevant les mêmes indices « plus grand / plus petit ».
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : quelle est la meilleure stratégie ?
+
+1. Si l'ordinateur propose 1, puis 2, puis 3…, combien d'essais lui faut-il **au pire** ? En moyenne ?
+2. Imaginez une stratégie plus maline. Avec elle, en combien d'essais au maximum peut-on être **sûr** de trouver un nombre entre 1 et 100 ?
+3. Et entre 1 et 1 000 000 ?
+
+Réfléchissez avant de lire la suite !
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+La meilleure stratégie consiste à toujours proposer **le milieu** de l'intervalle encore possible. Chaque réponse élimine alors la moitié des nombres restants : 100, puis 50, 25, 12, 6, 3, 1. C'est la **recherche par dichotomie**.
+
+| Stratégie | Essais en moyenne | Pire cas |
+|---|---|---|
+| 1, 2, 3… dans l'ordre | 50,5 | 100 |
+| Dichotomie | 5,8 | **7** |
+
+Entre 1 et 1 000 000, il faut au pire… **20 essais**. Doubler la taille de l'intervalle ne coûte qu'**un essai de plus**.
+
+Attention aux bornes en la codant : après « plus grand », le nouvel intervalle commence à `milieu + 1`, pas à `milieu`. Sinon, la boucle peut tourner à l'infini.
+:::
+
+**À coder** : écrivez une fonction `devine_auto(secret, strategie)` qui fait deviner l'ordinateur et renvoie le nombre d'essais, puis faites jouer chaque stratégie (dans l'ordre, au hasard, par dichotomie) sur **1 000 parties** et comparez la moyenne d'essais. Vous venez de comparer des algorithmes avec des données plutôt qu'à l'intuition : c'est la démarche d'un data scientist.
+
+::: {.callout-note}
+### La dichotomie est partout
+Chercher un mot dans un dictionnaire papier, retrouver avec `git bisect` le commit qui a introduit un bug, chercher une valeur dans une colonne triée ou un index de base de données : c'est toujours le même principe, couper en deux.
+:::
+
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/devine_nombre.py)
+
+---
+
+## À vous de jouer 🎲 : le catalogue
+
+Choisissez **au moins un jeu** dans la liste ci-dessous, selon votre niveau et vos envies.
+
+| Jeu | Difficulté | Notions clés | Le défi |
+|---|---|---|---|
+| [Pierre-feuille-ciseaux](#pierre-feuille-ciseaux) | ⭐ | `random.choice`, dictionnaires | Un système qui apprend vos habitudes |
+| [Blackjack](#blackjack) | ⭐⭐ | listes, tuples, `random.shuffle` | Quand faut-il s'arrêter de tirer ? |
+| [Mastermind](#mastermind) | ⭐⭐⭐ | comparaison position par position, `zip` | Un solveur automatique |
+| [Morpion](#morpion) | ⭐⭐⭐⭐ | listes de listes, fonctions de vérification | Une IA difficile à battre |
+
+Pour chaque jeu, les indices sont repliés : essayez d'abord sans !
+
+### Pierre-feuille-ciseaux
+
+**Règles** : la pierre bat les ciseaux, les ciseaux battent la feuille, la feuille bat la pierre.
+
+**Cahier des charges**
+
+1. L'ordinateur choisit un coup au hasard, le joueur saisit le sien (saisie validée).
+2. Le programme annonce le vainqueur de la manche.
+3. La partie se joue en 5 manches, avec un score affiché à la fin.
+
+::: {.callout-tip collapse="true"}
+### 💡 Indices
+- Un dictionnaire `BAT = {"pierre": "ciseaux", ...}` (« la clé bat la valeur ») évite une longue série de `if`.
+- Pour le système, comptez les coups du joueur dans un dictionnaire, comme dans l'exemple `compteur` de la page sur les structures de données.
+:::
+
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/pierre_feuille_ciseaux.py)
+
+### Le pendu
+
+**Règles** : l'ordinateur choisit un mot secret, le joueur propose des lettres une à une. Au bout de 7 erreurs, il est pendu.
+
+**Cahier des charges**
+
+1. Choisir un mot au hasard dans une liste.
+2. Afficher le mot avec des `_` à la place des lettres non trouvées : `p _ t h _ n`.
+3. Refuser une saisie qui n'est pas une lettre, ou une lettre déjà proposée.
+4. Annoncer la victoire ou la défaite.
+
+::: {.callout-tip collapse="true"}
+### 💡 Indices
+- Un **ensemble** est idéal pour stocker les lettres déjà jouées : pas de doublons, et `in` est très rapide.
+- `" ".join(liste)` assemble une liste de chaînes en les séparant par un espace.
+- `.isalpha()` vérifie qu'une chaîne ne contient que des lettres.
+:::
+
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/pendu.py)
+
+
+### Blackjack
+
+**Règles simplifiées** : le but est de s'approcher de 21 sans le dépasser. Les figures valent 10, l'as vaut 1 ou 11 (au choix le plus avantageux). Le joueur tire des cartes tant qu'il le souhaite, puis le croupier tire jusqu'à atteindre au moins 17. Celui qui est le plus proche de 21 gagne. Au-delà de 21, on perd immédiatement.
+
+**Cahier des charges**
+
+1. Créer un paquet de 52 cartes et le mélanger.
+2. Distribuer deux cartes au joueur et au croupier, et montrer une seule carte du croupier.
+3. Laisser le joueur tirer ou rester.
+4. Faire jouer le croupier, puis annoncer le résultat.
+
+::: {.callout-tip collapse="true"}
+### 💡 Indices
+- Une carte peut être un tuple `("R", "♥")`, et le paquet une liste de tuples construite avec deux boucles imbriquées.
+- `paquet.pop()` retire et renvoie la dernière carte : parfait pour tirer une carte.
+:::
+
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/blackjack.py)
+
+### Mastermind
+
+**Règles** : l'ordinateur choisit une combinaison secrète de 4 couleurs parmi 6 (une couleur peut apparaître plusieurs fois). Le joueur a 10 essais. Après chaque essai, il apprend combien de couleurs sont **bien placées** et combien sont **présentes mais mal placées**.
+
+**Cahier des charges**
+
+1. Générer la combinaison secrète.
+2. Saisir et valider une proposition, par exemple `RVBJ`.
+3. Calculer et afficher les bien placées et les mal placées.
+4. Gérer la victoire et la défaite.
+
+**🎯 Défi** : écrivez un solveur. À chaque tour, il propose une combinaison **compatible avec tous les indices reçus** jusque-là. En combien d'essais trouve-t-il en moyenne ?
+
+::: {.callout-tip collapse="true"}
+### 💡 Indices
+- Calculez d'abord les bien placées avec `zip(secret, essai)`, et mettez de côté les couleurs restantes des deux côtés.
+- Pour les mal placées, parcourez les couleurs restantes de l'essai : si l'une est dans les restes du secret, comptez-la et **retirez-la** (`.remove()`) pour ne pas la compter deux fois.
+- Pour le solveur : générez les 6⁴ = 1 296 combinaisons, puis ne gardez après chaque essai que celles qui auraient donné exactement la même réponse.
+:::
+
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/mastermind.py)
+
+### Morpion
+
+**Règles** : deux joueurs placent tour à tour un `X` ou un `O` sur une grille 3×3. Le premier qui aligne trois symboles (en ligne, en colonne ou en diagonale) gagne.
+
+**Cahier des charges**
+
+1. Représenter la grille par une **liste de 3 listes** et l'afficher proprement.
+2. Faire saisir une case de 1 à 9 au joueur, en refusant les cases occupées.
+3. Détecter la victoire et le match nul.
+4. Faire jouer l'ordinateur.
+
+**🎯 Défi** : rendez l'ordinateur difficile à battre avec des règles simples, dans cet ordre : gagner s'il le peut, sinon bloquer le joueur, sinon prendre le centre, sinon un coin. Arrivez-vous encore à le battre ? Pour aller encore plus loin, renseignez-vous sur l'algorithme **minimax**, qui rend l'ordinateur imbattable.
+
+::: {.callout-tip collapse="true"}
+### 💡 Indices
+- `grille[ligne][colonne]` accède à une case. La case numéro `n` (de 1 à 9) correspond à la ligne `(n - 1) // 3` et à la colonne `(n - 1) % 3`.
+- Écrivez une fonction qui renvoie les 8 alignements possibles (3 lignes, 3 colonnes, 2 diagonales) : la détection de victoire devient une simple boucle.
+- Pour savoir si un coup est gagnant, jouez-le « pour de faux », testez la victoire, puis annulez-le.
+- Oui, le système du corrigé a une faille : à vous de la trouver !
+:::
+
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/morpion.py)
+
+---
+
+::: {.callout-tip}
+### À retenir
+- Un **script** `.py` s'exécute de haut en bas avec `python fichier.py`. Seul `print()` affiche quelque chose.
+- `input()` renvoie **toujours une chaîne** : convertissez-la, et validez-la avant (`.isdigit()`, boucle `while`).
+- `import random` donne accès au hasard : `randint` (bornes incluses), `choice`, `shuffle`.
+- Un script bien organisé : docstring, imports, constantes, fonctions, puis `if __name__ == "__main__":`.
+- La **dichotomie** trouve un nombre parmi 100 en 7 essais au plus, et parmi un million en 20.
+- **Simuler** des milliers de parties permet de comparer des stratégies avec des données plutôt qu'avec l'intuition.
+:::
