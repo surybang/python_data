@@ -1,0 +1,260 @@
+---
+title: "TabICL : un modèle de fondation pour les données tabulaires"
+---
+
+::: {.callout-note}
+### Prérequis
+Cette page suppose que vous connaissez la démarche classique du machine learning avec `scikit-learn` : séparer les données en jeu d'entraînement et jeu de test, entraîner un modèle avec `fit()`, prédire avec `predict()`, et évaluer avec une métrique.
+:::
+
+
+## L'idée en une phrase
+
+Vous connaissez *ChatGPT* ou *Claude* : on leur donne quelques exemples dans la conversation, et ils comprennent la tâche **sans être réentraînés**. **TabICL** applique la même idée aux tableaux de données : on lui montre les lignes d'entraînement, et il prédit les nouvelles lignes **directement, sans entraînement ni réglage d'hyperparamètres**.
+
+TabICL est développé en France, par l'équipe SODA de l'**Inria** ([Qu, Holzmüller, Varoquaux et Le Morvan, ICML 2025](https://arxiv.org/abs/2502.05564)). Sa deuxième version, **TabICLv2**, est sortie en 2026 ([arXiv](https://arxiv.org/abs/2602.11139)). Il est **open source**, et s'utilise exactement comme un modèle `scikit-learn`.
+
+---
+
+## Deux façons d'apprendre
+
+### Le machine learning classique
+
+Avec un modèle comme une `Random Forest` ou `XGBoost`, on **entraîne un nouveau modèle pour chaque jeu de données** :
+
+1. `fit()` : l'algorithme ajuste ses paramètres sur les données d'entraînement. C'est l'étape longue ;
+2. on règle les hyperparamètres (profondeur des arbres, taux d'apprentissage…), souvent en relançant l'entraînement des dizaines de fois ;
+3. `predict()` : le modèle entraîné prédit. C'est l'étape rapide.
+
+### L'apprentissage en contexte (*in-context learning*)
+
+TabICL fonctionne à l'envers :
+
+1. **une seule fois, par ses auteurs** : un grand réseau de neurones (un *transformer*, l'architecture des *LLM*) est pré-entraîné sur des **millions de jeux de données synthétiques**, générés aléatoirement. Il y apprend non pas à résoudre *un* problème, mais à **apprendre à partir d'exemples**, quel que soit le problème ;
+2. **chez vous**, `fit()` ne fait presque rien : il prépare et mémorise les données d'entraînement, qui serviront de **contexte** ;
+3. `predict()` envoie au réseau, en un seul passage, le contexte (les lignes d'entraînement avec leur réponse) et les lignes à prédire. Le réseau en déduit les prédictions.
+
+| | XGBoost, Random Forest ...| TabICL |
+|---|---|---|
+| Entraînement sur vos données | oui, à chaque fois | **non** : le modèle est déjà pré-entraîné |
+| Réglage des hyperparamètres | souvent indispensable | pas nécessaire |
+| `fit()` | long | quasi instantané |
+| `predict()` | rapide | **plus long** : tout le calcul se fait ici |
+| Matériel | un CPU suffit | GPU recommandé |
+
+C'est pour ça qu'on parle de **modèle de fondation** : comme un LLM pour le texte, un seul modèle pré-entraîné sert de point de départ pour une infinité de tâches.
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : où passe le temps de calcul ?
+
+Une banque veut utiliser un modèle pour noter **en temps réel** des millions de transactions par jour, à partir d'un historique de 50 000 transactions étiquetées.
+
+1. Avec XGBoost, à quel moment le calcul coûteux a-t-il lieu ? Et avec TabICL ?
+2. Lequel des deux vous semble le plus adapté à ce cas d'usage ? Et pour une étude ponctuelle sur 2 000 lignes ?
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+Avec XGBoost, le coût est payé **une fois**, à l'entraînement. Ensuite, chaque prédiction ne demande que de parcourir quelques arbres : c'est extrêmement rapide, même sur un simple CPU.
+
+Avec TabICL, il n'y a pas d'entraînement, mais **chaque prédiction** fait passer tout le contexte (les 50 000 lignes d'historique) dans un gros réseau de neurones. Pour du temps réel à très grand volume, c'est coûteux. La bibliothèque propose un cache (`kv_cache=True`) qui précalcule le contexte une fois pour toutes et accélère les prédictions suivantes, mais un modèle à arbres reste en général plus simple à mettre en production dans ce cas.
+
+Pour une étude ponctuelle sur quelques milliers de lignes, TabICL est en revanche idéal : un excellent résultat en quelques secondes, sans passer des heures à régler des hyperparamètres.
+
+Retenez qu'il n'y a pas de meilleur modèle dans l'absolu : il y a un meilleur modèle **pour un usage donné**.
+:::
+
+---
+
+## Utiliser TabICL
+
+### Installation
+
+```bash
+pip install tabicl
+```
+
+La bibliothèque s'appuie sur PyTorch. Au premier appel, elle **télécharge les poids pré-entraînés** du modèle depuis Hugging Face : il faut donc une connexion internet la première fois.
+
+::: {.callout-tip}
+### Sur SSP Cloud
+TabICL fonctionne sur CPU, mais il est nettement plus rapide sur **GPU**. Le catalogue SSP Cloud propose des services avec GPU : c'est le bon choix dès que vos données dépassent quelques milliers de lignes.
+:::
+
+### Classification
+
+TabICL respecte l'interface de scikit-learn : `fit`, `predict`, `predict_proba`. Comparons-le à un modèle à arbres de référence, sur un jeu de données intégré à scikit-learn (diagnostic de tumeurs du sein, 569 patientes, 30 variables) :
+
+```python
+from sklearn.datasets import load_breast_cancer
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from tabicl import TabICLClassifier
+
+X, y = load_breast_cancer(return_X_y=True, as_frame=True)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=0, stratify=y
+)
+
+modeles = {
+    "Gradient boosting": HistGradientBoostingClassifier(random_state=0),
+    "TabICL": TabICLClassifier(),
+}
+
+for nom, modele in modeles.items():
+    modele.fit(X_train, y_train)
+    precision = accuracy_score(y_test, modele.predict(X_test))
+    print(f"{nom:<18} accuracy : {precision:.3f}")
+```
+
+Et biensûr, `predict_proba()` renvoie, comme pour tout classifieur scikit-learn, la probabilité de chaque classe :
+
+```python
+modeles["TabICL"].predict_proba(X_test)[:5]
+```
+
+### Régression
+
+Depuis la version 2, TabICL sait aussi prédire une valeur numérique, avec `TabICLRegressor` :
+
+```python
+from sklearn.datasets import load_diabetes
+from sklearn.metrics import mean_absolute_error
+from tabicl import TabICLRegressor
+
+X, y = load_diabetes(return_X_y=True, as_frame=True)   # progression d'un diabète à un an
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
+
+reg = TabICLRegressor()
+reg.fit(X_train, y_train)
+print(mean_absolute_error(y_test, reg.predict(X_test)))
+```
+
+### Quelques paramètres utiles
+
+Vous n'avez pas besoin de régler TabICL, mais quelques paramètres sont bons à connaître :
+
+| Paramètre | Rôle |
+|---|---|
+| `device` | `"cpu"` ou `"cuda"` (GPU). Par défaut, TabICL choisit tout seul |
+| `n_estimators` | nombre de « vues » différentes des données combinées pour la prédiction (8 par défaut). Plus = un peu plus précis, mais plus lent |
+| `kv_cache` | précalcule le contexte pour accélérer des prédictions répétées |
+| `random_state` | fixe le hasard pour des résultats reproductibles (42 par défaut) |
+
+::: {.callout-note}
+### Un ensemble de vues
+Le paramètre `n_estimators` cache une idée intéressante : TabICL fait plusieurs prédictions sur des versions légèrement transformées des mêmes données (colonnes dans un ordre différent, normalisation différente…), puis en fait la moyenne. C'est le même principe que la forêt aléatoire, qui combine de nombreux arbres : la moyenne de plusieurs avis est plus robuste qu'un avis unique.
+:::
+
+---
+
+## Forces et limites
+
+### Ses points forts
+
+- **Performant sans réglage** : d'après ses auteurs, TabICLv2 fait mieux que XGBoost, CatBoost ou LightGBM **optimisés** sur une large majorité des jeux de données du benchmark TabArena.
+- **Gain de temps** : pas d'entraînement, pas de recherche d'hyperparamètres. Idéal pour obtenir rapidement une **référence solide** sur un nouveau problème.
+- **Très bon sur les petits jeux de données**, là où les modèles classiques ont du mal à généraliser.
+- **Open source et local** : le modèle tourne sur votre machine. Vos données ne partent vers aucun service externe, un point important pour des données sensibles.
+
+### Ses limites
+
+- **La taille des données** : le modèle a été pré-entraîné sur des jeux de données de quelques centaines à quelques dizaines de milliers de lignes. Il peut aller au-delà (plusieurs centaines de milliers de lignes, selon ses auteurs), mais les performances et les temps de calcul peuvent se dégrader.
+- **Le coût à la prédiction**, comme on l'a vu : moins adapté au temps réel à grand volume.
+- **Le matériel** : sans GPU, il devient lent sur de gros volumes.
+- **L'explicabilité** : impossible de savoir précisément pourquoi le modèle a pris une décision. C'est une limite majeure, détaillée ci-dessous.
+- **Un domaine jeune** : ces modèles évoluent très vite, et les comparaisons publiées sont surtout celles de leurs auteurs. Gardez le réflexe de **toujours comparer** à un modèle de référence sur vos propres données, comme dans l'exemple ci-dessus.
+
+### Pourquoi le modèle a-t-il pris cette décision ?
+
+Avec une régression logistique, chaque variable a un coefficient qu'on peut lire : « chaque année d'ancienneté augmente le score de tant ». Avec un arbre de décision, on peut suivre le chemin qui mène à la prédiction : « revenu inférieur à X, puis taux d'endettement supérieur à Y ».
+
+Avec TabICL, rien de tout ça. La prédiction sort d'un réseau de neurones de **plusieurs millions de paramètres**, qui compare la ligne à prédire à **toutes** les lignes du contexte. Le raisonnement n'est écrit nulle part : on ne peut pas savoir pourquoi le modèle a prédit « fraude » pour cette transaction, ni quelles lignes du contexte ont pesé dans sa décision.
+
+On peut en partie contourner le problème avec des **méthodes d'explication indépendantes du modèle** :
+
+- l'**importance par permutation** (`sklearn.inspection.permutation_importance`) mélange une colonne et mesure de combien les performances chutent : plus la chute est forte, plus la variable compte ;
+- les **valeurs SHAP** (bibliothèque `shap`) estiment la contribution de chaque variable à **une** prédiction précise.
+
+Ces méthodes fonctionnent avec TabICL car elles ne regardent pas l'intérieur du modèle : elles se contentent de l'interroger, en modifiant les données en entrée et en observant comment les prédictions changent. Il suffit donc que le modèle ait une méthode `predict` ou `predict_proba`.
+
+```python
+import shap
+
+# On fournit à SHAP la fonction de prédiction, et un échantillon de données de référence
+explainer = shap.Explainer(
+    lambda X: modeles["TabICL"].predict_proba(X)[:, 1],
+    shap.maskers.Independent(X_train, max_samples=50),
+)
+valeurs_shap = explainer(X_test.iloc[:3])   # explique les 3 premières prédictions
+shap.plots.waterfall(valeurs_shap[0])       # contribution de chaque variable à la 1re prédiction
+```
+
+Mais attention à deux limites :
+
+- ces méthodes donnent une **approximation** du comportement du modèle, pas son raisonnement réel
+- elles sont **très gourmandes en calcul**. SHAP teste de nombreuses combinaisons de variables, et pour chacune remplace les valeurs par celles d'un échantillon de référence.
+
+Dans un test réalisé pour ce *log* sur un simple CPU (30 variables, échantillon de référence de 50 lignes), expliquer **3 prédictions** a demandé plus de **76 000 prédictions** au modèle :
+
+| Modèle | Durée pour expliquer 3 prédictions |
+|---|---|
+| Gradient boosting | **8 secondes** |
+| TabICL | **9 minutes** |
+| TabICL avec `kv_cache=True` | **8 minutes 20** |
+
+Le cache (`kv_cache=True`) ne fait gagner qu'environ 10 % : il évite de retraiter le contexte (les lignes d'entraînement), mais ici l'essentiel du coût vient des milliers de lignes à prédire que SHAP envoie au modèle.
+
+Le nombre de prédictions ne dépend pas du modèle, mais il est **proportionnel** à la taille de l'échantillon de référence : environ 15 000 prédictions avec 10 lignes de référence, 76 000 avec 50, 150 000 avec 100.
+
+::: {.callout-tip}
+### À vous de tester
+Le notebook [`TabICL.ipynb`](https://github.com/surybang/python_data/blob/main/notebooks/TabICL.ipynb) reproduit cette expérience : il compte les prédictions demandées par SHAP, mesure les temps de calcul de chaque modèle, et affiche l'explication d'une prédiction. Lancez-le avec des réglages réduits (`NB_LIGNES = 1`, `MAX_SAMPLES = 10`) si vous êtes sur CPU.
+:::
+
+::: {.callout-warning}
+### L'AI Act et le RGPD
+En Europe, la question n'est pas seulement technique. L'**AI Act** classe certains usages de l'IA comme « **à haut risque** » : l'évaluation de la solvabilité d'une personne pour un crédit, la tarification d'assurances vie et santé, le recrutement… Ces systèmes doivent notamment être **documentés**, **transparents** pour leurs utilisateurs, et placés sous **contrôle humain**. Ces obligations, initialement prévues pour août 2026, ont été repoussées au **2 décembre 2027** par l'accord dit « omnibus numérique ».
+
+Le **RGPD**, déjà en vigueur, encadre aussi les décisions entièrement automatisées qui affectent une personne : celle-ci a le droit d'obtenir une intervention humaine et de contester la décision.
+
+Pour ces usages, un modèle dont on ne peut pas expliquer les décisions pose un vrai problème de conformité. Un modèle plus simple, un peu moins performant mais **explicable**, est souvent le meilleur choix. À l'inverse, pour une étude exploratoire, une prévision de ventes ou un cas d'usage sans impact direct sur une personne, cette limite pèse beaucoup moins.
+:::
+
+::: {.callout-note}
+### Et les données d'entraînement ?
+Pour les LLM, on reproche souvent de ne pas savoir sur quelles données ils ont été entraînés : des textes du web, parfois protégés par le droit d'auteur, parfois personnels.
+
+TabICL est un cas différent : il n'a **jamais vu de données réelles**. Il a été pré-entraîné uniquement sur des jeux de données **synthétiques**, produits par un générateur aléatoire décrit dans l'article de ses auteurs. Pas de données personnelles, donc, ni de risque qu'il ait « mémorisé » des informations sur de vraies personnes.
+
+Mais cela soulève une autre question : le modèle a appris sur des données **artificielles**. Rien ne garantit que les régularités de ces données synthétiques ressemblent à celles de **vos** données métier. C'est une raison de plus pour toujours comparer TabICL à un modèle de référence sur vos propres données, et de surveiller ses performances dans le temps.
+:::
+
+### Et les autres modèles de fondation tabulaires ?
+
+TabICL n'est pas seul : le plus connu de ses concurrents est **TabPFN**, développé par l'université de Fribourg et la start-up Prior Labs, qui a popularisé cette approche. Les deux reposent sur le même principe d'apprentissage en contexte, avec des architectures différentes. Le domaine bouge vite : consultez des benchmarks indépendants comme [TabArena](https://github.com/autogluon/tabarena) pour suivre l'état de l'art.
+
+::: {.callout-tip}
+### À retenir
+- TabICL est un **modèle de fondation** pour les données tabulaires : pré-entraîné une fois sur des millions de jeux de données synthétiques, il s'applique à vos données **sans entraînement**.
+- Il fonctionne par **apprentissage en contexte**, comme un LLM à qui on donne des exemples : `fit()` mémorise le contexte, `predict()` fait tout le calcul.
+- Il s'utilise comme un modèle **scikit-learn** : `TabICLClassifier` et `TabICLRegressor`.
+- Ses atouts : performant **sans réglage**, rapide à mettre en place, excellent sur les petits jeux de données.
+- Ses limites : coûteux à la prédiction, GPU recommandé, performances incertaines sur de très gros volumes, et surtout **peu explicable**.
+- L'explicabilité n'est pas qu'une question technique : pour les usages « à haut risque » de l'**AI Act** (crédit, assurance, recrutement…), un modèle explicable est souvent préférable.
+- TabICL a été pré-entraîné sur des données **synthétiques** : pas de données personnelles, mais aucune garantie qu'elles ressemblent à vos données métier.
+- Comme pour tout modèle : **comparez-le toujours** à une référence sur vos propres données.
+:::
+
+## Pour aller plus loin
+
+- [Dépôt GitHub de TabICL](https://github.com/soda-inria/tabicl)
+- [Article TabICL (ICML 2025)](https://arxiv.org/abs/2502.05564)
+- [Article TabICLv2](https://arxiv.org/abs/2602.11139)
+- [TabArena, benchmark indépendant des modèles tabulaires](https://github.com/autogluon/tabarena)
+- [Son nouveau modèle IA va faire oublier les LLMs](https://www.youtube.com/watch?v=qpaYZYC5zg0)
+- [TabICL - Déploiement d’un modèle prédictif avec « TabICLv2 »](https://www.youtube.com/watch?v=Y7k04AO9FOQ)
+- [Classifieur « universel » avec TabICL](https://www.youtube.com/watch?v=D32joiDHsUw)
+- [NLP – Catégorisation multiclasse avec TabICL](https://www.youtube.com/watch?v=pWDFTIJiYMU)
