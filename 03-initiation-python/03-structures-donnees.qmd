@@ -343,8 +343,6 @@ for ville in villes:
 
 print(compteur)  # {'Lyon': 3, 'Paris': 2, 'Nantes': 1}
 ```
-
-C'est exactement ce que fait `value_counts()` en pandas.
 :::
 
 ---
@@ -365,6 +363,90 @@ Comme il n'y a pas d'ordre, il n'y a pas d'index : `villes_uniques[0]` lève une
 
 ::: {.callout-warning}
 `{}` crée un **dictionnaire** vide, pas un ensemble vide. Pour un ensemble vide, écrivez `set()`.
+:::
+
+---
+
+## Pour aller plus loin : le module `collections`
+
+Python fournit, dans sa bibliothèque standard, un module `collections` qui propose des versions **spécialisées** des structures que vous venez de voir. Rien à installer : il suffit de l'importer.
+
+### `Counter` : compter sans effort
+
+Vous vous souvenez du compteur de villes construit à la main ?
+
+```python
+compteur = {}
+for ville in villes:
+    compteur[ville] = compteur.get(ville, 0) + 1
+```
+
+`Counter` fait exactement la même chose, en une ligne (plutôt pratique 🧐):
+
+```python
+from collections import Counter
+
+villes = ["Lyon", "Paris", "Lyon", "Nantes", "Paris", "Lyon"]
+compteur = Counter(villes)
+
+print(compteur)                 # Counter({'Lyon': 3, 'Paris': 2, 'Nantes': 1})
+print(compteur.most_common(2))  # [('Lyon', 3), ('Paris', 2)] → les 2 plus fréquentes
+print(compteur["Marseille"])    # 0 → pas de KeyError pour une valeur absente
+```
+
+Un `Counter` est un dictionnaire : tout ce que vous savez des dictionnaires (`.items()`, `in`…) s'applique.
+
+### `defaultdict` : un dictionnaire avec une valeur par défaut
+
+Pour **regrouper** des valeurs par clé, il faut normalement vérifier si la clé existe avant d'ajouter. `defaultdict` crée automatiquement la valeur de départ :
+
+```python
+from collections import defaultdict
+
+ventes = [("Lyon", 49.9), ("Paris", 19.9), ("Lyon", 189.0)]
+montants_par_ville = defaultdict(list)    # une clé absente démarre avec une liste vide
+
+for ville, montant in ventes:
+    montants_par_ville[ville].append(montant)
+
+print(dict(montants_par_ville))  # {'Lyon': [49.9, 189.0], 'Paris': [19.9]}
+```
+
+### `namedtuple` : un tuple avec des noms
+
+`coordonnees[0]`, c'est la latitude ou la longitude ? Un `namedtuple` lève l'ambiguïté :
+
+```python
+from collections import namedtuple
+
+Point = namedtuple("Point", ["lat", "lon"])
+paris = Point(48.85, 2.35)
+
+print(paris.lat)    # 48.85 → plus lisible que paris[0]
+print(paris)        # Point(lat=48.85, lon=2.35)
+```
+
+Il reste un tuple : immuable, et déballable avec `lat, lon = paris`.
+
+### `deque` : garder les derniers éléments
+
+Une `deque` (prononcez « deck ») est une liste optimisée pour ajouter et retirer aux deux bouts. Avec `maxlen`, elle ne garde que les N derniers éléments :
+
+```python
+from collections import deque
+
+derniers_essais = deque(maxlen=3)
+for essai in [50, 25, 37, 31, 34]:
+    derniers_essais.append(essai)
+
+print(derniers_essais)   # deque([37, 31, 34], maxlen=3) → les plus anciens sont sortis
+```
+
+Pratique pour un historique limité, comme les derniers coups d'un joueur dans un jeu.
+
+::: {.callout-note}
+### Pourquoi avoir appris à le faire à la main ?
+`Counter` et `defaultdict` font en une ligne ce que vous avez écrit avec une boucle. Mais comprendre le motif manuel vous permet de savoir **ce qu'ils font en coulisse**, et d'adapter le calcul quand aucun outil tout prêt ne correspond. En `pandas`, `value_counts()` et `groupby()` reprendront exactement ces deux idées.
 :::
 
 ---
@@ -394,14 +476,14 @@ for c in clients:
 
 ::: {.callout-note}
 ### Et en analyse de données ?
-Cette liste de dictionnaires, c'est déjà un tableau : chaque dictionnaire est une ligne, chaque clé une colonne. Avec pandas, une seule ligne suffit pour le transformer en DataFrame :
+Cette liste de dictionnaires, c'est déjà un tableau : chaque dictionnaire est une ligne, chaque clé une colonne. Avec `pandas`, une seule ligne suffit pour le transformer en DataFrame :
 
 ```python
 import pandas as pd
 df = pd.DataFrame(clients)
 ```
 
-Et le filtre ci-dessus s'écrira `df[df["ville"] == "Lyon"]`. Comprendre les listes et les dictionnaires, c'est comprendre de quoi est fait un DataFrame.
+Et le filtre ci-dessus s'écrira `df[df["ville"] == "Lyon"]`. Comprendre les listes et les dictionnaires, c'est comprendre de quoi est fait un *DataFrame*.
 :::
 
 ::: {.callout-tip}
