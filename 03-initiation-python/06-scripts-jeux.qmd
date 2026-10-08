@@ -13,9 +13,9 @@ format-links:
 ---
 
 :::{.callout-tip}
-Pour ce chapitre, pas de notebook : vous allez écrire de **vrais scripts** `.py`. Les corrigés sont dans le dossier [`jeux/` du dépôt](https://github.com/surybang/python_data/tree/main/jeux).
+Pour ce chapitre, pas de notebook : vous allez écrire des **scripts** `.py`. Les corrigés sont dans le dossier [`correction_jeux/` du dépôt](https://github.com/surybang/python_data/tree/main/correction_jeux).
 
-Travaillez de préférence sur **SSP Cloud** (service VS Code), qui dispose d'un terminal, ou sur votre propre machine.
+Travaillez de préférence sur **SSP Cloud** (service *VS Code*), qui dispose d'un terminal, ou via un [éditeur en ligne](https://www.online-python.com/) ou encore sur votre propre machine.
 :::
 
 
