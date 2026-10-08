@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Pourquoi Python ? – Python &amp; data</title>
+<title>TabICL : un modèle de fondation pour les données tabulaires – Python &amp; data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,8 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../02-environnement/index.html" rel="next">
-<link href="../01-introduction/01-langages.html" rel="prev">
+<link href="../logs/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -315,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-introduction/01-langages.html">Introduction</a></li><li class="breadcrumb-item"><a href="../01-introduction/02-pourquoi-python.html">Pourquoi Python ?</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../logs/index.html">Logs</a></li><li class="breadcrumb-item"><a href="../logs/tabicl.html">TabICL</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -335,13 +334,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
@@ -350,7 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link active">
+  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pourquoi Python ?</span></a>
   </div>
 </li>
@@ -436,14 +435,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../logs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Logs</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+  <a href="../logs/tabicl.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">TabICL</span></a>
   </div>
 </li>
@@ -459,31 +458,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#un-peu-dhistoire" id="toc-un-peu-dhistoire" class="nav-link active" data-scroll-target="#un-peu-dhistoire">Un peu d’histoire</a></li>
-  <li><a href="#les-atouts-de-python" id="toc-les-atouts-de-python" class="nav-link" data-scroll-target="#les-atouts-de-python">Les atouts de Python</a>
+  <li><a href="#lidée-en-une-phrase" id="toc-lidée-en-une-phrase" class="nav-link active" data-scroll-target="#lidée-en-une-phrase">L’idée en une phrase</a></li>
+  <li><a href="#deux-façons-dapprendre" id="toc-deux-façons-dapprendre" class="nav-link" data-scroll-target="#deux-façons-dapprendre">Deux façons d’apprendre</a>
   <ul class="collapse">
-  <li><a href="#une-syntaxe-claire-et-lisible" id="toc-une-syntaxe-claire-et-lisible" class="nav-link" data-scroll-target="#une-syntaxe-claire-et-lisible">1. Une syntaxe claire et lisible</a></li>
-  <li><a href="#un-écosystème-open-source-très-riche" id="toc-un-écosystème-open-source-très-riche" class="nav-link" data-scroll-target="#un-écosystème-open-source-très-riche">2. Un écosystème open-source très riche</a></li>
+  <li><a href="#le-machine-learning-classique" id="toc-le-machine-learning-classique" class="nav-link" data-scroll-target="#le-machine-learning-classique">Le machine learning classique</a></li>
+  <li><a href="#lapprentissage-en-contexte-in-context-learning" id="toc-lapprentissage-en-contexte-in-context-learning" class="nav-link" data-scroll-target="#lapprentissage-en-contexte-in-context-learning">L’apprentissage en contexte (<em>in-context learning</em>)</a></li>
   </ul></li>
-  <li><a href="#apprendre-python-à-lère-de-lia-générative" id="toc-apprendre-python-à-lère-de-lia-générative" class="nav-link" data-scroll-target="#apprendre-python-à-lère-de-lia-générative">Apprendre Python à l’ère de l’IA générative ?</a>
+  <li><a href="#utiliser-tabicl" id="toc-utiliser-tabicl" class="nav-link" data-scroll-target="#utiliser-tabicl">Utiliser TabICL</a>
   <ul class="collapse">
-  <li><a href="#le-paradoxe-de-la-productivité" id="toc-le-paradoxe-de-la-productivité" class="nav-link" data-scroll-target="#le-paradoxe-de-la-productivité">Le paradoxe de la productivité</a></li>
-  <li><a href="#ce-que-disent-les-développeurs-professionnels" id="toc-ce-que-disent-les-développeurs-professionnels" class="nav-link" data-scroll-target="#ce-que-disent-les-développeurs-professionnels">Ce que disent les développeurs professionnels</a></li>
-  <li><a href="#la-question-du-pourquoi-plutôt-que-du-comment" id="toc-la-question-du-pourquoi-plutôt-que-du-comment" class="nav-link" data-scroll-target="#la-question-du-pourquoi-plutôt-que-du-comment">La question du « pourquoi » plutôt que du « comment »</a></li>
-  <li><a href="#le-piège-de-lillusion-de-compétence" id="toc-le-piège-de-lillusion-de-compétence" class="nav-link" data-scroll-target="#le-piège-de-lillusion-de-compétence">Le piège de l’illusion de compétence</a></li>
-  <li><a href="#ce-que-cela-signifie-pour-vous" id="toc-ce-que-cela-signifie-pour-vous" class="nav-link" data-scroll-target="#ce-que-cela-signifie-pour-vous">Ce que cela signifie pour vous</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a></li>
+  <li><a href="#régression" id="toc-régression" class="nav-link" data-scroll-target="#régression">Régression</a></li>
+  <li><a href="#quelques-paramètres-utiles" id="toc-quelques-paramètres-utiles" class="nav-link" data-scroll-target="#quelques-paramètres-utiles">Quelques paramètres utiles</a></li>
   </ul></li>
+  <li><a href="#forces-et-limites" id="toc-forces-et-limites" class="nav-link" data-scroll-target="#forces-et-limites">Forces et limites</a>
+  <ul class="collapse">
+  <li><a href="#ses-points-forts" id="toc-ses-points-forts" class="nav-link" data-scroll-target="#ses-points-forts">Ses points forts</a></li>
+  <li><a href="#ses-limites" id="toc-ses-limites" class="nav-link" data-scroll-target="#ses-limites">Ses limites</a></li>
+  <li><a href="#pourquoi-le-modèle-a-t-il-pris-cette-décision" id="toc-pourquoi-le-modèle-a-t-il-pris-cette-décision" class="nav-link" data-scroll-target="#pourquoi-le-modèle-a-t-il-pris-cette-décision">Pourquoi le modèle a-t-il pris cette décision ?</a></li>
+  <li><a href="#et-les-autres-modèles-de-fondation-tabulaires" id="toc-et-les-autres-modèles-de-fondation-tabulaires" class="nav-link" data-scroll-target="#et-les-autres-modèles-de-fondation-tabulaires">Et les autres modèles de fondation tabulaires ?</a></li>
+  </ul></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python-data/edit/main/01-introduction/02-pourquoi-python.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02-pourquoi-python-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="02-pourquoi-python-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python-data/edit/main/logs/tabicl.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-introduction/01-langages.html">Introduction</a></li><li class="breadcrumb-item"><a href="../01-introduction/02-pourquoi-python.html">Pourquoi Python ?</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../logs/index.html">Logs</a></li><li class="breadcrumb-item"><a href="../logs/tabicl.html">TabICL</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Pourquoi Python ?</h1>
+<h1 class="title">TabICL : un modèle de fondation pour les données tabulaires</h1>
 </div>
 
 
@@ -500,203 +505,392 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Python est aujourd’hui <strong>l’un des langages de programmation les plus populaire au monde (selon <a href="https://www.tiobe.com/tiobe-index/">TIOBE</a>)</strong>, et le langage dominant dans l’écosystème de la data science.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="assets/TIOBE_index_python.png" class="img-fluid figure-img"></p>
-<figcaption>Python est le langage le plus populaire</figcaption>
-</figure>
-</div>
-<section id="un-peu-dhistoire" class="level2">
-<h2 class="anchored" data-anchor-id="un-peu-dhistoire">Un peu d’histoire</h2>
-<p>Python a été créé par <strong>Guido van Rossum</strong> à la fin des années 1980<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, et sa première version publique date de <strong>1991</strong>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Guido van Rossum travaillait alors au CWI (<em>Centrum voor Wiskunde en Informatica</em>), à Amsterdam. En <strong>décembre 1989</strong>, pendant les vacances de Noël, l’entreprise était fermée et il cherchait un projet pour s’occuper. C’est ce qu’il appelle lui-même un <strong>« side project »</strong>, mené en marge de son travail officiel. Il raconte : <em>« J’avais deux semaines de vacances de Noël et rien à faire. »</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> En deux semaines, il écrit la première version de l’interpréteur Python.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<p>Le nom <strong>Python</strong> ne vient pas du serpent 🐍, mais de la troupe de comédie britannique <a href="https://fr.wikipedia.org/wiki/Monty_Python"><strong>Monty Python</strong></a>, que van Rossum appréciait. Il cherchait un nom <strong>court, unique et légèrement mystérieux</strong> et « Python » cochait toutes les cases.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Le Zen de Python
+<span class="screen-reader-only">Note</span>Prérequis
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si vous tapez <code>import this</code> dans un interpréteur Python, vous verrez s’afficher le <em>Zen de Python</em>, une petite collection de 19 aphorismes qui résument la philosophie du langage. Par exemple :</p>
-<blockquote class="blockquote">
-<p><em>« Beautiful is better than ugly. »</em> <em>« Simple is better than complex. »</em> <em>« Readability counts. »</em></p>
-</blockquote>
+<p>Cette page suppose que vous connaissez la démarche classique du machine learning avec <code>scikit-learn</code> : séparer les données en jeu d’entraînement et jeu de test, entraîner un modèle avec <code>fit()</code>, prédire avec <code>predict()</code>, et évaluer avec une métrique.</p>
+</div>
+</div>
+<section id="lidée-en-une-phrase" class="level2">
+<h2 class="anchored" data-anchor-id="lidée-en-une-phrase">L’idée en une phrase</h2>
+<p>Vous connaissez <em>ChatGPT</em> ou <em>Claude</em> : on leur donne quelques exemples dans la conversation, et ils comprennent la tâche <strong>sans être réentraînés</strong>. <strong>TabICL</strong> applique la même idée aux tableaux de données : on lui montre les lignes d’entraînement, et il prédit les nouvelles lignes <strong>directement, sans entraînement ni réglage d’hyperparamètres</strong>.</p>
+<p>TabICL est développé en France, par l’équipe SODA de l’<strong>Inria</strong> (<a href="https://arxiv.org/abs/2502.05564">Qu, Holzmüller, Varoquaux et Le Morvan, ICML 2025</a>). Sa deuxième version, <strong>TabICLv2</strong>, est sortie en 2026 (<a href="https://arxiv.org/abs/2602.11139">arXiv</a>). Il est <strong>open source</strong>, et s’utilise exactement comme un modèle <code>scikit-learn</code>.</p>
+<hr>
+</section>
+<section id="deux-façons-dapprendre" class="level2">
+<h2 class="anchored" data-anchor-id="deux-façons-dapprendre">Deux façons d’apprendre</h2>
+<section id="le-machine-learning-classique" class="level3">
+<h3 class="anchored" data-anchor-id="le-machine-learning-classique">Le machine learning classique</h3>
+<p>Avec un modèle comme une <code>Random Forest</code> ou <code>XGBoost</code>, on <strong>entraîne un nouveau modèle pour chaque jeu de données</strong> :</p>
+<ol type="1">
+<li><code>fit()</code> : l’algorithme ajuste ses paramètres sur les données d’entraînement. C’est l’étape longue ;</li>
+<li>on règle les hyperparamètres (profondeur des arbres, taux d’apprentissage…), souvent en relançant l’entraînement des dizaines de fois ;</li>
+<li><code>predict()</code> : le modèle entraîné prédit. C’est l’étape rapide.</li>
+</ol>
+</section>
+<section id="lapprentissage-en-contexte-in-context-learning" class="level3">
+<h3 class="anchored" data-anchor-id="lapprentissage-en-contexte-in-context-learning">L’apprentissage en contexte (<em>in-context learning</em>)</h3>
+<p>TabICL fonctionne à l’envers :</p>
+<ol type="1">
+<li><strong>une seule fois, par ses auteurs</strong> : un grand réseau de neurones (un <em>transformer</em>, l’architecture des <em>LLM</em>) est pré-entraîné sur des <strong>millions de jeux de données synthétiques</strong>, générés aléatoirement. Il y apprend non pas à résoudre <em>un</em> problème, mais à <strong>apprendre à partir d’exemples</strong>, quel que soit le problème ;</li>
+<li><strong>chez vous</strong>, <code>fit()</code> ne fait presque rien : il prépare et mémorise les données d’entraînement, qui serviront de <strong>contexte</strong> ;</li>
+<li><code>predict()</code> envoie au réseau, en un seul passage, le contexte (les lignes d’entraînement avec leur réponse) et les lignes à prédire. Le réseau en déduit les prédictions.</li>
+</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>XGBoost, Random Forest …</th>
+<th>TabICL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Entraînement sur vos données</td>
+<td>oui, à chaque fois</td>
+<td><strong>non</strong> : le modèle est déjà pré-entraîné</td>
+</tr>
+<tr class="even">
+<td>Réglage des hyperparamètres</td>
+<td>souvent indispensable</td>
+<td>pas nécessaire</td>
+</tr>
+<tr class="odd">
+<td><code>fit()</code></td>
+<td>long</td>
+<td>quasi instantané</td>
+</tr>
+<tr class="even">
+<td><code>predict()</code></td>
+<td>rapide</td>
+<td><strong>plus long</strong> : tout le calcul se fait ici</td>
+</tr>
+<tr class="odd">
+<td>Matériel</td>
+<td>un CPU suffit</td>
+<td>GPU recommandé</td>
+</tr>
+</tbody>
+</table>
+<p>C’est pour ça qu’on parle de <strong>modèle de fondation</strong> : comme un LLM pour le texte, un seul modèle pré-entraîné sert de point de départ pour une infinité de tâches.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>🧠 À vous de réfléchir : où passe le temps de calcul ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une banque veut utiliser un modèle pour noter <strong>en temps réel</strong> des millions de transactions par jour, à partir d’un historique de 50 000 transactions étiquetées.</p>
+<ol type="1">
+<li>Avec XGBoost, à quel moment le calcul coûteux a-t-il lieu ? Et avec TabICL ?</li>
+<li>Lequel des deux vous semble le plus adapté à ce cas d’usage ? Et pour une étude ponctuelle sur 2 000 lignes ?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Voir la solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Avec XGBoost, le coût est payé <strong>une fois</strong>, à l’entraînement. Ensuite, chaque prédiction ne demande que de parcourir quelques arbres : c’est extrêmement rapide, même sur un simple CPU.</p>
+<p>Avec TabICL, il n’y a pas d’entraînement, mais <strong>chaque prédiction</strong> fait passer tout le contexte (les 50 000 lignes d’historique) dans un gros réseau de neurones. Pour du temps réel à très grand volume, c’est coûteux. La bibliothèque propose un cache (<code>kv_cache=True</code>) qui précalcule le contexte une fois pour toutes et accélère les prédictions suivantes, mais un modèle à arbres reste en général plus simple à mettre en production dans ce cas.</p>
+<p>Pour une étude ponctuelle sur quelques milliers de lignes, TabICL est en revanche idéal : un excellent résultat en quelques secondes, sans passer des heures à régler des hyperparamètres.</p>
+<p>Retenez qu’il n’y a pas de meilleur modèle dans l’absolu : il y a un meilleur modèle <strong>pour un usage donné</strong>.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="utiliser-tabicl" class="level2">
+<h2 class="anchored" data-anchor-id="utiliser-tabicl">Utiliser TabICL</h2>
+<section id="installation" class="level3">
+<h3 class="anchored" data-anchor-id="installation">Installation</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install tabicl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La bibliothèque s’appuie sur PyTorch. Au premier appel, elle <strong>télécharge les poids pré-entraînés</strong> du modèle depuis Hugging Face : il faut donc une connexion internet la première fois.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Sur SSP Cloud
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>TabICL fonctionne sur CPU, mais il est nettement plus rapide sur <strong>GPU</strong>. Le catalogue SSP Cloud propose des services avec GPU : c’est le bon choix dès que vos données dépassent quelques milliers de lignes.</p>
 </div>
 </div>
 </section>
-<section id="les-atouts-de-python" class="level2">
-<h2 class="anchored" data-anchor-id="les-atouts-de-python">Les atouts de Python</h2>
-<section id="une-syntaxe-claire-et-lisible" class="level3">
-<h3 class="anchored" data-anchor-id="une-syntaxe-claire-et-lisible">1. Une syntaxe claire et lisible</h3>
-<p>Python a été conçu pour être <strong>lisible</strong>. Sa syntaxe utilise des mots-clés proches de l’anglais courant (<code>if</code>, <code>else</code>, <code>for</code>, <code>while</code>, <code>in</code>, <code>not</code>), et l’indentation fait partie intégrante de la grammaire du langage. Cela force à écrire du code structuré.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculer la moyenne de trois notes</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>notes <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">8</span>]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>moyenne <span class="op">=</span> <span class="bu">sum</span>(notes) <span class="op">/</span> <span class="bu">len</span>(notes)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"La moyenne est :"</span>, moyenne)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="classification" class="level3">
+<h3 class="anchored" data-anchor-id="classification">Classification</h3>
+<p>TabICL respecte l’interface de scikit-learn : <code>fit</code>, <code>predict</code>, <code>predict_proba</code>. Comparons-le à un modèle à arbres de référence, sur un jeu de données intégré à scikit-learn (diagnostic de tumeurs du sein, 569 patientes, 30 variables) :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> HistGradientBoostingClassifier</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabicl <span class="im">import</span> TabICLClassifier</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> load_breast_cancer(return_X_y<span class="op">=</span><span class="va">True</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.25</span>, random_state<span class="op">=</span><span class="dv">0</span>, stratify<span class="op">=</span>y</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>modeles <span class="op">=</span> {</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gradient boosting"</span>: HistGradientBoostingClassifier(random_state<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TabICL"</span>: TabICLClassifier(),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nom, modele <span class="kw">in</span> modeles.items():</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    modele.fit(X_train, y_train)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    precision <span class="op">=</span> accuracy_score(y_test, modele.predict(X_test))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>nom<span class="sc">:&lt;18}</span><span class="ss"> accuracy : </span><span class="sc">{</span>precision<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Et biensûr, <code>predict_proba()</code> renvoie, comme pour tout classifieur scikit-learn, la probabilité de chaque classe :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>modeles[<span class="st">"TabICL"</span>].predict_proba(X_test)[:<span class="dv">5</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="un-écosystème-open-source-très-riche" class="level3">
-<h3 class="anchored" data-anchor-id="un-écosystème-open-source-très-riche">2. Un écosystème open-source très riche</h3>
-<p>C’est sans doute <strong>l’argument le plus important</strong> pour la data science. Python dispose d’une vaste collection de bibliothèques spécialisées, maintenues par une communauté active et <strong>ouvertes</strong> : on peut les utiliser, les modifier et les redistribuer librement.</p>
-<p>Pour les retrouver, vous pouvez passer par l’index officiel <a href="https://pypi.org/">Pypi</a> (Python Package Index), qui recense l’ensemble des paquets publiés pour Python. Vous pouvez également explorer <a href="https://github.com">GitHub</a>, où la grande majorité de ces bibliothèques sont développées en open source.</p>
+<section id="régression" class="level3">
+<h3 class="anchored" data-anchor-id="régression">Régression</h3>
+<p>Depuis la version 2, TabICL sait aussi prédire une valeur numérique, avec <code>TabICLRegressor</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_diabetes</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabicl <span class="im">import</span> TabICLRegressor</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> load_diabetes(return_X_y<span class="op">=</span><span class="va">True</span>, as_frame<span class="op">=</span><span class="va">True</span>)   <span class="co"># progression d'un diabète à un an</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.25</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> TabICLRegressor()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>reg.fit(X_train, y_train)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mean_absolute_error(y_test, reg.predict(X_test)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="quelques-paramètres-utiles" class="level3">
+<h3 class="anchored" data-anchor-id="quelques-paramètres-utiles">Quelques paramètres utiles</h3>
+<p>Vous n’avez pas besoin de régler TabICL, mais quelques paramètres sont bons à connaître :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Paramètre</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>device</code></td>
+<td><code>"cpu"</code> ou <code>"cuda"</code> (GPU). Par défaut, TabICL choisit tout seul</td>
+</tr>
+<tr class="even">
+<td><code>n_estimators</code></td>
+<td>nombre de « vues » différentes des données combinées pour la prédiction (8 par défaut). Plus = un peu plus précis, mais plus lent</td>
+</tr>
+<tr class="odd">
+<td><code>kv_cache</code></td>
+<td>précalcule le contexte pour accélérer des prédictions répétées</td>
+</tr>
+<tr class="even">
+<td><code>random_state</code></td>
+<td>fixe le hasard pour des résultats reproductibles (42 par défaut)</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Un ensemble de vues
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le paramètre <code>n_estimators</code> cache une idée intéressante : TabICL fait plusieurs prédictions sur des versions légèrement transformées des mêmes données (colonnes dans un ordre différent, normalisation différente…), puis en fait la moyenne. C’est le même principe que la forêt aléatoire, qui combine de nombreux arbres : la moyenne de plusieurs avis est plus robuste qu’un avis unique.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="forces-et-limites" class="level2">
+<h2 class="anchored" data-anchor-id="forces-et-limites">Forces et limites</h2>
+<section id="ses-points-forts" class="level3">
+<h3 class="anchored" data-anchor-id="ses-points-forts">Ses points forts</h3>
+<ul>
+<li><strong>Performant sans réglage</strong> : d’après ses auteurs, TabICLv2 fait mieux que XGBoost, CatBoost ou LightGBM <strong>optimisés</strong> sur une large majorité des jeux de données du benchmark TabArena.</li>
+<li><strong>Gain de temps</strong> : pas d’entraînement, pas de recherche d’hyperparamètres. Idéal pour obtenir rapidement une <strong>référence solide</strong> sur un nouveau problème.</li>
+<li><strong>Très bon sur les petits jeux de données</strong>, là où les modèles classiques ont du mal à généraliser.</li>
+<li><strong>Open source et local</strong> : le modèle tourne sur votre machine. Vos données ne partent vers aucun service externe, un point important pour des données sensibles.</li>
+</ul>
+</section>
+<section id="ses-limites" class="level3">
+<h3 class="anchored" data-anchor-id="ses-limites">Ses limites</h3>
+<ul>
+<li><strong>La taille des données</strong> : le modèle a été pré-entraîné sur des jeux de données de quelques centaines à quelques dizaines de milliers de lignes. Il peut aller au-delà (plusieurs centaines de milliers de lignes, selon ses auteurs), mais les performances et les temps de calcul peuvent se dégrader.</li>
+<li><strong>Le coût à la prédiction</strong>, comme on l’a vu : moins adapté au temps réel à grand volume.</li>
+<li><strong>Le matériel</strong> : sans GPU, il devient lent sur de gros volumes.</li>
+<li><strong>L’explicabilité</strong> : impossible de savoir précisément pourquoi le modèle a pris une décision. C’est une limite majeure, détaillée ci-dessous.</li>
+<li><strong>Un domaine jeune</strong> : ces modèles évoluent très vite, et les comparaisons publiées sont surtout celles de leurs auteurs. Gardez le réflexe de <strong>toujours comparer</strong> à un modèle de référence sur vos propres données, comme dans l’exemple ci-dessus.</li>
+</ul>
+</section>
+<section id="pourquoi-le-modèle-a-t-il-pris-cette-décision" class="level3">
+<h3 class="anchored" data-anchor-id="pourquoi-le-modèle-a-t-il-pris-cette-décision">Pourquoi le modèle a-t-il pris cette décision ?</h3>
+<p>Avec une régression logistique, chaque variable a un coefficient qu’on peut lire : « chaque année d’ancienneté augmente le score de tant ». Avec un arbre de décision, on peut suivre le chemin qui mène à la prédiction : « revenu inférieur à X, puis taux d’endettement supérieur à Y ».</p>
+<p>Avec TabICL, rien de tout ça. La prédiction sort d’un réseau de neurones de <strong>plusieurs millions de paramètres</strong>, qui compare la ligne à prédire à <strong>toutes</strong> les lignes du contexte. Le raisonnement n’est écrit nulle part : on ne peut pas savoir pourquoi le modèle a prédit « fraude » pour cette transaction, ni quelles lignes du contexte ont pesé dans sa décision.</p>
+<p>On peut en partie contourner le problème avec des <strong>méthodes d’explication indépendantes du modèle</strong> :</p>
+<ul>
+<li>l’<strong>importance par permutation</strong> (<code>sklearn.inspection.permutation_importance</code>) mélange une colonne et mesure de combien les performances chutent : plus la chute est forte, plus la variable compte ;</li>
+<li>les <strong>valeurs SHAP</strong> (bibliothèque <code>shap</code>) estiment la contribution de chaque variable à <strong>une</strong> prédiction précise.</li>
+</ul>
+<p>Ces méthodes fonctionnent avec TabICL car elles ne regardent pas l’intérieur du modèle : elles se contentent de l’interroger, en modifiant les données en entrée et en observant comment les prédictions changent. Il suffit donc que le modèle ait une méthode <code>predict</code> ou <code>predict_proba</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shap</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># On fournit à SHAP la fonction de prédiction, et un échantillon de données de référence</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>explainer <span class="op">=</span> shap.Explainer(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> X: modeles[<span class="st">"TabICL"</span>].predict_proba(X)[:, <span class="dv">1</span>],</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    shap.maskers.Independent(X_train, max_samples<span class="op">=</span><span class="dv">50</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>valeurs_shap <span class="op">=</span> explainer(X_test.iloc[:<span class="dv">3</span>])   <span class="co"># explique les 3 premières prédictions</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>shap.plots.waterfall(valeurs_shap[<span class="dv">0</span>])       <span class="co"># contribution de chaque variable à la 1re prédiction</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Mais attention à deux limites :</p>
+<ul>
+<li>ces méthodes donnent une <strong>approximation</strong> du comportement du modèle, pas son raisonnement réel</li>
+<li>elles sont <strong>très gourmandes en calcul</strong>. SHAP teste de nombreuses combinaisons de variables, et pour chacune remplace les valeurs par celles d’un échantillon de référence.</li>
+</ul>
+<p>Dans un test réalisé pour ce <em>log</em> sur un simple CPU (30 variables, échantillon de référence de 50 lignes), expliquer <strong>3 prédictions</strong> a demandé plus de <strong>76 000 prédictions</strong> au modèle :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Modèle</th>
+<th>Durée pour expliquer 3 prédictions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gradient boosting</td>
+<td><strong>8 secondes</strong></td>
+</tr>
+<tr class="even">
+<td>TabICL</td>
+<td><strong>9 minutes</strong></td>
+</tr>
+<tr class="odd">
+<td>TabICL avec <code>kv_cache=True</code></td>
+<td><strong>8 minutes 20</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Le cache (<code>kv_cache=True</code>) ne fait gagner qu’environ 10 % : il évite de retraiter le contexte (les lignes d’entraînement), mais ici l’essentiel du coût vient des milliers de lignes à prédire que SHAP envoie au modèle.</p>
+<p>Le nombre de prédictions ne dépend pas du modèle, mais il est <strong>proportionnel</strong> à la taille de l’échantillon de référence : environ 15 000 prédictions avec 10 lignes de référence, 76 000 avec 50, 150 000 avec 100.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>À vous de tester
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le notebook <a href="https://github.com/surybang/python_data/blob/main/notebooks/TabICL.ipynb"><code>TabICL.ipynb</code></a> reproduit cette expérience : il compte les prédictions demandées par SHAP, mesure les temps de calcul de chaque modèle, et affiche l’explication d’une prédiction. Lancez-le avec des réglages réduits (<code>NB_LIGNES = 1</code>, <code>MAX_SAMPLES = 10</code>) si vous êtes sur CPU.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+<span class="screen-reader-only">Warning</span>L’AI Act et le RGPD
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>L’écosystème open-source est une cible privilégiée pour les cyberattaques. Un phénomène de plus en plus répandu est la <em>supply chain attack</em> (attaque de chaîne d’approvisionnement) : des attaquants publient des paquets malveillants sur des dépôts officiels comme <code>PyPI</code>, ou compromettent des paquets légitimes en volant les identifiants de leurs mainteneurs.</p>
-<p>Les techniques sont variées :</p>
-<ul>
-<li><p>Typosquatting : publication de paquets aux noms très proches de bibliothèques populaires (par exemple reqeusts au lieu de requests, ou nunpy au lieu de numpy) pour piéger les fautes de frappe.</p></li>
-<li><p>Compromission de mainteneurs : les attaquants volent les identifiants de développeurs légitimes et publient des versions malveillantes de paquets largement utilisés.</p></li>
-<li><p>Slopsquatting : exploitation des hallucinations des assistants IA, qui inventent parfois des noms de paquets inexistants. Les attaquants enregistrent ces noms pour piéger les développeurs qui installent aveuglément ce que l’IA a suggéré.</p></li>
-</ul>
-<p>Les conséquences peuvent être graves : vol de données, installation de logiciels malveillants, compromission de l’ensemble d’une chaîne de <em>build</em>.</p>
-<p><strong>Comment se protéger ?</strong></p>
-<p>Vérifiez le nom exact avant d’installer un paquet. Une faute de frappe peut suffire.</p>
-<p>Regardez les statistiques : un paquet légitime a généralement un historique, des étoiles, des contributeurs.</p>
-<p>Préférez les paquets connus et largement utilisés quand c’est possible.</p>
-<p>Soyez vigilant avec les suggestions de l’IA : un nom de paquet proposé par un assistant doit toujours être vérifié sur PyPI ou GitHub avant installation.</p>
+<p>En Europe, la question n’est pas seulement technique. L’<strong>AI Act</strong> classe certains usages de l’IA comme « <strong>à haut risque</strong> » : l’évaluation de la solvabilité d’une personne pour un crédit, la tarification d’assurances vie et santé, le recrutement… Ces systèmes doivent notamment être <strong>documentés</strong>, <strong>transparents</strong> pour leurs utilisateurs, et placés sous <strong>contrôle humain</strong>. Ces obligations, initialement prévues pour août 2026, ont été repoussées au <strong>2 décembre 2027</strong> par l’accord dit « omnibus numérique ».</p>
+<p>Le <strong>RGPD</strong>, déjà en vigueur, encadre aussi les décisions entièrement automatisées qui affectent une personne : celle-ci a le droit d’obtenir une intervention humaine et de contester la décision.</p>
+<p>Pour ces usages, un modèle dont on ne peut pas expliquer les décisions pose un vrai problème de conformité. Un modèle plus simple, un peu moins performant mais <strong>explicable</strong>, est souvent le meilleur choix. À l’inverse, pour une étude exploratoire, une prévision de ventes ou un cas d’usage sans impact direct sur une personne, cette limite pèse beaucoup moins.</p>
 </div>
 </div>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Domaine</th>
-<th>Bibliothèques principales</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Calcul numérique</td>
-<td><strong>NumPy</strong></td>
-</tr>
-<tr class="even">
-<td>Manipulation de données</td>
-<td><strong>Pandas</strong>, Polars</td>
-</tr>
-<tr class="odd">
-<td>Visualisation</td>
-<td><strong>Matplotlib</strong>, Seaborn, Plotly</td>
-</tr>
-<tr class="even">
-<td>Machine Learning</td>
-<td><strong>scikit-learn</strong></td>
-</tr>
-<tr class="odd">
-<td>Deep Learning</td>
-<td><strong>PyTorch</strong>, TensorFlow, JAX</td>
-</tr>
-<tr class="even">
-<td>Statistiques</td>
-<td>SciPy, statsmodels</td>
-</tr>
-<tr class="odd">
-<td>Web scraping</td>
-<td>Beautiful Soup, Scrapy</td>
-</tr>
-<tr class="even">
-<td>Automatisation</td>
-<td><strong>Airflow</strong>, scheduler</td>
-</tr>
-</tbody>
-</table>
-<p>Ces bibliothèques sont <strong>interopérables</strong> : elles partagent souvent les mêmes structures de données (par exemple, <code>NumPy</code> est à la base de <code>Pandas</code>, <code>scikit-learn</code> et <code>PyTorch</code>). Cela permet d’enchaîner les étapes d’un projet sans friction : charger → nettoyer → analyser → visualiser → modéliser.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="assets/why_pythonc_cuz_its_magic.JPG" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>Python est magique</figcaption>
-</figure>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Et les données d’entraînement ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour les LLM, on reproche souvent de ne pas savoir sur quelles données ils ont été entraînés : des textes du web, parfois protégés par le droit d’auteur, parfois personnels.</p>
+<p>TabICL est un cas différent : il n’a <strong>jamais vu de données réelles</strong>. Il a été pré-entraîné uniquement sur des jeux de données <strong>synthétiques</strong>, produits par un générateur aléatoire décrit dans l’article de ses auteurs. Pas de données personnelles, donc, ni de risque qu’il ait « mémorisé » des informations sur de vraies personnes.</p>
+<p>Mais cela soulève une autre question : le modèle a appris sur des données <strong>artificielles</strong>. Rien ne garantit que les régularités de ces données synthétiques ressemblent à celles de <strong>vos</strong> données métier. C’est une raison de plus pour toujours comparer TabICL à un modèle de référence sur vos propres données, et de surveiller ses performances dans le temps.</p>
+</div>
+</div>
+</section>
+<section id="et-les-autres-modèles-de-fondation-tabulaires" class="level3">
+<h3 class="anchored" data-anchor-id="et-les-autres-modèles-de-fondation-tabulaires">Et les autres modèles de fondation tabulaires ?</h3>
+<p>TabICL n’est pas seul : le plus connu de ses concurrents est <strong>TabPFN</strong>, développé par l’université de Fribourg et la start-up Prior Labs, qui a popularisé cette approche. Les deux reposent sur le même principe d’apprentissage en contexte, avec des architectures différentes. Le domaine bouge vite : consultez des benchmarks indépendants comme <a href="https://github.com/autogluon/tabarena">TabArena</a> pour suivre l’état de l’art.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>À retenir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>TabICL est un <strong>modèle de fondation</strong> pour les données tabulaires : pré-entraîné une fois sur des millions de jeux de données synthétiques, il s’applique à vos données <strong>sans entraînement</strong>.</li>
+<li>Il fonctionne par <strong>apprentissage en contexte</strong>, comme un LLM à qui on donne des exemples : <code>fit()</code> mémorise le contexte, <code>predict()</code> fait tout le calcul.</li>
+<li>Il s’utilise comme un modèle <strong>scikit-learn</strong> : <code>TabICLClassifier</code> et <code>TabICLRegressor</code>.</li>
+<li>Ses atouts : performant <strong>sans réglage</strong>, rapide à mettre en place, excellent sur les petits jeux de données.</li>
+<li>Ses limites : coûteux à la prédiction, GPU recommandé, performances incertaines sur de très gros volumes, et surtout <strong>peu explicable</strong>.</li>
+<li>L’explicabilité n’est pas qu’une question technique : pour les usages « à haut risque » de l’<strong>AI Act</strong> (crédit, assurance, recrutement…), un modèle explicable est souvent préférable.</li>
+<li>TabICL a été pré-entraîné sur des données <strong>synthétiques</strong> : pas de données personnelles, mais aucune garantie qu’elles ressemblent à vos données métier.</li>
+<li>Comme pour tout modèle : <strong>comparez-le toujours</strong> à une référence sur vos propres données.</li>
+</ul>
+</div>
 </div>
 </section>
 </section>
-<section id="apprendre-python-à-lère-de-lia-générative" class="level2">
-<h2 class="anchored" data-anchor-id="apprendre-python-à-lère-de-lia-générative">Apprendre Python à l’ère de l’IA générative ?</h2>
-<p>L’arrivée des assistants de code basés sur l’IA (GitHub Copilot, ChatGPT, Claude) a profondément transformé le paysage de l’apprentissage de la programmation. La question mérite d’être posée frontalement : <strong>faut-il encore apprendre à coder quand une IA peut générer du code en quelques secondes ?</strong></p>
-<p>La réponse, largement documentée par la recherche, est <strong>oui biensûr, mais pour des raisons différentes qu’avant</strong>.</p>
-<section id="le-paradoxe-de-la-productivité" class="level3">
-<h3 class="anchored" data-anchor-id="le-paradoxe-de-la-productivité">Le paradoxe de la productivité</h3>
-<p>Les études montrent que l’IA accélère considérablement l’écriture de code. Mais cette vitesse cache un risque pour les débutants : celui de <strong>sauter l’étape de l’apprentissage</strong>. Ce phénomène est appelé <strong>« atrophie cognitive »</strong><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> : à force de déléguer la syntaxe à l’IA, les apprenants développent une « façade syntaxique », ils produisent du code qui fonctionne, sans posséder les modèles mentaux pour en expliquer la logique ou en maintenir la structure.</p>
-<p>Cette recherche introduit un concept essentiel pour comprendre l’enjeu : le <strong>« Confidence-Competence Gap »</strong> (écart entre confiance et compétence). Les développeurs novices qui utilisent l’IA produisent souvent du code de moindre qualité sécuritaire tout en se sentant plus confiants dans sa qualité. Le code fonctionne, mais l’apprenant n’a pas acquis les compétences sous-jacentes.</p>
-</section>
-<section id="ce-que-disent-les-développeurs-professionnels" class="level3">
-<h3 class="anchored" data-anchor-id="ce-que-disent-les-développeurs-professionnels">Ce que disent les développeurs professionnels</h3>
-<p>L’enquête Stack Overflow 2025, menée auprès de plus de 49 000 développeurs, offre un éclairage précieux.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> Les résultats révèlent une tension :</p>
+<section id="pour-aller-plus-loin" class="level2">
+<h2 class="anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
 <ul>
-<li><strong>80 %</strong> des développeurs utilisent des outils d’IA dans leur workflow</li>
-<li>Mais seulement <strong>29 %</strong> font confiance à leur exactitude (contre 40 % les années précédentes)</li>
-<li><strong>66 %</strong> passent plus de temps à corriger du code généré par l’IA qui est « presque correct, mais pas tout à fait »</li>
-<li><strong>75 %</strong> préfèrent demander de l’aide à un humain quand ils ne font pas confiance à l’IA</li>
+<li><a href="https://github.com/soda-inria/tabicl">Dépôt GitHub de TabICL</a></li>
+<li><a href="https://arxiv.org/abs/2502.05564">Article TabICL (ICML 2025)</a></li>
+<li><a href="https://arxiv.org/abs/2602.11139">Article TabICLv2</a></li>
+<li><a href="https://github.com/autogluon/tabarena">TabArena, benchmark indépendant des modèles tabulaires</a></li>
+<li><a href="https://www.youtube.com/watch?v=qpaYZYC5zg0">Son nouveau modèle IA va faire oublier les LLMs</a></li>
+<li><a href="https://www.youtube.com/watch?v=Y7k04AO9FOQ">TabICL - Déploiement d’un modèle prédictif avec « TabICLv2 »</a></li>
+<li><a href="https://www.youtube.com/watch?v=D32joiDHsUw">Classifieur « universel » avec TabICL</a></li>
+<li><a href="https://www.youtube.com/watch?v=pWDFTIJiYMU">NLP – Catégorisation multiclasse avec TabICL</a></li>
 </ul>
-<p>La frustration numéro un, citée par 66 % des développeurs, concerne les « solutions IA presque correctes mais pas tout à fait ». Cela signifie que <strong>la compétence de vérification et de correction</strong> devient plus critique que jamais.</p>
-</section>
-<section id="la-question-du-pourquoi-plutôt-que-du-comment" class="level3">
-<h3 class="anchored" data-anchor-id="la-question-du-pourquoi-plutôt-que-du-comment">La question du « pourquoi » plutôt que du « comment »</h3>
-<p>Une enquête menée (Black, 2026) auprès de la communauté tech a posé directement la question : <em>« Si l’IA peut écrire du code, devons-nous encore apprendre à coder ? »</em><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
-<p><strong>80,9 %</strong> des répondants ont dit oui. Mais avec une nuance importante : <em>« oui, mais pas de la même manière »</em>. Le consensus émergent est que le rôle du développeur se déplace :</p>
-<blockquote class="blockquote">
-<p>« Le codage ne disparaît pas, il change. »</p>
-</blockquote>
-<p>Les compétences qui gagnent en importance sont :</p>
-<ul>
-<li><strong>La pensée critique</strong> : savoir si ce que l’IA a produit est correct, sûr, utile</li>
-<li><strong>La décomposition de problèmes</strong> : savoir structurer un problème avant de demander à l’IA de le résoudre</li>
-<li><strong>La vérification</strong> : auditer et contrôler la qualité du code généré</li>
-<li><strong>La pensée systémique</strong> : comprendre comment les composants interagissent</li>
-</ul>
-</section>
-<section id="le-piège-de-lillusion-de-compétence" class="level3">
-<h3 class="anchored" data-anchor-id="le-piège-de-lillusion-de-compétence">Le piège de l’illusion de compétence</h3>
-<p>Une étude sur les apprenants débutants (<em>The Widening Gap</em>, 2024) a observé que les étudiants qui utilisent l’IA de manière passive développent une <strong>« illusion de compétence »</strong> : le code fonctionne, donc ils pensent avoir compris. Mais quand on leur demande d’expliquer ou de modifier le code, ils échouent.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
-<p>À l’inverse, les apprenants qui réussissent utilisent l’IA comme <strong>partenaire d’apprentissage</strong>, pas comme substitut. Ils adoptent des stratégies comme :</p>
-<ul>
-<li>Demander des explications sur le code généré</li>
-<li>Décomposer les problèmes et n’utiliser l’IA que pour des parties spécifiques</li>
-<li>Résoudre manuellement d’abord, puis comparer avec la solution de l’IA</li>
-</ul>
-</section>
-<section id="ce-que-cela-signifie-pour-vous" class="level3">
-<h3 class="anchored" data-anchor-id="ce-que-cela-signifie-pour-vous">Ce que cela signifie pour vous</h3>
-<p>Si vous débutez en programmation aujourd’hui :</p>
-<ol type="1">
-<li><p><strong>Apprenez les fondamentaux.</strong> La syntaxe, les types, les boucles, les fonctions, ne vous inquiétez pas, ces concepts ne sont pas obsolètes. Ils sont la base sur laquelle vous construirez votre jugement.</p></li>
-<li><p><strong>Utilisez l’IA, mais activement.</strong> Demandez-lui des explications. Faites-lui vérifier votre code. Ne copiez-collez jamais sans comprendre.</p></li>
-<li><p><strong>Développez votre esprit critique.</strong> La compétence la plus valorisée à l’ère de l’IA n’est pas d’écrire du code, mais de <strong>savoir si le code est correct</strong>.</p></li>
-<li><p><strong>Acceptez l’inconfort.</strong> La « lutte productive », le moment où vous ne comprenez pas et devez chercher est précisément là où l’apprentissage se produit. L’IA peut réduire cet inconfort, mais si elle l’élimine complètement, elle élimine aussi l’apprentissage.</p></li>
-</ol>
-</section>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>L’IA ne rend pas l’apprentissage de la programmation obsolète. Elle le <strong>recentre</strong> sur ce qui compte vraiment : la capacité à résoudre des problèmes, à penser logiquement, et à porter un jugement critique sur ce que les machines produisent.</p>
 
 
 </section>
-</section>
 
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p><a href="https://leaderswithouttitle.github.io/PythonLWT/index.html">Python - Historique</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://docs.python.org/3/faq/general.html#why-was-python-created-in-the-first-place">Python Documentation officielle, <em>History of Python</em></a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Guido van Rossum, cité dans <em>Linux Journal</em>, 1998. Voir aussi son blog personnel : <a href="https://python-history.blogspot.com/"><em>The History of Python</em></a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Computer History Museum, <a href="https://computerhistory.org/profile/guido-van-rossum/"><em>Oral History of Guido van Rossum</em></a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><a href="https://docs.python.org/3/faq/general.html#why-is-it-called-python">Python FAQ — <em>Why is it called Python?</em></a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p><a href="https://www.polytechnique-insights.com/tribunes/neurosciences/ia-generative-le-risque-de-latrophie-cognitive/">IA générative : le risque de l’atrophie cognitive</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>Stack Overflow Developer Survey (2025). <a href="https://survey.stackoverflow.co/2025/">survey.stackoverflow.co</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p><a href="https://ieeexplore-ieee-org.proxybib-pp.cnam.fr/stamp/stamp.jsp?arnumber=11679520&amp;tag=1">Black, S. (2026). <em>The Question: Should We Still Learn to Code in the Age of AI?</em> IEEE Software.</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p><a href="https://arxiv.org/abs/2405.17739"><em>The Widening Gap: Novice Learners and Generative AI in Programming Education</em> (2024).</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1112,14 +1306,11 @@ Warning
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../01-introduction/01-langages.html" class="pagination-link" aria-label="Langages de programmation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Langages de programmation</span>
+      <a href="../logs/index.html" class="pagination-link" aria-label="Logs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Logs</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../02-environnement/index.html" class="pagination-link" aria-label="Environnement">
-        <span class="nav-page-text">Environnement</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -1130,7 +1321,7 @@ Warning
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python-data/edit/main/01-introduction/02-pourquoi-python.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python-data/edit/main/logs/tabicl.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python-data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

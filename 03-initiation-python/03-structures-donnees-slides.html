@@ -1460,7 +1460,6 @@ margin-right: 0; }
 <span id="cb19-5"><a aria-label="5"></a>    compteur[ville] <span class="op">=</span> compteur.get(ville, <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb19-6"><a aria-label="6"></a></span>
 <span id="cb19-7"><a aria-label="7"></a><span class="bu">print</span>(compteur)  <span class="co"># {&#39;Lyon&#39;: 3, &#39;Paris&#39;: 2, &#39;Nantes&#39;: 1}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>C’est exactement ce que fait <code>value_counts()</code> en pandas.</p>
 </div>
 </div>
 </div>
@@ -1484,6 +1483,69 @@ margin-right: 0; }
 </div>
 <div class="callout-content">
 <p><code>{}</code> crée un <strong>dictionnaire</strong> vide, pas un ensemble vide. Pour un ensemble vide, écrivez <code>set()</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="pour-aller-plus-loin-le-module-collections" class="slide level2">
+<h2>Pour aller plus loin : le module <code>collections</code></h2>
+<p>Python fournit, dans sa bibliothèque standard, un module <code>collections</code> qui propose des versions <strong>spécialisées</strong> des structures que vous venez de voir. Rien à installer : il suffit de l’importer.</p>
+<h3 id="counter-compter-sans-effort"><code>Counter</code> : compter sans effort</h3>
+<p>Vous vous souvenez du compteur de villes construit à la main ?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>compteur <span class="op">=</span> {}</span>
+<span id="cb21-2"><a aria-label="2"></a><span class="cf">for</span> ville <span class="kw">in</span> villes:</span>
+<span id="cb21-3"><a aria-label="3"></a>    compteur[ville] <span class="op">=</span> compteur.get(ville, <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>Counter</code> fait exactement la même chose, en une ligne (plutôt pratique 🧐):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb22-2"><a aria-label="2"></a></span>
+<span id="cb22-3"><a aria-label="3"></a>villes <span class="op">=</span> [<span class="st">&quot;Lyon&quot;</span>, <span class="st">&quot;Paris&quot;</span>, <span class="st">&quot;Lyon&quot;</span>, <span class="st">&quot;Nantes&quot;</span>, <span class="st">&quot;Paris&quot;</span>, <span class="st">&quot;Lyon&quot;</span>]</span>
+<span id="cb22-4"><a aria-label="4"></a>compteur <span class="op">=</span> Counter(villes)</span>
+<span id="cb22-5"><a aria-label="5"></a></span>
+<span id="cb22-6"><a aria-label="6"></a><span class="bu">print</span>(compteur)                 <span class="co"># Counter({&#39;Lyon&#39;: 3, &#39;Paris&#39;: 2, &#39;Nantes&#39;: 1})</span></span>
+<span id="cb22-7"><a aria-label="7"></a><span class="bu">print</span>(compteur.most_common(<span class="dv">2</span>))  <span class="co"># [(&#39;Lyon&#39;, 3), (&#39;Paris&#39;, 2)] → les 2 plus fréquentes</span></span>
+<span id="cb22-8"><a aria-label="8"></a><span class="bu">print</span>(compteur[<span class="st">&quot;Marseille&quot;</span>])    <span class="co"># 0 → pas de KeyError pour une valeur absente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Un <code>Counter</code> est un dictionnaire : tout ce que vous savez des dictionnaires (<code>.items()</code>, <code>in</code>…) s’applique.</p>
+<h3 id="defaultdict-un-dictionnaire-avec-une-valeur-par-défaut"><code>defaultdict</code> : un dictionnaire avec une valeur par défaut</h3>
+<p>Pour <strong>regrouper</strong> des valeurs par clé, il faut normalement vérifier si la clé existe avant d’ajouter. <code>defaultdict</code> crée automatiquement la valeur de départ :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
+<span id="cb23-2"><a aria-label="2"></a></span>
+<span id="cb23-3"><a aria-label="3"></a>ventes <span class="op">=</span> [(<span class="st">&quot;Lyon&quot;</span>, <span class="fl">49.9</span>), (<span class="st">&quot;Paris&quot;</span>, <span class="fl">19.9</span>), (<span class="st">&quot;Lyon&quot;</span>, <span class="fl">189.0</span>)]</span>
+<span id="cb23-4"><a aria-label="4"></a>montants_par_ville <span class="op">=</span> defaultdict(<span class="bu">list</span>)    <span class="co"># une clé absente démarre avec une liste vide</span></span>
+<span id="cb23-5"><a aria-label="5"></a></span>
+<span id="cb23-6"><a aria-label="6"></a><span class="cf">for</span> ville, montant <span class="kw">in</span> ventes:</span>
+<span id="cb23-7"><a aria-label="7"></a>    montants_par_ville[ville].append(montant)</span>
+<span id="cb23-8"><a aria-label="8"></a></span>
+<span id="cb23-9"><a aria-label="9"></a><span class="bu">print</span>(<span class="bu">dict</span>(montants_par_ville))  <span class="co"># {&#39;Lyon&#39;: [49.9, 189.0], &#39;Paris&#39;: [19.9]}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="namedtuple-un-tuple-avec-des-noms"><code>namedtuple</code> : un tuple avec des noms</h3>
+<p><code>coordonnees[0]</code>, c’est la latitude ou la longitude ? Un <code>namedtuple</code> lève l’ambiguïté :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="im">from</span> collections <span class="im">import</span> namedtuple</span>
+<span id="cb24-2"><a aria-label="2"></a></span>
+<span id="cb24-3"><a aria-label="3"></a>Point <span class="op">=</span> namedtuple(<span class="st">&quot;Point&quot;</span>, [<span class="st">&quot;lat&quot;</span>, <span class="st">&quot;lon&quot;</span>])</span>
+<span id="cb24-4"><a aria-label="4"></a>paris <span class="op">=</span> Point(<span class="fl">48.85</span>, <span class="fl">2.35</span>)</span>
+<span id="cb24-5"><a aria-label="5"></a></span>
+<span id="cb24-6"><a aria-label="6"></a><span class="bu">print</span>(paris.lat)    <span class="co"># 48.85 → plus lisible que paris[0]</span></span>
+<span id="cb24-7"><a aria-label="7"></a><span class="bu">print</span>(paris)        <span class="co"># Point(lat=48.85, lon=2.35)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Il reste un tuple : immuable, et déballable avec <code>lat, lon = paris</code>.</p>
+<h3 id="deque-garder-les-derniers-éléments"><code>deque</code> : garder les derniers éléments</h3>
+<p>Une <code>deque</code> (prononcez « deck ») est une liste optimisée pour ajouter et retirer aux deux bouts. Avec <code>maxlen</code>, elle ne garde que les N derniers éléments :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a><span class="im">from</span> collections <span class="im">import</span> deque</span>
+<span id="cb25-2"><a aria-label="2"></a></span>
+<span id="cb25-3"><a aria-label="3"></a>derniers_essais <span class="op">=</span> deque(maxlen<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb25-4"><a aria-label="4"></a><span class="cf">for</span> essai <span class="kw">in</span> [<span class="dv">50</span>, <span class="dv">25</span>, <span class="dv">37</span>, <span class="dv">31</span>, <span class="dv">34</span>]:</span>
+<span id="cb25-5"><a aria-label="5"></a>    derniers_essais.append(essai)</span>
+<span id="cb25-6"><a aria-label="6"></a></span>
+<span id="cb25-7"><a aria-label="7"></a><span class="bu">print</span>(derniers_essais)   <span class="co"># deque([37, 31, 34], maxlen=3) → les plus anciens sont sortis</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pratique pour un historique limité, comme les derniers coups d’un joueur dans un jeu.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pourquoi avoir appris à le faire à la main ?</strong></p>
+</div>
+<div class="callout-content">
+<p><code>Counter</code> et <code>defaultdict</code> font en une ligne ce que vous avez écrit avec une boucle. Mais comprendre le motif manuel vous permet de savoir <strong>ce qu’ils font en coulisse</strong>, et d’adapter le calcul quand aucun outil tout prêt ne correspond. En <code>pandas</code>, <code>value_counts()</code> et <code>groupby()</code> reprendront exactement ces deux idées.</p>
 </div>
 </div>
 </div>
@@ -1527,15 +1589,15 @@ margin-right: 0; }
 </tbody>
 </table>
 <p>Et elles se combinent ! Une <strong>liste de dictionnaires</strong> est la façon la plus naturelle de représenter un tableau de données en Python pur :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>clients <span class="op">=</span> [</span>
-<span id="cb21-2"><a aria-label="2"></a>    {<span class="st">&quot;nom&quot;</span>: <span class="st">&quot;Hyde&quot;</span>, <span class="st">&quot;age&quot;</span>: <span class="dv">32</span>, <span class="st">&quot;ville&quot;</span>: <span class="st">&quot;Lyon&quot;</span>},</span>
-<span id="cb21-3"><a aria-label="3"></a>    {<span class="st">&quot;nom&quot;</span>: <span class="st">&quot;Wilson&quot;</span>, <span class="st">&quot;age&quot;</span>: <span class="dv">45</span>, <span class="st">&quot;ville&quot;</span>: <span class="st">&quot;Paris&quot;</span>},</span>
-<span id="cb21-4"><a aria-label="4"></a>    {<span class="st">&quot;nom&quot;</span>: <span class="st">&quot;Ian&quot;</span>, <span class="st">&quot;age&quot;</span>: <span class="dv">28</span>, <span class="st">&quot;ville&quot;</span>: <span class="st">&quot;Lyon&quot;</span>},</span>
-<span id="cb21-5"><a aria-label="5"></a>]</span>
-<span id="cb21-6"><a aria-label="6"></a></span>
-<span id="cb21-7"><a aria-label="7"></a><span class="cf">for</span> c <span class="kw">in</span> clients:</span>
-<span id="cb21-8"><a aria-label="8"></a>    <span class="cf">if</span> c[<span class="st">&quot;ville&quot;</span>] <span class="op">==</span> <span class="st">&quot;Lyon&quot;</span>:</span>
-<span id="cb21-9"><a aria-label="9"></a>        <span class="bu">print</span>(c[<span class="st">&quot;nom&quot;</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>clients <span class="op">=</span> [</span>
+<span id="cb26-2"><a aria-label="2"></a>    {<span class="st">&quot;nom&quot;</span>: <span class="st">&quot;Hyde&quot;</span>, <span class="st">&quot;age&quot;</span>: <span class="dv">32</span>, <span class="st">&quot;ville&quot;</span>: <span class="st">&quot;Lyon&quot;</span>},</span>
+<span id="cb26-3"><a aria-label="3"></a>    {<span class="st">&quot;nom&quot;</span>: <span class="st">&quot;Wilson&quot;</span>, <span class="st">&quot;age&quot;</span>: <span class="dv">45</span>, <span class="st">&quot;ville&quot;</span>: <span class="st">&quot;Paris&quot;</span>},</span>
+<span id="cb26-4"><a aria-label="4"></a>    {<span class="st">&quot;nom&quot;</span>: <span class="st">&quot;Ian&quot;</span>, <span class="st">&quot;age&quot;</span>: <span class="dv">28</span>, <span class="st">&quot;ville&quot;</span>: <span class="st">&quot;Lyon&quot;</span>},</span>
+<span id="cb26-5"><a aria-label="5"></a>]</span>
+<span id="cb26-6"><a aria-label="6"></a></span>
+<span id="cb26-7"><a aria-label="7"></a><span class="cf">for</span> c <span class="kw">in</span> clients:</span>
+<span id="cb26-8"><a aria-label="8"></a>    <span class="cf">if</span> c[<span class="st">&quot;ville&quot;</span>] <span class="op">==</span> <span class="st">&quot;Lyon&quot;</span>:</span>
+<span id="cb26-9"><a aria-label="9"></a>        <span class="bu">print</span>(c[<span class="st">&quot;nom&quot;</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1545,10 +1607,10 @@ margin-right: 0; }
 <p><strong>Et en analyse de données ?</strong></p>
 </div>
 <div class="callout-content">
-<p>Cette liste de dictionnaires, c’est déjà un tableau : chaque dictionnaire est une ligne, chaque clé une colonne. Avec pandas, une seule ligne suffit pour le transformer en DataFrame :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb22-2"><a aria-label="2"></a>df <span class="op">=</span> pd.DataFrame(clients)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Et le filtre ci-dessus s’écrira <code>df[df[&quot;ville&quot;] == &quot;Lyon&quot;]</code>. Comprendre les listes et les dictionnaires, c’est comprendre de quoi est fait un DataFrame.</p>
+<p>Cette liste de dictionnaires, c’est déjà un tableau : chaque dictionnaire est une ligne, chaque clé une colonne. Avec <code>pandas</code>, une seule ligne suffit pour le transformer en DataFrame :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb27-2"><a aria-label="2"></a>df <span class="op">=</span> pd.DataFrame(clients)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Et le filtre ci-dessus s’écrira <code>df[df[&quot;ville&quot;] == &quot;Lyon&quot;]</code>. Comprendre les listes et les dictionnaires, c’est comprendre de quoi est fait un <em>DataFrame</em>.</p>
 </div>
 </div>
 </div>

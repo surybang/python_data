@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../logs/index.html" rel="next">
 <link href="../03-initiation-python/05-fonctions.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -431,6 +432,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../logs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TabICL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -501,8 +519,8 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Pour ce chapitre, pas de notebook : vous allez écrire de <strong>vrais scripts</strong> <code>.py</code>. Les corrigés sont dans le dossier <a href="https://github.com/surybang/python_data/tree/main/jeux"><code>jeux/</code> du dépôt</a>.</p>
-<p>Travaillez de préférence sur <strong>SSP Cloud</strong> (service VS Code), qui dispose d’un terminal, ou sur votre propre machine.</p>
+<p>Pour ce chapitre, pas de notebook : vous allez écrire des <strong>scripts</strong> <code>.py</code>. Les corrigés sont dans le dossier <a href="https://github.com/surybang/python_data/tree/main/correction_jeux"><code>correction_jeux/</code> du dépôt</a>.</p>
+<p>Travaillez de préférence sur <strong>SSP Cloud</strong> (service <em>VS Code</em>), qui dispose d’un terminal, ou via un <a href="https://www.online-python.com/">éditeur en ligne</a> ou encore sur votre propre machine.</p>
 </div>
 </div>
 <section id="pourquoi-sortir-du-notebook" class="level2">
@@ -510,6 +528,28 @@ Tip
 <p>Le notebook est parfait pour <strong>explorer</strong> : on exécute une cellule, on regarde le résultat, on ajuste. Mais un programme qu’on veut <strong>lancer</strong>, partager ou automatiser (un traitement à exécuter chaque matin, un outil pour un collègue, un jeu…) s’écrit dans un <strong>script</strong> : un simple fichier texte qui se termine par <code>.py</code>.</p>
 <p>Bonne nouvelle : vous savez déjà tout écrire. Un script, c’est le contenu de vos cellules, mis bout à bout dans un fichier.</p>
 <p>Ce chapitre vous fait passer au script en codant des <strong>jeux classiques</strong>. Chaque jeu réutilise tout ce que vous avez vu : variables, conditions, boucles, structures de données et fonctions.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Bien d’autres raisons de passer au script
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le notebook a aussi ses pièges : on peut exécuter les cellules dans le désordre, et obtenir un résultat qu’il est impossible de reproduire en relançant tout. Un script, lui, s’exécute toujours de haut en bas.</p>
+<p>En entreprise, le code passe donc presque toujours par des fichiers <code>.py</code>, pour bien d’autres raisons :</p>
+<ul>
+<li><strong>réutiliser</strong> ses fonctions d’un projet à l’autre, en les important au lieu de les copier-coller ;</li>
+<li><strong>créer un package</strong> : regrouper son code dans une bibliothèque installable pour la partager avec son équipe ;</li>
+<li><strong>garantir la reproductibilité</strong> : une même commande donne le même résultat, sur n’importe quelle machine ;</li>
+<li><strong>tester</strong> son code automatiquement, et <strong>suivre ses modifications</strong> avec Git (les fichiers <code>.py</code> sont bien plus lisibles dans un historique que les notebooks) ;</li>
+<li><strong>automatiser</strong> : planifier un traitement chaque nuit, ou le déployer sur un serveur.</li>
+</ul>
+<p>Ces notions sont encore trop avancées pour une première approche : nous y reviendrons plus tard. Pour l’instant, retenez simplement que le notebook sert à <strong>explorer</strong>, et le script à <strong>produire</strong>. 😎</p>
+</div>
+</div>
 <hr>
 </section>
 <section id="du-notebook-au-script" class="level2">
@@ -636,7 +676,7 @@ Note
 <li>ajouter le <code>if __name__ == "__main__":</code>.</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -645,7 +685,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Une boucle <code>while</code> peut avoir un <code>else</code>, exécuté <strong>seulement si la boucle s’est terminée sans <code>break</code></strong>. C’est pratique ici : le <code>break</code> correspond à la victoire, le <code>else</code> à la défaite.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(historique) <span class="op">&lt;</span> ESSAIS_MAX:</span>
@@ -681,7 +721,7 @@ Note
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -690,7 +730,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>La meilleure stratégie consiste à toujours proposer <strong>le milieu</strong> de l’intervalle encore possible. Chaque réponse élimine alors la moitié des nombres restants : 100, puis 50, 25, 12, 6, 3, 1. C’est la <strong>recherche par dichotomie</strong>.</p>
 <table class="caption-top table">
@@ -787,7 +827,7 @@ Note
 <li>La partie se joue en 5 manches, avec un score affiché à la fin.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -796,7 +836,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Un dictionnaire <code>BAT = {"pierre": "ciseaux", ...}</code> (« la clé bat la valeur ») évite une longue série de <code>if</code>.</li>
@@ -818,7 +858,7 @@ Note
 <li>Annoncer la victoire ou la défaite.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -827,7 +867,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Un <strong>ensemble</strong> est idéal pour stocker les lettres déjà jouées : pas de doublons, et <code>in</code> est très rapide.</li>
@@ -850,7 +890,7 @@ Note
 <li>Faire jouer le croupier, puis annoncer le résultat.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -859,7 +899,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Une carte peut être un tuple <code>("R", "♥")</code>, et le paquet une liste de tuples construite avec deux boucles imbriquées.</li>
@@ -882,7 +922,7 @@ Note
 </ol>
 <p><strong>🎯 Défi</strong> : écrivez un solveur. À chaque tour, il propose une combinaison <strong>compatible avec tous les indices reçus</strong> jusque-là. En combien d’essais trouve-t-il en moyenne ?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -891,7 +931,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Calculez d’abord les bien placées avec <code>zip(secret, essai)</code>, et mettez de côté les couleurs restantes des deux côtés.</li>
@@ -915,7 +955,7 @@ Note
 </ol>
 <p><strong>🎯 Défi</strong> : rendez l’ordinateur difficile à battre avec des règles simples, dans cet ordre : gagner s’il le peut, sinon bloquer le joueur, sinon prendre le centre, sinon un coin. Arrivez-vous encore à le battre ? Pour aller encore plus loin, renseignez-vous sur l’algorithme <strong>minimax</strong>, qui rend l’ordinateur imbattable.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -924,7 +964,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><code>grille[ligne][colonne]</code> accède à une case. La case numéro <code>n</code> (de 1 à 9) correspond à la ligne <code>(n - 1) // 3</code> et à la colonne <code>(n - 1) % 3</code>.</li>
@@ -1383,6 +1423,9 @@ Note
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../logs/index.html" class="pagination-link" aria-label="Logs">
+        <span class="nav-page-text">Logs</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -1073,8 +1073,8 @@ margin-right: 0; }
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>Pour ce chapitre, pas de notebook : vous allez écrire de <strong>vrais scripts</strong> <code>.py</code>. Les corrigés sont dans le dossier <a href="https://github.com/surybang/python_data/tree/main/jeux"><code>jeux/</code> du dépôt</a>.</p>
-<p>Travaillez de préférence sur <strong>SSP Cloud</strong> (service VS Code), qui dispose d’un terminal, ou sur votre propre machine.</p>
+<p>Pour ce chapitre, pas de notebook : vous allez écrire des <strong>scripts</strong> <code>.py</code>. Les corrigés sont dans le dossier <a href="https://github.com/surybang/python_data/tree/main/correction_jeux"><code>correction_jeux/</code> du dépôt</a>.</p>
+<p>Travaillez de préférence sur <strong>SSP Cloud</strong> (service <em>VS Code</em>), qui dispose d’un terminal, ou via un <a href="https://www.online-python.com/">éditeur en ligne</a> ou encore sur votre propre machine.</p>
 </div>
 </div>
 </div>
@@ -1084,6 +1084,28 @@ margin-right: 0; }
 <p>Le notebook est parfait pour <strong>explorer</strong> : on exécute une cellule, on regarde le résultat, on ajuste. Mais un programme qu’on veut <strong>lancer</strong>, partager ou automatiser (un traitement à exécuter chaque matin, un outil pour un collègue, un jeu…) s’écrit dans un <strong>script</strong> : un simple fichier texte qui se termine par <code>.py</code>.</p>
 <p>Bonne nouvelle : vous savez déjà tout écrire. Un script, c’est le contenu de vos cellules, mis bout à bout dans un fichier.</p>
 <p>Ce chapitre vous fait passer au script en codant des <strong>jeux classiques</strong>. Chaque jeu réutilise tout ce que vous avez vu : variables, conditions, boucles, structures de données et fonctions.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Bien d’autres raisons de passer au script</strong></p>
+</div>
+<div class="callout-content">
+<p>Le notebook a aussi ses pièges : on peut exécuter les cellules dans le désordre, et obtenir un résultat qu’il est impossible de reproduire en relançant tout. Un script, lui, s’exécute toujours de haut en bas.</p>
+<p>En entreprise, le code passe donc presque toujours par des fichiers <code>.py</code>, pour bien d’autres raisons :</p>
+<ul>
+<li><strong>réutiliser</strong> ses fonctions d’un projet à l’autre, en les important au lieu de les copier-coller ;</li>
+<li><strong>créer un package</strong> : regrouper son code dans une bibliothèque installable pour la partager avec son équipe ;</li>
+<li><strong>garantir la reproductibilité</strong> : une même commande donne le même résultat, sur n’importe quelle machine ;</li>
+<li><strong>tester</strong> son code automatiquement, et <strong>suivre ses modifications</strong> avec Git (les fichiers <code>.py</code> sont bien plus lisibles dans un historique que les notebooks) ;</li>
+<li><strong>automatiser</strong> : planifier un traitement chaque nuit, ou le déployer sur un serveur.</li>
+</ul>
+<p>Ces notions sont encore trop avancées pour une première approche : nous y reviendrons plus tard. Pour l’instant, retenez simplement que le notebook sert à <strong>explorer</strong>, et le script à <strong>produire</strong>. 😎</p>
+</div>
+</div>
+</div>
 </section>
 <section id="du-notebook-au-script" class="slide level2 scrollable">
 <h2>Du notebook au script</h2>
