@@ -27,6 +27,20 @@ Bonne nouvelle : vous savez déjà tout écrire. Un script, c'est le contenu de 
 
 Ce chapitre vous fait passer au script en codant des **jeux classiques**. Chaque jeu réutilise tout ce que vous avez vu : variables, conditions, boucles, structures de données et fonctions.
 
+::: {.callout-note}
+### Bien d'autres raisons de passer au script
+Le notebook a aussi ses pièges : on peut exécuter les cellules dans le désordre, et obtenir un résultat qu'il est impossible de reproduire en relançant tout. Un script, lui, s'exécute toujours de haut en bas.
+
+En entreprise, le code passe donc presque toujours par des fichiers `.py`, pour bien d'autres raisons :
+
+- **réutiliser** ses fonctions d'un projet à l'autre, en les important au lieu de les copier-coller ;
+- **créer un package** : regrouper son code dans une bibliothèque installable pour la partager avec son équipe ;
+- **garantir la reproductibilité** : une même commande donne le même résultat, sur n'importe quelle machine ;
+- **tester** son code automatiquement, et **suivre ses modifications** avec Git (les fichiers `.py` sont bien plus lisibles dans un historique que les notebooks) ;
+- **automatiser** : planifier un traitement chaque nuit, ou le déployer sur un serveur.
+
+Ces notions sont encore trop avancées pour une première approche : nous y reviendrons plus tard. Pour l'instant, retenez simplement que le notebook sert à **explorer**, et le script à **produire**. 😎
+:::
 ---
 
 ## Du notebook au script
