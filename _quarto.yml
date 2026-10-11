@@ -5,8 +5,8 @@ project:
 website:
   title: "Python & data"
   description: "Introduction à la programmation Python et à l'écosystème data"
-  site-url: https://surybang.github.io/python-data/
-  repo-url: https://github.com/surybang/python-data
+  site-url: https://surybang.github.io/python_data/
+  repo-url: https://github.com/surybang/python_data
   repo-actions: [edit, issue]
   page-navigation: true
   back-to-top-navigation: true
@@ -16,7 +16,7 @@ website:
     search: true
     right:
       - icon: github
-        href: https://github.com/surybang/python-data
+        href: https://github.com/surybang/python_data
         aria-label: GitHub
 
   sidebar:

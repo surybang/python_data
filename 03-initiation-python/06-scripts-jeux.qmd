@@ -219,7 +219,7 @@ Attention aux bornes en la codant : après « plus grand », le nouvel intervall
 Chercher un mot dans un dictionnaire papier, retrouver avec `git bisect` le commit qui a introduit un bug, chercher une valeur dans une colonne triée ou un index de base de données : c'est toujours le même principe, couper en deux.
 :::
 
-[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/devine_nombre.py)
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/correction_jeux/devine_nombre.py)
 
 ---
 
@@ -252,7 +252,7 @@ Pour chaque jeu, les indices sont repliés : essayez d'abord sans !
 - Pour le système, comptez les coups du joueur dans un dictionnaire, comme dans l'exemple `compteur` de la page sur les structures de données.
 :::
 
-[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/pierre_feuille_ciseaux.py)
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/correction_jeux/pierre_feuille_ciseaux.py)
 
 ### Le pendu
 
@@ -272,7 +272,7 @@ Pour chaque jeu, les indices sont repliés : essayez d'abord sans !
 - `.isalpha()` vérifie qu'une chaîne ne contient que des lettres.
 :::
 
-[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/pendu.py)
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/correction_jeux/pendu.py)
 
 
 ### Blackjack
@@ -292,7 +292,7 @@ Pour chaque jeu, les indices sont repliés : essayez d'abord sans !
 - `paquet.pop()` retire et renvoie la dernière carte : parfait pour tirer une carte.
 :::
 
-[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/blackjack.py)
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/correction_jeux/blackjack.py)
 
 ### Mastermind
 
@@ -314,7 +314,7 @@ Pour chaque jeu, les indices sont repliés : essayez d'abord sans !
 - Pour le solveur : générez les 6⁴ = 1 296 combinaisons, puis ne gardez après chaque essai que celles qui auraient donné exactement la même réponse.
 :::
 
-[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/mastermind.py)
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/correction_jeux/mastermind.py)
 
 ### Morpion
 
@@ -337,7 +337,7 @@ Pour chaque jeu, les indices sont repliés : essayez d'abord sans !
 - Oui, le système du corrigé a une faille : à vous de la trouver !
 :::
 
-[Voir le corrigé](https://github.com/surybang/python_data/blob/main/jeux/morpion.py)
+[Voir le corrigé](https://github.com/surybang/python_data/blob/main/correction_jeux/morpion.py)
 
 ---
 
