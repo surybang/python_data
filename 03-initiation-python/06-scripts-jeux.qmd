@@ -101,9 +101,48 @@ age = int(saisie)
 
 C'est un motif que vous retrouverez dans tous les jeux : **ne jamais faire confiance à une saisie utilisateur**.
 
-### Utiliser une bibliothèque : `random`
+### Modules et bibliothèques
 
-Pour un jeu, il faut du hasard. Python le fournit dans le module `random`, qu'on **importe** en haut du script :
+Python ne charge pas tous ses outils au démarrage. Ils sont rangés dans des **modules** : des fichiers `.py` qui regroupent des fonctions sur un même thème, et qu'on **importe** quand on en a besoin.
+
+Il en existe deux familles :
+
+| | Bibliothèque standard | Bibliothèques externes |
+|---|---|---|
+| Exemples | `random`, `math`, `datetime`, `statistics`, `sqlite3` | `pandas`, `numpy`, `matplotlib`, `scikit-learn` |
+| Installation | aucune : fournies avec Python | à installer (`pip install pandas` ou `uv add pandas`) |
+
+Sur SSP Cloud et Colab, les bibliothèques les plus courantes sont déjà installées.
+
+### Trois façons d'importer
+
+```python
+import math                 # 1. tout le module : on préfixe par son nom
+print(math.sqrt(16))        # 4.0
+
+from math import sqrt       # 2. une seule fonction : plus de préfixe
+print(sqrt(16))             # 4.0
+
+import statistics as st     # 3. avec un alias, plus court
+print(st.mean([12, 15, 8, 17]))   # 13
+```
+
+La troisième forme est celle que vous verrez partout en data, avec des alias devenus des conventions : `import pandas as pd`, `import numpy as np`, `import matplotlib.pyplot as plt`. Respectez-les : tout le monde les reconnaît.
+
+::: {.callout-warning}
+Vous croiserez parfois `from math import *`, qui importe tout le contenu d'un module. Évitez-le : on ne sait plus d'où vient chaque fonction, et un nom peut en écraser un autre sans prévenir, introduisant ainsi des bugs qui pourraient vous faire perdre du temps. 🙄
+:::
+
+Les imports s'écrivent [**toujours en haut du fichier**](https://peps.python.org/pep-0008/#imports) : un lecteur voit d'emblée de quoi dépend le script. 
+
+::: {.callout-note}
+### Vos scripts sont aussi des modules
+Un fichier `jeux.py` que vous écrivez est lui-même un module : un autre script peut faire `import jeux` pour réutiliser ses fonctions. C'est d'ailleurs pour cela que le `if __name__ == "__main__":` présenté plus bas existe.
+:::
+
+### Le module `random`
+
+Pour un jeu, il faut du hasard :
 
 ```python
 import random
@@ -212,7 +251,7 @@ Entre 1 et 1 000 000, il faut au pire… **20 essais**. Doubler la taille de l'i
 Attention aux bornes en la codant : après « plus grand », le nouvel intervalle commence à `milieu + 1`, pas à `milieu`. Sinon, la boucle peut tourner à l'infini.
 :::
 
-**À coder** : écrivez une fonction `devine_auto(secret, strategie)` qui fait deviner l'ordinateur et renvoie le nombre d'essais, puis faites jouer chaque stratégie (dans l'ordre, au hasard, par dichotomie) sur **1 000 parties** et comparez la moyenne d'essais. Vous venez de comparer des algorithmes avec des données plutôt qu'à l'intuition : c'est la démarche d'un data scientist.
+**À coder** : écrivez une fonction `devine_auto(secret, strategie)` qui fait deviner l'ordinateur et renvoie le nombre d'essais, puis faites jouer chaque stratégie (dans l'ordre, au hasard, par dichotomie) sur **1 000 parties** et comparez la moyenne d'essais. Vous venez de comparer des algorithmes avec des données plutôt qu'à l'intuition. 👏
 
 ::: {.callout-note}
 ### La dichotomie est partout
