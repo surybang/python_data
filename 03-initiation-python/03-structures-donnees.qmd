@@ -109,6 +109,31 @@ if "Wilson" in prenoms:
 | `.count(x)` | nombre d'occurrences | `notes.count(8)` | `1` |
 | `.index(x)` | position de la 1re occurrence | `notes.index(15)` | `1` |
 
+### Passer d'une chaîne à une liste, et inversement
+
+`.split()` découpe une chaîne en **liste**, selon un séparateur :
+
+```python
+ligne = "Jessica;Hyde;Lyon;32"
+champs = ligne.split(";")
+print(champs)          # ['Jessica', 'Hyde', 'Lyon', '32']
+
+notes = "12 15  8".split()   # sans argument : découpe sur les espaces, même multiples
+print(notes)           # ['12', '15', '8']
+```
+
+C'est exactement ce que fait un lecteur de fichier CSV en coulisse : chaque ligne est découpée sur le séparateur. Attention, les morceaux restent des **chaînes** : `"32"` n'est pas un nombre tant qu'on ne l'a pas converti avec `int()`.
+
+`.join()` fait l'inverse : il assemble une liste de chaînes, en les séparant par la chaîne sur laquelle on l'appelle.
+
+```python
+villes = ["Lyon", "Paris", "Nantes"]
+print(" - ".join(villes))   # Lyon - Paris - Nantes
+```
+
+La syntaxe surprend : on écrit `<séparateur>.join(liste)`, et non `liste.join(<séparateur>)`. C'est une méthode des **chaînes**, pas des listes.
+
+
 ::: {.callout-important}
 ### 🧠 À vous de réfléchir : où est passée ma liste ?
 
