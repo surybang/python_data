@@ -182,6 +182,35 @@ Mais certains **packages** s'appuient sur ces annotations pour ajouter une véri
 Donc : le type hint est un **indice** pour Python, mais il peut devenir une **règle** pour certaines bibliothèques.
 :::
 
+### `None` : l'absence de valeur
+
+`None` est une valeur spéciale qui signifie « rien », « pas de valeur ». Ce n'est ni `0`, ni une chaîne vide `""` : c'est l'**absence** de valeur.
+
+```python
+telephone = None          # le client n'a pas renseigné de téléphone
+print(type(telephone))    # <class 'NoneType'>
+```
+
+On l'utilise pour indiquer qu'une information est manquante, ou pas encore connue. Et vous la croiserez souvent sans l'avoir écrite : certaines fonctions et méthodes renvoient `None` quand elles n'ont rien à renvoyer. Par exemple, `print()` affiche du texte, mais **renvoie** `None` :
+
+```python
+resultat = print("Bonjour")   # affiche Bonjour
+print(resultat)               # None
+```
+
+Gardez cet exemple en tête, il reviendra plusieurs fois dans le cours.
+
+::: {.callout-tip}
+### Tester si une valeur vaut `None`
+On écrit `is None`, et non `== None` :
+
+```python
+if telephone is None:
+    print("Téléphone non renseigné")
+```
+
+Les deux fonctionnent ici, mais `is None` est la convention en Python : `None` est un objet unique, et `is` vérifie qu'on désigne bien **cet** objet. C'est le schéma des étiquettes en mémoire : toutes les variables qui valent `None` pointent vers le même objet.
+:::
 
 ## Les types de base en Python
 
@@ -301,6 +330,35 @@ print("ha" * 3)      # hahaha
 | `.lower()` | Minuscules | `"DATA".lower()` | `"data"` |
 | `.capitalize()` | 1re lettre en majuscule | `"alice".capitalize()` | `"Alice"` |
 | `.replace(a, b)` | Remplace a par b | `"chat".replace("c", "b")` | `"bhat"` |
+
+### Nettoyer et tester du texte
+
+Les données texte sont rarement propres : espaces en trop, majuscules incohérentes… Ces méthodes reviennent constamment en data.
+
+| Méthode | Rôle | Exemple | Résultat |
+|---|---|---|---|
+| `.strip()` | retire les espaces (et retours à la ligne) au début et à la fin | `"  Jessica Hyde \n".strip()` | `"Jessica Hyde"` |
+| `.title()` | majuscule au début de chaque mot | `"jessica hyde".title()` | `"Jessica Hyde"` |
+| `.startswith(x)` | commence par `x` ? | `"FR76 3000".startswith("FR")` | `True` |
+| `.endswith(x)` | se termine par `x` ? | `"rapport.csv".endswith(".csv")` | `True` |
+| `.count(x)` | nombre d'occurrences de `x` | `"Mississippi".count("s")` | `4` |
+| `.find(x)` | position de `x`, ou `-1` si absent | `"Python".find("t")` | `2` |
+| `.isdigit()` | ne contient que des chiffres ? | `"42".isdigit()` | `True` |
+
+Et l'opérateur `in` teste si un texte en contient un autre :
+
+```python
+print("data" in "data science")   # True
+```
+
+Les méthodes peuvent s'**enchaîner**, puisque chacune renvoie une nouvelle chaîne :
+
+```python
+email = "  Jessica.HYDE@Exemple.FR "
+email_propre = email.strip().lower()
+print(email_propre)   # jessica.hyde@exemple.fr
+```
+
 
 ::: {.callout-note}
 ### Une chaîne ne se modifie jamais
