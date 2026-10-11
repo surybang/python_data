@@ -752,7 +752,7 @@
     "href": "notebooks/03-structures-donnees.html#exercice-4-filtrer-des-transactions",
     "title": "Exercices : Structures de données",
     "section": "Exercice 4 : Filtrer des transactions",
-    "text": "Exercice 4 : Filtrer des transactions\nConstruis la liste des débits (montants négatifs), puis calcule leur total.\n\ntransactions = [120.0, -45.5, 300.0, -12.0, -80.25, 50.0]\n\n# TODO : accumulateur qui construit une liste\ndebits = ...\n\nprint(debits)        # attendu : [-45.5, -12.0, -80.25]\nprint(sum(debits))   # attendu : -137.75\n\n[-45.5, -12.0, -80.25]\n-137.75\n\n\n\n# Bonus : refais la même chose en une ligne avec une liste en compréhension\ndebits = ...\nprint(debits)"
+    "text": "Exercice 4 : Filtrer des transactions\nConstruis la liste des débits (montants négatifs), puis calcule leur total.\n\ntransactions = [120.0, -45.5, 300.0, -12.0, -80.25, 50.0]\n\n# TODO : accumulateur qui construit une liste\ndebits = ...\n\nprint(debits)        # attendu : [-45.5, -12.0, -80.25]\nprint(sum(debits))   # attendu : -137.75\n\n\n# Bonus : refais la même chose en une ligne avec une liste en compréhension\ndebits = ...\nprint(debits)"
   },
   {
     "objectID": "notebooks/03-structures-donnees.html#exercice-5-deux-listes-en-parallèle",
@@ -815,14 +815,14 @@
     "href": "notebooks/02-conditions-boucles.html#exercice-1-tarif-de-cinéma",
     "title": "Exercices : Conditions et boucles",
     "section": "Exercice 1 : Tarif de cinéma",
-    "text": "Exercice 1 : Tarif de cinéma\nÉcris un programme qui affiche le prix d’une place selon l’âge :\n\nmoins de 12 ans : 5 €\nde 12 à 25 ans inclus : 7 €\n65 ans et plus : 6 €\nsinon : 10 €\n\n\nage = 30\n\n# TODO : calcule le prix avec if / elif / else\nprix = ...\n\nprint(f\"{age} ans → {prix} €\")\n# attendu : 30 ans → 10 €   (teste aussi 8, 25, 26, 70)\n\n30 ans → 10 €"
+    "text": "Exercice 1 : Tarif de cinéma\nÉcris un programme qui affiche le prix d’une place selon l’âge :\n\nmoins de 12 ans : 5 €\nde 12 à 25 ans inclus : 7 €\n65 ans et plus : 6 €\nsinon : 10 €\n\n\nage = 30\n\n# TODO : calcule le prix avec if / elif / else\nprix = ...\n\nprint(f\"{age} ans → {prix} €\")\n# attendu : 30 ans → 10 €   (teste aussi 8, 25, 26, 70)"
   },
   {
     "objectID": "notebooks/02-conditions-boucles.html#exercice-2-année-bissextile",
     "href": "notebooks/02-conditions-boucles.html#exercice-2-année-bissextile",
     "title": "Exercices : Conditions et boucles",
     "section": "Exercice 2 : Année bissextile",
-    "text": "Exercice 2 : Année bissextile\nUne année est bissextile si elle est divisible par 4, sauf si elle est divisible par 100… sauf si elle est aussi divisible par 400.\nIndice : « divisible par 4 » se traduit par annee % 4 == 0.\n\nannee = 1900\n\n# TODO : écris la condition en une seule ligne, avec and / or / not\nbissextile = ...\n\nprint(f\"{annee} bissextile ? {bissextile}\")\n# attendu : 1900 → False, 2000 → True, 2024 → True, 2025 → False\n\n1900 bissextile ? False"
+    "text": "Exercice 2 : Année bissextile\nUne année est bissextile si elle est divisible par 4, sauf si elle est divisible par 100… sauf si elle est aussi divisible par 400.\nIndice : « divisible par 4 » se traduit par annee % 4 == 0.\n\nannee = 1900\n\n# TODO : écris la condition en une seule ligne, avec and / or / not\nbissextile = ...\n\nprint(f\"{annee} bissextile ? {bissextile}\")\n# attendu : 1900 → False, 2000 → True, 2024 → True, 2025 → False"
   },
   {
     "objectID": "notebooks/02-conditions-boucles.html#exercice-3-suivi-de-commande-avec-match",
@@ -871,14 +871,14 @@
     "href": "notebooks/02-conditions-boucles.html#exercice-9-trouve-le-bug",
     "title": "Exercices : Conditions et boucles",
     "section": "Exercice 9 : Trouve le bug 🐛",
-    "text": "Exercice 9 : Trouve le bug 🐛\nCe programme doit afficher la somme des nombres pairs de 1 à 100. Il contient trois erreurs. Devine d’abord ce qu’il affiche, puis corrige-le.\n\nfor n in range(1, 100):\n    total = 0\n    if n % 2 == 1:\n        total += n\n\nprint(total)\n# attendu après correction : 2550\n\n2500"
+    "text": "Exercice 9 : Trouve le bug 🐛\nCe programme doit afficher la somme des nombres pairs de 1 à 100. Il contient trois erreurs. Devine d’abord ce qu’il affiche, puis corrige-le.\n\nfor n in range(1, 100):\n    total = 0\n    if n % 2 == 1:\n        total += n\n\nprint(total)\n# attendu après correction : 2550"
   },
   {
     "objectID": "notebooks/02-conditions-boucles.html#exercice-10-mini-projet-fizzbuzz",
     "href": "notebooks/02-conditions-boucles.html#exercice-10-mini-projet-fizzbuzz",
     "title": "Exercices : Conditions et boucles",
     "section": "Exercice 10 : Mini-projet FizzBuzz",
-    "text": "Exercice 10 : Mini-projet FizzBuzz\nUn grand classique des entretiens techniques ! Pour chaque nombre de 1 à 30 :\n\ns’il est divisible par 3 et par 5, affiche FizzBuzz ;\ns’il est divisible par 3, affiche Fizz ;\ns’il est divisible par 5, affiche Buzz ;\nsinon, affiche le nombre.\n\nRéfléchis bien à l’ordre de tes conditions…\n\n# TODO\n...\n# attendu : 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16...\n\nBuzz"
+    "text": "Exercice 10 : Mini-projet FizzBuzz\nUn grand classique des entretiens techniques ! Pour chaque nombre de 1 à 30 :\n\ns’il est divisible par 3 et par 5, affiche FizzBuzz ;\ns’il est divisible par 3, affiche Fizz ;\ns’il est divisible par 5, affiche Buzz ;\nsinon, affiche le nombre.\n\nRéfléchis bien à l’ordre de tes conditions…\n\n# TODO\n...\n# attendu : 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16..."
   },
   {
     "objectID": "notebooks/02-conditions-boucles.html#corrigés",
@@ -1109,7 +1109,7 @@
     "href": "notebooks/05-fonctions.html#exercice-7-où-sont-passées-mes-variables",
     "title": "Exercices : Les fonctions",
     "section": "Exercice 7 : Où sont passées mes variables ?",
-    "text": "Exercice 7 : Où sont passées mes variables ?\nPour chaque cellule, devine d’abord ce qui va s’afficher (ou quelle erreur va se produire), note ta réponse en commentaire, puis exécute.\n\ndef calcul():\n    resultat = 42\n    return resultat\n\ncalcul()\nprint(resultat)   # ?\n\n\nx = 10\n\ndef modifier():\n    x = 5\n    return x\n\nprint(modifier())  # ?\nprint(x)           # ?\n\n5\n10"
+    "text": "Exercice 7 : Où sont passées mes variables ?\nPour chaque cellule, devine d’abord ce qui va s’afficher (ou quelle erreur va se produire), note ta réponse en commentaire, puis exécute.\n\ndef calcul():\n    resultat = 42\n    return resultat\n\ncalcul()\nprint(resultat)   # ?\n\n\nx = 10\n\ndef modifier():\n    x = 5\n    return x\n\nprint(modifier())  # ?\nprint(x)           # ?"
   },
   {
     "objectID": "notebooks/05-fonctions.html#exercice-8-une-fonction-qui-ne-casse-rien",
