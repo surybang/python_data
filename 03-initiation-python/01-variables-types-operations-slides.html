@@ -1249,6 +1249,30 @@ margin-right: 0; }
 </div>
 </div>
 </div>
+<h3 id="none-labsence-de-valeur"><code>None</code> : l’absence de valeur</h3>
+<p><code>None</code> est une valeur spéciale qui signifie « rien », « pas de valeur ». Ce n’est ni <code>0</code>, ni une chaîne vide <code>&quot;&quot;</code> : c’est l’<strong>absence</strong> de valeur.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>telephone <span class="op">=</span> <span class="va">None</span>          <span class="co"># le client n&#39;a pas renseigné de téléphone</span></span>
+<span id="cb9-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="bu">type</span>(telephone))    <span class="co"># &lt;class &#39;NoneType&#39;&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On l’utilise pour indiquer qu’une information est manquante, ou pas encore connue. Et vous la croiserez souvent sans l’avoir écrite : certaines fonctions et méthodes renvoient <code>None</code> quand elles n’ont rien à renvoyer. Par exemple, <code>print()</code> affiche du texte, mais <strong>renvoie</strong> <code>None</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>resultat <span class="op">=</span> <span class="bu">print</span>(<span class="st">&quot;Bonjour&quot;</span>)   <span class="co"># affiche Bonjour</span></span>
+<span id="cb10-2"><a aria-label="2"></a><span class="bu">print</span>(resultat)               <span class="co"># None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Gardez cet exemple en tête, il reviendra plusieurs fois dans le cours.</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tester si une valeur vaut <code>None</code></strong></p>
+</div>
+<div class="callout-content">
+<p>On écrit <code>is None</code>, et non <code>== None</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="cf">if</span> telephone <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb11-2"><a aria-label="2"></a>    <span class="bu">print</span>(<span class="st">&quot;Téléphone non renseigné&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Les deux fonctionnent ici, mais <code>is None</code> est la convention en Python : <code>None</code> est un objet unique, et <code>is</code> vérifie qu’on désigne bien <strong>cet</strong> objet. C’est le schéma des étiquettes en mémoire : toutes les variables qui valent <code>None</code> pointent vers le même objet.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="les-types-de-base-en-python" class="slide level2">
 <h2>Les types de base en Python</h2>
@@ -1284,11 +1308,11 @@ margin-right: 0; }
 </tbody>
 </table>
 <p>On peut vérifier le type d’une variable avec la fonction <code>type()</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
-<span id="cb9-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="bu">type</span>(age))       <span class="co"># &lt;class &#39;int&#39;&gt;</span></span>
-<span id="cb9-3"><a aria-label="3"></a></span>
-<span id="cb9-4"><a aria-label="4"></a>prenom <span class="op">=</span> <span class="st">&quot;Jessica&quot;</span></span>
-<span id="cb9-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="bu">type</span>(prenom))    <span class="co"># &lt;class &#39;str&#39;&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb12-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="bu">type</span>(age))       <span class="co"># &lt;class &#39;int&#39;&gt;</span></span>
+<span id="cb12-3"><a aria-label="3"></a></span>
+<span id="cb12-4"><a aria-label="4"></a>prenom <span class="op">=</span> <span class="st">&quot;Jessica&quot;</span></span>
+<span id="cb12-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="bu">type</span>(prenom))    <span class="co"># &lt;class &#39;str&#39;&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="opérations-de-base" class="slide level2 scrollable">
 <h2>Opérations de base</h2>
@@ -1349,16 +1373,16 @@ margin-right: 0; }
 </tr>
 </tbody>
 </table>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb10-2"><a aria-label="2"></a>b <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb10-3"><a aria-label="3"></a></span>
-<span id="cb10-4"><a aria-label="4"></a><span class="bu">print</span>(a <span class="op">+</span> b)   <span class="co"># 13</span></span>
-<span id="cb10-5"><a aria-label="5"></a><span class="bu">print</span>(a <span class="op">-</span> b)   <span class="co"># 7</span></span>
-<span id="cb10-6"><a aria-label="6"></a><span class="bu">print</span>(a <span class="op">*</span> b)   <span class="co"># 30</span></span>
-<span id="cb10-7"><a aria-label="7"></a><span class="bu">print</span>(a <span class="op">/</span> b)   <span class="co"># 3.3333333333333335</span></span>
-<span id="cb10-8"><a aria-label="8"></a><span class="bu">print</span>(a <span class="op">//</span> b)  <span class="co"># 3</span></span>
-<span id="cb10-9"><a aria-label="9"></a><span class="bu">print</span>(a <span class="op">%</span> b)   <span class="co"># 1</span></span>
-<span id="cb10-10"><a aria-label="10"></a><span class="bu">print</span>(a <span class="op">**</span> b)  <span class="co"># 1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb13-2"><a aria-label="2"></a>b <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb13-3"><a aria-label="3"></a></span>
+<span id="cb13-4"><a aria-label="4"></a><span class="bu">print</span>(a <span class="op">+</span> b)   <span class="co"># 13</span></span>
+<span id="cb13-5"><a aria-label="5"></a><span class="bu">print</span>(a <span class="op">-</span> b)   <span class="co"># 7</span></span>
+<span id="cb13-6"><a aria-label="6"></a><span class="bu">print</span>(a <span class="op">*</span> b)   <span class="co"># 30</span></span>
+<span id="cb13-7"><a aria-label="7"></a><span class="bu">print</span>(a <span class="op">/</span> b)   <span class="co"># 3.3333333333333335</span></span>
+<span id="cb13-8"><a aria-label="8"></a><span class="bu">print</span>(a <span class="op">//</span> b)  <span class="co"># 3</span></span>
+<span id="cb13-9"><a aria-label="9"></a><span class="bu">print</span>(a <span class="op">%</span> b)   <span class="co"># 1</span></span>
+<span id="cb13-10"><a aria-label="10"></a><span class="bu">print</span>(a <span class="op">**</span> b)  <span class="co"># 1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1369,8 +1393,8 @@ margin-right: 0; }
 </div>
 <div class="callout-content">
 <p>En Python, <code>/</code> renvoie <strong>toujours</strong> un flottant, même quand le résultat tombe juste :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span>)   <span class="co"># 5.0 (et non 5)</span></span>
-<span id="cb11-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">//</span> <span class="dv">2</span>)  <span class="co"># 5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span>)   <span class="co"># 5.0 (et non 5)</span></span>
+<span id="cb14-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">//</span> <span class="dv">2</span>)  <span class="co"># 5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1402,9 +1426,9 @@ margin-right: 0; }
 </tr>
 </tbody>
 </table>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>score <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb12-2"><a aria-label="2"></a>score <span class="op">+=</span> <span class="dv">5</span></span>
-<span id="cb12-3"><a aria-label="3"></a><span class="bu">print</span>(score)  <span class="co"># 15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a>score <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb15-2"><a aria-label="2"></a>score <span class="op">+=</span> <span class="dv">5</span></span>
+<span id="cb15-3"><a aria-label="3"></a><span class="bu">print</span>(score)  <span class="co"># 15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <h3 id="priorité-des-opérations">Priorité des opérations</h3>
 <p>Python respecte les règles de priorité habituelles des mathématiques :</p>
 <ol type="1">
@@ -1414,18 +1438,18 @@ margin-right: 0; }
 <li>Addition, soustraction (<code>+</code>, <code>-</code>)</li>
 </ol>
 <p>En cas de doute, <strong>utilisez des parenthèses.</strong> Elles ne coûtent rien et rendent le code plus lisible.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span>)      <span class="co"># 14 (et non 20)</span></span>
-<span id="cb13-2"><a aria-label="2"></a><span class="bu">print</span>((<span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span>) <span class="op">*</span> <span class="dv">4</span>)    <span class="co"># 20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span>)      <span class="co"># 14 (et non 20)</span></span>
+<span id="cb16-2"><a aria-label="2"></a><span class="bu">print</span>((<span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span>) <span class="op">*</span> <span class="dv">4</span>)    <span class="co"># 20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="opérations-sur-les-chaînes-de-caractères" class="slide level2">
 <h2>Opérations sur les chaînes de caractères</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>prenom <span class="op">=</span> <span class="st">&quot;Jessica&quot;</span></span>
-<span id="cb14-2"><a aria-label="2"></a>nom <span class="op">=</span> <span class="st">&quot;Hyde&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a>prenom <span class="op">=</span> <span class="st">&quot;Jessica&quot;</span></span>
+<span id="cb17-2"><a aria-label="2"></a>nom <span class="op">=</span> <span class="st">&quot;Hyde&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <h3 id="concaténation-et-répétition">Concaténation et répétition</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a>nom_complet <span class="op">=</span> prenom <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> nom</span>
-<span id="cb15-2"><a aria-label="2"></a><span class="bu">print</span>(nom_complet)   <span class="co"># Jessica Hyde</span></span>
-<span id="cb15-3"><a aria-label="3"></a></span>
-<span id="cb15-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="st">&quot;ha&quot;</span> <span class="op">*</span> <span class="dv">3</span>)      <span class="co"># hahaha</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a>nom_complet <span class="op">=</span> prenom <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> nom</span>
+<span id="cb18-2"><a aria-label="2"></a><span class="bu">print</span>(nom_complet)   <span class="co"># Jessica Hyde</span></span>
+<span id="cb18-3"><a aria-label="3"></a></span>
+<span id="cb18-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="st">&quot;ha&quot;</span> <span class="op">*</span> <span class="dv">3</span>)      <span class="co"># hahaha</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <h3 id="quelques-outils-utiles">Quelques outils utiles</h3>
 <table class="caption-top">
 <colgroup>
@@ -1475,6 +1499,74 @@ margin-right: 0; }
 </tr>
 </tbody>
 </table>
+<h3 id="nettoyer-et-tester-du-texte">Nettoyer et tester du texte</h3>
+<p>Les données texte sont rarement propres : espaces en trop, majuscules incohérentes… Ces méthodes reviennent constamment en data.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Méthode</th>
+<th>Rôle</th>
+<th>Exemple</th>
+<th>Résultat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.strip()</code></td>
+<td>retire les espaces (et retours à la ligne) au début et à la fin</td>
+<td><code>&quot;  Jessica Hyde \n&quot;.strip()</code></td>
+<td><code>&quot;Jessica Hyde&quot;</code></td>
+</tr>
+<tr class="even">
+<td><code>.title()</code></td>
+<td>majuscule au début de chaque mot</td>
+<td><code>&quot;jessica hyde&quot;.title()</code></td>
+<td><code>&quot;Jessica Hyde&quot;</code></td>
+</tr>
+<tr class="odd">
+<td><code>.startswith(x)</code></td>
+<td>commence par <code>x</code> ?</td>
+<td><code>&quot;FR76 3000&quot;.startswith(&quot;FR&quot;)</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>.endswith(x)</code></td>
+<td>se termine par <code>x</code> ?</td>
+<td><code>&quot;rapport.csv&quot;.endswith(&quot;.csv&quot;)</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td><code>.count(x)</code></td>
+<td>nombre d’occurrences de <code>x</code></td>
+<td><code>&quot;Mississippi&quot;.count(&quot;s&quot;)</code></td>
+<td><code>4</code></td>
+</tr>
+<tr class="even">
+<td><code>.find(x)</code></td>
+<td>position de <code>x</code>, ou <code>-1</code> si absent</td>
+<td><code>&quot;Python&quot;.find(&quot;t&quot;)</code></td>
+<td><code>2</code></td>
+</tr>
+<tr class="odd">
+<td><code>.isdigit()</code></td>
+<td>ne contient que des chiffres ?</td>
+<td><code>&quot;42&quot;.isdigit()</code></td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+<p>Et l’opérateur <code>in</code> teste si un texte en contient un autre :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="st">&quot;data&quot;</span> <span class="kw">in</span> <span class="st">&quot;data science&quot;</span>)   <span class="co"># True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Les méthodes peuvent s’<strong>enchaîner</strong>, puisque chacune renvoie une nouvelle chaîne :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>email <span class="op">=</span> <span class="st">&quot;  Jessica.HYDE@Exemple.FR &quot;</span></span>
+<span id="cb20-2"><a aria-label="2"></a>email_propre <span class="op">=</span> email.strip().lower()</span>
+<span id="cb20-3"><a aria-label="3"></a><span class="bu">print</span>(email_propre)   <span class="co"># jessica.hyde@exemple.fr</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1485,19 +1577,19 @@ margin-right: 0; }
 </div>
 <div class="callout-content">
 <p>Comme les entiers, les <code>str</code> sont <strong>immuables</strong>. <code>.upper()</code> ne modifie pas la chaîne, elle en renvoie une <strong>nouvelle</strong>. Pour garder le résultat, il faut recoller l’étiquette :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a>mot <span class="op">=</span> <span class="st">&quot;data&quot;</span></span>
-<span id="cb16-2"><a aria-label="2"></a>mot.upper()</span>
-<span id="cb16-3"><a aria-label="3"></a><span class="bu">print</span>(mot)        <span class="co"># data  → inchangé !</span></span>
-<span id="cb16-4"><a aria-label="4"></a>mot <span class="op">=</span> mot.upper()</span>
-<span id="cb16-5"><a aria-label="5"></a><span class="bu">print</span>(mot)        <span class="co"># DATA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>mot <span class="op">=</span> <span class="st">&quot;data&quot;</span></span>
+<span id="cb21-2"><a aria-label="2"></a>mot.upper()</span>
+<span id="cb21-3"><a aria-label="3"></a><span class="bu">print</span>(mot)        <span class="co"># data  → inchangé !</span></span>
+<span id="cb21-4"><a aria-label="4"></a>mot <span class="op">=</span> mot.upper()</span>
+<span id="cb21-5"><a aria-label="5"></a><span class="bu">print</span>(mot)        <span class="co"># DATA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <h3 id="les-f-strings-afficher-des-variables-proprement">Les f-strings : afficher des variables proprement</h3>
 <p>Plutôt que d’enchaîner les <code>+</code>, on préfixe la chaîne par <code>f</code> et on place les variables entre <code>{}</code> :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
-<span id="cb17-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> a </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss"> ans&quot;</span>)           <span class="co"># Jessica a 25 ans</span></span>
-<span id="cb17-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f&quot;Dans 10 ans : </span><span class="sc">{</span>age <span class="op">+</span> <span class="dv">10</span><span class="sc">}</span><span class="ss"> ans&quot;</span>)   <span class="co"># calcul possible dans les {}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb22-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> a </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss"> ans&quot;</span>)           <span class="co"># Jessica a 25 ans</span></span>
+<span id="cb22-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f&quot;Dans 10 ans : </span><span class="sc">{</span>age <span class="op">+</span> <span class="dv">10</span><span class="sc">}</span><span class="ss"> ans&quot;</span>)   <span class="co"># calcul possible dans les {}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>C’est la méthode recommandée en Python moderne.</p>
 <h3 id="contrôler-laffichage">Contrôler l’affichage</h3>
 <p>Après la valeur, on peut ajouter <code>:</code> suivi d’un <strong>code de formatage</strong> :</p>
@@ -1573,27 +1665,27 @@ margin-right: 0; }
 <div class="callout-content">
 <p>Python a connu trois générations de formatage. Vous les croiserez toutes dans du code existant.</p>
 <p><strong>1. Opérateur <code>%</code> (style C, Python 2)</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="co">&quot;Bonjour %s, tu as %d ans&quot;</span> <span class="op">%</span> (<span class="st">&quot;Alice&quot;</span>, <span class="dv">25</span>)</span>
-<span id="cb18-2"><a aria-label="2"></a><span class="co">&quot;Prix : %.2f€&quot;</span> <span class="op">%</span> <span class="fl">3.14159</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="co">&quot;Bonjour %s, tu as %d ans&quot;</span> <span class="op">%</span> (<span class="st">&quot;Alice&quot;</span>, <span class="dv">25</span>)</span>
+<span id="cb23-2"><a aria-label="2"></a><span class="co">&quot;Prix : %.2f€&quot;</span> <span class="op">%</span> <span class="fl">3.14159</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>%s</code> → chaîne, <code>%d</code> → entier, <code>%f</code> → flottant. Encore très présent dans du code <em>legacy</em>.</p>
 <p><strong>2. <code>.format()</code> (Python 3.0)</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="co">&quot;Bonjour {}, tu as {} ans&quot;</span>.<span class="bu">format</span>(<span class="st">&quot;Alice&quot;</span>, <span class="dv">25</span>)</span>
-<span id="cb19-2"><a aria-label="2"></a><span class="co">&quot;Prix : {:.2f}€&quot;</span>.<span class="bu">format</span>(<span class="fl">3.14159</span>)</span>
-<span id="cb19-3"><a aria-label="3"></a><span class="co">&quot;{prenom} a {age} ans&quot;</span>.<span class="bu">format</span>(prenom<span class="op">=</span><span class="st">&quot;Alice&quot;</span>, age<span class="op">=</span><span class="dv">25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="co">&quot;Bonjour {}, tu as {} ans&quot;</span>.<span class="bu">format</span>(<span class="st">&quot;Alice&quot;</span>, <span class="dv">25</span>)</span>
+<span id="cb24-2"><a aria-label="2"></a><span class="co">&quot;Prix : {:.2f}€&quot;</span>.<span class="bu">format</span>(<span class="fl">3.14159</span>)</span>
+<span id="cb24-3"><a aria-label="3"></a><span class="co">&quot;{prenom} a {age} ans&quot;</span>.<span class="bu">format</span>(prenom<span class="op">=</span><span class="st">&quot;Alice&quot;</span>, age<span class="op">=</span><span class="dv">25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Plus lisible que <code>%</code>, mais verbeux.</p>
 <p><strong>3. f-strings (Python 3.6)</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>prenom, age <span class="op">=</span> <span class="st">&quot;Alice&quot;</span>, <span class="dv">25</span></span>
-<span id="cb20-2"><a aria-label="2"></a><span class="ss">f&quot;Bonjour </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss">, tu as </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss"> ans&quot;</span></span>
-<span id="cb20-3"><a aria-label="3"></a><span class="ss">f&quot;Prix : </span><span class="sc">{</span><span class="fl">3.14159</span><span class="sc">:.2f}</span><span class="ss">€&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a>prenom, age <span class="op">=</span> <span class="st">&quot;Alice&quot;</span>, <span class="dv">25</span></span>
+<span id="cb25-2"><a aria-label="2"></a><span class="ss">f&quot;Bonjour </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss">, tu as </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss"> ans&quot;</span></span>
+<span id="cb25-3"><a aria-label="3"></a><span class="ss">f&quot;Prix : </span><span class="sc">{</span><span class="fl">3.14159</span><span class="sc">:.2f}</span><span class="ss">€&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Le code s’écrit directement dans la chaîne. C’est ce qu’on utilise aujourd’hui.</p>
 <p><strong>Les trois font la même chose :</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>prenom <span class="op">=</span> <span class="st">&quot;Alice&quot;</span></span>
-<span id="cb21-2"><a aria-label="2"></a>prix <span class="op">=</span> <span class="fl">3.14159</span></span>
-<span id="cb21-3"><a aria-label="3"></a></span>
-<span id="cb21-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="st">&quot;Bonjour </span><span class="sc">%s</span><span class="st">, prix : </span><span class="sc">%.2f</span><span class="st">€&quot;</span> <span class="op">%</span> (prenom, prix))</span>
-<span id="cb21-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="st">&quot;Bonjour </span><span class="sc">{}</span><span class="st">, prix : </span><span class="sc">{:.2f}</span><span class="st">€&quot;</span>.<span class="bu">format</span>(prenom, prix))</span>
-<span id="cb21-6"><a aria-label="6"></a><span class="bu">print</span>(<span class="ss">f&quot;Bonjour </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss">, prix : </span><span class="sc">{</span>prix<span class="sc">:.2f}</span><span class="ss">€&quot;</span>)</span>
-<span id="cb21-7"><a aria-label="7"></a><span class="co"># Bonjour Alice, prix : 3.14€  (trois fois)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>prenom <span class="op">=</span> <span class="st">&quot;Alice&quot;</span></span>
+<span id="cb26-2"><a aria-label="2"></a>prix <span class="op">=</span> <span class="fl">3.14159</span></span>
+<span id="cb26-3"><a aria-label="3"></a></span>
+<span id="cb26-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="st">&quot;Bonjour </span><span class="sc">%s</span><span class="st">, prix : </span><span class="sc">%.2f</span><span class="st">€&quot;</span> <span class="op">%</span> (prenom, prix))</span>
+<span id="cb26-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="st">&quot;Bonjour </span><span class="sc">{}</span><span class="st">, prix : </span><span class="sc">{:.2f}</span><span class="st">€&quot;</span>.<span class="bu">format</span>(prenom, prix))</span>
+<span id="cb26-6"><a aria-label="6"></a><span class="bu">print</span>(<span class="ss">f&quot;Bonjour </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss">, prix : </span><span class="sc">{</span>prix<span class="sc">:.2f}</span><span class="ss">€&quot;</span>)</span>
+<span id="cb26-7"><a aria-label="7"></a><span class="co"># Bonjour Alice, prix : 3.14€  (trois fois)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Remarquez que le code <code>.2f</code> est le même partout : ce que vous apprenez avec les f-strings reste valable pour lire l’ancien code.</p>
 </div>
 </div>
@@ -1602,8 +1694,8 @@ margin-right: 0; }
 <section id="conversions-de-types" class="slide level2">
 <h2>Conversions de types</h2>
 <p>Python ne mélange pas les types automatiquement :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
-<span id="cb22-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="st">&quot;J&#39;ai &quot;</span> <span class="op">+</span> age <span class="op">+</span> <span class="st">&quot; ans&quot;</span>)  <span class="co"># ❌ TypeError</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a>age <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb27-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="st">&quot;J&#39;ai &quot;</span> <span class="op">+</span> age <span class="op">+</span> <span class="st">&quot; ans&quot;</span>)  <span class="co"># ❌ TypeError</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Il faut <strong>convertir</strong> explicitement :</p>
 <table class="caption-top">
 <thead>
@@ -1641,7 +1733,7 @@ margin-right: 0; }
 </tr>
 </tbody>
 </table>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="st">&quot;J&#39;ai &quot;</span> <span class="op">+</span> <span class="bu">str</span>(age) <span class="op">+</span> <span class="st">&quot; ans&quot;</span>)  <span class="co"># 🆗 J&#39;ai 25 ans</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="st">&quot;J&#39;ai &quot;</span> <span class="op">+</span> <span class="bu">str</span>(age) <span class="op">+</span> <span class="st">&quot; ans&quot;</span>)  <span class="co"># 🆗 J&#39;ai 25 ans</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1720,10 +1812,10 @@ margin-right: 0; }
 </tr>
 </tbody>
 </table>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">==</span> <span class="dv">5</span>)     <span class="co"># True</span></span>
-<span id="cb24-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">!=</span> <span class="dv">3</span>)     <span class="co"># True</span></span>
-<span id="cb24-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">&gt;</span> <span class="dv">3</span>)     <span class="co"># True</span></span>
-<span id="cb24-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">&lt;=</span> <span class="dv">3</span>)    <span class="co"># False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">==</span> <span class="dv">5</span>)     <span class="co"># True</span></span>
+<span id="cb29-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">!=</span> <span class="dv">3</span>)     <span class="co"># True</span></span>
+<span id="cb29-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">&gt;</span> <span class="dv">3</span>)     <span class="co"># True</span></span>
+<span id="cb29-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">&lt;=</span> <span class="dv">3</span>)    <span class="co"># False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

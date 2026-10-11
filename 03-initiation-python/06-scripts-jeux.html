@@ -464,7 +464,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#créer-et-lancer-un-script" id="toc-créer-et-lancer-un-script" class="nav-link" data-scroll-target="#créer-et-lancer-un-script">Créer et lancer un script</a></li>
   <li><a href="#dialoguer-avec-lutilisateur-input" id="toc-dialoguer-avec-lutilisateur-input" class="nav-link" data-scroll-target="#dialoguer-avec-lutilisateur-input">Dialoguer avec l’utilisateur : <code>input()</code></a></li>
-  <li><a href="#utiliser-une-bibliothèque-random" id="toc-utiliser-une-bibliothèque-random" class="nav-link" data-scroll-target="#utiliser-une-bibliothèque-random">Utiliser une bibliothèque : <code>random</code></a></li>
+  <li><a href="#modules-et-bibliothèques" id="toc-modules-et-bibliothèques" class="nav-link" data-scroll-target="#modules-et-bibliothèques">Modules et bibliothèques</a></li>
+  <li><a href="#trois-façons-dimporter" id="toc-trois-façons-dimporter" class="nav-link" data-scroll-target="#trois-façons-dimporter">Trois façons d’importer</a></li>
+  <li><a href="#le-module-random" id="toc-le-module-random" class="nav-link" data-scroll-target="#le-module-random">Le module <code>random</code></a></li>
   <li><a href="#organiser-un-script" id="toc-organiser-un-script" class="nav-link" data-scroll-target="#organiser-un-script">Organiser un script</a></li>
   </ul></li>
   <li><a href="#projet-guidé-le-génie" id="toc-projet-guidé-le-génie" class="nav-link" data-scroll-target="#projet-guidé-le-génie">Projet guidé : le génie 🧞</a>
@@ -611,33 +613,104 @@ Note
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="bu">int</span>(saisie)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>C’est un motif que vous retrouverez dans tous les jeux : <strong>ne jamais faire confiance à une saisie utilisateur</strong>.</p>
 </section>
-<section id="utiliser-une-bibliothèque-random" class="level3">
-<h3 class="anchored" data-anchor-id="utiliser-une-bibliothèque-random">Utiliser une bibliothèque : <code>random</code></h3>
-<p>Pour un jeu, il faut du hasard. Python le fournit dans le module <code>random</code>, qu’on <strong>importe</strong> en haut du script :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>random.randint(<span class="dv">1</span>, <span class="dv">100</span>)                     <span class="co"># un entier entre 1 et 100, bornes INCLUSES</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>random.choice([<span class="st">"pierre"</span>, <span class="st">"feuille"</span>, <span class="st">"ciseaux"</span>])  <span class="co"># un élément au hasard d'une liste</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cartes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>random.shuffle(cartes)                     <span class="co"># mélange la liste sur place (renvoie None !)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="modules-et-bibliothèques" class="level3">
+<h3 class="anchored" data-anchor-id="modules-et-bibliothèques">Modules et bibliothèques</h3>
+<p>Python ne charge pas tous ses outils au démarrage. Ils sont rangés dans des <strong>modules</strong> : des fichiers <code>.py</code> qui regroupent des fonctions sur un même thème, et qu’on <strong>importe</strong> quand on en a besoin.</p>
+<p>Il en existe deux familles :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Bibliothèque standard</th>
+<th>Bibliothèques externes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exemples</td>
+<td><code>random</code>, <code>math</code>, <code>datetime</code>, <code>statistics</code>, <code>sqlite3</code></td>
+<td><code>pandas</code>, <code>numpy</code>, <code>matplotlib</code>, <code>scikit-learn</code></td>
+</tr>
+<tr class="even">
+<td>Installation</td>
+<td>aucune : fournies avec Python</td>
+<td>à installer (<code>pip install pandas</code> ou <code>uv add pandas</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Sur SSP Cloud et Colab, les bibliothèques les plus courantes sont déjà installées.</p>
+</section>
+<section id="trois-façons-dimporter" class="level3">
+<h3 class="anchored" data-anchor-id="trois-façons-dimporter">Trois façons d’importer</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math                 <span class="co"># 1. tout le module : on préfixe par son nom</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(math.sqrt(<span class="dv">16</span>))        <span class="co"># 4.0</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> sqrt       <span class="co"># 2. une seule fonction : plus de préfixe</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sqrt(<span class="dv">16</span>))             <span class="co"># 4.0</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics <span class="im">as</span> st     <span class="co"># 3. avec un alias, plus court</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(st.mean([<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">17</span>]))   <span class="co"># 13</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La troisième forme est celle que vous verrez partout en data, avec des alias devenus des conventions : <code>import pandas as pd</code>, <code>import numpy as np</code>, <code>import matplotlib.pyplot as plt</code>. Respectez-les : tout le monde les reconnaît.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous croiserez parfois <code>from math import *</code>, qui importe tout le contenu d’un module. Évitez-le : on ne sait plus d’où vient chaque fonction, et un nom peut en écraser un autre sans prévenir, introduisant ainsi des bugs qui pourraient vous faire perdre du temps. 🙄</p>
+</div>
+</div>
+<p>Les imports s’écrivent <a href="https://peps.python.org/pep-0008/#imports"><strong>toujours en haut du fichier</strong></a> : un lecteur voit d’emblée de quoi dépend le script.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Vos scripts sont aussi des modules
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un fichier <code>jeux.py</code> que vous écrivez est lui-même un module : un autre script peut faire <code>import jeux</code> pour réutiliser ses fonctions. C’est d’ailleurs pour cela que le <code>if __name__ == "__main__":</code> présenté plus bas existe.</p>
+</div>
+</div>
+</section>
+<section id="le-module-random" class="level3">
+<h3 class="anchored" data-anchor-id="le-module-random">Le module <code>random</code></h3>
+<p>Pour un jeu, il faut du hasard :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>random.randint(<span class="dv">1</span>, <span class="dv">100</span>)                     <span class="co"># un entier entre 1 et 100, bornes INCLUSES</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>random.choice([<span class="st">"pierre"</span>, <span class="st">"feuille"</span>, <span class="st">"ciseaux"</span>])  <span class="co"># un élément au hasard d'une liste</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>cartes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>random.shuffle(cartes)                     <span class="co"># mélange la liste sur place (renvoie None !)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Attention : contrairement à <code>range()</code>, <code>randint(1, 100)</code> peut renvoyer 100.</p>
 </section>
 <section id="organiser-un-script" class="level3">
 <h3 class="anchored" data-anchor-id="organiser-un-script">Organiser un script</h3>
 <p>Un script bien écrit suit toujours la même structure :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Une docstring en haut du fichier, qui explique ce que fait le script."""</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random                  <span class="co"># 1. les imports</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ESSAIS_MAX <span class="op">=</span> <span class="dv">10</span>                <span class="co"># 2. les constantes, en MAJUSCULES par convention</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jouer():                   <span class="co"># 3. les fonctions</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:     <span class="co"># 4. le point d'entrée</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    jouer()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Une docstring en haut du fichier, qui explique ce que fait le script."""</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random                  <span class="co"># 1. les imports</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>ESSAIS_MAX <span class="op">=</span> <span class="dv">10</span>                <span class="co"># 2. les constantes, en MAJUSCULES par convention</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jouer():                   <span class="co"># 3. les fonctions</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:     <span class="co"># 4. le point d'entrée</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    jouer()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>La dernière ligne mérite une explication. <code>if __name__ == "__main__":</code> signifie : « exécute ce bloc <strong>seulement si</strong> ce fichier est lancé directement avec <code>python fichier.py</code> ». Si un autre script fait <code>import fichier</code> pour réutiliser ses fonctions, le jeu ne se lance pas tout seul. Retenez-le comme une formule : toute la logique dans des fonctions, et l’appel principal sous ce <code>if</code>.</p>
 <hr>
 </section>
@@ -676,7 +749,7 @@ Note
 <li>ajouter le <code>if __name__ == "__main__":</code>.</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -685,16 +758,16 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Une boucle <code>while</code> peut avoir un <code>else</code>, exécuté <strong>seulement si la boucle s’est terminée sans <code>break</code></strong>. C’est pratique ici : le <code>break</code> correspond à la victoire, le <code>else</code> à la défaite.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(historique) <span class="op">&lt;</span> ESSAIS_MAX:</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> essai <span class="op">==</span> secret:</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Gagné !"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Perdu !"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(historique) <span class="op">&lt;</span> ESSAIS_MAX:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> essai <span class="op">==</span> secret:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Gagné !"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Perdu !"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -721,7 +794,7 @@ Note
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -730,7 +803,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>La meilleure stratégie consiste à toujours proposer <strong>le milieu</strong> de l’intervalle encore possible. Chaque réponse élimine alors la moitié des nombres restants : 100, puis 50, 25, 12, 6, 3, 1. C’est la <strong>recherche par dichotomie</strong>.</p>
 <table class="caption-top table">
@@ -759,7 +832,7 @@ Note
 </div>
 </div>
 </div>
-<p><strong>À coder</strong> : écrivez une fonction <code>devine_auto(secret, strategie)</code> qui fait deviner l’ordinateur et renvoie le nombre d’essais, puis faites jouer chaque stratégie (dans l’ordre, au hasard, par dichotomie) sur <strong>1 000 parties</strong> et comparez la moyenne d’essais. Vous venez de comparer des algorithmes avec des données plutôt qu’à l’intuition : c’est la démarche d’un data scientist.</p>
+<p><strong>À coder</strong> : écrivez une fonction <code>devine_auto(secret, strategie)</code> qui fait deviner l’ordinateur et renvoie le nombre d’essais, puis faites jouer chaque stratégie (dans l’ordre, au hasard, par dichotomie) sur <strong>1 000 parties</strong> et comparez la moyenne d’essais. Vous venez de comparer des algorithmes avec des données plutôt qu’à l’intuition. 👏</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -827,7 +900,7 @@ Note
 <li>La partie se joue en 5 manches, avec un score affiché à la fin.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -836,7 +909,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Un dictionnaire <code>BAT = {"pierre": "ciseaux", ...}</code> (« la clé bat la valeur ») évite une longue série de <code>if</code>.</li>
@@ -858,7 +931,7 @@ Note
 <li>Annoncer la victoire ou la défaite.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -867,7 +940,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Un <strong>ensemble</strong> est idéal pour stocker les lettres déjà jouées : pas de doublons, et <code>in</code> est très rapide.</li>
@@ -890,7 +963,7 @@ Note
 <li>Faire jouer le croupier, puis annoncer le résultat.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -899,7 +972,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Une carte peut être un tuple <code>("R", "♥")</code>, et le paquet une liste de tuples construite avec deux boucles imbriquées.</li>
@@ -922,7 +995,7 @@ Note
 </ol>
 <p><strong>🎯 Défi</strong> : écrivez un solveur. À chaque tour, il propose une combinaison <strong>compatible avec tous les indices reçus</strong> jusque-là. En combien d’essais trouve-t-il en moyenne ?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -931,7 +1004,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Calculez d’abord les bien placées avec <code>zip(secret, essai)</code>, et mettez de côté les couleurs restantes des deux côtés.</li>
@@ -955,7 +1028,7 @@ Note
 </ol>
 <p><strong>🎯 Défi</strong> : rendez l’ordinateur difficile à battre avec des règles simples, dans cet ordre : gagner s’il le peut, sinon bloquer le joueur, sinon prendre le centre, sinon un coin. Arrivez-vous encore à le battre ? Pour aller encore plus loin, renseignez-vous sur l’algorithme <strong>minimax</strong>, qui rend l’ordinateur imbattable.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -964,7 +1037,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><code>grille[ligne][colonne]</code> accède à une case. La case numéro <code>n</code> (de 1 à 9) correspond à la ligne <code>(n - 1) // 3</code> et à la colonne <code>(n - 1) % 3</code>.</li>

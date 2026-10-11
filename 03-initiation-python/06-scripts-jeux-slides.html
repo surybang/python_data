@@ -1162,30 +1162,97 @@ margin-right: 0; }
 <span id="cb5-3"><a aria-label="3"></a>    saisie <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;Merci de taper un nombre : &quot;</span>)</span>
 <span id="cb5-4"><a aria-label="4"></a>age <span class="op">=</span> <span class="bu">int</span>(saisie)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>C’est un motif que vous retrouverez dans tous les jeux : <strong>ne jamais faire confiance à une saisie utilisateur</strong>.</p>
-<h3 id="utiliser-une-bibliothèque-random">Utiliser une bibliothèque : <code>random</code></h3>
-<p>Pour un jeu, il faut du hasard. Python le fournit dans le module <code>random</code>, qu’on <strong>importe</strong> en haut du script :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">import</span> random</span>
-<span id="cb6-2"><a aria-label="2"></a></span>
-<span id="cb6-3"><a aria-label="3"></a>random.randint(<span class="dv">1</span>, <span class="dv">100</span>)                     <span class="co"># un entier entre 1 et 100, bornes INCLUSES</span></span>
-<span id="cb6-4"><a aria-label="4"></a>random.choice([<span class="st">&quot;pierre&quot;</span>, <span class="st">&quot;feuille&quot;</span>, <span class="st">&quot;ciseaux&quot;</span>])  <span class="co"># un élément au hasard d&#39;une liste</span></span>
-<span id="cb6-5"><a aria-label="5"></a>cartes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb6-6"><a aria-label="6"></a>random.shuffle(cartes)                     <span class="co"># mélange la liste sur place (renvoie None !)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="modules-et-bibliothèques">Modules et bibliothèques</h3>
+<p>Python ne charge pas tous ses outils au démarrage. Ils sont rangés dans des <strong>modules</strong> : des fichiers <code>.py</code> qui regroupent des fonctions sur un même thème, et qu’on <strong>importe</strong> quand on en a besoin.</p>
+<p>Il en existe deux familles :</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Bibliothèque standard</th>
+<th>Bibliothèques externes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exemples</td>
+<td><code>random</code>, <code>math</code>, <code>datetime</code>, <code>statistics</code>, <code>sqlite3</code></td>
+<td><code>pandas</code>, <code>numpy</code>, <code>matplotlib</code>, <code>scikit-learn</code></td>
+</tr>
+<tr class="even">
+<td>Installation</td>
+<td>aucune : fournies avec Python</td>
+<td>à installer (<code>pip install pandas</code> ou <code>uv add pandas</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Sur SSP Cloud et Colab, les bibliothèques les plus courantes sont déjà installées.</p>
+<h3 id="trois-façons-dimporter">Trois façons d’importer</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">import</span> math                 <span class="co"># 1. tout le module : on préfixe par son nom</span></span>
+<span id="cb6-2"><a aria-label="2"></a><span class="bu">print</span>(math.sqrt(<span class="dv">16</span>))        <span class="co"># 4.0</span></span>
+<span id="cb6-3"><a aria-label="3"></a></span>
+<span id="cb6-4"><a aria-label="4"></a><span class="im">from</span> math <span class="im">import</span> sqrt       <span class="co"># 2. une seule fonction : plus de préfixe</span></span>
+<span id="cb6-5"><a aria-label="5"></a><span class="bu">print</span>(sqrt(<span class="dv">16</span>))             <span class="co"># 4.0</span></span>
+<span id="cb6-6"><a aria-label="6"></a></span>
+<span id="cb6-7"><a aria-label="7"></a><span class="im">import</span> statistics <span class="im">as</span> st     <span class="co"># 3. avec un alias, plus court</span></span>
+<span id="cb6-8"><a aria-label="8"></a><span class="bu">print</span>(st.mean([<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">17</span>]))   <span class="co"># 13</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La troisième forme est celle que vous verrez partout en data, avec des alias devenus des conventions : <code>import pandas as pd</code>, <code>import numpy as np</code>, <code>import matplotlib.pyplot as plt</code>. Respectez-les : tout le monde les reconnaît.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Vous croiserez parfois <code>from math import *</code>, qui importe tout le contenu d’un module. Évitez-le : on ne sait plus d’où vient chaque fonction, et un nom peut en écraser un autre sans prévenir, introduisant ainsi des bugs qui pourraient vous faire perdre du temps. 🙄</p>
+</div>
+</div>
+</div>
+<p>Les imports s’écrivent <a href="https://peps.python.org/pep-0008/#imports"><strong>toujours en haut du fichier</strong></a> : un lecteur voit d’emblée de quoi dépend le script.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Vos scripts sont aussi des modules</strong></p>
+</div>
+<div class="callout-content">
+<p>Un fichier <code>jeux.py</code> que vous écrivez est lui-même un module : un autre script peut faire <code>import jeux</code> pour réutiliser ses fonctions. C’est d’ailleurs pour cela que le <code>if __name__ == &quot;__main__&quot;:</code> présenté plus bas existe.</p>
+</div>
+</div>
+</div>
+<h3 id="le-module-random">Le module <code>random</code></h3>
+<p>Pour un jeu, il faut du hasard :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="im">import</span> random</span>
+<span id="cb7-2"><a aria-label="2"></a></span>
+<span id="cb7-3"><a aria-label="3"></a>random.randint(<span class="dv">1</span>, <span class="dv">100</span>)                     <span class="co"># un entier entre 1 et 100, bornes INCLUSES</span></span>
+<span id="cb7-4"><a aria-label="4"></a>random.choice([<span class="st">&quot;pierre&quot;</span>, <span class="st">&quot;feuille&quot;</span>, <span class="st">&quot;ciseaux&quot;</span>])  <span class="co"># un élément au hasard d&#39;une liste</span></span>
+<span id="cb7-5"><a aria-label="5"></a>cartes <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb7-6"><a aria-label="6"></a>random.shuffle(cartes)                     <span class="co"># mélange la liste sur place (renvoie None !)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Attention : contrairement à <code>range()</code>, <code>randint(1, 100)</code> peut renvoyer 100.</p>
 <h3 id="organiser-un-script">Organiser un script</h3>
 <p>Un script bien écrit suit toujours la même structure :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="co">&quot;&quot;&quot;Une docstring en haut du fichier, qui explique ce que fait le script.&quot;&quot;&quot;</span></span>
-<span id="cb7-2"><a aria-label="2"></a></span>
-<span id="cb7-3"><a aria-label="3"></a><span class="im">import</span> random                  <span class="co"># 1. les imports</span></span>
-<span id="cb7-4"><a aria-label="4"></a></span>
-<span id="cb7-5"><a aria-label="5"></a>ESSAIS_MAX <span class="op">=</span> <span class="dv">10</span>                <span class="co"># 2. les constantes, en MAJUSCULES par convention</span></span>
-<span id="cb7-6"><a aria-label="6"></a></span>
-<span id="cb7-7"><a aria-label="7"></a></span>
-<span id="cb7-8"><a aria-label="8"></a><span class="kw">def</span> jouer():                   <span class="co"># 3. les fonctions</span></span>
-<span id="cb7-9"><a aria-label="9"></a>    ...</span>
-<span id="cb7-10"><a aria-label="10"></a></span>
-<span id="cb7-11"><a aria-label="11"></a></span>
-<span id="cb7-12"><a aria-label="12"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:     <span class="co"># 4. le point d&#39;entrée</span></span>
-<span id="cb7-13"><a aria-label="13"></a>    jouer()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co">&quot;&quot;&quot;Une docstring en haut du fichier, qui explique ce que fait le script.&quot;&quot;&quot;</span></span>
+<span id="cb8-2"><a aria-label="2"></a></span>
+<span id="cb8-3"><a aria-label="3"></a><span class="im">import</span> random                  <span class="co"># 1. les imports</span></span>
+<span id="cb8-4"><a aria-label="4"></a></span>
+<span id="cb8-5"><a aria-label="5"></a>ESSAIS_MAX <span class="op">=</span> <span class="dv">10</span>                <span class="co"># 2. les constantes, en MAJUSCULES par convention</span></span>
+<span id="cb8-6"><a aria-label="6"></a></span>
+<span id="cb8-7"><a aria-label="7"></a></span>
+<span id="cb8-8"><a aria-label="8"></a><span class="kw">def</span> jouer():                   <span class="co"># 3. les fonctions</span></span>
+<span id="cb8-9"><a aria-label="9"></a>    ...</span>
+<span id="cb8-10"><a aria-label="10"></a></span>
+<span id="cb8-11"><a aria-label="11"></a></span>
+<span id="cb8-12"><a aria-label="12"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:     <span class="co"># 4. le point d&#39;entrée</span></span>
+<span id="cb8-13"><a aria-label="13"></a>    jouer()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>La dernière ligne mérite une explication. <code>if __name__ == &quot;__main__&quot;:</code> signifie : « exécute ce bloc <strong>seulement si</strong> ce fichier est lancé directement avec <code>python fichier.py</code> ». Si un autre script fait <code>import fichier</code> pour réutiliser ses fonctions, le jeu ne se lance pas tout seul. Retenez-le comme une formule : toute la logique dans des fonctions, et l’appel principal sous ce <code>if</code>.</p>
 </section>
 <section id="projet-guidé-le-génie" class="slide level2 scrollable">
@@ -1224,13 +1291,13 @@ margin-right: 0; }
 </div>
 <div class="callout-content">
 <p>Une boucle <code>while</code> peut avoir un <code>else</code>, exécuté <strong>seulement si la boucle s’est terminée sans <code>break</code></strong>. C’est pratique ici : le <code>break</code> correspond à la victoire, le <code>else</code> à la défaite.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="cf">while</span> <span class="bu">len</span>(historique) <span class="op">&lt;</span> ESSAIS_MAX:</span>
-<span id="cb8-2"><a aria-label="2"></a>    ...</span>
-<span id="cb8-3"><a aria-label="3"></a>    <span class="cf">if</span> essai <span class="op">==</span> secret:</span>
-<span id="cb8-4"><a aria-label="4"></a>        <span class="bu">print</span>(<span class="st">&quot;Gagné !&quot;</span>)</span>
-<span id="cb8-5"><a aria-label="5"></a>        <span class="cf">break</span></span>
-<span id="cb8-6"><a aria-label="6"></a><span class="cf">else</span>:</span>
-<span id="cb8-7"><a aria-label="7"></a>    <span class="bu">print</span>(<span class="st">&quot;Perdu !&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="cf">while</span> <span class="bu">len</span>(historique) <span class="op">&lt;</span> ESSAIS_MAX:</span>
+<span id="cb9-2"><a aria-label="2"></a>    ...</span>
+<span id="cb9-3"><a aria-label="3"></a>    <span class="cf">if</span> essai <span class="op">==</span> secret:</span>
+<span id="cb9-4"><a aria-label="4"></a>        <span class="bu">print</span>(<span class="st">&quot;Gagné !&quot;</span>)</span>
+<span id="cb9-5"><a aria-label="5"></a>        <span class="cf">break</span></span>
+<span id="cb9-6"><a aria-label="6"></a><span class="cf">else</span>:</span>
+<span id="cb9-7"><a aria-label="7"></a>    <span class="bu">print</span>(<span class="st">&quot;Perdu !&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1290,7 +1357,7 @@ margin-right: 0; }
 </div>
 </div>
 </div>
-<p><strong>À coder</strong> : écrivez une fonction <code>devine_auto(secret, strategie)</code> qui fait deviner l’ordinateur et renvoie le nombre d’essais, puis faites jouer chaque stratégie (dans l’ordre, au hasard, par dichotomie) sur <strong>1 000 parties</strong> et comparez la moyenne d’essais. Vous venez de comparer des algorithmes avec des données plutôt qu’à l’intuition : c’est la démarche d’un data scientist.</p>
+<p><strong>À coder</strong> : écrivez une fonction <code>devine_auto(secret, strategie)</code> qui fait deviner l’ordinateur et renvoie le nombre d’essais, puis faites jouer chaque stratégie (dans l’ordre, au hasard, par dichotomie) sur <strong>1 000 parties</strong> et comparez la moyenne d’essais. Vous venez de comparer des algorithmes avec des données plutôt qu’à l’intuition. 👏</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
