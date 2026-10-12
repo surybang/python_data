@@ -1078,7 +1078,11 @@ margin-right: 0; }
 </div>
 </div>
 </div>
-<p>Le <strong>slicing</strong> (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :</p>
+</section>
+<section id="pourquoi-le-slicing" class="slide level2">
+<h2>Pourquoi le slicing ?</h2>
+<p>En data, on passe son temps à extraire des morceaux : les 7 derniers jours d’une série de ventes, les 3 premiers caractères d’un code postal pour retrouver le département, l’extension d’un nom de fichier, un échantillon d’une ligne sur dix… Le slicing permet de tout faire avec une seule syntaxe, sur les chaînes comme sur les listes.</p>
+<p>Le <strong>slicing</strong> (découpage) permet donc d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :</p>
 <pre><code>sequence[debut:fin:pas]</code></pre>
 <ul>
 <li><code>debut</code> : index du premier élément inclus (par défaut : 0)</li>
@@ -1106,36 +1110,137 @@ index   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]</code></pre>
 <span id="cb4-3"><a aria-label="3"></a>mot[<span class="dv">2</span>:<span class="dv">5</span>]   <span class="co"># &quot;tho&quot;  → index 2, 3, 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Astuce</strong> : <code>fin - debut</code> donne le nombre d’éléments extraits.</p>
 </section>
+<section id="le-slicing-ne-déborde-jamais" class="slide level2">
+<h2>Le slicing ne déborde jamais</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>🧠 À vous de réfléchir : et si on dépasse ?</strong></p>
+</div>
+<div class="callout-content">
+<p><code>mot = &quot;Python&quot;</code> contient 6 caractères. Observez <strong>sans exécuter</strong> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a>mot[<span class="dv">100</span>]</span>
+<span id="cb5-2"><a aria-label="2"></a>mot[<span class="dv">0</span>:<span class="dv">100</span>]</span>
+<span id="cb5-3"><a aria-label="3"></a>mot[<span class="dv">10</span>:<span class="dv">20</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Laquelle de ces lignes provoque une erreur ?</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>💡 Voir la solution</strong></p>
+</div>
+<div class="callout-content">
+<p>Seule <code>mot[100]</code> plante, avec une <code>IndexError</code> : on demande <strong>un</strong> élément précis alors qu’il n’existe pas.</p>
+<p>En revanche, en utiliant des slices, ça fonctionne !</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>mot[<span class="dv">0</span>:<span class="dv">100</span>]   <span class="co"># &#39;Python&#39; → Python s&#39;arrête simplement à la fin</span></span>
+<span id="cb6-2"><a aria-label="2"></a>mot[<span class="dv">10</span>:<span class="dv">20</span>]   <span class="co"># &#39;&#39;       → aucun élément dans cette zone : chaîne vide</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Un slice demande « tout ce qui se trouve dans cette zone ». Si la zone dépasse, Python prend ce qui existe, quitte à ne rien renvoyer.</p>
+<p>C’est très pratique lorsque vous ne connaissez pas forcément la longueur de votre chaîne : <code>commentaire[:50]</code> tronque un texte à 50 caractères, qu’il en fasse 12 ou 3 000, sans avoir à vérifier sa longueur. Mais attention : un slice vide passe <strong>silencieusement</strong>, sans message d’erreur pour vous alerter d’une borne mal calculée.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="omettre-debut-ou-fin" class="slide level2">
 <h2>Omettre <code>debut</code> ou <code>fin</code></h2>
 <p>Quand on omet <code>debut</code>, Python part du début. Quand on omet <code>fin</code>, il va jusqu’à la fin.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a>mot[:<span class="dv">3</span>]    <span class="co"># &quot;Pyt&quot;     → depuis le début</span></span>
-<span id="cb5-2"><a aria-label="2"></a>mot[<span class="dv">3</span>:]    <span class="co"># &quot;hon&quot;     → jusqu&#39;à la fin</span></span>
-<span id="cb5-3"><a aria-label="3"></a>mot[:]     <span class="co"># &quot;Python&quot;  → copie complète</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>mot[:<span class="dv">3</span>]    <span class="co"># &quot;Pyt&quot;     → depuis le début</span></span>
+<span id="cb7-2"><a aria-label="2"></a>mot[<span class="dv">3</span>:]    <span class="co"># &quot;hon&quot;     → jusqu&#39;à la fin</span></span>
+<span id="cb7-3"><a aria-label="3"></a>mot[:]     <span class="co"># &quot;Python&quot;  → copie complète</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="un-élément-ou-une-séquence" class="slide level2">
+<h2>Un élément ou une séquence ?</h2>
+<p>Un index et un slice d’un seul élément se ressemblent, mais ne renvoient pas la même chose :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>nombres <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>]</span>
+<span id="cb8-2"><a aria-label="2"></a></span>
+<span id="cb8-3"><a aria-label="3"></a>nombres[<span class="dv">0</span>]     <span class="co"># 10   → un élément (un int)</span></span>
+<span id="cb8-4"><a aria-label="4"></a>nombres[<span class="dv">0</span>:<span class="dv">1</span>]   <span class="co"># [10] → une liste qui contient un élément</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Un index renvoie <strong>un élément</strong>, un slice renvoie toujours <strong>une séquence du même type</strong> que l’original : une liste pour une liste, une chaîne pour une chaîne, un tuple pour un tuple. Avec les chaînes, la différence est invisible (<code>&quot;Python&quot;[0]</code> et <code>&quot;Python&quot;[0:1]</code> valent tous les deux <code>&#39;P&#39;</code>), mais avec les listes, <code>nombres[0] + 1</code> fonctionne, alors que <code>nombres[0:1] + 1</code> lève une <code>TypeError</code>.</p>
 </section>
 <section id="index-négatifs-dans-le-slicing" class="slide level2">
 <h2>Index négatifs dans le slicing</h2>
 <p>Les index négatifs fonctionnent aussi dans les slices. Très pratique pour raisonner « depuis la fin » sans connaître la longueur.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>mot[<span class="op">-</span><span class="dv">3</span>:]     <span class="co"># &quot;hon&quot;    → les 3 derniers</span></span>
-<span id="cb6-2"><a aria-label="2"></a>mot[:<span class="op">-</span><span class="dv">3</span>]     <span class="co"># &quot;Pyt&quot;    → tout sauf les 3 derniers</span></span>
-<span id="cb6-3"><a aria-label="3"></a>mot[<span class="op">-</span><span class="dv">4</span>:<span class="op">-</span><span class="dv">1</span>]   <span class="co"># &quot;tho&quot;    → du 4e au 2e en partant de la fin</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>mot[<span class="op">-</span><span class="dv">3</span>:]     <span class="co"># &quot;hon&quot;    → les 3 derniers</span></span>
+<span id="cb9-2"><a aria-label="2"></a>mot[:<span class="op">-</span><span class="dv">3</span>]     <span class="co"># &quot;Pyt&quot;    → tout sauf les 3 derniers</span></span>
+<span id="cb9-3"><a aria-label="3"></a>mot[<span class="op">-</span><span class="dv">4</span>:<span class="op">-</span><span class="dv">1</span>]   <span class="co"># &quot;tho&quot;    → du 4e au 2e en partant de la fin</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="le-pas-debutfinpas" class="slide level2">
 <h2>Le pas : <code>[debut:fin:pas]</code></h2>
 <p>Le troisième paramètre contrôle le <strong>saut</strong> entre les éléments sélectionnés.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>nombres <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
-<span id="cb7-2"><a aria-label="2"></a>nombres[::<span class="dv">2</span>]    <span class="co"># [0, 2, 4, 6, 8]       → un sur deux</span></span>
-<span id="cb7-3"><a aria-label="3"></a>nombres[<span class="dv">1</span>::<span class="dv">2</span>]   <span class="co"># [1, 3, 5, 7, 9]       → un sur deux, à partir de 1</span></span>
-<span id="cb7-4"><a aria-label="4"></a>nombres[::<span class="dv">3</span>]    <span class="co"># [0, 3, 6, 9]          → un sur trois</span></span>
-<span id="cb7-5"><a aria-label="5"></a>nombres[::<span class="op">-</span><span class="dv">1</span>]   <span class="co"># [9, 8, 7, ..., 0]     → inverser la séquence</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>nombres <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb10-2"><a aria-label="2"></a>nombres[::<span class="dv">2</span>]    <span class="co"># [0, 2, 4, 6, 8]       → un sur deux</span></span>
+<span id="cb10-3"><a aria-label="3"></a>nombres[<span class="dv">1</span>::<span class="dv">2</span>]   <span class="co"># [1, 3, 5, 7, 9]       → un sur deux, à partir de 1</span></span>
+<span id="cb10-4"><a aria-label="4"></a>nombres[::<span class="dv">3</span>]    <span class="co"># [0, 3, 6, 9]          → un sur trois</span></span>
+<span id="cb10-5"><a aria-label="5"></a>nombres[::<span class="op">-</span><span class="dv">1</span>]   <span class="co"># [9, 8, 7, ..., 0]     → inverser la séquence</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>[::-1]</code> est <strong>l’idiome Python</strong> pour inverser une séquence.</p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pas négatif : on lit à l’envers</strong></p>
+</div>
+<div class="callout-content">
+<p>Avec un pas négatif, Python <strong>recule</strong> dans la séquence. Le point de départ doit donc se trouver <strong>après</strong> le point d’arrivée.</p>
+<pre><code>mot   =   P    y    t    h    o    n
+index    [0]  [1]  [2]  [3]  [4]  [5]</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>mot <span class="op">=</span> <span class="st">&quot;Python&quot;</span></span>
+<span id="cb12-2"><a aria-label="2"></a>mot[<span class="dv">5</span>:<span class="dv">2</span>:<span class="op">-</span><span class="dv">1</span>]   <span class="co"># &#39;noh&#39; → part de 5, recule : 5, 4, 3, et s&#39;arrête avant 2</span></span>
+<span id="cb12-3"><a aria-label="3"></a>mot[<span class="dv">2</span>:<span class="dv">5</span>:<span class="op">-</span><span class="dv">1</span>]   <span class="co"># &#39;&#39;    → part de 2 et recule… l&#39;index 5 est devant : rien à prendre</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En pratique, vous utiliserez surtout <code>[::-1]</code>, qui inverse toute la séquence sans avoir à réfléchir aux bornes.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="slicing-et-copie" class="slide level2">
 <h2>Slicing et copie</h2>
-<p>Sur les listes, <code>[:]</code> crée une <strong>copie superficielle</strong>. Utile pour ne pas modifier l’original.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb8-2"><a aria-label="2"></a>b <span class="op">=</span> a        <span class="co"># b pointe sur le même objet</span></span>
-<span id="cb8-3"><a aria-label="3"></a>b <span class="op">=</span> a[:]     <span class="co"># b est une copie</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>🧠 À vous de réfléchir</strong></p>
+</div>
+<div class="callout-content">
+<p>Observez le code suivant <strong>sans l’exécuter</strong> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb13-2"><a aria-label="2"></a>b <span class="op">=</span> a</span>
+<span id="cb13-3"><a aria-label="3"></a>c <span class="op">=</span> a[:]</span>
+<span id="cb13-4"><a aria-label="4"></a></span>
+<span id="cb13-5"><a aria-label="5"></a>b.append(<span class="dv">4</span>)</span>
+<span id="cb13-6"><a aria-label="6"></a><span class="bu">print</span>(a)  <span class="co"># ?</span></span>
+<span id="cb13-7"><a aria-label="7"></a><span class="bu">print</span>(c)  <span class="co"># ?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Qu’affichent les deux <code>print</code> ? Dessinez ce qui se passe en mémoire, puis vérifiez.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>💡 Voir la solution</strong></p>
+</div>
+<div class="callout-content">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="bu">print</span>(a)  <span class="co"># [1, 2, 3, 4]  → modifiée via b, car a et b désignent la même liste</span></span>
+<span id="cb14-2"><a aria-label="2"></a><span class="bu">print</span>(c)  <span class="co"># [1, 2, 3]     → c est une nouvelle liste, elle n&#39;est pas affectée</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>b.append(4)</code> modifie la liste que <code>a</code> et <code>b</code> désignent toutes les deux. <code>c</code>, créée par slicing, est un objet à part : elle ne bouge pas.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1146,6 +1251,30 @@ index   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]</code></pre>
 </div>
 <div class="callout-content">
 <p>Le slicing ne modifie <strong>jamais</strong> la séquence originale : il retourne toujours une <strong>nouvelle</strong> séquence.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>À retenir</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><code>sequence[debut:fin:pas]</code> : <code>debut</code> <strong>inclus</strong>, <code>fin</code> <strong>exclue</strong>, comme <code>range()</code>.</li>
+<li>Les index négatifs comptent depuis la fin : <code>-1</code> est le dernier élément.</li>
+<li>On peut omettre <code>debut</code> ou <code>fin</code> : <code>[:3]</code> les trois premiers, <code>[-3:]</code> les trois derniers, <code>[:]</code> une copie.</li>
+<li>Un slice ne plante jamais, même s’il dépasse : il renvoie ce qui existe, éventuellement une séquence vide.</li>
+<li>Un index renvoie <strong>un élément</strong>, un slice renvoie <strong>une séquence</strong>.</li>
+<li><code>[::-1]</code> inverse une séquence. Avec un pas négatif, <code>debut</code> doit être après <code>fin</code>.</li>
+<li><code>b = a</code> ne copie pas une liste, <code>a[:]</code> (ou <code>a.copy()</code>) si.</li>
+</ul>
 </div>
 </div>
 </div>

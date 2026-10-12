@@ -605,7 +605,18 @@
     "href": "03-initiation-python/04-slicing.html",
     "title": "Le slicing",
     "section": "",
-    "text": "Tip\n\n\n\nPour accéder aux notebooks d’exercices c’est ici 👇\nLe slicing (découpage) permet d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :",
+    "text": "Tip\n\n\n\nPour accéder aux notebooks d’exercices c’est ici 👇",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/04-slicing.html#pourquoi-le-slicing",
+    "href": "03-initiation-python/04-slicing.html#pourquoi-le-slicing",
+    "title": "Le slicing",
+    "section": "Pourquoi le slicing ?",
+    "text": "Pourquoi le slicing ?\nEn data, on passe son temps à extraire des morceaux : les 7 derniers jours d’une série de ventes, les 3 premiers caractères d’un code postal pour retrouver le département, l’extension d’un nom de fichier, un échantillon d’une ligne sur dix… Le slicing permet de tout faire avec une seule syntaxe, sur les chaînes comme sur les listes.\nLe slicing (découpage) permet donc d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :\nsequence[debut:fin:pas]\n\ndebut : index du premier élément inclus (par défaut : 0)\nfin : index du premier élément exclu (par défaut : fin de la séquence)\npas : le saut entre chaque élément (par défaut : 1)",
     "crumbs": [
       "Initiation Python",
       "Le slicing"
@@ -634,11 +645,33 @@
     ]
   },
   {
+    "objectID": "03-initiation-python/04-slicing.html#le-slicing-ne-déborde-jamais",
+    "href": "03-initiation-python/04-slicing.html#le-slicing-ne-déborde-jamais",
+    "title": "Le slicing",
+    "section": "Le slicing ne déborde jamais",
+    "text": "Le slicing ne déborde jamais\n\n\n\n\n\n\nImportant🧠 À vous de réfléchir : et si on dépasse ?\n\n\n\nmot = \"Python\" contient 6 caractères. Observez sans exécuter :\nmot[100]\nmot[0:100]\nmot[10:20]\nLaquelle de ces lignes provoque une erreur ?\n\n\n\n\n\n\n\n\nTip💡 Voir la solution\n\n\n\n\n\nSeule mot[100] plante, avec une IndexError : on demande un élément précis alors qu’il n’existe pas.\nEn revanche, en utiliant des slices, ça fonctionne !\nmot[0:100]   # 'Python' → Python s'arrête simplement à la fin\nmot[10:20]   # ''       → aucun élément dans cette zone : chaîne vide\nUn slice demande « tout ce qui se trouve dans cette zone ». Si la zone dépasse, Python prend ce qui existe, quitte à ne rien renvoyer.\nC’est très pratique lorsque vous ne connaissez pas forcément la longueur de votre chaîne : commentaire[:50] tronque un texte à 50 caractères, qu’il en fasse 12 ou 3 000, sans avoir à vérifier sa longueur. Mais attention : un slice vide passe silencieusement, sans message d’erreur pour vous alerter d’une borne mal calculée.",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
     "objectID": "03-initiation-python/04-slicing.html#omettre-debut-ou-fin",
     "href": "03-initiation-python/04-slicing.html#omettre-debut-ou-fin",
     "title": "Le slicing",
     "section": "Omettre debut ou fin",
     "text": "Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin.\nmot[:3]    # \"Pyt\"     → depuis le début\nmot[3:]    # \"hon\"     → jusqu'à la fin\nmot[:]     # \"Python\"  → copie complète",
+    "crumbs": [
+      "Initiation Python",
+      "Le slicing"
+    ]
+  },
+  {
+    "objectID": "03-initiation-python/04-slicing.html#un-élément-ou-une-séquence",
+    "href": "03-initiation-python/04-slicing.html#un-élément-ou-une-séquence",
+    "title": "Le slicing",
+    "section": "Un élément ou une séquence ?",
+    "text": "Un élément ou une séquence ?\nUn index et un slice d’un seul élément se ressemblent, mais ne renvoient pas la même chose :\nnombres = [10, 20, 30, 40]\n\nnombres[0]     # 10   → un élément (un int)\nnombres[0:1]   # [10] → une liste qui contient un élément\nUn index renvoie un élément, un slice renvoie toujours une séquence du même type que l’original : une liste pour une liste, une chaîne pour une chaîne, un tuple pour un tuple. Avec les chaînes, la différence est invisible (\"Python\"[0] et \"Python\"[0:1] valent tous les deux 'P'), mais avec les listes, nombres[0] + 1 fonctionne, alors que nombres[0:1] + 1 lève une TypeError.",
     "crumbs": [
       "Initiation Python",
       "Le slicing"
@@ -660,7 +693,7 @@
     "href": "03-initiation-python/04-slicing.html#le-pas-debutfinpas",
     "title": "Le slicing",
     "section": "Le pas : [debut:fin:pas]",
-    "text": "Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    # [0, 2, 4, 6, 8]       → un sur deux\nnombres[1::2]   # [1, 3, 5, 7, 9]       → un sur deux, à partir de 1\nnombres[::3]    # [0, 3, 6, 9]          → un sur trois\nnombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence\n[::-1] est l’idiome Python pour inverser une séquence.",
+    "text": "Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    # [0, 2, 4, 6, 8]       → un sur deux\nnombres[1::2]   # [1, 3, 5, 7, 9]       → un sur deux, à partir de 1\nnombres[::3]    # [0, 3, 6, 9]          → un sur trois\nnombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence\n[::-1] est l’idiome Python pour inverser une séquence.\n\n\n\n\n\n\n\nWarningPas négatif : on lit à l’envers\n\n\n\nAvec un pas négatif, Python recule dans la séquence. Le point de départ doit donc se trouver après le point d’arrivée.\nmot   =   P    y    t    h    o    n\nindex    [0]  [1]  [2]  [3]  [4]  [5]\nmot = \"Python\"\nmot[5:2:-1]   # 'noh' → part de 5, recule : 5, 4, 3, et s'arrête avant 2\nmot[2:5:-1]   # ''    → part de 2 et recule… l'index 5 est devant : rien à prendre\nEn pratique, vous utiliserez surtout [::-1], qui inverse toute la séquence sans avoir à réfléchir aux bornes.",
     "crumbs": [
       "Initiation Python",
       "Le slicing"
@@ -671,53 +704,74 @@
     "href": "03-initiation-python/04-slicing.html#slicing-et-copie",
     "title": "Le slicing",
     "section": "Slicing et copie",
-    "text": "Slicing et copie\nSur les listes, [:] crée une copie superficielle. Utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie\n\n\n\n\n\n\nWarning\n\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence.",
+    "text": "Slicing et copie\n\n\n\n\n\n\nImportant🧠 À vous de réfléchir\n\n\n\nObservez le code suivant sans l’exécuter :\na = [1, 2, 3]\nb = a\nc = a[:]\n\nb.append(4)\nprint(a)  # ?\nprint(c)  # ?\nQu’affichent les deux print ? Dessinez ce qui se passe en mémoire, puis vérifiez.\n\n\n\n\n\n\n\n\nTip💡 Voir la solution\n\n\n\n\n\nprint(a)  # [1, 2, 3, 4]  → modifiée via b, car a et b désignent la même liste\nprint(c)  # [1, 2, 3]     → c est une nouvelle liste, elle n'est pas affectée\nb.append(4) modifie la liste que a et b désignent toutes les deux. c, créée par slicing, est un objet à part : elle ne bouge pas.\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence.\n\n\n\n\n\n\n\n\n\nTipÀ retenir\n\n\n\n\nsequence[debut:fin:pas] : debut inclus, fin exclue, comme range().\nLes index négatifs comptent depuis la fin : -1 est le dernier élément.\nOn peut omettre debut ou fin : [:3] les trois premiers, [-3:] les trois derniers, [:] une copie.\nUn slice ne plante jamais, même s’il dépasse : il renvoie ce qui existe, éventuellement une séquence vide.\nUn index renvoie un élément, un slice renvoie une séquence.\n[::-1] inverse une séquence. Avec un pas négatif, debut doit être après fin.\nb = a ne copie pas une liste, a[:] (ou a.copy()) si.",
     "crumbs": [
       "Initiation Python",
       "Le slicing"
     ]
   },
   {
-    "objectID": "03-initiation-python/07-slicing-slides.html#index-positif-et-index-négatif",
-    "href": "03-initiation-python/07-slicing-slides.html#index-positif-et-index-négatif",
+    "objectID": "03-initiation-python/04-slicing-slides.html#pourquoi-le-slicing",
+    "href": "03-initiation-python/04-slicing-slides.html#pourquoi-le-slicing",
+    "title": "Le slicing",
+    "section": "Pourquoi le slicing ?",
+    "text": "Pourquoi le slicing ?\nEn data, on passe son temps à extraire des morceaux : les 7 derniers jours d’une série de ventes, les 3 premiers caractères d’un code postal pour retrouver le département, l’extension d’un nom de fichier, un échantillon d’une ligne sur dix… Le slicing permet de tout faire avec une seule syntaxe, sur les chaînes comme sur les listes.\nLe slicing (découpage) permet donc d’extraire une portion d’une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :\nsequence[debut:fin:pas]\n\ndebut : index du premier élément inclus (par défaut : 0)\nfin : index du premier élément exclu (par défaut : fin de la séquence)\npas : le saut entre chaque élément (par défaut : 1)"
+  },
+  {
+    "objectID": "03-initiation-python/04-slicing-slides.html#index-positif-et-index-négatif",
+    "href": "03-initiation-python/04-slicing-slides.html#index-positif-et-index-négatif",
     "title": "Le slicing",
     "section": "Index positif et index négatif",
     "text": "Index positif et index négatif\nChaque élément d’une séquence possède deux index : un positif (de gauche à droite, à partir de 0) et un négatif (de droite à gauche, à partir de -1).\nmot   =  P    y    t    h    o    n\nindex   [ 0]  [ 1]  [ 2]  [ 3]  [ 4]  [ 5]\nindex   [-6]  [-5]  [-4]  [-3]  [-2]  [-1]\nL’index négatif permet d’accéder aux éléments depuis la fin, sans connaître la longueur de la séquence.\nmot = \"Python\"\nmot[0]    # 'P'\nmot[-1]   # 'n' (le dernier)\nmot[-2]   # 'o' (l'avant-dernier)"
   },
   {
-    "objectID": "03-initiation-python/07-slicing-slides.html#slicing-de-base-debutfin",
-    "href": "03-initiation-python/07-slicing-slides.html#slicing-de-base-debutfin",
+    "objectID": "03-initiation-python/04-slicing-slides.html#slicing-de-base-debutfin",
+    "href": "03-initiation-python/04-slicing-slides.html#slicing-de-base-debutfin",
     "title": "Le slicing",
     "section": "Slicing de base : [debut:fin]",
     "text": "Slicing de base : [debut:fin]\nsequence[debut:fin] renvoie les éléments de l’index debut inclus jusqu’à fin exclu.\nmot = \"Python\"\nmot[0:3]   # \"Pyt\"  → index 0, 1, 2\nmot[2:5]   # \"tho\"  → index 2, 3, 4\nAstuce : fin - debut donne le nombre d’éléments extraits."
   },
   {
-    "objectID": "03-initiation-python/07-slicing-slides.html#omettre-debut-ou-fin",
-    "href": "03-initiation-python/07-slicing-slides.html#omettre-debut-ou-fin",
+    "objectID": "03-initiation-python/04-slicing-slides.html#le-slicing-ne-déborde-jamais",
+    "href": "03-initiation-python/04-slicing-slides.html#le-slicing-ne-déborde-jamais",
+    "title": "Le slicing",
+    "section": "Le slicing ne déborde jamais",
+    "text": "Le slicing ne déborde jamais\n\n\n\n\n\n\n🧠 À vous de réfléchir : et si on dépasse ?\n\n\nmot = \"Python\" contient 6 caractères. Observez sans exécuter :\nmot[100]\nmot[0:100]\nmot[10:20]\nLaquelle de ces lignes provoque une erreur ?\n\n\n\n\n\n\n\n\n\n💡 Voir la solution\n\n\nSeule mot[100] plante, avec une IndexError : on demande un élément précis alors qu’il n’existe pas.\nEn revanche, en utiliant des slices, ça fonctionne !\nmot[0:100]   # 'Python' → Python s'arrête simplement à la fin\nmot[10:20]   # ''       → aucun élément dans cette zone : chaîne vide\nUn slice demande « tout ce qui se trouve dans cette zone ». Si la zone dépasse, Python prend ce qui existe, quitte à ne rien renvoyer.\nC’est très pratique lorsque vous ne connaissez pas forcément la longueur de votre chaîne : commentaire[:50] tronque un texte à 50 caractères, qu’il en fasse 12 ou 3 000, sans avoir à vérifier sa longueur. Mais attention : un slice vide passe silencieusement, sans message d’erreur pour vous alerter d’une borne mal calculée."
+  },
+  {
+    "objectID": "03-initiation-python/04-slicing-slides.html#omettre-debut-ou-fin",
+    "href": "03-initiation-python/04-slicing-slides.html#omettre-debut-ou-fin",
     "title": "Le slicing",
     "section": "Omettre debut ou fin",
     "text": "Omettre debut ou fin\nQuand on omet debut, Python part du début. Quand on omet fin, il va jusqu’à la fin.\nmot[:3]    # \"Pyt\"     → depuis le début\nmot[3:]    # \"hon\"     → jusqu'à la fin\nmot[:]     # \"Python\"  → copie complète"
   },
   {
-    "objectID": "03-initiation-python/07-slicing-slides.html#index-négatifs-dans-le-slicing",
-    "href": "03-initiation-python/07-slicing-slides.html#index-négatifs-dans-le-slicing",
+    "objectID": "03-initiation-python/04-slicing-slides.html#un-élément-ou-une-séquence",
+    "href": "03-initiation-python/04-slicing-slides.html#un-élément-ou-une-séquence",
+    "title": "Le slicing",
+    "section": "Un élément ou une séquence ?",
+    "text": "Un élément ou une séquence ?\nUn index et un slice d’un seul élément se ressemblent, mais ne renvoient pas la même chose :\nnombres = [10, 20, 30, 40]\n\nnombres[0]     # 10   → un élément (un int)\nnombres[0:1]   # [10] → une liste qui contient un élément\nUn index renvoie un élément, un slice renvoie toujours une séquence du même type que l’original : une liste pour une liste, une chaîne pour une chaîne, un tuple pour un tuple. Avec les chaînes, la différence est invisible (\"Python\"[0] et \"Python\"[0:1] valent tous les deux 'P'), mais avec les listes, nombres[0] + 1 fonctionne, alors que nombres[0:1] + 1 lève une TypeError."
+  },
+  {
+    "objectID": "03-initiation-python/04-slicing-slides.html#index-négatifs-dans-le-slicing",
+    "href": "03-initiation-python/04-slicing-slides.html#index-négatifs-dans-le-slicing",
     "title": "Le slicing",
     "section": "Index négatifs dans le slicing",
     "text": "Index négatifs dans le slicing\nLes index négatifs fonctionnent aussi dans les slices. Très pratique pour raisonner « depuis la fin » sans connaître la longueur.\nmot[-3:]     # \"hon\"    → les 3 derniers\nmot[:-3]     # \"Pyt\"    → tout sauf les 3 derniers\nmot[-4:-1]   # \"tho\"    → du 4e au 2e en partant de la fin"
   },
   {
-    "objectID": "03-initiation-python/07-slicing-slides.html#le-pas-debutfinpas",
-    "href": "03-initiation-python/07-slicing-slides.html#le-pas-debutfinpas",
+    "objectID": "03-initiation-python/04-slicing-slides.html#le-pas-debutfinpas",
+    "href": "03-initiation-python/04-slicing-slides.html#le-pas-debutfinpas",
     "title": "Le slicing",
     "section": "Le pas : [debut:fin:pas]",
     "text": "Le pas : [debut:fin:pas]\nLe troisième paramètre contrôle le saut entre les éléments sélectionnés.\nnombres = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\nnombres[::2]    # [0, 2, 4, 6, 8]       → un sur deux\nnombres[1::2]   # [1, 3, 5, 7, 9]       → un sur deux, à partir de 1\nnombres[::3]    # [0, 3, 6, 9]          → un sur trois\nnombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence\n[::-1] est l’idiome Python pour inverser une séquence."
   },
   {
-    "objectID": "03-initiation-python/07-slicing-slides.html#slicing-et-copie",
-    "href": "03-initiation-python/07-slicing-slides.html#slicing-et-copie",
+    "objectID": "03-initiation-python/04-slicing-slides.html#slicing-et-copie",
+    "href": "03-initiation-python/04-slicing-slides.html#slicing-et-copie",
     "title": "Le slicing",
     "section": "Slicing et copie",
-    "text": "Slicing et copie\nSur les listes, [:] crée une copie superficielle. Utile pour ne pas modifier l’original.\na = [1, 2, 3]\nb = a        # b pointe sur le même objet\nb = a[:]     # b est une copie\n\n\n\n\n\n\nWarning\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence."
+    "text": "Slicing et copie\n\n\n\n\n\n\n🧠 À vous de réfléchir\n\n\nObservez le code suivant sans l’exécuter :\na = [1, 2, 3]\nb = a\nc = a[:]\n\nb.append(4)\nprint(a)  # ?\nprint(c)  # ?\nQu’affichent les deux print ? Dessinez ce qui se passe en mémoire, puis vérifiez.\n\n\n\n\n\n\n\n\n\n💡 Voir la solution\n\n\nprint(a)  # [1, 2, 3, 4]  → modifiée via b, car a et b désignent la même liste\nprint(c)  # [1, 2, 3]     → c est une nouvelle liste, elle n'est pas affectée\nb.append(4) modifie la liste que a et b désignent toutes les deux. c, créée par slicing, est un objet à part : elle ne bouge pas.\n\n\n\n\n\n\n\n\n\nWarning\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence."
   },
   {
     "objectID": "notebooks/03-structures-donnees.html",
