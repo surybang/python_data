@@ -3,7 +3,7 @@ title: "Le slicing"
 format:
   html: default
   revealjs:
-    output-file: 07-slicing-slides.html
+    output-file: 04-slicing-slides.html
     embed-resources: true
     scrollable: true
 format-links:
@@ -19,8 +19,11 @@ Pour accéder aux notebooks d'exercices c'est ici 👇
 [![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB04-slicing%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%AB04-slicing%C2%BB)
 :::
 
+## Pourquoi le slicing ?
 
-Le **slicing** (découpage) permet d'extraire une portion d'une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :
+En data, on passe son temps à extraire des morceaux : les 7 derniers jours d'une série de ventes, les 3 premiers caractères d'un code postal pour retrouver le département, l'extension d'un nom de fichier, un échantillon d'une ligne sur dix… Le slicing permet de tout faire avec une seule syntaxe, sur les chaînes comme sur les listes.
+
+Le **slicing** (découpage) permet donc d'extraire une portion d'une séquence : une liste, une chaîne de caractères, un tuple… La syntaxe est toujours la même :
 
 ```
 sequence[debut:fin:pas]
@@ -67,6 +70,41 @@ mot[2:5]   # "tho"  → index 2, 3, 4
 
 ---
 
+## Le slicing ne déborde jamais
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : et si on dépasse ?
+
+`mot = "Python"` contient 6 caractères. Observez **sans exécuter** :
+
+```python
+mot[100]
+mot[0:100]
+mot[10:20]
+```
+
+Laquelle de ces lignes provoque une erreur ?
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+Seule `mot[100]` plante, avec une `IndexError` : on demande **un** élément précis alors qu'il n'existe pas.
+
+En revanche, en utiliant des slices, ça fonctionne !
+
+```python
+mot[0:100]   # 'Python' → Python s'arrête simplement à la fin
+mot[10:20]   # ''       → aucun élément dans cette zone : chaîne vide
+```
+
+Un slice demande « tout ce qui se trouve dans cette zone ». Si la zone dépasse, Python prend ce qui existe, quitte à ne rien renvoyer.
+
+C'est très pratique lorsque vous ne connaissez pas forcément la longueur de votre chaîne : `commentaire[:50]` tronque un texte à 50 caractères, qu'il en fasse 12 ou 3 000, sans avoir à vérifier sa longueur. Mais attention : un slice vide passe **silencieusement**, sans message d'erreur pour vous alerter d'une borne mal calculée.
+:::
+
+---
+
 ## Omettre `debut` ou `fin`
 
 Quand on omet `debut`, Python part du début. Quand on omet `fin`, il va jusqu'à la fin.
@@ -76,6 +114,21 @@ mot[:3]    # "Pyt"     → depuis le début
 mot[3:]    # "hon"     → jusqu'à la fin
 mot[:]     # "Python"  → copie complète
 ```
+
+---
+
+## Un élément ou une séquence ?
+
+Un index et un slice d'un seul élément se ressemblent, mais ne renvoient pas la même chose :
+
+```python
+nombres = [10, 20, 30, 40]
+
+nombres[0]     # 10   → un élément (un int)
+nombres[0:1]   # [10] → une liste qui contient un élément
+```
+
+Un index renvoie **un élément**, un slice renvoie toujours **une séquence du même type** que l'original : une liste pour une liste, une chaîne pour une chaîne, un tuple pour un tuple. Avec les chaînes, la différence est invisible (`"Python"[0]` et `"Python"[0:1]` valent tous les deux `'P'`), mais avec les listes, `nombres[0] + 1` fonctionne, alors que `nombres[0:1] + 1` lève une `TypeError`.
 
 ---
 
@@ -107,16 +160,70 @@ nombres[::-1]   # [9, 8, 7, ..., 0]     → inverser la séquence
 
 ---
 
+::: {.callout-warning}
+### Pas négatif : on lit à l'envers
+Avec un pas négatif, Python **recule** dans la séquence. Le point de départ doit donc se trouver **après** le point d'arrivée.
+
+```
+mot   =   P    y    t    h    o    n
+index    [0]  [1]  [2]  [3]  [4]  [5]
+```
+
+```python
+mot = "Python"
+mot[5:2:-1]   # 'noh' → part de 5, recule : 5, 4, 3, et s'arrête avant 2
+mot[2:5:-1]   # ''    → part de 2 et recule… l'index 5 est devant : rien à prendre
+```
+
+En pratique, vous utiliserez surtout `[::-1]`, qui inverse toute la séquence sans avoir à réfléchir aux bornes.
+:::
+
+---
+
 ## Slicing et copie
 
-Sur les listes, `[:]` crée une **copie superficielle**. Utile pour ne pas modifier l'original.
+::: {.callout-important}
+### 🧠 À vous de réfléchir
+
+Observez le code suivant **sans l'exécuter** :
 
 ```python
 a = [1, 2, 3]
-b = a        # b pointe sur le même objet
-b = a[:]     # b est une copie
+b = a
+c = a[:]
+
+b.append(4)
+print(a)  # ?
+print(c)  # ?
 ```
+
+Qu'affichent les deux `print` ? Dessinez ce qui se passe en mémoire, puis vérifiez.
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+```python
+print(a)  # [1, 2, 3, 4]  → modifiée via b, car a et b désignent la même liste
+print(c)  # [1, 2, 3]     → c est une nouvelle liste, elle n'est pas affectée
+```
+
+`b.append(4)` modifie la liste que `a` et `b` désignent toutes les deux. `c`, créée par slicing, est un objet à part : elle ne bouge pas.
+:::
 
 :::{.callout-warning}
 Le slicing ne modifie **jamais** la séquence originale : il retourne toujours une **nouvelle** séquence.
+:::
+
+---
+
+::: {.callout-tip}
+### À retenir
+- `sequence[debut:fin:pas]` : `debut` **inclus**, `fin` **exclue**, comme `range()`.
+- Les index négatifs comptent depuis la fin : `-1` est le dernier élément.
+- On peut omettre `debut` ou `fin` : `[:3]` les trois premiers, `[-3:]` les trois derniers, `[:]` une copie.
+- Un slice ne plante jamais, même s'il dépasse : il renvoie ce qui existe, éventuellement une séquence vide.
+- Un index renvoie **un élément**, un slice renvoie **une séquence**.
+- `[::-1]` inverse une séquence. Avec un pas négatif, `debut` doit être après `fin`.
+- `b = a` ne copie pas une liste, `a[:]` (ou `a.copy()`) si.
 :::
