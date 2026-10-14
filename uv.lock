@@ -2639,6 +2639,14 @@ dependencies = [
     { name = "torch" },
 ]
 
+[package.dev-dependencies]
+docs = [
+    { name = "ipykernel" },
+    { name = "jupyter" },
+    { name = "nbclient" },
+    { name = "nbformat" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "ipykernel", specifier = ">=7.4.0" },
@@ -2651,6 +2659,14 @@ requires-dist = [
     { name = "shap", specifier = ">=0.52.0" },
     { name = "tabicl", specifier = ">=2.2.0" },
     { name = "torch", specifier = ">=2.14.1" },
+]
+
+[package.metadata.requires-dev]
+docs = [
+    { name = "ipykernel", specifier = ">=7.4.0" },
+    { name = "jupyter", specifier = ">=1.1.1" },
+    { name = "nbclient", specifier = ">=0.11.0" },
+    { name = "nbformat", specifier = ">=5.11.1" },
 ]
 
 [[package]]

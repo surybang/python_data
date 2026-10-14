@@ -29,3 +29,11 @@ build-backend = "uv_build"
 
 [tool.ruff.lint.per-file-ignores]
 "src/python_data/manim/compile_vs_interprete.py" = ["F403", "F405"]
+
+[dependency-groups]
+docs = [
+    "ipykernel>=7.4.0",
+    "jupyter>=1.1.1",
+    "nbclient>=0.11.0",
+    "nbformat>=5.11.1",
+]
