@@ -1,0 +1,400 @@
+---
+title: "Erreurs et exceptions"
+format:
+  html: default
+  revealjs:
+    output-file: 06-erreurs-exceptions-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tip}
+Pour accéder aux notebooks d'exercices c'est ici 👇
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/06-erreurs-exceptions.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB06-erreurs-exceptions%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%AB06-erreurs-exceptions%C2%BB)
+:::
+
+Depuis le début du module, vous avez forcément croisé des messages rouges. Ils font peur au début, mais ce sont vos meilleurs alliés : Python vous dit **ce qui ne va pas**, **où**, et souvent **pourquoi**. Ce chapitre vous apprend à les lire, puis à les gérer dans vos programmes.
+
+## Deux familles d'erreurs
+
+### Les erreurs de syntaxe
+
+Python lit tout votre code **avant** de l'exécuter. Si une phrase est mal construite, il refuse de démarrer :
+
+```python
+if stock > 0
+    print("En stock")
+```
+
+```
+    if stock > 0
+                ^
+SyntaxError: expected ':'
+```
+
+Rien ne s'exécute, pas même les lignes précédentes. Le petit `^` indique l'endroit où Python s'est perdu. Une indentation oubliée produit une cousine, l'`IndentationError` :
+
+```python
+def bonjour():
+print("Bonjour")
+```
+
+```
+IndentationError: expected an indented block after function definition on line 1
+```
+
+### Les exceptions
+
+Le code est bien écrit, mais quelque chose se passe mal **pendant l'exécution** : une division par zéro, une clé absente, un texte là où on attendait un nombre. Python lève alors une **exception**, et le programme s'arrête à cette ligne, sauf si vous l'avez prévu.
+
+:::{.callout-note}
+Une exception n'est pas un bug de Python : c'est un **signal**. Python vous dit « je ne sais pas faire ça, que dois-je faire ? ». Toute la suite du chapitre consiste à répondre à cette question.
+:::
+
+## Lire un *traceback*
+
+Voici un petit script de calcul de panier :
+
+```python
+def prix_ttc(prix_ht, taux_tva):
+    return prix_ht * (1 + taux_tva)
+
+def total_panier(panier):
+    total = 0
+    for produit in panier:
+        total += prix_ttc(produit["prix"], 0.2)
+    return total
+
+panier = [
+    {"nom": "Clavier", "prix": 49.9},
+    {"nom": "Souris", "prix": "19.9"},
+]
+print(total_panier(panier))
+```
+
+Et voici ce que Python affiche :
+
+```
+Traceback (most recent call last):
+  File "ventes.py", line 16, in <module>
+    print(total_panier(panier))
+          ~~~~~~~~~~~~^^^^^^^^
+  File "ventes.py", line 8, in total_panier
+    total += prix_ttc(produit["prix"], 0.2)
+             ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "ventes.py", line 2, in prix_ttc
+    return prix_ht * (1 + taux_tva)
+           ~~~~~~~~^~~~~~~~~~~~~~~~
+TypeError: can't multiply sequence by non-int of type 'float'
+```
+
+Un *traceback* se lit **de bas en haut** :
+
+1. **La dernière ligne** donne le type d'erreur (`TypeError`) et le message. C'est la première chose à lire.
+2. **Juste au-dessus**, la ligne qui a planté : `return prix_ht * (1 + taux_tva)`, dans la fonction `prix_ttc`.
+3. **En remontant**, le chemin qui y a mené : `prix_ttc` a été appelée par `total_panier` (ligne 8), elle-même appelée par le programme principal (ligne 16).
+
+Le message dit : « impossible de multiplier une *séquence* par un nombre décimal ». Une séquence ? `prix_ht` devrait être un nombre... sauf pour la souris, dont le prix est `"19.9"`, une **chaîne**. Le bug n'est pas dans `prix_ttc`, il est dans les **données**.
+
+:::{.callout-tip}
+La ligne qui plante n'est pas toujours la ligne fautive. Le *traceback* vous montre où le problème a **explosé**, à vous de remonter là où il a **commencé**.
+:::
+
+## Les erreurs les plus courantes
+
+| Erreur | Exemple | Message | Ce que ça veut dire |
+|---|---|---|---|
+| `NameError` | `print(prenom_client)` | `name 'prenom_client' is not defined` | Variable inconnue : faute de frappe ou cellule non exécutée |
+| `TypeError` | `"Total : " + 5` | `can only concatenate str (not "int") to str` | Opération entre types incompatibles |
+| `TypeError` | `None + 1` | `unsupported operand type(s) for +: 'NoneType' and 'int'` | Souvent une fonction sans `return` |
+| `ValueError` | `int("vingt")` | `invalid literal for int() with base 10: 'vingt'` | Le type est bon, la valeur non |
+| `ValueError` | `float("12,5")` | `could not convert string to float: '12,5'` | La virgule décimale française ! |
+| `IndexError` | `[1, 2, 3][5]` | `list index out of range` | Position qui n'existe pas |
+| `KeyError` | `client["age"]` | `'age'` | Clé absente du dictionnaire |
+| `AttributeError` | `[1, 2].upper()` | `'list' object has no attribute 'upper'` | Méthode qui n'existe pas pour ce type |
+| `ZeroDivisionError` | `10 / 0` | `division by zero` | Division par zéro |
+
+:::{.callout-note}
+Le `KeyError` a le message le plus avare : juste `'age'`. Quand vous voyez un nom entre apostrophes tout seul, pensez dictionnaire.
+:::
+
+### 🧠 À vous de réfléchir
+
+Pour chaque erreur, trouvez la cause **sans exécuter** le code.
+
+```python
+stocks = {"vis": 120, "écrous": 80}
+print(stocks["boulons"])
+```
+
+```python
+def moyenne(notes):
+    total = sum(notes)
+    total / len(notes)
+
+print(moyenne([12, 15]) + 1)
+```
+
+```python
+quantite = input("Quantité : ")   # l'utilisateur tape 3
+print(quantite * 2.5)
+```
+
+:::{.callout-tip collapse="true"}
+## 💡 Voir la solution
+
+1. `KeyError: 'boulons'` : la clé n'existe pas dans le dictionnaire.
+2. `TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'` : la fonction calcule mais n'a pas de `return`, elle renvoie donc `None`. L'erreur apparaît **à l'appel**, pas dans la fonction.
+3. `TypeError: can't multiply sequence by non-int of type 'float'` : `input()` renvoie toujours une chaîne. C'est le même message que dans notre panier !
+:::
+
+## Gérer une exception : `try` / `except`
+
+Parfois, une erreur est **prévisible** : l'utilisateur tape n'importe quoi, un fichier est absent, une donnée est mal formatée. Plutôt que de laisser le programme s'arrêter, on peut l'intercepter :
+
+```{python}
+saisie = "vingt"
+
+try:
+    quantite = int(saisie)
+    print(f"Quantité : {quantite}")
+except ValueError:
+    print(f"'{saisie}' n'est pas un nombre entier.")
+```
+
+Python **essaie** le bloc `try`. Si une `ValueError` survient, il saute directement dans le bloc `except` au lieu de planter. Si tout va bien, le bloc `except` est ignoré.
+
+### Récupérer le message avec `as`
+
+```{python}
+try:
+    prix = float("12,5")
+except ValueError as e:
+    print(f"Conversion impossible : {e}")
+```
+
+### Plusieurs `except`
+
+On peut traiter chaque type d'erreur différemment :
+
+```{python}
+stocks = {"vis": 120, "écrous": 80}
+
+def stock_par_jour(article, nb_jours):
+    try:
+        return stocks[article] / nb_jours
+    except KeyError:
+        print(f"Article inconnu : {article}")
+    except ZeroDivisionError:
+        print("Le nombre de jours doit être supérieur à 0.")
+
+stock_par_jour("boulons", 5)
+stock_par_jour("vis", 0)
+print(stock_par_jour("vis", 4))
+```
+
+### `else` et `finally`
+
+```{python}
+def lire_quantite(saisie):
+    try:
+        quantite = int(saisie)
+    except ValueError:
+        print("Saisie invalide")
+    else:
+        print(f"OK : {quantite} unités")   # seulement si aucune erreur
+    finally:
+        print("Fin de la vérification")    # dans tous les cas
+
+lire_quantite("12")
+lire_quantite("douze")
+```
+
+`else` sert à garder le bloc `try` le plus court possible : on n'y met **que** la ligne qui peut échouer. `finally` sert surtout à libérer des ressources (fermer un fichier, une connexion à une base), vous le recroiserez plus tard.
+
+### Ce qu'il ne faut jamais faire
+
+:::{.callout-warning}
+```python
+try:
+    total = calculer_total(panier)
+except:
+    pass
+```
+
+Un `except` **nu** attrape **toutes** les erreurs, y compris vos fautes de frappe (`NameError`) et même un Ctrl+C. Avec `pass`, l'erreur disparaît en silence : le programme continue avec des données fausses et vous ne saurez jamais pourquoi. C'est bien pire qu'un plantage.
+
+**Règle** : attrapez toujours un type précis, celui que vous **attendez**, et faites quelque chose d'utile dans le `except`.
+:::
+
+### Demander pardon plutôt que la permission
+
+Dans le chapitre sur les scripts, on vérifiait une saisie avec `.isdigit()` avant de la convertir. Ça marche, mais `"-3".isdigit()` vaut `False`, et `"²".isdigit()` vaut `True` alors que `int("²")` plante ! Le style Python préfère **essayer** :
+
+```{python}
+for saisie in ["42", "-3", "²", "abc"]:
+    try:
+        nombre = int(saisie)
+        print(f"{saisie!r} -> {nombre}")
+    except ValueError:
+        print(f"{saisie!r} -> invalide")
+```
+
+Cette philosophie a un nom dans la communauté Python : *EAFP*, « *Easier to Ask Forgiveness than Permission* ».
+
+Combiné à une boucle, on obtient le grand classique de la saisie robuste :
+
+```python
+while True:
+    saisie = input("Votre nombre : ")
+    try:
+        nombre = int(saisie)
+        break                       # conversion réussie, on sort
+    except ValueError:
+        print("Ce n'est pas un nombre entier, réessayez.")
+```
+
+## Lever ses propres erreurs : `raise`
+
+Jusqu'ici, c'est Python qui levait les exceptions. Mais **vos** fonctions aussi peuvent refuser une situation absurde :
+
+```{python}
+def appliquer_remise(prix, taux):
+    """Applique une remise à un prix.
+
+    Args:
+        prix: Prix initial en euros.
+        taux: Taux de remise entre 0 et 1.
+
+    Returns:
+        Le prix après remise.
+
+    Raises:
+        ValueError: Si le taux n'est pas compris entre 0 et 1.
+    """
+    if not 0 <= taux <= 1:
+        raise ValueError(f"Taux de remise invalide : {taux}")
+    return prix * (1 - taux)
+
+print(appliquer_remise(100, 0.2))
+
+try:
+    appliquer_remise(100, 20)   # on voulait sûrement 20 %
+except ValueError as e:
+    print(e)
+```
+
+Vous retrouvez la section `Raises` des docstrings vue au chapitre sur les fonctions : elle documente précisément ces erreurs.
+
+:::{.callout-important}
+Pourquoi ne pas simplement faire un `print("Taux invalide")` et `return None` ? Parce que le programme **continuerait** avec un `None`, qui exploserait trois fonctions plus loin avec un message incompréhensible (souvenez-vous du `NoneType`). Une erreur levée **tôt**, avec un message **clair**, fait gagner des heures de débogage.
+:::
+
+## Pour aller plus loin : créer ses propres exceptions
+
+:::{.callout-note collapse="true"}
+## Partie avancée, dépliez si vous êtes à l'aise
+
+`ValueError`, `KeyError`... ces noms sont génériques. Dans un vrai programme, on aimerait des erreurs qui parlent **le langage du métier** : « stock insuffisant », « commande introuvable ». Python permet de créer ses propres types d'exceptions.
+
+La syntaxe utilise le mot-clé `class`, que nous n'avons pas encore vu. Prenez-la pour l'instant comme une **recette** :
+
+```{python}
+class StockInsuffisantError(Exception):
+    """Levée quand on veut sortir plus d'articles qu'il n'y en a en stock."""
+    pass
+```
+
+C'est tout. `(Exception)` signifie « mon erreur est une sorte d'exception », elle se comporte donc comme toutes les autres :
+
+```{python}
+stocks = {"vis": 120, "écrous": 80}
+
+def sortir_du_stock(article, quantite):
+    if article not in stocks:
+        raise KeyError(f"Article inconnu : {article}")
+    if quantite > stocks[article]:
+        raise StockInsuffisantError(
+            f"{article} : {quantite} demandés, {stocks[article]} disponibles"
+        )
+    stocks[article] -= quantite
+
+commandes = [("vis", 50), ("écrous", 200), ("boulons", 10), ("vis", 30)]
+
+for article, quantite in commandes:
+    try:
+        sortir_du_stock(article, quantite)
+        print(f"✅ {quantite} {article} expédiés")
+    except StockInsuffisantError as e:
+        print(f"📦 À réapprovisionner : {e}")
+    except KeyError:
+        print(f"❌ Article inconnu : {article}")
+
+print(stocks)
+```
+
+Qu'a-t-on gagné ?
+
+- **Le programme a du sens** : en lisant `except StockInsuffisantError`, n'importe qui comprend la situation métier, sans lire le code de la fonction.
+- **On distingue les cas** : un stock insuffisant déclenche un réapprovisionnement, un article inconnu est probablement une faute de saisie. Deux problèmes, deux réactions.
+- **On ne capture que ce qu'on attend** : un vrai bug (un `TypeError` par exemple) ne sera pas confondu avec une rupture de stock et fera planter le programme, ce qui est exactement ce qu'on veut.
+
+### Une famille d'erreurs
+
+On peut aussi créer une erreur « parente » pour regrouper toutes les erreurs de son application :
+
+```{python}
+class LogistiqueError(Exception):
+    """Erreur de base de notre application logistique."""
+
+class StockInsuffisantError(LogistiqueError):
+    """Pas assez d'articles en stock."""
+
+class CommandeIntrouvableError(LogistiqueError):
+    """Le numéro de commande n'existe pas."""
+
+try:
+    raise CommandeIntrouvableError("Commande n°4521")
+except LogistiqueError as e:
+    print(f"Problème logistique : {e}")
+```
+
+Un `except LogistiqueError` attrape **toutes** ses « filles ». Les bibliothèques que vous utiliserez fonctionnent ainsi : pandas, SQLAlchemy ou `requests` ont chacune leur famille d'exceptions.
+
+:::{.callout-tip}
+Convention : le nom d'une exception se termine par `Error` et s'écrit en *CamelCase* (une majuscule à chaque mot, sans `_`). La docstring suffit comme corps, le `pass` est alors facultatif.
+:::
+:::
+
+## Méthode de débogage
+
+Face à une erreur, dans cet ordre :
+
+1. **Lisez la dernière ligne** : le type et le message. Ils suffisent souvent.
+2. **Remontez le *traceback*** jusqu'à la première ligne qui vient de **votre** code (pas d'une bibliothèque).
+3. **Inspectez les valeurs** juste avant la ligne fautive avec un `print()`, en affichant aussi le type :
+```python
+   print(repr(produit["prix"]), type(produit["prix"]))
+   # '19.9' <class 'str'>
+```
+   `repr()` affiche les guillemets des chaînes : `'19.9'` et `19.9` ne se confondent plus.
+4. **Cherchez le message** sur le web : quelqu'un a eu le même problème avant vous, très probablement sur Stack Overflow.
+5. **Demandez à un assistant IA**, en lui donnant le *traceback* complet **et** le code. Mais lisez et comprenez sa réponse avant de la coller : sinon, vous aurez le même problème la semaine prochaine.
+
+:::{.callout-important}
+## À retenir
+
+- Une `SyntaxError` empêche le programme de démarrer ; une **exception** survient pendant l'exécution.
+- Un *traceback* se lit **de bas en haut** : type d'erreur, message, ligne en cause, puis le chemin des appels.
+- `try` / `except UnType:` intercepte une erreur **prévue**. Jamais d'`except:` nu, jamais d'erreur avalée avec `pass`.
+- `else` s'exécute si tout s'est bien passé, `finally` dans tous les cas.
+- Pour convertir une saisie, on **essaie** `int()` et on attrape la `ValueError`, plutôt que de vérifier avant.
+- `raise ValueError("message clair")` dans vos fonctions, documenté dans la section `Raises` de la docstring.
+- Pour aller plus loin : `class MonError(Exception): pass` crée une erreur qui parle le langage du métier.
+:::
