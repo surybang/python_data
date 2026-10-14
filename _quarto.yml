@@ -53,8 +53,10 @@ website:
             href: 03-initiation-python/04-slicing.qmd
           - text: "Les fonctions"
             href: 03-initiation-python/05-fonctions.qmd
+          - text: "Erreurs et exceptions"
+            href: 03-initiation-python/06-erreurs-exceptions.qmd
           - text: "Scripts et jeux"
-            href: 03-initiation-python/06-scripts-jeux.qmd
+            href: 03-initiation-python/07-scripts-jeux.qmd
       - section : "Logs"
         href: logs/index.qmd
         contents:
