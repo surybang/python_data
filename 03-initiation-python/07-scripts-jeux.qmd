@@ -3,7 +3,7 @@ title: "Scripts et jeux"
 format:
   html: default
   revealjs:
-    output-file: 06-scripts-jeux-slides.html
+    output-file: 07-scripts-jeux-slides.html
     embed-resources: true
     scrollable: true
 format-links:
