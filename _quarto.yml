@@ -57,6 +57,8 @@ website:
             href: 03-initiation-python/06-erreurs-exceptions.qmd
           - text: "Scripts et jeux"
             href: 03-initiation-python/07-scripts-jeux.qmd
+          - text: "Base de données"
+            href: 03-initiation-python/08-python-sql.qmd
       - section : "Logs"
         href: logs/index.qmd
         contents:

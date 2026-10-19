@@ -18,6 +18,7 @@ Il est conçu pour des **débutants complets** : aucune connaissance préalable 
 | 5 | [Les fonctions](05-fonctions.qmd) | Organiser son code en blocs réutilisables, et distinguer fonctions et méthodes |
 | 6 | [Erreurs et exceptions](06-erreurs-exceptions.qmd) | Apprendre à lire les erreurs et créer ses propres exceptions |
 | 7 | [Scripts et jeux](07-scripts-jeux.qmd)| Sortir du notebook, dialoguer avec l'utilisateur et coder des jeux classiques pour débuter l'algorithmie |
+| 8 | [Python et bases de données](08-python-sql.qmd)| Se connecter à différentes bases de données |
 
 Chaque chapitre s'appuie sur les précédents : suivez-les **dans l'ordre**, via la barre latérale ou les liens en bas de chaque page.
 

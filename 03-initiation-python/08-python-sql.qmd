@@ -1,0 +1,396 @@
+---
+title: "Se connecter à une base de données"
+format:
+  html: default
+  revealjs:
+    output-file: 08-bases-de-donnees-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tip}
+Pour accéder aux notebooks d'exercices c'est ici 👇
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/08-bases-de-donnees.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB08-bases-de-donnees%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%AB08-bases-de-donnees%C2%BB)
+:::
+
+
+## Où vivent les données ?
+
+Dans les cours et les tutoriels, les données arrivent souvent sous la forme d'un fichier CSV tout prêt. En entreprise, on les trouve plutôt à trois endroits :
+
+- des **fichiers d'échange** (CSV, Excel) envoyés par mail ou déposés sur un partage ;
+- des **bases de données**, comme PostgreSQL, MySQL, SQL Server, Oracle, SQLite, BigQuery ou Snowflake ;
+- des **fichiers analytiques**, souvent au format **Parquet**, stockés sur un stockage objet (S3, MinIO sur SSP Cloud) et interrogés en SQL comme une base : c'est l'approche *lakehouse*.
+
+Pour les bases de données, ce qui compte n'est pas tant la techno que l'**usage** :
+
+| Usage | Ce que fait la base | Exemple |
+|---|---|---|
+| **Faire tourner une application** | Enregistrer et lire beaucoup de petites opérations, une ligne à la fois | Chaque commande passée sur un site e-commerce |
+| **Analyser** (entrepôt de données) | Stocker l'historique et agréger des millions de lignes | Le chiffre d'affaires mensuel par région sur 5 ans |
+
+Une même base, PostgreSQL par exemple, peut servir pour l'un comme pour l'autre. Certains moteurs sont toutefois conçus pour un usage précis : SQLite pour être embarqué dans une application, BigQuery, Snowflake ou DuckDB pour l'analyse. En pratique, les données passent souvent de l'un à l'autre : les applications écrivent dans leur base, puis des traitements copient régulièrement ces données vers l'entrepôt ou le *lakehouse*, où les équipes data les analysent sans ralentir les applications.
+
+:::{.callout-note}
+## Parquet et *lakehouse* en deux mots
+**Parquet** est un format de fichier pensé pour l'analyse. Contrairement au CSV, il conserve le **type** de chaque colonne, il est **compressé**, et il range les données par colonne : lire 3 colonnes sur 50 ne charge que ces 3 colonnes.
+
+Une architecture ***lakehouse*** stocke les données sous forme de fichiers de ce type, tout en permettant de les interroger en SQL comme une base. 
+:::
+
+Dans tous les cas, un CSV exporté n'est qu'une **photo** des données à un instant donné : dès le lendemain, il n'est plus à jour. Savoir aller chercher les données **à la source**, c'est pouvoir relancer la même analyse demain, sans demander un nouvel export.
+
+Ce chapitre utilise **SQLite** pour apprendre à **se connecter** à une base depuis Python, **l'interroger** et récupérer les résultats. Les réflexes sont les mêmes quelle que soit la base et son usage : on écrit du SQL, on passe par un pilote ou par SQLAlchemy, et on récupère le résultat dans pandas.
+
+---
+
+## Quelques notions avant de commencer
+
+### Une base de données relationnelle
+
+Une base de données **relationnelle** range les données dans des **tables**. Une table ressemble beaucoup à ce que vous connaissez déjà : des lignes et des colonnes, comme une feuille Excel ou une liste de dictionnaires. On parle donc ici de **données structurées**.
+
+```
+Table "ventes"
+┌────┬─────────┬────────┬──────────┬───────┐
+│ id │ produit │ ville  │ quantite │ prix  │
+├────┼─────────┼────────┼──────────┼───────┤
+│  1 │ Clavier │ Lyon   │        2 │  49.9 │
+│  2 │ Souris  │ Paris  │        5 │  19.9 │
+│  3 │ Écran   │ Lyon   │        1 │ 189.0 │
+└────┴─────────┴────────┴──────────┴───────┘
+```
+
+Deux différences importantes avec une feuille Excel :
+
+- chaque colonne a un **type** imposé (texte, entier, nombre décimal…) ;
+- une base contient en général **plusieurs tables** liées entre elles (les clients, les commandes, les produits…), d'où le nom « relationnelle ».
+
+Le logiciel qui gère la base s'appelle un **SGBD** (système de gestion de base de données). Les plus connus : **PostgreSQL**, **MySQL**, **SQL Server**, **Oracle**… et **SQLite**.
+
+### SQL : le langage des bases de données
+
+Pour parler à une base, on utilise le langage **SQL** (*Structured Query Language*). Une requête SQL décrit **ce que l'on veut**, pas comment l'obtenir :
+
+```sql
+SELECT produit, prix          -- les colonnes voulues
+FROM ventes                   -- la table
+WHERE ville = 'Lyon'          -- le filtre
+ORDER BY prix DESC;           -- le tri
+```
+
+SQL mérite un cours à lui seul. (un jour peut-être 👀) Ici, nous n'utiliserons que quelques requêtes simples : l'objectif est de comprendre comment **Python** échange avec une base.
+
+### Pourquoi SQLite ?
+
+La plupart des SGBD fonctionnent en mode **client-serveur** : la base tourne sur un serveur, et votre programme s'y connecte à travers le réseau, avec une adresse, un identifiant et un mot de passe.
+
+**SQLite** fonctionne autrement : toute la base tient dans **un simple fichier** sur votre disque, et il n'y a aucun serveur à installer. Ne le prenez pas pour un jouet : [c'est l'une des bases de données les plus utilisées au monde](!https://www.sqlite.org/mostdeployed.html). Elle est intégrée à tous les smartphones, aux navigateurs web, et à d'innombrables applications.
+
+Pour apprendre, c'est idéal : le module `sqlite3` est **fourni avec Python**, rien à installer.
+
+---
+
+## Premiers pas avec `sqlite3`
+
+### Créer une base et une table
+
+```python
+import sqlite3
+
+connexion = sqlite3.connect("ventes.db")   # crée le fichier s'il n'existe pas
+
+connexion.execute("""
+    CREATE TABLE IF NOT EXISTS ventes (
+        id INTEGER PRIMARY KEY,
+        produit TEXT NOT NULL,
+        ville TEXT NOT NULL,
+        quantite INTEGER,
+        prix REAL
+    )
+""")
+```
+
+`sqlite3.connect()` ouvre une **connexion** vers la base : c'est le « canal » par lequel passeront toutes vos requêtes. La requête `CREATE TABLE` crée la table, avec le nom et le type de chaque colonne. `id INTEGER PRIMARY KEY` est un identifiant unique, que SQLite remplit automatiquement.
+
+### Insérer des données
+
+```python
+ventes = [
+    ("Clavier", "Lyon", 2, 49.9),
+    ("Souris", "Paris", 5, 19.9),
+    ("Écran", "Lyon", 1, 189.0),
+    ("Clavier", "Nantes", 3, 49.9),
+    ("Écran", "Paris", 2, 189.0),
+    ("Souris", "Lyon", 4, 19.9),
+]
+
+connexion.executemany(
+    "INSERT INTO ventes (produit, ville, quantite, prix) VALUES (?, ?, ?, ?)",
+    ventes,
+)
+connexion.commit()   # enregistre définitivement les modifications
+```
+
+Vous reconnaissez une **liste de tuples** : chaque tuple devient une ligne de la table. Les `?` sont des **emplacements** que `sqlite3` remplit avec les valeurs de chaque tuple. Nous verrons plus bas pourquoi c'est si important.
+
+::: {.callout-warning}
+### N'oubliez pas `commit()`
+Une base de données regroupe les modifications dans une **transaction**. Tant que vous n'avez pas appelé `connexion.commit()`, vos insertions ne sont pas enregistrées : si le script s'arrête, elles sont perdues. C'est une sécurité : si une erreur survient au milieu d'une série de modifications, on peut tout annuler (`connexion.rollback()`) au lieu de laisser la base à moitié modifiée.
+:::
+
+### Interroger la base
+
+```python
+curseur = connexion.execute("SELECT produit, quantite, prix FROM ventes WHERE ville = 'Lyon'")
+resultats = curseur.fetchall()
+
+print(resultats)
+# [('Clavier', 2, 49.9), ('Écran', 1, 189.0), ('Souris', 4, 19.9)]
+```
+
+Le résultat d'une requête est un **curseur**, qu'on lit avec :
+
+- `fetchall()` : toutes les lignes, sous forme de **liste de tuples** ;
+- `fetchone()` : la ligne suivante seulement (pratique quand on attend un seul résultat).
+
+On peut aussi parcourir directement le curseur avec une boucle `for`, comme une liste :
+
+```python
+for produit, quantite, prix in connexion.execute("SELECT produit, quantite, prix FROM ventes"):
+    print(f"{produit:<8} {quantite * prix:7.2f} €")
+```
+
+La base sait aussi **calculer** : c'est souvent plus efficace de lui faire faire le travail que de tout rapatrier dans Python.
+
+```python
+requete = """
+    SELECT ville, SUM(quantite * prix) AS chiffre_affaires
+    FROM ventes
+    GROUP BY ville
+    ORDER BY chiffre_affaires DESC
+"""
+print(connexion.execute(requete).fetchall())
+# [('Paris', 477.5), ('Lyon', 368.4), ('Nantes', 149.7)]
+```
+
+Souvenez-vous du mini-projet du chapitre sur les structures de données : calculer le chiffre d'affaires par ville demandait une boucle et un dictionnaire. Ici, une seule requête suffit.
+
+### Fermer la connexion
+
+```python
+connexion.close()
+```
+
+Une connexion ouverte occupe des ressources, et sur une base partagée, le nombre de connexions est souvent limité. Prenez l'habitude de fermer vos connexions dès que vous avez terminé.
+
+::: {.callout-note}
+### Et le `with` ?
+Vous croiserez souvent `with sqlite3.connect("ventes.db") as connexion:`. Attention, avec `sqlite3`, ce bloc gère la **transaction** (il fait un `commit()` à la fin, ou un `rollback()` en cas d'erreur), mais il **ne ferme pas** la connexion. Il faut toujours appeler `connexion.close()` ensuite.
+:::
+
+---
+
+## Ne jamais construire une requête avec une f-string
+
+Imaginons un script qui demande une ville à l'utilisateur, puis affiche ses ventes. La tentation est grande d'utiliser une f-string, que vous maîtrisez maintenant très bien :
+
+```python
+ville = input("Ville : ")
+requete = f"SELECT * FROM ventes WHERE ville = '{ville}'"
+```
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : un utilisateur malveillant
+
+Un utilisateur tape la saisie suivante :
+
+```
+Lyon' OR '1'='1
+```
+
+1. Écrivez la requête SQL obtenue après remplacement dans la f-string.
+2. Combien de lignes renvoie-t-elle ? Les ventes de Lyon seulement ?
+3. Imaginez que la table contienne des données confidentielles, ou que la requête soit un `DELETE`. Quel est le risque ?
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+La requête devient :
+
+```sql
+SELECT * FROM ventes WHERE ville = 'Lyon' OR '1'='1'
+```
+
+La condition `'1'='1'` est toujours vraie : la requête renvoie **toutes les lignes de la table** (les 6 ventes, et pas seulement les 3 de Lyon). L'utilisateur a réussi à **modifier la requête** en glissant du SQL dans sa saisie.
+
+C'est une **injection SQL**, l'une des failles de sécurité les plus répandues et les plus graves : elle permet de lire des données confidentielles, de contourner un mot de passe, voire de supprimer des tables entières.
+
+La solution, ce sont les **requêtes paramétrées**, avec les `?` :
+
+```python
+curseur = connexion.execute("SELECT * FROM ventes WHERE ville = ?", (ville,))
+```
+
+`sqlite3` transmet alors la valeur **séparément** de la requête : elle est toujours traitée comme une simple valeur, jamais comme du code SQL. Avec la même saisie malveillante, la requête cherche une ville qui s'appelle littéralement `Lyon' OR '1'='1`… et ne renvoie **aucune** ligne.
+
+Attention au détail de syntaxe : `(ville,)` avec une virgule, car les paramètres doivent être un **tuple**, même s'il n'y en a qu'un.
+:::
+
+La règle est simple et ne souffre aucune exception : **dès qu'une valeur vient de l'extérieur** (un utilisateur, un fichier, une API), **elle passe par un paramètre**, jamais par une f-string.
+
+---
+
+## Au-delà de SQLite : les autres bases
+
+### Un pilote par base
+
+`sqlite3` ne sait parler qu'à SQLite. Pour les autres bases, il faut installer un **pilote** (*driver*), une bibliothèque qui sait dialoguer avec ce SGBD précis :
+
+| Base de données | Pilote Python courant |
+|---|---|
+| SQLite | `sqlite3` (fourni avec Python) |
+| PostgreSQL | `psycopg2` ou `psycopg` (sa version 3) |
+| MySQL / MariaDB | `pymysql`, `mysql-connector-python` |
+| SQL Server | `pyodbc` |
+| Oracle | `oracledb` |
+
+Bonne nouvelle : ils suivent tous la même norme Python (la **DB-API**). Vous retrouverez donc partout `connect()`, `execute()`, `fetchall()`, `commit()` et `close()`. La principale différence est l'**adresse de connexion** : un serveur, un port, un identifiant, un mot de passe, au lieu d'un simple nom de fichier.
+
+```python
+import psycopg2
+
+connexion = psycopg2.connect(
+    host="mon-serveur.exemple.fr",
+    port=5432,
+    dbname="entreprise",
+    user="analyste",
+    password="...",   # voir l'encadré ci-dessous !
+)
+```
+
+Petite différence de syntaxe : selon le pilote, les paramètres s'écrivent `?` (SQLite) ou `%s` (PostgreSQL, MySQL).
+
+### SQLAlchemy : une seule façon d'écrire pour toutes les bases
+
+**SQLAlchemy** est une bibliothèque qui se place **au-dessus** des pilotes. On décrit la base à laquelle on veut se connecter avec une **URL**, et le reste du code est identique, quelle que soit la base :
+
+```python
+from sqlalchemy import create_engine, text
+
+engine = create_engine("sqlite:///ventes.db")
+# Pour PostgreSQL, seule l'URL changerait :
+# engine = create_engine("postgresql+psycopg2://analyste:motdepasse@mon-serveur:5432/entreprise")
+
+with engine.connect() as connexion:
+    resultat = connexion.execute(
+        text("SELECT produit, prix FROM ventes WHERE ville = :ville"),
+        {"ville": "Paris"},
+    )
+    print(resultat.fetchall())
+# [('Souris', 19.9), ('Écran', 189.0)]
+```
+
+Remarquez les paramètres nommés (`:ville`), remplis par un **dictionnaire** : c'est plus lisible que des `?`, et toujours protégé contre les injections. Et ici, le `with` ferme bien la connexion à la fin du bloc.
+
+::: {.callout-warning}
+### Jamais de mot de passe dans le code
+Un mot de passe écrit en clair dans un script finit tôt ou tard sur GitHub, dans un mail ou dans une capture d'écran. Stockez-le plutôt dans une **variable d'environnement**, et lisez-le dans le script :
+
+```python
+import os
+
+mot_de_passe = os.environ["DB_PASSWORD"]
+```
+
+Sur SSP Cloud, l'espace « Mes secrets » permet de stocker ces valeurs et de les injecter comme variables d'environnement dans vos services.
+:::
+
+---
+
+## Le pont entre SQL et pandas
+
+Une liste de tuples, c'est pratique pour quelques lignes. Mais pour analyser des données, vous utiliserez **pandas**, que nous verrons dans le module suivant. Bonne nouvelle : pandas sait lire directement le résultat d'une requête SQL, avec `pd.read_sql()`.
+
+```python
+import pandas as pd
+import sqlite3
+
+connexion = sqlite3.connect("ventes.db")
+
+ventes_lyon = pd.read_sql(
+    "SELECT * FROM ventes WHERE ville = ?",
+    connexion,
+    params=("Lyon",),       # toujours des requêtes paramétrées !
+)
+print(ventes_lyon)
+```
+
+```
+   id  produit ville  quantite   prix
+0   1  Clavier  Lyon         2   49.9
+1   3    Écran  Lyon         1  189.0
+2   6   Souris  Lyon         4   19.9
+```
+
+Le résultat arrive directement dans un **DataFrame**, avec les noms de colonnes de la table. Plus besoin de `fetchall()` ni de boucle.
+
+Le chemin inverse existe aussi : `to_sql()` enregistre un DataFrame dans une table de la base, par exemple pour sauvegarder le résultat d'une analyse.
+
+```python
+ventes_lyon.to_sql("ventes_lyon", connexion, if_exists="replace", index=False)
+connexion.close()
+```
+
+`if_exists="replace"` remplace la table si elle existe déjà (`"append"` ajouterait les lignes à la suite), et `index=False` évite d'enregistrer l'index du DataFrame comme une colonne.
+
+::: {.callout-note}
+### `sqlite3` ou SQLAlchemy ?
+Avec SQLite, on peut passer directement la connexion `sqlite3` à pandas. Pour toutes les autres bases (PostgreSQL, MySQL…), pandas attend un **engine SQLAlchemy** : `pd.read_sql("SELECT ...", engine)`. C'est la principale raison pour laquelle vous croiserez SQLAlchemy dans presque tous les projets data.
+:::
+
+::: {.callout-tip}
+### Qui fait le travail : la base ou pandas ?
+SQL et pandas savent tous les deux filtrer, trier et agréger. Alors, qui doit s'en charger ?
+
+La règle pratique : **filtrez et agrégez dans la base, analysez dans pandas**. Si la table contient 50 millions de lignes et que vous n'avez besoin que des ventes de Lyon en 2026, écrivez `WHERE` dans la requête : la base est optimisée pour ça, et vous évitez de rapatrier des gigaoctets de données inutiles dans la mémoire de votre ordinateur. Un `SELECT *` sur une grosse table de production est un excellent moyen de faire planter son notebook… et d'énerver l'équipe qui gère la base.
+:::
+
+
+::: {.callout-note}
+### 🦆 Teasing : et DuckDB ?
+SQLite est conçu pour **enregistrer** des données au fil de l'eau : une commande, un compte, une ligne à la fois. Pour **analyser** de gros volumes (des millions de lignes, des agrégations, des jointures), il existe une base de la même famille, elle aussi sans serveur et tenant dans un fichier : **DuckDB**.
+
+Son petit tour de magie : elle sait interroger **directement un fichier CSV ou Parquet** en SQL, sans rien importer au préalable.
+
+```python
+import duckdb
+
+duckdb.sql("""
+    SELECT ville, SUM(quantite * prix) AS chiffre_affaires
+    FROM 'ventes.csv'
+    GROUP BY ville
+""")
+```
+
+Nous lui consacrerons un module entier plus tard. 😉
+:::
+
+::: {.callout-important}
+## À retenir
+- Les données vivent dans des **fichiers d'échange** (CSV, Excel), des **bases de données** ou des **fichiers Parquet** interrogés en SQL. Une base sert à faire tourner une application ou à analyser : c'est l'**usage** qui compte, pas le logiciel. Un CSV exporté n'est qu'une photo figée.
+- Une base relationnelle range les données dans des **tables** typées, qu'on interroge en **SQL**.
+- **SQLite** tient dans un simple fichier, sans serveur, et `sqlite3` est fourni avec Python : idéal pour apprendre, et très utilisé en vrai.
+- Le cycle est toujours le même : `connect()`, `execute()`, `fetchall()`, `commit()` si on modifie, `close()`.
+- **Jamais de f-string** pour insérer une valeur dans une requête : utilisez des **requêtes paramétrées** (`?`, `%s` ou `:nom`), sinon gare à l'injection SQL.
+- Chaque base a son **pilote** (`psycopg2` pour PostgreSQL…), et **SQLAlchemy** permet d'écrire le même code pour toutes, en changeant seulement l'URL.
+- `pd.read_sql()` charge le résultat d'une requête dans un DataFrame, `to_sql()` fait le chemin inverse. **Filtrez dans la base, analysez dans pandas.**
+- Les mots de passe ne s'écrivent jamais dans le code : utilisez des **variables d'environnement**.
+:::
