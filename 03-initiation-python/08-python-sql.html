@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Se connecter à une base de données – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../logs/index.html" rel="next">
+<link href="../03-initiation-python/07-scripts-jeux.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9ec74a487b0f7bffdf8907e3024c0954.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python_data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/08-python-sql.html">Base de données</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Langages de programmation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnement</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnements en ligne</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Initiation Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditions &amp; boucles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structures de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les fonctions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/06-erreurs-exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Erreurs et exceptions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/07-scripts-jeux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts et jeux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/08-python-sql.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Base de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../logs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TabICL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#où-vivent-les-données" id="toc-où-vivent-les-données" class="nav-link active" data-scroll-target="#où-vivent-les-données">Où vivent les données ?</a></li>
+  <li><a href="#quelques-notions-avant-de-commencer" id="toc-quelques-notions-avant-de-commencer" class="nav-link" data-scroll-target="#quelques-notions-avant-de-commencer">Quelques notions avant de commencer</a>
+  <ul class="collapse">
+  <li><a href="#une-base-de-données-relationnelle" id="toc-une-base-de-données-relationnelle" class="nav-link" data-scroll-target="#une-base-de-données-relationnelle">Une base de données relationnelle</a></li>
+  <li><a href="#sql-le-langage-des-bases-de-données" id="toc-sql-le-langage-des-bases-de-données" class="nav-link" data-scroll-target="#sql-le-langage-des-bases-de-données">SQL : le langage des bases de données</a></li>
+  <li><a href="#pourquoi-sqlite" id="toc-pourquoi-sqlite" class="nav-link" data-scroll-target="#pourquoi-sqlite">Pourquoi SQLite ?</a></li>
+  </ul></li>
+  <li><a href="#premiers-pas-avec-sqlite3" id="toc-premiers-pas-avec-sqlite3" class="nav-link" data-scroll-target="#premiers-pas-avec-sqlite3">Premiers pas avec <code>sqlite3</code></a>
+  <ul class="collapse">
+  <li><a href="#créer-une-base-et-une-table" id="toc-créer-une-base-et-une-table" class="nav-link" data-scroll-target="#créer-une-base-et-une-table">Créer une base et une table</a></li>
+  <li><a href="#insérer-des-données" id="toc-insérer-des-données" class="nav-link" data-scroll-target="#insérer-des-données">Insérer des données</a></li>
+  <li><a href="#interroger-la-base" id="toc-interroger-la-base" class="nav-link" data-scroll-target="#interroger-la-base">Interroger la base</a></li>
+  <li><a href="#fermer-la-connexion" id="toc-fermer-la-connexion" class="nav-link" data-scroll-target="#fermer-la-connexion">Fermer la connexion</a></li>
+  </ul></li>
+  <li><a href="#ne-jamais-construire-une-requête-avec-une-f-string" id="toc-ne-jamais-construire-une-requête-avec-une-f-string" class="nav-link" data-scroll-target="#ne-jamais-construire-une-requête-avec-une-f-string">Ne jamais construire une requête avec une f-string</a></li>
+  <li><a href="#au-delà-de-sqlite-les-autres-bases" id="toc-au-delà-de-sqlite-les-autres-bases" class="nav-link" data-scroll-target="#au-delà-de-sqlite-les-autres-bases">Au-delà de SQLite : les autres bases</a>
+  <ul class="collapse">
+  <li><a href="#un-pilote-par-base" id="toc-un-pilote-par-base" class="nav-link" data-scroll-target="#un-pilote-par-base">Un pilote par base</a></li>
+  <li><a href="#sqlalchemy-une-seule-façon-décrire-pour-toutes-les-bases" id="toc-sqlalchemy-une-seule-façon-décrire-pour-toutes-les-bases" class="nav-link" data-scroll-target="#sqlalchemy-une-seule-façon-décrire-pour-toutes-les-bases">SQLAlchemy : une seule façon d’écrire pour toutes les bases</a></li>
+  </ul></li>
+  <li><a href="#le-pont-entre-sql-et-pandas" id="toc-le-pont-entre-sql-et-pandas" class="nav-link" data-scroll-target="#le-pont-entre-sql-et-pandas">Le pont entre SQL et pandas</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python_data/edit/main/03-initiation-python/08-python-sql.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="08-bases-de-donnees-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="08-bases-de-donnees-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-initiation-python/index.html">Initiation Python</a></li><li class="breadcrumb-item"><a href="../03-initiation-python/08-python-sql.html">Base de données</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Se connecter à une base de données</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour accéder aux notebooks d’exercices c’est ici 👇</p>
+<p><a href="https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/08-bases-de-donnees.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB08-bases-de-donnees%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&amp;init.personalInitArgs=%C2%AB08-bases-de-donnees%C2%BB"><img src="https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode.png" class="img-fluid" alt="Open In SSP Cloud"></a></p>
+</div>
+</div>
+<section id="où-vivent-les-données" class="level2">
+<h2 class="anchored" data-anchor-id="où-vivent-les-données">Où vivent les données ?</h2>
+<p>Dans les cours et les tutoriels, les données arrivent souvent sous la forme d’un fichier CSV tout prêt. En entreprise, on les trouve plutôt à trois endroits :</p>
+<ul>
+<li>des <strong>fichiers d’échange</strong> (CSV, Excel) envoyés par mail ou déposés sur un partage ;</li>
+<li>des <strong>bases de données</strong>, comme PostgreSQL, MySQL, SQL Server, Oracle, SQLite, BigQuery ou Snowflake ;</li>
+<li>des <strong>fichiers analytiques</strong>, souvent au format <strong>Parquet</strong>, stockés sur un stockage objet (S3, MinIO sur SSP Cloud) et interrogés en SQL comme une base : c’est l’approche <em>lakehouse</em>.</li>
+</ul>
+<p>Pour les bases de données, ce qui compte n’est pas tant la techno que l’<strong>usage</strong> :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Usage</th>
+<th>Ce que fait la base</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Faire tourner une application</strong></td>
+<td>Enregistrer et lire beaucoup de petites opérations, une ligne à la fois</td>
+<td>Chaque commande passée sur un site e-commerce</td>
+</tr>
+<tr class="even">
+<td><strong>Analyser</strong> (entrepôt de données)</td>
+<td>Stocker l’historique et agréger des millions de lignes</td>
+<td>Le chiffre d’affaires mensuel par région sur 5 ans</td>
+</tr>
+</tbody>
+</table>
+<p>Une même base, PostgreSQL par exemple, peut servir pour l’un comme pour l’autre. Certains moteurs sont toutefois conçus pour un usage précis : SQLite pour être embarqué dans une application, BigQuery, Snowflake ou DuckDB pour l’analyse. En pratique, les données passent souvent de l’un à l’autre : les applications écrivent dans leur base, puis des traitements copient régulièrement ces données vers l’entrepôt ou le <em>lakehouse</em>, où les équipes data les analysent sans ralentir les applications.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Parquet et <em>lakehouse</em> en deux mots
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Parquet</strong> est un format de fichier pensé pour l’analyse. Contrairement au CSV, il conserve le <strong>type</strong> de chaque colonne, il est <strong>compressé</strong>, et il range les données par colonne : lire 3 colonnes sur 50 ne charge que ces 3 colonnes.</p>
+<p>Une architecture <strong><em>lakehouse</em></strong> stocke les données sous forme de fichiers de ce type, tout en permettant de les interroger en SQL comme une base.</p>
+</div>
+</div>
+<p>Dans tous les cas, un CSV exporté n’est qu’une <strong>photo</strong> des données à un instant donné : dès le lendemain, il n’est plus à jour. Savoir aller chercher les données <strong>à la source</strong>, c’est pouvoir relancer la même analyse demain, sans demander un nouvel export.</p>
+<p>Ce chapitre utilise <strong>SQLite</strong> pour apprendre à <strong>se connecter</strong> à une base depuis Python, <strong>l’interroger</strong> et récupérer les résultats. Les réflexes sont les mêmes quelle que soit la base et son usage : on écrit du SQL, on passe par un pilote ou par SQLAlchemy, et on récupère le résultat dans pandas.</p>
+<hr>
+</section>
+<section id="quelques-notions-avant-de-commencer" class="level2">
+<h2 class="anchored" data-anchor-id="quelques-notions-avant-de-commencer">Quelques notions avant de commencer</h2>
+<section id="une-base-de-données-relationnelle" class="level3">
+<h3 class="anchored" data-anchor-id="une-base-de-données-relationnelle">Une base de données relationnelle</h3>
+<p>Une base de données <strong>relationnelle</strong> range les données dans des <strong>tables</strong>. Une table ressemble beaucoup à ce que vous connaissez déjà : des lignes et des colonnes, comme une feuille Excel ou une liste de dictionnaires. On parle donc ici de <strong>données structurées</strong>.</p>
+<pre><code>Table "ventes"
+┌────┬─────────┬────────┬──────────┬───────┐
+│ id │ produit │ ville  │ quantite │ prix  │
+├────┼─────────┼────────┼──────────┼───────┤
+│  1 │ Clavier │ Lyon   │        2 │  49.9 │
+│  2 │ Souris  │ Paris  │        5 │  19.9 │
+│  3 │ Écran   │ Lyon   │        1 │ 189.0 │
+└────┴─────────┴────────┴──────────┴───────┘</code></pre>
+<p>Deux différences importantes avec une feuille Excel :</p>
+<ul>
+<li>chaque colonne a un <strong>type</strong> imposé (texte, entier, nombre décimal…) ;</li>
+<li>une base contient en général <strong>plusieurs tables</strong> liées entre elles (les clients, les commandes, les produits…), d’où le nom « relationnelle ».</li>
+</ul>
+<p>Le logiciel qui gère la base s’appelle un <strong>SGBD</strong> (système de gestion de base de données). Les plus connus : <strong>PostgreSQL</strong>, <strong>MySQL</strong>, <strong>SQL Server</strong>, <strong>Oracle</strong>… et <strong>SQLite</strong>.</p>
+</section>
+<section id="sql-le-langage-des-bases-de-données" class="level3">
+<h3 class="anchored" data-anchor-id="sql-le-langage-des-bases-de-données">SQL : le langage des bases de données</h3>
+<p>Pour parler à une base, on utilise le langage <strong>SQL</strong> (<em>Structured Query Language</em>). Une requête SQL décrit <strong>ce que l’on veut</strong>, pas comment l’obtenir :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> produit, prix          <span class="co">-- les colonnes voulues</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> ventes                   <span class="co">-- la table</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> ville <span class="op">=</span> <span class="st">'Lyon'</span>          <span class="co">-- le filtre</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> prix <span class="kw">DESC</span>;           <span class="co">-- le tri</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>SQL mérite un cours à lui seul. (un jour peut-être 👀) Ici, nous n’utiliserons que quelques requêtes simples : l’objectif est de comprendre comment <strong>Python</strong> échange avec une base.</p>
+</section>
+<section id="pourquoi-sqlite" class="level3">
+<h3 class="anchored" data-anchor-id="pourquoi-sqlite">Pourquoi SQLite ?</h3>
+<p>La plupart des SGBD fonctionnent en mode <strong>client-serveur</strong> : la base tourne sur un serveur, et votre programme s’y connecte à travers le réseau, avec une adresse, un identifiant et un mot de passe.</p>
+<p><strong>SQLite</strong> fonctionne autrement : toute la base tient dans <strong>un simple fichier</strong> sur votre disque, et il n’y a aucun serveur à installer. Ne le prenez pas pour un jouet : <a href="!https://www.sqlite.org/mostdeployed.html">c’est l’une des bases de données les plus utilisées au monde</a>. Elle est intégrée à tous les smartphones, aux navigateurs web, et à d’innombrables applications.</p>
+<p>Pour apprendre, c’est idéal : le module <code>sqlite3</code> est <strong>fourni avec Python</strong>, rien à installer.</p>
+<hr>
+</section>
+</section>
+<section id="premiers-pas-avec-sqlite3" class="level2">
+<h2 class="anchored" data-anchor-id="premiers-pas-avec-sqlite3">Premiers pas avec <code>sqlite3</code></h2>
+<section id="créer-une-base-et-une-table" class="level3">
+<h3 class="anchored" data-anchor-id="créer-une-base-et-une-table">Créer une base et une table</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>connexion <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">"ventes.db"</span>)   <span class="co"># crée le fichier s'il n'existe pas</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>connexion.execute(<span class="st">"""</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">    CREATE TABLE IF NOT EXISTS ventes (</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">        id INTEGER PRIMARY KEY,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">        produit TEXT NOT NULL,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">        ville TEXT NOT NULL,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">        quantite INTEGER,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">        prix REAL</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="st">    )</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>sqlite3.connect()</code> ouvre une <strong>connexion</strong> vers la base : c’est le « canal » par lequel passeront toutes vos requêtes. La requête <code>CREATE TABLE</code> crée la table, avec le nom et le type de chaque colonne. <code>id INTEGER PRIMARY KEY</code> est un identifiant unique, que SQLite remplit automatiquement.</p>
+</section>
+<section id="insérer-des-données" class="level3">
+<h3 class="anchored" data-anchor-id="insérer-des-données">Insérer des données</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Clavier"</span>, <span class="st">"Lyon"</span>, <span class="dv">2</span>, <span class="fl">49.9</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Souris"</span>, <span class="st">"Paris"</span>, <span class="dv">5</span>, <span class="fl">19.9</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Écran"</span>, <span class="st">"Lyon"</span>, <span class="dv">1</span>, <span class="fl">189.0</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Clavier"</span>, <span class="st">"Nantes"</span>, <span class="dv">3</span>, <span class="fl">49.9</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Écran"</span>, <span class="st">"Paris"</span>, <span class="dv">2</span>, <span class="fl">189.0</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Souris"</span>, <span class="st">"Lyon"</span>, <span class="dv">4</span>, <span class="fl">19.9</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>connexion.executemany(</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"INSERT INTO ventes (produit, ville, quantite, prix) VALUES (?, ?, ?, ?)"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    ventes,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>connexion.commit()   <span class="co"># enregistre définitivement les modifications</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Vous reconnaissez une <strong>liste de tuples</strong> : chaque tuple devient une ligne de la table. Les <code>?</code> sont des <strong>emplacements</strong> que <code>sqlite3</code> remplit avec les valeurs de chaque tuple. Nous verrons plus bas pourquoi c’est si important.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>N’oubliez pas <code>commit()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une base de données regroupe les modifications dans une <strong>transaction</strong>. Tant que vous n’avez pas appelé <code>connexion.commit()</code>, vos insertions ne sont pas enregistrées : si le script s’arrête, elles sont perdues. C’est une sécurité : si une erreur survient au milieu d’une série de modifications, on peut tout annuler (<code>connexion.rollback()</code>) au lieu de laisser la base à moitié modifiée.</p>
+</div>
+</div>
+</section>
+<section id="interroger-la-base" class="level3">
+<h3 class="anchored" data-anchor-id="interroger-la-base">Interroger la base</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>curseur <span class="op">=</span> connexion.execute(<span class="st">"SELECT produit, quantite, prix FROM ventes WHERE ville = 'Lyon'"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>resultats <span class="op">=</span> curseur.fetchall()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(resultats)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># [('Clavier', 2, 49.9), ('Écran', 1, 189.0), ('Souris', 4, 19.9)]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Le résultat d’une requête est un <strong>curseur</strong>, qu’on lit avec :</p>
+<ul>
+<li><code>fetchall()</code> : toutes les lignes, sous forme de <strong>liste de tuples</strong> ;</li>
+<li><code>fetchone()</code> : la ligne suivante seulement (pratique quand on attend un seul résultat).</li>
+</ul>
+<p>On peut aussi parcourir directement le curseur avec une boucle <code>for</code>, comme une liste :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> produit, quantite, prix <span class="kw">in</span> connexion.execute(<span class="st">"SELECT produit, quantite, prix FROM ventes"</span>):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>produit<span class="sc">:&lt;8}</span><span class="ss"> </span><span class="sc">{</span>quantite <span class="op">*</span> prix<span class="sc">:7.2f}</span><span class="ss"> €"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La base sait aussi <strong>calculer</strong> : c’est souvent plus efficace de lui faire faire le travail que de tout rapatrier dans Python.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>requete <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT ville, SUM(quantite * prix) AS chiffre_affaires</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM ventes</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY ville</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY chiffre_affaires DESC</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(connexion.execute(requete).fetchall())</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># [('Paris', 477.5), ('Lyon', 368.4), ('Nantes', 149.7)]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Souvenez-vous du mini-projet du chapitre sur les structures de données : calculer le chiffre d’affaires par ville demandait une boucle et un dictionnaire. Ici, une seule requête suffit.</p>
+</section>
+<section id="fermer-la-connexion" class="level3">
+<h3 class="anchored" data-anchor-id="fermer-la-connexion">Fermer la connexion</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>connexion.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Une connexion ouverte occupe des ressources, et sur une base partagée, le nombre de connexions est souvent limité. Prenez l’habitude de fermer vos connexions dès que vous avez terminé.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Et le <code>with</code> ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous croiserez souvent <code>with sqlite3.connect("ventes.db") as connexion:</code>. Attention, avec <code>sqlite3</code>, ce bloc gère la <strong>transaction</strong> (il fait un <code>commit()</code> à la fin, ou un <code>rollback()</code> en cas d’erreur), mais il <strong>ne ferme pas</strong> la connexion. Il faut toujours appeler <code>connexion.close()</code> ensuite.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="ne-jamais-construire-une-requête-avec-une-f-string" class="level2">
+<h2 class="anchored" data-anchor-id="ne-jamais-construire-une-requête-avec-une-f-string">Ne jamais construire une requête avec une f-string</h2>
+<p>Imaginons un script qui demande une ville à l’utilisateur, puis affiche ses ventes. La tentation est grande d’utiliser une f-string, que vous maîtrisez maintenant très bien :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ville <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Ville : "</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>requete <span class="op">=</span> <span class="ss">f"SELECT * FROM ventes WHERE ville = '</span><span class="sc">{</span>ville<span class="sc">}</span><span class="ss">'"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>🧠 À vous de réfléchir : un utilisateur malveillant
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un utilisateur tape la saisie suivante :</p>
+<pre><code>Lyon' OR '1'='1</code></pre>
+<ol type="1">
+<li>Écrivez la requête SQL obtenue après remplacement dans la f-string.</li>
+<li>Combien de lignes renvoie-t-elle ? Les ventes de Lyon seulement ?</li>
+<li>Imaginez que la table contienne des données confidentielles, ou que la requête soit un <code>DELETE</code>. Quel est le risque ?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Voir la solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La requête devient :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> ventes <span class="kw">WHERE</span> ville <span class="op">=</span> <span class="st">'Lyon'</span> <span class="kw">OR</span> <span class="st">'1'</span><span class="op">=</span><span class="st">'1'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La condition <code>'1'='1'</code> est toujours vraie : la requête renvoie <strong>toutes les lignes de la table</strong> (les 6 ventes, et pas seulement les 3 de Lyon). L’utilisateur a réussi à <strong>modifier la requête</strong> en glissant du SQL dans sa saisie.</p>
+<p>C’est une <strong>injection SQL</strong>, l’une des failles de sécurité les plus répandues et les plus graves : elle permet de lire des données confidentielles, de contourner un mot de passe, voire de supprimer des tables entières.</p>
+<p>La solution, ce sont les <strong>requêtes paramétrées</strong>, avec les <code>?</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>curseur <span class="op">=</span> connexion.execute(<span class="st">"SELECT * FROM ventes WHERE ville = ?"</span>, (ville,))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>sqlite3</code> transmet alors la valeur <strong>séparément</strong> de la requête : elle est toujours traitée comme une simple valeur, jamais comme du code SQL. Avec la même saisie malveillante, la requête cherche une ville qui s’appelle littéralement <code>Lyon' OR '1'='1</code>… et ne renvoie <strong>aucune</strong> ligne.</p>
+<p>Attention au détail de syntaxe : <code>(ville,)</code> avec une virgule, car les paramètres doivent être un <strong>tuple</strong>, même s’il n’y en a qu’un.</p>
+</div>
+</div>
+</div>
+<p>La règle est simple et ne souffre aucune exception : <strong>dès qu’une valeur vient de l’extérieur</strong> (un utilisateur, un fichier, une API), <strong>elle passe par un paramètre</strong>, jamais par une f-string.</p>
+<hr>
+</section>
+<section id="au-delà-de-sqlite-les-autres-bases" class="level2">
+<h2 class="anchored" data-anchor-id="au-delà-de-sqlite-les-autres-bases">Au-delà de SQLite : les autres bases</h2>
+<section id="un-pilote-par-base" class="level3">
+<h3 class="anchored" data-anchor-id="un-pilote-par-base">Un pilote par base</h3>
+<p><code>sqlite3</code> ne sait parler qu’à SQLite. Pour les autres bases, il faut installer un <strong>pilote</strong> (<em>driver</em>), une bibliothèque qui sait dialoguer avec ce SGBD précis :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Base de données</th>
+<th>Pilote Python courant</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SQLite</td>
+<td><code>sqlite3</code> (fourni avec Python)</td>
+</tr>
+<tr class="even">
+<td>PostgreSQL</td>
+<td><code>psycopg2</code> ou <code>psycopg</code> (sa version 3)</td>
+</tr>
+<tr class="odd">
+<td>MySQL / MariaDB</td>
+<td><code>pymysql</code>, <code>mysql-connector-python</code></td>
+</tr>
+<tr class="even">
+<td>SQL Server</td>
+<td><code>pyodbc</code></td>
+</tr>
+<tr class="odd">
+<td>Oracle</td>
+<td><code>oracledb</code></td>
+</tr>
+</tbody>
+</table>
+<p>Bonne nouvelle : ils suivent tous la même norme Python (la <strong>DB-API</strong>). Vous retrouverez donc partout <code>connect()</code>, <code>execute()</code>, <code>fetchall()</code>, <code>commit()</code> et <code>close()</code>. La principale différence est l’<strong>adresse de connexion</strong> : un serveur, un port, un identifiant, un mot de passe, au lieu d’un simple nom de fichier.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> psycopg2</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>connexion <span class="op">=</span> psycopg2.<span class="ex">connect</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    host<span class="op">=</span><span class="st">"mon-serveur.exemple.fr"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    port<span class="op">=</span><span class="dv">5432</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    dbname<span class="op">=</span><span class="st">"entreprise"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    user<span class="op">=</span><span class="st">"analyste"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    password<span class="op">=</span><span class="st">"..."</span>,   <span class="co"># voir l'encadré ci-dessous !</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Petite différence de syntaxe : selon le pilote, les paramètres s’écrivent <code>?</code> (SQLite) ou <code>%s</code> (PostgreSQL, MySQL).</p>
+</section>
+<section id="sqlalchemy-une-seule-façon-décrire-pour-toutes-les-bases" class="level3">
+<h3 class="anchored" data-anchor-id="sqlalchemy-une-seule-façon-décrire-pour-toutes-les-bases">SQLAlchemy : une seule façon d’écrire pour toutes les bases</h3>
+<p><strong>SQLAlchemy</strong> est une bibliothèque qui se place <strong>au-dessus</strong> des pilotes. On décrit la base à laquelle on veut se connecter avec une <strong>URL</strong>, et le reste du code est identique, quelle que soit la base :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine, text</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>engine <span class="op">=</span> create_engine(<span class="st">"sqlite:///ventes.db"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour PostgreSQL, seule l'URL changerait :</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># engine = create_engine("postgresql+psycopg2://analyste:motdepasse@mon-serveur:5432/entreprise")</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> engine.<span class="ex">connect</span>() <span class="im">as</span> connexion:</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    resultat <span class="op">=</span> connexion.execute(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        text(<span class="st">"SELECT produit, prix FROM ventes WHERE ville = :ville"</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"ville"</span>: <span class="st">"Paris"</span>},</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(resultat.fetchall())</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># [('Souris', 19.9), ('Écran', 189.0)]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Remarquez les paramètres nommés (<code>:ville</code>), remplis par un <strong>dictionnaire</strong> : c’est plus lisible que des <code>?</code>, et toujours protégé contre les injections. Et ici, le <code>with</code> ferme bien la connexion à la fin du bloc.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Jamais de mot de passe dans le code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un mot de passe écrit en clair dans un script finit tôt ou tard sur GitHub, dans un mail ou dans une capture d’écran. Stockez-le plutôt dans une <strong>variable d’environnement</strong>, et lisez-le dans le script :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>mot_de_passe <span class="op">=</span> os.environ[<span class="st">"DB_PASSWORD"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Sur SSP Cloud, l’espace « Mes secrets » permet de stocker ces valeurs et de les injecter comme variables d’environnement dans vos services.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="le-pont-entre-sql-et-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="le-pont-entre-sql-et-pandas">Le pont entre SQL et pandas</h2>
+<p>Une liste de tuples, c’est pratique pour quelques lignes. Mais pour analyser des données, vous utiliserez <strong>pandas</strong>, que nous verrons dans le module suivant. Bonne nouvelle : pandas sait lire directement le résultat d’une requête SQL, avec <code>pd.read_sql()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>connexion <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">"ventes.db"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>ventes_lyon <span class="op">=</span> pd.read_sql(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT * FROM ventes WHERE ville = ?"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    connexion,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    params<span class="op">=</span>(<span class="st">"Lyon"</span>,),       <span class="co"># toujours des requêtes paramétrées !</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ventes_lyon)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>   id  produit ville  quantite   prix
+0   1  Clavier  Lyon         2   49.9
+1   3    Écran  Lyon         1  189.0
+2   6   Souris  Lyon         4   19.9</code></pre>
+<p>Le résultat arrive directement dans un <strong>DataFrame</strong>, avec les noms de colonnes de la table. Plus besoin de <code>fetchall()</code> ni de boucle.</p>
+<p>Le chemin inverse existe aussi : <code>to_sql()</code> enregistre un DataFrame dans une table de la base, par exemple pour sauvegarder le résultat d’une analyse.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ventes_lyon.to_sql(<span class="st">"ventes_lyon"</span>, connexion, if_exists<span class="op">=</span><span class="st">"replace"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>connexion.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>if_exists="replace"</code> remplace la table si elle existe déjà (<code>"append"</code> ajouterait les lignes à la suite), et <code>index=False</code> évite d’enregistrer l’index du DataFrame comme une colonne.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><code>sqlite3</code> ou SQLAlchemy ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Avec SQLite, on peut passer directement la connexion <code>sqlite3</code> à pandas. Pour toutes les autres bases (PostgreSQL, MySQL…), pandas attend un <strong>engine SQLAlchemy</strong> : <code>pd.read_sql("SELECT ...", engine)</code>. C’est la principale raison pour laquelle vous croiserez SQLAlchemy dans presque tous les projets data.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Qui fait le travail : la base ou pandas ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>SQL et pandas savent tous les deux filtrer, trier et agréger. Alors, qui doit s’en charger ?</p>
+<p>La règle pratique : <strong>filtrez et agrégez dans la base, analysez dans pandas</strong>. Si la table contient 50 millions de lignes et que vous n’avez besoin que des ventes de Lyon en 2026, écrivez <code>WHERE</code> dans la requête : la base est optimisée pour ça, et vous évitez de rapatrier des gigaoctets de données inutiles dans la mémoire de votre ordinateur. Un <code>SELECT *</code> sur une grosse table de production est un excellent moyen de faire planter son notebook… et d’énerver l’équipe qui gère la base.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>🦆 Teasing : et DuckDB ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>SQLite est conçu pour <strong>enregistrer</strong> des données au fil de l’eau : une commande, un compte, une ligne à la fois. Pour <strong>analyser</strong> de gros volumes (des millions de lignes, des agrégations, des jointures), il existe une base de la même famille, elle aussi sans serveur et tenant dans un fichier : <strong>DuckDB</strong>.</p>
+<p>Son petit tour de magie : elle sait interroger <strong>directement un fichier CSV ou Parquet</strong> en SQL, sans rien importer au préalable.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>duckdb.sql(<span class="st">"""</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT ville, SUM(quantite * prix) AS chiffre_affaires</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM 'ventes.csv'</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY ville</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nous lui consacrerons un module entier plus tard. 😉</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>À retenir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Les données vivent dans des <strong>fichiers d’échange</strong> (CSV, Excel), des <strong>bases de données</strong> ou des <strong>fichiers Parquet</strong> interrogés en SQL. Une base sert à faire tourner une application ou à analyser : c’est l’<strong>usage</strong> qui compte, pas le logiciel. Un CSV exporté n’est qu’une photo figée.</li>
+<li>Une base relationnelle range les données dans des <strong>tables</strong> typées, qu’on interroge en <strong>SQL</strong>.</li>
+<li><strong>SQLite</strong> tient dans un simple fichier, sans serveur, et <code>sqlite3</code> est fourni avec Python : idéal pour apprendre, et très utilisé en vrai.</li>
+<li>Le cycle est toujours le même : <code>connect()</code>, <code>execute()</code>, <code>fetchall()</code>, <code>commit()</code> si on modifie, <code>close()</code>.</li>
+<li><strong>Jamais de f-string</strong> pour insérer une valeur dans une requête : utilisez des <strong>requêtes paramétrées</strong> (<code>?</code>, <code>%s</code> ou <code>:nom</code>), sinon gare à l’injection SQL.</li>
+<li>Chaque base a son <strong>pilote</strong> (<code>psycopg2</code> pour PostgreSQL…), et <strong>SQLAlchemy</strong> permet d’écrire le même code pour toutes, en changeant seulement l’URL.</li>
+<li><code>pd.read_sql()</code> charge le résultat d’une requête dans un DataFrame, <code>to_sql()</code> fait le chemin inverse. <strong>Filtrez dans la base, analysez dans pandas.</strong></li>
+<li>Les mots de passe ne s’écrivent jamais dans le code : utilisez des <strong>variables d’environnement</strong>.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python_data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../03-initiation-python/07-scripts-jeux.html" class="pagination-link" aria-label="Scripts et jeux">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Scripts et jeux</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../logs/index.html" class="pagination-link" aria-label="Logs">
+        <span class="nav-page-text">Logs</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python_data/edit/main/03-initiation-python/08-python-sql.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
