@@ -1,0 +1,154 @@
+---
+title: "Reproductibilité des projets"
+format:
+  html: default
+  revealjs:
+    output-file: index-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+Vous avez sûrement déjà entendu (ou prononcé) cette phrase : **« Pourtant, ça marche sur ma machine ! ¯\_(ツ)_/¯»**. Vous envoyez votre script à un collègue, il le lance, et il obtient une erreur `ModuleNotFoundError`, un résultat différent, ou un code illisible qu'il n'ose pas modifier.
+
+Jusqu'ici, vous avez travaillé dans un environnement identique pour tout le monde (voir la partie [Environnement](../02-environnement/index.qmd)). C'est confortable, mais dans la vraie vie un projet doit pouvoir **tourner ailleurs** : sur l'ordinateur d'un collègue, sur un serveur, dans six mois sur votre propre machine. C'est ce qu'on appelle la **reproductibilité**.
+
+Cette partie vous présente les outils qui permettent d'y arriver.
+
+## Qu'est-ce qu'un projet reproductible ?
+
+Un projet est reproductible quand **une autre personne peut le récupérer, l'installer et obtenir le même résultat que vous**, sans vous appeler au secours.
+
+Pour cela, trois choses doivent être maîtrisées :
+
+| Ce qui peut varier | Exemple de problème | Outil qui règle le problème |
+|---|---|---|
+| Les **bibliothèques** et leurs versions | `pandas` 2 chez vous, `pandas` 3 chez votre collègue | `uv` |
+| La **version de Python** | Python 3.13 chez vous, 3.9 sur le serveur | `uv` |
+| Le **code** lui-même (lisibilité, erreurs bêtes) | imports inutilisés, style différent selon les personnes | `ruff` |
+| Le **système** autour (OS, librairies système) | ça marche sur Mac, pas sur le serveur Linux | `Docker` |
+
+:::{.callout-note}
+## Une analogie : la recette de cuisine
+
+Votre code, c'est la recette. Mais si vous écrivez seulement « mettre de la farine », chacun prendra la farine qu'il a sous la main et le gâteau sera différent à chaque fois.
+
+- `uv` écrit **la liste de courses exacte** : la marque et le paquet précis de farine.
+- `ruff` relit la recette pour qu'elle soit **claire et sans faute**.
+- `Docker` fournit **la cuisine entière** : même four, mêmes ustensiles, partout.
+
+:::
+
+## `uv` : gérer Python et les dépendances
+
+Vous avez déjà installé des bibliothèques avec `pip install pandas`. Le problème : rien ne garde la trace de **quelle version** a été installée, et toutes vos bibliothèques finissent mélangées dans le même Python, d'un projet à l'autre.
+
+[`uv`](https://docs.astral.sh/uv/) règle ces problèmes en un seul outil :
+
+- il crée un **environnement virtuel** propre à chaque projet (un dossier `.venv`) ;
+- il installe la **bonne version de Python** si besoin ;
+- il note les dépendances dans `pyproject.toml` et **fige les versions exactes** dans `uv.lock` ;
+- il est **très rapide** (vraiment important quand on a connu les lenteurs de `pip`).
+
+
+## `ruff` : un code propre et homogène
+
+Un code reproductible doit aussi être **lisible par les autres**. [`ruff`](https://docs.astral.sh/ruff/) fait deux choses :
+
+- **linter** (`ruff check`) : il repère les erreurs et les mauvaises pratiques (imports inutilisés, variables jamais utilisées...) ;
+- **formateur** (`ruff format`) : il réécrit votre code avec un style standard (espaces, sauts de ligne, indentation).
+
+Prenons ce fichier `calcul.py`, écrit un peu vite :
+
+```python
+import os
+import pandas as pd
+def stock_total(stocks):
+    total=0
+    for s in stocks: total+=s
+    return total
+```
+
+```bash
+uv run ruff check calcul.py
+```
+
+```
+calcul.py:1:1: I001 [*] Import block is un-sorted or un-formatted
+calcul.py:1:8: F401 [*] `os` imported but unused
+calcul.py:2:18: F401 [*] `pandas` imported but unused
+Found 3 errors.
+[*] 3 fixable with `--fix`.
+```
+
+Et après `uv run ruff format calcul.py` :
+
+```python
+import os
+import pandas as pd
+
+
+def stock_total(stocks):
+    total = 0
+    for s in stocks:
+        total += s
+    return total
+```
+
+:::{.callout-tip}
+## Une bonne habitude
+
+Le formateur ne supprime pas les imports inutiles, c'est le rôle du linter. Lancez les deux : `ruff check --fix` puis `ruff format`. Dans VS Code, l'extension *Ruff* peut le faire automatiquement à chaque sauvegarde.
+:::
+
+:::{.callout-important}
+## Pourquoi c'est important
+
+Quand tout le monde formate son code de la même manière, les différences entre deux versions d'un fichier ne montrent **que les vrais changements**, pas des espaces déplacés.
+:::
+
+## `Docker` : emporter tout l'environnement
+
+`uv` fige Python et les bibliothèques. Mais il reste tout ce qu'il y a **autour** : le système d'exploitation, certaines librairies système, les variables d'environnement...
+
+[`Docker`](https://docs.docker.com/get-started/) permet d'empaqueter votre projet **avec son système** dans une **image**. Cette image se lance ensuite à l'identique partout sous forme de **conteneur** : sur votre machine, chez un collègue, sur un serveur.
+
+La recette d'une image s'écrit dans un fichier `Dockerfile`. Voici à quoi il ressemble pour un projet géré avec `uv` :
+
+```dockerfile
+FROM python:3.13-slim                                   # On préferera toujours une utiliser une image légère
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/  # À adapter selon votre registry d'image
+
+WORKDIR /app
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev --no-install-project
+
+COPY . .
+RUN uv sync --frozen --no-dev
+
+CMD ["uv", "run", "main.py"]
+```
+
+Remarquez que le `Dockerfile` **s'appuie sur `uv.lock`** : les outils se complètent, ils ne se remplacent pas.
+
+:::{.callout-note}
+## Un peu de vocabulaire : image ou conteneur ?
+
+L'**image** est le plat surgelé : préparé une fois, toujours identique. Le **conteneur** est le plat réchauffé et servi : on peut en lancer autant qu'on veut à partir de la même image.
+:::
+
+## Pour aller plus loin
+
+Ces outils sont utilisés de bout en bout dans le projet [MEDAS Financial Reporting](https://surybang.github.io/MEDAS-Financial-Reporting/) : `uv` pour structurer le projet, `ruff` et `pytest` dans l'intégration continue, puis `Docker` et `ArgoCD` pour la mise en production.
+
+:::{.callout-important}
+## À retenir
+- Un projet reproductible tourne **à l'identique chez quelqu'un d'autre**, sans aide.
+- `uv` gère la version de Python, l'environnement virtuel et les dépendances.
+- `pyproject.toml` décrit ce dont le projet a besoin, `uv.lock` fige les versions exactes.
+- `ruff check` repère les erreurs, `ruff format` uniformise le style.
+- `Docker` empaquette le projet **avec son système** dans une image.
+:::
