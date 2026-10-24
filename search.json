@@ -911,6 +911,251 @@
     "text": "Slicing et copie\n\n\n\n\n\n\n🧠 À vous de réfléchir\n\n\nObservez le code suivant sans l’exécuter :\na = [1, 2, 3]\nb = a\nc = a[:]\n\nb.append(4)\nprint(a)  # ?\nprint(c)  # ?\nQu’affichent les deux print ? Dessinez ce qui se passe en mémoire, puis vérifiez.\n\n\n\n\n\n\n\n\n\n💡 Voir la solution\n\n\nprint(a)  # [1, 2, 3, 4]  → modifiée via b, car a et b désignent la même liste\nprint(c)  # [1, 2, 3]     → c est une nouvelle liste, elle n'est pas affectée\nb.append(4) modifie la liste que a et b désignent toutes les deux. c, créée par slicing, est un objet à part : elle ne bouge pas.\n\n\n\n\n\n\n\n\n\nWarning\n\n\nLe slicing ne modifie jamais la séquence originale : il retourne toujours une nouvelle séquence."
   },
   {
+    "objectID": "05-projet-reproductible/uv.html",
+    "href": "05-projet-reproductible/uv.html",
+    "title": "Gérer ses projets avec uv",
+    "section": "",
+    "text": "Depuis le début du cours, quand une bibliothèque manquait, vous avez tapé pip install et c’était réglé. Ça fonctionne… jusqu’au jour où vous travaillez sur deux projets qui demandent deux versions différentes de pandas pour des raisons obscures.\nCe chapitre vous montre comment uv règle ces problèmes, avec un fil rouge : un petit projet suivi-stocks qui lit un état des stocks de palettes et de cartons.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#le-problème-un-seul-python-pour-tout",
+    "href": "05-projet-reproductible/uv.html#le-problème-un-seul-python-pour-tout",
+    "title": "Gérer ses projets avec uv",
+    "section": "Le problème : un seul Python pour tout",
+    "text": "Le problème : un seul Python pour tout\nQuand vous faites pip install pandas, la bibliothèque est installée dans le Python de votre machine, partagé par tous vos projets. Résultat :\n\nle projet A a besoin de pandas 2, le projet B de pandas 3 : impossible d’avoir les deux ;\nau bout de quelques mois, plus personne ne sait quelles bibliothèques sont réellement utiles à quel projet ;\nvotre collègue ne sait pas ce qu’il doit installer pour faire tourner votre code.\n\n\n\n\n\n\n\nNoteL’environnement virtuel, en coulisses\n\n\n\nLa solution classique s’appelle un environnement virtuel : un dossier (par convention .venv) qui contient une copie isolée de Python et uniquement les bibliothèques d’un projet. Chaque projet a le sien, ils ne se marchent plus dessus.\nAvant, il fallait le créer, l’activer, puis y installer les dépendances à la main. uv fait tout cela pour vous.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#installer-uv",
+    "href": "05-projet-reproductible/uv.html#installer-uv",
+    "title": "Gérer ses projets avec uv",
+    "section": "Installer uv",
+    "text": "Installer uv\nSur SSP Cloud, uv est déjà disponible dans les services VS Code. En local, suivez la page d’installation officielle.\nAvec pip, la plus simple si Python est déjà installé :\npip install uv\nAvec le script officiel, qui n’a pas besoin de Python (pour Linux et Mac):\ncurl -LsSf https://astral.sh/uv/install.sh | sh\nPuis vérifiez :\nuv --version\nVous devriez voir la version de uv s’afficher dans votre terminal.\n\n\n\n\n\n\nTip\n\n\n\nuv peut lui-même installer Python : vous n’avez pas besoin d’installer Python avant. C’est une des raisons pour lesquelles il simplifie autant les installations en local.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#créer-un-projet",
+    "href": "05-projet-reproductible/uv.html#créer-un-projet",
+    "title": "Gérer ses projets avec uv",
+    "section": "Créer un projet",
+    "text": "Créer un projet\nuv init suivi-stocks\ncd suivi-stocks\nInitialized project `suivi-stocks` at `/home/onyxia/work/suivi-stocks`\nuv crée un dossier avec ces fichiers :\n\n\n\n\n\n\n\nFichier\nRôle\n\n\n\n\npyproject.toml\nLa carte d’identité du projet : nom, version de Python, dépendances\n\n\n.python-version\nLa version de Python à utiliser (ici 3.13)\n\n\nmain.py\nUn premier script d’exemple\n\n\nREADME.md\nLa documentation du projet\n\n\n.gitignore\nCe que Git doit ignorer (dont .venv)\n\n\n\nLe pyproject.toml ressemble à ceci :\n[project]\nname = \"suivi-stocks\"\nversion = \"0.1.0\"\ndescription = \"Add your description here\"\nreadme = \"README.md\"\nrequires-python = \"&gt;=3.13\"\ndependencies = []\nLa liste dependencies est vide : le projet n’a encore besoin de rien.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#ajouter-une-dépendance",
+    "href": "05-projet-reproductible/uv.html#ajouter-une-dépendance",
+    "title": "Gérer ses projets avec uv",
+    "section": "Ajouter une dépendance",
+    "text": "Ajouter une dépendance\nuv add pandas\nInstalled 5 packages in 19ms\n + numpy==2.5.4\n + pandas==3.1.0\n + python-dateutil==3.0.0\n + six==1.17.0\n + tzdata==2026.5\nTrois choses se sont passées d’un coup :\n\nuv a créé le dossier .venv (s’il n’existait pas) ;\nil a installé pandas et ses propres dépendances (numpy, etc.) dans .venv ;\nil a mis à jour pyproject.toml et créé le fichier uv.lock.\n\ndependencies = [\n    \"pandas&gt;=3.1.0\",\n]\nPour retirer une bibliothèque, c’est symétrique : uv remove pandas.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#lancer-son-code",
+    "href": "05-projet-reproductible/uv.html#lancer-son-code",
+    "title": "Gérer ses projets avec uv",
+    "section": "Lancer son code",
+    "text": "Lancer son code\nOn remplace le contenu de main.py :\nimport pandas as pd\n\nstocks = pd.DataFrame({\"produit\": [\"palette\", \"carton\"], \"quantite\": [12, 40]})\nprint(stocks)\nEt on le lance avec uv run :\nuv run main.py\n   produit  quantite\n0  palette        12\n1   carton        40\nuv run lance le script dans l’environnement du projet, sans que vous ayez à activer quoi que ce soit. Avant de lancer, il vérifie même que l’environnement est à jour avec pyproject.toml.\n\n\n\n\n\n\nWarningLe piège classique\n\n\n\nSi vous lancez python main.py directement, vous utilisez le Python de la machine, pas celui du projet. Selon ce qui y est installé, le script fonctionnera… ou pas. Prenez l’habitude de toujours passer par uv run.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#pyproject.toml-et-uv.lock-deux-fichiers-deux-rôles",
+    "href": "05-projet-reproductible/uv.html#pyproject.toml-et-uv.lock-deux-fichiers-deux-rôles",
+    "title": "Gérer ses projets avec uv",
+    "section": "pyproject.toml et uv.lock : deux fichiers, deux rôles",
+    "text": "pyproject.toml et uv.lock : deux fichiers, deux rôles\n\n\n\n\n\n\n\n\n\npyproject.toml\nuv.lock\n\n\n\n\nQui l’écrit ?\nVous (via uv add)\nuv, automatiquement\n\n\nCe qu’il contient\nCe dont le projet a besoin : pandas&gt;=3.1.0\nLes versions exactes de tout : pandas 3.1.0, numpy 2.5.4…\n\n\nSe modifie à la main ?\nOui, si besoin\nJamais\n\n\n\n\n\n\n\n\n\nNoteUne analogie : la commande et le bon de livraison\n\n\n\npyproject.toml, c’est le bon de commande : « je veux des palettes, au moins du modèle 2024 ».\nuv.lock, c’est le bon de livraison : il liste exactement ce qui a été livré, avec les références précises, y compris les vis et les sangles que vous n’aviez pas demandées explicitement mais qui étaient nécessaires (les dépendances des dépendances).\nPour reproduire la même livraison, c’est le bon de livraison qu’il faut transmettre.\n\n\nPour voir l’arbre complet des dépendances :\nuv tree\nsuivi-stocks v0.1.0\n└── pandas v3.1.0\n    ├── numpy v2.5.4\n    └── python-dateutil v3.0.0\n        ├── six v1.17.0\n        └── tzdata v2026.5",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#les-dépendances-de-développement",
+    "href": "05-projet-reproductible/uv.html#les-dépendances-de-développement",
+    "title": "Gérer ses projets avec uv",
+    "section": "Les dépendances de développement",
+    "text": "Les dépendances de développement\nCertains outils servent à vous, pendant que vous développez, mais pas au fonctionnement du projet : ruff, pytest, ipykernel pour les notebooks. On les ajoute dans un groupe séparé avec --dev :\nuv add --dev ruff\n[dependency-groups]\ndev = [\n    \"ruff&gt;=0.17.2\",\n]\nEt on les utilise aussi avec uv run :\nuv run ruff check .\n\n\n\n\n\n\nTip\n\n\n\nQuand on met un projet en production (dans une image Docker par exemple), on installe sans ces outils avec uv sync --no-dev. L’image est plus légère.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#récupérer-le-projet-de-quelquun-dautre",
+    "href": "05-projet-reproductible/uv.html#récupérer-le-projet-de-quelquun-dautre",
+    "title": "Gérer ses projets avec uv",
+    "section": "Récupérer le projet de quelqu’un d’autre",
+    "text": "Récupérer le projet de quelqu’un d’autre\nC’est là que tout prend son sens. Votre collègue clone votre projet. Il a pyproject.toml, uv.lock et .python-version, mais pas de .venv. Il tape une seule commande :\nuv sync\nUsing CPython 3.13.17\nCreating virtual environment at: .venv\nInstalled 6 packages in 22ms\n + numpy==2.5.4\n + pandas==3.1.0\n + python-dateutil==3.0.0\n + ruff==0.17.2\n + six==1.17.0\n + tzdata==2026.5\nIl obtient exactement les mêmes versions que vous, grâce à uv.lock. Si la bonne version de Python n’est pas installée sur sa machine, uv la télécharge.\n\n\n\n\n\n\nImportantPourquoi on ne partage jamais .venv\n\n\n\nLe dossier .venv est lourd (souvent plusieurs centaines de Mo) et dépend du système sur lequel il a été créé : un .venv créé sur Mac ne fonctionne pas sur Linux ou Windows. On partage la recette (pyproject.toml + uv.lock), pas le plat cuisiné. uv sync le recrée en quelques secondes.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#choisir-sa-version-de-python",
+    "href": "05-projet-reproductible/uv.html#choisir-sa-version-de-python",
+    "title": "Gérer ses projets avec uv",
+    "section": "Choisir sa version de Python",
+    "text": "Choisir sa version de Python\nLa version est notée dans .python-version. Pour en changer :\nuv python pin 3.12\nPour voir les versions disponibles et installées :\nuv python list\n\n\n\n\n\n\nWarningEn entreprise, uv ne peut pas toujours télécharger Python\n\n\n\nQuand la version demandée n’est pas installée sur la machine, uv la télécharge depuis internet (sur GitHub). Sur un poste ou un serveur d’entreprise, c’est souvent bloqué par le proxy ou la politique de sécurité : la commande échoue ou reste bloquée.\nDans ce cas, la démarche est différente :\n\nFaire installer les versions de Python nécessaires par le service informatique (ou via le gestionnaire de logiciels de l’entreprise).\nInterdire à uv de télécharger Python, pour qu’il utilise uniquement les versions déjà installées. Dans pyproject.toml :\n[tool.uv]\npython-downloads = \"never\"\npython-preference = \"only-system\"\nou, pour toute votre session, la variable d’environnement UV_PYTHON_DOWNLOADS=never.\nVérifier les versions que uv trouve sur la machine :\nuv python list --only-installed\nPointer vers l’interpréteur voulu avec son chemin, plutôt qu’un simple numéro de version :\nuv python pin /usr/bin/python3.12\nuv sync\nSous Windows, le chemin ressemble plutôt à C:\\Program Files\\Python312\\python.exe.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#choisir-le-bon-type-de-projet",
+    "href": "05-projet-reproductible/uv.html#choisir-le-bon-type-de-projet",
+    "title": "Gérer ses projets avec uv",
+    "section": "Choisir le bon type de projet",
+    "text": "Choisir le bon type de projet\nJusqu’ici, uv init a créé un projet « application » : un main.py à la racine, rien d’installable. C’est le comportement par défaut, parfait pour une analyse ou un script de reporting. Mais uv init sait créer d’autres structures selon ce que vous voulez faire.\n\n\n\n\n\n\n\n\nOption\nCe que vous obtenez\nQuand l’utiliser\n\n\n\n\n(aucune) ou --app\nmain.py à la racine, pas de [build-system]\nUne analyse, un script, un petit outil interne\n\n\n--package\nUn dossier src/nom/, un point d’entrée, un [build-system]\nUne application qu’on veut installer et lancer par une commande\n\n\n--lib\nUn dossier src/nom/ avec py.typed, sans point d’entrée\nUne bibliothèque de fonctions réutilisée par d’autres projets\n\n\n--script\nUn fichier .py seul, avec ses dépendances écrites dedans\nUn script jetable ou à partager par mail\n\n\n\n\n--package : la structure src/\nuv init --package suivi-stocks\nsuivi-stocks/\n├── .gitignore\n├── .python-version\n├── README.md\n├── pyproject.toml\n└── src/\n    └── suivi_stocks/\n        └── __init__.py\nNotez le nom du dossier : suivi_stocks avec un underscore. Un nom de module Python ne peut pas contenir de tiret. uv fait la conversion pour vous.\nLe pyproject.toml gagne deux sections :\n[project.scripts]\nsuivi-stocks = \"suivi_stocks:main\"\n\n[build-system]\nrequires = [\"uv_build&gt;=0.11.32,&lt;0.12.0\"]\nbuild-backend = \"uv_build\"\n\n[project.scripts] crée une commande : uv run suivi-stocks appelle la fonction main() du fichier src/suivi_stocks/__init__.py.\n[build-system] indique comment installer votre code comme un vrai package. Sans lui, vos imports entre fichiers du projet ne fonctionneraient pas.\n\nuv run suivi-stocks\nHello from suivi-stocks!\n\n\n\n\n\n\nImportantPourquoi un dossier src/ ?\n\n\n\nCe que disent les standards. Le packaging Python est encadré par des PEP (Python Enhancement Proposals), les documents qui font évoluer le langage et son écosystème :\n\nla PEP 518 introduit le fichier pyproject.toml et la section [build-system] ;\nla PEP 517 définit comment un outil construit un package à partir de ce fichier ;\nla PEP 621 standardise la section [project] (nom, version, dépendances) ;\nla PEP 660 permet d’installer son projet en mode « éditable », ce que fait uv : vos modifications sont prises en compte sans réinstaller.\n\nAucune PEP n’impose src/, mais c’est la structure recommandée par le guide officiel de packaging, et celle que uv, hatch ou poetry proposent pour un package.\nCe que ça change concrètement. Quand vous lancez Python, le dossier courant est automatiquement ajouté aux endroits où il cherche les modules. Sans src/, import suivi_stocks peut donc fonctionner « par accident », simplement parce que le dossier est à côté, même si le package est mal installé ou mal configuré. Avec src/, ce raccourci n’existe plus : votre code n’est importable que s’il est correctement installé, exactement comme chez la personne qui l’installera après vous.\nLes bonnes pratiques qui en découlent :\n\nle code du package vit dans src/, séparé des tests (tests/), des notebooks, de la documentation et de la configuration ;\nles tests s’exécutent contre la version installée du package, pas contre des fichiers qui traînent dans le dossier ;\nce qui sera distribué est clairement délimité : tout ce qui est dans src/nom_du_package/, et rien d’autre.\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nVous avez déjà un dossier de travail ? Placez-vous dedans et lancez uv init --package . (avec le point) : uv crée la structure sur place au lieu de créer un nouveau dossier.\n\n\n\n\n--lib : une boîte à outils\n--lib ressemble à --package, mais sans commande à lancer : on ne « lance » pas une bibliothèque, on l’importe. Par exemple, un ensemble de fonctions de calcul de stock de sécurité que trois projets différents réutilisent.\nLe petit fichier py.typed signale aux éditeurs que vos fonctions contiennent des annotations de type (-&gt; None, : int), ce qui améliore l’autocomplétion de ceux qui utilisent votre bibliothèque.\n\n\n--script : un fichier qui se suffit à lui-même\nParfois, un projet complet est disproportionné : vous voulez juste envoyer un script rapport.py à un collègue. uv sait écrire les dépendances dans le fichier lui-même :\nuv init --script rapport.py\nuv add --script rapport.py pandas\n# /// script\n# requires-python = \"&gt;=3.13\"\n# dependencies = [\n#     \"pandas&gt;=3.1.0\",\n# ]\n# ///\n\n\ndef main() -&gt; None:\n    print(\"Hello from rapport.py!\")\n\n\nif __name__ == \"__main__\":\n    main()\nLe bloc entre # /// est un standard Python (la PEP 723). Votre collègue lance uv run rapport.py et uv installe pandas dans un environnement temporaire, sans pyproject.toml ni .venv dans le dossier.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#utiliser-un-outil-sans-linstaller-dans-le-projet",
+    "href": "05-projet-reproductible/uv.html#utiliser-un-outil-sans-linstaller-dans-le-projet",
+    "title": "Gérer ses projets avec uv",
+    "section": "Utiliser un outil sans l’installer dans le projet",
+    "text": "Utiliser un outil sans l’installer dans le projet\nCertains outils n’ont rien à faire dans les dépendances de votre projet : vous voulez juste les utiliser.\n\n\n\n\n\n\n\nJe veux…\nCommande\n\n\n\n\nLancer un outil une fois, dans un environnement jetable\nuvx ruff check .\n\n\nInstaller un outil pour l’avoir partout sur ma machine\nuv tool install ruff\n\n\nTester une bibliothèque sans l’ajouter au projet\nuv run --with rich main.py\n\n\n\nuvx est simplement un raccourci de uv tool run. Avec --with, la bibliothèque est disponible pour cette exécution seulement : pyproject.toml n’est pas modifié.\n\n\n\n\n\n\nWarningLe piège de --with\n\n\n\nSi votre code a réellement besoin de la bibliothèque, ajoutez-la avec uv add. Un projet qui ne fonctionne qu’avec --with n’est plus reproductible : votre collègue n’en saura rien.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#pour-aller-plus-loin",
+    "href": "05-projet-reproductible/uv.html#pour-aller-plus-loin",
+    "title": "Gérer ses projets avec uv",
+    "section": "Pour aller plus loin",
+    "text": "Pour aller plus loin\n\n\n\n\n\n\nNotePartie avancée, dépliez si vous êtes à l’aise\n\n\n\n\n\nContraindre une version. uv add \"pandas==3.0.*\" impose la série 3.0. Restez souple par défaut (&gt;=) : c’est uv.lock qui garantit la reproductibilité, pas pyproject.toml.\nMettre à jour les dépendances. uv lock --upgrade remonte tout à la dernière version compatible, uv lock --upgrade-package pandas seulement pandas. Lancez vos tests après !\nDes groupes de dépendances sur mesure. En plus de dev, vous pouvez créer vos propres groupes : uv add --group docs quarto-cli. On les installe avec uv sync --group docs et on les exclut avec --no-group docs. Le dépôt de ce cours utilise justement un groupe docs.\nDes dépendances optionnelles. uv add --optional excel openpyxl crée un « extra » : les utilisateurs de votre package choisissent de l’installer (suivi-stocks[excel]). La différence avec un groupe : un extra est publié avec le package, un groupe reste chez vous.\nLes variables d’environnement. uv run --env-file .env main.py charge les variables d’un fichier .env (mots de passe, chemins MinIO…) uniquement pour cette exécution, sans les écrire dans le code.\nGérer la version de son projet. uv version --bump minor fait passer la version de 0.1.0 à 0.2.0 dans pyproject.toml (aussi major et patch).\nsuivi-stocks 0.1.0 =&gt; 0.2.0\nConstruire et publier. Pour un projet --package ou --lib, uv build produit dans dist/ les fichiers installables (.whl et .tar.gz), et uv publish les envoie sur PyPI.\nExporter pour les outils qui ne connaissent pas uv. uv export --format requirements-txt &gt; requirements.txt produit un fichier requirements.txt classique à partir de uv.lock.\nLe mode compatible pip. uv venv et uv pip install reproduisent l’ancienne façon de faire, en beaucoup plus rapide. Utile sur un projet existant qu’on ne peut pas migrer, mais rien n’est écrit dans pyproject.toml : préférez uv add dès que possible.\nLes workspaces. Plusieurs packages dans un même dépôt (une application et sa bibliothèque de calcul, par exemple) peuvent partager un seul uv.lock. Lancez uv init --lib packages/calculs depuis la racine du projet : uv l’ajoute automatiquement comme membre.\n[tool.uv.workspace]\nmembers = [\"packages/calculs\"]\n\n[tool.uv.sources]\ncalculs = { workspace = true }\nAprès uv add calculs, l’application importe la bibliothèque comme n’importe quel package, et chaque modification de calculs est prise en compte immédiatement.\nChanger de backend de build. uv init --package --build-backend hatch utilise hatchling au lieu de uv_build, si un outil de votre entreprise l’exige.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/uv.html#cheatsheet",
+    "href": "05-projet-reproductible/uv.html#cheatsheet",
+    "title": "Gérer ses projets avec uv",
+    "section": "Cheatsheet",
+    "text": "Cheatsheet\n\n\n\n\n\n\n\nJe veux…\nCommande\n\n\n\n\nCréer un projet (application)\nuv init nom-projet\n\n\nCréer un package avec src/\nuv init --package nom-projet\n\n\nCréer une bibliothèque\nuv init --lib nom-projet\n\n\nCréer un projet minimal\nuv init --bare nom-projet\n\n\nCréer un script autonome\nuv init --script script.py\n\n\nAjouter une bibliothèque\nuv add pandas\n\n\nAjouter une dépendance à un script\nuv add --script script.py pandas\n\n\nAjouter un outil de dev\nuv add --dev ruff\n\n\nRetirer une bibliothèque\nuv remove pandas\n\n\nLancer un script\nuv run main.py\n\n\nLancer un outil sans l’installer\nuvx ruff check .\n\n\nInstaller un projet récupéré\nuv sync\n\n\nVoir les dépendances\nuv tree\n\n\nMettre à jour une dépendance\nuv lock --upgrade-package pandas\n\n\nChanger de version de Python\nuv python pin 3.12\n\n\nMonter la version du projet\nuv version --bump minor\n\n\n\n\n\n\n\n\n\nImportantÀ retenir\n\n\n\n\nUn projet = un environnement virtuel .venv, géré automatiquement par uv.\nuv add ajoute une dépendance, uv run lance le code dans le bon environnement.\npyproject.toml dit ce dont le projet a besoin, uv.lock fige les versions exactes.\nOn ne modifie jamais uv.lock à la main, on le versionne toujours.\nuv sync recrée l’environnement à l’identique chez n’importe qui.\nChoisissez la structure selon l’usage : application, --package, --lib ou --script.\nLes outils de développement vont dans --dev, les outils ponctuels passent par uvx.",
+    "crumbs": [
+      "Créer des projets reproductibles",
+      "uv pour les gouverner tous"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#le-problème-un-seul-python-pour-tout",
+    "href": "05-projet-reproductible/01-uv-slides.html#le-problème-un-seul-python-pour-tout",
+    "title": "Gérer ses projets avec uv",
+    "section": "Le problème : un seul Python pour tout",
+    "text": "Le problème : un seul Python pour tout\nQuand vous faites pip install pandas, la bibliothèque est installée dans le Python de votre machine, partagé par tous vos projets. Résultat :\n\nle projet A a besoin de pandas 2, le projet B de pandas 3 : impossible d’avoir les deux ;\nau bout de quelques mois, plus personne ne sait quelles bibliothèques sont réellement utiles à quel projet ;\nvotre collègue ne sait pas ce qu’il doit installer pour faire tourner votre code.\n\n\n\n\n\n\n\nL’environnement virtuel, en coulisses\n\n\nLa solution classique s’appelle un environnement virtuel : un dossier (par convention .venv) qui contient une copie isolée de Python et uniquement les bibliothèques d’un projet. Chaque projet a le sien, ils ne se marchent plus dessus.\nAvant, il fallait le créer, l’activer, puis y installer les dépendances à la main. uv fait tout cela pour vous."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#installer-uv",
+    "href": "05-projet-reproductible/01-uv-slides.html#installer-uv",
+    "title": "Gérer ses projets avec uv",
+    "section": "Installer uv",
+    "text": "Installer uv\nSur SSP Cloud, uv est déjà disponible dans les services VS Code. En local, suivez la page d’installation officielle.\nAvec pip, la plus simple si Python est déjà installé :\npip install uv\nAvec le script officiel, qui n’a pas besoin de Python (pour Linux et Mac):\ncurl -LsSf https://astral.sh/uv/install.sh | sh\nPuis vérifiez :\nuv --version\nVous devriez voir la version de uv s’afficher dans votre terminal.\n\n\n\n\n\n\nTip\n\n\nuv peut lui-même installer Python : vous n’avez pas besoin d’installer Python avant. C’est une des raisons pour lesquelles il simplifie autant les installations en local."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#créer-un-projet",
+    "href": "05-projet-reproductible/01-uv-slides.html#créer-un-projet",
+    "title": "Gérer ses projets avec uv",
+    "section": "Créer un projet",
+    "text": "Créer un projet\nuv init suivi-stocks\ncd suivi-stocks\nInitialized project `suivi-stocks` at `/home/onyxia/work/suivi-stocks`\nuv crée un dossier avec ces fichiers :\n\n\n\n\n\n\n\nFichier\nRôle\n\n\n\n\npyproject.toml\nLa carte d’identité du projet : nom, version de Python, dépendances\n\n\n.python-version\nLa version de Python à utiliser (ici 3.13)\n\n\nmain.py\nUn premier script d’exemple\n\n\nREADME.md\nLa documentation du projet\n\n\n.gitignore\nCe que Git doit ignorer (dont .venv)\n\n\n\nLe pyproject.toml ressemble à ceci :\n[project]\nname = \"suivi-stocks\"\nversion = \"0.1.0\"\ndescription = \"Add your description here\"\nreadme = \"README.md\"\nrequires-python = \"&gt;=3.13\"\ndependencies = []\nLa liste dependencies est vide : le projet n’a encore besoin de rien."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#ajouter-une-dépendance",
+    "href": "05-projet-reproductible/01-uv-slides.html#ajouter-une-dépendance",
+    "title": "Gérer ses projets avec uv",
+    "section": "Ajouter une dépendance",
+    "text": "Ajouter une dépendance\nuv add pandas\nInstalled 5 packages in 19ms\n + numpy==2.5.4\n + pandas==3.1.0\n + python-dateutil==3.0.0\n + six==1.17.0\n + tzdata==2026.5\nTrois choses se sont passées d’un coup :\n\nuv a créé le dossier .venv (s’il n’existait pas) ;\nil a installé pandas et ses propres dépendances (numpy, etc.) dans .venv ;\nil a mis à jour pyproject.toml et créé le fichier uv.lock.\n\ndependencies = [\n    \"pandas&gt;=3.1.0\",\n]\nPour retirer une bibliothèque, c’est symétrique : uv remove pandas."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#lancer-son-code",
+    "href": "05-projet-reproductible/01-uv-slides.html#lancer-son-code",
+    "title": "Gérer ses projets avec uv",
+    "section": "Lancer son code",
+    "text": "Lancer son code\nOn remplace le contenu de main.py :\nimport pandas as pd\n\nstocks = pd.DataFrame({\"produit\": [\"palette\", \"carton\"], \"quantite\": [12, 40]})\nprint(stocks)\nEt on le lance avec uv run :\nuv run main.py\n   produit  quantite\n0  palette        12\n1   carton        40\nuv run lance le script dans l’environnement du projet, sans que vous ayez à activer quoi que ce soit. Avant de lancer, il vérifie même que l’environnement est à jour avec pyproject.toml.\n\n\n\n\n\n\nLe piège classique\n\n\nSi vous lancez python main.py directement, vous utilisez le Python de la machine, pas celui du projet. Selon ce qui y est installé, le script fonctionnera… ou pas. Prenez l’habitude de toujours passer par uv run."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#pyproject.toml-et-uv.lock-deux-fichiers-deux-rôles",
+    "href": "05-projet-reproductible/01-uv-slides.html#pyproject.toml-et-uv.lock-deux-fichiers-deux-rôles",
+    "title": "Gérer ses projets avec uv",
+    "section": "pyproject.toml et uv.lock : deux fichiers, deux rôles",
+    "text": "pyproject.toml et uv.lock : deux fichiers, deux rôles\n\n\n\n\n\n\n\n\n\npyproject.toml\nuv.lock\n\n\n\n\nQui l’écrit ?\nVous (via uv add)\nuv, automatiquement\n\n\nCe qu’il contient\nCe dont le projet a besoin : pandas&gt;=3.1.0\nLes versions exactes de tout : pandas 3.1.0, numpy 2.5.4…\n\n\nSe modifie à la main ?\nOui, si besoin\nJamais\n\n\n\n\n\n\n\n\n\nUne analogie : la commande et le bon de livraison\n\n\npyproject.toml, c’est le bon de commande : « je veux des palettes, au moins du modèle 2024 ».\nuv.lock, c’est le bon de livraison : il liste exactement ce qui a été livré, avec les références précises, y compris les vis et les sangles que vous n’aviez pas demandées explicitement mais qui étaient nécessaires (les dépendances des dépendances).\nPour reproduire la même livraison, c’est le bon de livraison qu’il faut transmettre.\n\n\n\nPour voir l’arbre complet des dépendances :\nuv tree\nsuivi-stocks v0.1.0\n└── pandas v3.1.0\n    ├── numpy v2.5.4\n    └── python-dateutil v3.0.0\n        ├── six v1.17.0\n        └── tzdata v2026.5"
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#les-dépendances-de-développement",
+    "href": "05-projet-reproductible/01-uv-slides.html#les-dépendances-de-développement",
+    "title": "Gérer ses projets avec uv",
+    "section": "Les dépendances de développement",
+    "text": "Les dépendances de développement\nCertains outils servent à vous, pendant que vous développez, mais pas au fonctionnement du projet : ruff, pytest, ipykernel pour les notebooks. On les ajoute dans un groupe séparé avec --dev :\nuv add --dev ruff\n[dependency-groups]\ndev = [\n    \"ruff&gt;=0.17.2\",\n]\nEt on les utilise aussi avec uv run :\nuv run ruff check .\n\n\n\n\n\n\nTip\n\n\nQuand on met un projet en production (dans une image Docker par exemple), on installe sans ces outils avec uv sync --no-dev. L’image est plus légère."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#récupérer-le-projet-de-quelquun-dautre",
+    "href": "05-projet-reproductible/01-uv-slides.html#récupérer-le-projet-de-quelquun-dautre",
+    "title": "Gérer ses projets avec uv",
+    "section": "Récupérer le projet de quelqu’un d’autre",
+    "text": "Récupérer le projet de quelqu’un d’autre\nC’est là que tout prend son sens. Votre collègue clone votre projet. Il a pyproject.toml, uv.lock et .python-version, mais pas de .venv. Il tape une seule commande :\nuv sync\nUsing CPython 3.13.17\nCreating virtual environment at: .venv\nInstalled 6 packages in 22ms\n + numpy==2.5.4\n + pandas==3.1.0\n + python-dateutil==3.0.0\n + ruff==0.17.2\n + six==1.17.0\n + tzdata==2026.5\nIl obtient exactement les mêmes versions que vous, grâce à uv.lock. Si la bonne version de Python n’est pas installée sur sa machine, uv la télécharge.\n\n\n\n\n\n\nPourquoi on ne partage jamais .venv\n\n\nLe dossier .venv est lourd (souvent plusieurs centaines de Mo) et dépend du système sur lequel il a été créé : un .venv créé sur Mac ne fonctionne pas sur Linux ou Windows. On partage la recette (pyproject.toml + uv.lock), pas le plat cuisiné. uv sync le recrée en quelques secondes."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#choisir-sa-version-de-python",
+    "href": "05-projet-reproductible/01-uv-slides.html#choisir-sa-version-de-python",
+    "title": "Gérer ses projets avec uv",
+    "section": "Choisir sa version de Python",
+    "text": "Choisir sa version de Python\nLa version est notée dans .python-version. Pour en changer :\nuv python pin 3.12\nPour voir les versions disponibles et installées :\nuv python list\n\n\n\n\n\n\nEn entreprise, uv ne peut pas toujours télécharger Python\n\n\nQuand la version demandée n’est pas installée sur la machine, uv la télécharge depuis internet (sur GitHub). Sur un poste ou un serveur d’entreprise, c’est souvent bloqué par le proxy ou la politique de sécurité : la commande échoue ou reste bloquée.\nDans ce cas, la démarche est différente :\n\nFaire installer les versions de Python nécessaires par le service informatique (ou via le gestionnaire de logiciels de l’entreprise).\nInterdire à uv de télécharger Python, pour qu’il utilise uniquement les versions déjà installées. Dans pyproject.toml :\n[tool.uv]\npython-downloads = \"never\"\npython-preference = \"only-system\"\nou, pour toute votre session, la variable d’environnement UV_PYTHON_DOWNLOADS=never.\nVérifier les versions que uv trouve sur la machine :\nuv python list --only-installed\nPointer vers l’interpréteur voulu avec son chemin, plutôt qu’un simple numéro de version :\nuv python pin /usr/bin/python3.12\nuv sync\nSous Windows, le chemin ressemble plutôt à C:\\Program Files\\Python312\\python.exe."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#choisir-le-bon-type-de-projet",
+    "href": "05-projet-reproductible/01-uv-slides.html#choisir-le-bon-type-de-projet",
+    "title": "Gérer ses projets avec uv",
+    "section": "Choisir le bon type de projet",
+    "text": "Choisir le bon type de projet\nJusqu’ici, uv init a créé un projet « application » : un main.py à la racine, rien d’installable. C’est le comportement par défaut, parfait pour une analyse ou un script de reporting. Mais uv init sait créer d’autres structures selon ce que vous voulez faire.\n\n\n\n\n\n\n\n\nOption\nCe que vous obtenez\nQuand l’utiliser\n\n\n\n\n(aucune) ou --app\nmain.py à la racine, pas de [build-system]\nUne analyse, un script, un petit outil interne\n\n\n--package\nUn dossier src/nom/, un point d’entrée, un [build-system]\nUne application qu’on veut installer et lancer par une commande\n\n\n--lib\nUn dossier src/nom/ avec py.typed, sans point d’entrée\nUne bibliothèque de fonctions réutilisée par d’autres projets\n\n\n--script\nUn fichier .py seul, avec ses dépendances écrites dedans\nUn script jetable ou à partager par mail\n\n\n\n--package : la structure src/\nuv init --package suivi-stocks\nsuivi-stocks/\n├── .gitignore\n├── .python-version\n├── README.md\n├── pyproject.toml\n└── src/\n    └── suivi_stocks/\n        └── __init__.py\nNotez le nom du dossier : suivi_stocks avec un underscore. Un nom de module Python ne peut pas contenir de tiret. uv fait la conversion pour vous.\nLe pyproject.toml gagne deux sections :\n[project.scripts]\nsuivi-stocks = \"suivi_stocks:main\"\n\n[build-system]\nrequires = [\"uv_build&gt;=0.11.32,&lt;0.12.0\"]\nbuild-backend = \"uv_build\"\n\n[project.scripts] crée une commande : uv run suivi-stocks appelle la fonction main() du fichier src/suivi_stocks/__init__.py.\n[build-system] indique comment installer votre code comme un vrai package. Sans lui, vos imports entre fichiers du projet ne fonctionneraient pas.\n\nuv run suivi-stocks\nHello from suivi-stocks!\n\n\n\n\n\n\nPourquoi un dossier src/ ?\n\n\nCe que disent les standards. Le packaging Python est encadré par des PEP (Python Enhancement Proposals), les documents qui font évoluer le langage et son écosystème :\n\nla PEP 518 introduit le fichier pyproject.toml et la section [build-system] ;\nla PEP 517 définit comment un outil construit un package à partir de ce fichier ;\nla PEP 621 standardise la section [project] (nom, version, dépendances) ;\nla PEP 660 permet d’installer son projet en mode « éditable », ce que fait uv : vos modifications sont prises en compte sans réinstaller.\n\nAucune PEP n’impose src/, mais c’est la structure recommandée par le guide officiel de packaging, et celle que uv, hatch ou poetry proposent pour un package.\nCe que ça change concrètement. Quand vous lancez Python, le dossier courant est automatiquement ajouté aux endroits où il cherche les modules. Sans src/, import suivi_stocks peut donc fonctionner « par accident », simplement parce que le dossier est à côté, même si le package est mal installé ou mal configuré. Avec src/, ce raccourci n’existe plus : votre code n’est importable que s’il est correctement installé, exactement comme chez la personne qui l’installera après vous.\nLes bonnes pratiques qui en découlent :\n\nle code du package vit dans src/, séparé des tests (tests/), des notebooks, de la documentation et de la configuration ;\nles tests s’exécutent contre la version installée du package, pas contre des fichiers qui traînent dans le dossier ;\nce qui sera distribué est clairement délimité : tout ce qui est dans src/nom_du_package/, et rien d’autre.\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nVous avez déjà un dossier de travail ? Placez-vous dedans et lancez uv init --package . (avec le point) : uv crée la structure sur place au lieu de créer un nouveau dossier.\n\n\n\n--lib : une boîte à outils\n--lib ressemble à --package, mais sans commande à lancer : on ne « lance » pas une bibliothèque, on l’importe. Par exemple, un ensemble de fonctions de calcul de stock de sécurité que trois projets différents réutilisent.\nLe petit fichier py.typed signale aux éditeurs que vos fonctions contiennent des annotations de type (-&gt; None, : int), ce qui améliore l’autocomplétion de ceux qui utilisent votre bibliothèque.\n--script : un fichier qui se suffit à lui-même\nParfois, un projet complet est disproportionné : vous voulez juste envoyer un script rapport.py à un collègue. uv sait écrire les dépendances dans le fichier lui-même :\nuv init --script rapport.py\nuv add --script rapport.py pandas\n# /// script\n# requires-python = \"&gt;=3.13\"\n# dependencies = [\n#     \"pandas&gt;=3.1.0\",\n# ]\n# ///\n\n\ndef main() -&gt; None:\n    print(\"Hello from rapport.py!\")\n\n\nif __name__ == \"__main__\":\n    main()\nLe bloc entre # /// est un standard Python (la PEP 723). Votre collègue lance uv run rapport.py et uv installe pandas dans un environnement temporaire, sans pyproject.toml ni .venv dans le dossier."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#utiliser-un-outil-sans-linstaller-dans-le-projet",
+    "href": "05-projet-reproductible/01-uv-slides.html#utiliser-un-outil-sans-linstaller-dans-le-projet",
+    "title": "Gérer ses projets avec uv",
+    "section": "Utiliser un outil sans l’installer dans le projet",
+    "text": "Utiliser un outil sans l’installer dans le projet\nCertains outils n’ont rien à faire dans les dépendances de votre projet : vous voulez juste les utiliser.\n\n\n\n\n\n\n\nJe veux…\nCommande\n\n\n\n\nLancer un outil une fois, dans un environnement jetable\nuvx ruff check .\n\n\nInstaller un outil pour l’avoir partout sur ma machine\nuv tool install ruff\n\n\nTester une bibliothèque sans l’ajouter au projet\nuv run --with rich main.py\n\n\n\nuvx est simplement un raccourci de uv tool run. Avec --with, la bibliothèque est disponible pour cette exécution seulement : pyproject.toml n’est pas modifié.\n\n\n\n\n\n\nLe piège de --with\n\n\nSi votre code a réellement besoin de la bibliothèque, ajoutez-la avec uv add. Un projet qui ne fonctionne qu’avec --with n’est plus reproductible : votre collègue n’en saura rien."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#pour-aller-plus-loin",
+    "href": "05-projet-reproductible/01-uv-slides.html#pour-aller-plus-loin",
+    "title": "Gérer ses projets avec uv",
+    "section": "Pour aller plus loin",
+    "text": "Pour aller plus loin\n\n\n\n\n\n\nPartie avancée, dépliez si vous êtes à l’aise\n\n\nContraindre une version. uv add \"pandas==3.0.*\" impose la série 3.0. Restez souple par défaut (&gt;=) : c’est uv.lock qui garantit la reproductibilité, pas pyproject.toml.\nMettre à jour les dépendances. uv lock --upgrade remonte tout à la dernière version compatible, uv lock --upgrade-package pandas seulement pandas. Lancez vos tests après !\nDes groupes de dépendances sur mesure. En plus de dev, vous pouvez créer vos propres groupes : uv add --group docs quarto-cli. On les installe avec uv sync --group docs et on les exclut avec --no-group docs. Le dépôt de ce cours utilise justement un groupe docs.\nDes dépendances optionnelles. uv add --optional excel openpyxl crée un « extra » : les utilisateurs de votre package choisissent de l’installer (suivi-stocks[excel]). La différence avec un groupe : un extra est publié avec le package, un groupe reste chez vous.\nLes variables d’environnement. uv run --env-file .env main.py charge les variables d’un fichier .env (mots de passe, chemins MinIO…) uniquement pour cette exécution, sans les écrire dans le code.\nGérer la version de son projet. uv version --bump minor fait passer la version de 0.1.0 à 0.2.0 dans pyproject.toml (aussi major et patch).\nsuivi-stocks 0.1.0 =&gt; 0.2.0\nConstruire et publier. Pour un projet --package ou --lib, uv build produit dans dist/ les fichiers installables (.whl et .tar.gz), et uv publish les envoie sur PyPI.\nExporter pour les outils qui ne connaissent pas uv. uv export --format requirements-txt &gt; requirements.txt produit un fichier requirements.txt classique à partir de uv.lock.\nLe mode compatible pip. uv venv et uv pip install reproduisent l’ancienne façon de faire, en beaucoup plus rapide. Utile sur un projet existant qu’on ne peut pas migrer, mais rien n’est écrit dans pyproject.toml : préférez uv add dès que possible.\nLes workspaces. Plusieurs packages dans un même dépôt (une application et sa bibliothèque de calcul, par exemple) peuvent partager un seul uv.lock. Lancez uv init --lib packages/calculs depuis la racine du projet : uv l’ajoute automatiquement comme membre.\n[tool.uv.workspace]\nmembers = [\"packages/calculs\"]\n\n[tool.uv.sources]\ncalculs = { workspace = true }\nAprès uv add calculs, l’application importe la bibliothèque comme n’importe quel package, et chaque modification de calculs est prise en compte immédiatement.\nChanger de backend de build. uv init --package --build-backend hatch utilise hatchling au lieu de uv_build, si un outil de votre entreprise l’exige."
+  },
+  {
+    "objectID": "05-projet-reproductible/01-uv-slides.html#cheatsheet",
+    "href": "05-projet-reproductible/01-uv-slides.html#cheatsheet",
+    "title": "Gérer ses projets avec uv",
+    "section": "Cheatsheet",
+    "text": "Cheatsheet\n\n\n\n\n\n\n\nJe veux…\nCommande\n\n\n\n\nCréer un projet (application)\nuv init nom-projet\n\n\nCréer un package avec src/\nuv init --package nom-projet\n\n\nCréer une bibliothèque\nuv init --lib nom-projet\n\n\nCréer un projet minimal\nuv init --bare nom-projet\n\n\nCréer un script autonome\nuv init --script script.py\n\n\nAjouter une bibliothèque\nuv add pandas\n\n\nAjouter une dépendance à un script\nuv add --script script.py pandas\n\n\nAjouter un outil de dev\nuv add --dev ruff\n\n\nRetirer une bibliothèque\nuv remove pandas\n\n\nLancer un script\nuv run main.py\n\n\nLancer un outil sans l’installer\nuvx ruff check .\n\n\nInstaller un projet récupéré\nuv sync\n\n\nVoir les dépendances\nuv tree\n\n\nMettre à jour une dépendance\nuv lock --upgrade-package pandas\n\n\nChanger de version de Python\nuv python pin 3.12\n\n\nMonter la version du projet\nuv version --bump minor\n\n\n\n\n\n\n\n\n\nÀ retenir\n\n\n\nUn projet = un environnement virtuel .venv, géré automatiquement par uv.\nuv add ajoute une dépendance, uv run lance le code dans le bon environnement.\npyproject.toml dit ce dont le projet a besoin, uv.lock fige les versions exactes.\nOn ne modifie jamais uv.lock à la main, on le versionne toujours.\nuv sync recrée l’environnement à l’identique chez n’importe qui.\nChoisissez la structure selon l’usage : application, --package, --lib ou --script.\nLes outils de développement vont dans --dev, les outils ponctuels passent par uvx."
+  },
+  {
     "objectID": "notebooks/03-structures-donnees.html",
     "href": "notebooks/03-structures-donnees.html",
     "title": "Exercices : Structures de données",
@@ -1497,6 +1742,101 @@
     "title": "📓 Découverte des Notebooks Jupyter",
     "section": "Récapitulatif",
     "text": "Récapitulatif\n\n\n\n\n\n\n\nConcept\nCe qu’il faut retenir\n\n\n\n\nNotebook\nDocument JSON combinant texte, code et résultats\n\n\nCellule Markdown\nTexte formaté, rendu à l’exécution\n\n\nCellule de code\nCode Python exécuté par le kernel\n\n\nKernel\nProcessus séparé qui fait tourner Python\n\n\nÉtat partagé\nToutes les cellules partagent le même namespace\n\n\nOrdre d’exécution\nLes [n] montrent l’ordre réel, pas la position\n\n\nMagic commands\n%time, %whos, %%timeit, !cmd…\n\n\nRègle d’or\nRestart & Run All doit toujours fonctionner"
+  },
+  {
+    "objectID": "05-projet-reproductible/index-slides.html#quest-ce-quun-projet-reproductible",
+    "href": "05-projet-reproductible/index-slides.html#quest-ce-quun-projet-reproductible",
+    "title": "Reproductibilité des projets",
+    "section": "Qu’est-ce qu’un projet reproductible ?",
+    "text": "Qu’est-ce qu’un projet reproductible ?\nUn projet est reproductible quand une autre personne peut le récupérer, l’installer et obtenir le même résultat que vous, sans vous appeler au secours.\nPour cela, trois choses doivent être maîtrisées :\n\n\n\n\n\n\n\n\nCe qui peut varier\nExemple de problème\nOutil qui règle le problème\n\n\n\n\nLes bibliothèques et leurs versions\npandas 2 chez vous, pandas 3 chez votre collègue\nuv\n\n\nLa version de Python\nPython 3.13 chez vous, 3.9 sur le serveur\nuv\n\n\nLe code lui-même (lisibilité, erreurs bêtes)\nimports inutilisés, style différent selon les personnes\nruff\n\n\nLe système autour (OS, librairies système)\nça marche sur Mac, pas sur le serveur Linux\nDocker\n\n\n\n\n\n\n\n\n\nUne analogie : la recette de cuisine\n\n\nVotre code, c’est la recette. Mais si vous écrivez seulement « mettre de la farine », chacun prendra la farine qu’il a sous la main et le gâteau sera différent à chaque fois.\n\nuv écrit la liste de courses exacte : la marque et le paquet précis de farine.\nruff relit la recette pour qu’elle soit claire et sans faute.\nDocker fournit la cuisine entière : même four, mêmes ustensiles, partout."
+  },
+  {
+    "objectID": "05-projet-reproductible/index-slides.html#uv-gérer-python-et-les-dépendances",
+    "href": "05-projet-reproductible/index-slides.html#uv-gérer-python-et-les-dépendances",
+    "title": "Reproductibilité des projets",
+    "section": "uv : gérer Python et les dépendances",
+    "text": "uv : gérer Python et les dépendances\nVous avez déjà installé des bibliothèques avec pip install pandas. Le problème : rien ne garde la trace de quelle version a été installée, et toutes vos bibliothèques finissent mélangées dans le même Python, d’un projet à l’autre.\nuv règle ces problèmes en un seul outil :\n\nil crée un environnement virtuel propre à chaque projet (un dossier .venv) ;\nil installe la bonne version de Python si besoin ;\nil note les dépendances dans pyproject.toml et fige les versions exactes dans uv.lock ;\nil est très rapide (vraiment important quand on a connu les lenteurs de pip)."
+  },
+  {
+    "objectID": "05-projet-reproductible/index-slides.html#ruff-un-code-propre-et-homogène",
+    "href": "05-projet-reproductible/index-slides.html#ruff-un-code-propre-et-homogène",
+    "title": "Reproductibilité des projets",
+    "section": "ruff : un code propre et homogène",
+    "text": "ruff : un code propre et homogène\nUn code reproductible doit aussi être lisible par les autres. ruff fait deux choses :\n\nlinter (ruff check) : il repère les erreurs et les mauvaises pratiques (imports inutilisés, variables jamais utilisées…) ;\nformateur (ruff format) : il réécrit votre code avec un style standard (espaces, sauts de ligne, indentation).\n\nPrenons ce fichier calcul.py, écrit un peu vite :\nimport os\nimport pandas as pd\ndef stock_total(stocks):\n    total=0\n    for s in stocks: total+=s\n    return total\nuv run ruff check calcul.py\ncalcul.py:1:1: I001 [*] Import block is un-sorted or un-formatted\ncalcul.py:1:8: F401 [*] `os` imported but unused\ncalcul.py:2:18: F401 [*] `pandas` imported but unused\nFound 3 errors.\n[*] 3 fixable with `--fix`.\nEt après uv run ruff format calcul.py :\nimport os\nimport pandas as pd\n\n\ndef stock_total(stocks):\n    total = 0\n    for s in stocks:\n        total += s\n    return total\n\n\n\n\n\n\nUne bonne habitude\n\n\nLe formateur ne supprime pas les imports inutiles, c’est le rôle du linter. Lancez les deux : ruff check --fix puis ruff format. Dans VS Code, l’extension Ruff peut le faire automatiquement à chaque sauvegarde.\n\n\n\n\n\n\n\n\n\nPourquoi c’est important\n\n\nQuand tout le monde formate son code de la même manière, les différences entre deux versions d’un fichier ne montrent que les vrais changements, pas des espaces déplacés."
+  },
+  {
+    "objectID": "05-projet-reproductible/index-slides.html#docker-emporter-tout-lenvironnement",
+    "href": "05-projet-reproductible/index-slides.html#docker-emporter-tout-lenvironnement",
+    "title": "Reproductibilité des projets",
+    "section": "Docker : emporter tout l’environnement",
+    "text": "Docker : emporter tout l’environnement\nuv fige Python et les bibliothèques. Mais il reste tout ce qu’il y a autour : le système d’exploitation, certaines librairies système, les variables d’environnement…\nDocker permet d’empaqueter votre projet avec son système dans une image. Cette image se lance ensuite à l’identique partout sous forme de conteneur : sur votre machine, chez un collègue, sur un serveur.\nLa recette d’une image s’écrit dans un fichier Dockerfile. Voici à quoi il ressemble pour un projet géré avec uv :\nFROM python:3.13-slim                                   # On préferera toujours une utiliser une image légère\nCOPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/  # À adapter selon votre registry d'image\n\nWORKDIR /app\nCOPY pyproject.toml uv.lock ./\nRUN uv sync --frozen --no-dev --no-install-project\n\nCOPY . .\nRUN uv sync --frozen --no-dev\n\nCMD [\"uv\", \"run\", \"main.py\"]\nRemarquez que le Dockerfile s’appuie sur uv.lock : les outils se complètent, ils ne se remplacent pas.\n\n\n\n\n\n\nUn peu de vocabulaire : image ou conteneur ?\n\n\nL’image est le plat surgelé : préparé une fois, toujours identique. Le conteneur est le plat réchauffé et servi : on peut en lancer autant qu’on veut à partir de la même image."
+  },
+  {
+    "objectID": "05-projet-reproductible/index-slides.html#pour-aller-plus-loin",
+    "href": "05-projet-reproductible/index-slides.html#pour-aller-plus-loin",
+    "title": "Reproductibilité des projets",
+    "section": "Pour aller plus loin",
+    "text": "Pour aller plus loin\nCes outils sont utilisés de bout en bout dans le projet MEDAS Financial Reporting : uv pour structurer le projet, ruff et pytest dans l’intégration continue, puis Docker et ArgoCD pour la mise en production.\n\n\n\n\n\n\nÀ retenir\n\n\n\nUn projet reproductible tourne à l’identique chez quelqu’un d’autre, sans aide.\nuv gère la version de Python, l’environnement virtuel et les dépendances.\npyproject.toml décrit ce dont le projet a besoin, uv.lock fige les versions exactes.\nruff check repère les erreurs, ruff format uniformise le style.\nDocker empaquette le projet avec son système dans une image."
+  },
+  {
+    "objectID": "05-projet-reproductible/index.html",
+    "href": "05-projet-reproductible/index.html",
+    "title": "Reproductibilité des projets",
+    "section": "",
+    "text": "Vous avez sûrement déjà entendu (ou prononcé) cette phrase : **« Pourtant, ça marche sur ma machine ! ¯_(ツ)_/¯»**. Vous envoyez votre script à un collègue, il le lance, et il obtient une erreur ModuleNotFoundError, un résultat différent, ou un code illisible qu’il n’ose pas modifier.\nJusqu’ici, vous avez travaillé dans un environnement identique pour tout le monde (voir la partie Environnement). C’est confortable, mais dans la vraie vie un projet doit pouvoir tourner ailleurs : sur l’ordinateur d’un collègue, sur un serveur, dans six mois sur votre propre machine. C’est ce qu’on appelle la reproductibilité.\nCette partie vous présente les outils qui permettent d’y arriver.",
+    "crumbs": [
+      "Créer des projets reproductibles"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/index.html#quest-ce-quun-projet-reproductible",
+    "href": "05-projet-reproductible/index.html#quest-ce-quun-projet-reproductible",
+    "title": "Reproductibilité des projets",
+    "section": "Qu’est-ce qu’un projet reproductible ?",
+    "text": "Qu’est-ce qu’un projet reproductible ?\nUn projet est reproductible quand une autre personne peut le récupérer, l’installer et obtenir le même résultat que vous, sans vous appeler au secours.\nPour cela, trois choses doivent être maîtrisées :\n\n\n\n\n\n\n\n\nCe qui peut varier\nExemple de problème\nOutil qui règle le problème\n\n\n\n\nLes bibliothèques et leurs versions\npandas 2 chez vous, pandas 3 chez votre collègue\nuv\n\n\nLa version de Python\nPython 3.13 chez vous, 3.9 sur le serveur\nuv\n\n\nLe code lui-même (lisibilité, erreurs bêtes)\nimports inutilisés, style différent selon les personnes\nruff\n\n\nLe système autour (OS, librairies système)\nça marche sur Mac, pas sur le serveur Linux\nDocker\n\n\n\n\n\n\n\n\n\nNoteUne analogie : la recette de cuisine\n\n\n\nVotre code, c’est la recette. Mais si vous écrivez seulement « mettre de la farine », chacun prendra la farine qu’il a sous la main et le gâteau sera différent à chaque fois.\n\nuv écrit la liste de courses exacte : la marque et le paquet précis de farine.\nruff relit la recette pour qu’elle soit claire et sans faute.\nDocker fournit la cuisine entière : même four, mêmes ustensiles, partout.",
+    "crumbs": [
+      "Créer des projets reproductibles"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/index.html#uv-gérer-python-et-les-dépendances",
+    "href": "05-projet-reproductible/index.html#uv-gérer-python-et-les-dépendances",
+    "title": "Reproductibilité des projets",
+    "section": "uv : gérer Python et les dépendances",
+    "text": "uv : gérer Python et les dépendances\nVous avez déjà installé des bibliothèques avec pip install pandas. Le problème : rien ne garde la trace de quelle version a été installée, et toutes vos bibliothèques finissent mélangées dans le même Python, d’un projet à l’autre.\nuv règle ces problèmes en un seul outil :\n\nil crée un environnement virtuel propre à chaque projet (un dossier .venv) ;\nil installe la bonne version de Python si besoin ;\nil note les dépendances dans pyproject.toml et fige les versions exactes dans uv.lock ;\nil est très rapide (vraiment important quand on a connu les lenteurs de pip).",
+    "crumbs": [
+      "Créer des projets reproductibles"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/index.html#ruff-un-code-propre-et-homogène",
+    "href": "05-projet-reproductible/index.html#ruff-un-code-propre-et-homogène",
+    "title": "Reproductibilité des projets",
+    "section": "ruff : un code propre et homogène",
+    "text": "ruff : un code propre et homogène\nUn code reproductible doit aussi être lisible par les autres. ruff fait deux choses :\n\nlinter (ruff check) : il repère les erreurs et les mauvaises pratiques (imports inutilisés, variables jamais utilisées…) ;\nformateur (ruff format) : il réécrit votre code avec un style standard (espaces, sauts de ligne, indentation).\n\nPrenons ce fichier calcul.py, écrit un peu vite :\nimport os\nimport pandas as pd\ndef stock_total(stocks):\n    total=0\n    for s in stocks: total+=s\n    return total\nuv run ruff check calcul.py\ncalcul.py:1:1: I001 [*] Import block is un-sorted or un-formatted\ncalcul.py:1:8: F401 [*] `os` imported but unused\ncalcul.py:2:18: F401 [*] `pandas` imported but unused\nFound 3 errors.\n[*] 3 fixable with `--fix`.\nEt après uv run ruff format calcul.py :\nimport os\nimport pandas as pd\n\n\ndef stock_total(stocks):\n    total = 0\n    for s in stocks:\n        total += s\n    return total\n\n\n\n\n\n\nTipUne bonne habitude\n\n\n\nLe formateur ne supprime pas les imports inutiles, c’est le rôle du linter. Lancez les deux : ruff check --fix puis ruff format. Dans VS Code, l’extension Ruff peut le faire automatiquement à chaque sauvegarde.\n\n\n\n\n\n\n\n\nImportantPourquoi c’est important\n\n\n\nQuand tout le monde formate son code de la même manière, les différences entre deux versions d’un fichier ne montrent que les vrais changements, pas des espaces déplacés.",
+    "crumbs": [
+      "Créer des projets reproductibles"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/index.html#docker-emporter-tout-lenvironnement",
+    "href": "05-projet-reproductible/index.html#docker-emporter-tout-lenvironnement",
+    "title": "Reproductibilité des projets",
+    "section": "Docker : emporter tout l’environnement",
+    "text": "Docker : emporter tout l’environnement\nuv fige Python et les bibliothèques. Mais il reste tout ce qu’il y a autour : le système d’exploitation, certaines librairies système, les variables d’environnement…\nDocker permet d’empaqueter votre projet avec son système dans une image. Cette image se lance ensuite à l’identique partout sous forme de conteneur : sur votre machine, chez un collègue, sur un serveur.\nLa recette d’une image s’écrit dans un fichier Dockerfile. Voici à quoi il ressemble pour un projet géré avec uv :\nFROM python:3.13-slim                                   # On préferera toujours une utiliser une image légère\nCOPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/  # À adapter selon votre registry d'image\n\nWORKDIR /app\nCOPY pyproject.toml uv.lock ./\nRUN uv sync --frozen --no-dev --no-install-project\n\nCOPY . .\nRUN uv sync --frozen --no-dev\n\nCMD [\"uv\", \"run\", \"main.py\"]\nRemarquez que le Dockerfile s’appuie sur uv.lock : les outils se complètent, ils ne se remplacent pas.\n\n\n\n\n\n\nNoteUn peu de vocabulaire : image ou conteneur ?\n\n\n\nL’image est le plat surgelé : préparé une fois, toujours identique. Le conteneur est le plat réchauffé et servi : on peut en lancer autant qu’on veut à partir de la même image.",
+    "crumbs": [
+      "Créer des projets reproductibles"
+    ]
+  },
+  {
+    "objectID": "05-projet-reproductible/index.html#pour-aller-plus-loin",
+    "href": "05-projet-reproductible/index.html#pour-aller-plus-loin",
+    "title": "Reproductibilité des projets",
+    "section": "Pour aller plus loin",
+    "text": "Pour aller plus loin\nCes outils sont utilisés de bout en bout dans le projet MEDAS Financial Reporting : uv pour structurer le projet, ruff et pytest dans l’intégration continue, puis Docker et ArgoCD pour la mise en production.\n\n\n\n\n\n\nImportantÀ retenir\n\n\n\n\nUn projet reproductible tourne à l’identique chez quelqu’un d’autre, sans aide.\nuv gère la version de Python, l’environnement virtuel et les dépendances.\npyproject.toml décrit ce dont le projet a besoin, uv.lock fige les versions exactes.\nruff check repère les erreurs, ruff format uniformise le style.\nDocker empaquette le projet avec son système dans une image.",
+    "crumbs": [
+      "Créer des projets reproductibles"
+    ]
   },
   {
     "objectID": "index.html",

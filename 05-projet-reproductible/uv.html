@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Gérer ses projets avec uv – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../logs/index.html" rel="next">
+<link href="../05-projet-reproductible/index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9ec74a487b0f7bffdf8907e3024c0954.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-7fcee7985294b57bc83ad21fda0acf33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python_data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05-projet-reproductible/index.html">Créer des projets reproductibles</a></li><li class="breadcrumb-item"><a href="../05-projet-reproductible/uv.html">uv pour les gouverner tous</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Langages de programmation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnement</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnements en ligne</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Initiation Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditions &amp; boucles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structures de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les fonctions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/06-erreurs-exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Erreurs et exceptions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/07-scripts-jeux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts et jeux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/08-python-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Base de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../05-projet-reproductible/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Créer des projets reproductibles</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-projet-reproductible/uv.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">uv pour les gouverner tous</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../logs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TabICL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#le-problème-un-seul-python-pour-tout" id="toc-le-problème-un-seul-python-pour-tout" class="nav-link active" data-scroll-target="#le-problème-un-seul-python-pour-tout">Le problème : un seul Python pour tout</a></li>
+  <li><a href="#installer-uv" id="toc-installer-uv" class="nav-link" data-scroll-target="#installer-uv">Installer <code>uv</code></a></li>
+  <li><a href="#créer-un-projet" id="toc-créer-un-projet" class="nav-link" data-scroll-target="#créer-un-projet">Créer un projet</a></li>
+  <li><a href="#ajouter-une-dépendance" id="toc-ajouter-une-dépendance" class="nav-link" data-scroll-target="#ajouter-une-dépendance">Ajouter une dépendance</a></li>
+  <li><a href="#lancer-son-code" id="toc-lancer-son-code" class="nav-link" data-scroll-target="#lancer-son-code">Lancer son code</a></li>
+  <li><a href="#pyproject.toml-et-uv.lock-deux-fichiers-deux-rôles" id="toc-pyproject.toml-et-uv.lock-deux-fichiers-deux-rôles" class="nav-link" data-scroll-target="#pyproject.toml-et-uv.lock-deux-fichiers-deux-rôles"><code>pyproject.toml</code> et <code>uv.lock</code> : deux fichiers, deux rôles</a></li>
+  <li><a href="#les-dépendances-de-développement" id="toc-les-dépendances-de-développement" class="nav-link" data-scroll-target="#les-dépendances-de-développement">Les dépendances de développement</a></li>
+  <li><a href="#récupérer-le-projet-de-quelquun-dautre" id="toc-récupérer-le-projet-de-quelquun-dautre" class="nav-link" data-scroll-target="#récupérer-le-projet-de-quelquun-dautre">Récupérer le projet de quelqu’un d’autre</a></li>
+  <li><a href="#choisir-sa-version-de-python" id="toc-choisir-sa-version-de-python" class="nav-link" data-scroll-target="#choisir-sa-version-de-python">Choisir sa version de Python</a></li>
+  <li><a href="#choisir-le-bon-type-de-projet" id="toc-choisir-le-bon-type-de-projet" class="nav-link" data-scroll-target="#choisir-le-bon-type-de-projet">Choisir le bon type de projet</a>
+  <ul class="collapse">
+  <li><a href="#package-la-structure-src" id="toc-package-la-structure-src" class="nav-link" data-scroll-target="#package-la-structure-src"><code>--package</code> : la structure <code>src/</code></a></li>
+  <li><a href="#lib-une-boîte-à-outils" id="toc-lib-une-boîte-à-outils" class="nav-link" data-scroll-target="#lib-une-boîte-à-outils"><code>--lib</code> : une boîte à outils</a></li>
+  <li><a href="#script-un-fichier-qui-se-suffit-à-lui-même" id="toc-script-un-fichier-qui-se-suffit-à-lui-même" class="nav-link" data-scroll-target="#script-un-fichier-qui-se-suffit-à-lui-même"><code>--script</code> : un fichier qui se suffit à lui-même</a></li>
+  </ul></li>
+  <li><a href="#utiliser-un-outil-sans-linstaller-dans-le-projet" id="toc-utiliser-un-outil-sans-linstaller-dans-le-projet" class="nav-link" data-scroll-target="#utiliser-un-outil-sans-linstaller-dans-le-projet">Utiliser un outil sans l’installer dans le projet</a></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+  <li><a href="#cheatsheet" id="toc-cheatsheet" class="nav-link" data-scroll-target="#cheatsheet">Cheatsheet</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python_data/edit/main/05-projet-reproductible/uv.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="01-uv-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="01-uv-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05-projet-reproductible/index.html">Créer des projets reproductibles</a></li><li class="breadcrumb-item"><a href="../05-projet-reproductible/uv.html">uv pour les gouverner tous</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Gérer ses projets avec uv</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Depuis le début du cours, quand une bibliothèque manquait, vous avez tapé <code>pip install</code> et c’était réglé. Ça fonctionne… jusqu’au jour où vous travaillez sur deux projets qui demandent deux versions différentes de <code>pandas</code> pour des raisons obscures.</p>
+<p>Ce chapitre vous montre comment <code>uv</code> règle ces problèmes, avec un fil rouge : un petit projet <code>suivi-stocks</code> qui lit un état des stocks de palettes et de cartons.</p>
+<section id="le-problème-un-seul-python-pour-tout" class="level2">
+<h2 class="anchored" data-anchor-id="le-problème-un-seul-python-pour-tout">Le problème : un seul Python pour tout</h2>
+<p>Quand vous faites <code>pip install pandas</code>, la bibliothèque est installée <strong>dans le Python de votre machine</strong>, partagé par tous vos projets. Résultat :</p>
+<ul>
+<li>le projet A a besoin de <code>pandas</code> 2, le projet B de <code>pandas</code> 3 : impossible d’avoir les deux ;</li>
+<li>au bout de quelques mois, plus personne ne sait quelles bibliothèques sont réellement utiles à quel projet ;</li>
+<li>votre collègue ne sait pas ce qu’il doit installer pour faire tourner votre code.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>L’environnement virtuel, en coulisses
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La solution classique s’appelle un <strong>environnement virtuel</strong> : un dossier (par convention <code>.venv</code>) qui contient une copie isolée de Python et <strong>uniquement</strong> les bibliothèques d’un projet. Chaque projet a le sien, ils ne se marchent plus dessus.</p>
+<p>Avant, il fallait le créer, l’activer, puis y installer les dépendances à la main. <code>uv</code> fait tout cela pour vous.</p>
+</div>
+</div>
+</section>
+<section id="installer-uv" class="level2">
+<h2 class="anchored" data-anchor-id="installer-uv">Installer <code>uv</code></h2>
+<p>Sur SSP Cloud, <code>uv</code> est déjà disponible dans les services VS Code. En local, suivez la <a href="https://docs.astral.sh/uv/getting-started/installation/">page d’installation officielle</a>.</p>
+<p><strong>Avec <code>pip</code></strong>, la plus simple si Python est déjà installé :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install uv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Avec le script officiel</strong>, qui n’a pas besoin de Python (pour Linux et Mac):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-LsSf</span> https://astral.sh/uv/install.sh <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Puis vérifiez :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Vous devriez voir la version de <code>uv</code> s’afficher dans votre terminal.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>uv</code> peut lui-même installer Python : vous n’avez <strong>pas besoin</strong> d’installer Python avant. C’est une des raisons pour lesquelles il simplifie autant les installations en local.</p>
+</div>
+</div>
+</section>
+<section id="créer-un-projet" class="level2">
+<h2 class="anchored" data-anchor-id="créer-un-projet">Créer un projet</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init suivi-stocks</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> suivi-stocks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Initialized project `suivi-stocks` at `/home/onyxia/work/suivi-stocks`</code></pre>
+<p><code>uv</code> crée un dossier avec ces fichiers :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fichier</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>pyproject.toml</code></td>
+<td>La <strong>carte d’identité</strong> du projet : nom, version de Python, dépendances</td>
+</tr>
+<tr class="even">
+<td><code>.python-version</code></td>
+<td>La version de Python à utiliser (ici <code>3.13</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>main.py</code></td>
+<td>Un premier script d’exemple</td>
+</tr>
+<tr class="even">
+<td><code>README.md</code></td>
+<td>La documentation du projet</td>
+</tr>
+<tr class="odd">
+<td><code>.gitignore</code></td>
+<td>Ce que <code>Git</code> doit ignorer (dont <code>.venv</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Le <code>pyproject.toml</code> ressemble à ceci :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[project]</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"suivi-stocks"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">"Add your description here"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">readme</span> <span class="op">=</span> <span class="st">"README.md"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="dt">requires-python</span> <span class="op">=</span> <span class="st">"&gt;=3.13"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La liste <code>dependencies</code> est vide : le projet n’a encore besoin de rien.</p>
+</section>
+<section id="ajouter-une-dépendance" class="level2">
+<h2 class="anchored" data-anchor-id="ajouter-une-dépendance">Ajouter une dépendance</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Installed 5 packages in 19ms
+ + numpy==2.5.4
+ + pandas==3.1.0
+ + python-dateutil==3.0.0
+ + six==1.17.0
+ + tzdata==2026.5</code></pre>
+<p>Trois choses se sont passées d’un coup :</p>
+<ol type="1">
+<li><code>uv</code> a créé le dossier <code>.venv</code> (s’il n’existait pas) ;</li>
+<li>il a installé <code>pandas</code> <strong>et ses propres dépendances</strong> (<code>numpy</code>, etc.) dans <code>.venv</code> ;</li>
+<li>il a mis à jour <code>pyproject.toml</code> et créé le fichier <code>uv.lock</code>.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas&gt;=3.1.0"</span><span class="op">,</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pour retirer une bibliothèque, c’est symétrique : <code>uv remove pandas</code>.</p>
+</section>
+<section id="lancer-son-code" class="level2">
+<h2 class="anchored" data-anchor-id="lancer-son-code">Lancer son code</h2>
+<p>On remplace le contenu de <code>main.py</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>stocks <span class="op">=</span> pd.DataFrame({<span class="st">"produit"</span>: [<span class="st">"palette"</span>, <span class="st">"carton"</span>], <span class="st">"quantite"</span>: [<span class="dv">12</span>, <span class="dv">40</span>]})</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stocks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Et on le lance <strong>avec <code>uv run</code></strong> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>   produit  quantite
+0  palette        12
+1   carton        40</code></pre>
+<p><code>uv run</code> lance le script <strong>dans l’environnement du projet</strong>, sans que vous ayez à activer quoi que ce soit. Avant de lancer, il vérifie même que l’environnement est à jour avec <code>pyproject.toml</code>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Le piège classique
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous lancez <code>python main.py</code> directement, vous utilisez <strong>le Python de la machine</strong>, pas celui du projet. Selon ce qui y est installé, le script fonctionnera… ou pas. Prenez l’habitude de toujours passer par <code>uv run</code>.</p>
+</div>
+</div>
+</section>
+<section id="pyproject.toml-et-uv.lock-deux-fichiers-deux-rôles" class="level2">
+<h2 class="anchored" data-anchor-id="pyproject.toml-et-uv.lock-deux-fichiers-deux-rôles"><code>pyproject.toml</code> et <code>uv.lock</code> : deux fichiers, deux rôles</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><code>pyproject.toml</code></th>
+<th><code>uv.lock</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qui l’écrit ?</td>
+<td>Vous (via <code>uv add</code>)</td>
+<td><code>uv</code>, automatiquement</td>
+</tr>
+<tr class="even">
+<td>Ce qu’il contient</td>
+<td>Ce dont le projet <strong>a besoin</strong> : <code>pandas&gt;=3.1.0</code></td>
+<td>Les versions <strong>exactes</strong> de tout : <code>pandas 3.1.0</code>, <code>numpy 2.5.4</code>…</td>
+</tr>
+<tr class="odd">
+<td>Se modifie à la main ?</td>
+<td>Oui, si besoin</td>
+<td><strong>Jamais</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Une analogie : la commande et le bon de livraison
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>pyproject.toml</code>, c’est le <strong>bon de commande</strong> : « je veux des palettes, au moins du modèle 2024 ».</p>
+<p><code>uv.lock</code>, c’est le <strong>bon de livraison</strong> : il liste exactement ce qui a été livré, avec les références précises, y compris les vis et les sangles que vous n’aviez pas demandées explicitement mais qui étaient nécessaires (les dépendances des dépendances).</p>
+<p>Pour reproduire la même livraison, c’est le bon de livraison qu’il faut transmettre.</p>
+</div>
+</div>
+<p>Pour voir l’arbre complet des dépendances :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> tree</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>suivi-stocks v0.1.0
+└── pandas v3.1.0
+    ├── numpy v2.5.4
+    └── python-dateutil v3.0.0
+        ├── six v1.17.0
+        └── tzdata v2026.5</code></pre>
+</section>
+<section id="les-dépendances-de-développement" class="level2">
+<h2 class="anchored" data-anchor-id="les-dépendances-de-développement">Les dépendances de développement</h2>
+<p>Certains outils servent <strong>à vous</strong>, pendant que vous développez, mais pas au fonctionnement du projet : <code>ruff</code>, <code>pytest</code>, <code>ipykernel</code> pour les notebooks. On les ajoute dans un groupe séparé avec <code>--dev</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add <span class="at">--dev</span> ruff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[dependency-groups]</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dt">dev</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ruff&gt;=0.17.2"</span><span class="op">,</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Et on les utilise aussi avec <code>uv run</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run ruff check .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Quand on met un projet en production (dans une image <code>Docker</code> par exemple), on installe sans ces outils avec <code>uv sync --no-dev</code>. L’image est plus légère.</p>
+</div>
+</div>
+</section>
+<section id="récupérer-le-projet-de-quelquun-dautre" class="level2">
+<h2 class="anchored" data-anchor-id="récupérer-le-projet-de-quelquun-dautre">Récupérer le projet de quelqu’un d’autre</h2>
+<p>C’est là que tout prend son sens. Votre collègue clone votre projet. Il a <code>pyproject.toml</code>, <code>uv.lock</code> et <code>.python-version</code>, mais pas de <code>.venv</code>. Il tape une seule commande :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Using CPython 3.13.17
+Creating virtual environment at: .venv
+Installed 6 packages in 22ms
+ + numpy==2.5.4
+ + pandas==3.1.0
+ + python-dateutil==3.0.0
+ + ruff==0.17.2
+ + six==1.17.0
+ + tzdata==2026.5</code></pre>
+<p>Il obtient <strong>exactement</strong> les mêmes versions que vous, grâce à <code>uv.lock</code>. Si la bonne version de Python n’est pas installée sur sa machine, <code>uv</code> la télécharge.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Pourquoi on ne partage jamais <code>.venv</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le dossier <code>.venv</code> est lourd (souvent plusieurs centaines de Mo) et <strong>dépend du système</strong> sur lequel il a été créé : un <code>.venv</code> créé sur Mac ne fonctionne pas sur Linux ou Windows. On partage la recette (<code>pyproject.toml</code> + <code>uv.lock</code>), pas le plat cuisiné. <code>uv sync</code> le recrée en quelques secondes.</p>
+</div>
+</div>
+</section>
+<section id="choisir-sa-version-de-python" class="level2">
+<h2 class="anchored" data-anchor-id="choisir-sa-version-de-python">Choisir sa version de Python</h2>
+<p>La version est notée dans <code>.python-version</code>. Pour en changer :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python pin 3.12</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pour voir les versions disponibles et installées :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>En entreprise, <code>uv</code> ne peut pas toujours télécharger Python
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Quand la version demandée n’est pas installée sur la machine, <code>uv</code> la <strong>télécharge depuis internet</strong> (sur GitHub). Sur un poste ou un serveur d’entreprise, c’est souvent bloqué par le proxy ou la politique de sécurité : la commande échoue ou reste bloquée.</p>
+<p>Dans ce cas, la démarche est différente :</p>
+<ol type="1">
+<li><p><strong>Faire installer les versions de Python nécessaires</strong> par le service informatique (ou via le gestionnaire de logiciels de l’entreprise).</p></li>
+<li><p><strong>Interdire à <code>uv</code> de télécharger Python</strong>, pour qu’il utilise uniquement les versions déjà installées. Dans <code>pyproject.toml</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tool.uv]</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="dt">python-downloads</span> <span class="op">=</span> <span class="st">"never"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="dt">python-preference</span> <span class="op">=</span> <span class="st">"only-system"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ou, pour toute votre session, la variable d’environnement <code>UV_PYTHON_DOWNLOADS=never</code>.</p></li>
+<li><p><strong>Vérifier les versions que <code>uv</code> trouve</strong> sur la machine :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python list <span class="at">--only-installed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Pointer vers l’interpréteur voulu</strong> avec son chemin, plutôt qu’un simple numéro de version :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python pin /usr/bin/python3.12</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Sous Windows, le chemin ressemble plutôt à <code>C:\Program Files\Python312\python.exe</code>.</p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="choisir-le-bon-type-de-projet" class="level2">
+<h2 class="anchored" data-anchor-id="choisir-le-bon-type-de-projet">Choisir le bon type de projet</h2>
+<p>Jusqu’ici, <code>uv init</code> a créé un projet « application » : un <code>main.py</code> à la racine, rien d’installable. C’est le comportement par défaut, parfait pour une analyse ou un script de reporting. Mais <code>uv init</code> sait créer d’autres structures selon ce que vous voulez faire.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Ce que vous obtenez</th>
+<th>Quand l’utiliser</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>(aucune)</em> ou <code>--app</code></td>
+<td><code>main.py</code> à la racine, pas de <code>[build-system]</code></td>
+<td>Une analyse, un script, un petit outil interne</td>
+</tr>
+<tr class="even">
+<td><code>--package</code></td>
+<td>Un dossier <code>src/nom/</code>, un point d’entrée, un <code>[build-system]</code></td>
+<td>Une application qu’on veut installer et lancer par une commande</td>
+</tr>
+<tr class="odd">
+<td><code>--lib</code></td>
+<td>Un dossier <code>src/nom/</code> avec <code>py.typed</code>, sans point d’entrée</td>
+<td>Une bibliothèque de fonctions réutilisée par d’autres projets</td>
+</tr>
+<tr class="even">
+<td><code>--script</code></td>
+<td>Un fichier <code>.py</code> seul, avec ses dépendances écrites dedans</td>
+<td>Un script jetable ou à partager par mail</td>
+</tr>
+</tbody>
+</table>
+<section id="package-la-structure-src" class="level3">
+<h3 class="anchored" data-anchor-id="package-la-structure-src"><code>--package</code> : la structure <code>src/</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init <span class="at">--package</span> suivi-stocks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>suivi-stocks/
+├── .gitignore
+├── .python-version
+├── README.md
+├── pyproject.toml
+└── src/
+    └── suivi_stocks/
+        └── __init__.py</code></pre>
+<p>Notez le nom du dossier : <code>suivi_stocks</code> avec un <strong>underscore</strong>. Un nom de module Python ne peut pas contenir de tiret. <code>uv</code> fait la conversion pour vous.</p>
+<p>Le <code>pyproject.toml</code> gagne deux sections :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[project.scripts]</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="dt">suivi-stocks</span> <span class="op">=</span> <span class="st">"suivi_stocks:main"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="kw">[build-system]</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"uv_build&gt;=0.11.32,&lt;0.12.0"</span><span class="op">]</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="dt">build-backend</span> <span class="op">=</span> <span class="st">"uv_build"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>[project.scripts]</code> crée une <strong>commande</strong> : <code>uv run suivi-stocks</code> appelle la fonction <code>main()</code> du fichier <code>src/suivi_stocks/__init__.py</code>.</li>
+<li><code>[build-system]</code> indique comment <strong>installer</strong> votre code comme un vrai package. Sans lui, vos imports entre fichiers du projet ne fonctionneraient pas.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run suivi-stocks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Hello from suivi-stocks!</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Pourquoi un dossier <code>src/</code> ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Ce que disent les standards.</strong> Le packaging Python est encadré par des PEP (<em>Python Enhancement Proposals</em>), les documents qui font évoluer le langage et son écosystème :</p>
+<ul>
+<li>la <a href="https://peps.python.org/pep-0518/">PEP 518</a> introduit le fichier <code>pyproject.toml</code> et la section <code>[build-system]</code> ;</li>
+<li>la <a href="https://peps.python.org/pep-0517/">PEP 517</a> définit comment un outil construit un package à partir de ce fichier ;</li>
+<li>la <a href="https://peps.python.org/pep-0621/">PEP 621</a> standardise la section <code>[project]</code> (nom, version, dépendances) ;</li>
+<li>la <a href="https://peps.python.org/pep-0660/">PEP 660</a> permet d’installer son projet en mode « éditable », ce que fait <code>uv</code> : vos modifications sont prises en compte sans réinstaller.</li>
+</ul>
+<p>Aucune PEP n’impose <code>src/</code>, mais c’est la structure <strong>recommandée par le <a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/">guide officiel de packaging</a></strong>, et celle que <code>uv</code>, <code>hatch</code> ou <code>poetry</code> proposent pour un package.</p>
+<p><strong>Ce que ça change concrètement.</strong> Quand vous lancez Python, le dossier courant est automatiquement ajouté aux endroits où il cherche les modules. Sans <code>src/</code>, <code>import suivi_stocks</code> peut donc fonctionner « par accident », simplement parce que le dossier est à côté, même si le package est mal installé ou mal configuré. Avec <code>src/</code>, ce raccourci n’existe plus : votre code n’est importable <strong>que s’il est correctement installé</strong>, exactement comme chez la personne qui l’installera après vous.</p>
+<p><strong>Les bonnes pratiques qui en découlent :</strong></p>
+<ul>
+<li>le code du package vit dans <code>src/</code>, séparé des tests (<code>tests/</code>), des notebooks, de la documentation et de la configuration ;</li>
+<li>les tests s’exécutent contre la <strong>version installée</strong> du package, pas contre des fichiers qui traînent dans le dossier ;</li>
+<li>ce qui sera distribué est clairement délimité : tout ce qui est dans <code>src/nom_du_package/</code>, et rien d’autre.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous avez déjà un dossier de travail ? Placez-vous dedans et lancez <code>uv init --package .</code> (avec le point) : <code>uv</code> crée la structure sur place au lieu de créer un nouveau dossier.</p>
+</div>
+</div>
+</section>
+<section id="lib-une-boîte-à-outils" class="level3">
+<h3 class="anchored" data-anchor-id="lib-une-boîte-à-outils"><code>--lib</code> : une boîte à outils</h3>
+<p><code>--lib</code> ressemble à <code>--package</code>, mais <strong>sans commande</strong> à lancer : on ne « lance » pas une bibliothèque, on l’importe. Par exemple, un ensemble de fonctions de calcul de stock de sécurité que trois projets différents réutilisent.</p>
+<p>Le petit fichier <code>py.typed</code> signale aux éditeurs que vos fonctions contiennent des annotations de type (<code>-&gt; None</code>, <code>: int</code>), ce qui améliore l’autocomplétion de ceux qui utilisent votre bibliothèque.</p>
+</section>
+<section id="script-un-fichier-qui-se-suffit-à-lui-même" class="level3">
+<h3 class="anchored" data-anchor-id="script-un-fichier-qui-se-suffit-à-lui-même"><code>--script</code> : un fichier qui se suffit à lui-même</h3>
+<p>Parfois, un projet complet est disproportionné : vous voulez juste envoyer un script <code>rapport.py</code> à un collègue. <code>uv</code> sait écrire les dépendances <strong>dans le fichier lui-même</strong> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init <span class="at">--script</span> rapport.py</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add <span class="at">--script</span> rapport.py pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># /// script</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># requires-python = "&gt;=3.13"</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dependencies = [</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     "pandas&gt;=3.1.0",</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ]</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ///</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main() <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Hello from rapport.py!"</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Le bloc entre <code># ///</code> est un standard Python (la PEP 723). Votre collègue lance <code>uv run rapport.py</code> et <code>uv</code> installe <code>pandas</code> dans un environnement temporaire, sans <code>pyproject.toml</code> ni <code>.venv</code> dans le dossier.</p>
+</section>
+</section>
+<section id="utiliser-un-outil-sans-linstaller-dans-le-projet" class="level2">
+<h2 class="anchored" data-anchor-id="utiliser-un-outil-sans-linstaller-dans-le-projet">Utiliser un outil sans l’installer dans le projet</h2>
+<p>Certains outils n’ont rien à faire dans les dépendances de votre projet : vous voulez juste les utiliser.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Je veux…</th>
+<th>Commande</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lancer un outil une fois, dans un environnement jetable</td>
+<td><code>uvx ruff check .</code></td>
+</tr>
+<tr class="even">
+<td>Installer un outil pour l’avoir partout sur ma machine</td>
+<td><code>uv tool install ruff</code></td>
+</tr>
+<tr class="odd">
+<td>Tester une bibliothèque sans l’ajouter au projet</td>
+<td><code>uv run --with rich main.py</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>uvx</code> est simplement un raccourci de <code>uv tool run</code>. Avec <code>--with</code>, la bibliothèque est disponible <strong>pour cette exécution seulement</strong> : <code>pyproject.toml</code> n’est pas modifié.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Le piège de <code>--with</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si votre code a réellement besoin de la bibliothèque, ajoutez-la avec <code>uv add</code>. Un projet qui ne fonctionne qu’avec <code>--with</code> n’est plus reproductible : votre collègue n’en saura rien.</p>
+</div>
+</div>
+</section>
+<section id="pour-aller-plus-loin" class="level2">
+<h2 class="anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Partie avancée, dépliez si vous êtes à l’aise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Contraindre une version.</strong> <code>uv add "pandas==3.0.*"</code> impose la série 3.0. Restez souple par défaut (<code>&gt;=</code>) : c’est <code>uv.lock</code> qui garantit la reproductibilité, pas <code>pyproject.toml</code>.</p>
+<p><strong>Mettre à jour les dépendances.</strong> <code>uv lock --upgrade</code> remonte tout à la dernière version compatible, <code>uv lock --upgrade-package pandas</code> seulement <code>pandas</code>. Lancez vos tests après !</p>
+<p><strong>Des groupes de dépendances sur mesure.</strong> En plus de <code>dev</code>, vous pouvez créer vos propres groupes : <code>uv add --group docs quarto-cli</code>. On les installe avec <code>uv sync --group docs</code> et on les exclut avec <code>--no-group docs</code>. Le dépôt de ce cours utilise justement un groupe <code>docs</code>.</p>
+<p><strong>Des dépendances optionnelles.</strong> <code>uv add --optional excel openpyxl</code> crée un « extra » : les utilisateurs de votre package choisissent de l’installer (<code>suivi-stocks[excel]</code>). La différence avec un groupe : un extra est publié avec le package, un groupe reste chez vous.</p>
+<p><strong>Les variables d’environnement.</strong> <code>uv run --env-file .env main.py</code> charge les variables d’un fichier <code>.env</code> (mots de passe, chemins MinIO…) uniquement pour cette exécution, sans les écrire dans le code.</p>
+<p><strong>Gérer la version de son projet.</strong> <code>uv version --bump minor</code> fait passer la version de <code>0.1.0</code> à <code>0.2.0</code> dans <code>pyproject.toml</code> (aussi <code>major</code> et <code>patch</code>).</p>
+<pre><code>suivi-stocks 0.1.0 =&gt; 0.2.0</code></pre>
+<p><strong>Construire et publier.</strong> Pour un projet <code>--package</code> ou <code>--lib</code>, <code>uv build</code> produit dans <code>dist/</code> les fichiers installables (<code>.whl</code> et <code>.tar.gz</code>), et <code>uv publish</code> les envoie sur PyPI.</p>
+<p><strong>Exporter pour les outils qui ne connaissent pas <code>uv</code>.</strong> <code>uv export --format requirements-txt &gt; requirements.txt</code> produit un fichier <code>requirements.txt</code> classique à partir de <code>uv.lock</code>.</p>
+<p><strong>Le mode compatible <code>pip</code>.</strong> <code>uv venv</code> et <code>uv pip install</code> reproduisent l’ancienne façon de faire, en beaucoup plus rapide. Utile sur un projet existant qu’on ne peut pas migrer, mais rien n’est écrit dans <code>pyproject.toml</code> : préférez <code>uv add</code> dès que possible.</p>
+<p><strong>Les workspaces.</strong> Plusieurs packages dans un même dépôt (une application et sa bibliothèque de calcul, par exemple) peuvent partager un seul <code>uv.lock</code>. Lancez <code>uv init --lib packages/calculs</code> depuis la racine du projet : <code>uv</code> l’ajoute automatiquement comme membre.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tool.uv.workspace]</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="dt">members</span> <span class="op">=</span> <span class="op">[</span><span class="st">"packages/calculs"</span><span class="op">]</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="kw">[tool.uv.sources]</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="dt">calculs</span> <span class="op">=</span> <span class="op">{ </span><span class="dt">workspace</span><span class="op"> =</span> <span class="cn">true</span><span class="op"> }</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Après <code>uv add calculs</code>, l’application importe la bibliothèque comme n’importe quel package, et chaque modification de <code>calculs</code> est prise en compte immédiatement.</p>
+<p><strong>Changer de backend de build.</strong> <code>uv init --package --build-backend hatch</code> utilise <code>hatchling</code> au lieu de <code>uv_build</code>, si un outil de votre entreprise l’exige.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="cheatsheet" class="level2">
+<h2 class="anchored" data-anchor-id="cheatsheet">Cheatsheet</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Je veux…</th>
+<th>Commande</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Créer un projet (application)</td>
+<td><code>uv init nom-projet</code></td>
+</tr>
+<tr class="even">
+<td>Créer un package avec <code>src/</code></td>
+<td><code>uv init --package nom-projet</code></td>
+</tr>
+<tr class="odd">
+<td>Créer une bibliothèque</td>
+<td><code>uv init --lib nom-projet</code></td>
+</tr>
+<tr class="even">
+<td>Créer un projet minimal</td>
+<td><code>uv init --bare nom-projet</code></td>
+</tr>
+<tr class="odd">
+<td>Créer un script autonome</td>
+<td><code>uv init --script script.py</code></td>
+</tr>
+<tr class="even">
+<td>Ajouter une bibliothèque</td>
+<td><code>uv add pandas</code></td>
+</tr>
+<tr class="odd">
+<td>Ajouter une dépendance à un script</td>
+<td><code>uv add --script script.py pandas</code></td>
+</tr>
+<tr class="even">
+<td>Ajouter un outil de dev</td>
+<td><code>uv add --dev ruff</code></td>
+</tr>
+<tr class="odd">
+<td>Retirer une bibliothèque</td>
+<td><code>uv remove pandas</code></td>
+</tr>
+<tr class="even">
+<td>Lancer un script</td>
+<td><code>uv run main.py</code></td>
+</tr>
+<tr class="odd">
+<td>Lancer un outil sans l’installer</td>
+<td><code>uvx ruff check .</code></td>
+</tr>
+<tr class="even">
+<td>Installer un projet récupéré</td>
+<td><code>uv sync</code></td>
+</tr>
+<tr class="odd">
+<td>Voir les dépendances</td>
+<td><code>uv tree</code></td>
+</tr>
+<tr class="even">
+<td>Mettre à jour une dépendance</td>
+<td><code>uv lock --upgrade-package pandas</code></td>
+</tr>
+<tr class="odd">
+<td>Changer de version de Python</td>
+<td><code>uv python pin 3.12</code></td>
+</tr>
+<tr class="even">
+<td>Monter la version du projet</td>
+<td><code>uv version --bump minor</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>À retenir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Un projet = un environnement virtuel <code>.venv</code>, géré automatiquement par <code>uv</code>.</li>
+<li><code>uv add</code> ajoute une dépendance, <code>uv run</code> lance le code dans le bon environnement.</li>
+<li><code>pyproject.toml</code> dit ce dont le projet a besoin, <code>uv.lock</code> fige les versions exactes.</li>
+<li>On ne modifie jamais <code>uv.lock</code> à la main, on le versionne toujours.</li>
+<li><code>uv sync</code> recrée l’environnement à l’identique chez n’importe qui.</li>
+<li>Choisissez la structure selon l’usage : application, <code>--package</code>, <code>--lib</code> ou <code>--script</code>.</li>
+<li>Les outils de développement vont dans <code>--dev</code>, les outils ponctuels passent par <code>uvx</code>.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python_data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../05-projet-reproductible/index.html" class="pagination-link" aria-label="Créer des projets reproductibles">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Créer des projets reproductibles</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../logs/index.html" class="pagination-link" aria-label="Logs">
+        <span class="nav-page-text">Logs</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python_data/edit/main/05-projet-reproductible/uv.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
