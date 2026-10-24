@@ -59,6 +59,12 @@ website:
             href: 03-initiation-python/07-scripts-jeux.qmd
           - text: "Base de données"
             href: 03-initiation-python/08-python-sql.qmd
+      - section: "Créer des projets reproductibles"
+        href: 05-projet-reproductible/index.qmd
+        contents:
+          - text: "uv pour les gouverner tous"
+            href: 05-projet-reproductible/uv.qmd
+
       - section : "Logs"
         href: logs/index.qmd
         contents:
