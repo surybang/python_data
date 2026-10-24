@@ -1,0 +1,492 @@
+---
+title: "Gérer ses projets avec uv"
+format:
+  html: default
+  revealjs:
+    output-file: 01-uv-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+Depuis le début du cours, quand une bibliothèque manquait, vous avez tapé `pip install` et c'était réglé. Ça fonctionne... jusqu'au jour où vous travaillez sur deux projets qui demandent deux versions différentes de `pandas` pour des raisons obscures.
+
+Ce chapitre vous montre comment `uv` règle ces problèmes, avec un fil rouge : un petit projet `suivi-stocks` qui lit un état des stocks de palettes et de cartons.
+
+## Le problème : un seul Python pour tout
+
+Quand vous faites `pip install pandas`, la bibliothèque est installée **dans le Python de votre machine**, partagé par tous vos projets. Résultat :
+
+- le projet A a besoin de `pandas` 2, le projet B de `pandas` 3 : impossible d'avoir les deux ;
+- au bout de quelques mois, plus personne ne sait quelles bibliothèques sont réellement utiles à quel projet ;
+- votre collègue ne sait pas ce qu'il doit installer pour faire tourner votre code.
+
+:::{.callout-note}
+## L'environnement virtuel, en coulisses
+
+La solution classique s'appelle un **environnement virtuel** : un dossier (par convention `.venv`) qui contient une copie isolée de Python et **uniquement** les bibliothèques d'un projet. Chaque projet a le sien, ils ne se marchent plus dessus.
+
+Avant, il fallait le créer, l'activer, puis y installer les dépendances à la main. `uv` fait tout cela pour vous.
+:::
+
+## Installer `uv`
+
+Sur SSP Cloud, `uv` est déjà disponible dans les services VS Code. En local, suivez la [page d'installation officielle](https://docs.astral.sh/uv/getting-started/installation/).
+
+**Avec `pip`**, la plus simple si Python est déjà installé :
+
+```bash
+pip install uv
+```
+
+**Avec le script officiel**, qui n'a pas besoin de Python  (pour Linux et Mac):
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Puis vérifiez :
+
+```bash
+uv --version
+```
+Vous devriez voir la version de `uv` s'afficher dans votre terminal.
+
+:::{.callout-tip}
+`uv` peut lui-même installer Python : vous n'avez **pas besoin** d'installer Python avant. C'est une des raisons pour lesquelles il simplifie autant les installations en local.
+:::
+
+## Créer un projet
+
+```bash
+uv init suivi-stocks
+cd suivi-stocks
+```
+
+```
+Initialized project `suivi-stocks` at `/home/onyxia/work/suivi-stocks`
+```
+
+`uv` crée un dossier avec ces fichiers :
+
+| Fichier | Rôle |
+|---|---|
+| `pyproject.toml` | La **carte d'identité** du projet : nom, version de Python, dépendances |
+| `.python-version` | La version de Python à utiliser (ici `3.13`) |
+| `main.py` | Un premier script d'exemple |
+| `README.md` | La documentation du projet |
+| `.gitignore` | Ce que `Git` doit ignorer (dont `.venv`) |
+
+Le `pyproject.toml` ressemble à ceci :
+
+```toml
+[project]
+name = "suivi-stocks"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+```
+
+La liste `dependencies` est vide : le projet n'a encore besoin de rien.
+
+## Ajouter une dépendance
+
+```bash
+uv add pandas
+```
+
+```
+Installed 5 packages in 19ms
+ + numpy==2.5.4
+ + pandas==3.1.0
+ + python-dateutil==3.0.0
+ + six==1.17.0
+ + tzdata==2026.5
+```
+
+Trois choses se sont passées d'un coup :
+
+1. `uv` a créé le dossier `.venv` (s'il n'existait pas) ;
+2. il a installé `pandas` **et ses propres dépendances** (`numpy`, etc.) dans `.venv` ;
+3. il a mis à jour `pyproject.toml` et créé le fichier `uv.lock`.
+
+```toml
+dependencies = [
+    "pandas>=3.1.0",
+]
+```
+
+Pour retirer une bibliothèque, c'est symétrique : `uv remove pandas`.
+
+## Lancer son code
+
+On remplace le contenu de `main.py` :
+
+```python
+import pandas as pd
+
+stocks = pd.DataFrame({"produit": ["palette", "carton"], "quantite": [12, 40]})
+print(stocks)
+```
+
+Et on le lance **avec `uv run`** :
+
+```bash
+uv run main.py
+```
+
+```
+   produit  quantite
+0  palette        12
+1   carton        40
+```
+
+`uv run` lance le script **dans l'environnement du projet**, sans que vous ayez à activer quoi que ce soit. Avant de lancer, il vérifie même que l'environnement est à jour avec `pyproject.toml`.
+
+:::{.callout-warning}
+## Le piège classique
+
+Si vous lancez `python main.py` directement, vous utilisez **le Python de la machine**, pas celui du projet. Selon ce qui y est installé, le script fonctionnera... ou pas. Prenez l'habitude de toujours passer par `uv run`.
+:::
+
+## `pyproject.toml` et `uv.lock` : deux fichiers, deux rôles
+
+| | `pyproject.toml` | `uv.lock` |
+|---|---|---|
+| Qui l'écrit ? | Vous (via `uv add`) | `uv`, automatiquement |
+| Ce qu'il contient | Ce dont le projet **a besoin** : `pandas>=3.1.0` | Les versions **exactes** de tout : `pandas 3.1.0`, `numpy 2.5.4`... |
+| Se modifie à la main ? | Oui, si besoin | **Jamais** |
+
+:::{.callout-note}
+## Une analogie : la commande et le bon de livraison
+
+`pyproject.toml`, c'est le **bon de commande** : « je veux des palettes, au moins du modèle 2024 ».
+
+`uv.lock`, c'est le **bon de livraison** : il liste exactement ce qui a été livré, avec les références précises, y compris les vis et les sangles que vous n'aviez pas demandées explicitement mais qui étaient nécessaires (les dépendances des dépendances).
+
+Pour reproduire la même livraison, c'est le bon de livraison qu'il faut transmettre.
+:::
+
+Pour voir l'arbre complet des dépendances :
+
+```bash
+uv tree
+```
+
+```
+suivi-stocks v0.1.0
+└── pandas v3.1.0
+    ├── numpy v2.5.4
+    └── python-dateutil v3.0.0
+        ├── six v1.17.0
+        └── tzdata v2026.5
+```
+
+## Les dépendances de développement
+
+Certains outils servent **à vous**, pendant que vous développez, mais pas au fonctionnement du projet : `ruff`, `pytest`, `ipykernel` pour les notebooks. On les ajoute dans un groupe séparé avec `--dev` :
+
+```bash
+uv add --dev ruff
+```
+
+```toml
+[dependency-groups]
+dev = [
+    "ruff>=0.17.2",
+]
+```
+
+Et on les utilise aussi avec `uv run` :
+
+```bash
+uv run ruff check .
+```
+
+:::{.callout-tip}
+Quand on met un projet en production (dans une image `Docker` par exemple), on installe sans ces outils avec `uv sync --no-dev`. L'image est plus légère.
+:::
+
+## Récupérer le projet de quelqu'un d'autre
+
+C'est là que tout prend son sens. Votre collègue clone votre projet. Il a `pyproject.toml`, `uv.lock` et `.python-version`, mais pas de `.venv`. Il tape une seule commande :
+
+```bash
+uv sync
+```
+
+```
+Using CPython 3.13.17
+Creating virtual environment at: .venv
+Installed 6 packages in 22ms
+ + numpy==2.5.4
+ + pandas==3.1.0
+ + python-dateutil==3.0.0
+ + ruff==0.17.2
+ + six==1.17.0
+ + tzdata==2026.5
+```
+
+Il obtient **exactement** les mêmes versions que vous, grâce à `uv.lock`. Si la bonne version de Python n'est pas installée sur sa machine, `uv` la télécharge.
+
+:::{.callout-important}
+## Pourquoi on ne partage jamais `.venv`
+
+Le dossier `.venv` est lourd (souvent plusieurs centaines de Mo) et **dépend du système** sur lequel il a été créé : un `.venv` créé sur Mac ne fonctionne pas sur Linux ou Windows. On partage la recette (`pyproject.toml` + `uv.lock`), pas le plat cuisiné. `uv sync` le recrée en quelques secondes.
+:::
+
+## Choisir sa version de Python
+
+La version est notée dans `.python-version`. Pour en changer :
+
+```bash
+uv python pin 3.12
+```
+
+Pour voir les versions disponibles et installées :
+
+```bash
+uv python list
+```
+
+:::{.callout-warning}
+## En entreprise, `uv` ne peut pas toujours télécharger Python
+
+Quand la version demandée n'est pas installée sur la machine, `uv` la **télécharge depuis internet** (sur GitHub). Sur un poste ou un serveur d'entreprise, c'est souvent bloqué par le proxy ou la politique de sécurité : la commande échoue ou reste bloquée.
+
+Dans ce cas, la démarche est différente :
+
+1. **Faire installer les versions de Python nécessaires** par le service informatique (ou via le gestionnaire de logiciels de l'entreprise).
+2. **Interdire à `uv` de télécharger Python**, pour qu'il utilise uniquement les versions déjà installées. Dans `pyproject.toml` :
+
+   ```toml
+   [tool.uv]
+   python-downloads = "never"
+   python-preference = "only-system"
+   ```
+
+   ou, pour toute votre session, la variable d'environnement `UV_PYTHON_DOWNLOADS=never`.
+
+3. **Vérifier les versions que `uv` trouve** sur la machine :
+
+   ```bash
+   uv python list --only-installed
+   ```
+
+4. **Pointer vers l'interpréteur voulu** avec son chemin, plutôt qu'un simple numéro de version :
+
+   ```bash
+   uv python pin /usr/bin/python3.12
+   uv sync
+   ```
+
+   Sous Windows, le chemin ressemble plutôt à `C:\Program Files\Python312\python.exe`.
+:::
+
+## Choisir le bon type de projet
+
+Jusqu'ici, `uv init` a créé un projet « application » : un `main.py` à la racine, rien d'installable. C'est le comportement par défaut, parfait pour une analyse ou un script de reporting. Mais `uv init` sait créer d'autres structures selon ce que vous voulez faire.
+
+| Option | Ce que vous obtenez | Quand l'utiliser |
+|---|---|---|
+| *(aucune)* ou `--app` | `main.py` à la racine, pas de `[build-system]` | Une analyse, un script, un petit outil interne |
+| `--package` | Un dossier `src/nom/`, un point d'entrée, un `[build-system]` | Une application qu'on veut installer et lancer par une commande |
+| `--lib` | Un dossier `src/nom/` avec `py.typed`, sans point d'entrée | Une bibliothèque de fonctions réutilisée par d'autres projets |
+| `--script` | Un fichier `.py` seul, avec ses dépendances écrites dedans | Un script jetable ou à partager par mail |
+
+### `--package` : la structure `src/`
+
+```bash
+uv init --package suivi-stocks
+```
+
+```
+suivi-stocks/
+├── .gitignore
+├── .python-version
+├── README.md
+├── pyproject.toml
+└── src/
+    └── suivi_stocks/
+        └── __init__.py
+```
+
+Notez le nom du dossier : `suivi_stocks` avec un **underscore**. Un nom de module Python ne peut pas contenir de tiret. `uv` fait la conversion pour vous.
+
+Le `pyproject.toml` gagne deux sections :
+
+```toml
+[project.scripts]
+suivi-stocks = "suivi_stocks:main"
+
+[build-system]
+requires = ["uv_build>=0.11.32,<0.12.0"]
+build-backend = "uv_build"
+```
+
+- `[project.scripts]` crée une **commande** : `uv run suivi-stocks` appelle la fonction `main()` du fichier `src/suivi_stocks/__init__.py`.
+- `[build-system]` indique comment **installer** votre code comme un vrai package. Sans lui, vos imports entre fichiers du projet ne fonctionneraient pas.
+
+```bash
+uv run suivi-stocks
+```
+
+```
+Hello from suivi-stocks!
+```
+
+:::{.callout-important}
+## Pourquoi un dossier `src/` ?
+
+**Ce que disent les standards.** Le packaging Python est encadré par des PEP (*Python Enhancement Proposals*), les documents qui font évoluer le langage et son écosystème :
+
+- la [PEP 518](https://peps.python.org/pep-0518/) introduit le fichier `pyproject.toml` et la section `[build-system]` ;
+- la [PEP 517](https://peps.python.org/pep-0517/) définit comment un outil construit un package à partir de ce fichier ;
+- la [PEP 621](https://peps.python.org/pep-0621/) standardise la section `[project]` (nom, version, dépendances) ;
+- la [PEP 660](https://peps.python.org/pep-0660/) permet d'installer son projet en mode « éditable », ce que fait `uv` : vos modifications sont prises en compte sans réinstaller.
+
+Aucune PEP n'impose `src/`, mais c'est la structure **recommandée par le [guide officiel de packaging](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/)**, et celle que `uv`, `hatch` ou `poetry` proposent pour un package.
+
+**Ce que ça change concrètement.** Quand vous lancez Python, le dossier courant est automatiquement ajouté aux endroits où il cherche les modules. Sans `src/`, `import suivi_stocks` peut donc fonctionner « par accident », simplement parce que le dossier est à côté, même si le package est mal installé ou mal configuré. Avec `src/`, ce raccourci n'existe plus : votre code n'est importable **que s'il est correctement installé**, exactement comme chez la personne qui l'installera après vous.
+
+**Les bonnes pratiques qui en découlent :**
+
+- le code du package vit dans `src/`, séparé des tests (`tests/`), des notebooks, de la documentation et de la configuration ;
+- les tests s'exécutent contre la **version installée** du package, pas contre des fichiers qui traînent dans le dossier ;
+- ce qui sera distribué est clairement délimité : tout ce qui est dans `src/nom_du_package/`, et rien d'autre.
+:::
+
+:::{.callout-tip}
+Vous avez déjà un dossier de travail ? Placez-vous dedans et lancez `uv init --package .` (avec le point) : `uv` crée la structure sur place au lieu de créer un nouveau dossier.
+:::
+
+### `--lib` : une boîte à outils
+
+`--lib` ressemble à `--package`, mais **sans commande** à lancer : on ne « lance » pas une bibliothèque, on l'importe. Par exemple, un ensemble de fonctions de calcul de stock de sécurité que trois projets différents réutilisent.
+
+Le petit fichier `py.typed` signale aux éditeurs que vos fonctions contiennent des annotations de type (`-> None`, `: int`), ce qui améliore l'autocomplétion de ceux qui utilisent votre bibliothèque.
+
+### `--script` : un fichier qui se suffit à lui-même
+
+Parfois, un projet complet est disproportionné : vous voulez juste envoyer un script `rapport.py` à un collègue. `uv` sait écrire les dépendances **dans le fichier lui-même** :
+
+```bash
+uv init --script rapport.py
+uv add --script rapport.py pandas
+```
+
+```python
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "pandas>=3.1.0",
+# ]
+# ///
+
+
+def main() -> None:
+    print("Hello from rapport.py!")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+Le bloc entre `# ///` est un standard Python (la PEP 723). Votre collègue lance `uv run rapport.py` et `uv` installe `pandas` dans un environnement temporaire, sans `pyproject.toml` ni `.venv` dans le dossier.
+
+## Utiliser un outil sans l'installer dans le projet
+
+Certains outils n'ont rien à faire dans les dépendances de votre projet : vous voulez juste les utiliser.
+
+| Je veux... | Commande |
+|---|---|
+| Lancer un outil une fois, dans un environnement jetable | `uvx ruff check .` |
+| Installer un outil pour l'avoir partout sur ma machine | `uv tool install ruff` |
+| Tester une bibliothèque sans l'ajouter au projet | `uv run --with rich main.py` |
+
+`uvx` est simplement un raccourci de `uv tool run`. Avec `--with`, la bibliothèque est disponible **pour cette exécution seulement** : `pyproject.toml` n'est pas modifié.
+
+:::{.callout-warning}
+## Le piège de `--with`
+
+Si votre code a réellement besoin de la bibliothèque, ajoutez-la avec `uv add`. Un projet qui ne fonctionne qu'avec `--with` n'est plus reproductible : votre collègue n'en saura rien.
+:::
+
+## Pour aller plus loin
+
+:::{.callout-note collapse="true"}
+## Partie avancée, dépliez si vous êtes à l'aise
+
+**Contraindre une version.** `uv add "pandas==3.0.*"` impose la série 3.0. Restez souple par défaut (`>=`) : c'est `uv.lock` qui garantit la reproductibilité, pas `pyproject.toml`.
+
+**Mettre à jour les dépendances.** `uv lock --upgrade` remonte tout à la dernière version compatible, `uv lock --upgrade-package pandas` seulement `pandas`. Lancez vos tests après !
+
+**Des groupes de dépendances sur mesure.** En plus de `dev`, vous pouvez créer vos propres groupes : `uv add --group docs quarto-cli`. On les installe avec `uv sync --group docs` et on les exclut avec `--no-group docs`. Le dépôt de ce cours utilise justement un groupe `docs`.
+
+**Des dépendances optionnelles.** `uv add --optional excel openpyxl` crée un « extra » : les utilisateurs de votre package choisissent de l'installer (`suivi-stocks[excel]`). La différence avec un groupe : un extra est publié avec le package, un groupe reste chez vous.
+
+**Les variables d'environnement.** `uv run --env-file .env main.py` charge les variables d'un fichier `.env` (mots de passe, chemins MinIO...) uniquement pour cette exécution, sans les écrire dans le code.
+
+**Gérer la version de son projet.** `uv version --bump minor` fait passer la version de `0.1.0` à `0.2.0` dans `pyproject.toml` (aussi `major` et `patch`).
+
+```
+suivi-stocks 0.1.0 => 0.2.0
+```
+
+**Construire et publier.** Pour un projet `--package` ou `--lib`, `uv build` produit dans `dist/` les fichiers installables (`.whl` et `.tar.gz`), et `uv publish` les envoie sur PyPI.
+
+**Exporter pour les outils qui ne connaissent pas `uv`.** `uv export --format requirements-txt > requirements.txt` produit un fichier `requirements.txt` classique à partir de `uv.lock`.
+
+**Le mode compatible `pip`.** `uv venv` et `uv pip install` reproduisent l'ancienne façon de faire, en beaucoup plus rapide. Utile sur un projet existant qu'on ne peut pas migrer, mais rien n'est écrit dans `pyproject.toml` : préférez `uv add` dès que possible.
+
+**Les workspaces.** Plusieurs packages dans un même dépôt (une application et sa bibliothèque de calcul, par exemple) peuvent partager un seul `uv.lock`. Lancez `uv init --lib packages/calculs` depuis la racine du projet : `uv` l'ajoute automatiquement comme membre.
+
+```toml
+[tool.uv.workspace]
+members = ["packages/calculs"]
+
+[tool.uv.sources]
+calculs = { workspace = true }
+```
+
+Après `uv add calculs`, l'application importe la bibliothèque comme n'importe quel package, et chaque modification de `calculs` est prise en compte immédiatement.
+
+**Changer de backend de build.** `uv init --package --build-backend hatch` utilise `hatchling` au lieu de `uv_build`, si un outil de votre entreprise l'exige.
+:::
+
+## Cheatsheet
+
+| Je veux... | Commande |
+|---|---|
+| Créer un projet (application) | `uv init nom-projet` |
+| Créer un package avec `src/` | `uv init --package nom-projet` |
+| Créer une bibliothèque | `uv init --lib nom-projet` |
+| Créer un projet minimal | `uv init --bare nom-projet` |
+| Créer un script autonome | `uv init --script script.py` |
+| Ajouter une bibliothèque | `uv add pandas` |
+| Ajouter une dépendance à un script | `uv add --script script.py pandas` |
+| Ajouter un outil de dev | `uv add --dev ruff` |
+| Retirer une bibliothèque | `uv remove pandas` |
+| Lancer un script | `uv run main.py` |
+| Lancer un outil sans l'installer | `uvx ruff check .` |
+| Installer un projet récupéré | `uv sync` |
+| Voir les dépendances | `uv tree` |
+| Mettre à jour une dépendance | `uv lock --upgrade-package pandas` |
+| Changer de version de Python | `uv python pin 3.12` |
+| Monter la version du projet | `uv version --bump minor` |
+
+:::{.callout-important}
+## À retenir
+- Un projet = un environnement virtuel `.venv`, géré automatiquement par `uv`.
+- `uv add` ajoute une dépendance, `uv run` lance le code dans le bon environnement.
+- `pyproject.toml` dit ce dont le projet a besoin, `uv.lock` fige les versions exactes.
+- On ne modifie jamais `uv.lock` à la main, on le versionne toujours.
+- `uv sync` recrée l'environnement à l'identique chez n'importe qui.
+- Choisissez la structure selon l'usage : application, `--package`, `--lib` ou `--script`.
+- Les outils de développement vont dans `--dev`, les outils ponctuels passent par `uvx`.
+:::
