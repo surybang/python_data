@@ -1278,7 +1278,7 @@ TypeError: can&#39;t multiply sequence by non-int of type &#39;float&#39;</code>
 <section id="gérer-une-exception-try-except" class="slide level2">
 <h2>Gérer une exception : <code>try</code> / <code>except</code></h2>
 <p>Parfois, une erreur est <strong>prévisible</strong> : l’utilisateur tape n’importe quoi, un fichier est absent, une donnée est mal formatée. Plutôt que de laisser le programme s’arrêter, on peut l’intercepter :</p>
-<div id="e1fc5aa3" class="cell" data-execution_count="1">
+<div id="80325636" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>saisie <span class="op">=</span> <span class="st">&quot;vingt&quot;</span></span>
 <span id="cb10-2"><a aria-label="2"></a></span>
 <span id="cb10-3"><a aria-label="3"></a><span class="cf">try</span>:</span>
@@ -1292,7 +1292,7 @@ TypeError: can&#39;t multiply sequence by non-int of type &#39;float&#39;</code>
 </div>
 <p>Python <strong>essaie</strong> le bloc <code>try</code>. Si une <code>ValueError</code> survient, il saute directement dans le bloc <code>except</code> au lieu de planter. Si tout va bien, le bloc <code>except</code> est ignoré.</p>
 <h3 id="récupérer-le-message-avec-as">Récupérer le message avec <code>as</code></h3>
-<div id="e3dfacbb" class="cell" data-execution_count="2">
+<div id="d422f997" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="cf">try</span>:</span>
 <span id="cb12-2"><a aria-label="2"></a>    prix <span class="op">=</span> <span class="bu">float</span>(<span class="st">&quot;12,5&quot;</span>)</span>
 <span id="cb12-3"><a aria-label="3"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> e:</span>
@@ -1303,7 +1303,7 @@ TypeError: can&#39;t multiply sequence by non-int of type &#39;float&#39;</code>
 </div>
 <h3 id="plusieurs-except">Plusieurs <code>except</code></h3>
 <p>On peut traiter chaque type d’erreur différemment :</p>
-<div id="b1d4613c" class="cell" data-execution_count="3">
+<div id="f8239722" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>stocks <span class="op">=</span> {<span class="st">&quot;vis&quot;</span>: <span class="dv">120</span>, <span class="st">&quot;écrous&quot;</span>: <span class="dv">80</span>}</span>
 <span id="cb14-2"><a aria-label="2"></a></span>
 <span id="cb14-3"><a aria-label="3"></a><span class="kw">def</span> stock_par_jour(article, nb_jours):</span>
@@ -1324,7 +1324,7 @@ Le nombre de jours doit être supérieur à 0.
 </div>
 </div>
 <h3 id="else-et-finally"><code>else</code> et <code>finally</code></h3>
-<div id="31b1095b" class="cell" data-execution_count="4">
+<div id="9e11c8ad" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="kw">def</span> lire_quantite(saisie):</span>
 <span id="cb16-2"><a aria-label="2"></a>    <span class="cf">try</span>:</span>
 <span id="cb16-3"><a aria-label="3"></a>        quantite <span class="op">=</span> <span class="bu">int</span>(saisie)</span>
@@ -1366,7 +1366,7 @@ Fin de la vérification</code></pre>
 </div>
 <h3 id="demander-pardon-plutôt-que-la-permission">Demander pardon plutôt que la permission</h3>
 <p>Dans le chapitre sur les scripts, on vérifiait une saisie avec <code>.isdigit()</code> avant de la convertir. Ça marche, mais <code>&quot;-3&quot;.isdigit()</code> vaut <code>False</code>, et <code>&quot;²&quot;.isdigit()</code> vaut <code>True</code> alors que <code>int(&quot;²&quot;)</code> plante ! Le style Python préfère <strong>essayer</strong> :</p>
-<div id="2a5c5551" class="cell" data-execution_count="5">
+<div id="d39878d7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="cf">for</span> saisie <span class="kw">in</span> [<span class="st">&quot;42&quot;</span>, <span class="st">&quot;-3&quot;</span>, <span class="st">&quot;²&quot;</span>, <span class="st">&quot;abc&quot;</span>]:</span>
 <span id="cb19-2"><a aria-label="2"></a>    <span class="cf">try</span>:</span>
 <span id="cb19-3"><a aria-label="3"></a>        nombre <span class="op">=</span> <span class="bu">int</span>(saisie)</span>
@@ -1393,7 +1393,7 @@ Fin de la vérification</code></pre>
 <section id="lever-ses-propres-erreurs-raise" class="slide level2">
 <h2>Lever ses propres erreurs : <code>raise</code></h2>
 <p>Jusqu’ici, c’est Python qui levait les exceptions. Mais <strong>vos</strong> fonctions aussi peuvent refuser une situation absurde :</p>
-<div id="1ed3be3b" class="cell" data-execution_count="6">
+<div id="2fac129e" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="kw">def</span> appliquer_remise(prix, taux):</span>
 <span id="cb22-2"><a aria-label="2"></a>    <span class="co">&quot;&quot;&quot;Applique une remise à un prix.</span></span>
 <span id="cb22-3"><a aria-label="3"></a></span>
@@ -1450,13 +1450,13 @@ Taux de remise invalide : 20</code></pre>
 <div class="callout-content">
 <p><code>ValueError</code>, <code>KeyError</code>… ces noms sont génériques. Dans un vrai programme, on aimerait des erreurs qui parlent <strong>le langage du métier</strong> : « stock insuffisant », « commande introuvable ». Python permet de créer ses propres types d’exceptions.</p>
 <p>La syntaxe utilise le mot-clé <code>class</code>, que nous n’avons pas encore vu. Prenez-la pour l’instant comme une <strong>recette</strong> :</p>
-<div id="5063ff09" class="cell" data-execution_count="7">
+<div id="9df1b0fa" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="kw">class</span> StockInsuffisantError(<span class="pp">Exception</span>):</span>
 <span id="cb24-2"><a aria-label="2"></a>    <span class="co">&quot;&quot;&quot;Levée quand on veut sortir plus d&#39;articles qu&#39;il n&#39;y en a en stock.&quot;&quot;&quot;</span></span>
 <span id="cb24-3"><a aria-label="3"></a>    <span class="cf">pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>C’est tout. <code>(Exception)</code> signifie « mon erreur est une sorte d’exception », elle se comporte donc comme toutes les autres :</p>
-<div id="a12a8063" class="cell" data-execution_count="8">
+<div id="d89192ca" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a>stocks <span class="op">=</span> {<span class="st">&quot;vis&quot;</span>: <span class="dv">120</span>, <span class="st">&quot;écrous&quot;</span>: <span class="dv">80</span>}</span>
 <span id="cb25-2"><a aria-label="2"></a></span>
 <span id="cb25-3"><a aria-label="3"></a><span class="kw">def</span> sortir_du_stock(article, quantite):</span>
@@ -1496,7 +1496,7 @@ Taux de remise invalide : 20</code></pre>
 </ul>
 <h3 id="une-famille-derreurs">Une famille d’erreurs</h3>
 <p>On peut aussi créer une erreur « parente » pour regrouper toutes les erreurs de son application :</p>
-<div id="60087c3e" class="cell" data-execution_count="9">
+<div id="ad81722a" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a><span class="kw">class</span> LogistiqueError(<span class="pp">Exception</span>):</span>
 <span id="cb27-2"><a aria-label="2"></a>    <span class="co">&quot;&quot;&quot;Erreur de base de notre application logistique.&quot;&quot;&quot;</span></span>
 <span id="cb27-3"><a aria-label="3"></a></span>
