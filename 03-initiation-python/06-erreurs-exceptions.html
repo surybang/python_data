@@ -757,7 +757,7 @@ Note
 <section id="gérer-une-exception-try-except" class="level2">
 <h2 class="anchored" data-anchor-id="gérer-une-exception-try-except">Gérer une exception : <code>try</code> / <code>except</code></h2>
 <p>Parfois, une erreur est <strong>prévisible</strong> : l’utilisateur tape n’importe quoi, un fichier est absent, une donnée est mal formatée. Plutôt que de laisser le programme s’arrêter, on peut l’intercepter :</p>
-<div id="80325636" class="cell" data-execution_count="1">
+<div id="513706f7" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>saisie <span class="op">=</span> <span class="st">"vingt"</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
@@ -772,7 +772,7 @@ Note
 <p>Python <strong>essaie</strong> le bloc <code>try</code>. Si une <code>ValueError</code> survient, il saute directement dans le bloc <code>except</code> au lieu de planter. Si tout va bien, le bloc <code>except</code> est ignoré.</p>
 <section id="récupérer-le-message-avec-as" class="level3">
 <h3 class="anchored" data-anchor-id="récupérer-le-message-avec-as">Récupérer le message avec <code>as</code></h3>
-<div id="d422f997" class="cell" data-execution_count="2">
+<div id="479c2a38" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    prix <span class="op">=</span> <span class="bu">float</span>(<span class="st">"12,5"</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> e:</span>
@@ -785,7 +785,7 @@ Note
 <section id="plusieurs-except" class="level3">
 <h3 class="anchored" data-anchor-id="plusieurs-except">Plusieurs <code>except</code></h3>
 <p>On peut traiter chaque type d’erreur différemment :</p>
-<div id="f8239722" class="cell" data-execution_count="3">
+<div id="8c1c0db1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>stocks <span class="op">=</span> {<span class="st">"vis"</span>: <span class="dv">120</span>, <span class="st">"écrous"</span>: <span class="dv">80</span>}</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stock_par_jour(article, nb_jours):</span>
@@ -808,7 +808,7 @@ Le nombre de jours doit être supérieur à 0.
 </section>
 <section id="else-et-finally" class="level3">
 <h3 class="anchored" data-anchor-id="else-et-finally"><code>else</code> et <code>finally</code></h3>
-<div id="9e11c8ad" class="cell" data-execution_count="4">
+<div id="662983d8" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lire_quantite(saisie):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        quantite <span class="op">=</span> <span class="bu">int</span>(saisie)</span>
@@ -854,7 +854,7 @@ Warning
 <section id="demander-pardon-plutôt-que-la-permission" class="level3">
 <h3 class="anchored" data-anchor-id="demander-pardon-plutôt-que-la-permission">Demander pardon plutôt que la permission</h3>
 <p>Dans le chapitre sur les scripts, on vérifiait une saisie avec <code>.isdigit()</code> avant de la convertir. Ça marche, mais <code>"-3".isdigit()</code> vaut <code>False</code>, et <code>"²".isdigit()</code> vaut <code>True</code> alors que <code>int("²")</code> plante ! Le style Python préfère <strong>essayer</strong> :</p>
-<div id="d39878d7" class="cell" data-execution_count="5">
+<div id="813473f8" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> saisie <span class="kw">in</span> [<span class="st">"42"</span>, <span class="st">"-3"</span>, <span class="st">"²"</span>, <span class="st">"abc"</span>]:</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        nombre <span class="op">=</span> <span class="bu">int</span>(saisie)</span>
@@ -882,7 +882,7 @@ Warning
 <section id="lever-ses-propres-erreurs-raise" class="level2">
 <h2 class="anchored" data-anchor-id="lever-ses-propres-erreurs-raise">Lever ses propres erreurs : <code>raise</code></h2>
 <p>Jusqu’ici, c’est Python qui levait les exceptions. Mais <strong>vos</strong> fonctions aussi peuvent refuser une situation absurde :</p>
-<div id="2fac129e" class="cell" data-execution_count="6">
+<div id="d10fc477" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> appliquer_remise(prix, taux):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Applique une remise à un prix.</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -942,13 +942,13 @@ Important
 <div class="callout-body-container callout-body">
 <p><code>ValueError</code>, <code>KeyError</code>… ces noms sont génériques. Dans un vrai programme, on aimerait des erreurs qui parlent <strong>le langage du métier</strong> : « stock insuffisant », « commande introuvable ». Python permet de créer ses propres types d’exceptions.</p>
 <p>La syntaxe utilise le mot-clé <code>class</code>, que nous n’avons pas encore vu. Prenez-la pour l’instant comme une <strong>recette</strong> :</p>
-<div id="9df1b0fa" class="cell" data-execution_count="7">
+<div id="675daae2" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StockInsuffisantError(<span class="pp">Exception</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Levée quand on veut sortir plus d'articles qu'il n'y en a en stock."""</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>C’est tout. <code>(Exception)</code> signifie « mon erreur est une sorte d’exception », elle se comporte donc comme toutes les autres :</p>
-<div id="d89192ca" class="cell" data-execution_count="8">
+<div id="7e5e1a09" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>stocks <span class="op">=</span> {<span class="st">"vis"</span>: <span class="dv">120</span>, <span class="st">"écrous"</span>: <span class="dv">80</span>}</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sortir_du_stock(article, quantite):</span>
@@ -989,7 +989,7 @@ Important
 <section id="une-famille-derreurs" class="level3">
 <h3 class="anchored" data-anchor-id="une-famille-derreurs">Une famille d’erreurs</h3>
 <p>On peut aussi créer une erreur « parente » pour regrouper toutes les erreurs de son application :</p>
-<div id="ad81722a" class="cell" data-execution_count="9">
+<div id="7c022d3b" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LogistiqueError(<span class="pp">Exception</span>):</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Erreur de base de notre application logistique."""</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
