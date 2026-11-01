@@ -90,42 +90,64 @@ dbt applique aux données les bonnes pratiques des développeurs :
 
 - **Tout est du code.** Une transformation est un fichier texte, versionné avec git. On sait qui a changé quoi, et quand.
 - **Un modèle = un `SELECT`.** Pas de `CREATE TABLE`, pas de `INSERT` : vous décrivez **le résultat voulu**, dbt s'occupe de le construire.
-- **Des briques réutilisables.** Plutôt qu'une requête géante de 300 lignes, on enchaîne de petits modèles qui s'appuient les uns sur les autres, comme les fonctions du chapitre précédent.
+- **Des briques réutilisables.** Plutôt qu'une requête géante de 300 lignes, on enchaîne de petits modèles qui s'appuient les uns sur les autres.
 - **On teste.** Une donnée fausse dans un tableau de bord est pire qu'une absence de donnée. Les tests détectent les problèmes avant qu'ils n'arrivent chez les métiers.
 - **On documente.** La documentation vit à côté du code, et dbt la transforme en site web consultable.
 
 Ce métier, à mi-chemin entre l'analyste et le développeur, a même reçu un nom : l'**analytics engineering**.
 
+## Quel dbt ?
+
+« dbt » désigne à la fois un outil et une entreprise, **dbt Labs**, qui le développe. Elle en propose plusieurs versions :
+
+| Version | Licence | Prix | Usage |
+|---|---|---|---|
+| **dbt OSS** | Open source (Apache 2.0) | Gratuit | L'outil en ligne de commande, entièrement open source : **c'est celui que nous utilisons** |
+| **dbt** | Propriétaire | Gratuit | Le même outil, avec des fonctions en plus : analyse du SQL avant exécution, autocomplétion, extension VS Code |
+| **dbt platform** | Propriétaire | Payant | Une version hébergée : éditeur en ligne, planification des exécutions, interface web |
+| **dbt Core** | Open source (Apache 2.0) | Gratuit | L'ancienne version (v1), en Python, encore très présente en entreprise |
+
+:::{.callout-note}
+## dbt OSS ou dbt : quelle différence ?
+Pensez à Chromium et Google Chrome : **dbt OSS** est le moteur, entièrement open source. **dbt** reprend ce même moteur et y ajoute des briques fermées qui aident à écrire le code. Les commandes et les projets sont identiques : tout ce que vous apprenez ici fonctionne avec l'une comme avec l'autre, et avec dbt Core.
+
+Ce modèle s'appelle l'***open core*** : le cœur de l'outil est libre, pour fédérer une communauté, tandis que les fonctions les plus confortables restent fermées ou payantes, pour faire vivre l'entreprise.
+
+Attention enfin : **gratuit ne veut pas dire libre**. Un logiciel libre donne à chacun le droit de lire, modifier et redistribuer son code, et une version publiée sous licence libre le reste : si l'éditeur change de cap, la communauté peut reprendre ce code et le faire vivre ailleurs. Un logiciel propriétaire gratuit, lui, s'utilise selon les conditions de son éditeur, qui peut les changer à la version suivante.
+:::
+
+:::{.callout-tip collapse="true"}
+## Libre aujourd'hui, mais demain ?
+Une licence libre protège le code déjà publié, pas l'avenir du projet. En 2023, HashiCorp a publié les nouvelles versions de Terraform sous une licence qui n'est plus open source : la communauté a repris la dernière version libre pour créer **OpenTofu**. Plus récemment, MinIO, un stockage objet très utilisé, a retiré des fonctions de son édition gratuite puis cessé de la maintenir. Avant d'adopter un outil, regardez donc aussi **qui le maintient** et **comment il gagne sa vie**.
+:::
+
 ## Installation
 
-dbt existe en deux versions majeures :
-
-- **dbt v2** est la version actuelle, installée par défaut. Réécrite en Rust, elle intègre directement le connecteur DuckDB : rien d'autre à installer.
-- **dbt v1** (paquet `dbt-core`) est l'ancienne version en Python, encore très présente. Il faut lui ajouter un **adaptateur** par base (`dbt-duckdb`, `dbt-bigquery`…).
-
-Les projets s'écrivent de la même façon dans les deux versions : tout ce qui suit fonctionne avec l'une comme avec l'autre.
-
 ```bash
-uv add dbt                          # dbt v2
-# ou, pour dbt v1 :
-uv add dbt-core dbt-duckdb
-
-dbt --version                       # vérifier l'installation
+uv tool install dbt-oss  # installe la commande dbt, en open source
+dbt --version            # doit commencer par 2.
 ```
+
+`uv tool install` installe dbt comme un **outil** : la commande `dbt` est disponible partout dans le terminal, sans être ajoutée aux dépendances d'un projet Python. C'est logique, car on ne fait jamais `import dbt` : on le lance dans un terminal, et un projet dbt contient des fichiers `.sql` et `.yml`, pas du code Python.
+
+:::{.callout-warning}
+## Une seule version de dbt à la fois
+`dbt-oss`, `dbt` et `dbt-core` fournissent tous la même commande `dbt` : ne les installez pas dans le même environnement, ils se gêneraient mutuellement. Si vous rejoignez une équipe en dbt Core (v1), installez sa version avec son adaptateur : `uv add dbt-core dbt-duckdb`.
+:::
 
 ## La structure d'un projet
 
 La commande `dbt init` crée un nouveau projet :
 
 ```bash
-dbt init commandes
+uv run dbt init commandes
 ```
 
 ```
 commandes/
 ├── dbt_project.yml     # la carte d'identité du projet
 ├── models/             # vos transformations (.sql) et leur description (.yml)
-├── seeds/              # des fichiers CSV à charger dans la base
+├── seeds/              # de petits référentiels CSV (pas vos données !)
 ├── tests/              # vos tests personnalisés (.sql)
 ├── macros/             # des fonctions réutilisables
 ├── snapshots/          # l'historisation de tables qui changent
@@ -138,7 +160,7 @@ Deux dossiers apparaîtront au premier lancement, à ne jamais versionner (ajout
 - `target/` : le SQL compilé par dbt et les résultats d'exécution ;
 - `dbt_packages/` : les paquets externes installés avec `dbt deps`.
 
-Au début, vous n'utiliserez que `models/`, `seeds/` et `tests/`.
+Au début, vous n'utiliserez que `models/` et `tests/`.
 
 ### `dbt_project.yml` : la configuration du projet
 
@@ -175,9 +197,87 @@ Pour BigQuery ou PostgreSQL, on y trouverait un projet, un serveur, un identifia
 Par défaut, dbt cherche ce fichier dans `~/.dbt/`, **en dehors** du projet, justement pour qu'il ne finisse pas sur GitHub avec des identifiants. Pour un projet DuckDB local sans secret, on peut le laisser dans le projet et lancer les commandes avec `--profiles-dir .`.
 :::
 
-## Les modèles : un fichier, un `SELECT`
+## Avant dbt : charger les données brutes
 
-Pour illustrer, prenons un mini-exemple de commandes fournisseurs, avec deux tables brutes : `raw_commandes` et `raw_fournisseurs`. Le projet guidé reprendra tout cela en détail sur un vrai jeu de données.
+Rappelez-vous : dbt est le **T** de l'ELT. Il ne sait pas lire un fichier CSV en ligne ou posé sur votre disque, ni interroger une API. Avant de l'utiliser, il faut donc que les données brutes soient **déjà dans la base**. C'est le rôle de l'étape EL, confiée à un autre outil.
+
+Pour illustrer, prenons un mini-exemple de commandes fournisseurs, avec deux fichiers CSV disponibles en ligne. Le projet guidé reprendra tout cela en détail sur un vrai jeu de données.
+
+[`commandes.csv`](https://minio.lab.sspcloud.fr/fabienhos/exemple_dbt/commandes.csv) :
+
+```
+id_commande,id_fournisseur,date_commande,date_livraison,quantite
+1,F01,2026-09-01,2026-09-04,120
+2,F02,2026-09-02,2026-09-10,80
+3,F01,2026-09-05,2026-09-07,200
+4,F03,2026-09-06,2026-09-15,50
+5,F02,2026-09-08,2026-09-12,150
+```
+
+[`fournisseurs.csv`](https://minio.lab.sspcloud.fr/fabienhos/exemple_dbt/fournisseurs.csv) :
+
+```
+id_fournisseur,nom,delai_promis_jours
+F01,Acier SA,3
+F02,BoisPlus,5
+F03,Plastico,7
+```
+
+Ici, notre outil d'EL est un petit script Python qui utilise DuckDB (`uv add duckdb`). DuckDB sait lire un fichier directement depuis son adresse web, sans qu'on ait à le télécharger :
+
+```python
+# charger_donnees.py
+import duckdb
+
+URL = "https://minio.lab.sspcloud.fr/fabienhos/exemple_dbt"
+
+connexion = duckdb.connect("commandes.duckdb")
+connexion.sql("CREATE SCHEMA IF NOT EXISTS raw")
+
+connexion.sql(f"CREATE OR REPLACE TABLE raw.commandes AS SELECT * FROM read_csv('{URL}/commandes.csv')")
+connexion.sql(f"CREATE OR REPLACE TABLE raw.fournisseurs AS SELECT * FROM read_csv('{URL}/fournisseurs.csv')")
+
+print(connexion.sql("SELECT count(*) AS nb_commandes FROM raw.commandes"))
+connexion.close()
+```
+
+```
+┌──────────────┐
+│ nb_commandes │
+│    int64     │
+├──────────────┤
+│            5 │
+└──────────────┘
+```
+
+Les données sont copiées **telles quelles** dans un schéma `raw` : aucun nettoyage, aucun calcul. Tout le reste sera le travail de dbt.
+
+:::{.callout-note}
+## Une f-string dans du SQL ?
+Dans la page sur les bases de données, nous avons vu qu'il ne faut **jamais** construire une requête avec une f-string. La règle concerne les valeurs qui viennent de l'**extérieur** (un utilisateur, un formulaire, un fichier), qui pourraient contenir du SQL malveillant. Ici, l'adresse est écrite dans notre propre code : il n'y a aucun risque.
+:::
+
+:::{.callout-warning}
+## Fermez la connexion
+DuckDB n'autorise qu'un seul programme à écrire dans un fichier de base à la fois. Si le script ne ferme pas sa connexion (ou si un notebook garde la base ouverte), dbt ne pourra pas y accéder.
+:::
+
+### Déclarer les sources
+
+dbt doit savoir que ces tables existent. On les déclare comme **sources** dans un fichier `.yml` :
+
+```yaml
+# models/staging/_sources.yml
+version: 2
+
+sources:
+  - name: raw            # le schéma où le script a chargé les tables
+    tables:
+      - name: commandes
+      - name: fournisseurs
+```
+
+## Les modèles : un fichier, un `SELECT`
 
 Un **modèle** est un fichier `.sql` dans `models/`. Son nom de fichier devient le nom de la table ou de la vue créée.
 
@@ -189,20 +289,25 @@ select
     cast(date_commande as date) as date_commande,
     cast(date_livraison as date) as date_livraison,
     quantite
-from {{ ref('raw_commandes') }}
+from {{ source('raw', 'commandes') }}
 ```
 
-### `ref()` : le cœur de dbt
+### `source()` et `ref()` : le cœur de dbt
 
-`{{ ref('raw_commandes') }}` remplace le nom de la table. Cette syntaxe entre doubles accolades vient de **Jinja**, un langage de gabarits que dbt utilise pour rendre le SQL dynamique.
+`{{ source('raw', 'commandes') }}` remplace le nom de la table. Cette syntaxe entre doubles accolades vient de **Jinja**, un langage de gabarits que dbt utilise pour rendre le SQL dynamique.
 
-`ref()` fait deux choses :
+Il existe deux fonctions de ce type :
 
-1. Au moment de la compilation, dbt la remplace par le vrai nom de la table. Le fichier compilé dans `target/` contient :
+- `source()` désigne une table **brute**, chargée par un autre outil et déclarée dans les sources ;
+- `ref()` désigne un autre **modèle dbt**.
+
+Elles font deux choses :
+
+1. Au moment de la compilation, dbt les remplace par le vrai nom de la table. Le fichier compilé dans `target/` contient :
    ```sql
-   from "commandes"."main"."raw_commandes"
+   from "commandes"."raw"."commandes"
    ```
-2. Surtout, dbt **enregistre la dépendance** : `stg_commandes` dépend de `raw_commandes`. Avec toutes les dépendances, il construit un graphe (le *DAG*) et sait dans quel ordre tout lancer.
+2. Surtout, dbt **enregistre la dépendance** : `stg_commandes` dépend de la source `raw.commandes`. Avec toutes les dépendances, il construit un graphe (le *DAG*) et sait dans quel ordre tout lancer.
 
 Un modèle peut s'appuyer sur d'autres modèles :
 
@@ -228,14 +333,14 @@ group by f.nom_fournisseur
 ```
 
 ```
-raw_commandes ────> stg_commandes ─────┐
+raw.commandes ────> stg_commandes ─────┐
                                        ├──> performance_fournisseurs
-raw_fournisseurs ─> stg_fournisseurs ──┘
+raw.fournisseurs ─> stg_fournisseurs ──┘
 ```
 
 :::{.callout-warning}
 ## Jamais de nom de table en dur
-Écrire `from main.stg_commandes` fonctionnerait aussi... jusqu'au jour où le projet passe d'une base de test à la base de production, avec d'autres noms de schémas. Et dbt ne verrait pas la dépendance : il pourrait lancer les modèles dans le mauvais ordre. **Toujours** `ref()`.
+Écrire `from raw.commandes` ou `from main.stg_commandes` fonctionnerait aussi... jusqu'au jour où le projet passe d'une base de test à la base de production, avec d'autres noms de schémas. Et dbt ne verrait pas la dépendance : il pourrait lancer les modèles dans le mauvais ordre. **Toujours** `source()` ou `ref()`.
 :::
 
 ### Les couches d'un projet
@@ -261,32 +366,16 @@ La **matérialisation** décide ce que dbt crée dans la base pour un modèle :
 | `ephemeral` | Rien : le modèle est injecté dans les modèles qui l'utilisent | Petites étapes intermédiaires |
 | `incremental` | Une table complétée à chaque lancement, sans tout recalculer | Gros volumes qui grossissent chaque jour |
 
-## Seeds et sources : les données de départ
+## Et les seeds ?
 
-Un projet dbt part toujours de données déjà présentes dans la base. Il y a deux façons de les déclarer.
+Vous avez vu passer un dossier `seeds/` dans la structure du projet. Les **seeds** sont de petits fichiers CSV rangés dans le projet, que `dbt seed` charge dans la base. On les appelle avec `ref()`.
 
-**Les sources** désignent les tables brutes chargées par un autre outil. On les décrit dans un fichier `.yml`, puis on les appelle avec `source()` au lieu de `ref()` :
+Ce n'est **pas** un moyen de charger vos données : ils servent uniquement aux petits **référentiels** que l'équipe maintient elle-même et veut versionner avec le code. Une table de correspondance de codes pays, une liste de jours fériés, les délais promis par fournisseur…
 
-```yaml
-# models/staging/_sources.yml
-version: 2
-
-sources:
-  - name: erp
-    tables:
-      - name: commandes
-      - name: fournisseurs
-```
-
-```sql
-select * from {{ source('erp', 'commandes') }}
-```
-
-**Les seeds** sont de petits fichiers CSV rangés dans `seeds/`, que `dbt seed` charge dans la base. On les appelle avec `ref()`. Ils servent aux **référentiels** qui changent rarement et qu'on veut versionner avec le code : une table de correspondance de codes pays, une liste de jours fériés, les délais promis par fournisseur…
-
-:::{.callout-note}
-## Dans nos exemples
-Pour que le mini-exemple tienne en quelques lignes, `raw_commandes` est un seed. Dans le projet guidé, les données seront chargées dans la base par un petit script Python puis déclarées comme **sources**, comme en entreprise. Un seed n'est pas fait pour charger des données volumineuses ou qui changent tous les jours.
+:::{.callout-tip}
+## Seed ou source ?
+- La donnée existe déjà dans la base, ou elle arrive d'une application, d'une API, d'un fichier d'export : c'est une **source**, chargée par un outil d'EL.
+- C'est un petit référentiel qui n'existe nulle part ailleurs et change rarement : c'est un **seed**.
 :::
 
 ## Tester ses données
@@ -337,13 +426,13 @@ where date_livraison < date_commande
 
 ### 🧠 À vous de réfléchir
 
-On ajoute cette ligne aux commandes brutes, puis on lance `dbt build` :
+Imaginez que le fichier des commandes contienne une ligne de plus :
 
 ```
 6,F09,2026-09-09,2026-09-08,10
 ```
 
-Le fournisseur `F09` n'existe pas dans `raw_fournisseurs`. Quels tests vont échouer ? Et que va-t-il arriver au modèle `performance_fournisseurs` ?
+Le fournisseur `F09` n'existe pas dans `data/fournisseurs.csv`. Quels tests vont échouer ? Et que va-t-il arriver au modèle `performance_fournisseurs` ?
 
 :::{.callout-tip collapse="true"}
 ## 💡 Voir la solution
@@ -354,11 +443,11 @@ Deux tests échouent :
 - `assert_livraison_apres_commande` : la livraison (le 8) précède la commande (le 9).
 
 ```
-5 of 9 FAIL 1 assert_livraison_apres_commande .................................. [FAIL 1 in 0.03s]
-8 of 9 FAIL 1 relationships_stg_commandes_id_fournisseur__id_fournisseur__ref_stg_fournisseurs_  [FAIL 1 in 0.02s]
-9 of 9 SKIP relation main.performance_fournisseurs ............................. [SKIP]
+3 of 7 FAIL 1 assert_livraison_apres_commande .................................. [FAIL 1 in 0.03s]
+6 of 7 FAIL 1 relationships_stg_commandes_id_fournisseur__id_fournisseur__ref_stg_fournisseurs_  [FAIL 1 in 0.03s]
+7 of 7 SKIP relation main.performance_fournisseurs ............................. [SKIP]
 ...
-Done. PASS=6 WARN=0 ERROR=2 SKIP=1 NO-OP=0 REUSED=0 TOTAL=9
+Done. PASS=4 WARN=0 ERROR=2 SKIP=1 NO-OP=0 REUSED=0 TOTAL=7
 ```
 
 Et `performance_fournisseurs` n'est **pas construit** (`SKIP`) : avec `dbt build`, un modèle n'est pas lancé si les tests des modèles dont il dépend échouent. Le tableau de bord garde la dernière version correcte au lieu d'afficher des chiffres faux. C'est exactement le but.
@@ -381,7 +470,7 @@ Et `performance_fournisseurs` n'est **pas construit** (`SKIP`) : avec `dbt build
 | `dbt deps` | Installe les paquets externes |
 | `dbt clean` | Supprime `target/` et `dbt_packages/` |
 
-Au quotidien, trois commandes suffisent : `dbt build` pour tout construire et tester, `dbt run -s <modèle>` pour relancer ce sur quoi vous travaillez, et `dbt show -s <modèle>` pour vérifier le résultat. Vous les pratiquerez en détail dans le projet guidé.
+Au quotidien, trois commandes suffisent, une fois les données brutes chargées : `dbt build` pour tout construire et tester, `dbt run -s <modèle>` pour relancer ce sur quoi vous travaillez, et `dbt show -s <modèle>` pour vérifier le résultat. Vous les pratiquerez en détail dans le projet guidé.
 
 ### Sélectionner une partie du projet
 
@@ -423,9 +512,9 @@ Une fois les bases acquises, voici ce que vous croiserez rapidement :
 
 :::{.callout-important}
 ## À retenir
-- dbt (*data build tool*) **transforme** des données déjà présentes dans une base. C'est le **T** de l'ELT : il n'extrait ni ne charge rien.
+- dbt (*data build tool*) **transforme** des données déjà présentes dans une base. C'est le **T** de l'ELT : il n'extrait ni ne charge rien, un autre outil (ici, un script Python) s'en charge avant lui.
 - Un **modèle** est un fichier `.sql` qui contient un seul `SELECT` ; dbt en fait une vue ou une table.
-- `ref()` relie les modèles entre eux : dbt en déduit l'ordre d'exécution. Jamais de nom de table en dur.
+- `source()` désigne les tables brutes, `ref()` relie les modèles entre eux : dbt en déduit l'ordre d'exécution. Jamais de nom de table en dur.
 - On organise les modèles en couches : **staging** (nettoyer), **intermediate** (préparer), **marts** (servir).
 - Les **tests** (`unique`, `not_null`, `relationships`, `accepted_values` ou personnalisés) bloquent les données fausses avant qu'elles n'atteignent les tableaux de bord.
 - `dbt_project.yml` configure le projet, `profiles.yml` la connexion, qui ne contient jamais de mot de passe en clair.
