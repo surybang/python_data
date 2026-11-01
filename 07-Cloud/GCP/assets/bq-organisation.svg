@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 364" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Organisation et ingestion dans BigQuery</title>
+  <desc id="d">Dans un même projet GCP, des datasets, dont la région est fixée à la création, contiennent des tables. Les données arrivent par chargement en lot depuis Cloud Storage, par des tables externes qui lisent les fichiers sur place, ou en continu via Pub/Sub.</desc>
+  <defs><marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#5b6472"/></marker></defs>
+  <style>.h{font-size:16px;font-weight:700;fill:#1f2937}.s{font-size:12.5px;fill:#5b6472}.b{font-size:13px;font-weight:600;fill:#1f2937}.m{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;fill:#1f2937}.l{stroke:#5b6472;stroke-width:1.8;fill:none;marker-end:url(#f)}.d{stroke:#5b6472;stroke-width:1.8;fill:none;stroke-dasharray:5 4;marker-end:url(#f)}</style>
+  <rect width="900" height="364" fill="#fff"/>
+  <!-- projet -->
+  <rect x="8" y="6" width="884" height="350" rx="14" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="24" y="30" class="h">Projet GCP</text>
+  <!-- sources -->
+  <rect x="20" y="40" width="210" height="110" rx="10" fill="#fff4e5" stroke="#e8a33d" stroke-width="1.5"/>
+  <text x="125" y="70" text-anchor="middle" class="h">Cloud Storage</text>
+  <text x="125" y="94" text-anchor="middle" class="s">CSV, JSON, Parquet,</text>
+  <text x="125" y="112" text-anchor="middle" class="s">Avro, ORC, Iceberg…</text>
+  <rect x="20" y="200" width="210" height="110" rx="10" fill="#fff4e5" stroke="#e8a33d" stroke-width="1.5"/>
+  <text x="125" y="230" text-anchor="middle" class="h">Pub/Sub</text>
+  <text x="125" y="254" text-anchor="middle" class="s">des messages envoyés</text>
+  <text x="125" y="272" text-anchor="middle" class="s">en continu par une source</text>
+  <!-- projet -->
+  
+  <rect x="360" y="52" width="500" height="196" rx="12" fill="#eef4ff" stroke="#4a7bd0" stroke-width="1.5"/>
+  <text x="378" y="78" class="h">Dataset</text><text x="448" y="78" class="m">ventes</text><text x="508" y="78" class="s">région fixée à la création (ex. europe-west9)</text>
+  <rect x="378" y="94" width="225" height="40" rx="7" fill="#fff" stroke="#4a7bd0"/><text x="392" y="119" class="m">commandes</text><text x="590" y="119" text-anchor="end" class="s">table</text>
+  <rect x="378" y="144" width="225" height="40" rx="7" fill="#fff" stroke="#4a7bd0" stroke-dasharray="5 4"/><text x="392" y="169" class="m">fichiers_bruts</text><text x="590" y="169" text-anchor="end" class="s">table externe</text>
+  <rect x="378" y="194" width="225" height="40" rx="7" fill="#fff" stroke="#4a7bd0"/><text x="392" y="219" class="m">evenements</text><text x="590" y="219" text-anchor="end" class="s">table</text>
+  <rect x="617" y="94" width="225" height="40" rx="7" fill="#fff" stroke="#4a7bd0"/><text x="631" y="119" class="m">magasins</text><text x="829" y="119" text-anchor="end" class="s">table</text>
+  <rect x="360" y="260" width="500" height="80" rx="12" fill="#eef4ff" stroke="#4a7bd0" stroke-width="1.5"/>
+  <text x="378" y="284" class="h">Dataset</text><text x="448" y="284" class="m">finance</text><text x="520" y="284" class="s">ses propres tables et ses propres droits</text>
+  <text x="378" y="314" class="s">Adresse d'une table : <tspan class="m">projet.dataset.table</tspan></text>
+  <!-- fleches -->
+  <path d="M230,80 C300,80 310,114 374,114" class="l"/><text x="240" y="66" class="b">en lot</text>
+  <path d="M230,120 C300,130 310,164 374,164" class="d"/><text x="244" y="150" class="s">lue sur place</text>
+  <path d="M230,255 C300,255 310,214 374,214" class="l"/><text x="240" y="244" class="b">en continu</text>
+</svg>

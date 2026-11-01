@@ -1,0 +1,71 @@
+---
+title: "Google Cloud Platform"
+---
+
+## L'organisation sur GCP
+
+Sur GCP, tout s'organise autour de deux notions que vous retrouverez dans chaque page :
+
+- le **projet** : le conteneur de toutes vos ressources, avec sa facturation et ses droits d'accès. On crée souvent un projet par application ou par environnement (développement, production) ;
+- la **région** : l'endroit physique où tournent vos ressources, par exemple `europe-west9` à Paris. On choisit la région au plus près des utilisateurs et des contraintes réglementaires (RGPD).
+
+:::{.callout-warning}
+## Le cloud se paie à l'usage
+C'est sa force et son piège : une ressource oubliée ou une requête mal écrite continue de coûter. Dès la création d'un projet, mettez en place un **budget avec des alertes** dans la facturation, et supprimez ce que vous n'utilisez plus.
+:::
+
+## Les services que nous verrons
+
+GCP propose plus d'une centaine de services. Pour un projet data, trois sont à privilégier :
+
+| Service | À quoi il sert |
+|---|---|
+| [**Cloud Storage**](01-cloud-storage.qmd) (GCS) | Stocker des fichiers de toute taille : données brutes, exports, modèles, logs. C'est le socle d'un data lake. |
+| [**BigQuery**](02-bigquery.qmd) | L'entrepôt de données : interroger d'énormes volumes en SQL, sans serveur à gérer. |
+| **Cloud Run** | Exécuter du code dans un conteneur, sans gérer de serveur : une API, un script, un traitement planifié. Il s'adapte seul à la charge, et ne coûte rien quand rien ne tourne. Le moyen le plus simple de mettre du code en production, sans administrer tout un cluster Kubernetes (GKE). |
+| **Cloud Composer** | Orchestrer des pipelines : enchaîner les traitements, les planifier, relancer ceux qui échouent. C'est **Apache Airflow**, installé et maintenu par Google. |
+| **Gemini Enterprise Agent Platform** | La plateforme d'IA de Google : entraîner et déployer des modèles, accéder aux modèles Gemini et à d'autres modèles, construire des agents. Elle s'appelait **Vertex AI** jusqu'en 2026, nom que vous croiserez encore souvent. |
+
+:::{.callout-note}
+## Des outils standards, en version gérée
+Beaucoup de services Google Cloud sont des **outils open source bien connus**, que Google installe, met à jour et fait tourner pour vous :
+
+| Outil standard | Version gérée sur GCP |
+|---|---|
+| Apache Airflow | Cloud Composer |
+| Apache Spark | Dataproc |
+| Apache Beam | Dataflow |
+| Kubernetes | GKE |
+| PostgreSQL, MySQL | Cloud SQL, AlloyDB |
+
+Vous payez le confort de ne rien administrer, mais les compétences restent les mêmes : ce que vous apprenez sur Airflow ou Spark vous servira chez n'importe quel fournisseur de cloud, ou sur les serveurs de votre entreprise.
+:::
+
+## Et bien d'autres services
+
+GCP ne sert pas qu'à analyser des données : on y fait aussi tourner des **applications** complètes, des sites web, des API… Voici quelques familles de services que vous croiserez :
+
+| Famille | Exemples | À quoi ça sert |
+|---|---|---|
+| **Bases de données** | **Cloud SQL** (PostgreSQL, MySQL, SQL Server gérés par Google), **AlloyDB** (PostgreSQL haute performance), Firestore, Spanner, Bigtable | Faire tourner les bases des applications, sans gérer de serveur |
+| **Calcul** | Compute Engine (machines virtuelles), **Cloud Run** (conteneurs), Cloud Run functions (petites fonctions déclenchées par un événement), GKE (Kubernetes) | Exécuter du code : un script, une API, une application entière |
+| **Intégration et orchestration** | **Pub/Sub** (messagerie), Cloud Scheduler (planification), Workflows, Cloud Composer (Airflow géré), Dataflow (traitements en lot et en flux) | Faire circuler les données et enchaîner les traitements |
+| **Visualisation** | Looker Studio, Looker | Construire des tableaux de bord sur les données |
+| **Sécurité et administration** | IAM (droits d'accès), Secret Manager (mots de passe et clés), Cloud Logging et Monitoring | Contrôler qui fait quoi, protéger les secrets, surveiller |
+
+Pas d'inquiétude : personne ne connaît tous les services. L'important est de savoir **qu'ils existent** et de comprendre les briques de base, qui se ressemblent d'un fournisseur de cloud à l'autre.
+
+:::{.callout-tip}
+## Trois façons d'utiliser GCP
+- La **console web** ([console.cloud.google.com](https://console.cloud.google.com)) pour découvrir et explorer ;
+- la ligne de commande **`gcloud`** (et `bq` pour BigQuery) pour automatiser ;
+- les **bibliothèques Python** (`google-cloud-storage`, `google-cloud-bigquery`…) pour intégrer les services dans vos programmes.
+
+En entreprise, la création des ressources passe en plus par du code d'infrastructure, comme **Terraform**. (on y reviendra ... 👀)
+:::
+
+## Ressources
+
+- [Documentation de Google Cloud](https://docs.cloud.google.com/docs) : la référence pour chaque service.
+- [Liste des produits Google Cloud](https://cloud.google.com/products) : le catalogue complet, par catégorie.
+- [Google Cloud Skills Boost](https://www.cloudskillsboost.google) : des parcours et des travaux pratiques en ligne, proposés par Google.

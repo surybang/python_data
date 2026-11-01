@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Organisation de Cloud Storage</title>
+  <desc id="d">Un projet GCP contient des buckets. Chaque bucket contient des objets. Les dossiers ne sont qu'une partie du nom de l'objet, séparée par des barres obliques.</desc>
+  <style>
+    .h{font-size:16px;font-weight:700;fill:#1f2937}.s{font-size:12.5px;fill:#5b6472}.m{font-family:ui-monospace,Consolas,monospace;font-size:13px;fill:#1f2937}
+    .mono{font-family:ui-monospace,Consolas,monospace;font-size:12.5px}
+  </style>
+  <rect width="900" height="380" fill="#ffffff"/>
+  <!-- projet -->
+  <rect x="20" y="20" width="860" height="340" rx="14" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="40" y="50" class="h">Projet GCP</text><text x="140" y="50" class="s">regroupe les ressources, la facturation et les droits</text>
+  <!-- bucket 1 -->
+  <rect x="40" y="70" width="520" height="270" rx="12" fill="#eef4ff" stroke="#4a7bd0" stroke-width="1.5"/>
+  <text x="60" y="98" class="h">Bucket</text><text x="126" y="98" class="m">gs://ventes-brut-286bdf</text>
+  <text x="60" y="118" class="s">nom unique dans tout GCP · région · classe par défaut · droits d'accès</text>
+  <rect x="60" y="135" width="480" height="40" rx="8" fill="#fff" stroke="#4a7bd0"/>
+  <text x="75" y="160" class="mono" fill="#9ca3af">2026/10/</text><text x="141" y="160" class="mono" fill="#1f2937">ventes_2026-10-31.csv</text>
+  <rect x="60" y="183" width="480" height="40" rx="8" fill="#fff" stroke="#4a7bd0"/>
+  <text x="75" y="208" class="mono" fill="#9ca3af">2026/11/</text><text x="141" y="208" class="mono" fill="#1f2937">ventes_2026-11-01.csv</text>
+  <rect x="60" y="231" width="480" height="40" rx="8" fill="#fff" stroke="#4a7bd0"/>
+  <text x="75" y="256" class="mono" fill="#9ca3af">referentiels/</text><text x="181" y="256" class="mono" fill="#1f2937">magasins.parquet</text>
+  <text x="60" y="300" class="s">Chaque ligne est un <tspan font-weight="700" fill="#1f2937">objet</tspan> : un fichier + ses métadonnées.</text>
+  <text x="60" y="320" class="s">La partie grisée n'est pas un vrai dossier : elle fait partie du <tspan font-weight="700" fill="#1f2937">nom</tspan> de l'objet.</text>
+  <!-- bucket 2 -->
+  <rect x="590" y="70" width="270" height="120" rx="12" fill="#eef4ff" stroke="#4a7bd0" stroke-width="1.5"/>
+  <text x="610" y="96" class="h">Bucket</text><text x="610" y="118" class="m">gs://ventes-archives-286bdf</text>
+  <text x="610" y="142" class="s">un autre bucket, avec ses propres</text>
+  <text x="610" y="160" class="s">réglages (région, classe, droits)</text>
+  <text x="610" y="180" class="s">Un projet peut en contenir plusieurs.</text>
+  <!-- adresse -->
+  <rect x="590" y="210" width="270" height="130" rx="12" fill="#fff4e5" stroke="#e8a33d" stroke-width="1.5"/>
+  <text x="610" y="238" class="h">Adresse complète d'un objet</text>
+  <text x="610" y="266" class="mono" fill="#1f2937">gs://ventes-brut-286bdf/</text>
+  <text x="610" y="286" class="mono" fill="#1f2937">2026/11/ventes_2026-11-01.csv</text>
+  <text x="610" y="316" class="s">bucket + nom de l'objet</text>
+</svg>

@@ -1,0 +1,19 @@
+---
+title: "Cloud"
+---
+
+Jusqu'ici, vous avez travaillé sur votre ordinateur ou sur SSP Cloud. En entreprise, les données et les traitements tournent de plus en plus souvent chez un **fournisseur de cloud** : Amazon Web Services (AWS), Microsoft Azure ou **Google Cloud Platform** (GCP), que nous utilisons dans ce module.
+
+## Le cloud en deux mots
+
+Le cloud, c'est **louer** de l'informatique au lieu de l'acheter : du stockage, de la puissance de calcul, des bases de données, des outils d'IA… On les active en quelques clics ou en quelques lignes de code, et on **paie à l'usage**, sans acheter ni entretenir de serveurs.
+
+| Partie | Ce que vous y verrez | Statut |
+|---|---|---|
+| [**Google Cloud Platform**](GCP/index.qmd) | Le cloud de Google : stocker des fichiers avec Cloud Storage, analyser des données avec BigQuery, et un tour d'horizon des autres services (Cloud Run, Composer, IA…). | ✅ Disponible |
+| **SSP Cloud** | La plateforme data de l'Insee, que vous utilisez déjà : le catalogue de services, le stockage S3 et l'orchestration avec Argo Workflows. | 🚧 À venir |
+
+:::{.callout-tip}
+## Les mêmes briques partout
+D'un fournisseur à l'autre, les noms changent mais les briques se ressemblent : un stockage objet (Cloud Storage chez Google, S3 chez Amazon, MinIO sur SSP Cloud), un entrepôt de données, des services pour exécuter du code… Comprendre ces briques une fois, c'est pouvoir s'adapter à n'importe quel cloud.
+:::

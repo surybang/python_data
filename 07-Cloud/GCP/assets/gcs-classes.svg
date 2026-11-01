@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Les classes de stockage</title>
+  <desc id="d">Standard, Nearline, Coldline et Archive : plus on va vers Archive, moins le stockage coûte cher, mais plus la lecture coûte cher et plus la durée minimale de stockage est longue. Une règle de cycle de vie peut faire descendre automatiquement les objets d'une classe à l'autre avec le temps.</desc>
+  <defs><marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#5b6472"/></marker></defs>
+  <style>.h{font-size:17px;font-weight:700;fill:#1f2937}.s{font-size:12.5px;fill:#5b6472}.b{font-size:13px;font-weight:600;fill:#1f2937}.l{stroke:#5b6472;stroke-width:1.8;fill:none;marker-end:url(#f)}</style>
+  <rect width="900" height="400" fill="#ffffff"/>
+  <!-- cards -->
+  <g>
+    <rect x="30" y="30" width="190" height="150" rx="12" fill="#fde8e4" stroke="#e2603f" stroke-width="1.5"/>
+    <text x="125" y="62" text-anchor="middle" class="h">Standard</text>
+    <text x="125" y="88" text-anchor="middle" class="s">données lues souvent</text>
+    <text x="125" y="122" text-anchor="middle" class="b">pas de durée minimale</text>
+    <text x="125" y="146" text-anchor="middle" class="b">sans frais de récupération</text>
+  </g>
+  <g>
+    <rect x="245" y="30" width="190" height="150" rx="12" fill="#fff4e5" stroke="#e8a33d" stroke-width="1.5"/>
+    <text x="340" y="62" text-anchor="middle" class="h">Nearline</text>
+    <text x="340" y="88" text-anchor="middle" class="s">environ 1 fois par mois</text>
+    <text x="340" y="122" text-anchor="middle" class="b">minimum 30 jours</text>
+    <text x="340" y="146" text-anchor="middle" class="b">frais de récupération</text>
+  </g>
+  <g>
+    <rect x="460" y="30" width="190" height="150" rx="12" fill="#eaf2fb" stroke="#6b9bd8" stroke-width="1.5"/>
+    <text x="555" y="62" text-anchor="middle" class="h">Coldline</text>
+    <text x="555" y="88" text-anchor="middle" class="s">environ 1 fois par trimestre</text>
+    <text x="555" y="122" text-anchor="middle" class="b">minimum 90 jours</text>
+    <text x="555" y="146" text-anchor="middle" class="b">frais plus élevés</text>
+  </g>
+  <g>
+    <rect x="675" y="30" width="195" height="150" rx="12" fill="#e6ecf7" stroke="#3b5ea8" stroke-width="1.5"/>
+    <text x="772" y="62" text-anchor="middle" class="h">Archive</text>
+    <text x="772" y="88" text-anchor="middle" class="s">moins d'1 fois par an</text>
+    <text x="772" y="122" text-anchor="middle" class="b">minimum 365 jours</text>
+    <text x="772" y="146" text-anchor="middle" class="b">frais les plus élevés</text>
+  </g>
+  <!-- gradients -->
+  <text x="30" y="222" class="b">Prix du stockage</text>
+  <rect x="200" y="208" width="670" height="18" rx="9" fill="url(#g1)"/>
+  <defs>
+    <linearGradient id="g1"><stop offset="0" stop-color="#e2603f"/><stop offset="1" stop-color="#fbe3dc"/></linearGradient>
+    <linearGradient id="g2"><stop offset="0" stop-color="#dbe6f7"/><stop offset="1" stop-color="#3b5ea8"/></linearGradient>
+  </defs>
+  <text x="205" y="244" class="s">le plus cher</text><text x="865" y="244" text-anchor="end" class="s">le moins cher</text>
+  <text x="30" y="282" class="b">Frais de récupération</text>
+  <rect x="200" y="268" width="670" height="18" rx="9" fill="url(#g2)"/>
+  <text x="205" y="304" class="s">aucun</text><text x="865" y="304" text-anchor="end" class="s">le plus cher</text>
+  <!-- lifecycle -->
+  <rect x="30" y="325" width="840" height="58" rx="10" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="5 4"/>
+  <text x="50" y="350" class="b">Cycle de vie (exemple)</text>
+  <text x="50" y="370" class="s">selon l’âge de l’objet, une règle le fait changer de classe</text>
+  <text x="440" y="360" class="b">Standard</text>
+  <path d="M510,355 L560,355" class="l"/><text x="535" y="347" text-anchor="middle" class="s">30 j</text>
+  <text x="566" y="360" class="b">Nearline</text>
+  <path d="M632,355 L682,355" class="l"/><text x="657" y="347" text-anchor="middle" class="s">90 j</text>
+  <text x="688" y="360" class="b">Coldline</text>
+  <path d="M754,355 L795,355" class="l"/><text x="775" y="347" text-anchor="middle" class="s">1 an</text>
+  <text x="800" y="360" class="b">Archive</text>
+</svg>
