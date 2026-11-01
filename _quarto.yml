@@ -59,12 +59,28 @@ website:
             href: 03-initiation-python/07-scripts-jeux.qmd
           - text: "Base de données"
             href: 03-initiation-python/08-python-sql.qmd
+      - section: "Pandas pour l'analyse de données"
+        href: 04-pandas/index.qmd
+        contents:
+          - text: "Structure de données"
+            href: 04-pandas/01-structures-donnees.qmd 
       - section: "Créer des projets reproductibles"
         href: 05-projet-reproductible/index.qmd
         contents:
           - text: "uv pour les gouverner tous"
             href: 05-projet-reproductible/uv.qmd
-
+      - section: "dbt"
+        href: 06-dbt/index.qmd
+      - section: "Cloud"
+        href: 07-Cloud/GCP/index.qmd
+        contents:
+          - text: "GCP"
+            href: 07-Cloud/GCP/index.qmd
+            contents:
+            - text: "Google Cloud Storage (GCS)"
+              href: 07-Cloud/GCP/01-cloud-storage.qmd
+            - text: "BigQuery"
+              href: 07-Cloud/GCP/02-bigquery.qmd
       - section : "Logs"
         href: logs/index.qmd
         contents:
