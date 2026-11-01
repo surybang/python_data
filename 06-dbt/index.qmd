@@ -1,0 +1,433 @@
+---
+title: "Découvrir dbt"
+format:
+  html: default
+  revealjs:
+    output-file: 01-decouvrir-dbt-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tip}
+## Testez au fur et à mesure
+dbt s'utilise dans un **terminal**, pas dans un notebook. Le plus simple est d'ouvrir un service VSCode sur SSP Cloud, puis d'ouvrir un terminal (menu *Terminal* → *New Terminal*) pour lancer les commandes de cette page au fil de la lecture.
+
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer%20VSCode-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true)
+
+Vous pouvez aussi travailler sur votre ordinateur, dans VSCode, après avoir installé dbt (voir la section *Installation*).
+:::
+
+Par le passé, vous avez écrit des requêtes SQL pour filtrer, joindre et agréger des données. Une requête, c'est simple. Mais imaginez une équipe data avec 2 000 requêtes qui dépendent les unes des autres : laquelle lancer en premier ? Qui a modifié celle-ci ? Le chiffre d'affaires du tableau de bord est-il encore juste ? **dbt** a été créé pour répondre à ces questions.
+
+## dbt, c'est quoi ?
+
+**dbt** signifie *data build tool*. C'est un outil en ligne de commande qui sert à **transformer** des données déjà présentes dans une base, en écrivant uniquement des requêtes `SELECT`.
+
+Concrètement, vous écrivez des fichiers `.sql` qui contiennent chacun **une** requête `SELECT`. dbt se charge du reste :
+
+- il transforme chaque requête en table ou en vue dans la base ;
+- il comprend dans quel **ordre** lancer les requêtes, grâce aux dépendances entre elles ;
+- il **teste** les données (pas de doublons, pas de valeurs manquantes…) ;
+- il génère une **documentation** du projet, avec le schéma des dépendances.
+
+:::{.callout-note}
+## dbt ne fait pas les calculs lui-même
+dbt n'est pas une base de données. Il **compile** vos fichiers en SQL, puis il envoie ce SQL à la base (DuckDB, PostgreSQL, BigQuery, Snowflake…), qui fait tout le travail. Les données ne transitent jamais par dbt : elles restent dans la base.
+:::
+
+## Un outil de transformation pour l'ELT
+
+Pour qu'une donnée arrive dans un tableau de bord, il faut trois étapes :
+
+| Étape | En anglais | Exemple |
+|---|---|---|
+| **Extraire** | *Extract* | Interroger une API, lire l'export d'un logiciel |
+| **Charger** | *Load* | Écrire ces données brutes dans la base |
+| **Transformer** | *Transform* | Nettoyer, joindre, agréger pour répondre à une question métier |
+
+Il existe deux façons d'organiser ces étapes :
+
+- **ETL** : on transforme les données **avant** de les charger, par exemple dans un script Python, et on n'enregistre dans la base que le résultat final.
+- **ELT** : on charge d'abord les données **brutes** dans la base, puis on les transforme **dans la base**, en SQL.
+
+**dbt est l'outil du T de l'ELT.** Il ne sait ni appeler une API, ni lire un fichier sur un serveur distant, ni déplacer des données d'une base à une autre. Ces étapes sont confiées à d'autres outils : un script Python, Airbyte, Fivetran, dlt… dbt intervient une fois que les données brutes sont dans la base.
+
+:::{.callout-note collapse="true"}
+## Un peu d'histoire : pourquoi l'ETL était la norme avant ?
+
+**Des années 1990 aux années 2010, l'ETL est le standard.** Les entreprises utilisent des outils comme Informatica PowerCenter, IBM DataStage, Microsoft SSIS, puis Talend en open source : on y dessine les flux de données à la souris, sans écrire de code. Plusieurs raisons expliquent ce choix :
+
+- **L'entrepôt de données coûte très cher.** Il tourne sur des serveurs physiques achetés par l'entreprise, et le coût total (matériel et licences) peut atteindre plusieurs millions de dollars. Le stockage est rare, mais le **calcul** aussi : chaque traitement lancé dans l'entrepôt ralentit les requêtes des utilisateurs. On transforme donc les données sur un serveur à part, et on ne charge dans l'entrepôt que des données nettoyées et agrégées[^holistics].
+- **La structure est définie avant d'écrire les données.** Les entrepôts suivent des modèles stricts (schémas en étoile notamment) : une donnée doit être propre et au bon format avant d'entrer. Il n'existe pas de zone pour stocker du « brut ».
+- **Les sources sont très hétérogènes.** Mainframes, fichiers plats, formats propriétaires : il faut de toute façon convertir avant de charger, et les outils ETL proposent des connecteurs pour tout.
+- **Les traitements tournent la nuit, par lots.** Ne charger que le nécessaire permet de tenir dans la fenêtre de traitement nocturne.
+
+**Ce qui a changé la donne :**
+
+1. **Hadoop et Amazon S3**, en 2006 : la même année, deux innovations rendent le stockage massif abordable. **Hadoop**, projet open source inspiré de deux publications de Google et développé notamment chez Yahoo!, permet de stocker et de traiter d'énormes volumes de données sur des grappes de **serveurs ordinaires et bon marché**[^hadoop]. **Amazon S3**, lancé en mars 2006, propose un stockage en ligne **payé à l'usage**, sans serveur à acheter ni à administrer[^s3]. S3 et ses équivalents (Google Cloud Storage, Azure Blob, MinIO sur SSP Cloud) deviendront le socle de la plupart des data lakes.
+2. **Les data lakes**, autour de 2010 : le terme, popularisé par James Dixon, alors directeur technique de Pentaho[^datalake], donne un nom à cette nouvelle approche : stocker d'abord toutes les données brutes, puis décider plus tard comment les exploiter.
+3. **Les entrepôts cloud**, au début des années 2010 : BigQuery est annoncé en 2010[^bigquery], Amazon Redshift devient disponible en 2013 pour moins de 1 000 dollars par téraoctet et par an[^redshift], et Snowflake est fondé en 2012 sur l'idée de **séparer le stockage et le calcul**, facturés et dimensionnés indépendamment[^snowflake]. La puissance se loue à la demande : transformer directement dans la base devient rapide et bon marché.
+4. **Des outils pensés pour l'ELT** : dbt est créé en 2016 par Tristan Handy, Drew Banin et Connor McArthur, chez Fishtown Analytics, justement pour profiter de ces entrepôts cloud[^dbt].
+
+:::
+
+[^hadoop]: Wikipédia, [*Apache Hadoop*](https://en.wikipedia.org/wiki/Apache_Hadoop).
+[^s3]: Wikipédia, [*Amazon S3*](https://en.wikipedia.org/wiki/Amazon_S3).
+[^holistics]: Holistics, [*ETL vs. ELT: What's the big deal?*](https://holistics.io/books/setup-analytics/etl-vs-elt-what-s-the-big-deal), extrait de *The Analytics Setup Guidebook*.
+[^datalake]: Wikipédia, [*Data lake*](https://en.wikipedia.org/wiki/Data_lake).
+[^bigquery]: Wikipédia, [*BigQuery*](https://en.wikipedia.org/wiki/BigQuery).
+[^redshift]: Dice Insights, [*Amazon's Redshift Reaches General Availability*](https://insights.dice.com/2013/02/15/amazons-redshift-reaches-general-availability/), 15 février 2013.
+[^snowflake]: Bigeye, [*A brief history of Snowflake*](https://www.bigeye.com/blog/a-brief-history-of-snowflake).
+[^dbt]: Contrary Research, [*dbt Labs*](https://research.contrary.com/report/dbt-labs).
+
+## La philosophie de dbt
+
+dbt applique aux données les bonnes pratiques des développeurs :
+
+- **Tout est du code.** Une transformation est un fichier texte, versionné avec git. On sait qui a changé quoi, et quand.
+- **Un modèle = un `SELECT`.** Pas de `CREATE TABLE`, pas de `INSERT` : vous décrivez **le résultat voulu**, dbt s'occupe de le construire.
+- **Des briques réutilisables.** Plutôt qu'une requête géante de 300 lignes, on enchaîne de petits modèles qui s'appuient les uns sur les autres, comme les fonctions du chapitre précédent.
+- **On teste.** Une donnée fausse dans un tableau de bord est pire qu'une absence de donnée. Les tests détectent les problèmes avant qu'ils n'arrivent chez les métiers.
+- **On documente.** La documentation vit à côté du code, et dbt la transforme en site web consultable.
+
+Ce métier, à mi-chemin entre l'analyste et le développeur, a même reçu un nom : l'**analytics engineering**.
+
+## Installation
+
+dbt existe en deux versions majeures :
+
+- **dbt v2** est la version actuelle, installée par défaut. Réécrite en Rust, elle intègre directement le connecteur DuckDB : rien d'autre à installer.
+- **dbt v1** (paquet `dbt-core`) est l'ancienne version en Python, encore très présente. Il faut lui ajouter un **adaptateur** par base (`dbt-duckdb`, `dbt-bigquery`…).
+
+Les projets s'écrivent de la même façon dans les deux versions : tout ce qui suit fonctionne avec l'une comme avec l'autre.
+
+```bash
+uv add dbt                          # dbt v2
+# ou, pour dbt v1 :
+uv add dbt-core dbt-duckdb
+
+dbt --version                       # vérifier l'installation
+```
+
+## La structure d'un projet
+
+La commande `dbt init` crée un nouveau projet :
+
+```bash
+dbt init commandes
+```
+
+```
+commandes/
+├── dbt_project.yml     # la carte d'identité du projet
+├── models/             # vos transformations (.sql) et leur description (.yml)
+├── seeds/              # des fichiers CSV à charger dans la base
+├── tests/              # vos tests personnalisés (.sql)
+├── macros/             # des fonctions réutilisables
+├── snapshots/          # l'historisation de tables qui changent
+├── analyses/           # des requêtes d'analyse
+└── README.md
+```
+
+Deux dossiers apparaîtront au premier lancement, à ne jamais versionner (ajoutez-les au `.gitignore`) :
+
+- `target/` : le SQL compilé par dbt et les résultats d'exécution ;
+- `dbt_packages/` : les paquets externes installés avec `dbt deps`.
+
+Au début, vous n'utiliserez que `models/`, `seeds/` et `tests/`.
+
+### `dbt_project.yml` : la configuration du projet
+
+```yaml
+name: 'commandes'
+version: '1.0.0'
+profile: 'commandes'          # le profil de connexion à utiliser
+
+models:
+  commandes:
+    staging:
+      +materialized: view     # les modèles de models/staging/ seront des vues
+    marts:
+      +materialized: table    # ceux de models/marts/ seront des tables
+```
+
+### `profiles.yml` : la connexion à la base
+
+Ce fichier dit à dbt **où** se connecter. Avec DuckDB, la base est un simple fichier :
+
+```yaml
+commandes:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: commandes.duckdb
+```
+
+Pour BigQuery ou PostgreSQL, on y trouverait un projet, un serveur, un identifiant… Comme d'habitude, les mots de passe ne s'écrivent jamais en clair : dbt sait lire les variables d'environnement avec `{{ env_var('DB_PASSWORD') }}`.
+
+:::{.callout-warning}
+## Où ranger `profiles.yml` ?
+Par défaut, dbt cherche ce fichier dans `~/.dbt/`, **en dehors** du projet, justement pour qu'il ne finisse pas sur GitHub avec des identifiants. Pour un projet DuckDB local sans secret, on peut le laisser dans le projet et lancer les commandes avec `--profiles-dir .`.
+:::
+
+## Les modèles : un fichier, un `SELECT`
+
+Pour illustrer, prenons un mini-exemple de commandes fournisseurs, avec deux tables brutes : `raw_commandes` et `raw_fournisseurs`. Le projet guidé reprendra tout cela en détail sur un vrai jeu de données.
+
+Un **modèle** est un fichier `.sql` dans `models/`. Son nom de fichier devient le nom de la table ou de la vue créée.
+
+```sql
+-- models/staging/stg_commandes.sql
+select
+    id_commande,
+    id_fournisseur,
+    cast(date_commande as date) as date_commande,
+    cast(date_livraison as date) as date_livraison,
+    quantite
+from {{ ref('raw_commandes') }}
+```
+
+### `ref()` : le cœur de dbt
+
+`{{ ref('raw_commandes') }}` remplace le nom de la table. Cette syntaxe entre doubles accolades vient de **Jinja**, un langage de gabarits que dbt utilise pour rendre le SQL dynamique.
+
+`ref()` fait deux choses :
+
+1. Au moment de la compilation, dbt la remplace par le vrai nom de la table. Le fichier compilé dans `target/` contient :
+   ```sql
+   from "commandes"."main"."raw_commandes"
+   ```
+2. Surtout, dbt **enregistre la dépendance** : `stg_commandes` dépend de `raw_commandes`. Avec toutes les dépendances, il construit un graphe (le *DAG*) et sait dans quel ordre tout lancer.
+
+Un modèle peut s'appuyer sur d'autres modèles :
+
+```sql
+-- models/marts/performance_fournisseurs.sql
+with commandes as (
+    select * from {{ ref('stg_commandes') }}
+),
+
+fournisseurs as (
+    select * from {{ ref('stg_fournisseurs') }}
+)
+
+select
+    f.nom_fournisseur,
+    count(*) as nb_commandes,
+    avg(c.date_livraison - c.date_commande) as delai_moyen_jours,
+    sum(case when c.date_livraison - c.date_commande > f.delai_promis_jours
+             then 1 else 0 end) as nb_retards
+from commandes c
+join fournisseurs f using (id_fournisseur)
+group by f.nom_fournisseur
+```
+
+```
+raw_commandes ────> stg_commandes ─────┐
+                                       ├──> performance_fournisseurs
+raw_fournisseurs ─> stg_fournisseurs ──┘
+```
+
+:::{.callout-warning}
+## Jamais de nom de table en dur
+Écrire `from main.stg_commandes` fonctionnerait aussi... jusqu'au jour où le projet passe d'une base de test à la base de production, avec d'autres noms de schémas. Et dbt ne verrait pas la dépendance : il pourrait lancer les modèles dans le mauvais ordre. **Toujours** `ref()`.
+:::
+
+### Les couches d'un projet
+
+La documentation officielle recommande d'organiser les modèles en trois couches :
+
+| Couche | Préfixe | Rôle |
+|---|---|---|
+| **Staging** | `stg_` | Un modèle par table brute : renommer, typer, nettoyer. Pas de jointure. |
+| **Intermediate** | `int_` | Étapes de préparation : jointures, calculs intermédiaires. |
+| **Marts** | `fct_`, `dim_` ou nom métier | Les tables finales, prêtes pour les tableaux de bord et les analyses. |
+
+Vous croiserez aussi les noms **bronze**, **silver** et **gold** (architecture *médaillon*) : c'est la même idée, du brut vers le prêt à l'emploi.
+
+### Les matérialisations
+
+La **matérialisation** décide ce que dbt crée dans la base pour un modèle :
+
+| Matérialisation | Ce que dbt crée | Quand l'utiliser |
+|---|---|---|
+| `view` | Une vue : la requête est relancée à chaque lecture | Par défaut, modèles légers (staging) |
+| `table` | Une table : le résultat est calculé et stocké | Modèles lus souvent ou coûteux (marts) |
+| `ephemeral` | Rien : le modèle est injecté dans les modèles qui l'utilisent | Petites étapes intermédiaires |
+| `incremental` | Une table complétée à chaque lancement, sans tout recalculer | Gros volumes qui grossissent chaque jour |
+
+## Seeds et sources : les données de départ
+
+Un projet dbt part toujours de données déjà présentes dans la base. Il y a deux façons de les déclarer.
+
+**Les sources** désignent les tables brutes chargées par un autre outil. On les décrit dans un fichier `.yml`, puis on les appelle avec `source()` au lieu de `ref()` :
+
+```yaml
+# models/staging/_sources.yml
+version: 2
+
+sources:
+  - name: erp
+    tables:
+      - name: commandes
+      - name: fournisseurs
+```
+
+```sql
+select * from {{ source('erp', 'commandes') }}
+```
+
+**Les seeds** sont de petits fichiers CSV rangés dans `seeds/`, que `dbt seed` charge dans la base. On les appelle avec `ref()`. Ils servent aux **référentiels** qui changent rarement et qu'on veut versionner avec le code : une table de correspondance de codes pays, une liste de jours fériés, les délais promis par fournisseur…
+
+:::{.callout-note}
+## Dans nos exemples
+Pour que le mini-exemple tienne en quelques lignes, `raw_commandes` est un seed. Dans le projet guidé, les données seront chargées dans la base par un petit script Python puis déclarées comme **sources**, comme en entreprise. Un seed n'est pas fait pour charger des données volumineuses ou qui changent tous les jours.
+:::
+
+## Tester ses données
+
+### Les tests génériques
+
+Les tests se déclarent dans un fichier `.yml`, à côté des modèles. dbt en fournit quatre :
+
+```yaml
+# models/staging/_staging.yml
+version: 2
+
+models:
+  - name: stg_commandes
+    description: "Une ligne par commande fournisseur."
+    columns:
+      - name: id_commande
+        description: "Identifiant unique de la commande."
+        data_tests:
+          - unique
+          - not_null
+      - name: id_fournisseur
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_fournisseurs')
+                field: id_fournisseur
+```
+
+| Test | Vérifie que... |
+|---|---|
+| `unique` | la colonne ne contient aucun doublon |
+| `not_null` | la colonne ne contient aucune valeur manquante |
+| `accepted_values` | les valeurs appartiennent à une liste donnée |
+| `relationships` | chaque valeur existe dans une autre table (ici, chaque commande a un fournisseur connu) |
+
+### Les tests personnalisés
+
+Un test personnalisé est une requête rangée dans `tests/` qui cherche les lignes **problématiques**. Si elle renvoie au moins une ligne, le test échoue :
+
+```sql
+-- tests/assert_livraison_apres_commande.sql
+-- Une livraison ne peut pas avoir lieu avant la commande.
+select *
+from {{ ref('stg_commandes') }}
+where date_livraison < date_commande
+```
+
+### 🧠 À vous de réfléchir
+
+On ajoute cette ligne aux commandes brutes, puis on lance `dbt build` :
+
+```
+6,F09,2026-09-09,2026-09-08,10
+```
+
+Le fournisseur `F09` n'existe pas dans `raw_fournisseurs`. Quels tests vont échouer ? Et que va-t-il arriver au modèle `performance_fournisseurs` ?
+
+:::{.callout-tip collapse="true"}
+## 💡 Voir la solution
+
+Deux tests échouent :
+
+- `relationships` : `F09` n'existe pas dans `stg_fournisseurs` ;
+- `assert_livraison_apres_commande` : la livraison (le 8) précède la commande (le 9).
+
+```
+5 of 9 FAIL 1 assert_livraison_apres_commande .................................. [FAIL 1 in 0.03s]
+8 of 9 FAIL 1 relationships_stg_commandes_id_fournisseur__id_fournisseur__ref_stg_fournisseurs_  [FAIL 1 in 0.02s]
+9 of 9 SKIP relation main.performance_fournisseurs ............................. [SKIP]
+...
+Done. PASS=6 WARN=0 ERROR=2 SKIP=1 NO-OP=0 REUSED=0 TOTAL=9
+```
+
+Et `performance_fournisseurs` n'est **pas construit** (`SKIP`) : avec `dbt build`, un modèle n'est pas lancé si les tests des modèles dont il dépend échouent. Le tableau de bord garde la dernière version correcte au lieu d'afficher des chiffres faux. C'est exactement le but.
+:::
+
+## Les commandes de base
+
+| Commande | Ce qu'elle fait |
+|---|---|
+| `dbt init <nom>` | Crée un nouveau projet |
+| `dbt debug` | Vérifie l'installation et la connexion à la base |
+| `dbt seed` | Charge les CSV de `seeds/` dans la base |
+| `dbt run` | Construit les modèles (tables et vues) |
+| `dbt test` | Lance les tests |
+| `dbt build` | Fait tout, dans l'ordre du graphe : seeds, modèles, tests, snapshots |
+| `dbt compile` | Génère le SQL dans `target/`, sans rien exécuter |
+| `dbt show -s <modèle>` | Affiche un aperçu du résultat d'un modèle |
+| `dbt ls` | Liste les éléments du projet |
+| `dbt docs generate` puis `dbt docs serve` | Génère et ouvre la documentation du projet |
+| `dbt deps` | Installe les paquets externes |
+| `dbt clean` | Supprime `target/` et `dbt_packages/` |
+
+Au quotidien, trois commandes suffisent : `dbt build` pour tout construire et tester, `dbt run -s <modèle>` pour relancer ce sur quoi vous travaillez, et `dbt show -s <modèle>` pour vérifier le résultat. Vous les pratiquerez en détail dans le projet guidé.
+
+### Sélectionner une partie du projet
+
+Sur un vrai projet, on ne relance pas tout à chaque modification. L'option `--select` (ou `-s`) choisit ce qu'on lance :
+
+```bash
+dbt run -s stg_commandes               # un seul modèle
+dbt run -s stg_commandes+              # ce modèle et tout ce qui en dépend
+dbt run -s +performance_fournisseurs   # ce modèle et tout ce dont il dépend
+dbt build -s staging                   # tout le dossier models/staging/
+```
+
+:::{.callout-warning}
+Vous trouverez dans d'anciens tutoriels l'option `--models` ou `-m`. Elle a été remplacée par `--select` et provoque désormais une erreur avec dbt v2.
+:::
+
+## Pour aller plus loin
+
+:::{.callout-note collapse="true"}
+## Partie avancée, dépliez si vous êtes à l'aise
+
+Une fois les bases acquises, voici ce que vous croiserez rapidement :
+
+- **Les macros** : des fonctions Jinja, rangées dans `macros/`, pour éviter de recopier le même morceau de SQL dans plusieurs modèles.
+- **Les paquets** : des macros et des tests prêts à l'emploi, déclarés dans `packages.yml` et installés avec `dbt deps`. Le plus connu est `dbt_utils`.
+- **Les snapshots** : garder l'historique d'une table qui change, par exemple l'adresse d'un client avant et après un déménagement.
+- **Les modèles incrémentaux** : ne traiter que les nouvelles lignes à chaque lancement, indispensable sur de gros volumes.
+- **Les environnements** : plusieurs `outputs` dans `profiles.yml` (`dev`, `prod`), et `dbt build --target prod` pour choisir.
+:::
+
+## Ressources
+
+- [La documentation officielle de dbt](https://docs.getdbt.com/).
+- [How we structure our dbt projects](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview) : le guide officiel sur l'organisation en couches staging, intermediate et marts.
+- [La liste des commandes dbt](https://docs.getdbt.com/reference/dbt-commands) : chaque commande et ses options.
+- [Configurer DuckDB avec dbt](https://docs.getdbt.com/docs/local/connect-data-platform/duckdb-setup) : le détail de `profiles.yml` pour DuckDB.
+- [dbt Learn](https://www.getdbt.com/dbt-learn) : les cours en ligne gratuits de dbt Labs, dont *dbt Fundamentals*.
+- [Passer de dbt v1 à v2](https://docs.getdbt.com/docs/dbt-versions/core-upgrade/upgrading-to-v2).
+
+:::{.callout-important}
+## À retenir
+- dbt (*data build tool*) **transforme** des données déjà présentes dans une base. C'est le **T** de l'ELT : il n'extrait ni ne charge rien.
+- Un **modèle** est un fichier `.sql` qui contient un seul `SELECT` ; dbt en fait une vue ou une table.
+- `ref()` relie les modèles entre eux : dbt en déduit l'ordre d'exécution. Jamais de nom de table en dur.
+- On organise les modèles en couches : **staging** (nettoyer), **intermediate** (préparer), **marts** (servir).
+- Les **tests** (`unique`, `not_null`, `relationships`, `accepted_values` ou personnalisés) bloquent les données fausses avant qu'elles n'atteignent les tableaux de bord.
+- `dbt_project.yml` configure le projet, `profiles.yml` la connexion, qui ne contient jamais de mot de passe en clair.
+- `dbt build` lance tout dans l'ordre : seeds, modèles et tests.
+:::
