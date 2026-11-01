@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.20">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Cloud Storage (GCS) – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../07-Cloud/GCP/02-bigquery.html" rel="next">
+<link href="../../07-Cloud/GCP/index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0ae969d3293726db143f6e9eb89af930.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dfedb8b2004618b7676fd543330f2efa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-f96c46e044783225c03338700e5668f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-dfedb8b2004618b7676fd543330f2efa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python_data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../07-Cloud/index.html">Cloud</a></li><li class="breadcrumb-item"><a href="../../07-Cloud/GCP/index.html">GCP</a></li><li class="breadcrumb-item"><a href="../../07-Cloud/GCP/01-cloud-storage.html">Google Cloud Storage (GCS)</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Langages de programmation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnement</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnements en ligne</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Initiation Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditions &amp; boucles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structures de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les fonctions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/06-erreurs-exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Erreurs et exceptions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/07-scripts-jeux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts et jeux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/08-python-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Base de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../04-pandas/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pandas pour l'analyse de données</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../04-pandas/01-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../05-projet-reproductible/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Créer des projets reproductibles</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../05-projet-reproductible/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">uv pour les gouverner tous</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../06-dbt/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">dbt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../07-Cloud/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cloud</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../07-Cloud/GCP/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GCP</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../07-Cloud/GCP/01-cloud-storage.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Google Cloud Storage (GCS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../07-Cloud/GCP/02-bigquery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BigQuery</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../logs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TabICL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#le-stockage-objet-cest-quoi" id="toc-le-stockage-objet-cest-quoi" class="nav-link active" data-scroll-target="#le-stockage-objet-cest-quoi">Le stockage objet, c’est quoi ?</a></li>
+  <li><a href="#projets-buckets-et-objets" id="toc-projets-buckets-et-objets" class="nav-link" data-scroll-target="#projets-buckets-et-objets">Projets, buckets et objets</a></li>
+  <li><a href="#un-nom-de-bucket-unique-dans-tout-gcp" id="toc-un-nom-de-bucket-unique-dans-tout-gcp" class="nav-link" data-scroll-target="#un-nom-de-bucket-unique-dans-tout-gcp">Un nom de bucket unique dans tout GCP</a></li>
+  <li><a href="#où-sont-stockées-les-données" id="toc-où-sont-stockées-les-données" class="nav-link" data-scroll-target="#où-sont-stockées-les-données">Où sont stockées les données ?</a></li>
+  <li><a href="#les-classes-de-stockage" id="toc-les-classes-de-stockage" class="nav-link" data-scroll-target="#les-classes-de-stockage">Les classes de stockage</a>
+  <ul class="collapse">
+  <li><a href="#faire-évoluer-la-classe-avec-le-temps" id="toc-faire-évoluer-la-classe-avec-le-temps" class="nav-link" data-scroll-target="#faire-évoluer-la-classe-avec-le-temps">Faire évoluer la classe avec le temps</a></li>
+  </ul></li>
+  <li><a href="#qui-peut-accéder-aux-données" id="toc-qui-peut-accéder-aux-données" class="nav-link" data-scroll-target="#qui-peut-accéder-aux-données">Qui peut accéder aux données ?</a>
+  <ul class="collapse">
+  <li><a href="#les-droits" id="toc-les-droits" class="nav-link" data-scroll-target="#les-droits">Les droits</a></li>
+  <li><a href="#la-protection-contre-laccès-public" id="toc-la-protection-contre-laccès-public" class="nav-link" data-scroll-target="#la-protection-contre-laccès-public">La protection contre l’accès public</a></li>
+  </ul></li>
+  <li><a href="#se-protéger-des-erreurs" id="toc-se-protéger-des-erreurs" class="nav-link" data-scroll-target="#se-protéger-des-erreurs">Se protéger des erreurs</a></li>
+  <li><a href="#utiliser-cloud-storage" id="toc-utiliser-cloud-storage" class="nav-link" data-scroll-target="#utiliser-cloud-storage">Utiliser Cloud Storage</a>
+  <ul class="collapse">
+  <li><a href="#en-ligne-de-commande" id="toc-en-ligne-de-commande" class="nav-link" data-scroll-target="#en-ligne-de-commande">En ligne de commande</a></li>
+  <li><a href="#en-python" id="toc-en-python" class="nav-link" data-scroll-target="#en-python">En Python</a></li>
+  <li><a href="#à-vous-de-réfléchir" id="toc-à-vous-de-réfléchir" class="nav-link" data-scroll-target="#à-vous-de-réfléchir">🧠 À vous de réfléchir</a></li>
+  </ul></li>
+  <li><a href="#ressources" id="toc-ressources" class="nav-link" data-scroll-target="#ressources">Ressources</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python_data/edit/main/07-Cloud/GCP/01-cloud-storage.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="01-cloud-storage-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="01-cloud-storage-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../07-Cloud/index.html">Cloud</a></li><li class="breadcrumb-item"><a href="../../07-Cloud/GCP/index.html">GCP</a></li><li class="breadcrumb-item"><a href="../../07-Cloud/GCP/01-cloud-storage.html">Google Cloud Storage (GCS)</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Cloud Storage (GCS)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Dans la page sur les bases de données, nous avons vu que beaucoup de données analytiques vivent dans des <strong>fichiers</strong> (CSV, Parquet) posés sur un <strong>stockage objet</strong>, comme S3 chez Amazon ou MinIO sur SSP Cloud. Sur Google Cloud, ce service s’appelle <strong>Cloud Storage</strong>, souvent abrégé <strong>GCS</strong> (<em>Google Cloud Storage</em>). C’est la première brique de presque tout projet data sur GCP : c’est là qu’arrivent les fichiers bruts, avant d’être chargés dans BigQuery ou traités par un programme.</p>
+<section id="le-stockage-objet-cest-quoi" class="level2">
+<h2 class="anchored" data-anchor-id="le-stockage-objet-cest-quoi">Le stockage objet, c’est quoi ?</h2>
+<p>Cloud Storage n’est ni un disque dur, ni une base de données. Il stocke des <strong>objets</strong> : un objet, c’est un fichier (de n’importe quel type et de n’importe quelle taille) accompagné de quelques <strong>métadonnées</strong> (sa taille, son type, sa date de création…).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Disque dur</th>
+<th>Base de données</th>
+<th>Stockage objet (GCS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>On y range</td>
+<td>des fichiers dans des dossiers</td>
+<td>des lignes dans des tables</td>
+<td>des fichiers entiers (objets)</td>
+</tr>
+<tr class="even">
+<td>On y accède</td>
+<td>depuis une seule machine</td>
+<td>en SQL</td>
+<td>depuis n’importe où, par une adresse</td>
+</tr>
+<tr class="odd">
+<td>Capacité</td>
+<td>limitée par le disque</td>
+<td>limitée par le serveur</td>
+<td>pratiquement illimitée</td>
+</tr>
+<tr class="even">
+<td>Coût</td>
+<td>acheté d’avance</td>
+<td>selon le serveur</td>
+<td>à l’usage : ce qu’on stocke et ce qu’on lit</td>
+</tr>
+</tbody>
+</table>
+<p>On ne modifie pas un objet ligne par ligne comme une table : on le <strong>dépose</strong>, on le <strong>lit</strong> ou on le <strong>remplace</strong> entièrement.</p>
+<p>On y range à peu près tout ce qui prend la forme d’un fichier : les données brutes directement extraites des applications sources, des <strong>jeux de données</strong> (CSV, Parquet), des <strong>modèles</strong> de machine learning entraînés, des <strong>logs</strong>, des sauvegardes, des images… Et surtout, les autres services de Google Cloud savent <strong>lire directement</strong> dans Cloud Storage : BigQuery peut charger ou interroger des fichiers posés dans un bucket par exemple. GCS devient ainsi le point de rencontre des données entre les services.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>GCS, un data lake ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cloud Storage est souvent le <strong>socle</strong> d’un data lake sur Google Cloud, mais un bucket n’en est pas un à lui seul. Un data lake, c’est une <strong>façon d’organiser</strong> le stockage pour l’analyse : on y conserve les données brutes de toutes les sources, dans des formats ouverts (Parquet, CSV, JSON), rangées par zones (brut, nettoyé, prêt à l’emploi), décrites dans un <strong>catalogue</strong> et interrogées par des moteurs comme BigQuery, Spark ou DuckDB.</p>
+<p>Sans cette organisation, on obtient ce qu’on surnomme un <em>data swamp</em>, un marécage de données : tout est stocké, mais personne ne sait ce qu’il y a, d’où ça vient, ni si c’est fiable.</p>
+</div>
+</div>
+</section>
+<section id="projets-buckets-et-objets" class="level2">
+<h2 class="anchored" data-anchor-id="projets-buckets-et-objets">Projets, buckets et objets</h2>
+<p>Cloud Storage s’organise en trois niveaux :</p>
+<ul>
+<li>le <strong>projet GCP</strong> regroupe toutes les ressources, la facturation et les droits ;</li>
+<li>un <strong>bucket</strong> (littéralement « seau ») est un conteneur d’objets, avec ses propres réglages : son emplacement, sa classe de stockage par défaut, ses droits d’accès ;</li>
+<li>les <strong>objets</strong> sont les fichiers rangés dans un bucket.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/gcs-organisation.svg" class="img-fluid figure-img" style="width:100.0%" alt="Schéma de l'organisation de Cloud Storage : projet, buckets, objets"></p>
+<figcaption>Un projet contient des buckets, qui contiennent des objets.</figcaption>
+</figure>
+</div>
+<p>Chaque objet a une adresse qui commence par <code>gs://</code>, suivie du nom du bucket puis du nom de l’objet :</p>
+<pre><code>gs://ventes-brut-286bdf/2026/11/ventes_2026-11-01.csv</code></pre>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Les dossiers n’existent pas vraiment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dans un bucket classique, <code>2026/11/</code> n’est pas un vrai dossier : c’est simplement le <strong>début du nom</strong> de l’objet. La console et les outils affichent une arborescence pour que ce soit plus lisible, mais pour Cloud Storage, tous les objets sont rangés à plat. En pratique, on se sert quand même de ces préfixes pour organiser les données, par exemple par date.</p>
+</div>
+</div>
+</section>
+<section id="un-nom-de-bucket-unique-dans-tout-gcp" class="level2">
+<h2 class="anchored" data-anchor-id="un-nom-de-bucket-unique-dans-tout-gcp">Un nom de bucket unique dans tout GCP</h2>
+<p>C’est le premier piège : <strong>le nom d’un bucket doit être unique parmi tous les buckets de tous les utilisateurs de Google Cloud</strong>, pas seulement dans votre projet. Si quelqu’un, n’importe où dans le monde, a déjà créé un bucket <code>donnees</code>, vous ne pourrez pas l’utiliser.</p>
+<p>Quelques règles à connaître :</p>
+<ul>
+<li>entre 3 et 63 caractères : lettres <strong>minuscules</strong>, chiffres, tirets (<code>-</code>), tirets bas (<code>_</code>) et points (<code>.</code>) ;</li>
+<li>commencer et finir par une lettre ou un chiffre ;</li>
+<li>pas d’espace, pas de majuscule, et rien qui contienne « google » ;</li>
+<li><strong>le nom ne peut plus être changé</strong> : pour renommer, il faut créer un nouveau bucket et y déplacer les objets.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Une convention de nommage
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Décrivez le rôle du bucket et ajoutez un court suffixe aléatoire : <code>ventes-brut-286bdf</code>, <code>ventes-archives-286bdf</code>. Le nom devient presque sûrement unique, et on comprend son contenu sans l’ouvrir. Pour générer un suffixe : <code>python -c "import uuid; print(uuid.uuid4().hex[:6])"</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Les noms de buckets sont publics
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Même si le contenu du bucket est privé, son nom peut être visible. N’y mettez jamais d’information sensible : nom de client, adresse e-mail, identifiant personnel…</p>
+</div>
+</div>
+</section>
+<section id="où-sont-stockées-les-données" class="level2">
+<h2 class="anchored" data-anchor-id="où-sont-stockées-les-données">Où sont stockées les données ?</h2>
+<p>À la création d’un bucket, on choisit son <strong>emplacement</strong>. Il ne se change pas facilement ensuite, donc autant bien le choisir dès le départ.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type d’emplacement</th>
+<th>Exemple</th>
+<th>Disponibilité</th>
+<th>Coût</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Région</strong></td>
+<td><code>europe-west9</code> (Paris)</td>
+<td>les données sont copiées dans plusieurs zones de la région</td>
+<td>le moins cher</td>
+</tr>
+<tr class="even">
+<td><strong>Bi-région</strong> (<em>dual-region</em>)</td>
+<td>deux régions précises, par exemple en Europe</td>
+<td>les données sont copiées dans deux régions</td>
+<td>le plus cher</td>
+</tr>
+<tr class="odd">
+<td><strong>Multirégion</strong> (<em>multi-region</em>)</td>
+<td><code>EU</code> (pays de l’Union européenne)</td>
+<td>les données sont copiées dans plusieurs régions</td>
+<td>entre les deux</td>
+</tr>
+</tbody>
+</table>
+<p>Comment choisir ?</p>
+<ul>
+<li><strong>Rapprochez les données des traitements.</strong> Si BigQuery ou vos programmes tournent à Paris, mettez le bucket à Paris : lire des données dans la même région évite des frais de transfert et c’est plus rapide.</li>
+<li><strong>Respectez les contraintes réglementaires.</strong> Des données personnelles de clients européens doivent souvent rester en Europe (RGPD) : choisir une région ou la multirégion <code>EU</code> le garantit.</li>
+<li><strong>Payez la redondance seulement si elle est utile.</strong> Une bi-région ou une multirégion protège contre la panne d’une région entière. C’est important pour des données critiques, rarement indispensable pour un projet d’analyse.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Toutes les options gardent plusieurs copies de vos données : même une simple région résiste à la panne d’un centre de données. La bi-région et la multirégion protègent en plus contre la panne d’une <strong>région entière</strong>.</p>
+</div>
+</div>
+</section>
+<section id="les-classes-de-stockage" class="level2">
+<h2 class="anchored" data-anchor-id="les-classes-de-stockage">Les classes de stockage</h2>
+<p>Toutes les données ne sont pas lues aussi souvent. Les fichiers de la semaine sont consultés tous les jours ; les sauvegardes de l’an dernier, presque jamais. Cloud Storage propose donc quatre <strong>classes de stockage</strong> principales, avec un principe simple : <strong>plus le stockage est bon marché, plus la lecture coûte cher</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/gcs-classes.svg" class="img-fluid figure-img" style="width:100.0%" alt="Comparaison des classes Standard, Nearline, Coldline et Archive : prix du stockage, prix de la lecture et durée minimale"></p>
+<figcaption>Les quatre classes de stockage.</figcaption>
+</figure>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Classe</th>
+<th>Pour des données lues…</th>
+<th>Durée minimale</th>
+<th>Frais de récupération</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Standard</strong></td>
+<td>souvent (données « chaudes »)</td>
+<td>aucune</td>
+<td>sans frais de récupération</td>
+</tr>
+<tr class="even">
+<td><strong>Nearline</strong></td>
+<td>environ une fois par mois</td>
+<td>30 jours</td>
+<td>frais de récupération</td>
+</tr>
+<tr class="odd">
+<td><strong>Coldline</strong></td>
+<td>environ une fois par trimestre</td>
+<td>90 jours</td>
+<td>plus chère</td>
+</tr>
+<tr class="even">
+<td><strong>Archive</strong></td>
+<td>moins d’une fois par an</td>
+<td>365 jours</td>
+<td>la plus chère</td>
+</tr>
+</tbody>
+</table>
+<p>Deux points importants :</p>
+<ul>
+<li><strong>Toutes les classes sont accessibles immédiatement.</strong> Même en Archive, un fichier se lit en quelques millisecondes : la différence porte sur le <strong>prix</strong>, pas sur le délai.</li>
+<li><strong>La durée minimale est facturée quoi qu’il arrive.</strong> Un fichier supprimé après 10 jours en Coldline est facturé comme s’il était resté 90 jours. Mettre en Archive des fichiers temporaires est donc une fausse économie.</li>
+</ul>
+<p>Ces frais de récupération s’ajoutent à ce que coûte <strong>toute</strong> lecture, quelle que soit la classe :</p>
+<ul>
+<li>les <strong>opérations</strong> : chaque requête (lister un bucket, lire ou déposer un objet) est facturée, à un tarif très faible mais qui compte quand un programme en fait des millions ;</li>
+<li>le <strong>transfert réseau</strong> : lire les données depuis une autre région, ou les télécharger vers Internet, est facturé. Dans une multirégion, la lecture entraîne toujours des frais de transfert.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lire au bon endroit
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ce qui coûte le moins cher, c’est de lire des données en Standard <strong>depuis la même région</strong> que le bucket (par exemple, BigQuery à Paris qui lit un bucket à Paris). C’est une raison de plus pour bien choisir l’emplacement.</p>
+</div>
+</div>
+<p>Il existe aussi une classe plus récente, <strong>Rapid</strong>, réservée aux traitements très intensifs (IA, analyse de gros volumes). Elle ne nous concerne pas ici.</p>
+<section id="faire-évoluer-la-classe-avec-le-temps" class="level3">
+<h3 class="anchored" data-anchor-id="faire-évoluer-la-classe-avec-le-temps">Faire évoluer la classe avec le temps</h3>
+<p>La classe d’un objet peut changer au cours de sa vie. Plutôt que de le faire à la main, on définit des <strong>règles de cycle de vie</strong> (<em>Object Lifecycle Management</em>) sur le bucket. Par exemple : passer en Nearline après 30 jours, en Coldline après 90 jours, en Archive après un an, puis supprimer après cinq ans.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"rule"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"action"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"type"</span><span class="fu">:</span> <span class="st">"SetStorageClass"</span><span class="fu">,</span> <span class="dt">"storageClass"</span><span class="fu">:</span> <span class="st">"NEARLINE"</span><span class="fu">},</span> <span class="dt">"condition"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"age"</span><span class="fu">:</span> <span class="dv">30</span><span class="fu">}}</span><span class="ot">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"action"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"type"</span><span class="fu">:</span> <span class="st">"SetStorageClass"</span><span class="fu">,</span> <span class="dt">"storageClass"</span><span class="fu">:</span> <span class="st">"COLDLINE"</span><span class="fu">},</span> <span class="dt">"condition"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"age"</span><span class="fu">:</span> <span class="dv">90</span><span class="fu">}}</span><span class="ot">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"action"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"type"</span><span class="fu">:</span> <span class="st">"SetStorageClass"</span><span class="fu">,</span> <span class="dt">"storageClass"</span><span class="fu">:</span> <span class="st">"ARCHIVE"</span><span class="fu">},</span>  <span class="dt">"condition"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"age"</span><span class="fu">:</span> <span class="dv">365</span><span class="fu">}}</span><span class="ot">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"action"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Delete"</span><span class="fu">},</span> <span class="dt">"condition"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"age"</span><span class="fu">:</span> <span class="dv">1825</span><span class="fu">}}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>L’âge (<code>age</code>) se compte en jours depuis la création de l’objet.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Laisser Google choisir : Autoclass
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous ne savez pas à quelle fréquence vos données seront lues, activez <strong>Autoclass</strong> sur le bucket : Cloud Storage déplace alors lui-même chaque objet vers la classe la plus adaptée, selon son utilisation réelle.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="qui-peut-accéder-aux-données" class="level2">
+<h2 class="anchored" data-anchor-id="qui-peut-accéder-aux-données">Qui peut accéder aux données ?</h2>
+<section id="les-droits" class="level3">
+<h3 class="anchored" data-anchor-id="les-droits">Les droits</h3>
+<p>Les accès se gèrent avec <strong>IAM</strong>, le système de droits de Google Cloud : on donne un <strong>rôle</strong> (par exemple « lecteur des objets ») à un utilisateur, un groupe ou un <strong>compte de service</strong> (l’identité d’un programme), sur un projet ou sur un bucket précis.</p>
+<p>La bonne pratique est d’activer l’<strong>accès uniforme au niveau du bucket</strong> (<em>uniform bucket-level access</em>) : les droits se définissent pour tout le bucket, et pas objet par objet. C’est plus simple à comprendre et beaucoup plus difficile de se tromper.</p>
+</section>
+<section id="la-protection-contre-laccès-public" class="level3">
+<h3 class="anchored" data-anchor-id="la-protection-contre-laccès-public">La protection contre l’accès public</h3>
+<p>Lors de la création d’un bucket dans la console, la <strong>protection contre l’accès public</strong> (<em>public access prevention</em>) est activée par défaut : personne ne peut rendre le bucket ou ses objets accessibles à tout Internet, même par erreur.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Ne la désactivez qu’avec une très bonne raison
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Des buckets ouverts par erreur sont à l’origine de nombreuses fuites de données. On ne la désactive que pour publier volontairement des données publiques (de l’open data, par exemple), dans un bucket dédié qui ne contient <strong>que</strong> ces données.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="se-protéger-des-erreurs" class="level2">
+<h2 class="anchored" data-anchor-id="se-protéger-des-erreurs">Se protéger des erreurs</h2>
+<ul>
+<li><strong>La suppression réversible</strong> (<em>soft delete</em>) est activée par défaut : un objet supprimé ou remplacé reste récupérable pendant <strong>7 jours</strong> (durée réglable jusqu’à 90 jours). Attention, ces objets continuent d’être facturés pendant ce délai.</li>
+<li><strong>Le versionnement</strong> (<em>object versioning</em>), à activer soi-même, conserve les anciennes versions d’un objet à chaque remplacement. Utile pour des fichiers importants qu’on écrase régulièrement.</li>
+</ul>
+</section>
+<section id="utiliser-cloud-storage" class="level2">
+<h2 class="anchored" data-anchor-id="utiliser-cloud-storage">Utiliser Cloud Storage</h2>
+<p>Comme pour BigQuery, il y a trois façons de travailler avec Cloud Storage : la <strong>console web</strong> pour explorer, la ligne de commande <strong><code>gcloud</code></strong> pour automatiser, et <strong>Python</strong> pour intégrer GCS à vos programmes.</p>
+<section id="en-ligne-de-commande" class="level3">
+<h3 class="anchored" data-anchor-id="en-ligne-de-commande">En ligne de commande</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer un bucket à Paris</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> storage buckets create gs://ventes-brut-286bdf <span class="at">--location</span><span class="op">=</span>europe-west9</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Déposer un fichier, lister le contenu, télécharger un fichier</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> storage cp ventes.csv gs://ventes-brut-286bdf/2026/11/</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> storage ls gs://ventes-brut-286bdf/2026/11/</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> storage cp gs://ventes-brut-286bdf/2026/11/ventes.csv .</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Appliquer des règles de cycle de vie</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> storage buckets update gs://ventes-brut-286bdf <span class="at">--lifecycle-file</span><span class="op">=</span>cycle_de_vie.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="en-python" class="level3">
+<h3 class="anchored" data-anchor-id="en-python">En Python</h3>
+<p>La bibliothèque <code>google-cloud-storage</code> permet de manipuler buckets et objets :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.cloud <span class="im">import</span> storage</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> storage.Client()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>bucket <span class="op">=</span> client.bucket(<span class="st">"ventes-brut-286bdf"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Déposer un fichier</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>bucket.blob(<span class="st">"2026/11/ventes.csv"</span>).upload_from_filename(<span class="st">"ventes.csv"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Lister les objets qui commencent par un préfixe</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> objet <span class="kw">in</span> client.list_blobs(<span class="st">"ventes-brut-286bdf"</span>, prefix<span class="op">=</span><span class="st">"2026/11/"</span>):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(objet.name, objet.size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Et pandas sait lire directement une adresse <code>gs://</code>, à condition d’installer le paquet <code>gcsfs</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> pd.read_csv(<span class="st">"gs://ventes-brut-286bdf/2026/11/ventes.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Et l’authentification ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En local, la commande <code>gcloud auth application-default login</code> suffit : les bibliothèques Python trouvent ensuite vos identifiants toutes seules. En production, un programme utilise un <strong>compte de service</strong> avec uniquement les droits dont il a besoin. Jamais de clé ou de mot de passe dans le code.</p>
+</div>
+</div>
+</section>
+<section id="à-vous-de-réfléchir" class="level3">
+<h3 class="anchored" data-anchor-id="à-vous-de-réfléchir">🧠 À vous de réfléchir</h3>
+<p>Pour chaque situation, quelle classe de stockage et quel emplacement choisiriez-vous ?</p>
+<ol type="1">
+<li>Les fichiers de ventes déposés chaque nuit, chargés dans BigQuery à Paris le lendemain matin.</li>
+<li>Les exports comptables, à conserver dix ans pour une obligation légale, et qu’on ne relit qu’en cas de contrôle.</li>
+<li>Des fichiers de travail intermédiaires, supprimés au bout de deux jours.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Voir la solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>Standard</strong>, en région <strong><code>europe-west9</code></strong> (Paris) : les données sont lues dès le lendemain, et elles sont au même endroit que BigQuery, donc pas de frais de transfert. On peut ajouter une règle de cycle de vie pour les faire passer en Nearline ou en Coldline une fois chargées.</li>
+<li><strong>Archive</strong>, dans une région ou en <code>EU</code> : le stockage le moins cher pour des données presque jamais lues, et la lecture reste immédiate en cas de contrôle. Une règle de cycle de vie peut les supprimer au bout de dix ans.</li>
+<li><strong>Standard</strong> : c’est la seule classe sans durée minimale ni frais de récupération. En Nearline, chaque fichier serait facturé 30 jours alors qu’il n’en vit que deux. Et un bucket sans suppression réversible évite de payer 7 jours de plus pour chaque fichier supprimé.</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ressources" class="level2">
+<h2 class="anchored" data-anchor-id="ressources">Ressources</h2>
+<ul>
+<li><a href="https://docs.cloud.google.com/storage/docs">Documentation de Cloud Storage</a> : la référence officielle.</li>
+<li><a href="https://docs.cloud.google.com/storage/docs/storage-classes">Les classes de stockage</a> : le détail de chaque classe.</li>
+<li><a href="https://docs.cloud.google.com/storage/docs/locations">Les emplacements des buckets</a> : régions, bi-régions et multirégions.</li>
+<li><a href="https://docs.cloud.google.com/storage/docs/naming">Les règles de nommage</a> : tout sur les noms de buckets.</li>
+<li><a href="https://docs.cloud.google.com/storage/docs/soft-delete">La suppression réversible</a> : son fonctionnement et son coût.</li>
+<li><a href="https://cloud.google.com/storage/pricing">Les tarifs de Cloud Storage</a> : les prix par classe et par emplacement.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>À retenir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Cloud Storage (GCS) stocke des <strong>objets</strong> (des fichiers et leurs métadonnées) dans des <strong>buckets</strong>, à l’adresse <code>gs://bucket/nom-de-l-objet</code>. Les dossiers ne sont qu’une partie du nom.</li>
+<li><strong>Le nom d’un bucket est unique dans tout Google Cloud</strong>, ne peut pas être changé et peut être visible publiquement.</li>
+<li>L’<strong>emplacement</strong> se choisit à la création : une région (le moins cher, et à placer près des traitements), une bi-région ou une multirégion (plus de redondance, plus cher).</li>
+<li>Quatre classes : <strong>Standard</strong>, <strong>Nearline</strong>, <strong>Coldline</strong>, <strong>Archive</strong>. Plus le stockage est bon marché, plus la lecture coûte cher et plus la durée minimale facturée est longue.</li>
+<li>Des <strong>règles de cycle de vie</strong> (ou Autoclass) changent la classe des objets avec le temps, et peuvent les supprimer.</li>
+<li>La <strong>protection contre l’accès public</strong> est activée par défaut : on ne la désactive que pour publier volontairement des données ouvertes.</li>
+<li>La <strong>suppression réversible</strong> permet de récupérer un objet supprimé pendant 7 jours par défaut.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python_data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../07-Cloud/GCP/index.html" class="pagination-link" aria-label="GCP">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">GCP</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../07-Cloud/GCP/02-bigquery.html" class="pagination-link" aria-label="BigQuery">
+        <span class="nav-page-text">BigQuery</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python_data/edit/main/07-Cloud/GCP/01-cloud-storage.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

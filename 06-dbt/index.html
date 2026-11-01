@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.20">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Découvrir dbt – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../07-Cloud/index.html" rel="next">
+<link href="../05-projet-reproductible/uv.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0ae969d3293726db143f6e9eb89af930.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dfedb8b2004618b7676fd543330f2efa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f96c46e044783225c03338700e5668f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-dfedb8b2004618b7676fd543330f2efa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python_data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06-dbt/index.html">dbt</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Langages de programmation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnement</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnements en ligne</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Initiation Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditions &amp; boucles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structures de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les fonctions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/06-erreurs-exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Erreurs et exceptions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/07-scripts-jeux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts et jeux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/08-python-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Base de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../04-pandas/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pandas pour l'analyse de données</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-pandas/01-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../05-projet-reproductible/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Créer des projets reproductibles</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-projet-reproductible/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">uv pour les gouverner tous</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../06-dbt/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">dbt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07-Cloud/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cloud</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07-Cloud/GCP/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GCP</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../07-Cloud/GCP/01-cloud-storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Google Cloud Storage (GCS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../07-Cloud/GCP/02-bigquery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BigQuery</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../logs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TabICL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#dbt-cest-quoi" id="toc-dbt-cest-quoi" class="nav-link active" data-scroll-target="#dbt-cest-quoi">dbt, c’est quoi ?</a></li>
+  <li><a href="#un-outil-de-transformation-pour-lelt" id="toc-un-outil-de-transformation-pour-lelt" class="nav-link" data-scroll-target="#un-outil-de-transformation-pour-lelt">Un outil de transformation pour l’ELT</a></li>
+  <li><a href="#la-philosophie-de-dbt" id="toc-la-philosophie-de-dbt" class="nav-link" data-scroll-target="#la-philosophie-de-dbt">La philosophie de dbt</a></li>
+  <li><a href="#quel-dbt" id="toc-quel-dbt" class="nav-link" data-scroll-target="#quel-dbt">Quel dbt ?</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#la-structure-dun-projet" id="toc-la-structure-dun-projet" class="nav-link" data-scroll-target="#la-structure-dun-projet">La structure d’un projet</a>
+  <ul class="collapse">
+  <li><a href="#dbt_project.yml-la-configuration-du-projet" id="toc-dbt_project.yml-la-configuration-du-projet" class="nav-link" data-scroll-target="#dbt_project.yml-la-configuration-du-projet"><code>dbt_project.yml</code> : la configuration du projet</a></li>
+  <li><a href="#profiles.yml-la-connexion-à-la-base" id="toc-profiles.yml-la-connexion-à-la-base" class="nav-link" data-scroll-target="#profiles.yml-la-connexion-à-la-base"><code>profiles.yml</code> : la connexion à la base</a></li>
+  </ul></li>
+  <li><a href="#avant-dbt-charger-les-données-brutes" id="toc-avant-dbt-charger-les-données-brutes" class="nav-link" data-scroll-target="#avant-dbt-charger-les-données-brutes">Avant dbt : charger les données brutes</a>
+  <ul class="collapse">
+  <li><a href="#déclarer-les-sources" id="toc-déclarer-les-sources" class="nav-link" data-scroll-target="#déclarer-les-sources">Déclarer les sources</a></li>
+  </ul></li>
+  <li><a href="#les-modèles-un-fichier-un-select" id="toc-les-modèles-un-fichier-un-select" class="nav-link" data-scroll-target="#les-modèles-un-fichier-un-select">Les modèles : un fichier, un <code>SELECT</code></a>
+  <ul class="collapse">
+  <li><a href="#source-et-ref-le-cœur-de-dbt" id="toc-source-et-ref-le-cœur-de-dbt" class="nav-link" data-scroll-target="#source-et-ref-le-cœur-de-dbt"><code>source()</code> et <code>ref()</code> : le cœur de dbt</a></li>
+  <li><a href="#les-couches-dun-projet" id="toc-les-couches-dun-projet" class="nav-link" data-scroll-target="#les-couches-dun-projet">Les couches d’un projet</a></li>
+  <li><a href="#les-matérialisations" id="toc-les-matérialisations" class="nav-link" data-scroll-target="#les-matérialisations">Les matérialisations</a></li>
+  </ul></li>
+  <li><a href="#et-les-seeds" id="toc-et-les-seeds" class="nav-link" data-scroll-target="#et-les-seeds">Et les seeds ?</a></li>
+  <li><a href="#tester-ses-données" id="toc-tester-ses-données" class="nav-link" data-scroll-target="#tester-ses-données">Tester ses données</a>
+  <ul class="collapse">
+  <li><a href="#les-tests-génériques" id="toc-les-tests-génériques" class="nav-link" data-scroll-target="#les-tests-génériques">Les tests génériques</a></li>
+  <li><a href="#les-tests-personnalisés" id="toc-les-tests-personnalisés" class="nav-link" data-scroll-target="#les-tests-personnalisés">Les tests personnalisés</a></li>
+  <li><a href="#à-vous-de-réfléchir" id="toc-à-vous-de-réfléchir" class="nav-link" data-scroll-target="#à-vous-de-réfléchir">🧠 À vous de réfléchir</a></li>
+  </ul></li>
+  <li><a href="#les-commandes-de-base" id="toc-les-commandes-de-base" class="nav-link" data-scroll-target="#les-commandes-de-base">Les commandes de base</a>
+  <ul class="collapse">
+  <li><a href="#sélectionner-une-partie-du-projet" id="toc-sélectionner-une-partie-du-projet" class="nav-link" data-scroll-target="#sélectionner-une-partie-du-projet">Sélectionner une partie du projet</a></li>
+  </ul></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+  <li><a href="#ressources" id="toc-ressources" class="nav-link" data-scroll-target="#ressources">Ressources</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python_data/edit/main/06-dbt/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="01-decouvrir-dbt-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="01-decouvrir-dbt-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Découvrir dbt</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Testez au fur et à mesure
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>dbt s’utilise dans un <strong>terminal</strong>, pas dans un notebook. Le plus simple est d’ouvrir un service VSCode sur SSP Cloud, puis d’ouvrir un terminal (menu <em>Terminal</em> → <em>New Terminal</em>) pour lancer les commandes de cette page au fil de la lecture.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true"><img src="https://img.shields.io/badge/SSPCloud-Lancer%20VSCode-blue?logo=visualstudiocode.png" class="img-fluid figure-img"></a></p>
+<figcaption>Open In SSP Cloud</figcaption>
+</figure>
+</div>
+<p>Vous pouvez aussi travailler sur votre ordinateur, dans VSCode, après avoir installé dbt (voir la section <em>Installation</em>).</p>
+</div>
+</div>
+<p>Par le passé, vous avez écrit des requêtes SQL pour filtrer, joindre et agréger des données. Une requête, c’est simple. Mais imaginez une équipe data avec 2 000 requêtes qui dépendent les unes des autres : laquelle lancer en premier ? Qui a modifié celle-ci ? Le chiffre d’affaires du tableau de bord est-il encore juste ? <strong>dbt</strong> a été créé pour répondre à ces questions.</p>
+<section id="dbt-cest-quoi" class="level2">
+<h2 class="anchored" data-anchor-id="dbt-cest-quoi">dbt, c’est quoi ?</h2>
+<p><strong>dbt</strong> signifie <em>data build tool</em>. C’est un outil en ligne de commande qui sert à <strong>transformer</strong> des données déjà présentes dans une base, en écrivant uniquement des requêtes <code>SELECT</code>.</p>
+<p>Concrètement, vous écrivez des fichiers <code>.sql</code> qui contiennent chacun <strong>une</strong> requête <code>SELECT</code>. dbt se charge du reste :</p>
+<ul>
+<li>il transforme chaque requête en table ou en vue dans la base ;</li>
+<li>il comprend dans quel <strong>ordre</strong> lancer les requêtes, grâce aux dépendances entre elles ;</li>
+<li>il <strong>teste</strong> les données (pas de doublons, pas de valeurs manquantes…) ;</li>
+<li>il génère une <strong>documentation</strong> du projet, avec le schéma des dépendances.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>dbt ne fait pas les calculs lui-même
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>dbt n’est pas une base de données. Il <strong>compile</strong> vos fichiers en SQL, puis il envoie ce SQL à la base (DuckDB, PostgreSQL, BigQuery, Snowflake…), qui fait tout le travail. Les données ne transitent jamais par dbt : elles restent dans la base.</p>
+</div>
+</div>
+</section>
+<section id="un-outil-de-transformation-pour-lelt" class="level2">
+<h2 class="anchored" data-anchor-id="un-outil-de-transformation-pour-lelt">Un outil de transformation pour l’ELT</h2>
+<p>Pour qu’une donnée arrive dans un tableau de bord, il faut trois étapes :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Étape</th>
+<th>En anglais</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Extraire</strong></td>
+<td><em>Extract</em></td>
+<td>Interroger une API, lire l’export d’un logiciel</td>
+</tr>
+<tr class="even">
+<td><strong>Charger</strong></td>
+<td><em>Load</em></td>
+<td>Écrire ces données brutes dans la base</td>
+</tr>
+<tr class="odd">
+<td><strong>Transformer</strong></td>
+<td><em>Transform</em></td>
+<td>Nettoyer, joindre, agréger pour répondre à une question métier</td>
+</tr>
+</tbody>
+</table>
+<p>Il existe deux façons d’organiser ces étapes :</p>
+<ul>
+<li><strong>ETL</strong> : on transforme les données <strong>avant</strong> de les charger, par exemple dans un script Python, et on n’enregistre dans la base que le résultat final.</li>
+<li><strong>ELT</strong> : on charge d’abord les données <strong>brutes</strong> dans la base, puis on les transforme <strong>dans la base</strong>, en SQL.</li>
+</ul>
+<p><strong>dbt est l’outil du T de l’ELT.</strong> Il ne sait ni appeler une API, ni lire un fichier sur un serveur distant, ni déplacer des données d’une base à une autre. Ces étapes sont confiées à d’autres outils : un script Python, Airbyte, Fivetran, dlt… dbt intervient une fois que les données brutes sont dans la base.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Un peu d’histoire : pourquoi l’ETL était la norme avant ?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Des années 1990 aux années 2010, l’ETL est le standard.</strong> Les entreprises utilisent des outils comme Informatica PowerCenter, IBM DataStage, Microsoft SSIS, puis Talend en open source : on y dessine les flux de données à la souris, sans écrire de code. Plusieurs raisons expliquent ce choix :</p>
+<ul>
+<li><strong>L’entrepôt de données coûte très cher.</strong> Il tourne sur des serveurs physiques achetés par l’entreprise, et le coût total (matériel et licences) peut atteindre plusieurs millions de dollars. Le stockage est rare, mais le <strong>calcul</strong> aussi : chaque traitement lancé dans l’entrepôt ralentit les requêtes des utilisateurs. On transforme donc les données sur un serveur à part, et on ne charge dans l’entrepôt que des données nettoyées et agrégées<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</li>
+<li><strong>La structure est définie avant d’écrire les données.</strong> Les entrepôts suivent des modèles stricts (schémas en étoile notamment) : une donnée doit être propre et au bon format avant d’entrer. Il n’existe pas de zone pour stocker du « brut ».</li>
+<li><strong>Les sources sont très hétérogènes.</strong> Mainframes, fichiers plats, formats propriétaires : il faut de toute façon convertir avant de charger, et les outils ETL proposent des connecteurs pour tout.</li>
+<li><strong>Les traitements tournent la nuit, par lots.</strong> Ne charger que le nécessaire permet de tenir dans la fenêtre de traitement nocturne.</li>
+</ul>
+<p><strong>Ce qui a changé la donne :</strong></p>
+<ol type="1">
+<li><strong>Hadoop et Amazon S3</strong>, en 2006 : la même année, deux innovations rendent le stockage massif abordable. <strong>Hadoop</strong>, projet open source inspiré de deux publications de Google et développé notamment chez Yahoo!, permet de stocker et de traiter d’énormes volumes de données sur des grappes de <strong>serveurs ordinaires et bon marché</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. <strong>Amazon S3</strong>, lancé en mars 2006, propose un stockage en ligne <strong>payé à l’usage</strong>, sans serveur à acheter ni à administrer<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. S3 et ses équivalents (Google Cloud Storage, Azure Blob, MinIO sur SSP Cloud) deviendront le socle de la plupart des data lakes.</li>
+<li><strong>Les data lakes</strong>, autour de 2010 : le terme, popularisé par James Dixon, alors directeur technique de Pentaho<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, donne un nom à cette nouvelle approche : stocker d’abord toutes les données brutes, puis décider plus tard comment les exploiter.</li>
+<li><strong>Les entrepôts cloud</strong>, au début des années 2010 : BigQuery est annoncé en 2010<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, Amazon Redshift devient disponible en 2013 pour moins de 1 000 dollars par téraoctet et par an<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, et Snowflake est fondé en 2012 sur l’idée de <strong>séparer le stockage et le calcul</strong>, facturés et dimensionnés indépendamment<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. La puissance se loue à la demande : transformer directement dans la base devient rapide et bon marché.</li>
+<li><strong>Des outils pensés pour l’ELT</strong> : dbt est créé en 2016 par Tristan Handy, Drew Banin et Connor McArthur, chez Fishtown Analytics, justement pour profiter de ces entrepôts cloud<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>.</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="la-philosophie-de-dbt" class="level2">
+<h2 class="anchored" data-anchor-id="la-philosophie-de-dbt">La philosophie de dbt</h2>
+<p>dbt applique aux données les bonnes pratiques des développeurs :</p>
+<ul>
+<li><strong>Tout est du code.</strong> Une transformation est un fichier texte, versionné avec git. On sait qui a changé quoi, et quand.</li>
+<li><strong>Un modèle = un <code>SELECT</code>.</strong> Pas de <code>CREATE TABLE</code>, pas de <code>INSERT</code> : vous décrivez <strong>le résultat voulu</strong>, dbt s’occupe de le construire.</li>
+<li><strong>Des briques réutilisables.</strong> Plutôt qu’une requête géante de 300 lignes, on enchaîne de petits modèles qui s’appuient les uns sur les autres.</li>
+<li><strong>On teste.</strong> Une donnée fausse dans un tableau de bord est pire qu’une absence de donnée. Les tests détectent les problèmes avant qu’ils n’arrivent chez les métiers.</li>
+<li><strong>On documente.</strong> La documentation vit à côté du code, et dbt la transforme en site web consultable.</li>
+</ul>
+<p>Ce métier, à mi-chemin entre l’analyste et le développeur, a même reçu un nom : l’<strong>analytics engineering</strong>.</p>
+</section>
+<section id="quel-dbt" class="level2">
+<h2 class="anchored" data-anchor-id="quel-dbt">Quel dbt ?</h2>
+<p>« dbt » désigne à la fois un outil et une entreprise, <strong>dbt Labs</strong>, qui le développe. Elle en propose plusieurs versions :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Version</th>
+<th>Licence</th>
+<th>Prix</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>dbt OSS</strong></td>
+<td>Open source (Apache 2.0)</td>
+<td>Gratuit</td>
+<td>L’outil en ligne de commande, entièrement open source : <strong>c’est celui que nous utilisons</strong></td>
+</tr>
+<tr class="even">
+<td><strong>dbt</strong></td>
+<td>Propriétaire</td>
+<td>Gratuit</td>
+<td>Le même outil, avec des fonctions en plus : analyse du SQL avant exécution, autocomplétion, extension VS Code</td>
+</tr>
+<tr class="odd">
+<td><strong>dbt platform</strong></td>
+<td>Propriétaire</td>
+<td>Payant</td>
+<td>Une version hébergée : éditeur en ligne, planification des exécutions, interface web</td>
+</tr>
+<tr class="even">
+<td><strong>dbt Core</strong></td>
+<td>Open source (Apache 2.0)</td>
+<td>Gratuit</td>
+<td>L’ancienne version (v1), en Python, encore très présente en entreprise</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>dbt OSS ou dbt : quelle différence ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pensez à Chromium et Google Chrome : <strong>dbt OSS</strong> est le moteur, entièrement open source. <strong>dbt</strong> reprend ce même moteur et y ajoute des briques fermées qui aident à écrire le code. Les commandes et les projets sont identiques : tout ce que vous apprenez ici fonctionne avec l’une comme avec l’autre, et avec dbt Core.</p>
+<p>Ce modèle s’appelle l’<strong><em>open core</em></strong> : le cœur de l’outil est libre, pour fédérer une communauté, tandis que les fonctions les plus confortables restent fermées ou payantes, pour faire vivre l’entreprise.</p>
+<p>Attention enfin : <strong>gratuit ne veut pas dire libre</strong>. Un logiciel libre donne à chacun le droit de lire, modifier et redistribuer son code, et une version publiée sous licence libre le reste : si l’éditeur change de cap, la communauté peut reprendre ce code et le faire vivre ailleurs. Un logiciel propriétaire gratuit, lui, s’utilise selon les conditions de son éditeur, qui peut les changer à la version suivante.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Libre aujourd’hui, mais demain ?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Une licence libre protège le code déjà publié, pas l’avenir du projet. En 2023, HashiCorp a publié les nouvelles versions de Terraform sous une licence qui n’est plus open source : la communauté a repris la dernière version libre pour créer <strong>OpenTofu</strong>. Plus récemment, MinIO, un stockage objet très utilisé, a retiré des fonctions de son édition gratuite puis cessé de la maintenir. Avant d’adopter un outil, regardez donc aussi <strong>qui le maintient</strong> et <strong>comment il gagne sa vie</strong>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> tool install dbt-oss  <span class="co"># installe la commande dbt, en open source</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dbt</span> <span class="at">--version</span>            <span class="co"># doit commencer par 2.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>uv tool install</code> installe dbt comme un <strong>outil</strong> : la commande <code>dbt</code> est disponible partout dans le terminal, sans être ajoutée aux dépendances d’un projet Python. C’est logique, car on ne fait jamais <code>import dbt</code> : on le lance dans un terminal, et un projet dbt contient des fichiers <code>.sql</code> et <code>.yml</code>, pas du code Python.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Une seule version de dbt à la fois
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>dbt-oss</code>, <code>dbt</code> et <code>dbt-core</code> fournissent tous la même commande <code>dbt</code> : ne les installez pas dans le même environnement, ils se gêneraient mutuellement. Si vous rejoignez une équipe en dbt Core (v1), installez sa version avec son adaptateur : <code>uv add dbt-core dbt-duckdb</code>.</p>
+</div>
+</div>
+</section>
+<section id="la-structure-dun-projet" class="level2">
+<h2 class="anchored" data-anchor-id="la-structure-dun-projet">La structure d’un projet</h2>
+<p>La commande <code>dbt init</code> crée un nouveau projet :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run dbt init commandes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>commandes/
+├── dbt_project.yml     # la carte d'identité du projet
+├── models/             # vos transformations (.sql) et leur description (.yml)
+├── seeds/              # de petits référentiels CSV (pas vos données !)
+├── tests/              # vos tests personnalisés (.sql)
+├── macros/             # des fonctions réutilisables
+├── snapshots/          # l'historisation de tables qui changent
+├── analyses/           # des requêtes d'analyse
+└── README.md</code></pre>
+<p>Deux dossiers apparaîtront au premier lancement, à ne jamais versionner (ajoutez-les au <code>.gitignore</code>) :</p>
+<ul>
+<li><code>target/</code> : le SQL compilé par dbt et les résultats d’exécution ;</li>
+<li><code>dbt_packages/</code> : les paquets externes installés avec <code>dbt deps</code>.</li>
+</ul>
+<p>Au début, vous n’utiliserez que <code>models/</code> et <code>tests/</code>.</p>
+<section id="dbt_project.yml-la-configuration-du-projet" class="level3">
+<h3 class="anchored" data-anchor-id="dbt_project.yml-la-configuration-du-projet"><code>dbt_project.yml</code> : la configuration du projet</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">'commandes'</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">'1.0.0'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">profile</span><span class="kw">:</span><span class="at"> </span><span class="st">'commandes'</span><span class="co">          # le profil de connexion à utiliser</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">models</span><span class="kw">:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">commandes</span><span class="kw">:</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">staging</span><span class="kw">:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">+materialized</span><span class="kw">:</span><span class="at"> view</span><span class="co">     # les modèles de models/staging/ seront des vues</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">marts</span><span class="kw">:</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">+materialized</span><span class="kw">:</span><span class="at"> table</span><span class="co">    # ceux de models/marts/ seront des tables</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="profiles.yml-la-connexion-à-la-base" class="level3">
+<h3 class="anchored" data-anchor-id="profiles.yml-la-connexion-à-la-base"><code>profiles.yml</code> : la connexion à la base</h3>
+<p>Ce fichier dit à dbt <strong>où</strong> se connecter. Avec DuckDB, la base est un simple fichier :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">commandes</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">target</span><span class="kw">:</span><span class="at"> dev</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">outputs</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">dev</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> duckdb</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> commandes.duckdb</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pour BigQuery ou PostgreSQL, on y trouverait un projet, un serveur, un identifiant… Comme d’habitude, les mots de passe ne s’écrivent jamais en clair : dbt sait lire les variables d’environnement avec <code>{ env_var('DB_PASSWORD') }</code>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Où ranger <code>profiles.yml</code> ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Par défaut, dbt cherche ce fichier dans <code>~/.dbt/</code>, <strong>en dehors</strong> du projet, justement pour qu’il ne finisse pas sur GitHub avec des identifiants. Pour un projet DuckDB local sans secret, on peut le laisser dans le projet et lancer les commandes avec <code>--profiles-dir .</code>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="avant-dbt-charger-les-données-brutes" class="level2">
+<h2 class="anchored" data-anchor-id="avant-dbt-charger-les-données-brutes">Avant dbt : charger les données brutes</h2>
+<p>Rappelez-vous : dbt est le <strong>T</strong> de l’ELT. Il ne sait pas lire un fichier CSV en ligne ou posé sur votre disque, ni interroger une API. Avant de l’utiliser, il faut donc que les données brutes soient <strong>déjà dans la base</strong>. C’est le rôle de l’étape EL, confiée à un autre outil.</p>
+<p>Pour illustrer, prenons un mini-exemple de commandes fournisseurs, avec deux fichiers CSV disponibles en ligne. Le projet guidé reprendra tout cela en détail sur un vrai jeu de données.</p>
+<p><a href="https://minio.lab.sspcloud.fr/fabienhos/exemple_dbt/commandes.csv"><code>commandes.csv</code></a> :</p>
+<pre><code>id_commande,id_fournisseur,date_commande,date_livraison,quantite
+1,F01,2026-09-01,2026-09-04,120
+2,F02,2026-09-02,2026-09-10,80
+3,F01,2026-09-05,2026-09-07,200
+4,F03,2026-09-06,2026-09-15,50
+5,F02,2026-09-08,2026-09-12,150</code></pre>
+<p><a href="https://minio.lab.sspcloud.fr/fabienhos/exemple_dbt/fournisseurs.csv"><code>fournisseurs.csv</code></a> :</p>
+<pre><code>id_fournisseur,nom,delai_promis_jours
+F01,Acier SA,3
+F02,BoisPlus,5
+F03,Plastico,7</code></pre>
+<p>Ici, notre outil d’EL est un petit script Python qui utilise DuckDB (<code>uv add duckdb</code>). DuckDB sait lire un fichier directement depuis son adresse web, sans qu’on ait à le télécharger :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># charger_donnees.py</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>URL <span class="op">=</span> <span class="st">"https://minio.lab.sspcloud.fr/fabienhos/exemple_dbt"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>connexion <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"commandes.duckdb"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>connexion.sql(<span class="st">"CREATE SCHEMA IF NOT EXISTS raw"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>connexion.sql(<span class="ss">f"CREATE OR REPLACE TABLE raw.commandes AS SELECT * FROM read_csv('</span><span class="sc">{</span>URL<span class="sc">}</span><span class="ss">/commandes.csv')"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>connexion.sql(<span class="ss">f"CREATE OR REPLACE TABLE raw.fournisseurs AS SELECT * FROM read_csv('</span><span class="sc">{</span>URL<span class="sc">}</span><span class="ss">/fournisseurs.csv')"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(connexion.sql(<span class="st">"SELECT count(*) AS nb_commandes FROM raw.commandes"</span>))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>connexion.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>┌──────────────┐
+│ nb_commandes │
+│    int64     │
+├──────────────┤
+│            5 │
+└──────────────┘</code></pre>
+<p>Les données sont copiées <strong>telles quelles</strong> dans un schéma <code>raw</code> : aucun nettoyage, aucun calcul. Tout le reste sera le travail de dbt.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Une f-string dans du SQL ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dans la page sur les bases de données, nous avons vu qu’il ne faut <strong>jamais</strong> construire une requête avec une f-string. La règle concerne les valeurs qui viennent de l’<strong>extérieur</strong> (un utilisateur, un formulaire, un fichier), qui pourraient contenir du SQL malveillant. Ici, l’adresse est écrite dans notre propre code : il n’y a aucun risque.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Fermez la connexion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>DuckDB n’autorise qu’un seul programme à écrire dans un fichier de base à la fois. Si le script ne ferme pas sa connexion (ou si un notebook garde la base ouverte), dbt ne pourra pas y accéder.</p>
+</div>
+</div>
+<section id="déclarer-les-sources" class="level3">
+<h3 class="anchored" data-anchor-id="déclarer-les-sources">Déclarer les sources</h3>
+<p>dbt doit savoir que ces tables existent. On les déclare comme <strong>sources</strong> dans un fichier <code>.yml</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models/staging/_sources.yml</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sources</span><span class="kw">:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> raw</span><span class="co">            # le schéma où le script a chargé les tables</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tables</span><span class="kw">:</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> commandes</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> fournisseurs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="les-modèles-un-fichier-un-select" class="level2">
+<h2 class="anchored" data-anchor-id="les-modèles-un-fichier-un-select">Les modèles : un fichier, un <code>SELECT</code></h2>
+<p>Un <strong>modèle</strong> est un fichier <code>.sql</code> dans <code>models/</code>. Son nom de fichier devient le nom de la table ou de la vue créée.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- models/staging/stg_commandes.sql</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    id_commande,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    id_fournisseur,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cast</span>(date_commande <span class="kw">as</span> <span class="dt">date</span>) <span class="kw">as</span> date_commande,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cast</span>(date_livraison <span class="kw">as</span> <span class="dt">date</span>) <span class="kw">as</span> date_livraison,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    quantite</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> {{ <span class="kw">source</span>(<span class="st">'raw'</span>, <span class="st">'commandes'</span>) }}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="source-et-ref-le-cœur-de-dbt" class="level3">
+<h3 class="anchored" data-anchor-id="source-et-ref-le-cœur-de-dbt"><code>source()</code> et <code>ref()</code> : le cœur de dbt</h3>
+<p><code>{ source('raw', 'commandes') }</code> remplace le nom de la table. Cette syntaxe entre doubles accolades vient de <strong>Jinja</strong>, un langage de gabarits que dbt utilise pour rendre le SQL dynamique.</p>
+<p>Il existe deux fonctions de ce type :</p>
+<ul>
+<li><code>source()</code> désigne une table <strong>brute</strong>, chargée par un autre outil et déclarée dans les sources ;</li>
+<li><code>ref()</code> désigne un autre <strong>modèle dbt</strong>.</li>
+</ul>
+<p>Elles font deux choses :</p>
+<ol type="1">
+<li><p>Au moment de la compilation, dbt les remplace par le vrai nom de la table. Le fichier compilé dans <code>target/</code> contient :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> <span class="ot">"commandes"</span>.<span class="ot">"raw"</span>.<span class="ot">"commandes"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Surtout, dbt <strong>enregistre la dépendance</strong> : <code>stg_commandes</code> dépend de la source <code>raw.commandes</code>. Avec toutes les dépendances, il construit un graphe (le <em>DAG</em>) et sait dans quel ordre tout lancer.</p></li>
+</ol>
+<p>Un modèle peut s’appuyer sur d’autres modèles :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- models/marts/performance_fournisseurs.sql</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">with</span> commandes <span class="kw">as</span> (</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> {{ <span class="fu">ref</span>(<span class="st">'stg_commandes'</span>) }}</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>fournisseurs <span class="kw">as</span> (</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> {{ <span class="fu">ref</span>(<span class="st">'stg_fournisseurs'</span>) }}</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    f.nom_fournisseur,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">as</span> nb_commandes,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">avg</span>(c.date_livraison <span class="op">-</span> c.date_commande) <span class="kw">as</span> delai_moyen_jours,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(<span class="cf">case</span> <span class="cf">when</span> c.date_livraison <span class="op">-</span> c.date_commande <span class="op">&gt;</span> f.delai_promis_jours</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>             <span class="cf">then</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span> <span class="cf">end</span>) <span class="kw">as</span> nb_retards</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> commandes c</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="kw">join</span> fournisseurs f <span class="kw">using</span> (id_fournisseur)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="kw">group</span> <span class="kw">by</span> f.nom_fournisseur</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>raw.commandes ────&gt; stg_commandes ─────┐
+                                       ├──&gt; performance_fournisseurs
+raw.fournisseurs ─&gt; stg_fournisseurs ──┘</code></pre>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Jamais de nom de table en dur
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Écrire <code>from raw.commandes</code> ou <code>from main.stg_commandes</code> fonctionnerait aussi… jusqu’au jour où le projet passe d’une base de test à la base de production, avec d’autres noms de schémas. Et dbt ne verrait pas la dépendance : il pourrait lancer les modèles dans le mauvais ordre. <strong>Toujours</strong> <code>source()</code> ou <code>ref()</code>.</p>
+</div>
+</div>
+</section>
+<section id="les-couches-dun-projet" class="level3">
+<h3 class="anchored" data-anchor-id="les-couches-dun-projet">Les couches d’un projet</h3>
+<p>La documentation officielle recommande d’organiser les modèles en trois couches :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Couche</th>
+<th>Préfixe</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Staging</strong></td>
+<td><code>stg_</code></td>
+<td>Un modèle par table brute : renommer, typer, nettoyer. Pas de jointure.</td>
+</tr>
+<tr class="even">
+<td><strong>Intermediate</strong></td>
+<td><code>int_</code></td>
+<td>Étapes de préparation : jointures, calculs intermédiaires.</td>
+</tr>
+<tr class="odd">
+<td><strong>Marts</strong></td>
+<td><code>fct_</code>, <code>dim_</code> ou nom métier</td>
+<td>Les tables finales, prêtes pour les tableaux de bord et les analyses.</td>
+</tr>
+</tbody>
+</table>
+<p>Vous croiserez aussi les noms <strong>bronze</strong>, <strong>silver</strong> et <strong>gold</strong> (architecture <em>médaillon</em>) : c’est la même idée, du brut vers le prêt à l’emploi.</p>
+</section>
+<section id="les-matérialisations" class="level3">
+<h3 class="anchored" data-anchor-id="les-matérialisations">Les matérialisations</h3>
+<p>La <strong>matérialisation</strong> décide ce que dbt crée dans la base pour un modèle :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Matérialisation</th>
+<th>Ce que dbt crée</th>
+<th>Quand l’utiliser</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>view</code></td>
+<td>Une vue : la requête est relancée à chaque lecture</td>
+<td>Par défaut, modèles légers (staging)</td>
+</tr>
+<tr class="even">
+<td><code>table</code></td>
+<td>Une table : le résultat est calculé et stocké</td>
+<td>Modèles lus souvent ou coûteux (marts)</td>
+</tr>
+<tr class="odd">
+<td><code>ephemeral</code></td>
+<td>Rien : le modèle est injecté dans les modèles qui l’utilisent</td>
+<td>Petites étapes intermédiaires</td>
+</tr>
+<tr class="even">
+<td><code>incremental</code></td>
+<td>Une table complétée à chaque lancement, sans tout recalculer</td>
+<td>Gros volumes qui grossissent chaque jour</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="et-les-seeds" class="level2">
+<h2 class="anchored" data-anchor-id="et-les-seeds">Et les seeds ?</h2>
+<p>Vous avez vu passer un dossier <code>seeds/</code> dans la structure du projet. Les <strong>seeds</strong> sont de petits fichiers CSV rangés dans le projet, que <code>dbt seed</code> charge dans la base. On les appelle avec <code>ref()</code>.</p>
+<p>Ce n’est <strong>pas</strong> un moyen de charger vos données : ils servent uniquement aux petits <strong>référentiels</strong> que l’équipe maintient elle-même et veut versionner avec le code. Une table de correspondance de codes pays, une liste de jours fériés, les délais promis par fournisseur…</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Seed ou source ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>La donnée existe déjà dans la base, ou elle arrive d’une application, d’une API, d’un fichier d’export : c’est une <strong>source</strong>, chargée par un outil d’EL.</li>
+<li>C’est un petit référentiel qui n’existe nulle part ailleurs et change rarement : c’est un <strong>seed</strong>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="tester-ses-données" class="level2">
+<h2 class="anchored" data-anchor-id="tester-ses-données">Tester ses données</h2>
+<section id="les-tests-génériques" class="level3">
+<h3 class="anchored" data-anchor-id="les-tests-génériques">Les tests génériques</h3>
+<p>Les tests se déclarent dans un fichier <code>.yml</code>, à côté des modèles. dbt en fournit quatre :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># models/staging/_staging.yml</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">models</span><span class="kw">:</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> stg_commandes</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Une ligne par commande fournisseur."</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">columns</span><span class="kw">:</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> id_commande</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Identifiant unique de la commande."</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">data_tests</span><span class="kw">:</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> unique</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> not_null</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> id_fournisseur</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">data_tests</span><span class="kw">:</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> </span><span class="fu">relationships</span><span class="kw">:</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="at">              </span><span class="fu">arguments</span><span class="kw">:</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">to</span><span class="kw">:</span><span class="at"> ref('stg_fournisseurs')</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="fu">field</span><span class="kw">:</span><span class="at"> id_fournisseur</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Test</th>
+<th>Vérifie que…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>unique</code></td>
+<td>la colonne ne contient aucun doublon</td>
+</tr>
+<tr class="even">
+<td><code>not_null</code></td>
+<td>la colonne ne contient aucune valeur manquante</td>
+</tr>
+<tr class="odd">
+<td><code>accepted_values</code></td>
+<td>les valeurs appartiennent à une liste donnée</td>
+</tr>
+<tr class="even">
+<td><code>relationships</code></td>
+<td>chaque valeur existe dans une autre table (ici, chaque commande a un fournisseur connu)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="les-tests-personnalisés" class="level3">
+<h3 class="anchored" data-anchor-id="les-tests-personnalisés">Les tests personnalisés</h3>
+<p>Un test personnalisé est une requête rangée dans <code>tests/</code> qui cherche les lignes <strong>problématiques</strong>. Si elle renvoie au moins une ligne, le test échoue :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- tests/assert_livraison_apres_commande.sql</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Une livraison ne peut pas avoir lieu avant la commande.</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="op">*</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> {{ <span class="fu">ref</span>(<span class="st">'stg_commandes'</span>) }}</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> date_livraison <span class="op">&lt;</span> date_commande</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="à-vous-de-réfléchir" class="level3">
+<h3 class="anchored" data-anchor-id="à-vous-de-réfléchir">🧠 À vous de réfléchir</h3>
+<p>Imaginez que le fichier des commandes contienne une ligne de plus :</p>
+<pre><code>6,F09,2026-09-09,2026-09-08,10</code></pre>
+<p>Le fournisseur <code>F09</code> n’existe pas dans <code>data/fournisseurs.csv</code>. Quels tests vont échouer ? Et que va-t-il arriver au modèle <code>performance_fournisseurs</code> ?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Voir la solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Deux tests échouent :</p>
+<ul>
+<li><code>relationships</code> : <code>F09</code> n’existe pas dans <code>stg_fournisseurs</code> ;</li>
+<li><code>assert_livraison_apres_commande</code> : la livraison (le 8) précède la commande (le 9).</li>
+</ul>
+<pre><code>3 of 7 FAIL 1 assert_livraison_apres_commande .................................. [FAIL 1 in 0.03s]
+6 of 7 FAIL 1 relationships_stg_commandes_id_fournisseur__id_fournisseur__ref_stg_fournisseurs_  [FAIL 1 in 0.03s]
+7 of 7 SKIP relation main.performance_fournisseurs ............................. [SKIP]
+...
+Done. PASS=4 WARN=0 ERROR=2 SKIP=1 NO-OP=0 REUSED=0 TOTAL=7</code></pre>
+<p>Et <code>performance_fournisseurs</code> n’est <strong>pas construit</strong> (<code>SKIP</code>) : avec <code>dbt build</code>, un modèle n’est pas lancé si les tests des modèles dont il dépend échouent. Le tableau de bord garde la dernière version correcte au lieu d’afficher des chiffres faux. C’est exactement le but.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="les-commandes-de-base" class="level2">
+<h2 class="anchored" data-anchor-id="les-commandes-de-base">Les commandes de base</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Commande</th>
+<th>Ce qu’elle fait</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dbt init &lt;nom&gt;</code></td>
+<td>Crée un nouveau projet</td>
+</tr>
+<tr class="even">
+<td><code>dbt debug</code></td>
+<td>Vérifie l’installation et la connexion à la base</td>
+</tr>
+<tr class="odd">
+<td><code>dbt seed</code></td>
+<td>Charge les CSV de <code>seeds/</code> dans la base</td>
+</tr>
+<tr class="even">
+<td><code>dbt run</code></td>
+<td>Construit les modèles (tables et vues)</td>
+</tr>
+<tr class="odd">
+<td><code>dbt test</code></td>
+<td>Lance les tests</td>
+</tr>
+<tr class="even">
+<td><code>dbt build</code></td>
+<td>Fait tout, dans l’ordre du graphe : seeds, modèles, tests, snapshots</td>
+</tr>
+<tr class="odd">
+<td><code>dbt compile</code></td>
+<td>Génère le SQL dans <code>target/</code>, sans rien exécuter</td>
+</tr>
+<tr class="even">
+<td><code>dbt show -s &lt;modèle&gt;</code></td>
+<td>Affiche un aperçu du résultat d’un modèle</td>
+</tr>
+<tr class="odd">
+<td><code>dbt ls</code></td>
+<td>Liste les éléments du projet</td>
+</tr>
+<tr class="even">
+<td><code>dbt docs generate</code> puis <code>dbt docs serve</code></td>
+<td>Génère et ouvre la documentation du projet</td>
+</tr>
+<tr class="odd">
+<td><code>dbt deps</code></td>
+<td>Installe les paquets externes</td>
+</tr>
+<tr class="even">
+<td><code>dbt clean</code></td>
+<td>Supprime <code>target/</code> et <code>dbt_packages/</code></td>
+</tr>
+</tbody>
+</table>
+<p>Au quotidien, trois commandes suffisent, une fois les données brutes chargées : <code>dbt build</code> pour tout construire et tester, <code>dbt run -s &lt;modèle&gt;</code> pour relancer ce sur quoi vous travaillez, et <code>dbt show -s &lt;modèle&gt;</code> pour vérifier le résultat. Vous les pratiquerez en détail dans le projet guidé.</p>
+<section id="sélectionner-une-partie-du-projet" class="level3">
+<h3 class="anchored" data-anchor-id="sélectionner-une-partie-du-projet">Sélectionner une partie du projet</h3>
+<p>Sur un vrai projet, on ne relance pas tout à chaque modification. L’option <code>--select</code> (ou <code>-s</code>) choisit ce qu’on lance :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dbt</span> run <span class="at">-s</span> stg_commandes               <span class="co"># un seul modèle</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dbt</span> run <span class="at">-s</span> stg_commandes+              <span class="co"># ce modèle et tout ce qui en dépend</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dbt</span> run <span class="at">-s</span> +performance_fournisseurs   <span class="co"># ce modèle et tout ce dont il dépend</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dbt</span> build <span class="at">-s</span> staging                   <span class="co"># tout le dossier models/staging/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous trouverez dans d’anciens tutoriels l’option <code>--models</code> ou <code>-m</code>. Elle a été remplacée par <code>--select</code> et provoque désormais une erreur avec dbt v2.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="pour-aller-plus-loin" class="level2">
+<h2 class="anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Partie avancée, dépliez si vous êtes à l’aise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Une fois les bases acquises, voici ce que vous croiserez rapidement :</p>
+<ul>
+<li><strong>Les macros</strong> : des fonctions Jinja, rangées dans <code>macros/</code>, pour éviter de recopier le même morceau de SQL dans plusieurs modèles.</li>
+<li><strong>Les paquets</strong> : des macros et des tests prêts à l’emploi, déclarés dans <code>packages.yml</code> et installés avec <code>dbt deps</code>. Le plus connu est <code>dbt_utils</code>.</li>
+<li><strong>Les snapshots</strong> : garder l’historique d’une table qui change, par exemple l’adresse d’un client avant et après un déménagement.</li>
+<li><strong>Les modèles incrémentaux</strong> : ne traiter que les nouvelles lignes à chaque lancement, indispensable sur de gros volumes.</li>
+<li><strong>Les environnements</strong> : plusieurs <code>outputs</code> dans <code>profiles.yml</code> (<code>dev</code>, <code>prod</code>), et <code>dbt build --target prod</code> pour choisir.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="ressources" class="level2">
+<h2 class="anchored" data-anchor-id="ressources">Ressources</h2>
+<ul>
+<li><a href="https://docs.getdbt.com/">La documentation officielle de dbt</a>.</li>
+<li><a href="https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview">How we structure our dbt projects</a> : le guide officiel sur l’organisation en couches staging, intermediate et marts.</li>
+<li><a href="https://docs.getdbt.com/reference/dbt-commands">La liste des commandes dbt</a> : chaque commande et ses options.</li>
+<li><a href="https://docs.getdbt.com/docs/local/connect-data-platform/duckdb-setup">Configurer DuckDB avec dbt</a> : le détail de <code>profiles.yml</code> pour DuckDB.</li>
+<li><a href="https://www.getdbt.com/dbt-learn">dbt Learn</a> : les cours en ligne gratuits de dbt Labs, dont <em>dbt Fundamentals</em>.</li>
+<li><a href="https://docs.getdbt.com/docs/dbt-versions/core-upgrade/upgrading-to-v2">Passer de dbt v1 à v2</a>.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>À retenir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>dbt (<em>data build tool</em>) <strong>transforme</strong> des données déjà présentes dans une base. C’est le <strong>T</strong> de l’ELT : il n’extrait ni ne charge rien, un autre outil (ici, un script Python) s’en charge avant lui.</li>
+<li>Un <strong>modèle</strong> est un fichier <code>.sql</code> qui contient un seul <code>SELECT</code> ; dbt en fait une vue ou une table.</li>
+<li><code>source()</code> désigne les tables brutes, <code>ref()</code> relie les modèles entre eux : dbt en déduit l’ordre d’exécution. Jamais de nom de table en dur.</li>
+<li>On organise les modèles en couches : <strong>staging</strong> (nettoyer), <strong>intermediate</strong> (préparer), <strong>marts</strong> (servir).</li>
+<li>Les <strong>tests</strong> (<code>unique</code>, <code>not_null</code>, <code>relationships</code>, <code>accepted_values</code> ou personnalisés) bloquent les données fausses avant qu’elles n’atteignent les tableaux de bord.</li>
+<li><code>dbt_project.yml</code> configure le projet, <code>profiles.yml</code> la connexion, qui ne contient jamais de mot de passe en clair.</li>
+<li><code>dbt build</code> lance tout dans l’ordre : seeds, modèles et tests.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Holistics, <a href="https://holistics.io/books/setup-analytics/etl-vs-elt-what-s-the-big-deal"><em>ETL vs.&nbsp;ELT: What’s the big deal?</em></a>, extrait de <em>The Analytics Setup Guidebook</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Wikipédia, <a href="https://en.wikipedia.org/wiki/Apache_Hadoop"><em>Apache Hadoop</em></a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Wikipédia, <a href="https://en.wikipedia.org/wiki/Amazon_S3"><em>Amazon S3</em></a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Wikipédia, <a href="https://en.wikipedia.org/wiki/Data_lake"><em>Data lake</em></a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Wikipédia, <a href="https://en.wikipedia.org/wiki/BigQuery"><em>BigQuery</em></a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Dice Insights, <a href="https://insights.dice.com/2013/02/15/amazons-redshift-reaches-general-availability/"><em>Amazon’s Redshift Reaches General Availability</em></a>, 15 février 2013.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Bigeye, <a href="https://www.bigeye.com/blog/a-brief-history-of-snowflake"><em>A brief history of Snowflake</em></a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Contrary Research, <a href="https://research.contrary.com/report/dbt-labs"><em>dbt Labs</em></a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python_data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../05-projet-reproductible/uv.html" class="pagination-link" aria-label="uv pour les gouverner tous">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">uv pour les gouverner tous</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../07-Cloud/index.html" class="pagination-link" aria-label="Cloud">
+        <span class="nav-page-text">Cloud</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python_data/edit/main/06-dbt/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

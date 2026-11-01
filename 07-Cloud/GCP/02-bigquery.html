@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.20">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BigQuery – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../logs/index.html" rel="next">
+<link href="../../07-Cloud/GCP/01-cloud-storage.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0ae969d3293726db143f6e9eb89af930.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dfedb8b2004618b7676fd543330f2efa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-f96c46e044783225c03338700e5668f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-dfedb8b2004618b7676fd543330f2efa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python_data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../07-Cloud/index.html">Cloud</a></li><li class="breadcrumb-item"><a href="../../07-Cloud/GCP/index.html">GCP</a></li><li class="breadcrumb-item"><a href="../../07-Cloud/GCP/02-bigquery.html">BigQuery</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Langages de programmation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnement</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnements en ligne</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Initiation Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditions &amp; boucles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structures de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les fonctions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/06-erreurs-exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Erreurs et exceptions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/07-scripts-jeux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts et jeux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/08-python-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Base de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../04-pandas/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pandas pour l'analyse de données</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../04-pandas/01-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../05-projet-reproductible/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Créer des projets reproductibles</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../05-projet-reproductible/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">uv pour les gouverner tous</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../06-dbt/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">dbt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../07-Cloud/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cloud</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../07-Cloud/GCP/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GCP</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../07-Cloud/GCP/01-cloud-storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Google Cloud Storage (GCS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../07-Cloud/GCP/02-bigquery.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">BigQuery</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../logs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TabICL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#un-entrepôt-de-données-sans-serveur" id="toc-un-entrepôt-de-données-sans-serveur" class="nav-link active" data-scroll-target="#un-entrepôt-de-données-sans-serveur">Un entrepôt de données sans serveur</a></li>
+  <li><a href="#comment-ça-marche" id="toc-comment-ça-marche" class="nav-link" data-scroll-target="#comment-ça-marche">Comment ça marche</a></li>
+  <li><a href="#combien-ça-coûte" id="toc-combien-ça-coûte" class="nav-link" data-scroll-target="#combien-ça-coûte">Combien ça coûte ?</a></li>
+  <li><a href="#projets-datasets-et-tables" id="toc-projets-datasets-et-tables" class="nav-link" data-scroll-target="#projets-datasets-et-tables">Projets, datasets et tables</a></li>
+  <li><a href="#faire-entrer-les-données" id="toc-faire-entrer-les-données" class="nav-link" data-scroll-target="#faire-entrer-les-données">Faire entrer les données</a>
+  <ul class="collapse">
+  <li><a href="#le-chargement-en-lot-depuis-cloud-storage" id="toc-le-chargement-en-lot-depuis-cloud-storage" class="nav-link" data-scroll-target="#le-chargement-en-lot-depuis-cloud-storage">Le chargement en lot depuis Cloud Storage</a></li>
+  <li><a href="#les-tables-externes-lire-les-fichiers-sur-place" id="toc-les-tables-externes-lire-les-fichiers-sur-place" class="nav-link" data-scroll-target="#les-tables-externes-lire-les-fichiers-sur-place">Les tables externes : lire les fichiers sur place</a></li>
+  <li><a href="#le-flux-continu-streaming" id="toc-le-flux-continu-streaming" class="nav-link" data-scroll-target="#le-flux-continu-streaming">Le flux continu (<em>streaming</em>)</a></li>
+  </ul></li>
+  <li><a href="#partitionnement-et-clustering-lire-moins-pour-payer-moins" id="toc-partitionnement-et-clustering-lire-moins-pour-payer-moins" class="nav-link" data-scroll-target="#partitionnement-et-clustering-lire-moins-pour-payer-moins">Partitionnement et clustering : lire moins pour payer moins</a>
+  <ul class="collapse">
+  <li><a href="#le-partitionnement-découper-la-table" id="toc-le-partitionnement-découper-la-table" class="nav-link" data-scroll-target="#le-partitionnement-découper-la-table">Le partitionnement : découper la table</a></li>
+  <li><a href="#le-clustering-trier-chaque-partition" id="toc-le-clustering-trier-chaque-partition" class="nav-link" data-scroll-target="#le-clustering-trier-chaque-partition">Le clustering : trier chaque partition</a></li>
+  <li><a href="#en-pratique" id="toc-en-pratique" class="nav-link" data-scroll-target="#en-pratique">En pratique</a></li>
+  </ul></li>
+  <li><a href="#les-bons-réflexes-pour-maîtriser-les-coûts" id="toc-les-bons-réflexes-pour-maîtriser-les-coûts" class="nav-link" data-scroll-target="#les-bons-réflexes-pour-maîtriser-les-coûts">Les bons réflexes pour maîtriser les coûts</a>
+  <ul class="collapse">
+  <li><a href="#ne-jamais-faire-select" id="toc-ne-jamais-faire-select" class="nav-link" data-scroll-target="#ne-jamais-faire-select">Ne jamais faire <code>SELECT *</code></a></li>
+  <li><a href="#estimer-le-coût-avant-de-lancer-la-requête" id="toc-estimer-le-coût-avant-de-lancer-la-requête" class="nav-link" data-scroll-target="#estimer-le-coût-avant-de-lancer-la-requête">Estimer le coût avant de lancer la requête</a></li>
+  <li><a href="#poser-des-limites" id="toc-poser-des-limites" class="nav-link" data-scroll-target="#poser-des-limites">Poser des limites</a></li>
+  <li><a href="#à-vous-de-réfléchir" id="toc-à-vous-de-réfléchir" class="nav-link" data-scroll-target="#à-vous-de-réfléchir">🧠 À vous de réfléchir</a></li>
+  </ul></li>
+  <li><a href="#bien-plus-quun-entrepôt" id="toc-bien-plus-quun-entrepôt" class="nav-link" data-scroll-target="#bien-plus-quun-entrepôt">Bien plus qu’un entrepôt</a></li>
+  <li><a href="#ressources" id="toc-ressources" class="nav-link" data-scroll-target="#ressources">Ressources</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python_data/edit/main/07-Cloud/GCP/02-bigquery.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02-bigquery-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="02-bigquery-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../07-Cloud/index.html">Cloud</a></li><li class="breadcrumb-item"><a href="../../07-Cloud/GCP/index.html">GCP</a></li><li class="breadcrumb-item"><a href="../../07-Cloud/GCP/02-bigquery.html">BigQuery</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">BigQuery</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Les fichiers sont dans Cloud Storage. Il faut maintenant pouvoir les <strong>interroger</strong> : filtrer, joindre, agréger des millions de lignes en quelques secondes. Sur Google Cloud, c’est le rôle de <strong>BigQuery</strong>, l’entrepôt de données (<em>data warehouse</em>) de Google. Et bonne nouvelle : tout ce que vous avez appris en SQL s’y applique directement.</p>
+<section id="un-entrepôt-de-données-sans-serveur" class="level2">
+<h2 class="anchored" data-anchor-id="un-entrepôt-de-données-sans-serveur">Un entrepôt de données sans serveur</h2>
+<p>BigQuery est <strong>serverless</strong> (sans serveur) : vous n’installez rien, vous ne choisissez pas de machine, vous ne gérez ni disque ni mise à jour. Vous écrivez du SQL, Google s’occupe du reste.</p>
+<p>C’est une grande différence avec la page sur les bases de données : avec PostgreSQL, quelqu’un doit installer et dimensionner un serveur. Avec BigQuery, la puissance s’adapte toute seule à chaque requête, qu’elle lise mille lignes ou mille milliards.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Entrepôt, pas base transactionnelle
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>BigQuery est fait pour <strong>analyser</strong> : lire et agréger de gros volumes. Il n’est pas fait pour faire tourner une application qui modifie une ligne à la fois des milliers de fois par seconde. Pour ça, on garde une base transactionnelle classique, comme on l’a vu dans la page sur les bases de données.</p>
+</div>
+</div>
+</section>
+<section id="comment-ça-marche" class="level2">
+<h2 class="anchored" data-anchor-id="comment-ça-marche">Comment ça marche</h2>
+<p>Le secret de BigQuery tient en deux idées.</p>
+<p><strong>1. Le stockage et le calcul sont séparés.</strong> Les données sont stockées d’un côté, et la puissance de calcul est empruntée de l’autre, uniquement le temps de la requête. On paie donc le stockage et le calcul séparément, et on n’a jamais une machine qui tourne pour rien.</p>
+<p><strong>2. Le stockage est en colonnes.</strong> Une base classique range les données <strong>ligne par ligne</strong>. BigQuery les range <strong>colonne par colonne</strong>, dans un format appelé <strong>Capacitor</strong>. Quand une requête n’utilise que trois colonnes sur cinquante, BigQuery ne lit que ces trois colonnes.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/bq-architecture.svg" class="img-fluid figure-img" style="width:100.0%" alt="Schéma de l'architecture de BigQuery : le calcul, réparti sur des slots, lit uniquement les colonnes utiles dans le stockage en colonnes"></p>
+<figcaption>Le stockage et le calcul sont séparés, et seules les colonnes utiles sont lues.</figcaption>
+</figure>
+</div>
+<p>Côté calcul, le moteur s’appelle <strong>Dremel</strong> : il découpe chaque requête en petites tâches, réparties sur des centaines d’unités de calcul appelées <strong>slots</strong>, qui travaillent en parallèle puis rassemblent leurs résultats. C’est ce qui permet de parcourir des téraoctets en quelques secondes.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Pour aller plus loin : les briques internes de Google
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>BigQuery s’appuie sur plusieurs technologies internes de Google : <strong>Colossus</strong> pour le stockage distribué, <strong>Dremel</strong> pour l’exécution des requêtes, <strong>Jupiter</strong>, un réseau interne très rapide qui rend possible la séparation du stockage et du calcul, et <strong>Borg</strong> pour répartir les machines. Google les décrit dans l’article <a href="https://cloud.google.com/blog/products/bigquery/bigquery-under-the-hood"><em>BigQuery under the hood</em></a>, et le format de stockage dans <a href="https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format"><em>Inside Capacitor</em></a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="combien-ça-coûte" class="level2">
+<h2 class="anchored" data-anchor-id="combien-ça-coûte">Combien ça coûte ?</h2>
+<p>C’est <strong>la</strong> question à se poser avec BigQuery, parce que la facturation est très différente d’une base classique :</p>
+<ul>
+<li><strong>le stockage</strong> est facturé selon le volume de données conservées ;</li>
+<li><strong>les requêtes</strong> sont facturées, par défaut, selon le <strong>volume de données lues</strong> (on dit « scannées »), quel que soit le nombre de lignes renvoyées. C’est le modèle <strong>à la demande</strong> (<em>on-demand</em>).</li>
+</ul>
+<p>Conséquence directe : <strong>une requête qui lit 1 To coûte mille fois plus qu’une requête qui lit 1 Go</strong>, même si les deux renvoient une seule ligne. Tout l’art d’utiliser BigQuery consiste donc à <strong>lire le moins de données possible</strong>. C’est ce que permettent le stockage en colonnes, le partitionnement et le clustering.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>L’autre modèle : la capacité réservée
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Les entreprises qui lancent beaucoup de requêtes peuvent plutôt <strong>réserver</strong> un nombre de slots, payés à l’heure, quel que soit le volume lu. C’est plus prévisible pour un gros budget. Dans ce cours, nous restons sur le modèle à la demande.</p>
+</div>
+</div>
+</section>
+<section id="projets-datasets-et-tables" class="level2">
+<h2 class="anchored" data-anchor-id="projets-datasets-et-tables">Projets, datasets et tables</h2>
+<p>BigQuery s’organise en trois niveaux :</p>
+<ul>
+<li>le <strong>projet GCP</strong>, comme pour Cloud Storage ;</li>
+<li>les <strong>datasets</strong>, qui regroupent des tables, un peu comme un <strong>schéma</strong> dans PostgreSQL. Chaque dataset a ses propres droits, et sa <strong>région est choisie à la création et ne peut plus être changée</strong> ;</li>
+<li>les <strong>tables</strong>, qu’on désigne par leur adresse complète : <code>projet.dataset.table</code>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/bq-organisation.svg" class="img-fluid figure-img" style="width:100.0%" alt="Schéma : un projet contient des datasets et des tables ; les données arrivent depuis Cloud Storage en lot ou par table externe, et depuis Pub/Sub en continu"></p>
+<figcaption>Un projet contient des datasets, qui contiennent des tables. Les données y arrivent de plusieurs façons.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Choisissez la région du dataset avec soin
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une requête ne peut pas joindre des tables situées dans des régions différentes, et BigQuery ne peut charger directement que des fichiers situés au même endroit que le dataset. Placez donc vos datasets <strong>dans la même région que vos buckets</strong> : <code>europe-west9</code> (Paris) avec un bucket à Paris, par exemple.</p>
+</div>
+</div>
+</section>
+<section id="faire-entrer-les-données" class="level2">
+<h2 class="anchored" data-anchor-id="faire-entrer-les-données">Faire entrer les données</h2>
+<section id="le-chargement-en-lot-depuis-cloud-storage" class="level3">
+<h3 class="anchored" data-anchor-id="le-chargement-en-lot-depuis-cloud-storage">Le chargement en lot depuis Cloud Storage</h3>
+<p>C’est la méthode la plus courante : on dépose des fichiers dans un bucket, puis on les charge dans une table. BigQuery lit la plupart des formats : CSV, JSON, <strong>Parquet</strong>, Avro, ORC…</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>LOAD <span class="kw">DATA</span> <span class="kw">INTO</span> ventes.commandes</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> FILES (</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  format <span class="op">=</span> <span class="st">'PARQUET'</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  uris <span class="op">=</span> [<span class="st">'gs://ventes-brut-286bdf/2026/11/*.parquet'</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>L’étoile <code>*</code> charge tous les fichiers dont le nom correspond. Le même chargement est possible en ligne de commande avec <code>bq load</code>, ou depuis Python.</p>
+</section>
+<section id="les-tables-externes-lire-les-fichiers-sur-place" class="level3">
+<h3 class="anchored" data-anchor-id="les-tables-externes-lire-les-fichiers-sur-place">Les tables externes : lire les fichiers sur place</h3>
+<p>On peut aussi <strong>ne pas charger</strong> les données : une <strong>table externe</strong> pointe vers des fichiers qui restent dans Cloud Storage, et BigQuery les lit au moment de la requête.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> EXTERNAL <span class="kw">TABLE</span> ventes.fichiers_bruts</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>OPTIONS (</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  format <span class="op">=</span> <span class="st">'PARQUET'</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  uris <span class="op">=</span> [<span class="st">'gs://ventes-brut-286bdf/2026/*.parquet'</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>C’est pratique pour explorer des fichiers sans les dupliquer, ou pour interroger des données gérées par d’autres outils. BigQuery sait aussi lire des tables au format <strong>Apache Iceberg</strong>, un format ouvert de tables sur stockage objet, au cœur de l’approche <em>lakehouse</em>. En contrepartie, les requêtes sont plus lentes qu’avec une table « native ».</p>
+</section>
+<section id="le-flux-continu-streaming" class="level3">
+<h3 class="anchored" data-anchor-id="le-flux-continu-streaming">Le flux continu (<em>streaming</em>)</h3>
+<p>Quand les données arrivent en permanence (des capteurs, des clics, des passages en caisse), on les envoie au fil de l’eau. Le chemin le plus simple passe par <strong>Pub/Sub</strong>, le service de messagerie de Google Cloud : une source y publie des messages, et un <strong>abonnement BigQuery</strong> les écrit directement dans une table, sans programme intermédiaire.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lot ou flux continu ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La plupart des analyses n’ont pas besoin de données à la seconde près : un chargement par heure ou par nuit suffit, et c’est plus simple. Ne passez au flux continu que si un vrai besoin métier l’exige, comme une alerte en temps réel.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="partitionnement-et-clustering-lire-moins-pour-payer-moins" class="level2">
+<h2 class="anchored" data-anchor-id="partitionnement-et-clustering-lire-moins-pour-payer-moins">Partitionnement et clustering : lire moins pour payer moins</h2>
+<p>Puisqu’on paie les données lues, il faut organiser les tables pour que BigQuery puisse <strong>ignorer</strong> tout ce qui ne sert pas à la requête. Deux outils s’y emploient, et ils se combinent.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/bq-partition-cluster.svg" class="img-fluid figure-img" style="width:100.0%" alt="Schéma : une table non organisée oblige à lire toutes les lignes ; une fois partitionnée par date et clusterisée par magasin, la requête ne lit qu'une partition puis un seul bloc"></p>
+<figcaption>La même requête sur une table non organisée, puis sur une table partitionnée et clusterisée.</figcaption>
+</figure>
+</div>
+<section id="le-partitionnement-découper-la-table" class="level3">
+<h3 class="anchored" data-anchor-id="le-partitionnement-découper-la-table">Le partitionnement : découper la table</h3>
+<p><strong>Partitionner</strong>, c’est découper physiquement la table en morceaux, le plus souvent <strong>par date</strong> : une partition par jour, par mois ou par année. Quand une requête filtre sur la colonne de partitionnement, BigQuery ne lit <strong>que les partitions concernées</strong> et ignore les autres.</p>
+<p>On peut partitionner selon :</p>
+<ul>
+<li>une colonne de <strong>date ou d’horodatage</strong> (le cas le plus courant) ;</li>
+<li>la <strong>date d’arrivée</strong> des données dans BigQuery ;</li>
+<li>des <strong>tranches d’entiers</strong> (par exemple, un identifiant de magasin de 1 à 100, par tranches de 10).</li>
+</ul>
+</section>
+<section id="le-clustering-trier-chaque-partition" class="level3">
+<h3 class="anchored" data-anchor-id="le-clustering-trier-chaque-partition">Le clustering : trier chaque partition</h3>
+<p><strong>Clusteriser</strong>, c’est <strong>trier</strong> les données de chaque partition selon une à quatre colonnes, par exemple le magasin puis la catégorie de produit. Les lignes d’un même magasin se retrouvent alors regroupées dans les mêmes <strong>blocs</strong> de stockage. BigQuery sait quelles valeurs contient chaque bloc : quand une requête filtre sur <code>magasin = 'Lyon'</code>, il saute tous les blocs qui ne peuvent pas contenir Lyon.</p>
+<p>BigQuery entretient ce tri tout seul : au fur et à mesure que de nouvelles données arrivent, il les retrie en arrière-plan, sans frais supplémentaires.</p>
+</section>
+<section id="en-pratique" class="level3">
+<h3 class="anchored" data-anchor-id="en-pratique">En pratique</h3>
+<p>Les deux se déclarent à la création de la table :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> ventes.commandes (</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  id_commande STRING,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  date_commande <span class="dt">DATE</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  magasin STRING,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  categorie STRING,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  montant <span class="dt">NUMERIC</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">PARTITION</span> <span class="kw">BY</span> date_commande</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">CLUSTER</span> <span class="kw">BY</span> magasin, categorie</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>OPTIONS (require_partition_filter <span class="op">=</span> <span class="kw">TRUE</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>L’option <code>require_partition_filter</code> <strong>refuse</strong> toute requête qui ne filtre pas sur la date : impossible de lire toute la table par mégarde.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Partitionnement</th>
+<th>Clustering</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ce qu’il fait</td>
+<td>découpe la table en morceaux</td>
+<td>trie les données dans chaque morceau</td>
+</tr>
+<tr class="even">
+<td>Sur quelles colonnes</td>
+<td>une seule (date, horodatage ou entier)</td>
+<td>jusqu’à quatre</td>
+</tr>
+<tr class="odd">
+<td>Idéal pour</td>
+<td>les filtres sur une période</td>
+<td>les filtres sur des colonnes souvent utilisées (magasin, client, catégorie)</td>
+</tr>
+<tr class="even">
+<td>Estimation du coût avant la requête</td>
+<td>précise</td>
+<td>approximative</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Filtrer directement sur la colonne de partitionnement
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le partitionnement ne sert que si BigQuery comprend votre filtre <strong>avant</strong> de lancer la requête. Filtrez directement sur la colonne, avec des valeurs fixes :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> date_commande <span class="kw">BETWEEN</span> <span class="st">'2026-11-01'</span> <span class="kw">AND</span> <span class="st">'2026-11-30'</span>   <span class="co">-- ✅ seules les partitions de novembre sont lues</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Un filtre calculé à partir d’une sous-requête, ou combiné avec <code>OR</code> à une autre colonne, oblige BigQuery à tout lire.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="les-bons-réflexes-pour-maîtriser-les-coûts" class="level2">
+<h2 class="anchored" data-anchor-id="les-bons-réflexes-pour-maîtriser-les-coûts">Les bons réflexes pour maîtriser les coûts</h2>
+<section id="ne-jamais-faire-select" class="level3">
+<h3 class="anchored" data-anchor-id="ne-jamais-faire-select">Ne jamais faire <code>SELECT *</code></h3>
+<p>Comme le stockage est en colonnes, chaque colonne demandée est lue et facturée. Un <code>SELECT *</code> lit <strong>toutes</strong> les colonnes, y compris celles dont vous n’avez pas besoin. Listez uniquement les colonnes utiles.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span><code>LIMIT</code> ne fait pas baisser la facture
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>SELECT * FROM commandes LIMIT 10</code> lit quand même toute la table (sauf sur une table clusterisée, où l’économie reste partielle) : <code>LIMIT</code> réduit le nombre de lignes <strong>affichées</strong>, pas les données <strong>lues</strong>. Pour jeter un œil aux données, utilisez plutôt l’onglet <strong>Aperçu</strong> de la console ou la commande <code>bq head</code> : c’est gratuit.</p>
+</div>
+</div>
+</section>
+<section id="estimer-le-coût-avant-de-lancer-la-requête" class="level3">
+<h3 class="anchored" data-anchor-id="estimer-le-coût-avant-de-lancer-la-requête">Estimer le coût avant de lancer la requête</h3>
+<p>Dans la console, BigQuery affiche en haut à droite de l’éditeur le volume que la requête <strong>va lire</strong>, avant même de l’exécuter. En ligne de commande, c’est l’option <code>--dry_run</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bq</span> query <span class="at">--use_legacy_sql</span><span class="op">=</span>false <span class="at">--dry_run</span> <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'SELECT magasin, SUM(montant) FROM ventes.commandes</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">   WHERE date_commande = "2026-11-02" GROUP BY magasin'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La requête n’est pas exécutée, donc pas facturée : BigQuery indique seulement combien d’octets elle traiterait.</p>
+</section>
+<section id="poser-des-limites" class="level3">
+<h3 class="anchored" data-anchor-id="poser-des-limites">Poser des limites</h3>
+<ul>
+<li><p><strong>Par requête</strong> : l’option <strong>octets facturés maximum</strong> (<em>maximum bytes billed</em>) fait échouer, sans frais, toute requête qui dépasserait le volume fixé.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bq</span> query <span class="at">--use_legacy_sql</span><span class="op">=</span>false <span class="at">--maximum_bytes_billed</span><span class="op">=</span>1000000000 <span class="st">'...'</span>   <span class="co"># 1 Go maximum</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Par jour</strong> : des <strong>quotas personnalisés</strong> limitent le volume total qu’un projet ou un utilisateur peut lire chaque jour. Une fois le quota atteint, les requêtes sont refusées jusqu’au lendemain.</p></li>
+<li><p><strong>Pour le projet</strong> : un <strong>budget avec alertes</strong> dans la facturation Google Cloud, pour être prévenu avant la mauvaise surprise.</p></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Dès le premier jour sur un projet
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mettez en place un quota quotidien et une alerte de budget <strong>avant</strong> de donner accès à BigQuery à une équipe. Une seule requête mal écrite sur une très grosse table peut coûter cher, et il est beaucoup plus simple de prévenir que d’expliquer la facture.</p>
+</div>
+</div>
+</section>
+<section id="à-vous-de-réfléchir" class="level3">
+<h3 class="anchored" data-anchor-id="à-vous-de-réfléchir">🧠 À vous de réfléchir</h3>
+<p>La table <code>ventes.commandes</code> contient trois ans de données. Elle est partitionnée par <code>date_commande</code> et clusterisée par <code>magasin</code>. Classez ces requêtes de la plus coûteuse à la moins coûteuse.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- A</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> ventes.commandes <span class="kw">WHERE</span> date_commande <span class="op">=</span> <span class="st">'2026-11-02'</span>;</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- B</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> magasin, montant <span class="kw">FROM</span> ventes.commandes</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> date_commande <span class="op">=</span> <span class="st">'2026-11-02'</span> <span class="kw">AND</span> magasin <span class="op">=</span> <span class="st">'Lyon'</span>;</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- C</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> magasin, montant <span class="kw">FROM</span> ventes.commandes <span class="kw">LIMIT</span> <span class="dv">100</span>;</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- D</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> magasin, montant <span class="kw">FROM</span> ventes.commandes <span class="kw">WHERE</span> date_commande <span class="op">=</span> <span class="st">'2026-11-02'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Voir la solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>C &gt; A &gt; D &gt; B</strong></p>
+<ul>
+<li><strong>C</strong> est la plus coûteuse : aucun filtre sur la date, donc <strong>toutes</strong> les partitions des trois ans sont lues. Le <code>LIMIT</code> ne change presque rien. Avec <code>require_partition_filter</code>, elle serait d’ailleurs refusée.</li>
+<li><strong>A</strong> ne lit qu’une partition (un jour), mais <strong>toutes les colonnes</strong> de ce jour.</li>
+<li><strong>D</strong> lit la même partition, mais seulement deux colonnes.</li>
+<li><strong>B</strong> lit la même partition et les deux mêmes colonnes, et grâce au clustering, seulement les blocs de Lyon.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="bien-plus-quun-entrepôt" class="level2">
+<h2 class="anchored" data-anchor-id="bien-plus-quun-entrepôt">Bien plus qu’un entrepôt</h2>
+<p>BigQuery ne sert pas qu’à lancer des requêtes SQL. Quelques possibilités à connaître :</p>
+<ul>
+<li><p><strong>BigQuery ML</strong> : entraîner et utiliser des modèles de machine learning (régression, classification, séries temporelles, segmentation…) <strong>directement en SQL</strong>, sans sortir les données de l’entrepôt.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> MODEL ventes.prevision_ca</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>OPTIONS (model_type <span class="op">=</span> <span class="st">'ARIMA_PLUS'</span>, time_series_timestamp_col <span class="op">=</span> <span class="st">'jour'</span>, time_series_data_col <span class="op">=</span> <span class="st">'ca'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span> <span class="kw">SELECT</span> jour, ca <span class="kw">FROM</span> ventes.ca_journalier;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Des fonctions d’IA générative</strong> : appeler des modèles Gemini depuis une requête SQL, par exemple pour classer des commentaires clients.</p></li>
+<li><p><strong>Des données géographiques</strong> (<code>GEOGRAPHY</code>), la <strong>recherche vectorielle</strong>, des données semi-structurées (<code>JSON</code>) et imbriquées.</p></li>
+<li><p><strong>Des données publiques</strong> : des centaines de jeux de données ouverts, interrogeables directement (dataset <code>bigquery-public-data</code>).</p></li>
+<li><p><strong>Les outils de visualisation</strong>, comme Looker Studio, qui se branchent directement sur BigQuery.</p></li>
+<li><p><strong>Python</strong> : la bibliothèque <code>google-cloud-bigquery</code> renvoie le résultat d’une requête dans un DataFrame pandas, et <strong>dbt</strong> sait transformer les données directement dans BigQuery.</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Revenir dans le passé
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>BigQuery conserve l’historique des tables pendant quelques jours (le <em>time travel</em>, 7 jours par défaut) : une table supprimée ou modifiée par erreur peut être restaurée, ou interrogée telle qu’elle était à un instant donné avec <code>FOR SYSTEM_TIME AS OF</code>.</p>
+</div>
+</div>
+</section>
+<section id="ressources" class="level2">
+<h2 class="anchored" data-anchor-id="ressources">Ressources</h2>
+<ul>
+<li><a href="https://docs.cloud.google.com/bigquery/docs">Documentation de BigQuery</a> : la référence officielle.</li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/partitioned-tables">Les tables partitionnées</a> et <a href="https://docs.cloud.google.com/bigquery/docs/clustered-tables">les tables clusterisées</a> : le détail du fonctionnement.</li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/best-practices-costs">Estimer et maîtriser les coûts</a> : toutes les bonnes pratiques officielles.</li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables">Interroger une table partitionnée</a> : les filtres qui permettent d’ignorer des partitions.</li>
+<li><a href="https://cloud.google.com/blog/products/bigquery/bigquery-under-the-hood"><em>BigQuery under the hood</em></a> : l’architecture interne, expliquée par Google.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>À retenir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>BigQuery est un <strong>entrepôt de données sans serveur</strong> : on écrit du SQL, Google gère toute l’infrastructure.</li>
+<li><strong>Stockage et calcul sont séparés</strong>, et le stockage est <strong>en colonnes</strong> : seules les colonnes utilisées sont lues.</li>
+<li>Par défaut, on paie le <strong>volume de données lues</strong> par chaque requête, pas le nombre de lignes renvoyées.</li>
+<li>Un projet contient des <strong>datasets</strong> (région fixée à la création) qui contiennent des <strong>tables</strong> : <code>projet.dataset.table</code>.</li>
+<li>Les données arrivent surtout <strong>en lot depuis Cloud Storage</strong> ; les <strong>tables externes</strong> lisent les fichiers sur place ; <strong>Pub/Sub</strong> permet le flux continu.</li>
+<li><strong>Partitionner</strong> (par date) permet d’ignorer des morceaux entiers de la table ; <strong>clusteriser</strong> trie chaque partition pour sauter des blocs. On filtre directement sur ces colonnes.</li>
+<li>Jamais de <code>SELECT *</code>, <code>LIMIT</code> ne réduit pas le coût, on vérifie avec <strong><code>--dry_run</code></strong>, et on pose des <strong>limites</strong> (octets maximum, quotas, alertes de budget).</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python_data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../07-Cloud/GCP/01-cloud-storage.html" class="pagination-link" aria-label="Google Cloud Storage (GCS)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Google Cloud Storage (GCS)</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../logs/index.html" class="pagination-link" aria-label="Logs">
+        <span class="nav-page-text">Logs</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python_data/edit/main/07-Cloud/GCP/02-bigquery.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
