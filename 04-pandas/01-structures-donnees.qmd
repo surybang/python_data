@@ -1,0 +1,387 @@
+---
+title: "Les structures de données de pandas"
+format:
+  html: default
+  revealjs:
+    output-file: 01-structures-donnees-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tip}
+Pour accéder aux notebooks d'exercices c'est ici 👇
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/pandas-01-structures-donnees.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB01_premiers_pas%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%ABpandas-01-structures-donnees%C2%BB)
+:::
+
+
+## Pourquoi `Pandas` ?
+
+Dans le module d'initiation, vous avez analysé des ventes stockées dans une **liste de dictionnaires**. Pour calculer un chiffre d'affaires par ville, il fallait une boucle, un accumulateur, un dictionnaire de résultats… une dizaine de lignes pour une question simple.
+
+**pandas** est la bibliothèque de référence pour manipuler des données tabulaires en Python. Elle apporte deux structures, la **Series** et le **DataFrame**, et des centaines de méthodes pour filtrer, calculer, regrouper ou fusionner des données, le plus souvent **sans écrire une seule boucle**.
+
+On l'importe toujours de la même façon, avec l'alias `pd` :
+
+```python
+import pandas as pd
+```
+
+::: {.callout-note}
+### Quelle version ?
+Ce cours utilise **pandas 3**. Si vous êtes sur pandas 2, tout fonctionne de la même façon dans cette page, à un détail d'affichage près : les colonnes de texte y apparaissent avec le type `object` au lieu de `str`. Pour connaître votre version : `pd.__version__`.
+:::
+
+---
+
+## La Series : une colonne de données
+
+### Des valeurs et un index
+
+Une **Series** est une suite de valeurs, un peu comme une liste, mais chaque valeur porte une **étiquette**. L'ensemble des étiquettes s'appelle l'**index**.
+
+```python
+notes = pd.Series([12, 15, 8, 17])
+print(notes)
+```
+
+```
+0    12
+1    15
+2     8
+3    17
+dtype: int64
+```
+
+Trois choses s'affichent :
+
+- à gauche, l'**index** (par défaut 0, 1, 2…) ;
+- à droite, les **valeurs** ;
+- en bas, le **type** des valeurs (`dtype`) : toutes les valeurs d'une Series ont le **même type**.
+
+On peut choisir un index plus parlant, et donner un nom à la Series :
+
+```python
+notes = pd.Series(
+    [12, 15, 8, 17],
+    index=["Jessica", "Wilson", "Ian", "Becky"],
+    name="note",
+)
+
+notes["Ian"]     # 8 → on accède à une valeur par son étiquette, comme une clé de dictionnaire
+```
+
+Une Series combine donc ce que vous connaissez déjà : l'**ordre** d'une liste et l'**accès par étiquette** d'un dictionnaire.
+
+### Calculer sans boucle
+
+C'est la grande force de pandas : une opération s'applique à **toutes les valeurs d'un coup**. On parle d'opération **vectorisée**.
+
+```python
+notes + 1          # ajoute 1 à chaque note
+notes * 1.1 > 15   # compare chaque note majorée de 10 % à 15 → une Series de booléens
+notes.mean()       # 13.0
+notes.max()        # 17
+```
+
+Avec une liste, chacune de ces lignes aurait demandé une boucle. Souvenez-vous de l'encadré « Et en analyse de données ? » de la page sur les boucles : c'est exactement ce qu'on vous annonçait.
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : des Series qui ne s'alignent pas
+
+Voici les ventes de deux magasins, par mois. Observez le code **sans l'exécuter** :
+
+```python
+magasin_a = pd.Series([10, 20, 30], index=["janv", "fev", "mars"])
+magasin_b = pd.Series([1, 2, 3], index=["fev", "mars", "avr"])
+
+print(magasin_a + magasin_b)
+```
+
+1. Avec deux listes `[10, 20, 30]` et `[1, 2, 3]`, on additionnerait position par position. Que va faire pandas ?
+2. Que se passe-t-il pour janvier et avril ?
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+```
+avr      NaN
+fev     21.0
+janv     NaN
+mars    32.0
+dtype: float64
+```
+
+pandas n'additionne **pas** position par position : il **aligne les index**. Février de A s'ajoute à février de B (20 + 1), mars à mars (30 + 2).
+
+Janvier n'existe que dans A, avril que dans B : pandas ne peut pas faire l'addition et met `NaN` (*Not a Number*), la valeur qui représente une **donnée manquante**. Les valeurs passent au passage en flottants (`21.0`), car `NaN` est un flottant.
+
+C'est une protection précieuse : on ne risque pas d'additionner les ventes de janvier d'un magasin avec celles de février de l'autre. Mais c'est aussi une source de `NaN` inattendus quand deux Series n'ont pas le même index.
+:::
+
+---
+
+## Le DataFrame : un tableau de données
+
+### Un ensemble de Series qui partagent le même index
+
+Un **DataFrame** est un tableau à deux dimensions. On peut le voir comme **plusieurs Series côte à côte**, une par colonne, qui partagent **le même index**.
+
+La façon la plus simple de le créer : un dictionnaire dont chaque clé est un nom de colonne, et chaque valeur la liste de ses données.
+
+```python
+ventes = pd.DataFrame({
+    "produit": ["Clavier", "Souris", "Écran", "Clavier", "Écran", "Souris"],
+    "ville": ["Lyon", "Paris", "Lyon", "Nantes", "Paris", "Lyon"],
+    "quantite": [2, 5, 1, 3, 2, 4],
+    "prix": [49.9, 19.9, 189.0, 49.9, 189.0, 19.9],
+})
+```
+
+```
+   produit   ville  quantite   prix
+0  Clavier    Lyon         2   49.9
+1   Souris   Paris         5   19.9
+2    Écran    Lyon         1  189.0
+3  Clavier  Nantes         3   49.9
+4    Écran   Paris         2  189.0
+5   Souris    Lyon         4   19.9
+```
+
+Et la liste de dictionnaires du module d'initiation ? Elle se transforme directement en DataFrame avec `pd.DataFrame(liste_de_dicts)` : chaque dictionnaire devient une ligne.
+
+### Une feuille Excel… en mieux
+
+Si vous avez déjà utilisé Excel, vous connaissez déjà la structure d'un DataFrame :
+
+| Excel | pandas |
+|---|---|
+| une feuille de calcul | un `DataFrame` |
+| une colonne (A, B, C…) | une `Series`, désignée par un **nom** (`"prix"`) |
+| les numéros de ligne (1, 2, 3…) | l'**index** (0, 1, 2… par défaut) |
+| une cellule | une valeur, à l'intersection d'une ligne et d'une colonne |
+| une formule recopiée vers le bas | une opération vectorisée sur toute la colonne |
+
+Quelques différences importantes :
+
+- **l'index commence à 0**, pas à 1 ;
+- **une colonne a un seul type** : dans Excel, une colonne peut mélanger des nombres et du texte ; dans pandas, chaque colonne a son `dtype` ;
+- **pas de formule par cellule** : on ne calcule pas cellule par cellule, on applique une opération à une colonne entière ;
+- **le code garde la trace** de chaque transformation : on peut relancer toute l'analyse sur les données du mois suivant, sans refaire les manipulations à la main ;
+- **pas de limite pratique de taille** : Excel s'arrête à un peu plus d'un million de lignes, pandas peut en traiter bien davantage (dans la limite de la mémoire de votre ordinateur).
+
+### Les deux axes : lignes et colonnes
+
+Un DataFrame a deux **axes**, que de nombreuses méthodes vous demanderont de préciser avec le paramètre `axis` :
+
+| | Axe | Ce qu'il représente | Son étiquette |
+|---|---|---|---|
+| `axis=0` | les **lignes** | les observations (une vente) | l'index (`ventes.index`) |
+| `axis=1` | les **colonnes** | les variables (le prix) | les noms de colonnes (`ventes.columns`) |
+
+```
+                axis=1 →  (colonnes)
+              ┌──────────┬────────┬──────────┬───────┐
+              │ produit  │ ville  │ quantite │ prix  │
+   axis=0   0 │ Clavier  │ Lyon   │        2 │  49.9 │
+     ↓      1 │ Souris   │ Paris  │        5 │  19.9 │
+  (lignes)  2 │ Écran    │ Lyon   │        1 │ 189.0 │
+              └──────────┴────────┴──────────┴───────┘
+```
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : `axis=0` ou `axis=1` ?
+
+On ne garde que les colonnes numériques, puis on fait deux sommes :
+
+```python
+nombres = ventes[["quantite", "prix"]]
+
+nombres.sum(axis=0)
+nombres.sum(axis=1)
+```
+
+1. Laquelle donne le total **de chaque colonne** (la quantité totale vendue, la somme des prix) ?
+2. Combien de valeurs renvoie chacune des deux sommes ?
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+C'est `axis=0` qui donne le total de chaque colonne… alors que 0 désigne les lignes.
+
+```python
+nombres.sum(axis=0)    # 2 valeurs : une par colonne
+# quantite     17.0
+# prix        517.6
+
+nombres.sum(axis=1)    # 6 valeurs : une par ligne
+# 0     51.9
+# 1     24.9
+# ...
+```
+
+La bonne façon de le lire : `axis` indique l'axe **le long duquel on calcule**, celui qui **disparaît** dans le résultat.
+
+- `axis=0` : on parcourt les lignes, de haut en bas, et on les « écrase » : il reste **une valeur par colonne**. C'est le comportement par défaut : `nombres.sum()` fait la même chose.
+- `axis=1` : on parcourt les colonnes, de gauche à droite : il reste **une valeur par ligne**.
+
+(Ici, additionner une quantité et un prix n'a pas de sens métier : `axis=1` sert plutôt à additionner des colonnes de même nature, comme des ventes de janvier, février et mars.)
+
+Même logique pour supprimer : `ventes.drop(columns="prix")` ou `ventes.drop(index=0)`. Préférez ces paramètres explicites à `axis`, ils sont plus lisibles.
+:::
+
+---
+
+## Inspecter un DataFrame
+
+Face à un nouveau jeu de données, le premier réflexe est de l'**inspecter** avant de calculer quoi que ce soit.
+
+| Attribut ou méthode | Ce qu'il renvoie | Sur `ventes` |
+|---|---|---|
+| `ventes.shape` | le nombre de lignes et de colonnes (un tuple) | `(6, 4)` |
+| `ventes.columns` | les noms des colonnes | `produit`, `ville`, `quantite`, `prix` |
+| `ventes.index` | l'index | `RangeIndex(start=0, stop=6, step=1)` |
+| `ventes.dtypes` | le type de chaque colonne | `str`, `str`, `int64`, `float64` |
+| `ventes.head(3)` | les 3 premières lignes (5 par défaut) | |
+| `ventes.tail(3)` | les 3 dernières lignes | |
+| `ventes.info()` | un résumé : types, valeurs non manquantes, mémoire | |
+| `ventes.describe()` | les statistiques des colonnes numériques | moyenne, écart-type, quartiles… |
+
+```python
+ventes.info()
+```
+
+```
+RangeIndex: 6 entries, 0 to 5
+Data columns (total 4 columns):
+ #   Column    Non-Null Count  Dtype
+---  ------    --------------  -----
+ 0   produit   6 non-null      str
+ 1   ville     6 non-null      str
+ 2   quantite  6 non-null      int64
+ 3   prix      6 non-null      float64
+dtypes: float64(1), int64(1), str(2)
+memory usage: 324.0 bytes
+```
+
+::: {.callout-note}
+### Attribut ou méthode ?
+Remarquez que `shape`, `columns`, `index` et `dtypes` s'écrivent **sans parenthèses** : ce sont des **attributs**, de simples informations stockées dans l'objet. `head()`, `info()` ou `describe()` sont des **méthodes** : elles effectuent un traitement. Écrire `ventes.shape()` lève une `TypeError`.
+:::
+
+---
+
+## Accéder aux colonnes et aux lignes
+
+### Une colonne, c'est une Series
+
+```python
+ventes["prix"]          # une colonne → une Series
+ventes[["produit", "prix"]]  # une liste de colonnes → un DataFrame
+```
+
+Attention aux crochets : `ventes["prix"]` renvoie une **Series**, alors que `ventes[["prix"]]` (une liste contenant un seul nom) renvoie un **DataFrame** d'une seule colonne. Les deux s'affichent presque pareil, mais n'ont pas les mêmes méthodes.
+
+```python
+type(ventes["prix"])     # pandas.Series
+type(ventes[["prix"]])   # pandas.DataFrame
+```
+
+Comme une colonne est une Series, tout ce que vous avez vu plus haut s'applique : `ventes["prix"].mean()`, `ventes["prix"] * 1.2`, `ventes["ville"].value_counts()`…
+
+```python
+ventes["ville"].value_counts()
+```
+
+```
+ville
+Lyon      3
+Paris     2
+Nantes    1
+Name: count, dtype: int64
+```
+
+Une seule ligne, là où il fallait une boucle et un dictionnaire dans le module d'initiation.
+
+### Une ligne, c'est aussi une Series
+
+Pour accéder aux lignes, pandas propose deux outils :
+
+- `.iloc[...]` sélectionne par **position** (`i` pour *integer*), comme l'index d'une liste ;
+- `.loc[...]` sélectionne par **étiquette** d'index.
+
+```python
+ventes.iloc[0]             # la première ligne, quelle que soit son étiquette
+ventes.loc[2, "prix"]      # la valeur à la ligne d'étiquette 2, colonne prix → 189.0
+```
+
+Une ligne extraite seule est elle aussi une **Series**, dont l'index est formé des noms de colonnes. Comme elle mélange du texte et des nombres, son `dtype` devient `object`, le type « fourre-tout » de pandas.
+
+Avec l'index par défaut, `loc` et `iloc` semblent faire la même chose. La différence apparaîtra dès que l'index ne sera plus 0, 1, 2… par exemple après un tri ou un filtre. Nous y reviendrons en détail dans le chapitre sur la sélection.
+
+---
+
+## Les types de données
+
+Chaque colonne a un type unique, son `dtype`. Les plus courants :
+
+| `dtype` | Contenu | Équivalent Python |
+|---|---|---|
+| `int64` | nombres entiers | `int` |
+| `float64` | nombres à virgule | `float` |
+| `bool` | `True` / `False` | `bool` |
+| `str` | texte (`object` en pandas 2) | `str` |
+| `datetime64` | dates et heures | |
+| `category` | un petit nombre de valeurs répétées (villes, catégories…) | |
+
+Le bon type n'est pas un détail : une date stockée comme du texte ne peut pas être triée chronologiquement, et un montant lu comme du texte ne peut pas être additionné. Vérifier les `dtypes` fait partie du réflexe d'inspection. Un chapitre entier y sera consacré.
+
+---
+
+## Les méthodes renvoient un nouvel objet
+
+Ajoutons une colonne de chiffre d'affaires avec la méthode `.assign()` :
+
+```python
+ventes.assign(ca=ventes["quantite"] * ventes["prix"])
+```
+
+Le résultat s'affiche bien avec une colonne `ca`… mais :
+
+```python
+"ca" in ventes.columns   # False !
+```
+
+Comme `sorted()` dans le module d'initiation, la plupart des méthodes de pandas **ne modifient pas** le DataFrame : elles en **renvoient un nouveau**. Pour garder le résultat, il faut l'affecter à une variable :
+
+```python
+ventes_ca = ventes.assign(ca=ventes["quantite"] * ventes["prix"])
+```
+
+C'est voulu, et c'est une bonne nouvelle : l'original reste intact tant que vous ne le remplacez pas explicitement, et chaque étape de votre analyse produit un nouvel objet. C'est ce qui permettra, plus tard, d'**enchaîner** les méthodes les unes après les autres.
+
+::: {.callout-note}
+### pandas 3 et le *Copy-on-Write*
+Vous vous souvenez du schéma des étiquettes en mémoire ? En pandas 2, extraire une partie d'un DataFrame puis la modifier pouvait, selon les cas, modifier aussi l'original, d'où le célèbre avertissement `SettingWithCopyWarning`.
+
+pandas 3 applique désormais le **Copy-on-Write** : tout objet extrait d'un DataFrame se comporte comme une copie indépendante. Modifier l'un ne modifie jamais l'autre. Si vous croisez ce warning dans du code plus ancien, vous savez maintenant d'où il vient.
+:::
+
+::: {.callout-tip}
+### À retenir
+- `import pandas as pd` : la convention à toujours respecter.
+- Une **Series** est une colonne de valeurs de même type, chacune repérée par une étiquette de l'**index**.
+- Les opérations sur une Series sont **vectorisées** : elles s'appliquent à toutes les valeurs sans boucle, et s'**alignent sur l'index**.
+- Un **DataFrame** est un ensemble de Series qui partagent le même index : comme une feuille Excel, mais avec une colonne = un type, et un index qui commence à 0.
+- `axis=0` désigne les lignes, `axis=1` les colonnes. `sum(axis=0)` « écrase » les lignes et renvoie **une valeur par colonne**.
+- Inspecter avant de calculer : `shape`, `dtypes`, `head()`, `info()`, `describe()`.
+- `df["col"]` renvoie une Series, `df[["col"]]` un DataFrame. `.iloc` sélectionne par position, `.loc` par étiquette.
+- Les méthodes renvoient un **nouvel objet** : pensez à affecter le résultat.
+:::

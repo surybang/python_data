@@ -1,0 +1,70 @@
+---
+title: "Pandas pour l'analyse de données"
+format:
+  html: default
+  revealjs:
+    output-file: pandas-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+## Pourquoi `Pandas` ?
+
+Dans le module d'initiation, vous avez analysé des ventes stockées dans une **liste de dictionnaires**. Pour calculer un chiffre d'affaires par ville, il fallait une boucle, un accumulateur, un dictionnaire de résultats… une dizaine de lignes pour une question simple.
+
+**pandas** est la bibliothèque de référence pour manipuler des données tabulaires en Python. Elle apporte deux structures, la **Series** et le **DataFrame**, et des centaines de méthodes pour filtrer, calculer, regrouper ou fusionner des données, le plus souvent **sans écrire une seule boucle**.
+
+On l'importe toujours de la même façon, avec l'alias `pd` :
+
+```python
+import pandas as pd
+```
+
+::: {.callout-note}
+### Quelle version ?
+Ce cours utilise **pandas 3**. Si vous êtes sur pandas 2, tout fonctionne de la même façon dans cette page, à un détail d'affichage près : les colonnes de texte y apparaissent avec le type `object` au lieu de `str`. Pour connaître votre version : `pd.__version__`.
+:::
+
+## Sous le capot : NumPy et Arrow
+
+pandas ne travaille pas seul : il s'appuie sur deux bibliothèques qui font le gros du calcul.
+
+- **NumPy** est le moteur historique de pandas. Il range les nombres dans des **tableaux** compacts en mémoire et applique les calculs à tout le tableau d'un coup, dans du code compilé très rapide. C'est grâce à lui qu'on peut écrire `prix * quantite` sur un million de lignes, sans boucle.
+- **Apache Arrow** (avec sa bibliothèque Python, **PyArrow**) est un format de données **en colonnes**, devenu un standard partagé par de nombreux outils : pandas, DuckDB, Polars, Spark, BigQuery… Depuis pandas 3, les colonnes de texte (le type `str`) utilisent PyArrow s'il est installé, ce qui les rend nettement plus rapides et plus légères en mémoire.
+
+:::{.callout-tip}
+## Installez PyArrow avec pandas
+PyArrow n'est pas installé automatiquement avec pandas, mais il est fortement recommandé :
+
+```bash
+uv add pandas pyarrow
+```
+
+Il sert aussi à lire et écrire des fichiers **Parquet**, le format que vous croiserez partout en data.
+:::
+
+Dans ce cours, nous n'irons pas plus loin dans la mécanique interne : l'objectif est de savoir **utiliser** pandas pour analyser des données, simplement et efficacement. Vous n'avez pas besoin de savoir comment fonctionne un moteur pour conduire. Mais si le sujet vous intéresse, voici de quoi creuser.
+
+:::{.callout-note collapse="true"}
+## Pour aller plus loin : comprendre ce qu'il y a sous le capot
+
+**Documentation**
+
+- [La documentation de pandas](https://pandas.pydata.org/docs/), et en particulier son [guide de l'utilisateur](https://pandas.pydata.org/docs/user_guide/index.html).
+- [L'annonce de pandas 3.0](https://pandas.pydata.org/community/blog/pandas-3.0.html) : le nouveau type `str`, le Copy-on-Write et les autres changements de cette version.
+- [La documentation de NumPy](https://numpy.org/doc/stable/) et celle de [PyArrow](https://arrow.apache.org/docs/python/).
+
+**Articles**
+
+- [*Apache Arrow and the "10 Things I Hate About pandas"*](https://wesmckinney.com/blog/apache-arrow-pandas-internals/), par Wes McKinney, le créateur de pandas : pourquoi les limites de pandas l'ont poussé à cocréer Arrow.
+
+**Vidéos et podcasts**
+
+- [*Apache Arrow: connecting and accelerating dataframe libraries across the PyData ecosystem*](https://www.youtube.com/watch?v=h7F3Rr8Ozgw), par Joris Van den Bossche, l'un des mainteneurs de pandas (PyData Berlin 2023).
+- [*pandas and Beyond with Wes McKinney*](https://talkpython.fm/episodes/show/462/pandas-and-beyond-with-wes-mckinney), épisode du podcast Talk Python To Me.
+- Les conférences **PyData**, dont beaucoup de présentations sont filmées et en ligne : [pyvideo.org](https://pyvideo.org) les répertorie.
+:::
