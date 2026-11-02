@@ -38,7 +38,9 @@ if stock > 0
 SyntaxError: expected ':'
 ```
 
-Rien ne s'exécute, pas même les lignes précédentes. Le petit `^` indique l'endroit où Python s'est perdu. Une indentation oubliée produit une cousine, l'`IndentationError` :
+Rien ne s'exécute, pas même les lignes précédentes. Le petit `^` indique l'endroit où Python s'est perdu.
+
+Une indentation oubliée provoque une erreur du même type, l'`IndentationError` :
 
 ```python
 def bonjour():
@@ -48,6 +50,11 @@ print("Bonjour")
 ```
 IndentationError: expected an indented block after function definition on line 1
 ```
+
+:::{.callout-note}
+## Une erreur de syntaxe particulière
+`IndentationError` est en réalité un **cas particulier** de `SyntaxError` : une erreur de syntaxe qui concerne l'indentation. Comme toutes les erreurs de syntaxe, elle est détectée **avant** l'exécution. Dans un script, aucune ligne ne s'exécute, même celles qui sont correctes. Dans un notebook, Python analyse chaque cellule séparément : seule la cellule fautive est bloquée.
+:::
 
 ### Les exceptions
 
