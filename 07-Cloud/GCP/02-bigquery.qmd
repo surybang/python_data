@@ -16,7 +16,7 @@ Les fichiers sont dans Cloud Storage. Il faut maintenant pouvoir les **interroge
 
 ## Un entrepôt de données sans serveur
 
-BigQuery est **serverless** (sans serveur) : vous n'installez rien, vous ne choisissez pas de machine, vous ne gérez ni disque ni mise à jour. Vous écrivez du SQL, Google s'occupe du reste.
+BigQuery est **serverless** (sans serveur, voir [Géré ou serverless ?](index.qmd#géré-ou-serverless)) : vous n'installez rien, vous ne choisissez pas de machine, vous ne gérez ni disque ni mise à jour. Vous écrivez du SQL, Google s'occupe du reste.
 
 C'est une grande différence avec la page sur les bases de données : avec PostgreSQL, quelqu'un doit installer et dimensionner un serveur. Avec BigQuery, la puissance s'adapte toute seule à chaque requête, qu'elle lise mille lignes ou mille milliards.
 
@@ -206,6 +206,61 @@ La requête n'est pas exécutée, donc pas facturée : BigQuery indique seulemen
 Mettez en place un quota quotidien et une alerte de budget **avant** de donner accès à BigQuery à une équipe. Une seule requête mal écrite sur une très grosse table peut coûter cher, et il est beaucoup plus simple de prévenir que d'expliquer la facture.
 :::
 
+
+### Réutiliser plutôt que recalculer
+
+#### Le cache des résultats
+
+BigQuery garde le résultat de chaque requête pendant **environ 24 heures**. Si vous relancez **exactement la même requête**, il renvoie ce résultat sans relire les tables : c'est **gratuit**, et quasi instantané. Dans la console, la ligne *Bytes processed* affiche alors 0 B, et la requête est marquée comme venant du cache.
+
+Le cache n'est utilisé que si :
+
+- le texte de la requête est **identique au caractère près** : un espace, un retour à la ligne ou un commentaire ajouté suffisent à le rater ;
+- les tables lues **n'ont pas changé** depuis ;
+- la requête ne contient pas de fonction dont le résultat change à chaque appel, comme `CURRENT_DATE()` ou `CURRENT_TIMESTAMP()` ;
+- le résultat n'est pas écrit dans une table de destination.
+
+:::{.callout-tip}
+## Un piège fréquent
+`WHERE date_commande = CURRENT_DATE()` empêche tout cache, même si vous relancez la requête dix fois dans la journée. Si un tableau de bord rejoue souvent la même requête, écrivez la date en dur (ou passez-la en paramètre) pour qu'il puisse profiter du cache.
+:::
+
+#### Une CTE ne fait pas économiser
+
+On pourrait croire qu'une CTE (`WITH ...`) calcule un résultat une fois pour toutes, qu'on réutiliserait ensuite. Ce n'est pas le cas : Google précise que les CTE servent à la **lisibilité, pas à la performance**. BigQuery ne garde pas leur résultat, et une CTE utilisée à plusieurs endroits d'une requête **peut être recalculée à chaque fois**. Le cache ne s'applique pas non plus à une CTE seule : il porte toujours sur une requête entière.
+
+#### Les tables temporaires
+
+Pour réutiliser un résultat coûteux, on l'enregistre dans une **table temporaire**. Dans une requête à plusieurs instructions, la grosse lecture n'est faite et facturée qu'une seule fois, puis les analyses suivantes ne lisent que la petite table :
+
+```sql
+-- 1. La grosse requête : lue et facturée une seule fois
+CREATE TEMP TABLE ventes_novembre AS
+SELECT magasin, categorie, montant
+FROM ventes.commandes
+WHERE date_commande BETWEEN '2026-11-01' AND '2026-11-30';
+
+-- 2. Les analyses suivantes ne lisent que la table temporaire
+SELECT magasin, SUM(montant) AS ca FROM ventes_novembre GROUP BY magasin;
+SELECT categorie, AVG(montant) AS panier_moyen FROM ventes_novembre GROUP BY categorie;
+```
+
+La table temporaire disparaît automatiquement à la fin de la requête.
+
+#### Les tables intermédiaires et les vues matérialisées
+
+Quand un même résultat sert **d'un jour à l'autre**, ou à plusieurs personnes :
+
+- on l'enregistre dans une **table intermédiaire**, recalculée régulièrement. C'est exactement ce que fait dbt avec la couche intermédiaire : elle est calculée une fois, puis tous les marts la lisent ;
+- ou on crée une **vue matérialisée** : BigQuery stocke son résultat et le tient à jour quand les données sources changent.
+
+| Besoin | Solution |
+|---|---|
+| Relancer exactement la même requête | Le cache, automatique et gratuit pendant environ 24 heures |
+| Réutiliser un résultat dans la même requête | Une table temporaire (`CREATE TEMP TABLE`) |
+| Réutiliser un résultat d'un jour à l'autre | Une table intermédiaire (avec dbt, par exemple) ou une vue matérialisée |
+| Rendre une requête plus lisible | Une CTE, mais elle ne fait rien gagner |
+
 ### 🧠 À vous de réfléchir
 
 La table `ventes.commandes` contient trois ans de données. Elle est partitionnée par `date_commande` et clusterisée par `magasin`. Classez ces requêtes de la plus coûteuse à la moins coûteuse.
@@ -264,6 +319,8 @@ BigQuery conserve l'historique des tables pendant quelques jours (le *time trave
 - [Estimer et maîtriser les coûts](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) : toutes les bonnes pratiques officielles.
 - [Interroger une table partitionnée](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) : les filtres qui permettent d'ignorer des partitions.
 - [*BigQuery under the hood*](https://cloud.google.com/blog/products/bigquery/bigquery-under-the-hood) : l'architecture interne, expliquée par Google.
+- [Utiliser les résultats en cache](https://docs.cloud.google.com/bigquery/docs/cached-results) : le fonctionnement du cache et tous les cas où il ne s'applique pas.
+- [Optimiser le calcul des requêtes](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) : les bonnes pratiques officielles, dont le passage sur les CTE et les tables temporaires.
 
 :::{.callout-important}
 ## À retenir
@@ -274,4 +331,5 @@ BigQuery conserve l'historique des tables pendant quelques jours (le *time trave
 - Les données arrivent surtout **en lot depuis Cloud Storage** ; les **tables externes** lisent les fichiers sur place ; **Pub/Sub** permet le flux continu.
 - **Partitionner** (par date) permet d'ignorer des morceaux entiers de la table ; **clusteriser** trie chaque partition pour sauter des blocs. On filtre directement sur ces colonnes.
 - Jamais de `SELECT *`, `LIMIT` ne réduit pas le coût, on vérifie avec **`--dry_run`**, et on pose des **limites** (octets maximum, quotas, alertes de budget).
+- Relancer **exactement** la même requête est gratuit grâce au **cache** ; une CTE, elle, n'est jamais gardée en mémoire : pour réutiliser un résultat, passez par une **table temporaire** ou intermédiaire.
 :::
