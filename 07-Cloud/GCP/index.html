@@ -519,6 +519,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#lorganisation-sur-gcp" id="toc-lorganisation-sur-gcp" class="nav-link active" data-scroll-target="#lorganisation-sur-gcp">L’organisation sur GCP</a></li>
   <li><a href="#les-services-que-nous-verrons" id="toc-les-services-que-nous-verrons" class="nav-link" data-scroll-target="#les-services-que-nous-verrons">Les services que nous verrons</a></li>
   <li><a href="#et-bien-dautres-services" id="toc-et-bien-dautres-services" class="nav-link" data-scroll-target="#et-bien-dautres-services">Et bien d’autres services</a></li>
+  <li><a href="#géré-ou-serverless" id="toc-géré-ou-serverless" class="nav-link" data-scroll-target="#géré-ou-serverless">Géré ou serverless ?</a></li>
   <li><a href="#ressources" id="toc-ressources" class="nav-link" data-scroll-target="#ressources">Ressources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/surybang/python_data/edit/main/07-Cloud/GCP/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -708,6 +709,64 @@ ul.task-list li input[type="checkbox"] {
 <p>En entreprise, la création des ressources passe en plus par du code d’infrastructure, comme <strong>Terraform</strong>. (on y reviendra … 👀)</p>
 </div>
 </div>
+</section>
+<section id="géré-ou-serverless" class="level2">
+<h2 class="anchored" data-anchor-id="géré-ou-serverless">Géré ou serverless ?</h2>
+<p>Sur le cloud, vous croiserez souvent ces deux mots. Ils ont un point commun : <strong>Google s’occupe de l’infrastructure</strong> (installation, mises à jour, sauvegardes, pannes matérielles). La différence porte sur la <strong>capacité</strong> : qui la choisit, et quand on la paie.</p>
+<ul>
+<li>Un service <strong>géré</strong> (<em>managed</em>) : Google fait tourner le logiciel pour vous, mais <strong>vous choisissez la taille</strong> des machines (nombre de processeurs, mémoire, nombre de nœuds). Ces machines tournent <strong>en permanence</strong>, et vous les payez même quand personne ne s’en sert.</li>
+<li>Un service <strong>serverless</strong> (sans serveur) : vous ne choisissez <strong>rien</strong>. La capacité s’adapte toute seule à la demande, descend souvent jusqu’à zéro quand rien ne tourne, et vous payez <strong>à l’usage</strong> : la requête, la seconde de calcul, l’octet stocké.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Géré</th>
+<th>Serverless</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qui gère l’infrastructure ?</td>
+<td>Google</td>
+<td>Google</td>
+</tr>
+<tr class="even">
+<td>Qui choisit la capacité ?</td>
+<td>Vous (taille des machines, nombre de nœuds)</td>
+<td>Personne : elle s’adapte toute seule</td>
+</tr>
+<tr class="odd">
+<td>Quand paie-t-on ?</td>
+<td>Tant que le service existe, même sans activité</td>
+<td>Uniquement quand on s’en sert</td>
+</tr>
+<tr class="even">
+<td>Exemples sur GCP</td>
+<td>Cloud SQL, AlloyDB, Cloud Composer, Dataproc, GKE</td>
+<td>BigQuery, Cloud Run, Cloud Run functions, Cloud Storage, Pub/Sub</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Le piège du service géré oublié
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une base Cloud SQL ou un environnement Cloud Composer créés pour un test continuent de coûter, jour et nuit, tant qu’on ne les a pas supprimés. Avec un service serverless, un projet qui ne fait rien ne coûte presque rien. Pensez à supprimer les ressources gérées dont vous n’avez plus besoin.</p>
+</div>
+</div>
+<p>La frontière n’est pas toujours aussi nette : certains services existent dans les deux versions. Par exemple, Dataproc propose une version <em>serverless</em> pour Spark, et GKE un mode <em>Autopilot</em>, où Google dimensionne lui-même les machines. Le bon réflexe est de se poser une seule question : <strong>est-ce que je paie quand rien ne tourne ?</strong></p>
 </section>
 <section id="ressources" class="level2">
 <h2 class="anchored" data-anchor-id="ressources">Ressources</h2>

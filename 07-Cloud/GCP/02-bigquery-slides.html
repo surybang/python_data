@@ -1232,7 +1232,7 @@ margin-right: 0; }
 </section>
 <section id="un-entrepôt-de-données-sans-serveur" class="slide level2">
 <h2>Un entrepôt de données sans serveur</h2>
-<p>BigQuery est <strong>serverless</strong> (sans serveur) : vous n’installez rien, vous ne choisissez pas de machine, vous ne gérez ni disque ni mise à jour. Vous écrivez du SQL, Google s’occupe du reste.</p>
+<p>BigQuery est <strong>serverless</strong> (sans serveur, voir <a href="../../07-Cloud/GCP/index.html#géré-ou-serverless">Géré ou serverless ?</a>) : vous n’installez rien, vous ne choisissez pas de machine, vous ne gérez ni disque ni mise à jour. Vous écrivez du SQL, Google s’occupe du reste.</p>
 <p>C’est une grande différence avec la page sur les bases de données : avec PostgreSQL, quelqu’un doit installer et dimensionner un serveur. Avec BigQuery, la puissance s’adapte toute seule à chaque requête, qu’elle lise mille lignes ou mille milliards.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -1471,20 +1471,93 @@ margin-right: 0; }
 </div>
 </div>
 </div>
+<h3 id="réutiliser-plutôt-que-recalculer">Réutiliser plutôt que recalculer</h3>
+<h4 id="le-cache-des-résultats">Le cache des résultats</h4>
+<p>BigQuery garde le résultat de chaque requête pendant <strong>environ 24 heures</strong>. Si vous relancez <strong>exactement la même requête</strong>, il renvoie ce résultat sans relire les tables : c’est <strong>gratuit</strong>, et quasi instantané. Dans la console, la ligne <em>Bytes processed</em> affiche alors 0 B, et la requête est marquée comme venant du cache.</p>
+<p>Le cache n’est utilisé que si :</p>
+<ul>
+<li>le texte de la requête est <strong>identique au caractère près</strong> : un espace, un retour à la ligne ou un commentaire ajouté suffisent à le rater ;</li>
+<li>les tables lues <strong>n’ont pas changé</strong> depuis ;</li>
+<li>la requête ne contient pas de fonction dont le résultat change à chaque appel, comme <code>CURRENT_DATE()</code> ou <code>CURRENT_TIMESTAMP()</code> ;</li>
+<li>le résultat n’est pas écrit dans une table de destination.</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Un piège fréquent</strong></p>
+</div>
+<div class="callout-content">
+<p><code>WHERE date_commande = CURRENT_DATE()</code> empêche tout cache, même si vous relancez la requête dix fois dans la journée. Si un tableau de bord rejoue souvent la même requête, écrivez la date en dur (ou passez-la en paramètre) pour qu’il puisse profiter du cache.</p>
+</div>
+</div>
+</div>
+<h4 id="une-cte-ne-fait-pas-économiser">Une CTE ne fait pas économiser</h4>
+<p>On pourrait croire qu’une CTE (<code>WITH ...</code>) calcule un résultat une fois pour toutes, qu’on réutiliserait ensuite. Ce n’est pas le cas : Google précise que les CTE servent à la <strong>lisibilité, pas à la performance</strong>. BigQuery ne garde pas leur résultat, et une CTE utilisée à plusieurs endroits d’une requête <strong>peut être recalculée à chaque fois</strong>. Le cache ne s’applique pas non plus à une CTE seule : il porte toujours sur une requête entière.</p>
+<h4 id="les-tables-temporaires">Les tables temporaires</h4>
+<p>Pour réutiliser un résultat coûteux, on l’enregistre dans une <strong>table temporaire</strong>. Dans une requête à plusieurs instructions, la grosse lecture n’est faite et facturée qu’une seule fois, puis les analyses suivantes ne lisent que la petite table :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-label="1"></a><span class="co">-- 1. La grosse requête : lue et facturée une seule fois</span></span>
+<span id="cb7-2"><a aria-label="2"></a><span class="kw">CREATE</span> TEMP <span class="kw">TABLE</span> ventes_novembre <span class="kw">AS</span></span>
+<span id="cb7-3"><a aria-label="3"></a><span class="kw">SELECT</span> magasin, categorie, montant</span>
+<span id="cb7-4"><a aria-label="4"></a><span class="kw">FROM</span> ventes.commandes</span>
+<span id="cb7-5"><a aria-label="5"></a><span class="kw">WHERE</span> date_commande <span class="kw">BETWEEN</span> <span class="st">&#39;2026-11-01&#39;</span> <span class="kw">AND</span> <span class="st">&#39;2026-11-30&#39;</span>;</span>
+<span id="cb7-6"><a aria-label="6"></a></span>
+<span id="cb7-7"><a aria-label="7"></a><span class="co">-- 2. Les analyses suivantes ne lisent que la table temporaire</span></span>
+<span id="cb7-8"><a aria-label="8"></a><span class="kw">SELECT</span> magasin, <span class="fu">SUM</span>(montant) <span class="kw">AS</span> ca <span class="kw">FROM</span> ventes_novembre <span class="kw">GROUP</span> <span class="kw">BY</span> magasin;</span>
+<span id="cb7-9"><a aria-label="9"></a><span class="kw">SELECT</span> categorie, <span class="fu">AVG</span>(montant) <span class="kw">AS</span> panier_moyen <span class="kw">FROM</span> ventes_novembre <span class="kw">GROUP</span> <span class="kw">BY</span> categorie;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La table temporaire disparaît automatiquement à la fin de la requête.</p>
+<h4 id="les-tables-intermédiaires-et-les-vues-matérialisées">Les tables intermédiaires et les vues matérialisées</h4>
+<p>Quand un même résultat sert <strong>d’un jour à l’autre</strong>, ou à plusieurs personnes :</p>
+<ul>
+<li>on l’enregistre dans une <strong>table intermédiaire</strong>, recalculée régulièrement. C’est exactement ce que fait dbt avec la couche intermédiaire : elle est calculée une fois, puis tous les marts la lisent ;</li>
+<li>ou on crée une <strong>vue matérialisée</strong> : BigQuery stocke son résultat et le tient à jour quand les données sources changent.</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Besoin</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Relancer exactement la même requête</td>
+<td>Le cache, automatique et gratuit pendant environ 24 heures</td>
+</tr>
+<tr class="even">
+<td>Réutiliser un résultat dans la même requête</td>
+<td>Une table temporaire (<code>CREATE TEMP TABLE</code>)</td>
+</tr>
+<tr class="odd">
+<td>Réutiliser un résultat d’un jour à l’autre</td>
+<td>Une table intermédiaire (avec dbt, par exemple) ou une vue matérialisée</td>
+</tr>
+<tr class="even">
+<td>Rendre une requête plus lisible</td>
+<td>Une CTE, mais elle ne fait rien gagner</td>
+</tr>
+</tbody>
+</table>
 <h3 id="à-vous-de-réfléchir">🧠 À vous de réfléchir</h3>
 <p>La table <code>ventes.commandes</code> contient trois ans de données. Elle est partitionnée par <code>date_commande</code> et clusterisée par <code>magasin</code>. Classez ces requêtes de la plus coûteuse à la moins coûteuse.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-label="1"></a><span class="co">-- A</span></span>
-<span id="cb7-2"><a aria-label="2"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> ventes.commandes <span class="kw">WHERE</span> date_commande <span class="op">=</span> <span class="st">&#39;2026-11-02&#39;</span>;</span>
-<span id="cb7-3"><a aria-label="3"></a></span>
-<span id="cb7-4"><a aria-label="4"></a><span class="co">-- B</span></span>
-<span id="cb7-5"><a aria-label="5"></a><span class="kw">SELECT</span> magasin, montant <span class="kw">FROM</span> ventes.commandes</span>
-<span id="cb7-6"><a aria-label="6"></a><span class="kw">WHERE</span> date_commande <span class="op">=</span> <span class="st">&#39;2026-11-02&#39;</span> <span class="kw">AND</span> magasin <span class="op">=</span> <span class="st">&#39;Lyon&#39;</span>;</span>
-<span id="cb7-7"><a aria-label="7"></a></span>
-<span id="cb7-8"><a aria-label="8"></a><span class="co">-- C</span></span>
-<span id="cb7-9"><a aria-label="9"></a><span class="kw">SELECT</span> magasin, montant <span class="kw">FROM</span> ventes.commandes <span class="kw">LIMIT</span> <span class="dv">100</span>;</span>
-<span id="cb7-10"><a aria-label="10"></a></span>
-<span id="cb7-11"><a aria-label="11"></a><span class="co">-- D</span></span>
-<span id="cb7-12"><a aria-label="12"></a><span class="kw">SELECT</span> magasin, montant <span class="kw">FROM</span> ventes.commandes <span class="kw">WHERE</span> date_commande <span class="op">=</span> <span class="st">&#39;2026-11-02&#39;</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-label="1"></a><span class="co">-- A</span></span>
+<span id="cb8-2"><a aria-label="2"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> ventes.commandes <span class="kw">WHERE</span> date_commande <span class="op">=</span> <span class="st">&#39;2026-11-02&#39;</span>;</span>
+<span id="cb8-3"><a aria-label="3"></a></span>
+<span id="cb8-4"><a aria-label="4"></a><span class="co">-- B</span></span>
+<span id="cb8-5"><a aria-label="5"></a><span class="kw">SELECT</span> magasin, montant <span class="kw">FROM</span> ventes.commandes</span>
+<span id="cb8-6"><a aria-label="6"></a><span class="kw">WHERE</span> date_commande <span class="op">=</span> <span class="st">&#39;2026-11-02&#39;</span> <span class="kw">AND</span> magasin <span class="op">=</span> <span class="st">&#39;Lyon&#39;</span>;</span>
+<span id="cb8-7"><a aria-label="7"></a></span>
+<span id="cb8-8"><a aria-label="8"></a><span class="co">-- C</span></span>
+<span id="cb8-9"><a aria-label="9"></a><span class="kw">SELECT</span> magasin, montant <span class="kw">FROM</span> ventes.commandes <span class="kw">LIMIT</span> <span class="dv">100</span>;</span>
+<span id="cb8-10"><a aria-label="10"></a></span>
+<span id="cb8-11"><a aria-label="11"></a><span class="co">-- D</span></span>
+<span id="cb8-12"><a aria-label="12"></a><span class="kw">SELECT</span> magasin, montant <span class="kw">FROM</span> ventes.commandes <span class="kw">WHERE</span> date_commande <span class="op">=</span> <span class="st">&#39;2026-11-02&#39;</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1510,9 +1583,9 @@ margin-right: 0; }
 <p>BigQuery ne sert pas qu’à lancer des requêtes SQL. Quelques possibilités à connaître :</p>
 <ul>
 <li><p><strong>BigQuery ML</strong> : entraîner et utiliser des modèles de machine learning (régression, classification, séries temporelles, segmentation…) <strong>directement en SQL</strong>, sans sortir les données de l’entrepôt.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-label="1"></a><span class="kw">CREATE</span> MODEL ventes.prevision_ca</span>
-<span id="cb8-2"><a aria-label="2"></a>OPTIONS (model_type <span class="op">=</span> <span class="st">&#39;ARIMA_PLUS&#39;</span>, time_series_timestamp_col <span class="op">=</span> <span class="st">&#39;jour&#39;</span>, time_series_data_col <span class="op">=</span> <span class="st">&#39;ca&#39;</span>)</span>
-<span id="cb8-3"><a aria-label="3"></a><span class="kw">AS</span> <span class="kw">SELECT</span> jour, ca <span class="kw">FROM</span> ventes.ca_journalier;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a aria-label="1"></a><span class="kw">CREATE</span> MODEL ventes.prevision_ca</span>
+<span id="cb9-2"><a aria-label="2"></a>OPTIONS (model_type <span class="op">=</span> <span class="st">&#39;ARIMA_PLUS&#39;</span>, time_series_timestamp_col <span class="op">=</span> <span class="st">&#39;jour&#39;</span>, time_series_data_col <span class="op">=</span> <span class="st">&#39;ca&#39;</span>)</span>
+<span id="cb9-3"><a aria-label="3"></a><span class="kw">AS</span> <span class="kw">SELECT</span> jour, ca <span class="kw">FROM</span> ventes.ca_journalier;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Des fonctions d’IA générative</strong> : appeler des modèles Gemini depuis une requête SQL, par exemple pour classer des commentaires clients.</p></li>
 <li><p><strong>Des données géographiques</strong> (<code>GEOGRAPHY</code>), la <strong>recherche vectorielle</strong>, des données semi-structurées (<code>JSON</code>) et imbriquées.</p></li>
 <li><p><strong>Des données publiques</strong> : des centaines de jeux de données ouverts, interrogeables directement (dataset <code>bigquery-public-data</code>).</p></li>
@@ -1541,6 +1614,8 @@ margin-right: 0; }
 <li><a href="https://docs.cloud.google.com/bigquery/docs/best-practices-costs">Estimer et maîtriser les coûts</a> : toutes les bonnes pratiques officielles.</li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables">Interroger une table partitionnée</a> : les filtres qui permettent d’ignorer des partitions.</li>
 <li><a href="https://cloud.google.com/blog/products/bigquery/bigquery-under-the-hood"><em>BigQuery under the hood</em></a> : l’architecture interne, expliquée par Google.</li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/cached-results">Utiliser les résultats en cache</a> : le fonctionnement du cache et tous les cas où il ne s’applique pas.</li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute">Optimiser le calcul des requêtes</a> : les bonnes pratiques officielles, dont le passage sur les CTE et les tables temporaires.</li>
 </ul>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
@@ -1559,6 +1634,7 @@ margin-right: 0; }
 <li>Les données arrivent surtout <strong>en lot depuis Cloud Storage</strong> ; les <strong>tables externes</strong> lisent les fichiers sur place ; <strong>Pub/Sub</strong> permet le flux continu.</li>
 <li><strong>Partitionner</strong> (par date) permet d’ignorer des morceaux entiers de la table ; <strong>clusteriser</strong> trie chaque partition pour sauter des blocs. On filtre directement sur ces colonnes.</li>
 <li>Jamais de <code>SELECT *</code>, <code>LIMIT</code> ne réduit pas le coût, on vérifie avec <strong><code>--dry_run</code></strong>, et on pose des <strong>limites</strong> (octets maximum, quotas, alertes de budget).</li>
+<li>Relancer <strong>exactement</strong> la même requête est gratuit grâce au <strong>cache</strong> ; une CTE, elle, n’est jamais gardée en mémoire : pour réutiliser un résultat, passez par une <strong>table temporaire</strong> ou intermédiaire.</li>
 </ul>
 </div>
 </div>
