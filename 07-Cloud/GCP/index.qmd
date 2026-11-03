@@ -64,6 +64,27 @@ Pas d'inquiétude : personne ne connaît tous les services. L'important est de s
 En entreprise, la création des ressources passe en plus par du code d'infrastructure, comme **Terraform**. (on y reviendra ... 👀)
 :::
 
+## Géré ou serverless ?
+
+Sur le cloud, vous croiserez souvent ces deux mots. Ils ont un point commun : **Google s'occupe de l'infrastructure** (installation, mises à jour, sauvegardes, pannes matérielles). La différence porte sur la **capacité** : qui la choisit, et quand on la paie.
+
+- Un service **géré** (*managed*) : Google fait tourner le logiciel pour vous, mais **vous choisissez la taille** des machines (nombre de processeurs, mémoire, nombre de nœuds). Ces machines tournent **en permanence**, et vous les payez même quand personne ne s'en sert.
+- Un service **serverless** (sans serveur) : vous ne choisissez **rien**. La capacité s'adapte toute seule à la demande, descend souvent jusqu'à zéro quand rien ne tourne, et vous payez **à l'usage** : la requête, la seconde de calcul, l'octet stocké.
+
+| | Géré | Serverless |
+|---|---|---|
+| Qui gère l'infrastructure ? | Google | Google |
+| Qui choisit la capacité ? | Vous (taille des machines, nombre de nœuds) | Personne : elle s'adapte toute seule |
+| Quand paie-t-on ? | Tant que le service existe, même sans activité | Uniquement quand on s'en sert |
+| Exemples sur GCP | Cloud SQL, AlloyDB, Cloud Composer, Dataproc, GKE | BigQuery, Cloud Run, Cloud Run functions, Cloud Storage, Pub/Sub |
+
+:::{.callout-warning}
+## Le piège du service géré oublié
+Une base Cloud SQL ou un environnement Cloud Composer créés pour un test continuent de coûter, jour et nuit, tant qu'on ne les a pas supprimés. Avec un service serverless, un projet qui ne fait rien ne coûte presque rien. Pensez à supprimer les ressources gérées dont vous n'avez plus besoin.
+:::
+
+La frontière n'est pas toujours aussi nette : certains services existent dans les deux versions. Par exemple, Dataproc propose une version *serverless* pour Spark, et GKE un mode *Autopilot*, où Google dimensionne lui-même les machines. Le bon réflexe est de se poser une seule question : **est-ce que je paie quand rien ne tourne ?**
+
 ## Ressources
 
 - [Documentation de Google Cloud](https://docs.cloud.google.com/docs) : la référence pour chaque service.
