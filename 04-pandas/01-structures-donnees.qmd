@@ -19,19 +19,6 @@ Pour accéder aux notebooks d'exercices c'est ici 👇
 [![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB01_premiers_pas%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%ABpandas-01-structures-donnees%C2%BB)
 :::
 
-
-## Pourquoi `Pandas` ?
-
-Dans le module d'initiation, vous avez analysé des ventes stockées dans une **liste de dictionnaires**. Pour calculer un chiffre d'affaires par ville, il fallait une boucle, un accumulateur, un dictionnaire de résultats… une dizaine de lignes pour une question simple.
-
-**pandas** est la bibliothèque de référence pour manipuler des données tabulaires en Python. Elle apporte deux structures, la **Series** et le **DataFrame**, et des centaines de méthodes pour filtrer, calculer, regrouper ou fusionner des données, le plus souvent **sans écrire une seule boucle**.
-
-On l'importe toujours de la même façon, avec l'alias `pd` :
-
-```python
-import pandas as pd
-```
-
 ::: {.callout-note}
 ### Quelle version ?
 Ce cours utilise **pandas 3**. Si vous êtes sur pandas 2, tout fonctionne de la même façon dans cette page, à un détail d'affichage près : les colonnes de texte y apparaissent avec le type `object` au lieu de `str`. Pour connaître votre version : `pd.__version__`.
