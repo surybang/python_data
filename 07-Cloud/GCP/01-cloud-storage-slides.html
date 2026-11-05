@@ -1538,7 +1538,12 @@ margin-right: 0; }
 </section>
 <section id="utiliser-cloud-storage" class="slide level2 scrollable">
 <h2>Utiliser Cloud Storage</h2>
-<p>Comme pour BigQuery, il y a trois façons de travailler avec Cloud Storage : la <strong>console web</strong> pour explorer, la ligne de commande <strong><code>gcloud</code></strong> pour automatiser, et <strong>Python</strong> pour intégrer GCS à vos programmes.</p>
+<p>On travaille avec Cloud Storage de plusieurs façons, selon ce qu’on veut faire :</p>
+<ul>
+<li><strong>utiliser</strong> le stockage (déposer, lire, lister des fichiers) : la <strong>console web</strong> pour explorer, la ligne de commande <strong><code>gcloud</code></strong> pour automatiser, et <strong>Python</strong> pour intégrer GCS à vos programmes ;</li>
+<li><strong>créer et configurer</strong> les buckets eux-mêmes : en production, on passe le plus souvent par du code d’infrastructure, comme <strong>Terraform</strong>, pour que leur création soit versionnée, relue et reproductible d’un environnement à un autre.</li>
+</ul>
+<p>Dans cette page, nous nous concentrons sur la console, <code>gcloud</code> et Python.</p>
 <h3 id="en-ligne-de-commande">En ligne de commande</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Créer un bucket à Paris</span></span>
 <span id="cb3-2"><a aria-label="2"></a><span class="ex">gcloud</span> storage buckets create gs://ventes-brut-286bdf <span class="at">--location</span><span class="op">=</span>europe-west9</span>

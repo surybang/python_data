@@ -85,9 +85,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-49b7bb19c9d1baed06a534eabc31bd82.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-22fd6789635a9ff02d39035fd0fd6b41.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-49b7bb19c9d1baed06a534eabc31bd82.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-984c703134606744d06d6a556253c497.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-122ce7d522e5c239aedb5686f07626b7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-984c703134606744d06d6a556253c497.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -923,7 +923,12 @@ Note
 </section>
 <section id="utiliser-cloud-storage" class="level2">
 <h2 class="anchored" data-anchor-id="utiliser-cloud-storage">Utiliser Cloud Storage</h2>
-<p>Comme pour BigQuery, il y a trois façons de travailler avec Cloud Storage : la <strong>console web</strong> pour explorer, la ligne de commande <strong><code>gcloud</code></strong> pour automatiser, et <strong>Python</strong> pour intégrer GCS à vos programmes.</p>
+<p>On travaille avec Cloud Storage de plusieurs façons, selon ce qu’on veut faire :</p>
+<ul>
+<li><strong>utiliser</strong> le stockage (déposer, lire, lister des fichiers) : la <strong>console web</strong> pour explorer, la ligne de commande <strong><code>gcloud</code></strong> pour automatiser, et <strong>Python</strong> pour intégrer GCS à vos programmes ;</li>
+<li><strong>créer et configurer</strong> les buckets eux-mêmes : en production, on passe le plus souvent par du code d’infrastructure, comme <strong>Terraform</strong>, pour que leur création soit versionnée, relue et reproductible d’un environnement à un autre.</li>
+</ul>
+<p>Dans cette page, nous nous concentrons sur la console, <code>gcloud</code> et Python.</p>
 <section id="en-ligne-de-commande" class="level3">
 <h3 class="anchored" data-anchor-id="en-ligne-de-commande">En ligne de commande</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer un bucket à Paris</span></span>
