@@ -41,6 +41,12 @@ pandas ne travaille pas seul : il s'appuie sur deux bibliothèques qui font le g
 PyArrow n'est pas installé automatiquement avec pandas, mais il est fortement recommandé :
 
 ```bash
+# avec pip
+pip install pandas pyarrow
+```
+
+```bash
+# avec uv
 uv add pandas pyarrow
 ```
 
