@@ -11,7 +11,7 @@ Le cloud, c'est **louer** de l'informatique au lieu de l'acheter : du stockage, 
 | Partie | Ce que vous y verrez | Statut |
 |---|---|---|
 | [**Google Cloud Platform**](GCP/index.qmd) | Le cloud de Google : stocker des fichiers avec Cloud Storage, analyser des données avec BigQuery, et un tour d'horizon des autres services (Cloud Run, Composer, IA…). | ✅ Disponible |
-| **SSP Cloud** | La plateforme data de l'Insee, que vous utilisez déjà : le catalogue de services, le stockage S3 et l'orchestration avec Argo Workflows. | 🚧 À venir |
+| **SSP Cloud** | La plateforme data de l'Insee : le catalogue de services, le stockage S3 et l'orchestration avec Argo Workflows. | 🚧 À venir |
 
 :::{.callout-tip}
 ## Les mêmes briques partout
