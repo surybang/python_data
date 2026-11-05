@@ -175,7 +175,12 @@ Des buckets ouverts par erreur sont à l'origine de nombreuses fuites de donnée
 
 ## Utiliser Cloud Storage
 
-Comme pour BigQuery, il y a trois façons de travailler avec Cloud Storage : la **console web** pour explorer, la ligne de commande **`gcloud`** pour automatiser, et **Python** pour intégrer GCS à vos programmes.
+On travaille avec Cloud Storage de plusieurs façons, selon ce qu'on veut faire :
+
+- **utiliser** le stockage (déposer, lire, lister des fichiers) : la **console web** pour explorer, la ligne de commande **`gcloud`** pour automatiser, et **Python** pour intégrer GCS à vos programmes ;
+- **créer et configurer** les buckets eux-mêmes : en production, on passe le plus souvent par du code d'infrastructure, comme **Terraform**, pour que leur création soit versionnée, relue et reproductible d'un environnement à un autre.
+
+Dans cette page, nous nous concentrons sur la console, `gcloud` et Python.
 
 ### En ligne de commande
 
