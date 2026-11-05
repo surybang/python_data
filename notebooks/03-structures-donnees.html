@@ -643,6 +643,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classement)   <span class="co"># ?</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ventes)       <span class="co"># ?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>L’exemple de code ci-dessus montre ce qu’il ne faut pas faire. Ici, on souhaitait stocker les ventes triées dans une nouvelle variable <code>classement</code> cependant la méthode <code>sort()</code> renvoie None.</p>
+<p>De ce fait, la variable <code>classement</code> reçoit la valeur <code>None</code> au lieu des ventes triées. Vous remarquerez également que les ventes sont tout de même triées puisque la partie <code>ventes.sort()</code> a bien été exécutée.</p>
+<p>Le code n’est donc pas correct dans le cas où on aurait voulu conserver nos ventes “brutes” (non triées) et obtenir un classement des ventes.</p>
 <div id="sd0007" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> [<span class="dv">340</span>, <span class="dv">120</span>, <span class="dv">560</span>, <span class="dv">90</span>]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
