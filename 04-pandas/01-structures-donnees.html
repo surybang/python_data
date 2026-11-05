@@ -551,8 +551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#pourquoi-pandas" id="toc-pourquoi-pandas" class="nav-link active" data-scroll-target="#pourquoi-pandas">Pourquoi <code>Pandas</code> ?</a></li>
-  <li><a href="#la-series-une-colonne-de-données" id="toc-la-series-une-colonne-de-données" class="nav-link" data-scroll-target="#la-series-une-colonne-de-données">La Series : une colonne de données</a>
+  <li><a href="#la-series-une-colonne-de-données" id="toc-la-series-une-colonne-de-données" class="nav-link active" data-scroll-target="#la-series-une-colonne-de-données">La Series : une colonne de données</a>
   <ul class="collapse">
   <li><a href="#des-valeurs-et-un-index" id="toc-des-valeurs-et-un-index" class="nav-link" data-scroll-target="#des-valeurs-et-un-index">Des valeurs et un index</a></li>
   <li><a href="#calculer-sans-boucle" id="toc-calculer-sans-boucle" class="nav-link" data-scroll-target="#calculer-sans-boucle">Calculer sans boucle</a></li>
@@ -611,12 +610,6 @@ Tip
 <p><a href="https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/pandas-01-structures-donnees.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB01_premiers_pas%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&amp;init.personalInitArgs=%C2%ABpandas-01-structures-donnees%C2%BB"><img src="https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode.png" class="img-fluid" alt="Open In SSP Cloud"></a></p>
 </div>
 </div>
-<section id="pourquoi-pandas" class="level2">
-<h2 class="anchored" data-anchor-id="pourquoi-pandas">Pourquoi <code>Pandas</code> ?</h2>
-<p>Dans le module d’initiation, vous avez analysé des ventes stockées dans une <strong>liste de dictionnaires</strong>. Pour calculer un chiffre d’affaires par ville, il fallait une boucle, un accumulateur, un dictionnaire de résultats… une dizaine de lignes pour une question simple.</p>
-<p><strong>pandas</strong> est la bibliothèque de référence pour manipuler des données tabulaires en Python. Elle apporte deux structures, la <strong>Series</strong> et le <strong>DataFrame</strong>, et des centaines de méthodes pour filtrer, calculer, regrouper ou fusionner des données, le plus souvent <strong>sans écrire une seule boucle</strong>.</p>
-<p>On l’importe toujours de la même façon, avec l’alias <code>pd</code> :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -631,14 +624,13 @@ Tip
 </div>
 </div>
 <hr>
-</section>
 <section id="la-series-une-colonne-de-données" class="level2">
 <h2 class="anchored" data-anchor-id="la-series-une-colonne-de-données">La Series : une colonne de données</h2>
 <section id="des-valeurs-et-un-index" class="level3">
 <h3 class="anchored" data-anchor-id="des-valeurs-et-un-index">Des valeurs et un index</h3>
 <p>Une <strong>Series</strong> est une suite de valeurs, un peu comme une liste, mais chaque valeur porte une <strong>étiquette</strong>. L’ensemble des étiquettes s’appelle l’<strong>index</strong>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>notes <span class="op">=</span> pd.Series([<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">17</span>])</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(notes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>notes <span class="op">=</span> pd.Series([<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">17</span>])</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(notes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>0    12
 1    15
 2     8
@@ -651,22 +643,22 @@ dtype: int64</code></pre>
 <li>en bas, le <strong>type</strong> des valeurs (<code>dtype</code>) : toutes les valeurs d’une Series ont le <strong>même type</strong>.</li>
 </ul>
 <p>On peut choisir un index plus parlant, et donner un nom à la Series :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>notes <span class="op">=</span> pd.Series(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">17</span>],</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Jessica"</span>, <span class="st">"Wilson"</span>, <span class="st">"Ian"</span>, <span class="st">"Becky"</span>],</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"note"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>notes[<span class="st">"Ian"</span>]     <span class="co"># 8 → on accède à une valeur par son étiquette, comme une clé de dictionnaire</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>notes <span class="op">=</span> pd.Series(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">17</span>],</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Jessica"</span>, <span class="st">"Wilson"</span>, <span class="st">"Ian"</span>, <span class="st">"Becky"</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"note"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>notes[<span class="st">"Ian"</span>]     <span class="co"># 8 → on accède à une valeur par son étiquette, comme une clé de dictionnaire</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Une Series combine donc ce que vous connaissez déjà : l’<strong>ordre</strong> d’une liste et l’<strong>accès par étiquette</strong> d’un dictionnaire.</p>
 </section>
 <section id="calculer-sans-boucle" class="level3">
 <h3 class="anchored" data-anchor-id="calculer-sans-boucle">Calculer sans boucle</h3>
 <p>C’est la grande force de pandas : une opération s’applique à <strong>toutes les valeurs d’un coup</strong>. On parle d’opération <strong>vectorisée</strong>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>notes <span class="op">+</span> <span class="dv">1</span>          <span class="co"># ajoute 1 à chaque note</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>notes <span class="op">*</span> <span class="fl">1.1</span> <span class="op">&gt;</span> <span class="dv">15</span>   <span class="co"># compare chaque note majorée de 10 % à 15 → une Series de booléens</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>notes.mean()       <span class="co"># 13.0</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>notes.<span class="bu">max</span>()        <span class="co"># 17</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>notes <span class="op">+</span> <span class="dv">1</span>          <span class="co"># ajoute 1 à chaque note</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>notes <span class="op">*</span> <span class="fl">1.1</span> <span class="op">&gt;</span> <span class="dv">15</span>   <span class="co"># compare chaque note majorée de 10 % à 15 → une Series de booléens</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>notes.mean()       <span class="co"># 13.0</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>notes.<span class="bu">max</span>()        <span class="co"># 17</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Avec une liste, chacune de ces lignes aurait demandé une boucle. Souvenez-vous de l’encadré « Et en analyse de données ? » de la page sur les boucles : c’est exactement ce qu’on vous annonçait.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -679,10 +671,10 @@ dtype: int64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Voici les ventes de deux magasins, par mois. Observez le code <strong>sans l’exécuter</strong> :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>magasin_a <span class="op">=</span> pd.Series([<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>], index<span class="op">=</span>[<span class="st">"janv"</span>, <span class="st">"fev"</span>, <span class="st">"mars"</span>])</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>magasin_b <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], index<span class="op">=</span>[<span class="st">"fev"</span>, <span class="st">"mars"</span>, <span class="st">"avr"</span>])</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(magasin_a <span class="op">+</span> magasin_b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>magasin_a <span class="op">=</span> pd.Series([<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>], index<span class="op">=</span>[<span class="st">"janv"</span>, <span class="st">"fev"</span>, <span class="st">"mars"</span>])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>magasin_b <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], index<span class="op">=</span>[<span class="st">"fev"</span>, <span class="st">"mars"</span>, <span class="st">"avr"</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(magasin_a <span class="op">+</span> magasin_b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="1">
 <li>Avec deux listes <code>[10, 20, 30]</code> et <code>[1, 2, 3]</code>, on additionnerait position par position. Que va faire pandas ?</li>
 <li>Que se passe-t-il pour janvier et avril ?</li>
@@ -721,12 +713,12 @@ dtype: float64</code></pre>
 <h3 class="anchored" data-anchor-id="un-ensemble-de-series-qui-partagent-le-même-index">Un ensemble de Series qui partagent le même index</h3>
 <p>Un <strong>DataFrame</strong> est un tableau à deux dimensions. On peut le voir comme <strong>plusieurs Series côte à côte</strong>, une par colonne, qui partagent <strong>le même index</strong>.</p>
 <p>La façon la plus simple de le créer : un dictionnaire dont chaque clé est un nom de colonne, et chaque valeur la liste de ses données.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"produit"</span>: [<span class="st">"Clavier"</span>, <span class="st">"Souris"</span>, <span class="st">"Écran"</span>, <span class="st">"Clavier"</span>, <span class="st">"Écran"</span>, <span class="st">"Souris"</span>],</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ville"</span>: [<span class="st">"Lyon"</span>, <span class="st">"Paris"</span>, <span class="st">"Lyon"</span>, <span class="st">"Nantes"</span>, <span class="st">"Paris"</span>, <span class="st">"Lyon"</span>],</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"quantite"</span>: [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>],</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"prix"</span>: [<span class="fl">49.9</span>, <span class="fl">19.9</span>, <span class="fl">189.0</span>, <span class="fl">49.9</span>, <span class="fl">189.0</span>, <span class="fl">19.9</span>],</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"produit"</span>: [<span class="st">"Clavier"</span>, <span class="st">"Souris"</span>, <span class="st">"Écran"</span>, <span class="st">"Clavier"</span>, <span class="st">"Écran"</span>, <span class="st">"Souris"</span>],</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ville"</span>: [<span class="st">"Lyon"</span>, <span class="st">"Paris"</span>, <span class="st">"Lyon"</span>, <span class="st">"Nantes"</span>, <span class="st">"Paris"</span>, <span class="st">"Lyon"</span>],</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"quantite"</span>: [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>],</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"prix"</span>: [<span class="fl">49.9</span>, <span class="fl">19.9</span>, <span class="fl">189.0</span>, <span class="fl">49.9</span>, <span class="fl">189.0</span>, <span class="fl">19.9</span>],</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>   produit   ville  quantite   prix
 0  Clavier    Lyon         2   49.9
 1   Souris   Paris         5   19.9
@@ -833,10 +825,10 @@ dtype: float64</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>On ne garde que les colonnes numériques, puis on fait deux sommes :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>nombres <span class="op">=</span> ventes[[<span class="st">"quantite"</span>, <span class="st">"prix"</span>]]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>nombres.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>nombres.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nombres <span class="op">=</span> ventes[[<span class="st">"quantite"</span>, <span class="st">"prix"</span>]]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>nombres.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>nombres.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="1">
 <li>Laquelle donne le total <strong>de chaque colonne</strong> (la quantité totale vendue, la somme des prix) ?</li>
 <li>Combien de valeurs renvoie chacune des deux sommes ?</li>
@@ -856,14 +848,14 @@ dtype: float64</code></pre>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>C’est <code>axis=0</code> qui donne le total de chaque colonne… alors que 0 désigne les lignes.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>nombres.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)    <span class="co"># 2 valeurs : une par colonne</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># quantite     17.0</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># prix        517.6</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>nombres.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)    <span class="co"># 6 valeurs : une par ligne</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 0     51.9</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1     24.9</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>nombres.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)    <span class="co"># 2 valeurs : une par colonne</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># quantite     17.0</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># prix        517.6</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>nombres.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)    <span class="co"># 6 valeurs : une par ligne</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 0     51.9</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1     24.9</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>La bonne façon de le lire : <code>axis</code> indique l’axe <strong>le long duquel on calcule</strong>, celui qui <strong>disparaît</strong> dans le résultat.</p>
 <ul>
 <li><code>axis=0</code> : on parcourt les lignes, de haut en bas, et on les « écrase » : il reste <strong>une valeur par colonne</strong>. C’est le comportement par défaut : <code>nombres.sum()</code> fait la même chose.</li>
@@ -936,7 +928,7 @@ dtype: float64</code></pre>
 </tr>
 </tbody>
 </table>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ventes.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ventes.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>RangeIndex: 6 entries, 0 to 5
 Data columns (total 4 columns):
  #   Column    Non-Null Count  Dtype
@@ -966,13 +958,13 @@ memory usage: 324.0 bytes</code></pre>
 <h2 class="anchored" data-anchor-id="accéder-aux-colonnes-et-aux-lignes">Accéder aux colonnes et aux lignes</h2>
 <section id="une-colonne-cest-une-series" class="level3">
 <h3 class="anchored" data-anchor-id="une-colonne-cest-une-series">Une colonne, c’est une Series</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ventes[<span class="st">"prix"</span>]          <span class="co"># une colonne → une Series</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ventes[[<span class="st">"produit"</span>, <span class="st">"prix"</span>]]  <span class="co"># une liste de colonnes → un DataFrame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ventes[<span class="st">"prix"</span>]          <span class="co"># une colonne → une Series</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ventes[[<span class="st">"produit"</span>, <span class="st">"prix"</span>]]  <span class="co"># une liste de colonnes → un DataFrame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Attention aux crochets : <code>ventes["prix"]</code> renvoie une <strong>Series</strong>, alors que <code>ventes[["prix"]]</code> (une liste contenant un seul nom) renvoie un <strong>DataFrame</strong> d’une seule colonne. Les deux s’affichent presque pareil, mais n’ont pas les mêmes méthodes.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(ventes[<span class="st">"prix"</span>])     <span class="co"># pandas.Series</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(ventes[[<span class="st">"prix"</span>]])   <span class="co"># pandas.DataFrame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(ventes[<span class="st">"prix"</span>])     <span class="co"># pandas.Series</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(ventes[[<span class="st">"prix"</span>]])   <span class="co"># pandas.DataFrame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Comme une colonne est une Series, tout ce que vous avez vu plus haut s’applique : <code>ventes["prix"].mean()</code>, <code>ventes["prix"] * 1.2</code>, <code>ventes["ville"].value_counts()</code>…</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ventes[<span class="st">"ville"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ventes[<span class="st">"ville"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>ville
 Lyon      3
 Paris     2
@@ -987,8 +979,8 @@ Name: count, dtype: int64</code></pre>
 <li><code>.iloc[...]</code> sélectionne par <strong>position</strong> (<code>i</code> pour <em>integer</em>), comme l’index d’une liste ;</li>
 <li><code>.loc[...]</code> sélectionne par <strong>étiquette</strong> d’index.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ventes.iloc[<span class="dv">0</span>]             <span class="co"># la première ligne, quelle que soit son étiquette</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ventes.loc[<span class="dv">2</span>, <span class="st">"prix"</span>]      <span class="co"># la valeur à la ligne d'étiquette 2, colonne prix → 189.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ventes.iloc[<span class="dv">0</span>]             <span class="co"># la première ligne, quelle que soit son étiquette</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ventes.loc[<span class="dv">2</span>, <span class="st">"prix"</span>]      <span class="co"># la valeur à la ligne d'étiquette 2, colonne prix → 189.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Une ligne extraite seule est elle aussi une <strong>Series</strong>, dont l’index est formé des noms de colonnes. Comme elle mélange du texte et des nombres, son <code>dtype</code> devient <code>object</code>, le type « fourre-tout » de pandas.</p>
 <p>Avec l’index par défaut, <code>loc</code> et <code>iloc</code> semblent faire la même chose. La différence apparaîtra dès que l’index ne sera plus 0, 1, 2… par exemple après un tri ou un filtre. Nous y reviendrons en détail dans le chapitre sur la sélection.</p>
 <hr>
@@ -1049,11 +1041,11 @@ Name: count, dtype: int64</code></pre>
 <section id="les-méthodes-renvoient-un-nouvel-objet" class="level2">
 <h2 class="anchored" data-anchor-id="les-méthodes-renvoient-un-nouvel-objet">Les méthodes renvoient un nouvel objet</h2>
 <p>Ajoutons une colonne de chiffre d’affaires avec la méthode <code>.assign()</code> :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ventes.assign(ca<span class="op">=</span>ventes[<span class="st">"quantite"</span>] <span class="op">*</span> ventes[<span class="st">"prix"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ventes.assign(ca<span class="op">=</span>ventes[<span class="st">"quantite"</span>] <span class="op">*</span> ventes[<span class="st">"prix"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Le résultat s’affiche bien avec une colonne <code>ca</code>… mais :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">"ca"</span> <span class="kw">in</span> ventes.columns   <span class="co"># False !</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">"ca"</span> <span class="kw">in</span> ventes.columns   <span class="co"># False !</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Comme <code>sorted()</code> dans le module d’initiation, la plupart des méthodes de pandas <strong>ne modifient pas</strong> le DataFrame : elles en <strong>renvoient un nouveau</strong>. Pour garder le résultat, il faut l’affecter à une variable :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ventes_ca <span class="op">=</span> ventes.assign(ca<span class="op">=</span>ventes[<span class="st">"quantite"</span>] <span class="op">*</span> ventes[<span class="st">"prix"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ventes_ca <span class="op">=</span> ventes.assign(ca<span class="op">=</span>ventes[<span class="st">"quantite"</span>] <span class="op">*</span> ventes[<span class="st">"prix"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>C’est voulu, et c’est une bonne nouvelle : l’original reste intact tant que vous ne le remplacez pas explicitement, et chaque étape de votre analyse produit un nouvel objet. C’est ce qui permettra, plus tard, d’<strong>enchaîner</strong> les méthodes les unes après les autres.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">

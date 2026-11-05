@@ -1042,17 +1042,6 @@
     ]
   },
   {
-    "objectID": "04-pandas/01-structures-donnees.html#pourquoi-pandas",
-    "href": "04-pandas/01-structures-donnees.html#pourquoi-pandas",
-    "title": "Les structures de données de pandas",
-    "section": "Pourquoi Pandas ?",
-    "text": "Pourquoi Pandas ?\nDans le module d’initiation, vous avez analysé des ventes stockées dans une liste de dictionnaires. Pour calculer un chiffre d’affaires par ville, il fallait une boucle, un accumulateur, un dictionnaire de résultats… une dizaine de lignes pour une question simple.\npandas est la bibliothèque de référence pour manipuler des données tabulaires en Python. Elle apporte deux structures, la Series et le DataFrame, et des centaines de méthodes pour filtrer, calculer, regrouper ou fusionner des données, le plus souvent sans écrire une seule boucle.\nOn l’importe toujours de la même façon, avec l’alias pd :\nimport pandas as pd\n\n\n\n\n\n\nNoteQuelle version ?\n\n\n\nCe cours utilise pandas 3. Si vous êtes sur pandas 2, tout fonctionne de la même façon dans cette page, à un détail d’affichage près : les colonnes de texte y apparaissent avec le type object au lieu de str. Pour connaître votre version : pd.__version__.",
-    "crumbs": [
-      "Pandas pour l'analyse de données",
-      "Structure de données"
-    ]
-  },
-  {
     "objectID": "04-pandas/01-structures-donnees.html#la-series-une-colonne-de-données",
     "href": "04-pandas/01-structures-donnees.html#la-series-une-colonne-de-données",
     "title": "Les structures de données de pandas",
@@ -1117,13 +1106,6 @@
       "Pandas pour l'analyse de données",
       "Structure de données"
     ]
-  },
-  {
-    "objectID": "04-pandas/01-structures-donnees-slides.html#pourquoi-pandas",
-    "href": "04-pandas/01-structures-donnees-slides.html#pourquoi-pandas",
-    "title": "Les structures de données de pandas",
-    "section": "Pourquoi Pandas ?",
-    "text": "Pourquoi Pandas ?\nDans le module d’initiation, vous avez analysé des ventes stockées dans une liste de dictionnaires. Pour calculer un chiffre d’affaires par ville, il fallait une boucle, un accumulateur, un dictionnaire de résultats… une dizaine de lignes pour une question simple.\npandas est la bibliothèque de référence pour manipuler des données tabulaires en Python. Elle apporte deux structures, la Series et le DataFrame, et des centaines de méthodes pour filtrer, calculer, regrouper ou fusionner des données, le plus souvent sans écrire une seule boucle.\nOn l’importe toujours de la même façon, avec l’alias pd :\nimport pandas as pd\n\n\n\n\n\n\nQuelle version ?\n\n\nCe cours utilise pandas 3. Si vous êtes sur pandas 2, tout fonctionne de la même façon dans cette page, à un détail d’affichage près : les colonnes de texte y apparaissent avec le type object au lieu de str. Pour connaître votre version : pd.__version__."
   },
   {
     "objectID": "04-pandas/01-structures-donnees-slides.html#la-series-une-colonne-de-données",
