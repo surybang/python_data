@@ -1,0 +1,492 @@
+---
+title: "Charger et explorer un jeu de données"
+format:
+  html: default
+  revealjs:
+    output-file: 02-charger-explorer-slides.html
+    embed-resources: true
+    scrollable: true
+format-links:
+  - format: revealjs
+    text: "Voir les slides"
+    icon: file-slides
+---
+
+:::{.callout-tip}
+Pour accéder aux notebooks d'exercices c'est ici 👇
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/pandas-02-charger-explorer.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%ABpandas-02-charger-explorer%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%ABpandas-02-charger-explorer%C2%BB)
+:::
+
+Ce chapitre vous apprend à **charger** un fichier dans un DataFrame, puis à en mener une première **analyse exploratoire** (on parle souvent d'**EDA**, pour *Exploratory Data Analysis*) : combien de lignes, quels types, quelles valeurs, et surtout quels **problèmes**.. Car un jeu de données réel est rarement propre, et c'est à l'exploration qu'on s'en rend compte.
+
+---
+
+## Le jeu de données du module
+
+Tout au long du module, nous travaillons sur le même fichier, `ventes.csv` : les ventes d'une petite enseigne de matériel de bureau sur le premier semestre 2026. Chaque ligne est **une vente**.
+
+| Colonne | Contenu |
+|---|---|
+| `id_vente` | le numéro de la vente |
+| `date_vente` | la date de la vente |
+| `id_client` | le numéro du client |
+| `produit`, `categorie` | ce qui a été vendu |
+| `ville` | la ville du magasin |
+| `quantite` | le nombre d'articles (négatif pour un retour) |
+| `prix_unitaire` | le prix d'un article, en euros |
+| `statut` | `LIVREE`, `EN_ATTENTE`, `ANNULEE` ou `RETOUR` |
+
+---
+
+## Lire un fichier CSV
+
+### `pd.read_csv`
+
+Un fichier **CSV** (*Comma-Separated Values*) est un simple fichier texte : une ligne par enregistrement, des valeurs séparées par des virgules. La première ligne contient les noms des colonnes. Si vous l'ouvrez dans un éditeur de texte, voici ce que vous voyez :
+
+```
+id_vente,date_vente,id_client,produit,categorie,ville,quantite,prix_unitaire,statut
+1173,2026-01-01,18,Souris,Informatique,Paris,-2,19.9,RETOUR
+1245,2026-01-01,36,Casque,Audio,Lyon,2,79.0,ANNULEE
+```
+
+La fonction `pd.read_csv` le transforme en DataFrame. Elle accepte un **chemin** vers un fichier de votre ordinateur, ou directement une **URL** :
+
+```python
+import pandas as pd
+
+URL = "https://raw.githubusercontent.com/surybang/python_data/main/data/ventes.csv"
+ventes = pd.read_csv(URL)
+ventes.head()
+```
+
+```
+   id_vente  date_vente  id_client produit     categorie      ville  quantite  prix_unitaire   statut
+0      1173  2026-01-01         18  Souris  Informatique       Lyon        -2           19.9   RETOUR
+1      1245  2026-01-01         36  Casque         Audio      Paris         2           79.0  ANNULEE
+2      1246  2026-01-01         16  Chaise      Mobilier  Marseille         8          149.0   LIVREE
+3      1107  2026-01-02          9   Écran  Informatique  Marseille         2          189.0   LIVREE
+4      1190  2026-01-03         25  Souris  Informatique      Paris         1           19.9  ANNULEE
+```
+
+Sur votre ordinateur, vous écririez simplement `pd.read_csv("data/ventes.csv")`, avec le chemin du fichier.
+
+### Les options utiles
+
+`read_csv` a des dizaines de paramètres. Quatre suffisent dans la grande majorité des cas :
+
+| Paramètre | À quoi il sert | Exemple |
+|---|---|---|
+| `sep` | le séparateur de colonnes | `sep=";"` |
+| `decimal` | le séparateur décimal | `decimal=","` |
+| `parse_dates` | les colonnes à lire comme des dates | `parse_dates=["date_vente"]` |
+| `dtype` | forcer le type de certaines colonnes | `dtype={"id_client": "str"}` |
+
+:::{.callout-warning}
+## Le piège du CSV « à la française »
+Excel en français enregistre souvent les CSV avec un **point-virgule** comme séparateur et une **virgule** comme séparateur décimal (`19,9` au lieu de `19.9`). Lu sans options, un tel fichier donne un DataFrame d'**une seule colonne**, ou des prix stockés comme du texte. Le remède :
+
+```
+pd.read_csv("export_excel.csv", sep=";", decimal=",")
+```
+:::
+
+Regardez le type de la colonne `date_vente` : par défaut, pandas la lit comme du **texte**.
+
+```python
+ventes.dtypes
+```
+
+```
+id_vente           int64
+date_vente           str
+id_client          int64
+produit              str
+categorie            str
+ville                str
+quantite           int64
+prix_unitaire    float64
+statut               str
+dtype: object
+```
+
+Une date stockée comme du texte ne permet pas de calculer un délai ni d'extraire un mois. Demandez à pandas de la convertir dès la lecture :
+
+```python
+ventes = pd.read_csv(URL, parse_dates=["date_vente"])
+print(ventes["date_vente"].dtype)
+```
+
+```
+datetime64[us]
+```
+
+`datetime64` est le type des dates dans pandas (le `[us]` indique une précision à la microseconde, vous pouvez l'ignorer). Nous verrons tout ce qu'il permet au chapitre sur le nettoyage.
+
+### Et les autres formats ?
+
+La logique est la même pour tous les formats : une fonction `pd.read_...` qui renvoie un DataFrame.
+
+| Format | Fonction | Remarque |
+|---|---|---|
+| CSV | `pd.read_csv` | le plus courant |
+| Excel | `pd.read_excel` | choisir la feuille avec `sheet_name=` ; nécessite le paquet `openpyxl` |
+| Parquet | `pd.read_parquet` | format en colonnes, compact et rapide ; garde les types (dates comprises) ; nécessite `pyarrow` |
+| JSON | `pd.read_json` | fréquent pour les données issues d'API |
+
+À chaque `read_...` correspond un `to_...` pour écrire : `ventes.to_csv("ventes_propres.csv", index=False)`, `ventes.to_parquet("ventes.parquet")`.
+
+---
+
+## Le style de ce cours : enchaîner les méthodes
+
+Une méthode pandas renvoie (presque) toujours un **nouvel objet**, vous l'avez vu au chapitre précédent. On peut donc appeler une méthode **sur le résultat** de la précédente, et ainsi de suite. Dans ce cours, nous écrivons ces enchaînements d'une façon bien précise, recommandée par Matt Harrison dans *Effective Pandas* :
+
+```python
+resume = (
+    pd.read_csv(URL, parse_dates=["date_vente"])
+    .drop(columns=["categorie"])
+    .head(3)
+)
+resume
+```
+
+```
+   id_vente date_vente  id_client produit      ville  quantite  prix_unitaire   statut
+0      1173 2026-01-01         18  Souris       Lyon        -2           19.9   RETOUR
+1      1245 2026-01-01         36  Casque      Paris         2           79.0  ANNULEE
+2      1246 2026-01-01         16  Chaise  Marseille         8          149.0   LIVREE
+```
+
+Trois règles :
+
+- toute la chaîne est entourée de **parenthèses**, ce qui permet à Python de lire plusieurs lignes comme une seule instruction ;
+- **une étape par ligne**, chaque ligne commence par un point ;
+- on lit la chaîne **de haut en bas**, comme une recette : je lis le fichier, je retire la colonne `categorie`, je garde les trois premières lignes.
+
+:::{.callout-tip}
+## Pourquoi pas des variables intermédiaires ?
+La première autre façon d'écrire serait :
+
+```
+ventes_brutes = pd.read_csv(URL, parse_dates=["date_vente"])
+ventes_sans_cat = ventes_brutes.drop(columns=["categorie"])
+resume = ventes_sans_cat.head(3)
+```
+
+Ça fonctionne, mais on multiplie les noms de variables (et le risque d'utiliser la mauvaise), et la logique est noyée. Avec une chaîne, on peut aussi **commenter une ligne** pour désactiver une étape le temps de vérifier quelque chose.
+
+
+La seconde, la plus répandue dans les tutoriels, réutilise toujours le même nom `df` :
+
+```
+df = pd.read_csv(URL, parse_dates=["date_vente"])
+df = df.drop(columns=["categorie"])
+df.head(3)
+```
+
+Elle est plus courte, mais `df` change de contenu à chaque ligne. Dans un notebook, si vous relancez la deuxième cellule une fois de trop, la colonne a déjà été supprimée et vous obtenez :
+
+```
+KeyError: "['categorie'] not found in axis"
+```
+
+Le résultat dépend alors de **l'ordre dans lequel vous avez exécuté vos cellules**, pas seulement du code écrit. Avec une chaîne, tout part du fichier à chaque exécution : on peut la relancer autant de fois qu'on veut, le résultat est toujours le même.
+:::
+
+### Ajouter une colonne calculée : `assign` et `pd.col`
+
+Pour explorer les ventes, il nous manque une information essentielle : le **montant** de chaque vente, c'est-à-dire la quantité multipliée par le prix unitaire. La méthode `assign` ajoute une colonne et s'insère naturellement dans une chaîne. Avec pandas 3, on décrit le calcul avec `pd.col("nom_de_colonne")` :
+
+```python
+ventes = (
+    pd.read_csv(URL, parse_dates=["date_vente"])
+    .assign(montant=pd.col("quantite") * pd.col("prix_unitaire"))
+)
+ventes[["produit", "quantite", "prix_unitaire", "montant"]].head()
+```
+
+```
+  produit  quantite  prix_unitaire  montant
+0  Souris        -2           19.9    -39.8
+1  Casque         2           79.0    158.0
+2  Chaise         8          149.0   1192.0
+3   Écran         2          189.0    378.0
+4  Souris         1           19.9     19.9
+```
+
+Lisez `pd.col("quantite") * pd.col("prix_unitaire")` comme « la colonne quantité fois la colonne prix unitaire, **du DataFrame en cours de construction** ». Le calcul est vectorisé : il s'applique à toutes les lignes d'un coup, sans boucle. Nous approfondirons `assign` et `pd.col` dans le chapitre « Transformer et chaîner ».
+
+:::{.callout-note}
+## Sur pandas 2
+`pd.col` est apparu avec pandas 3. Sur une version plus ancienne, on écrit la même chose avec une fonction `lambda` : `.assign(montant=lambda df: df["quantite"] * df["prix_unitaire"])`.
+:::
+
+---
+
+## Faire le tour du propriétaire
+
+Vous connaissez déjà `shape`, `head`, `info` et `describe` depuis le chapitre précédent. Sur un vrai fichier, ils deviennent des outils d'**enquête**. Nous allons les passer un par un, en notant au fur et à mesure ce qui pourrait clocher.
+
+### Taille et aperçu
+
+```python
+ventes.shape
+```
+
+```
+(304, 10)
+```
+
+304 ventes et 10 colonnes (les 9 du fichier plus `montant`). `head()` montre le début du fichier, `tail()` la fin, mais les premières lignes ne sont pas forcément représentatives. `sample()` tire des lignes **au hasard** :
+
+```python
+ventes.sample(3, random_state=0)
+```
+
+```
+     id_vente date_vente  id_client  produit     categorie  ville  quantite  prix_unitaire   statut  montant
+66       1238 2026-02-05         50   Webcam  Informatique   lyon        -1           39.9   RETOUR    -39.9
+156      1155 2026-04-11         18  Clavier  Informatique  Lille        -2           49.9   RETOUR    -99.8
+247      1141 2026-05-28         14    Écran  Informatique  Paris         6          189.0  ANNULEE   1134.0
+```
+
+### Types et valeurs manquantes : `info`
+
+```python
+ventes.info()
+```
+
+```
+<class 'pandas.DataFrame'>
+RangeIndex: 304 entries, 0 to 303
+Data columns (total 10 columns):
+ #   Column         Non-Null Count  Dtype         
+---  ------         --------------  -----         
+ 0   id_vente       304 non-null    int64         
+ 1   date_vente     304 non-null    datetime64[us]
+ 2   id_client      304 non-null    int64         
+ 3   produit        304 non-null    str           
+ 4   categorie      304 non-null    str           
+ 5   ville          295 non-null    str           
+ 6   quantite       304 non-null    int64         
+ 7   prix_unitaire  298 non-null    float64       
+ 8   statut         304 non-null    str           
+ 9   montant        298 non-null    float64       
+dtypes: datetime64[us](1), float64(2), int64(3), str(4)
+memory usage: 32.4 KB
+```
+
+Lisez la colonne **Non-Null Count** : il y a 304 lignes, mais seulement **295** villes et **298** prix renseignés. Il manque donc des valeurs. Et comme `montant` est calculé à partir du prix, il lui manque aussi 6 valeurs : un calcul avec une valeur manquante donne une valeur manquante.
+
+::: {.callout-note}
+## Un rapide décompte
+`ventes.count()` donne directement le nombre de valeurs **renseignées** par colonne. Nous verrons au chapitre « Valeurs manquantes » comment compter celles qui **manquent** et quoi en faire.
+:::
+
+### Les colonnes numériques : `describe`
+
+```python
+ventes.describe()
+```
+
+```
+          id_vente                  date_vente   id_client    quantite  prix_unitaire      montant
+count   304.000000                         304  304.000000  304.000000     298.000000   298.000000
+mean   1150.388158  2026-04-03 19:44:12.631579   30.503289    4.062500      82.677181   334.893624
+min    1001.000000         2026-01-01 00:00:00    1.000000   -2.000000      19.900000  -378.000000
+25%    1075.750000         2026-02-13 18:00:00   15.750000    2.000000      39.900000    99.800000
+50%    1149.500000         2026-04-08 12:00:00   29.000000    4.000000      49.900000   199.600000
+75%    1225.250000         2026-05-20 00:00:00   46.000000    6.000000      79.000000   395.000000
+max    1300.000000         2026-06-30 00:00:00   60.000000    8.000000     249.000000  1992.000000
+std      86.733958                         NaN   17.457728    2.651242      68.362713   399.212594
+```
+
+Avec pandas 3, la colonne de dates est résumée elle aussi : la première vente date du 1er janvier, la dernière du 30 juin. Prenez le temps de lire colonne par colonne, c'est là que se cachent les surprises :
+
+- `quantite` a un **minimum de -2** : ce sont les retours, enregistrés en quantité négative ;
+- `montant` descend donc jusqu'à **-378 €** ;
+- `id_vente` et `id_client` sont des numéros : leur moyenne n'a **aucun sens**, pandas les traite comme des nombres parce qu'ils en ont l'air.
+
+:::{.callout-warning}
+## Une moyenne n'est pas toujours celle que l'on croit
+Le montant moyen affiché (environ 335 €) mélange des ventes livrées, des ventes annulées et des retours négatifs. Ce n'est **pas** le panier moyen d'un client. Avant d'interpréter une statistique, demandez-vous toujours **sur quelles lignes** elle est calculée. Vous apprendrez à filtrer les lignes au chapitre suivant.
+:::
+
+### Les colonnes de texte
+
+`describe()` ignore le texte par défaut. Pour les colonnes qualitatives, on demande le résumé explicitement :
+
+```python
+ventes.describe(include="str")
+```
+
+```
+        produit     categorie  ville  statut
+count       304           304    295     304
+unique        8             3      8       4
+top     Clavier  Informatique  Paris  LIVREE
+freq         68           200     85     215
+```
+
+`unique` donne le nombre de valeurs différentes, `top` la plus fréquente, `freq` son nombre d'apparitions. Huit produits, trois catégories, quatre statuts : cohérent. Mais **huit villes** ? L'enseigne n'a que six magasins. Allons voir.
+
+### Compter les valeurs : `value_counts`
+
+`value_counts()` compte les occurrences de chaque valeur d'une colonne, de la plus fréquente à la moins fréquente. C'est **la** méthode d'exploration des variables qualitatives.
+
+```python
+ventes["ville"].value_counts(dropna=False)
+```
+
+```
+ville
+Paris        85
+Lyon         69
+Marseille    43
+Bordeaux     37
+Lille        33
+Nantes       20
+NaN           9
+lyon          5
+ Paris        3
+Name: count, dtype: int64
+```
+
+Trois problèmes apparaissent d'un coup :
+
+- `lyon` en minuscules est compté **à part** de `Lyon` ;
+- `" Paris "` a des **espaces** autour du nom, invisibles à l'œil nu dans un tableur ;
+- 9 ventes n'ont **pas de ville** (`NaN`). Sans `dropna=False`, `value_counts` les aurait passées sous silence.
+
+Pour pandas, `"Lyon"`, `"lyon"` et `" Lyon "` sont trois chaînes différentes, exactement comme en Python pur. C'est un défaut de saisie très courant.
+
+Avec `normalize=True`, on obtient des **proportions** au lieu d'effectifs :
+
+```python
+ventes["statut"].value_counts(normalize=True)
+```
+
+```
+statut
+LIVREE        0.707237
+EN_ATTENTE    0.148026
+ANNULEE       0.082237
+RETOUR        0.062500
+Name: proportion, dtype: float64
+```
+
+70,7 % des ventes sont livrées, 6,25 % sont des retours.
+
+### Combien de valeurs distinctes : `nunique` et `unique`
+
+```python
+ventes.nunique()
+```
+
+```
+id_vente         300
+date_vente       143
+id_client         60
+produit            8
+categorie          3
+ville              8
+quantite          10
+prix_unitaire      8
+statut             4
+montant           72
+dtype: int64
+```
+
+Une ligne attire l'attention : **300** numéros de vente distincts pour **304** lignes. Or un numéro de vente devrait être unique. Il y a donc des ventes enregistrées plusieurs fois : des **doublons**.
+
+`unique()` renvoie la liste des valeurs distinctes d'une colonne, pratique pour repérer une faute de frappe :
+
+```python
+ventes["statut"].unique()
+```
+
+```
+<ArrowStringArray>
+['RETOUR', 'ANNULEE', 'LIVREE', 'EN_ATTENTE']
+Length: 4, dtype: str
+```
+
+---
+
+::: {.callout-important}
+### 🧠 À vous de réfléchir : une colonne mal lue
+
+Un collègue vous envoie `stocks.csv`, exporté d'Excel. Voici son début, ouvert dans un éditeur de texte :
+
+```
+reference;libelle;stock;prix
+A12;Palette bois;40;12,5
+B07;Film étirable;120;8,9
+```
+
+Il le charge avec `stocks = pd.read_csv("stocks.csv")`.
+
+1. Combien de colonnes aura `stocks` ?
+2. Quelle ligne de code faut-il écrire pour obtenir 4 colonnes et un prix numérique ?
+:::
+
+::: {.callout-tip collapse="true"}
+### 💡 Voir la solution
+
+1. **Une seule colonne**, nommée `reference;libelle;stock;prix`. Par défaut, `read_csv` cherche des **virgules**. Il n'y en a qu'une par ligne, à l'intérieur du prix : pandas coupe donc `A12;Palette bois;40;12,5` en deux morceaux, le premier devient l'index et le second (`5`) la seule valeur. Le résultat n'a aucun sens, mais **aucune erreur** n'est levée : seul `stocks.shape`, qui affiche `(2, 1)`, vous alerte.
+2. Il faut préciser les deux séparateurs :
+
+```
+stocks = pd.read_csv("stocks.csv", sep=";", decimal=",")
+```
+
+Sans `decimal=","`, vous auriez bien 4 colonnes, mais `prix` serait du texte (`"12,5"`) : `stocks.dtypes` le montrerait, et `stocks["prix"].sum()` collerait les chaînes bout à bout au lieu de les additionner.
+:::
+
+---
+
+## Le carnet de bord de l'exploration
+
+En quelques lignes de code, sans rien modifier, nous avons dressé la liste des problèmes du fichier. C'est le rôle de l'exploration : **comprendre avant de corriger**.
+
+| Constat | Outil qui l'a révélé | Où le traiter |
+|---|---|---|
+| des villes et des prix manquants | `info()`, `value_counts(dropna=False)` | chapitre « Valeurs manquantes » |
+| `lyon` et `" Paris "` mal saisis | `describe(include="str")`, `value_counts()` | chapitre « Nettoyer » |
+| 300 numéros de vente pour 304 lignes | `nunique()` | chapitre « Nettoyer » (doublons) |
+| des quantités négatives | `describe()` | ce sont des retours : une règle métier, pas une erreur |
+| des statistiques qui mélangent tous les statuts | `describe()` | chapitre « Sélectionner et filtrer » |
+
+:::{.callout-tip}
+## Une bonne habitude
+Gardez une cellule d'exploration en haut de chaque notebook d'analyse (`shape`, `info()`, `describe()`, quelques `value_counts()`). Quand le fichier du mois suivant arrive, vous la relancez et voyez immédiatement si quelque chose a changé.
+:::
+
+:::{.callout-note collapse="true"}
+## Pour aller plus loin
+
+**Lire seulement une partie d'un gros fichier.** Sur un fichier de plusieurs gigaoctets, inutile de tout charger pour explorer :
+
+```
+pd.read_csv(URL, nrows=1000)                               # les 1000 premières lignes
+pd.read_csv(URL, usecols=["date_vente", "produit", "quantite"])  # certaines colonnes seulement
+```
+
+**La mémoire occupée.** `ventes.info(memory_usage="deep")` mesure la mémoire réellement utilisée, texte compris. Comparer avant et après une conversion de types (que nous verrons au chapitre « Nettoyer ») montre vite l'intérêt de bien typer ses colonnes.
+
+**Parquet plutôt que CSV.** Un CSV ne stocke que du texte : à chaque lecture, pandas doit deviner les types, et les dates redeviennent du texte si l'on oublie `parse_dates`. Un fichier Parquet enregistre les types avec les données. Pour vos fichiers intermédiaires, `to_parquet` / `read_parquet` vous évitent ces surprises.
+:::
+
+:::{.callout-important}
+## À retenir
+- `pd.read_csv(chemin_ou_url)` charge un fichier CSV ; pensez à `sep`, `decimal` et `parse_dates`.
+- Chaque format a sa fonction `pd.read_...` et sa méthode `to_...`.
+- Dans ce cours, on enchaîne les méthodes entre parenthèses, une étape par ligne.
+- `assign(nouvelle=pd.col("a") * pd.col("b"))` ajoute une colonne calculée sans boucle.
+- `info()` révèle les types et les valeurs manquantes, `describe()` les valeurs aberrantes.
+- `value_counts(dropna=False)` et `nunique()` démasquent les fautes de saisie et les doublons.
+- On explore **avant** de corriger, et on note ce qu'on trouve.
+:::
