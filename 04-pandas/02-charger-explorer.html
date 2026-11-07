@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Charger et explorer un jeu de données – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-37939e3eb262a553528e6d6fe3c4a74d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f1fc3fe1c58281fce00a66b0e554d045.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-37939e3eb262a553528e6d6fe3c4a74d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python_data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Charger et explorer un jeu de données</li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Introduction</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Langages de programmation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Environnement</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: Environnement">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnements en ligne</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Initiation Python</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: Initiation Python">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditions &amp; boucles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structures de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les fonctions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/06-erreurs-exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Erreurs et exceptions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/07-scripts-jeux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts et jeux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-initiation-python/08-python-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Base de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../04-pandas/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Pandas pour l'analyse de données</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: Pandas pour l'analyse de données">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-pandas/01-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../05-projet-reproductible/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Créer des projets reproductibles</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: Créer des projets reproductibles">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-projet-reproductible/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">uv pour les gouverner tous</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../06-dbt/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">dbt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07-Cloud/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Cloud</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: Cloud">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07-Cloud/GCP/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">GCP</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section: GCP">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../07-Cloud/GCP/01-cloud-storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Google Cloud Storage (GCS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../07-Cloud/GCP/02-bigquery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BigQuery</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../logs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-8-label">Logs</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section: Logs">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TabICL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#le-jeu-de-données-du-module" id="toc-le-jeu-de-données-du-module" class="nav-link active" data-scroll-target="#le-jeu-de-données-du-module">Le jeu de données du module</a></li>
+  <li><a href="#lire-un-fichier-csv" id="toc-lire-un-fichier-csv" class="nav-link" data-scroll-target="#lire-un-fichier-csv">Lire un fichier CSV</a>
+  <ul class="collapse">
+  <li><a href="#pd.read_csv" id="toc-pd.read_csv" class="nav-link" data-scroll-target="#pd.read_csv"><code>pd.read_csv</code></a></li>
+  <li><a href="#les-options-utiles" id="toc-les-options-utiles" class="nav-link" data-scroll-target="#les-options-utiles">Les options utiles</a></li>
+  <li><a href="#et-les-autres-formats" id="toc-et-les-autres-formats" class="nav-link" data-scroll-target="#et-les-autres-formats">Et les autres formats ?</a></li>
+  </ul></li>
+  <li><a href="#le-style-de-ce-cours-enchaîner-les-méthodes" id="toc-le-style-de-ce-cours-enchaîner-les-méthodes" class="nav-link" data-scroll-target="#le-style-de-ce-cours-enchaîner-les-méthodes">Le style de ce cours : enchaîner les méthodes</a>
+  <ul class="collapse">
+  <li><a href="#ajouter-une-colonne-calculée-assign-et-pd.col" id="toc-ajouter-une-colonne-calculée-assign-et-pd.col" class="nav-link" data-scroll-target="#ajouter-une-colonne-calculée-assign-et-pd.col">Ajouter une colonne calculée : <code>assign</code> et <code>pd.col</code></a></li>
+  </ul></li>
+  <li><a href="#faire-le-tour-du-propriétaire" id="toc-faire-le-tour-du-propriétaire" class="nav-link" data-scroll-target="#faire-le-tour-du-propriétaire">Faire le tour du propriétaire</a>
+  <ul class="collapse">
+  <li><a href="#taille-et-aperçu" id="toc-taille-et-aperçu" class="nav-link" data-scroll-target="#taille-et-aperçu">Taille et aperçu</a></li>
+  <li><a href="#types-et-valeurs-manquantes-info" id="toc-types-et-valeurs-manquantes-info" class="nav-link" data-scroll-target="#types-et-valeurs-manquantes-info">Types et valeurs manquantes : <code>info</code></a></li>
+  <li><a href="#les-colonnes-numériques-describe" id="toc-les-colonnes-numériques-describe" class="nav-link" data-scroll-target="#les-colonnes-numériques-describe">Les colonnes numériques : <code>describe</code></a></li>
+  <li><a href="#les-colonnes-de-texte" id="toc-les-colonnes-de-texte" class="nav-link" data-scroll-target="#les-colonnes-de-texte">Les colonnes de texte</a></li>
+  <li><a href="#compter-les-valeurs-value_counts" id="toc-compter-les-valeurs-value_counts" class="nav-link" data-scroll-target="#compter-les-valeurs-value_counts">Compter les valeurs : <code>value_counts</code></a></li>
+  <li><a href="#combien-de-valeurs-distinctes-nunique-et-unique" id="toc-combien-de-valeurs-distinctes-nunique-et-unique" class="nav-link" data-scroll-target="#combien-de-valeurs-distinctes-nunique-et-unique">Combien de valeurs distinctes : <code>nunique</code> et <code>unique</code></a></li>
+  </ul></li>
+  <li><a href="#le-carnet-de-bord-de-lexploration" id="toc-le-carnet-de-bord-de-lexploration" class="nav-link" data-scroll-target="#le-carnet-de-bord-de-lexploration">Le carnet de bord de l’exploration</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/surybang/python_data/edit/main/04-pandas/02-charger-explorer.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02-charger-explorer-slides.html"><i class="bi bi-file-slides"></i>Voir les slides</a></li><li><a href="02-charger-explorer-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Charger et explorer un jeu de données</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour accéder aux notebooks d’exercices c’est ici 👇</p>
+<p><a href="https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/pandas-02-charger-explorer.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%ABpandas-02-charger-explorer%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&amp;init.personalInitArgs=%C2%ABpandas-02-charger-explorer%C2%BB"><img src="https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode.png" class="img-fluid" alt="Open In SSP Cloud"></a></p>
+</div>
+</div>
+<p>Ce chapitre vous apprend à <strong>charger</strong> un fichier dans un DataFrame, puis à en mener une première <strong>analyse exploratoire</strong> (on parle souvent d’<strong>EDA</strong>, pour <em>Exploratory Data Analysis</em>) : combien de lignes, quels types, quelles valeurs, et surtout quels <strong>problèmes</strong>.. Car un jeu de données réel est rarement propre, et c’est à l’exploration qu’on s’en rend compte.</p>
+<hr>
+<section id="le-jeu-de-données-du-module" class="level2">
+<h2 class="anchored" data-anchor-id="le-jeu-de-données-du-module">Le jeu de données du module</h2>
+<p>Tout au long du module, nous travaillons sur le même fichier, <code>ventes.csv</code> : les ventes d’une petite enseigne de matériel de bureau sur le premier semestre 2026. Chaque ligne est <strong>une vente</strong>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Colonne</th>
+<th>Contenu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id_vente</code></td>
+<td>le numéro de la vente</td>
+</tr>
+<tr class="even">
+<td><code>date_vente</code></td>
+<td>la date de la vente</td>
+</tr>
+<tr class="odd">
+<td><code>id_client</code></td>
+<td>le numéro du client</td>
+</tr>
+<tr class="even">
+<td><code>produit</code>, <code>categorie</code></td>
+<td>ce qui a été vendu</td>
+</tr>
+<tr class="odd">
+<td><code>ville</code></td>
+<td>la ville du magasin</td>
+</tr>
+<tr class="even">
+<td><code>quantite</code></td>
+<td>le nombre d’articles (négatif pour un retour)</td>
+</tr>
+<tr class="odd">
+<td><code>prix_unitaire</code></td>
+<td>le prix d’un article, en euros</td>
+</tr>
+<tr class="even">
+<td><code>statut</code></td>
+<td><code>LIVREE</code>, <code>EN_ATTENTE</code>, <code>ANNULEE</code> ou <code>RETOUR</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="lire-un-fichier-csv" class="level2">
+<h2 class="anchored" data-anchor-id="lire-un-fichier-csv">Lire un fichier CSV</h2>
+<section id="pd.read_csv" class="level3">
+<h3 class="anchored" data-anchor-id="pd.read_csv"><code>pd.read_csv</code></h3>
+<p>Un fichier <strong>CSV</strong> (<em>Comma-Separated Values</em>) est un simple fichier texte : une ligne par enregistrement, des valeurs séparées par des virgules. La première ligne contient les noms des colonnes. Si vous l’ouvrez dans un éditeur de texte, voici ce que vous voyez :</p>
+<pre><code>id_vente,date_vente,id_client,produit,categorie,ville,quantite,prix_unitaire,statut
+1173,2026-01-01,18,Souris,Informatique,Paris,-2,19.9,RETOUR
+1245,2026-01-01,36,Casque,Audio,Lyon,2,79.0,ANNULEE</code></pre>
+<p>La fonction <code>pd.read_csv</code> le transforme en DataFrame. Elle accepte un <strong>chemin</strong> vers un fichier de votre ordinateur, ou directement une <strong>URL</strong> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>URL <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/surybang/python_data/main/data/ventes.csv"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> pd.read_csv(URL)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ventes.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>   id_vente  date_vente  id_client produit     categorie      ville  quantite  prix_unitaire   statut
+0      1173  2026-01-01         18  Souris  Informatique       Lyon        -2           19.9   RETOUR
+1      1245  2026-01-01         36  Casque         Audio      Paris         2           79.0  ANNULEE
+2      1246  2026-01-01         16  Chaise      Mobilier  Marseille         8          149.0   LIVREE
+3      1107  2026-01-02          9   Écran  Informatique  Marseille         2          189.0   LIVREE
+4      1190  2026-01-03         25  Souris  Informatique      Paris         1           19.9  ANNULEE</code></pre>
+<p>Sur votre ordinateur, vous écririez simplement <code>pd.read_csv("data/ventes.csv")</code>, avec le chemin du fichier.</p>
+</section>
+<section id="les-options-utiles" class="level3">
+<h3 class="anchored" data-anchor-id="les-options-utiles">Les options utiles</h3>
+<p><code>read_csv</code> a des dizaines de paramètres. Quatre suffisent dans la grande majorité des cas :</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Paramètre</th>
+<th>À quoi il sert</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sep</code></td>
+<td>le séparateur de colonnes</td>
+<td><code>sep=";"</code></td>
+</tr>
+<tr class="even">
+<td><code>decimal</code></td>
+<td>le séparateur décimal</td>
+<td><code>decimal=","</code></td>
+</tr>
+<tr class="odd">
+<td><code>parse_dates</code></td>
+<td>les colonnes à lire comme des dates</td>
+<td><code>parse_dates=["date_vente"]</code></td>
+</tr>
+<tr class="even">
+<td><code>dtype</code></td>
+<td>forcer le type de certaines colonnes</td>
+<td><code>dtype={"id_client": "str"}</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Le piège du CSV « à la française »
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Excel en français enregistre souvent les CSV avec un <strong>point-virgule</strong> comme séparateur et une <strong>virgule</strong> comme séparateur décimal (<code>19,9</code> au lieu de <code>19.9</code>). Lu sans options, un tel fichier donne un DataFrame d’<strong>une seule colonne</strong>, ou des prix stockés comme du texte. Le remède :</p>
+<pre><code>pd.read_csv("export_excel.csv", sep=";", decimal=",")</code></pre>
+</div>
+</div>
+<p>Regardez le type de la colonne <code>date_vente</code> : par défaut, pandas la lit comme du <strong>texte</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ventes.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>id_vente           int64
+date_vente           str
+id_client          int64
+produit              str
+categorie            str
+ville                str
+quantite           int64
+prix_unitaire    float64
+statut               str
+dtype: object</code></pre>
+<p>Une date stockée comme du texte ne permet pas de calculer un délai ni d’extraire un mois. Demandez à pandas de la convertir dès la lecture :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> pd.read_csv(URL, parse_dates<span class="op">=</span>[<span class="st">"date_vente"</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ventes[<span class="st">"date_vente"</span>].dtype)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>datetime64[us]</code></pre>
+<p><code>datetime64</code> est le type des dates dans pandas (le <code>[us]</code> indique une précision à la microseconde, vous pouvez l’ignorer). Nous verrons tout ce qu’il permet au chapitre sur le nettoyage.</p>
+</section>
+<section id="et-les-autres-formats" class="level3">
+<h3 class="anchored" data-anchor-id="et-les-autres-formats">Et les autres formats ?</h3>
+<p>La logique est la même pour tous les formats : une fonction <code>pd.read_...</code> qui renvoie un DataFrame.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Format</th>
+<th>Fonction</th>
+<th>Remarque</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CSV</td>
+<td><code>pd.read_csv</code></td>
+<td>le plus courant</td>
+</tr>
+<tr class="even">
+<td>Excel</td>
+<td><code>pd.read_excel</code></td>
+<td>choisir la feuille avec <code>sheet_name=</code> ; nécessite le paquet <code>openpyxl</code></td>
+</tr>
+<tr class="odd">
+<td>Parquet</td>
+<td><code>pd.read_parquet</code></td>
+<td>format en colonnes, compact et rapide ; garde les types (dates comprises) ; nécessite <code>pyarrow</code></td>
+</tr>
+<tr class="even">
+<td>JSON</td>
+<td><code>pd.read_json</code></td>
+<td>fréquent pour les données issues d’API</td>
+</tr>
+</tbody>
+</table>
+<p>À chaque <code>read_...</code> correspond un <code>to_...</code> pour écrire : <code>ventes.to_csv("ventes_propres.csv", index=False)</code>, <code>ventes.to_parquet("ventes.parquet")</code>.</p>
+<hr>
+</section>
+</section>
+<section id="le-style-de-ce-cours-enchaîner-les-méthodes" class="level2">
+<h2 class="anchored" data-anchor-id="le-style-de-ce-cours-enchaîner-les-méthodes">Le style de ce cours : enchaîner les méthodes</h2>
+<p>Une méthode pandas renvoie (presque) toujours un <strong>nouvel objet</strong>, vous l’avez vu au chapitre précédent. On peut donc appeler une méthode <strong>sur le résultat</strong> de la précédente, et ainsi de suite. Dans ce cours, nous écrivons ces enchaînements d’une façon bien précise, recommandée par Matt Harrison dans <em>Effective Pandas</em> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>resume <span class="op">=</span> (</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    pd.read_csv(URL, parse_dates<span class="op">=</span>[<span class="st">"date_vente"</span>])</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    .drop(columns<span class="op">=</span>[<span class="st">"categorie"</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    .head(<span class="dv">3</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>resume</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>   id_vente date_vente  id_client produit      ville  quantite  prix_unitaire   statut
+0      1173 2026-01-01         18  Souris       Lyon        -2           19.9   RETOUR
+1      1245 2026-01-01         36  Casque      Paris         2           79.0  ANNULEE
+2      1246 2026-01-01         16  Chaise  Marseille         8          149.0   LIVREE</code></pre>
+<p>Trois règles :</p>
+<ul>
+<li>toute la chaîne est entourée de <strong>parenthèses</strong>, ce qui permet à Python de lire plusieurs lignes comme une seule instruction ;</li>
+<li><strong>une étape par ligne</strong>, chaque ligne commence par un point ;</li>
+<li>on lit la chaîne <strong>de haut en bas</strong>, comme une recette : je lis le fichier, je retire la colonne <code>categorie</code>, je garde les trois premières lignes.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Pourquoi pas des variables intermédiaires ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La première autre façon d’écrire serait :</p>
+<pre><code>ventes_brutes = pd.read_csv(URL, parse_dates=["date_vente"])
+ventes_sans_cat = ventes_brutes.drop(columns=["categorie"])
+resume = ventes_sans_cat.head(3)</code></pre>
+<p>Ça fonctionne, mais on multiplie les noms de variables (et le risque d’utiliser la mauvaise), et la logique est noyée. Avec une chaîne, on peut aussi <strong>commenter une ligne</strong> pour désactiver une étape le temps de vérifier quelque chose.</p>
+<p>La seconde, la plus répandue dans les tutoriels, réutilise toujours le même nom <code>df</code> :</p>
+<pre><code>df = pd.read_csv(URL, parse_dates=["date_vente"])
+df = df.drop(columns=["categorie"])
+df.head(3)</code></pre>
+<p>Elle est plus courte, mais <code>df</code> change de contenu à chaque ligne. Dans un notebook, si vous relancez la deuxième cellule une fois de trop, la colonne a déjà été supprimée et vous obtenez :</p>
+<pre><code>KeyError: "['categorie'] not found in axis"</code></pre>
+<p>Le résultat dépend alors de <strong>l’ordre dans lequel vous avez exécuté vos cellules</strong>, pas seulement du code écrit. Avec une chaîne, tout part du fichier à chaque exécution : on peut la relancer autant de fois qu’on veut, le résultat est toujours le même.</p>
+</div>
+</div>
+<section id="ajouter-une-colonne-calculée-assign-et-pd.col" class="level3">
+<h3 class="anchored" data-anchor-id="ajouter-une-colonne-calculée-assign-et-pd.col">Ajouter une colonne calculée : <code>assign</code> et <code>pd.col</code></h3>
+<p>Pour explorer les ventes, il nous manque une information essentielle : le <strong>montant</strong> de chaque vente, c’est-à-dire la quantité multipliée par le prix unitaire. La méthode <code>assign</code> ajoute une colonne et s’insère naturellement dans une chaîne. Avec pandas 3, on décrit le calcul avec <code>pd.col("nom_de_colonne")</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ventes <span class="op">=</span> (</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    pd.read_csv(URL, parse_dates<span class="op">=</span>[<span class="st">"date_vente"</span>])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    .assign(montant<span class="op">=</span>pd.col(<span class="st">"quantite"</span>) <span class="op">*</span> pd.col(<span class="st">"prix_unitaire"</span>))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>ventes[[<span class="st">"produit"</span>, <span class="st">"quantite"</span>, <span class="st">"prix_unitaire"</span>, <span class="st">"montant"</span>]].head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>  produit  quantite  prix_unitaire  montant
+0  Souris        -2           19.9    -39.8
+1  Casque         2           79.0    158.0
+2  Chaise         8          149.0   1192.0
+3   Écran         2          189.0    378.0
+4  Souris         1           19.9     19.9</code></pre>
+<p>Lisez <code>pd.col("quantite") * pd.col("prix_unitaire")</code> comme « la colonne quantité fois la colonne prix unitaire, <strong>du DataFrame en cours de construction</strong> ». Le calcul est vectorisé : il s’applique à toutes les lignes d’un coup, sans boucle. Nous approfondirons <code>assign</code> et <code>pd.col</code> dans le chapitre « Transformer et chaîner ».</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Sur pandas 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>pd.col</code> est apparu avec pandas 3. Sur une version plus ancienne, on écrit la même chose avec une fonction <code>lambda</code> : <code>.assign(montant=lambda df: df["quantite"] * df["prix_unitaire"])</code>.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="faire-le-tour-du-propriétaire" class="level2">
+<h2 class="anchored" data-anchor-id="faire-le-tour-du-propriétaire">Faire le tour du propriétaire</h2>
+<p>Vous connaissez déjà <code>shape</code>, <code>head</code>, <code>info</code> et <code>describe</code> depuis le chapitre précédent. Sur un vrai fichier, ils deviennent des outils d’<strong>enquête</strong>. Nous allons les passer un par un, en notant au fur et à mesure ce qui pourrait clocher.</p>
+<section id="taille-et-aperçu" class="level3">
+<h3 class="anchored" data-anchor-id="taille-et-aperçu">Taille et aperçu</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ventes.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>(304, 10)</code></pre>
+<p>304 ventes et 10 colonnes (les 9 du fichier plus <code>montant</code>). <code>head()</code> montre le début du fichier, <code>tail()</code> la fin, mais les premières lignes ne sont pas forcément représentatives. <code>sample()</code> tire des lignes <strong>au hasard</strong> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ventes.sample(<span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>     id_vente date_vente  id_client  produit     categorie  ville  quantite  prix_unitaire   statut  montant
+66       1238 2026-02-05         50   Webcam  Informatique   lyon        -1           39.9   RETOUR    -39.9
+156      1155 2026-04-11         18  Clavier  Informatique  Lille        -2           49.9   RETOUR    -99.8
+247      1141 2026-05-28         14    Écran  Informatique  Paris         6          189.0  ANNULEE   1134.0</code></pre>
+</section>
+<section id="types-et-valeurs-manquantes-info" class="level3">
+<h3 class="anchored" data-anchor-id="types-et-valeurs-manquantes-info">Types et valeurs manquantes : <code>info</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ventes.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>&lt;class 'pandas.DataFrame'&gt;
+RangeIndex: 304 entries, 0 to 303
+Data columns (total 10 columns):
+ #   Column         Non-Null Count  Dtype         
+---  ------         --------------  -----         
+ 0   id_vente       304 non-null    int64         
+ 1   date_vente     304 non-null    datetime64[us]
+ 2   id_client      304 non-null    int64         
+ 3   produit        304 non-null    str           
+ 4   categorie      304 non-null    str           
+ 5   ville          295 non-null    str           
+ 6   quantite       304 non-null    int64         
+ 7   prix_unitaire  298 non-null    float64       
+ 8   statut         304 non-null    str           
+ 9   montant        298 non-null    float64       
+dtypes: datetime64[us](1), float64(2), int64(3), str(4)
+memory usage: 32.4 KB</code></pre>
+<p>Lisez la colonne <strong>Non-Null Count</strong> : il y a 304 lignes, mais seulement <strong>295</strong> villes et <strong>298</strong> prix renseignés. Il manque donc des valeurs. Et comme <code>montant</code> est calculé à partir du prix, il lui manque aussi 6 valeurs : un calcul avec une valeur manquante donne une valeur manquante.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Un rapide décompte
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>ventes.count()</code> donne directement le nombre de valeurs <strong>renseignées</strong> par colonne. Nous verrons au chapitre « Valeurs manquantes » comment compter celles qui <strong>manquent</strong> et quoi en faire.</p>
+</div>
+</div>
+</section>
+<section id="les-colonnes-numériques-describe" class="level3">
+<h3 class="anchored" data-anchor-id="les-colonnes-numériques-describe">Les colonnes numériques : <code>describe</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ventes.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>          id_vente                  date_vente   id_client    quantite  prix_unitaire      montant
+count   304.000000                         304  304.000000  304.000000     298.000000   298.000000
+mean   1150.388158  2026-04-03 19:44:12.631579   30.503289    4.062500      82.677181   334.893624
+min    1001.000000         2026-01-01 00:00:00    1.000000   -2.000000      19.900000  -378.000000
+25%    1075.750000         2026-02-13 18:00:00   15.750000    2.000000      39.900000    99.800000
+50%    1149.500000         2026-04-08 12:00:00   29.000000    4.000000      49.900000   199.600000
+75%    1225.250000         2026-05-20 00:00:00   46.000000    6.000000      79.000000   395.000000
+max    1300.000000         2026-06-30 00:00:00   60.000000    8.000000     249.000000  1992.000000
+std      86.733958                         NaN   17.457728    2.651242      68.362713   399.212594</code></pre>
+<p>Avec pandas 3, la colonne de dates est résumée elle aussi : la première vente date du 1er janvier, la dernière du 30 juin. Prenez le temps de lire colonne par colonne, c’est là que se cachent les surprises :</p>
+<ul>
+<li><code>quantite</code> a un <strong>minimum de -2</strong> : ce sont les retours, enregistrés en quantité négative ;</li>
+<li><code>montant</code> descend donc jusqu’à <strong>-378 €</strong> ;</li>
+<li><code>id_vente</code> et <code>id_client</code> sont des numéros : leur moyenne n’a <strong>aucun sens</strong>, pandas les traite comme des nombres parce qu’ils en ont l’air.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Une moyenne n’est pas toujours celle que l’on croit
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le montant moyen affiché (environ 335 €) mélange des ventes livrées, des ventes annulées et des retours négatifs. Ce n’est <strong>pas</strong> le panier moyen d’un client. Avant d’interpréter une statistique, demandez-vous toujours <strong>sur quelles lignes</strong> elle est calculée. Vous apprendrez à filtrer les lignes au chapitre suivant.</p>
+</div>
+</div>
+</section>
+<section id="les-colonnes-de-texte" class="level3">
+<h3 class="anchored" data-anchor-id="les-colonnes-de-texte">Les colonnes de texte</h3>
+<p><code>describe()</code> ignore le texte par défaut. Pour les colonnes qualitatives, on demande le résumé explicitement :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ventes.describe(include<span class="op">=</span><span class="st">"str"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>        produit     categorie  ville  statut
+count       304           304    295     304
+unique        8             3      8       4
+top     Clavier  Informatique  Paris  LIVREE
+freq         68           200     85     215</code></pre>
+<p><code>unique</code> donne le nombre de valeurs différentes, <code>top</code> la plus fréquente, <code>freq</code> son nombre d’apparitions. Huit produits, trois catégories, quatre statuts : cohérent. Mais <strong>huit villes</strong> ? L’enseigne n’a que six magasins. Allons voir.</p>
+</section>
+<section id="compter-les-valeurs-value_counts" class="level3">
+<h3 class="anchored" data-anchor-id="compter-les-valeurs-value_counts">Compter les valeurs : <code>value_counts</code></h3>
+<p><code>value_counts()</code> compte les occurrences de chaque valeur d’une colonne, de la plus fréquente à la moins fréquente. C’est <strong>la</strong> méthode d’exploration des variables qualitatives.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ventes[<span class="st">"ville"</span>].value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>ville
+Paris        85
+Lyon         69
+Marseille    43
+Bordeaux     37
+Lille        33
+Nantes       20
+NaN           9
+lyon          5
+ Paris        3
+Name: count, dtype: int64</code></pre>
+<p>Trois problèmes apparaissent d’un coup :</p>
+<ul>
+<li><code>lyon</code> en minuscules est compté <strong>à part</strong> de <code>Lyon</code> ;</li>
+<li><code>" Paris "</code> a des <strong>espaces</strong> autour du nom, invisibles à l’œil nu dans un tableur ;</li>
+<li>9 ventes n’ont <strong>pas de ville</strong> (<code>NaN</code>). Sans <code>dropna=False</code>, <code>value_counts</code> les aurait passées sous silence.</li>
+</ul>
+<p>Pour pandas, <code>"Lyon"</code>, <code>"lyon"</code> et <code>" Lyon "</code> sont trois chaînes différentes, exactement comme en Python pur. C’est un défaut de saisie très courant.</p>
+<p>Avec <code>normalize=True</code>, on obtient des <strong>proportions</strong> au lieu d’effectifs :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ventes[<span class="st">"statut"</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>statut
+LIVREE        0.707237
+EN_ATTENTE    0.148026
+ANNULEE       0.082237
+RETOUR        0.062500
+Name: proportion, dtype: float64</code></pre>
+<p>70,7 % des ventes sont livrées, 6,25 % sont des retours.</p>
+</section>
+<section id="combien-de-valeurs-distinctes-nunique-et-unique" class="level3">
+<h3 class="anchored" data-anchor-id="combien-de-valeurs-distinctes-nunique-et-unique">Combien de valeurs distinctes : <code>nunique</code> et <code>unique</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ventes.nunique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>id_vente         300
+date_vente       143
+id_client         60
+produit            8
+categorie          3
+ville              8
+quantite          10
+prix_unitaire      8
+statut             4
+montant           72
+dtype: int64</code></pre>
+<p>Une ligne attire l’attention : <strong>300</strong> numéros de vente distincts pour <strong>304</strong> lignes. Or un numéro de vente devrait être unique. Il y a donc des ventes enregistrées plusieurs fois : des <strong>doublons</strong>.</p>
+<p><code>unique()</code> renvoie la liste des valeurs distinctes d’une colonne, pratique pour repérer une faute de frappe :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ventes[<span class="st">"statut"</span>].unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>&lt;ArrowStringArray&gt;
+['RETOUR', 'ANNULEE', 'LIVREE', 'EN_ATTENTE']
+Length: 4, dtype: str</code></pre>
+<hr>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>🧠 À vous de réfléchir : une colonne mal lue
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un collègue vous envoie <code>stocks.csv</code>, exporté d’Excel. Voici son début, ouvert dans un éditeur de texte :</p>
+<pre><code>reference;libelle;stock;prix
+A12;Palette bois;40;12,5
+B07;Film étirable;120;8,9</code></pre>
+<p>Il le charge avec <code>stocks = pd.read_csv("stocks.csv")</code>.</p>
+<ol type="1">
+<li>Combien de colonnes aura <code>stocks</code> ?</li>
+<li>Quelle ligne de code faut-il écrire pour obtenir 4 colonnes et un prix numérique ?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>💡 Voir la solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>Une seule colonne</strong>, nommée <code>reference;libelle;stock;prix</code>. Par défaut, <code>read_csv</code> cherche des <strong>virgules</strong>. Il n’y en a qu’une par ligne, à l’intérieur du prix : pandas coupe donc <code>A12;Palette bois;40;12,5</code> en deux morceaux, le premier devient l’index et le second (<code>5</code>) la seule valeur. Le résultat n’a aucun sens, mais <strong>aucune erreur</strong> n’est levée : seul <code>stocks.shape</code>, qui affiche <code>(2, 1)</code>, vous alerte.</li>
+<li>Il faut préciser les deux séparateurs :</li>
+</ol>
+<pre><code>stocks = pd.read_csv("stocks.csv", sep=";", decimal=",")</code></pre>
+<p>Sans <code>decimal=","</code>, vous auriez bien 4 colonnes, mais <code>prix</code> serait du texte (<code>"12,5"</code>) : <code>stocks.dtypes</code> le montrerait, et <code>stocks["prix"].sum()</code> collerait les chaînes bout à bout au lieu de les additionner.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="le-carnet-de-bord-de-lexploration" class="level2">
+<h2 class="anchored" data-anchor-id="le-carnet-de-bord-de-lexploration">Le carnet de bord de l’exploration</h2>
+<p>En quelques lignes de code, sans rien modifier, nous avons dressé la liste des problèmes du fichier. C’est le rôle de l’exploration : <strong>comprendre avant de corriger</strong>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Constat</th>
+<th>Outil qui l’a révélé</th>
+<th>Où le traiter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>des villes et des prix manquants</td>
+<td><code>info()</code>, <code>value_counts(dropna=False)</code></td>
+<td>chapitre « Valeurs manquantes »</td>
+</tr>
+<tr class="even">
+<td><code>lyon</code> et <code>" Paris "</code> mal saisis</td>
+<td><code>describe(include="str")</code>, <code>value_counts()</code></td>
+<td>chapitre « Nettoyer »</td>
+</tr>
+<tr class="odd">
+<td>300 numéros de vente pour 304 lignes</td>
+<td><code>nunique()</code></td>
+<td>chapitre « Nettoyer » (doublons)</td>
+</tr>
+<tr class="even">
+<td>des quantités négatives</td>
+<td><code>describe()</code></td>
+<td>ce sont des retours : une règle métier, pas une erreur</td>
+</tr>
+<tr class="odd">
+<td>des statistiques qui mélangent tous les statuts</td>
+<td><code>describe()</code></td>
+<td>chapitre « Sélectionner et filtrer »</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Une bonne habitude
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Gardez une cellule d’exploration en haut de chaque notebook d’analyse (<code>shape</code>, <code>info()</code>, <code>describe()</code>, quelques <code>value_counts()</code>). Quand le fichier du mois suivant arrive, vous la relancez et voyez immédiatement si quelque chose a changé.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Pour aller plus loin
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Lire seulement une partie d’un gros fichier.</strong> Sur un fichier de plusieurs gigaoctets, inutile de tout charger pour explorer :</p>
+<pre><code>pd.read_csv(URL, nrows=1000)                               # les 1000 premières lignes
+pd.read_csv(URL, usecols=["date_vente", "produit", "quantite"])  # certaines colonnes seulement</code></pre>
+<p><strong>La mémoire occupée.</strong> <code>ventes.info(memory_usage="deep")</code> mesure la mémoire réellement utilisée, texte compris. Comparer avant et après une conversion de types (que nous verrons au chapitre « Nettoyer ») montre vite l’intérêt de bien typer ses colonnes.</p>
+<p><strong>Parquet plutôt que CSV.</strong> Un CSV ne stocke que du texte : à chaque lecture, pandas doit deviner les types, et les dates redeviennent du texte si l’on oublie <code>parse_dates</code>. Un fichier Parquet enregistre les types avec les données. Pour vos fichiers intermédiaires, <code>to_parquet</code> / <code>read_parquet</code> vous évitent ces surprises.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>À retenir
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>pd.read_csv(chemin_ou_url)</code> charge un fichier CSV ; pensez à <code>sep</code>, <code>decimal</code> et <code>parse_dates</code>.</li>
+<li>Chaque format a sa fonction <code>pd.read_...</code> et sa méthode <code>to_...</code>.</li>
+<li>Dans ce cours, on enchaîne les méthodes entre parenthèses, une étape par ligne.</li>
+<li><code>assign(nouvelle=pd.col("a") * pd.col("b"))</code> ajoute une colonne calculée sans boucle.</li>
+<li><code>info()</code> révèle les types et les valeurs manquantes, <code>describe()</code> les valeurs aberrantes.</li>
+<li><code>value_counts(dropna=False)</code> et <code>nunique()</code> démasquent les fautes de saisie et les doublons.</li>
+<li>On explore <strong>avant</strong> de corriger, et on note ce qu’on trouve.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python_data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/surybang/python_data/edit/main/04-pandas/02-charger-explorer.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
