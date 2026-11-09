@@ -19,10 +19,7 @@ Pour accéder aux notebooks d'exercices c'est ici 👇
 [![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB01_premiers_pas%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%ABpandas%2F01-structures-donnees%C2%BB)
 :::
 
-::: {.callout-note}
-### Quelle version ?
-Ce cours utilise **pandas 3**. Si vous êtes sur pandas 2, tout fonctionne de la même façon dans cette page, à un détail d'affichage près : les colonnes de texte y apparaissent avec le type `object` au lieu de `str`. Pour connaître votre version : `pd.__version__`.
-:::
+![Un DataFrame : chaque colonne est une Series, et une ligne extraite en est une aussi.](assets/dataframe-anatomie.svg){fig-alt="Schéma d'un DataFrame : noms de colonnes, index, types, une colonne extraite et une ligne extraite sous forme de Series" width="100%"}
 
 ---
 

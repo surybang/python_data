@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Anatomie d'un DataFrame</title>
+  <desc id="d">Un DataFrame est un tableau dont chaque colonne est une Series. Toutes les colonnes partagent le même index, à gauche. Les noms des colonnes sont en haut. Extraire une colonne donne une Series indexée par l'index du DataFrame ; extraire une ligne donne une Series indexée par les noms de colonnes.</desc>
+  <defs><marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#5b6472"/></marker></defs>
+  <style>
+    .h{font-size:16px;font-weight:700;fill:#1f2937}.s{font-size:12.5px;fill:#5b6472}.b{font-size:13px;font-weight:600;fill:#1f2937}
+    .m{font-family:ui-monospace,Consolas,monospace;font-size:13px;fill:#1f2937}.mi{font-family:ui-monospace,Consolas,monospace;font-size:13px;fill:#6b7280}
+    .l{stroke:#5b6472;stroke-width:1.6;fill:none;marker-end:url(#f)}
+  </style>
+  <rect width="960" height="560" fill="#ffffff"/>
+
+  <!-- ===== DataFrame ===== -->
+  <text x="40" y="34" class="h">Un DataFrame : <tspan class="m" font-weight="400">ventes</tspan></text>
+
+  <!-- noms de colonnes -->
+  <rect x="110" y="56" width="420" height="30" rx="5" fill="#fff4e5" stroke="#e8a33d"/>
+  <text x="165" y="76" text-anchor="middle" class="b">produit</text>
+  <text x="270" y="76" text-anchor="middle" class="b">ville</text>
+  <text x="370" y="76" text-anchor="middle" class="b">quantite</text>
+  <text x="470" y="76" text-anchor="middle" class="b">prix</text>
+
+  <!-- index -->
+  <rect x="60" y="92" width="44" height="120" rx="5" fill="#eef4ff" stroke="#4a7bd0"/>
+  <text x="82" y="115" text-anchor="middle" class="mi">0</text>
+  <text x="82" y="145" text-anchor="middle" class="mi">1</text>
+  <text x="82" y="175" text-anchor="middle" class="mi">2</text>
+  <text x="82" y="205" text-anchor="middle" class="mi">…</text>
+
+  <!-- valeurs -->
+  <rect x="110" y="92" width="420" height="120" rx="5" fill="#f9fafb" stroke="#c4c9d1"/>
+  <!-- colonne prix surlignée -->
+  <rect x="425" y="92" width="105" height="120" fill="#e3f1e3" stroke="#3f9a52" stroke-width="2"/>
+  <!-- ligne 1 surlignée -->
+  <rect x="110" y="128" width="420" height="26" fill="#fde8e4" fill-opacity="0.85" stroke="#e2603f" stroke-width="2"/>
+  <g class="m">
+    <text x="165" y="115" text-anchor="middle">Clavier</text><text x="270" y="115" text-anchor="middle">Lyon</text><text x="370" y="115" text-anchor="middle">2</text><text x="470" y="115" text-anchor="middle">49.9</text>
+    <text x="165" y="145" text-anchor="middle">Souris</text><text x="270" y="145" text-anchor="middle">Paris</text><text x="370" y="145" text-anchor="middle">5</text><text x="470" y="145" text-anchor="middle">19.9</text>
+    <text x="165" y="175" text-anchor="middle">Écran</text><text x="270" y="175" text-anchor="middle">Lyon</text><text x="370" y="175" text-anchor="middle">1</text><text x="470" y="175" text-anchor="middle">189.0</text>
+    <text x="165" y="205" text-anchor="middle" fill="#9ca3af">…</text><text x="270" y="205" text-anchor="middle" fill="#9ca3af">…</text><text x="370" y="205" text-anchor="middle" fill="#9ca3af">…</text><text x="470" y="205" text-anchor="middle" fill="#9ca3af">…</text>
+  </g>
+
+  <!-- dtypes -->
+  <rect x="110" y="218" width="420" height="26" rx="5" fill="#f3f4f6" stroke="#c4c9d1" stroke-dasharray="4 3"/>
+  <g class="mi" font-size="12">
+    <text x="165" y="236" text-anchor="middle">str</text><text x="270" y="236" text-anchor="middle">str</text><text x="370" y="236" text-anchor="middle">int64</text><text x="470" y="236" text-anchor="middle">float64</text>
+  </g>
+
+  <!-- légendes DataFrame -->
+  <text x="560" y="76" class="b" fill="#b7791f">← les noms de colonnes</text>
+  <text x="560" y="94" class="s">ventes.columns</text>
+  <text x="560" y="236" class="b" fill="#5b6472">← un type par colonne</text>
+  <text x="560" y="254" class="s">ventes.dtypes</text>
+  <text x="40" y="270" class="b" fill="#2f5fa8">↑ l'index</text>
+  <text x="40" y="288" class="s">ventes.index</text>
+  <text x="140" y="270" class="s">les étiquettes des lignes, partagées par toutes les colonnes</text>
+
+  <!-- ===== Une colonne ===== -->
+  <rect x="40" y="320" width="420" height="215" rx="12" fill="#f4faf4" stroke="#3f9a52" stroke-width="1.5"/>
+  <text x="60" y="348" class="h" fill="#2f7a40">Une colonne → une Series</text>
+  <text x="60" y="370" class="m">ventes["prix"]</text>
+  <rect x="80" y="386" width="44" height="100" rx="5" fill="#eef4ff" stroke="#4a7bd0"/>
+  <rect x="128" y="386" width="90" height="100" rx="5" fill="#e3f1e3" stroke="#3f9a52"/>
+  <g class="m">
+    <text x="102" y="407" text-anchor="middle" fill="#6b7280">0</text><text x="173" y="407" text-anchor="middle">49.9</text>
+    <text x="102" y="432" text-anchor="middle" fill="#6b7280">1</text><text x="173" y="432" text-anchor="middle">19.9</text>
+    <text x="102" y="457" text-anchor="middle" fill="#6b7280">2</text><text x="173" y="457" text-anchor="middle">189.0</text>
+    <text x="102" y="479" text-anchor="middle" fill="#9ca3af">…</text><text x="173" y="479" text-anchor="middle" fill="#9ca3af">…</text>
+  </g>
+  <text x="240" y="410" class="s">index : celui du DataFrame</text>
+  <text x="240" y="432" class="s">valeurs : la colonne prix</text>
+  <text x="240" y="454" class="s">nom : <tspan class="m">prix</tspan></text>
+  <text x="240" y="476" class="s">dtype : <tspan class="m">float64</tspan> (un seul type)</text>
+  <text x="60" y="518" class="s">Avec une liste de noms, <tspan class="m">ventes[["prix"]]</tspan>, on garde un DataFrame.</text>
+
+  <!-- ===== Une ligne ===== -->
+  <rect x="500" y="320" width="420" height="215" rx="12" fill="#fef6f4" stroke="#e2603f" stroke-width="1.5"/>
+  <text x="520" y="348" class="h" fill="#b8432a">Une ligne → aussi une Series</text>
+  <text x="520" y="370" class="m">ventes.iloc[1]</text>
+  <rect x="540" y="386" width="90" height="100" rx="5" fill="#fff4e5" stroke="#e8a33d"/>
+  <rect x="634" y="386" width="70" height="100" rx="5" fill="#fde8e4" stroke="#e2603f"/>
+  <g class="m">
+    <text x="585" y="407" text-anchor="middle" fill="#6b7280">produit</text><text x="669" y="407" text-anchor="middle">Souris</text>
+    <text x="585" y="432" text-anchor="middle" fill="#6b7280">ville</text><text x="669" y="432" text-anchor="middle">Paris</text>
+    <text x="585" y="457" text-anchor="middle" fill="#6b7280">quantite</text><text x="669" y="457" text-anchor="middle">5</text>
+    <text x="585" y="479" text-anchor="middle" fill="#6b7280">prix</text><text x="669" y="479" text-anchor="middle">19.9</text>
+  </g>
+  <text x="722" y="410" class="s">index : les noms</text>
+  <text x="722" y="426" class="s">de colonnes</text>
+  <text x="722" y="450" class="s">nom : <tspan class="m">1</tspan></text>
+  <text x="722" y="474" class="s">dtype : <tspan class="m">object</tspan></text>
+  <text x="722" y="490" class="s">(texte et nombres mêlés)</text>
+  <text x="520" y="518" class="s"><tspan class="m">iloc</tspan> par position, <tspan class="m">loc</tspan> par étiquette.</text>
+
+  <!-- flèches -->
+  <path d="M477,214 C470,280 300,280 290,316" class="l"/>
+  <path d="M530,141 C700,160 740,250 720,316" class="l"/>
+</svg>
