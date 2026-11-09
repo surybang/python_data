@@ -71,6 +71,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../05-projet-reproductible/index.html" rel="next">
+<link href="../04-pandas/01-structures-donnees.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
@@ -322,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Charger et explorer un jeu de données</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-pandas/index.html">Pandas pour l’analyse de données</a></li><li class="breadcrumb-item"><a href="../04-pandas/02-charger-explorer.html">Charger et explorer</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -452,15 +454,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../04-pandas/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text" id="quarto-sidebar-section-4-label">Pandas pour l'analyse de données</span></a>
-            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: Pandas pour l'analyse de données">
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section: Pandas pour l'analyse de données">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
             </button> 
       </div>
-      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-pandas/01-structures-donnees.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Structure de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-pandas/02-charger-explorer.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Charger et explorer</span></a>
   </div>
 </li>
       </ul>
@@ -577,7 +585,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-pandas/index.html">Pandas pour l’analyse de données</a></li><li class="breadcrumb-item"><a href="../04-pandas/02-charger-explorer.html">Charger et explorer</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Charger et explorer un jeu de données</h1>
 </div>
@@ -1686,6 +1694,18 @@ pd.read_csv(URL, usecols=["date_vente", "produit", "quantite"])  # certaines col
   <script type="application/javascript">
   window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../04-pandas/01-structures-donnees.html" class="pagination-link" aria-label="Structure de données">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Structure de données</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../05-projet-reproductible/index.html" class="pagination-link" aria-label="Créer des projets reproductibles">
+        <span class="nav-page-text">Créer des projets reproductibles</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
