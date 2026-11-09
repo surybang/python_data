@@ -1232,7 +1232,7 @@ margin-right: 0; }
 <p><strong>pandas</strong> est la bibliothèque de référence pour manipuler des données tabulaires en Python. Elle apporte deux structures, la <strong>Series</strong> et le <strong>DataFrame</strong>, et des centaines de méthodes pour filtrer, calculer, regrouper ou fusionner des données, le plus souvent <strong>sans écrire une seule boucle</strong>.</p>
 <p>On l’importe toujours de la même façon, avec l’alias <code>pd</code> :</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
@@ -1241,7 +1241,13 @@ margin-right: 0; }
 <p><strong>Quelle version ?</strong></p>
 </div>
 <div class="callout-content">
-<p>Ce cours utilise <strong>pandas 3</strong>. Si vous êtes sur pandas 2, tout fonctionne de la même façon dans cette page, à un détail d’affichage près : les colonnes de texte y apparaissent avec le type <code>object</code> au lieu de <code>str</code>. Pour connaître votre version : <code>pd.__version__</code>.</p>
+<p>Ce cours utilise <strong>pandas 3</strong>. Pour connaître votre version : <code>pd.__version__</code>.</p>
+<p>Si vous avez une version plus ancienne, certaines commandes peuvent ne pas fonctionner ou donner un affichage différent de celui du cours. En cas de doute, mettez pandas à jour :</p>
+<ul>
+<li>avec pip : <code>pip install --upgrade pandas</code> ;</li>
+<li>avec uv, dans un projet (avec un <code>pyproject.toml</code>) : <code>uv add &quot;pandas&gt;=3&quot;</code> ;</li>
+<li>avec uv, dans un simple environnement virtuel : <code>uv pip install --upgrade pandas</code>.</li>
+</ul>
 </div>
 </div>
 </div>
