@@ -24,9 +24,15 @@ On l'importe toujours de la même façon, avec l'alias `pd` :
 import pandas as pd
 ```
 
-::: {.callout-note}
+::: {.callout-warning}
 ### Quelle version ?
-Ce cours utilise **pandas 3**. Si vous êtes sur pandas 2, tout fonctionne de la même façon dans cette page, à un détail d'affichage près : les colonnes de texte y apparaissent avec le type `object` au lieu de `str`. Pour connaître votre version : `pd.__version__`.
+Ce cours utilise **pandas 3**. Pour connaître votre version : `pd.__version__`.
+
+Si vous avez une version plus ancienne, certaines commandes peuvent ne pas fonctionner ou donner un affichage différent de celui du cours. En cas de doute, mettez pandas à jour :
+
+- avec pip : `pip install --upgrade pandas` ;
+- avec uv, dans un projet (avec un `pyproject.toml`) : `uv add "pandas>=3"` ;
+- avec uv, dans un simple environnement virtuel : `uv pip install --upgrade pandas`.
 :::
 
 ## Sous le capot : NumPy et Arrow
