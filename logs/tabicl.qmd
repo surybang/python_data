@@ -211,7 +211,7 @@ Le nombre de prédictions ne dépend pas du modèle, mais il est **proportionnel
 
 ::: {.callout-tip}
 ### À vous de tester
-Le notebook [`TabICL.ipynb`](https://github.com/surybang/python_data/blob/main/notebooks/TabICL.ipynb) reproduit cette expérience : il compte les prédictions demandées par SHAP, mesure les temps de calcul de chaque modèle, et affiche l'explication d'une prédiction. Lancez-le avec des réglages réduits (`NB_LIGNES = 1`, `MAX_SAMPLES = 10`) si vous êtes sur CPU.
+Le notebook [`TabICL.ipynb`](https://github.com/surybang/python_data/blob/main/notebooks/logs/TabICL.ipynb) reproduit cette expérience : il compte les prédictions demandées par SHAP, mesure les temps de calcul de chaque modèle, et affiche l'explication d'une prédiction. Lancez-le avec des réglages réduits (`NB_LIGNES = 1`, `MAX_SAMPLES = 10`) si vous êtes sur CPU.
 :::
 
 ::: {.callout-warning}

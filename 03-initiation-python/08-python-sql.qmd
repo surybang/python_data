@@ -15,8 +15,8 @@ format-links:
 :::{.callout-tip}
 Pour accéder aux notebooks d'exercices c'est ici 👇
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/08-bases-de-donnees.ipynb)
-[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB08-bases-de-donnees%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%AB08-bases-de-donnees%C2%BB)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/init_python/08-bases-de-donnees.ipynb)
+[![Open In SSP Cloud](https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode)](https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&name=%C2%AB08-bases-de-donnees%C2%BB&init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&init.personalInitArgs=%C2%ABinit_python%2F08-bases-de-donnees%C2%BB)
 :::
 
 
@@ -302,7 +302,7 @@ Remarquez les paramètres nommés (`:ville`), remplis par un **dictionnaire** : 
 
 ::: {.callout-warning}
 ### Jamais de mot de passe dans le code
-Un mot de passe écrit en clair dans un script finit tôt ou tard sur GitHub, dans un mail ou dans une capture d'écran. Stockez-le plutôt dans une **variable d'environnement**, et lisez-le dans le script :
+Un mot de passe écrit en clair dans un script finit tôt ou tard sur GitHub (ou autre), dans un mail ou dans une capture d'écran. Stockez-le plutôt dans une **variable d'environnement**, et lisez-le dans le script :
 
 ```python
 import os
