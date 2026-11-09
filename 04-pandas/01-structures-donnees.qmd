@@ -179,6 +179,9 @@ Un DataFrame a deux **axes**, que de nombreuses méthodes vous demanderont de pr
    axis=0   0 │ Clavier  │ Lyon   │        2 │  49.9 │
      ↓      1 │ Souris   │ Paris  │        5 │  19.9 │
   (lignes)  2 │ Écran    │ Lyon   │        1 │ 189.0 │
+            3 │ Clavier  │ Nantes │        3 │  49.9 │
+            4 │ Écran    │ Paris  │        2 │ 189.0 │
+            5 │ Souris   │ Lyon   │        4 │  19.9 │
               └──────────┴────────┴──────────┴───────┘
 ```
 
@@ -205,13 +208,16 @@ C'est `axis=0` qui donne le total de chaque colonne… alors que 0 désigne les 
 
 ```python
 nombres.sum(axis=0)    # 2 valeurs : une par colonne
-# quantite     17.0
-# prix        517.6
+# quantite     17.0     ← 2 + 5 + 1 + 3 + 2 + 4
+# prix        517.6     ← 49.9 + 19.9 + 189.0 + 49.9 + 189.0 + 19.9
 
 nombres.sum(axis=1)    # 6 valeurs : une par ligne
-# 0     51.9
-# 1     24.9
-# ...
+# 0     51.9    ← 2 + 49.9
+# 1     24.9    ← 5 + 19.9
+# 2    190.0    ← 1 + 189.0
+# 3     52.9    ← 3 + 49.9
+# 4    191.0    ← 2 + 189.0
+# 5     23.9    ← 4 + 19.9
 ```
 
 La bonne façon de le lire : `axis` indique l'axe **le long duquel on calcule**, celui qui **disparaît** dans le résultat.
@@ -354,7 +360,7 @@ ventes_ca = ventes.assign(ca=ventes["quantite"] * ventes["prix"])
 
 C'est voulu, et c'est une bonne nouvelle : l'original reste intact tant que vous ne le remplacez pas explicitement, et chaque étape de votre analyse produit un nouvel objet. C'est ce qui permettra, plus tard, d'**enchaîner** les méthodes les unes après les autres.
 
-::: {.callout-note}
+::: {.callout-note collapse="true"}
 ### pandas 3 et le *Copy-on-Write*
 Vous vous souvenez du schéma des étiquettes en mémoire ? En pandas 2, extraire une partie d'un DataFrame puis la modifier pouvait, selon les cas, modifier aussi l'original, d'où le célèbre avertissement `SettingWithCopyWarning`.
 
