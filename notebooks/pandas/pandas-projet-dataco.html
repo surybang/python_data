@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Projet : analyse exploratoire d’une supply chain – Python &amp; data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-37939e3eb262a553528e6d6fe3c4a74d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-f1fc3fe1c58281fce00a66b0e554d045.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-37939e3eb262a553528e6d6fe3c4a74d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Python &amp; data</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/surybang/python_data"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Projet : analyse exploratoire d’une supply chain</li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accueil</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Introduction</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Langages de programmation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pourquoi Python ?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Environnement</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: Environnement">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installer en local</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Environnements en ligne</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Initiation Python</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: Initiation Python">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Premiers pas en notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables, types &amp; opérations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditions &amp; boucles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structures de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le slicing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Les fonctions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/06-erreurs-exceptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Erreurs et exceptions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/07-scripts-jeux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts et jeux</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03-initiation-python/08-python-sql.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Base de données</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../04-pandas/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Pandas pour l'analyse de données</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: Pandas pour l'analyse de données">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../04-pandas/01-structures-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure de données</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../04-pandas/02-charger-explorer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Charger et explorer</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../05-projet-reproductible/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Créer des projets reproductibles</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: Créer des projets reproductibles">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../05-projet-reproductible/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">uv pour les gouverner tous</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../06-dbt/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">dbt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../07-Cloud/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Cloud</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: Cloud">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../07-Cloud/GCP/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">GCP</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section: GCP">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../07-Cloud/GCP/01-cloud-storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Google Cloud Storage (GCS)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../07-Cloud/GCP/02-bigquery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BigQuery</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../logs/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-8-label">Logs</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section: Logs">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TabICL</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#le-dictionnaire-des-colonnes" id="toc-le-dictionnaire-des-colonnes" class="nav-link active" data-scroll-target="#le-dictionnaire-des-colonnes">📖 Le dictionnaire des colonnes</a></li>
+  <li><a href="#partie-1-découvrir-le-fichier" id="toc-partie-1-découvrir-le-fichier" class="nav-link" data-scroll-target="#partie-1-découvrir-le-fichier">Partie 1 : découvrir le fichier</a>
+  <ul class="collapse">
+  <li><a href="#charger-le-fichier" id="toc-charger-le-fichier" class="nav-link" data-scroll-target="#charger-le-fichier">1.1 Charger le fichier</a></li>
+  <li><a href="#le-premier-tour" id="toc-le-premier-tour" class="nav-link" data-scroll-target="#le-premier-tour">1.2 Le premier tour</a></li>
+  <li><a href="#des-colonnes-en-double" id="toc-des-colonnes-en-double" class="nav-link" data-scroll-target="#des-colonnes-en-double">1.3 Des colonnes en double ?</a></li>
+  <li><a href="#combien-de-commandes" id="toc-combien-de-commandes" class="nav-link" data-scroll-target="#combien-de-commandes">1.4 Combien de commandes ?</a></li>
+  <li><a href="#les-variables-qualitatives" id="toc-les-variables-qualitatives" class="nav-link" data-scroll-target="#les-variables-qualitatives">1.5 Les variables qualitatives</a></li>
+  </ul></li>
+  <li><a href="#partie-2-préparer-les-données" id="toc-partie-2-préparer-les-données" class="nav-link" data-scroll-target="#partie-2-préparer-les-données">Partie 2 : préparer les données</a>
+  <ul class="collapse">
+  <li><a href="#la-fonction-de-préparation" id="toc-la-fonction-de-préparation" class="nav-link" data-scroll-target="#la-fonction-de-préparation">2.1 La fonction de préparation</a></li>
+  <li><a href="#vérifier-la-cohérence" id="toc-vérifier-la-cohérence" class="nav-link" data-scroll-target="#vérifier-la-cohérence">2.2 Vérifier la cohérence</a></li>
+  <li><a href="#la-période-couverte" id="toc-la-période-couverte" class="nav-link" data-scroll-target="#la-période-couverte">2.3 La période couverte</a></li>
+  </ul></li>
+  <li><a href="#partie-3-livrons-nous-à-lheure" id="toc-partie-3-livrons-nous-à-lheure" class="nav-link" data-scroll-target="#partie-3-livrons-nous-à-lheure">Partie 3 : livrons-nous à l’heure ?</a>
+  <ul class="collapse">
+  <li><a href="#le-taux-de-retard-global" id="toc-le-taux-de-retard-global" class="nav-link" data-scroll-target="#le-taux-de-retard-global">3.1 Le taux de retard global</a>
+  <ul class="collapse">
+  <li><a href="#à-toi-de-conclure" id="toc-à-toi-de-conclure" class="nav-link" data-scroll-target="#à-toi-de-conclure">✍️ À toi de conclure</a></li>
+  </ul></li>
+  <li><a href="#par-mode-dexpédition" id="toc-par-mode-dexpédition" class="nav-link" data-scroll-target="#par-mode-dexpédition">3.2 Par mode d’expédition</a>
+  <ul class="collapse">
+  <li><a href="#à-toi-de-conclure-1" id="toc-à-toi-de-conclure-1" class="nav-link" data-scroll-target="#à-toi-de-conclure-1">✍️ À toi de conclure</a></li>
+  </ul></li>
+  <li><a href="#le-retard-dépend-il-de-la-géographie" id="toc-le-retard-dépend-il-de-la-géographie" class="nav-link" data-scroll-target="#le-retard-dépend-il-de-la-géographie">3.3 Le retard dépend-il de la géographie ?</a>
+  <ul class="collapse">
+  <li><a href="#à-toi-de-conclure-2" id="toc-à-toi-de-conclure-2" class="nav-link" data-scroll-target="#à-toi-de-conclure-2">✍️ À toi de conclure</a></li>
+  </ul></li>
+  <li><a href="#retard-et-mode-croisés" id="toc-retard-et-mode-croisés" class="nav-link" data-scroll-target="#retard-et-mode-croisés">3.4 Retard et mode, croisés</a></li>
+  </ul></li>
+  <li><a href="#partie-4-quels-produits-comptent-vraiment-lanalyse-abc" id="toc-partie-4-quels-produits-comptent-vraiment-lanalyse-abc" class="nav-link" data-scroll-target="#partie-4-quels-produits-comptent-vraiment-lanalyse-abc">Partie 4 : quels produits comptent vraiment ? L’analyse ABC</a>
+  <ul class="collapse">
+  <li><a href="#le-chiffre-daffaires-par-produit" id="toc-le-chiffre-daffaires-par-produit" class="nav-link" data-scroll-target="#le-chiffre-daffaires-par-produit">4.1 Le chiffre d’affaires par produit</a></li>
+  <li><a href="#la-part-cumulée-et-la-classe" id="toc-la-part-cumulée-et-la-classe" class="nav-link" data-scroll-target="#la-part-cumulée-et-la-classe">4.2 La part cumulée et la classe</a>
+  <ul class="collapse">
+  <li><a href="#à-toi-de-conclure-3" id="toc-à-toi-de-conclure-3" class="nav-link" data-scroll-target="#à-toi-de-conclure-3">✍️ À toi de conclure</a></li>
+  </ul></li>
+  <li><a href="#les-produits-de-classe-a" id="toc-les-produits-de-classe-a" class="nav-link" data-scroll-target="#les-produits-de-classe-a">4.3 Les produits de classe A</a>
+  <ul class="collapse">
+  <li><a href="#bonus-la-courbe-de-pareto" id="toc-bonus-la-courbe-de-pareto" class="nav-link" data-scroll-target="#bonus-la-courbe-de-pareto">📊 Bonus : la courbe de Pareto</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#partie-5-où-gagne-t-on-où-perd-on-de-largent" id="toc-partie-5-où-gagne-t-on-où-perd-on-de-largent" class="nav-link" data-scroll-target="#partie-5-où-gagne-t-on-où-perd-on-de-largent">Partie 5 : où gagne-t-on, où perd-on de l’argent ?</a>
+  <ul class="collapse">
+  <li><a href="#des-lignes-à-perte" id="toc-des-lignes-à-perte" class="nav-link" data-scroll-target="#des-lignes-à-perte">5.1 Des lignes à perte</a></li>
+  <li><a href="#le-bénéfice-par-rayon" id="toc-le-bénéfice-par-rayon" class="nav-link" data-scroll-target="#le-bénéfice-par-rayon">5.2 Le bénéfice par rayon</a></li>
+  <li><a href="#les-remises-détruisent-elles-la-marge" id="toc-les-remises-détruisent-elles-la-marge" class="nav-link" data-scroll-target="#les-remises-détruisent-elles-la-marge">5.3 Les remises détruisent-elles la marge ?</a>
+  <ul class="collapse">
+  <li><a href="#à-toi-de-conclure-4" id="toc-à-toi-de-conclure-4" class="nav-link" data-scroll-target="#à-toi-de-conclure-4">✍️ À toi de conclure</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#partie-6-y-a-t-il-de-la-fraude" id="toc-partie-6-y-a-t-il-de-la-fraude" class="nav-link" data-scroll-target="#partie-6-y-a-t-il-de-la-fraude">Partie 6 : y a-t-il de la fraude ?</a>
+  <ul class="collapse">
+  <li><a href="#le-poids-de-la-fraude" id="toc-le-poids-de-la-fraude" class="nav-link" data-scroll-target="#le-poids-de-la-fraude">6.1 Le poids de la fraude</a></li>
+  <li><a href="#fraude-et-moyen-de-paiement" id="toc-fraude-et-moyen-de-paiement" class="nav-link" data-scroll-target="#fraude-et-moyen-de-paiement">6.2 Fraude et moyen de paiement</a>
+  <ul class="collapse">
+  <li><a href="#à-toi-de-conclure-5" id="toc-à-toi-de-conclure-5" class="nav-link" data-scroll-target="#à-toi-de-conclure-5">✍️ À toi de conclure</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#partie-7-comment-lactivité-évolue-t-elle" id="toc-partie-7-comment-lactivité-évolue-t-elle" class="nav-link" data-scroll-target="#partie-7-comment-lactivité-évolue-t-elle">Partie 7 : comment l’activité évolue-t-elle ?</a>
+  <ul class="collapse">
+  <li><a href="#les-commandes-mois-par-mois" id="toc-les-commandes-mois-par-mois" class="nav-link" data-scroll-target="#les-commandes-mois-par-mois">7.1 Les commandes mois par mois</a>
+  <ul class="collapse">
+  <li><a href="#à-toi-de-conclure-6" id="toc-à-toi-de-conclure-6" class="nav-link" data-scroll-target="#à-toi-de-conclure-6">✍️ À toi de conclure</a></li>
+  </ul></li>
+  <li><a href="#pour-aller-plus-loin-le-panier-moyen-a-t-il-changé" id="toc-pour-aller-plus-loin-le-panier-moyen-a-t-il-changé" class="nav-link" data-scroll-target="#pour-aller-plus-loin-le-panier-moyen-a-t-il-changé">7.2 Pour aller plus loin : le panier moyen a-t-il changé ?</a></li>
+  </ul></li>
+  <li><a href="#partie-8-la-synthèse" id="toc-partie-8-la-synthèse" class="nav-link" data-scroll-target="#partie-8-la-synthèse">Partie 8 : la synthèse</a>
+  <ul class="collapse">
+  <li><a href="#ma-note-de-synthèse" id="toc-ma-note-de-synthèse" class="nav-link" data-scroll-target="#ma-note-de-synthèse">✍️ Ma note de synthèse</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/surybang/python_data/blob/main/notebooks/pandas/pandas-projet-dataco.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Projet : analyse exploratoire d’une supply chain</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Ce notebook est un <strong>projet guidé</strong> qui mobilise tout le module pandas sur un vrai jeu de données. Tu joues le rôle d’un ou d’une analyste qui vient d’arriver chez <strong>DataCo Global</strong>, une entreprise qui vend des articles de sport, de vêtements et d’électronique dans le monde entier. Ton responsable te transmet l’export des commandes de 2015 à début 2018 et te pose des questions très concrètes :</p>
+<ol type="1">
+<li><strong>Livrons-nous à l’heure ?</strong> Et si non, où est le problème ?</li>
+<li><strong>Quels produits comptent vraiment ?</strong> (l’analyse ABC)</li>
+<li><strong>Où gagne-t-on et où perd-on de l’argent ?</strong></li>
+<li><strong>Y a-t-il de la fraude, et peut-on la repérer ?</strong></li>
+<li><strong>Comment l’activité évolue-t-elle dans le temps ?</strong></li>
+</ol>
+<p>Comme dans les autres notebooks : complète les cellules <code># TODO</code>, compare avec le résultat attendu, et ne regarde la solution qu’après avoir vraiment essayé. Mais ici, il y a une étape de plus : après chaque analyse, une cellule <strong>✍️ À toi de conclure</strong> te demande de <strong>traduire les chiffres en une phrase</strong> pour le métier. C’est la partie la plus importante du travail d’analyste.</p>
+<blockquote class="blockquote">
+<p><strong>Source des données</strong> : <em>DataCo Smart Supply Chain for Big Data Analysis</em>, F. Constante, F. Silva, A. Pereira (2019), Mendeley Data, DOI <a href="https://data.mendeley.com/datasets/8gx2fvg2k6">10.17632/8gx2fvg2k6</a>, licence CC BY 4.0. Le fichier utilisé ici est une version allégée : 27 colonnes sur 53, sans les données personnelles des clients, réencodée en UTF-8. Le jeu de données est aussi disponible sur Kaggle.</p>
+</blockquote>
+<section id="le-dictionnaire-des-colonnes" class="level3">
+<h3 class="anchored" data-anchor-id="le-dictionnaire-des-colonnes">📖 Le dictionnaire des colonnes</h3>
+<p>Chaque ligne est <strong>une ligne de commande</strong> : un produit dans une commande. Une commande de 3 produits différents occupe donc 3 lignes.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Colonne</th>
+<th>Contenu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Order Id</code>, <code>Order Item Id</code></td>
+<td>numéro de la commande, numéro de la ligne de commande</td>
+</tr>
+<tr class="even">
+<td><code>order date (DateOrders)</code>, <code>shipping date (DateOrders)</code></td>
+<td>date de la commande, date d’expédition</td>
+</tr>
+<tr class="odd">
+<td><code>Type</code></td>
+<td>moyen de paiement</td>
+</tr>
+<tr class="even">
+<td><code>Order Status</code></td>
+<td>statut de la commande (<code>COMPLETE</code>, <code>PENDING</code>, <code>SUSPECTED_FRAUD</code>…)</td>
+</tr>
+<tr class="odd">
+<td><code>Customer Id</code>, <code>Customer Segment</code></td>
+<td>numéro et segment du client</td>
+</tr>
+<tr class="even">
+<td><code>Market</code>, <code>Order Region</code>, <code>Order Country</code></td>
+<td>zone géographique de livraison</td>
+</tr>
+<tr class="odd">
+<td><code>Department Name</code>, <code>Category Name</code>, <code>Product Name</code></td>
+<td>rayon, catégorie et nom du produit</td>
+</tr>
+<tr class="even">
+<td><code>Order Item Product Price</code>, <code>Order Item Quantity</code>, <code>Order Item Discount Rate</code></td>
+<td>prix unitaire, quantité, taux de remise</td>
+</tr>
+<tr class="odd">
+<td><code>Sales</code></td>
+<td>montant avant remise</td>
+</tr>
+<tr class="even">
+<td><code>Order Item Total</code></td>
+<td>montant après remise</td>
+</tr>
+<tr class="odd">
+<td><code>Order Profit Per Order</code>, <code>Benefit per order</code></td>
+<td>bénéfice de la ligne</td>
+</tr>
+<tr class="even">
+<td><code>Order Item Profit Ratio</code></td>
+<td>bénéfice rapporté au montant</td>
+</tr>
+<tr class="odd">
+<td><code>Shipping Mode</code></td>
+<td>mode d’expédition (<code>Standard Class</code>, <code>First Class</code>…)</td>
+</tr>
+<tr class="even">
+<td><code>Days for shipment (scheduled)</code>, <code>Days for shipping (real)</code></td>
+<td>délai de livraison promis et réel, en jours</td>
+</tr>
+<tr class="odd">
+<td><code>Delivery Status</code>, <code>Late_delivery_risk</code></td>
+<td>statut de livraison, indicateur de retard (1 = en retard)</td>
+</tr>
+</tbody>
+</table>
+<div id="678549f2" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>URL <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/surybang/python_data/main/data/dataco_supply_chain.csv.gz"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="partie-1-découvrir-le-fichier" class="level1">
+<h1>Partie 1 : découvrir le fichier</h1>
+<hr>
+<section id="charger-le-fichier" class="level2">
+<h2 class="anchored" data-anchor-id="charger-le-fichier">1.1 Charger le fichier</h2>
+<p>Le fichier est compressé (<code>.csv.gz</code>) : <code>pd.read_csv</code> sait le lire directement, sans option particulière. Charge-le dans <code>raw</code> et affiche sa taille.</p>
+<div id="f4d10134" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>raw <span class="op">=</span> ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(raw.shape)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (180519, 27)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>brut <span class="op">=</span> pd.read_csv(URL)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(brut.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>🤔 Plus de 180 000 lignes : impossible de tout lire à l’œil. C’est exactement pour ça qu’on fait une analyse exploratoire.</p>
+<blockquote class="blockquote">
+<p>💡 Le fichier original de Kaggle est encodé en <em>latin-1</em>. Si tu le télécharges toi-même, <code>pd.read_csv</code> lèvera une <code>UnicodeDecodeError</code> : ajoute alors <code>encoding="latin-1"</code>.</p>
+</blockquote>
+<hr>
+</section>
+<section id="le-premier-tour" class="level2">
+<h2 class="anchored" data-anchor-id="le-premier-tour">1.2 Le premier tour</h2>
+<p>Compte le nombre <strong>total</strong> de valeurs manquantes dans le fichier, puis le nombre de colonnes de chaque type.</p>
+<div id="16b9b8ad" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># str        13</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># int64       7</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># float64     7</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: count, dtype: int64</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(brut.isna().<span class="bu">sum</span>().<span class="bu">sum</span>())</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(brut.dtypes.value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>Aucune valeur manquante : le fichier est remarquablement complet (c’est rare, et c’est aussi parce que la version allégée a retiré les colonnes les plus trouées, comme le code postal). Mais les deux colonnes de dates sont du <strong>texte</strong> (<code>str</code>) : il faudra les convertir.</p>
+<hr>
+</section>
+<section id="des-colonnes-en-double" class="level2">
+<h2 class="anchored" data-anchor-id="des-colonnes-en-double">1.3 Des colonnes en double ?</h2>
+<p>Le dictionnaire décrit deux colonnes de bénéfice, <code>Order Profit Per Order</code> et <code>Benefit per order</code>. Vérifie si elles sont <strong>identiques</strong> sur toutes les lignes.</p>
+<p>Indice : compare-les avec <code>==</code>, puis demande si <strong>toutes</strong> les valeurs sont vraies avec <code>.all()</code>.</p>
+<div id="a8f3ddae" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((brut[<span class="st">"Order Profit Per Order"</span>] <span class="op">==</span> brut[<span class="st">"Benefit per order"</span>]).<span class="bu">all</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>Elles sont identiques : l’une des deux est inutile. Les exports d’ERP contiennent souvent des colonnes en double, sous des noms différents. Inutile de garder les deux.</p>
+<hr>
+</section>
+<section id="combien-de-commandes" class="level2">
+<h2 class="anchored" data-anchor-id="combien-de-commandes">1.4 Combien de commandes ?</h2>
+<p>Combien de <strong>commandes</strong> différentes, de <strong>clients</strong> et de <strong>produits</strong> contient le fichier ? Combien de lignes compte une commande en moyenne ?</p>
+<div id="21366f49" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 65752 20652 118</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.75</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>nb_commandes <span class="op">=</span> brut[<span class="st">"Order Id"</span>].nunique()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nb_commandes, brut[<span class="st">"Customer Id"</span>].nunique(), brut[<span class="st">"Product Name"</span>].nunique())</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(<span class="bu">len</span>(brut) <span class="op">/</span> nb_commandes, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>65 752 commandes pour 180 519 lignes : une commande contient en moyenne près de 3 produits. Retiens-le : <strong>compter des lignes, ce n’est pas compter des commandes</strong>.</p>
+<hr>
+</section>
+<section id="les-variables-qualitatives" class="level2">
+<h2 class="anchored" data-anchor-id="les-variables-qualitatives">1.5 Les variables qualitatives</h2>
+<p>Affiche la répartition (en proportion, arrondie à 3 décimales) des modes d’expédition.</p>
+<div id="c5522f9c" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Shipping Mode</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard Class    0.597</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Second Class      0.195</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># First Class       0.154</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Same Day          0.054</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: proportion, dtype: float64</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>brut[<span class="st">"Shipping Mode"</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<hr>
+</section>
+</section>
+<section id="partie-2-préparer-les-données" class="level1">
+<h1>Partie 2 : préparer les données</h1>
+<p>Les noms de colonnes avec des espaces et des parenthèses sont pénibles à écrire (<code>pd.col("order date (DateOrders)")</code>…). On va écrire une fonction de préparation, à utiliser avec <code>pipe</code>, comme <code>nettoyer_ventes</code> dans le cours.</p>
+<div id="45c43f46" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>noms <span class="op">=</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Id"</span>: <span class="st">"id_commande"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Item Id"</span>: <span class="st">"id_ligne"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"order date (DateOrders)"</span>: <span class="st">"date_commande"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"shipping date (DateOrders)"</span>: <span class="st">"date_expedition"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Type"</span>: <span class="st">"paiement"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Status"</span>: <span class="st">"statut"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Customer Id"</span>: <span class="st">"id_client"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Customer Segment"</span>: <span class="st">"segment"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Market"</span>: <span class="st">"marche"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Region"</span>: <span class="st">"region"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Country"</span>: <span class="st">"pays"</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Department Name"</span>: <span class="st">"rayon"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Category Name"</span>: <span class="st">"categorie"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Product Name"</span>: <span class="st">"produit"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Item Product Price"</span>: <span class="st">"prix"</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Item Quantity"</span>: <span class="st">"quantite"</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Item Discount Rate"</span>: <span class="st">"taux_remise"</span>,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sales"</span>: <span class="st">"ca_brut"</span>,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Item Total"</span>: <span class="st">"ca_net"</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Profit Per Order"</span>: <span class="st">"benefice"</span>,</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order Item Profit Ratio"</span>: <span class="st">"marge"</span>,</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Shipping Mode"</span>: <span class="st">"mode_expedition"</span>,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Days for shipment (scheduled)"</span>: <span class="st">"delai_prevu"</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Days for shipping (real)"</span>: <span class="st">"delai_reel"</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Delivery Status"</span>: <span class="st">"statut_livraison"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Late_delivery_risk"</span>: <span class="st">"en_retard"</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+<section id="la-fonction-de-préparation" class="level2">
+<h2 class="anchored" data-anchor-id="la-fonction-de-préparation">2.1 La fonction de préparation</h2>
+<p>Écris une fonction <code>preparer(df)</code> qui, dans une seule chaîne :</p>
+<ol type="1">
+<li>supprime la colonne en double <code>Benefit per order</code> ;</li>
+<li>renomme les colonnes avec le dictionnaire <code>noms</code> ;</li>
+<li>convertit <code>date_commande</code> et <code>date_expedition</code> en dates (le format est <code>mois/jour/année heure:minute</code>, soit <code>format="%m/%d/%Y %H:%M"</code>) ;</li>
+<li>ajoute une colonne <code>retard_jours</code> : le délai réel moins le délai prévu.</li>
+</ol>
+<p>Utilise-la avec <code>pipe</code> pour créer <code>commandes</code>.</p>
+<p>Indice : <code>pd.to_datetime</code> est une <strong>fonction</strong>, comme <code>pd.cut</code> dans le cours. Tu as donc besoin d’une <code>lambda</code>.</p>
+<div id="be38ecb8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preparer(df):</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>commandes <span class="op">=</span> brut.pipe(preparer)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(commandes.shape)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(commandes[[<span class="st">"date_commande"</span>, <span class="st">"date_expedition"</span>, <span class="st">"retard_jours"</span>]].dtypes)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (180519, 27)</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># date_commande      datetime64[us]</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># date_expedition    datetime64[us]</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># retard_jours                int64</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># dtype: object</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preparer(df):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Renomme les colonnes, convertit les dates et calcule le retard."""</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        df</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        .drop(columns<span class="op">=</span>[<span class="st">"Benefit per order"</span>])</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        .rename(columns<span class="op">=</span>noms)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        .assign(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            date_commande<span class="op">=</span><span class="kw">lambda</span> d: pd.to_datetime(d[<span class="st">"date_commande"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y %H:%M"</span>),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>            date_expedition<span class="op">=</span><span class="kw">lambda</span> d: pd.to_datetime(d[<span class="st">"date_expedition"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y %H:%M"</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            retard_jours<span class="op">=</span>pd.col(<span class="st">"delai_reel"</span>) <span class="op">-</span> pd.col(<span class="st">"delai_prevu"</span>),</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>commandes <span class="op">=</span> brut.pipe(preparer)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(commandes.shape)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(commandes[[<span class="st">"date_commande"</span>, <span class="st">"date_expedition"</span>, <span class="st">"retard_jours"</span>]].dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<hr>
+</section>
+<section id="vérifier-la-cohérence" class="level2">
+<h2 class="anchored" data-anchor-id="vérifier-la-cohérence">2.2 Vérifier la cohérence</h2>
+<p>Deux colonnes parlent du retard : <code>statut_livraison</code> et <code>en_retard</code>. Vérifie qu’elles racontent la même histoire avec un tableau croisé.</p>
+<div id="5f2ccb66" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># en_retard              0      1</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># statut_livraison               </span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Advance shipping   41592      0</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Late delivery          0  98977</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Shipping canceled   7754      0</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Shipping on time   32196      0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pd.crosstab(commandes[<span class="st">"statut_livraison"</span>], commandes[<span class="st">"en_retard"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p><code>en_retard</code> vaut 1 exactement pour les lignes <code>Late delivery</code>, et 0 pour tout le reste, <strong>y compris les expéditions annulées</strong>. Pour mesurer la ponctualité, il faudra donc <strong>exclure</strong> les annulations : une commande annulée n’est ni à l’heure, ni en retard.</p>
+<hr>
+</section>
+<section id="la-période-couverte" class="level2">
+<h2 class="anchored" data-anchor-id="la-période-couverte">2.3 La période couverte</h2>
+<p>Quelle est la date de la première et de la dernière commande ?</p>
+<div id="67ef7cbe" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2015-01-01 00:00:00 2018-01-31 23:38:00</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(commandes[<span class="st">"date_commande"</span>].<span class="bu">min</span>(), commandes[<span class="st">"date_commande"</span>].<span class="bu">max</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<hr>
+</section>
+</section>
+<section id="partie-3-livrons-nous-à-lheure" class="level1">
+<h1>Partie 3 : livrons-nous à l’heure ?</h1>
+<div id="cfe6981e" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>expediees <span class="op">=</span> commandes.loc[pd.col(<span class="st">"statut_livraison"</span>) <span class="op">!=</span> <span class="st">"Shipping canceled"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>La cellule ci-dessus crée <code>expediees</code> : toutes les lignes <strong>sauf</strong> les expéditions annulées. C’est la base de toute cette partie.</p>
+<hr>
+<section id="le-taux-de-retard-global" class="level2">
+<h2 class="anchored" data-anchor-id="le-taux-de-retard-global">3.1 Le taux de retard global</h2>
+<p>Quelle proportion des lignes expédiées arrive en retard ? Arrondis à 3 décimales.</p>
+<p>Indice : la moyenne d’une colonne de 0 et de 1 est la proportion de 1.</p>
+<div id="145252b9" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.573</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(expediees[<span class="st">"en_retard"</span>].mean(), <span class="dv">3</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>expediees[<span class="st">"en_retard"</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<section id="à-toi-de-conclure" class="level3">
+<h3 class="anchored" data-anchor-id="à-toi-de-conclure">✍️ À toi de conclure</h3>
+<p>Plus d’une livraison sur deux arrive en retard. Est-ce que ça te semble acceptable pour un e-commerçant ? Que voudrais-tu savoir ensuite pour comprendre d’où vient le problème ?</p>
+<p><em>Écris ta réponse ici, en deux ou trois phrases, comme si tu l’envoyais à ton responsable.</em></p>
+<hr>
+</section>
+</section>
+<section id="par-mode-dexpédition" class="level2">
+<h2 class="anchored" data-anchor-id="par-mode-dexpédition">3.2 Par mode d’expédition</h2>
+<p>Pour chaque mode d’expédition, calcule :</p>
+<ul>
+<li><code>nb_lignes</code> : le nombre de lignes ;</li>
+<li><code>taux_retard</code> : la proportion de retards ;</li>
+<li><code>delai_prevu</code> et <code>delai_reel</code> : les délais moyens, en jours.</li>
+</ul>
+<p>Arrondis à 2 décimales et trie par taux de retard décroissant.</p>
+<div id="ddafdba8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    expediees</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                  nb_lignes  taux_retard  delai_prevu  delai_reel</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># mode_expedition                                                 </span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># First Class          26513         1.00          1.0        2.00</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Second Class         33806         0.80          2.0        3.99</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Same Day              9293         0.48          0.0        0.48</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard Class      103153         0.40          4.0        3.99</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    expediees</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"mode_expedition"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        nb_lignes<span class="op">=</span>(<span class="st">"id_ligne"</span>, <span class="st">"count"</span>),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        taux_retard<span class="op">=</span>(<span class="st">"en_retard"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        delai_prevu<span class="op">=</span>(<span class="st">"delai_prevu"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        delai_reel<span class="op">=</span>(<span class="st">"delai_reel"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">"taux_retard"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>🤔 Regarde bien les colonnes de délais. Le <code>First Class</code> promet une livraison en <strong>1 jour</strong> et livre en <strong>2 jours</strong>, à chaque fois : 100 % de retards. Le <code>Second Class</code> promet 2 jours et en met 4. Le <code>Standard Class</code> promet 4 jours et livre en 4 jours <strong>en moyenne</strong>, mais avec de la variabilité : 40 % de ses livraisons dépassent quand même le délai.</p>
+<section id="à-toi-de-conclure-1" class="level3">
+<h3 class="anchored" data-anchor-id="à-toi-de-conclure-1">✍️ À toi de conclure</h3>
+<p>Le problème des retards vient-il des transporteurs (qui livreraient lentement) ou de la <strong>promesse</strong> faite au client ? Quelle recommandation ferais-tu à la direction commerciale ?</p>
+<p><em>Écris ta réponse ici, en deux ou trois phrases, comme si tu l’envoyais à ton responsable.</em></p>
+<hr>
+</section>
+</section>
+<section id="le-retard-dépend-il-de-la-géographie" class="level2">
+<h2 class="anchored" data-anchor-id="le-retard-dépend-il-de-la-géographie">3.3 Le retard dépend-il de la géographie ?</h2>
+<p>Calcule le taux de retard (arrondi à 3 décimales) par marché.</p>
+<div id="7313a266" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># marche</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Africa          0.568</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Europe          0.577</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># LATAM           0.569</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Pacific Asia    0.574</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># USCA            0.574</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: en_retard, dtype: float64</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    expediees</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"marche"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"en_retard"</span>]</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<section id="à-toi-de-conclure-2" class="level3">
+<h3 class="anchored" data-anchor-id="à-toi-de-conclure-2">✍️ À toi de conclure</h3>
+<p>Les cinq marchés ont presque exactement le même taux de retard. Qu’est-ce que ça t’apprend sur l’origine du problème ? Pourquoi est-ce un résultat aussi utile qu’une grosse différence ?</p>
+<p><em>Écris ta réponse ici, en deux ou trois phrases, comme si tu l’envoyais à ton responsable.</em></p>
+<hr>
+</section>
+</section>
+<section id="retard-et-mode-croisés" class="level2">
+<h2 class="anchored" data-anchor-id="retard-et-mode-croisés">3.4 Retard et mode, croisés</h2>
+<p>Avec un tableau croisé dynamique, affiche le taux de retard par marché (en lignes) et par mode d’expédition (en colonnes), arrondi à 2 décimales.</p>
+<div id="2b09d786" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mode_expedition  First Class  Same Day  Second Class  Standard Class</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># marche                                                              </span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Africa                   1.0      0.46          0.80             0.4</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Europe                   1.0      0.49          0.80             0.4</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># LATAM                    1.0      0.50          0.79             0.4</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Pacific Asia             1.0      0.45          0.80             0.4</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># USCA                     1.0      0.46          0.80             0.4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>expediees.pivot_table(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span><span class="st">"marche"</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span><span class="st">"mode_expedition"</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    values<span class="op">=</span><span class="st">"en_retard"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    aggfunc<span class="op">=</span><span class="st">"mean"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>).<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>Dans <strong>chaque</strong> marché, on retrouve le même classement : le mode d’expédition explique les retards, la géographie non.</p>
+<hr>
+</section>
+</section>
+<section id="partie-4-quels-produits-comptent-vraiment-lanalyse-abc" class="level1">
+<h1>Partie 4 : quels produits comptent vraiment ? L’analyse ABC</h1>
+<p>L’<strong>analyse ABC</strong> classe les produits selon leur poids dans le chiffre d’affaires :</p>
+<ul>
+<li><strong>A</strong> : les produits qui font les <strong>80 %</strong> premiers du chiffre d’affaires, à surveiller de près (stock, prévisions) ;</li>
+<li><strong>B</strong> : les <strong>15 %</strong> suivants ;</li>
+<li><strong>C</strong> : les <strong>5 %</strong> restants, souvent nombreux et peu contributeurs.</li>
+</ul>
+<p>C’est la loi de Pareto appliquée au stock. La méthode : trier les produits du plus gros au plus petit chiffre d’affaires, puis calculer la <strong>part cumulée</strong>.</p>
+<hr>
+<section id="le-chiffre-daffaires-par-produit" class="level2">
+<h2 class="anchored" data-anchor-id="le-chiffre-daffaires-par-produit">4.1 Le chiffre d’affaires par produit</h2>
+<p>Crée <code>abc</code> : une ligne par produit, avec son chiffre d’affaires net (<code>ca</code>, somme de <code>ca_net</code>), trié du plus gros au plus petit, avec un index renuméroté (<code>reset_index()</code>). Affiche les 3 premières lignes et le nombre de produits.</p>
+<div id="ec34bd3d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>abc <span class="op">=</span> (</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(abc.head(<span class="dv">3</span>).<span class="bu">round</span>(<span class="dv">0</span>))</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(abc))</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">#                                          produit         ca</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 0      Field &amp; Stream Sportsman 16 Gun Fire Safe  6226935.0</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 1               Perfect Fitness Perfect Rip Deck  3973180.0</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2  Diamondback Women's Serene Classic Comfort Bi  3700784.0</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 118</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>abc <span class="op">=</span> (</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"produit"</span>, as_index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    .agg(ca<span class="op">=</span>(<span class="st">"ca_net"</span>, <span class="st">"sum"</span>))</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">"ca"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    .reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(abc.head(<span class="dv">3</span>).<span class="bu">round</span>(<span class="dv">0</span>))</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(abc))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<hr>
+</section>
+<section id="la-part-cumulée-et-la-classe" class="level2">
+<h2 class="anchored" data-anchor-id="la-part-cumulée-et-la-classe">4.2 La part cumulée et la classe</h2>
+<p>Ajoute à <code>abc</code> :</p>
+<ul>
+<li><code>part</code> : la part du produit dans le chiffre d’affaires total ;</li>
+<li><code>part_cumulee</code> : la somme cumulée de <code>part</code> (méthode <code>cumsum()</code>) ;</li>
+<li><code>classe</code> : <code>"A"</code> si la part cumulée est au plus 0,80, <code>"B"</code> si elle est au plus 0,95, <code>"C"</code> sinon (avec <code>case_when</code>).</li>
+</ul>
+<p>Compte ensuite le nombre de produits de chaque classe.</p>
+<div id="d9e06fa5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>abc <span class="op">=</span> (</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    abc</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(abc[<span class="st">"classe"</span>].value_counts().sort_index())</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># classe</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co"># A     7</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># B    16</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co"># C    95</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: count, dtype: int64</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>abc <span class="op">=</span> (</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    abc</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>        part<span class="op">=</span>pd.col(<span class="st">"ca"</span>) <span class="op">/</span> pd.col(<span class="st">"ca"</span>).<span class="bu">sum</span>(),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>        part_cumulee<span class="op">=</span>pd.col(<span class="st">"part"</span>).cumsum(),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        classe<span class="op">=</span>pd.col(<span class="st">"part_cumulee"</span>).case_when([</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>            (pd.col(<span class="st">"part_cumulee"</span>) <span class="op">&lt;=</span> <span class="fl">0.80</span>, <span class="st">"A"</span>),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>            (pd.col(<span class="st">"part_cumulee"</span>) <span class="op">&lt;=</span> <span class="fl">0.95</span>, <span class="st">"B"</span>),</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>            (pd.col(<span class="st">"part_cumulee"</span>) <span class="op">&gt;</span> <span class="fl">0.95</span>, <span class="st">"C"</span>),</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>        ]),</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(abc[<span class="st">"classe"</span>].value_counts().sort_index())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<section id="à-toi-de-conclure-3" class="level3">
+<h3 class="anchored" data-anchor-id="à-toi-de-conclure-3">✍️ À toi de conclure</h3>
+<p>Combien de produits font 80 % du chiffre d’affaires, sur 118 ? Qu’est-ce que ça change pour la gestion des stocks et des prévisions ?</p>
+<p><em>Écris ta réponse ici, en deux ou trois phrases, comme si tu l’envoyais à ton responsable.</em></p>
+<hr>
+</section>
+</section>
+<section id="les-produits-de-classe-a" class="level2">
+<h2 class="anchored" data-anchor-id="les-produits-de-classe-a">4.3 Les produits de classe A</h2>
+<p>Affiche les produits de classe A, avec leur chiffre d’affaires (arrondi à l’euro) et leur part cumulée (arrondie à 3 décimales).</p>
+<div id="373540fc" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                                          produit         ca  part_cumulee</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 0      Field &amp; Stream Sportsman 16 Gun Fire Safe  6226935.0         0.188</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1               Perfect Fitness Perfect Rip Deck  3973180.0         0.309</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2  Diamondback Women's Serene Classic Comfort Bi  3700784.0         0.421</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3              Nike Men's Free 5.0+ Running Shoe  3295693.0         0.520</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 4           Nike Men's Dri-FIT Victory Golf Polo  2828708.0         0.606</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 5                    Pelican Sunstream 100 Kayak  2785518.0         0.690</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 6        Nike Men's CJ Elite 2 TD Football Cleat  2598494.0         0.769</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    abc</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    .loc[pd.col(<span class="st">"classe"</span>) <span class="op">==</span> <span class="st">"A"</span>, [<span class="st">"produit"</span>, <span class="st">"ca"</span>, <span class="st">"part_cumulee"</span>]]</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>({<span class="st">"ca"</span>: <span class="dv">0</span>, <span class="st">"part_cumulee"</span>: <span class="dv">3</span>})</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<section id="bonus-la-courbe-de-pareto" class="level3">
+<h3 class="anchored" data-anchor-id="bonus-la-courbe-de-pareto">📊 Bonus : la courbe de Pareto</h3>
+<p>Pandas sait tracer des graphiques simples avec <code>.plot()</code> (il s’appuie sur la bibliothèque matplotlib). Ce n’est pas l’objet du module, mais la courbe de Pareto vaut le détour. Exécute simplement la cellule :</p>
+<div id="498b0620" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> abc[<span class="st">"part_cumulee"</span>].plot(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Part cumulée du chiffre d'affaires"</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Produits, du plus vendu au moins vendu"</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Part cumulée"</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="fl">0.8</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, color<span class="op">=</span><span class="st">"grey"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="partie-5-où-gagne-t-on-où-perd-on-de-largent" class="level1">
+<h1>Partie 5 : où gagne-t-on, où perd-on de l’argent ?</h1>
+<hr>
+<section id="des-lignes-à-perte" class="level2">
+<h2 class="anchored" data-anchor-id="des-lignes-à-perte">5.1 Des lignes à perte</h2>
+<p>Quelle proportion des lignes de commande a un bénéfice <strong>négatif</strong> ? Arrondis à 3 décimales.</p>
+<div id="f0e2e1a7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.187</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>((commandes[<span class="st">"benefice"</span>] <span class="op">&lt;</span> <span class="dv">0</span>).mean(), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<hr>
+</section>
+<section id="le-bénéfice-par-rayon" class="level2">
+<h2 class="anchored" data-anchor-id="le-bénéfice-par-rayon">5.2 Le bénéfice par rayon</h2>
+<p>Pour chaque rayon, calcule le chiffre d’affaires net (<code>ca</code>), le bénéfice total (<code>benefice</code>) et le <strong>taux de marge</strong> global (<code>taux_marge</code> = bénéfice total divisé par chiffre d’affaires total). Arrondis et trie par taux de marge croissant.</p>
+<p>Attention : on veut le rapport des <strong>totaux</strong>, pas la moyenne de la colonne <code>marge</code> (souviens-toi de la moyenne des moyennes).</p>
+<div id="87afdbe4" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                             ca   benefice  taux_marge</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co"># rayon                                                </span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Book Shop              11303.0      883.0       0.078</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Pet Shop               37318.0     3589.0       0.096</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Health and Beauty      95358.0     9494.0       0.100</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Footwear             3599469.0   410222.0       0.114</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Discs Shop            205676.0    24193.0       0.118</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Fan Shop            15378582.0  1834155.0       0.119</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Golf                 4142101.0   497524.0       0.120</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Technology            933829.0   113170.0       0.121</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Apparel              7167654.0   881883.0       0.123</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Outdoors             1125953.0   145251.0       0.129</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitness               357158.0    46538.0       0.130</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"rayon"</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    .agg(ca<span class="op">=</span>(<span class="st">"ca_net"</span>, <span class="st">"sum"</span>), benefice<span class="op">=</span>(<span class="st">"benefice"</span>, <span class="st">"sum"</span>))</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    .assign(taux_marge<span class="op">=</span>pd.col(<span class="st">"benefice"</span>) <span class="op">/</span> pd.col(<span class="st">"ca"</span>))</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>({<span class="st">"ca"</span>: <span class="dv">0</span>, <span class="st">"benefice"</span>: <span class="dv">0</span>, <span class="st">"taux_marge"</span>: <span class="dv">3</span>})</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">"taux_marge"</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<hr>
+</section>
+<section id="les-remises-détruisent-elles-la-marge" class="level2">
+<h2 class="anchored" data-anchor-id="les-remises-détruisent-elles-la-marge">5.3 Les remises détruisent-elles la marge ?</h2>
+<p>Découpe le taux de remise en tranches avec <code>pd.cut</code> : <code>[0, 0.05, 0.10, 0.15, 0.25]</code> (avec <code>include_lowest=True</code> pour garder les remises nulles). Pour chaque tranche, calcule le nombre de lignes et le taux de marge global (bénéfice total / CA net total), arrondi à 3 décimales.</p>
+<div id="f2f9f1c1" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># tranche_remise</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># (-0.001, 0.05]    0.120</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co"># (0.05, 0.1]       0.124</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (0.1, 0.15]       0.119</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># (0.15, 0.25]      0.118</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: taux_marge, dtype: float64</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    .assign(tranche_remise<span class="op">=</span><span class="kw">lambda</span> d: pd.cut(d[<span class="st">"taux_remise"</span>], bins<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.05</span>, <span class="fl">0.10</span>, <span class="fl">0.15</span>, <span class="fl">0.25</span>], include_lowest<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"tranche_remise"</span>, observed<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    .agg(nb_lignes<span class="op">=</span>(<span class="st">"id_ligne"</span>, <span class="st">"count"</span>), ca<span class="op">=</span>(<span class="st">"ca_net"</span>, <span class="st">"sum"</span>), benefice<span class="op">=</span>(<span class="st">"benefice"</span>, <span class="st">"sum"</span>))</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    .assign(taux_marge<span class="op">=</span>pd.col(<span class="st">"benefice"</span>) <span class="op">/</span> pd.col(<span class="st">"ca"</span>))</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"taux_marge"</span>]</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<section id="à-toi-de-conclure-4" class="level3">
+<h3 class="anchored" data-anchor-id="à-toi-de-conclure-4">✍️ À toi de conclure</h3>
+<p>La remise fait-elle beaucoup varier le taux de marge ? Si les lignes à perte ne s’expliquent pas par les remises, quelle autre piste regarderais-tu (indice : le bénéfice est-il le même pour toutes les lignes d’un même produit) ?</p>
+<p><em>Écris ta réponse ici, en deux ou trois phrases, comme si tu l’envoyais à ton responsable.</em></p>
+<hr>
+</section>
+</section>
+</section>
+<section id="partie-6-y-a-t-il-de-la-fraude" class="level1">
+<h1>Partie 6 : y a-t-il de la fraude ?</h1>
+<hr>
+<section id="le-poids-de-la-fraude" class="level2">
+<h2 class="anchored" data-anchor-id="le-poids-de-la-fraude">6.1 Le poids de la fraude</h2>
+<p>Combien de <strong>commandes</strong> (pas de lignes !) ont le statut <code>SUSPECTED_FRAUD</code>, et quel chiffre d’affaires net représentent-elles (arrondi à l’euro) ?</p>
+<div id="ffe514aa" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>fraude <span class="op">=</span> commandes.loc[...]</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1488</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 741492</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fraude <span class="op">=</span> commandes.loc[pd.col(<span class="st">"statut"</span>) <span class="op">==</span> <span class="st">"SUSPECTED_FRAUD"</span>]</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fraude[<span class="st">"id_commande"</span>].nunique())</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(fraude[<span class="st">"ca_net"</span>].<span class="bu">sum</span>()))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<hr>
+</section>
+<section id="fraude-et-moyen-de-paiement" class="level2">
+<h2 class="anchored" data-anchor-id="fraude-et-moyen-de-paiement">6.2 Fraude et moyen de paiement</h2>
+<p>Avec <code>pd.crosstab</code>, calcule pour chaque moyen de paiement la part des lignes suspectes de fraude. Arrondis à 3 décimales.</p>
+<p>Indice : crée d’abord une colonne booléenne <code>suspecte</code>.</p>
+<div id="0e91baa5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># suspecte  False  True </span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co"># paiement              </span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co"># CASH      1.000  0.000</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co"># DEBIT     1.000  0.000</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co"># PAYMENT   1.000  0.000</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co"># TRANSFER  0.919  0.081</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    .assign(suspecte<span class="op">=</span>pd.col(<span class="st">"statut"</span>) <span class="op">==</span> <span class="st">"SUSPECTED_FRAUD"</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    .pipe(<span class="kw">lambda</span> d: pd.crosstab(d[<span class="st">"paiement"</span>], d[<span class="st">"suspecte"</span>], normalize<span class="op">=</span><span class="st">"index"</span>))</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<section id="à-toi-de-conclure-5" class="level3">
+<h3 class="anchored" data-anchor-id="à-toi-de-conclure-5">✍️ À toi de conclure</h3>
+<p>Que remarques-tu ? Quelle règle simple proposerais-tu au service fraude ? Et quelle question poserais-tu sur la façon dont ce statut a été attribué (est-ce une fraude prouvée ou un soupçon) ?</p>
+<p><em>Écris ta réponse ici, en deux ou trois phrases, comme si tu l’envoyais à ton responsable.</em></p>
+<hr>
+</section>
+</section>
+</section>
+<section id="partie-7-comment-lactivité-évolue-t-elle" class="level1">
+<h1>Partie 7 : comment l’activité évolue-t-elle ?</h1>
+<hr>
+<section id="les-commandes-mois-par-mois" class="level2">
+<h2 class="anchored" data-anchor-id="les-commandes-mois-par-mois">7.1 Les commandes mois par mois</h2>
+<p>Crée <code>mensuel</code> : pour chaque mois (<code>to_period("M")</code>), le nombre de <strong>commandes</strong> distinctes et le chiffre d’affaires net. Affiche les 8 derniers mois, avec le CA arrondi à l’euro.</p>
+<div id="18fb0f7e" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>mensuel <span class="op">=</span> (</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mensuel.tail(<span class="dv">8</span>))</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co">#          nb_commandes         ca</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="co"># mois                            </span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2017-06          1676   927446.0</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 2017-07          1776   992423.0</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2017-08          1768   996508.0</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2017-09          1723  1027112.0</span></span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2017-10          2101   966081.0</span></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 2017-11          2055   563393.0</span></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 2017-12          2124   452742.0</span></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 2018-01          2123   297952.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mensuel <span class="op">=</span> (</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    .assign(mois<span class="op">=</span>pd.col(<span class="st">"date_commande"</span>).dt.to_period(<span class="st">"M"</span>))</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"mois"</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    .agg(nb_commandes<span class="op">=</span>(<span class="st">"id_commande"</span>, <span class="st">"nunique"</span>), ca<span class="op">=</span>(<span class="st">"ca_net"</span>, <span class="st">"sum"</span>))</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">0</span>)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mensuel.tail(<span class="dv">8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="9f270b9f" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mensuel[<span class="st">"ca"</span>].plot(title<span class="op">=</span><span class="st">"Chiffre d'affaires net par mois"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="à-toi-de-conclure-6" class="level3">
+<h3 class="anchored" data-anchor-id="à-toi-de-conclure-6">✍️ À toi de conclure</h3>
+<p>À partir d’octobre 2017, le nombre de commandes reste stable (il augmente même), mais le chiffre d’affaires mensuel s’effondre, de 1 million à 300 000. Avant d’annoncer une chute des ventes à la direction, quelles vérifications ferais-tu (changement de périmètre, de système, données incomplètes) ? Pourquoi est-il risqué de calculer une tendance « sur toute la période » ?</p>
+<p><em>Écris ta réponse ici, en deux ou trois phrases, comme si tu l’envoyais à ton responsable.</em></p>
+<hr>
+</section>
+</section>
+<section id="pour-aller-plus-loin-le-panier-moyen-a-t-il-changé" class="level2">
+<h2 class="anchored" data-anchor-id="pour-aller-plus-loin-le-panier-moyen-a-t-il-changé">7.2 Pour aller plus loin : le panier moyen a-t-il changé ?</h2>
+<p>Compare, avant et après le 1er octobre 2017, le nombre moyen de <strong>lignes</strong> par commande et le chiffre d’affaires net moyen <strong>par commande</strong>.</p>
+<p>Indice : regroupe d’abord par commande, puis par période.</p>
+<div id="890ef97d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># attendu :</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co">#          nb_lignes_moyen  panier_moyen</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co"># periode                               </span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co"># après               1.02        271.35</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="co"># avant               3.00        536.61</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    commandes</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"id_commande"</span>, as_index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    .agg(date<span class="op">=</span>(<span class="st">"date_commande"</span>, <span class="st">"first"</span>), nb_lignes<span class="op">=</span>(<span class="st">"id_ligne"</span>, <span class="st">"count"</span>), ca<span class="op">=</span>(<span class="st">"ca_net"</span>, <span class="st">"sum"</span>))</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    .assign(periode<span class="op">=</span>pd.col(<span class="st">"date"</span>).case_when([</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>        (pd.col(<span class="st">"date"</span>) <span class="op">&lt;</span> <span class="st">"2017-10-01"</span>, <span class="st">"avant"</span>),</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>        (pd.col(<span class="st">"date"</span>) <span class="op">&gt;=</span> <span class="st">"2017-10-01"</span>, <span class="st">"après"</span>),</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    ]))</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"periode"</span>)</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>    .agg(nb_lignes_moyen<span class="op">=</span>(<span class="st">"nb_lignes"</span>, <span class="st">"mean"</span>), panier_moyen<span class="op">=</span>(<span class="st">"ca"</span>, <span class="st">"mean"</span>))</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>Après octobre 2017, les commandes ne contiennent plus qu’<strong>une seule</strong> ligne. Ce n’est pas un comportement client : c’est presque certainement un changement dans la façon dont les données ont été enregistrées. Un bon réflexe d’analyste : quand une courbe casse brutalement, suspecter <strong>les données</strong> avant le métier.</p>
+<hr>
+</section>
+</section>
+<section id="partie-8-la-synthèse" class="level1">
+<h1>Partie 8 : la synthèse</h1>
+<p>Une analyse exploratoire se termine toujours par une <strong>restitution</strong>. Rédige ci-dessous une note de 5 à 10 lignes pour ton responsable :</p>
+<ul>
+<li>les <strong>3 constats</strong> les plus importants, chacun appuyé par un chiffre ;</li>
+<li>pour chacun, une <strong>recommandation</strong> ou une <strong>question</strong> à creuser avec le métier ;</li>
+<li>les <strong>limites</strong> des données que tu as rencontrées.</li>
+</ul>
+<p>Pas de jargon technique : ton responsable ne lit pas de code.</p>
+<section id="ma-note-de-synthèse" class="level3">
+<h3 class="anchored" data-anchor-id="ma-note-de-synthèse">✍️ Ma note de synthèse</h3>
+<p><em>1. Constat :</em></p>
+<p><em>2. Constat :</em></p>
+<p><em>3. Constat :</em></p>
+<p><em>Limites des données :</em></p>
+<details>
+<summary>
+💡 Un exemple de synthèse
+</summary>
+<ol type="1">
+<li><strong>Les retards viennent surtout de nos promesses.</strong> 57 % des livraisons arrivent en retard. Le First Class promet 1 jour et livre toujours en 2 (100 % de retards), le Second Class promet 2 jours et en met 4 (80 %). Recommandation : aligner les délais affichés sur les délais réels, ce qui supprimerait une grande partie des retards sans coût logistique. Le Standard Class respecte son délai en moyenne mais reste en retard 4 fois sur 10 : là, c’est la régularité du transport qu’il faut travailler. La géographie n’y est pour rien : tous les marchés sont autour de 57 %.</li>
+<li><strong>Une poignée de produits fait l’essentiel du chiffre d’affaires.</strong> 7 produits sur 118 font 80 % du CA. Ce sont eux qu’il faut prévoir finement et ne jamais laisser en rupture.</li>
+<li><strong>La fraude suspectée ne touche que les virements.</strong> Environ 8 % des lignes payées par virement sont suspectes, contre 0 % pour les autres moyens de paiement. À creuser avec le service fraude : est-ce une vraie fraude ou une règle de détection appliquée aux seuls virements ?</li>
+</ol>
+<strong>Limites</strong> : à partir d’octobre 2017, les commandes ne comptent plus qu’une ligne et le chiffre d’affaires mensuel est divisé par trois alors que le nombre de commandes est stable, ce qui ressemble à un changement de système. Les comparaisons dans le temps doivent s’arrêter à septembre 2017 tant que ce point n’est pas éclairci. Près d’une ligne sur cinq est vendue à perte, sans lien clair avec les remises : à étudier avec le contrôle de gestion.
+</details>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/surybang\.github\.io\/python_data\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Fabien HOS 👩🏻‍💻</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/surybang/python_data/blob/main/notebooks/pandas/pandas-projet-dataco.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
