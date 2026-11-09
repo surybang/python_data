@@ -64,6 +64,8 @@ website:
         contents:
           - text: "Structure de données"
             href: 04-pandas/01-structures-donnees.qmd
+          - text: "Charger et explorer"
+            href: 04-pandas/02-charger-explorer.qmd
       - section: "Créer des projets reproductibles"
         href: 05-projet-reproductible/index.qmd
         contents:
