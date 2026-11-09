@@ -616,18 +616,11 @@ Tip
 <p><a href="https://colab.research.google.com/github/surybang/python_data/blob/main/notebooks/pandas/01-structures-donnees.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?autoLaunch=true&amp;name=%C2%AB01_premiers_pas%C2%BB&amp;init.personalInit=%C2%ABhttps%3A%2F%2Fraw.githubusercontent.com%2Fsurybang%2Fpython_data%2Fmain%2Fscripts%2Finit.sh%C2%BB&amp;init.personalInitArgs=%C2%ABpandas%2F01-structures-donnees%C2%BB"><img src="https://img.shields.io/badge/SSPCloud-Lancer-blue?logo=visualstudiocode.png" class="img-fluid" alt="Open In SSP Cloud"></a></p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Quelle version ?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Ce cours utilise <strong>pandas 3</strong>. Si vous êtes sur pandas 2, tout fonctionne de la même façon dans cette page, à un détail d’affichage près : les colonnes de texte y apparaissent avec le type <code>object</code> au lieu de <code>str</code>. Pour connaître votre version : <code>pd.__version__</code>.</p>
-</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/dataframe-anatomie.svg" class="img-fluid figure-img" style="width:100.0%" alt="Schéma d'un DataFrame : noms de colonnes, index, types, une colonne extraite et une ligne extraite sous forme de Series"></p>
+<figcaption>Un DataFrame : chaque colonne est une Series, et une ligne extraite en est une aussi.</figcaption>
+</figure>
 </div>
 <hr>
 <section id="la-series-une-colonne-de-données" class="level2">
@@ -688,7 +681,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -697,7 +690,7 @@ dtype: int64</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <pre><code>avr      NaN
 fev     21.0
@@ -845,7 +838,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -854,7 +847,7 @@ dtype: float64</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>C’est <code>axis=0</code> qui donne le total de chaque colonne… alors que 0 désigne les lignes.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>nombres.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)    <span class="co"># 2 valeurs : une par colonne</span></span>
@@ -1060,7 +1053,7 @@ Name: count, dtype: int64</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ventes_ca <span class="op">=</span> ventes.assign(ca<span class="op">=</span>ventes[<span class="st">"quantite"</span>] <span class="op">*</span> ventes[<span class="st">"prix"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>C’est voulu, et c’est une bonne nouvelle : l’original reste intact tant que vous ne le remplacez pas explicitement, et chaque étape de votre analyse produit un nouvel objet. C’est ce qui permettra, plus tard, d’<strong>enchaîner</strong> les méthodes les unes après les autres.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1069,7 +1062,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Vous vous souvenez du schéma des étiquettes en mémoire ? En pandas 2, extraire une partie d’un DataFrame puis la modifier pouvait, selon les cas, modifier aussi l’original, d’où le célèbre avertissement <code>SettingWithCopyWarning</code>.</p>
 <p>pandas 3 applique désormais le <strong>Copy-on-Write</strong> : tout objet extrait d’un DataFrame se comporte comme une copie indépendante. Modifier l’un ne modifie jamais l’autre. Si vous croisez ce warning dans du code plus ancien, vous savez maintenant d’où il vient.</p>
