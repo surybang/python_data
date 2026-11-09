@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Test TabICL – Python &amp; data</title>
+<title>pandas : Series et DataFrame (exercices) – Python &amp; data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -64,28 +64,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-37939e3eb262a553528e6d6fe3c4a74d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-f1fc3fe1c58281fce00a66b0e554d045.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-37939e3eb262a553528e6d6fe3c4a74d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-37939e3eb262a553528e6d6fe3c4a74d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-f1fc3fe1c58281fce00a66b0e554d045.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-37939e3eb262a553528e6d6fe3c4a74d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../../style.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Python &amp; data</span>
     </a>
   </div>
@@ -322,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Test TabICL</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">pandas : Series et DataFrame (exercices)</li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -336,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Accueil</span></a>
   </div>
 </li>
@@ -348,13 +348,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
+  <a href="../../01-introduction/01-langages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Langages de programmation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
+  <a href="../../01-introduction/02-pourquoi-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pourquoi Python ?</span></a>
   </div>
 </li>
@@ -362,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../02-environnement/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../02-environnement/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text" id="quarto-sidebar-section-2-label">Environnement</span></a>
             <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: Environnement">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
@@ -371,13 +371,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
+  <a href="../../02-environnement/01-local.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installer en local</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
+  <a href="../../02-environnement/02-cloud.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Environnements en ligne</span></a>
   </div>
 </li>
@@ -385,7 +385,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../03-initiation-python/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text" id="quarto-sidebar-section-3-label">Initiation Python</span></a>
             <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: Initiation Python">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
@@ -394,55 +394,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03-initiation-python/00-premiers-pas-notebooks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Premiers pas en notebook</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03-initiation-python/01-variables-types-operations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variables, types &amp; opérations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03-initiation-python/02-conditions-boucles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditions &amp; boucles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03-initiation-python/03-structures-donnees.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Structures de données</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03-initiation-python/04-slicing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Le slicing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03-initiation-python/05-fonctions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Les fonctions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/06-erreurs-exceptions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03-initiation-python/06-erreurs-exceptions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Erreurs et exceptions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/07-scripts-jeux.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03-initiation-python/07-scripts-jeux.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Scripts et jeux</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03-initiation-python/08-python-sql.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03-initiation-python/08-python-sql.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base de données</span></a>
   </div>
 </li>
@@ -450,7 +450,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../04-pandas/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../04-pandas/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text" id="quarto-sidebar-section-4-label">Pandas pour l'analyse de données</span></a>
             <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: Pandas pour l'analyse de données">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
@@ -459,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../04-pandas/01-structures-donnees.html" class="sidebar-item-text sidebar-link">
+  <a href="../../04-pandas/01-structures-donnees.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Structure de données</span></a>
   </div>
 </li>
@@ -467,7 +467,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../05-projet-reproductible/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../05-projet-reproductible/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text" id="quarto-sidebar-section-5-label">Créer des projets reproductibles</span></a>
             <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: Créer des projets reproductibles">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
@@ -476,7 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../05-projet-reproductible/uv.html" class="sidebar-item-text sidebar-link">
+  <a href="../../05-projet-reproductible/uv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">uv pour les gouverner tous</span></a>
   </div>
 </li>
@@ -484,13 +484,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../06-dbt/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../06-dbt/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">dbt</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../07-Cloud/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../07-Cloud/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text" id="quarto-sidebar-section-6-label">Cloud</span></a>
             <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: Cloud">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
@@ -499,7 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../07-Cloud/GCP/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../07-Cloud/GCP/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text" id="quarto-sidebar-section-7-label">GCP</span></a>
             <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section: GCP">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
@@ -508,13 +508,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../07-Cloud/GCP/01-cloud-storage.html" class="sidebar-item-text sidebar-link">
+  <a href="../../07-Cloud/GCP/01-cloud-storage.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Google Cloud Storage (GCS)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../07-Cloud/GCP/02-bigquery.html" class="sidebar-item-text sidebar-link">
+  <a href="../../07-Cloud/GCP/02-bigquery.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BigQuery</span></a>
   </div>
 </li>
@@ -524,7 +524,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../logs/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../logs/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text" id="quarto-sidebar-section-8-label">Logs</span></a>
             <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section: Logs">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
@@ -533,7 +533,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../logs/tabicl.html" class="sidebar-item-text sidebar-link">
+  <a href="../../logs/tabicl.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">TabICL</span></a>
   </div>
 </li>
@@ -549,13 +549,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#données-et-modèles" id="toc-données-et-modèles" class="nav-link active" data-scroll-target="#données-et-modèles">1. Données et modèles</a></li>
-  <li><a href="#un-compteur-de-prédictions" id="toc-un-compteur-de-prédictions" class="nav-link" data-scroll-target="#un-compteur-de-prédictions">2. Un compteur de prédictions</a></li>
-  <li><a href="#shap-combien-de-prédictions-combien-de-temps" id="toc-shap-combien-de-prédictions-combien-de-temps" class="nav-link" data-scroll-target="#shap-combien-de-prédictions-combien-de-temps">3. SHAP : combien de prédictions, combien de temps ?</a></li>
-  <li><a href="#faire-varier-les-paramètres" id="toc-faire-varier-les-paramètres" class="nav-link" data-scroll-target="#faire-varier-les-paramètres">4. Faire varier les paramètres</a></li>
-  <li><a href="#pour-comparer-limportance-par-permutation" id="toc-pour-comparer-limportance-par-permutation" class="nav-link" data-scroll-target="#pour-comparer-limportance-par-permutation">5. Pour comparer : l’importance par permutation</a></li>
+  <li><a href="#créer-une-series" id="toc-créer-une-series" class="nav-link active" data-scroll-target="#créer-une-series">1. Créer une Series</a></li>
+  <li><a href="#calculer-sans-boucle" id="toc-calculer-sans-boucle" class="nav-link" data-scroll-target="#calculer-sans-boucle">2. Calculer sans boucle</a></li>
+  <li><a href="#des-index-qui-ne-salignent-pas" id="toc-des-index-qui-ne-salignent-pas" class="nav-link" data-scroll-target="#des-index-qui-ne-salignent-pas">3. Des index qui ne s’alignent pas</a></li>
+  <li><a href="#créer-un-dataframe" id="toc-créer-un-dataframe" class="nav-link" data-scroll-target="#créer-un-dataframe">4. Créer un DataFrame</a></li>
+  <li><a href="#inspecter-et-corriger-une-erreur" id="toc-inspecter-et-corriger-une-erreur" class="nav-link" data-scroll-target="#inspecter-et-corriger-une-erreur">5. Inspecter, et corriger une erreur</a></li>
+  <li><a href="#series-ou-dataframe" id="toc-series-ou-dataframe" class="nav-link" data-scroll-target="#series-ou-dataframe">6. Series ou DataFrame ?</a></li>
+  <li><a href="#compter-sans-boucle" id="toc-compter-sans-boucle" class="nav-link" data-scroll-target="#compter-sans-boucle">7. Compter sans boucle</a></li>
+  <li><a href="#axis0-ou-axis1" id="toc-axis0-ou-axis1" class="nav-link" data-scroll-target="#axis0-ou-axis1">8. <code>axis=0</code> ou <code>axis=1</code> ?</a></li>
+  <li><a href="#loc-et-iloc" id="toc-loc-et-iloc" class="nav-link" data-scroll-target="#loc-et-iloc">9. <code>loc</code> et <code>iloc</code></a></li>
+  <li><a href="#chasse-au-bug-la-colonne-qui-disparaît" id="toc-chasse-au-bug-la-colonne-qui-disparaît" class="nav-link" data-scroll-target="#chasse-au-bug-la-colonne-qui-disparaît">10. Chasse au bug : la colonne qui disparaît</a></li>
+  <li><a href="#pour-aller-plus-loin-quel-transporteur-charge-le-plus" id="toc-pour-aller-plus-loin-quel-transporteur-charge-le-plus" class="nav-link" data-scroll-target="#pour-aller-plus-loin-quel-transporteur-charge-le-plus">11. Pour aller plus loin : quel transporteur charge le plus ?</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.dev/surybang/python_data/blob/main/notebooks/TabICL.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/surybang/python_data/blob/main/notebooks/pandas/01-structures-donnees.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
@@ -563,7 +569,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Test TabICL</h1>
+<h1 class="title">pandas : Series et DataFrame (exercices)</h1>
 </div>
 
 
@@ -580,176 +586,292 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="6e6faf56" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shap</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> HistGradientBoostingClassifier</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabicl <span class="im">import</span> TabICLClassifier</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pour chaque exercice : complète les cellules marquées <code># TODO</code>, exécute-les et compare avec le résultat attendu. Ne regarde la solution qu’après avoir vraiment essayé !</p>
+<p>On travaille sur les livraisons d’un petit entrepôt.</p>
+<div id="c01" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="données-et-modèles" class="level2">
-<h2 class="anchored" data-anchor-id="données-et-modèles">1. Données et modèles</h2>
-<div id="69552253" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> load_breast_cancer(return_X_y<span class="op">=</span><span class="va">True</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="créer-une-series" class="level2">
+<h2 class="anchored" data-anchor-id="créer-une-series">1. Créer une Series</h2>
+<p>Crée une Series <code>stocks</code> qui contient les quantités <code>[120, 35, 0, 80]</code>, avec pour index les articles <code>"vis"</code>, <code>"écrou"</code>, <code>"clou"</code>, <code>"rondelle"</code>, et nommée <code>"stock"</code>. Affiche ensuite le stock de clous <strong>en utilisant son étiquette</strong>.</p>
+<div id="c03" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu :</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="fac8b466" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.25</span>, random_state<span class="op">=</span><span class="dv">0</span>, stratify<span class="op">=</span>y</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape, X_test.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(426, 30) (143, 30)</code></pre>
-</div>
-</div>
-<div id="f2db1439" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>modeles <span class="op">=</span>{</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gradient Boosting"</span>: HistGradientBoostingClassifier(random_state<span class="op">=</span><span class="dv">0</span>),</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TabICL"</span>: TabICLClassifier(),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TabICL + kv_cache"</span>: TabICLClassifier(kv_cache<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nom, modele <span class="kw">in</span> modeles.items():</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    debut <span class="op">=</span> time.perf_counter()</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    modele.fit(X_train, y_train)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    duree_fit <span class="op">=</span> time.perf_counter() <span class="op">-</span> debut</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    debut <span class="op">=</span> time.perf_counter()</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> modele.score(X_test, y_test)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    duree_predict <span class="op">=</span> time.perf_counter() <span class="op">-</span> debut</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>nom<span class="sc">:&lt;20}</span><span class="ss"> fit : </span><span class="sc">{</span>duree_fit<span class="sc">:6.2f}</span><span class="ss"> s   predict (</span><span class="sc">{</span><span class="bu">len</span>(X_test)<span class="sc">}</span><span class="ss"> lignes) : </span><span class="sc">{</span>duree_predict<span class="sc">:6.2f}</span><span class="ss"> s   accuracy : </span><span class="sc">{</span>score<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Gradient Boosting    fit :   0.35 s   predict (143 lignes) :   0.00 s   accuracy : 0.937
-INFO: You are downloading 'tabicl-classifier-v2-20260212.ckpt', the latest best-performing version, used in our TabICLv2 paper.
-
-Checkpoint 'tabicl-classifier-v2-20260212.ckpt' not cached.
- Downloading from Hugging Face Hub (jingang/TabICL).
-
-TabICL               fit :   3.62 s   predict (143 lignes) :  14.25 s   accuracy : 0.965
-TabICL + kv_cache    fit :   8.60 s   predict (143 lignes) :   3.41 s   accuracy : 0.965</code></pre>
-</div>
-</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>stocks <span class="op">=</span> pd.Series(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">120</span>, <span class="dv">35</span>, <span class="dv">0</span>, <span class="dv">80</span>],</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"vis"</span>, <span class="st">"écrou"</span>, <span class="st">"clou"</span>, <span class="st">"rondelle"</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"stock"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stocks[<span class="st">"clou"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </section>
-<section id="un-compteur-de-prédictions" class="level2">
-<h2 class="anchored" data-anchor-id="un-compteur-de-prédictions">2. Un compteur de prédictions</h2>
-<p>On enveloppe la fonction de prédiction dans une petite classe qui compte le nombre de <strong>lignes</strong> prédites et le nombre d’<strong>appels</strong>.</p>
-<div id="86fe98cc" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CompteurPredictions:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Enveloppe predict_proba d'un modèle et compte les lignes prédites."""</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, modele):</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.modele <span class="op">=</span> modele</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nb_lignes <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nb_appels <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, X):</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nb_lignes <span class="op">+=</span> <span class="bu">len</span>(X)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nb_appels <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.modele.predict_proba(X)[:, <span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="calculer-sans-boucle" class="level2">
+<h2 class="anchored" data-anchor-id="calculer-sans-boucle">2. Calculer sans boucle</h2>
+<p>Sans écrire de boucle :</p>
+<ol type="1">
+<li>affiche le stock total ;</li>
+<li>affiche une Series de booléens qui indique les articles dont le stock est <strong>inférieur à 50</strong> ;</li>
+<li>affiche les stocks après une livraison qui ajoute 10 unités à <strong>chaque</strong> article.</li>
+</ol>
+<div id="c06" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu :</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 235</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># vis         False</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># écrou        True</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># clou         True</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rondelle    False</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: stock, dtype: bool</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># vis         130</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># écrou        45</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># clou         10</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># rondelle     90</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: stock, dtype: int64</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stocks.<span class="bu">sum</span>())</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stocks <span class="op">&lt;</span> <span class="dv">50</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stocks <span class="op">+</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </section>
-<section id="shap-combien-de-prédictions-combien-de-temps" class="level2">
-<h2 class="anchored" data-anchor-id="shap-combien-de-prédictions-combien-de-temps">3. SHAP : combien de prédictions, combien de temps ?</h2>
-<p>Paramètres du test : on explique <code>NB_LIGNES</code> prédictions, avec un échantillon de référence de <code>MAX_SAMPLES</code> lignes. Commencez petit : sur CPU, TabICL peut être long.</p>
-<div id="eb936915" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>NB_LIGNES <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>MAX_SAMPLES <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>resultats_shap <span class="op">=</span> {}</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nom, modele <span class="kw">in</span> modeles.items():</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    compteur <span class="op">=</span> CompteurPredictions(modele)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    explainer <span class="op">=</span> shap.Explainer(</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        compteur,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        shap.maskers.Independent(X_train, max_samples<span class="op">=</span>MAX_SAMPLES),</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    debut <span class="op">=</span> time.perf_counter()</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    valeurs_shap <span class="op">=</span> explainer(X_test.iloc[:NB_LIGNES])</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    duree <span class="op">=</span> time.perf_counter() <span class="op">-</span> debut</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    resultats_shap[nom] <span class="op">=</span> valeurs_shap</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>nom<span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>compteur<span class="sc">.</span>nb_lignes<span class="sc">:&gt;8}</span><span class="ss"> lignes prédites "</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"en </span><span class="sc">{</span>compteur<span class="sc">.</span>nb_appels<span class="sc">:&gt;4}</span><span class="ss"> appels   durée : </span><span class="sc">{</span>duree<span class="sc">:7.1f}</span><span class="ss"> s"</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Background dataset has 426 samples but max_samples=50. Subsampling to 50 samples for SHAP value computation. To use all samples, set max_samples=426 when initializing the masker.
-Background dataset has 426 samples but max_samples=50. Subsampling to 50 samples for SHAP value computation. To use all samples, set max_samples=426 when initializing the masker.</code></pre>
+<section id="des-index-qui-ne-salignent-pas" class="level2">
+<h2 class="anchored" data-anchor-id="des-index-qui-ne-salignent-pas">3. Des index qui ne s’alignent pas</h2>
+<p>Sans exécuter le code, devine ce qu’affiche la cellule suivante, puis vérifie.</p>
+<div id="c09" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>semaine_1 <span class="op">=</span> pd.Series([<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">2</span>], index<span class="op">=</span>[<span class="st">"vis"</span>, <span class="st">"écrou"</span>, <span class="st">"clou"</span>])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>semaine_2 <span class="op">=</span> pd.Series([<span class="dv">3</span>, <span class="dv">4</span>], index<span class="op">=</span>[<span class="st">"clou"</span>, <span class="st">"vis"</span>])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(semaine_1 <span class="op">+</span> semaine_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Gradient Boosting       76236 lignes prédites en   26 appels   durée :     8.2 s</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>PermutationExplainer explainer: 4it [09:06, 182.27s/it]                      
-Background dataset has 426 samples but max_samples=50. Subsampling to 50 samples for SHAP value computation. To use all samples, set max_samples=426 when initializing the masker.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>TabICL                  76236 lignes prédites en   26 appels   durée :   546.8 s</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>PermutationExplainer explainer: 4it [08:18, 166.20s/it]                      </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>TabICL + kv_cache       76236 lignes prédites en   26 appels   durée :   498.6 s</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-</div>
-<div id="03f1ffc7" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualiser l'explication de la première prédiction de TabICL</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>shap.plots.waterfall(resultats_shap[<span class="st">"TabICL"</span>][<span class="dv">0</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="TabICL_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>✍️ Ta prédiction :</p>
+<ul>
+<li>valeur pour <code>vis</code> :</li>
+<li>valeur pour <code>écrou</code> :</li>
+<li>valeur pour <code>clou</code> :</li>
+</ul>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clou      5.0    ← 2 + 3</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># vis       9.0    ← 5 + 4</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># écrou     NaN    ← absent de semaine_2</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># dtype: float64</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pandas additionne les valeurs qui ont la même étiquette, pas la même position.</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># "écrou" n'existe que dans semaine_1 : le résultat est NaN (donnée manquante),</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># et toutes les valeurs passent en float, car NaN est un float.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </section>
-<section id="faire-varier-les-paramètres" class="level2">
-<h2 class="anchored" data-anchor-id="faire-varier-les-paramètres">4. Faire varier les paramètres</h2>
-<p>Comment évolue le coût quand on change la taille de l’échantillon de référence ? (Sur le modèle à arbres seulement, pour que ce soit rapide : le nombre de prédictions ne dépend pas du modèle.)</p>
-<div id="11926e5a" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> max_samples <span class="kw">in</span> [<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>]:</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    compteur <span class="op">=</span> CompteurPredictions(modeles[<span class="st">"Gradient Boosting"</span>])</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    explainer <span class="op">=</span> shap.Explainer(compteur, shap.maskers.Independent(X_train, max_samples<span class="op">=</span>max_samples))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    explainer(X_test.iloc[:NB_LIGNES])</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"max_samples = </span><span class="sc">{</span>max_samples<span class="sc">:&gt;3}</span><span class="ss"> → </span><span class="sc">{</span>compteur<span class="sc">.</span>nb_lignes<span class="sc">:&gt;8}</span><span class="ss"> lignes prédites pour </span><span class="sc">{</span>NB_LIGNES<span class="sc">}</span><span class="ss"> lignes expliquées"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Background dataset has 426 samples but max_samples=10. Subsampling to 10 samples for SHAP value computation. To use all samples, set max_samples=426 when initializing the masker.
-Background dataset has 426 samples but max_samples=50. Subsampling to 50 samples for SHAP value computation. To use all samples, set max_samples=426 when initializing the masker.
-Background dataset has 426 samples but max_samples=100. Subsampling to 100 samples for SHAP value computation. To use all samples, set max_samples=426 when initializing the masker.</code></pre>
+<section id="créer-un-dataframe" class="level2">
+<h2 class="anchored" data-anchor-id="créer-un-dataframe">4. Créer un DataFrame</h2>
+<p>Crée le DataFrame <code>livraisons</code> à partir du dictionnaire ci-dessous, puis affiche-le.</p>
+<div id="c13" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>donnees <span class="op">=</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"transporteur"</span>: [<span class="st">"Rapido"</span>, <span class="st">"Colixo"</span>, <span class="st">"Rapido"</span>, <span class="st">"Fretex"</span>, <span class="st">"Colixo"</span>],</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"colis"</span>: [<span class="dv">12</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">3</span>],</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"poids_kg"</span>: [<span class="fl">30.5</span>, <span class="fl">8.0</span>, <span class="fl">14.2</span>, <span class="fl">61.0</span>, <span class="fl">4.5</span>],</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu :</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   transporteur  colis  poids_kg</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 0       Rapido     12      30.5</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 1       Colixo      5       8.0</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2       Rapido      8      14.2</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3       Fretex     20      61.0</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 4       Colixo      3       4.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>max_samples =  10 →    15244 lignes prédites pour 3 lignes expliquées
-max_samples =  50 →    76236 lignes prédites pour 3 lignes expliquées
-max_samples = 100 →   152536 lignes prédites pour 3 lignes expliquées</code></pre>
-</div>
-</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>livraisons <span class="op">=</span> pd.DataFrame(donnees)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(livraisons)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </section>
-<section id="pour-comparer-limportance-par-permutation" class="level2">
-<h2 class="anchored" data-anchor-id="pour-comparer-limportance-par-permutation">5. Pour comparer : l’importance par permutation</h2>
-<p>Beaucoup moins coûteuse : <code>n_repeats</code> × nombre de variables appels à <code>predict</code>, chacun sur tout le jeu de test.</p>
-<div id="f6e6a104" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nom, modele <span class="kw">in</span> modeles.items():</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    debut <span class="op">=</span> time.perf_counter()</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    resultat <span class="op">=</span> permutation_importance(modele, X_test, y_test, n_repeats<span class="op">=</span><span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    duree <span class="op">=</span> time.perf_counter() <span class="op">-</span> debut</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>nom<span class="sc">:&lt;20}</span><span class="ss"> durée : </span><span class="sc">{</span>duree<span class="sc">:7.1f}</span><span class="ss"> s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Gradient Boosting    durée :     0.6 s</code></pre>
+<section id="inspecter-et-corriger-une-erreur" class="level2">
+<h2 class="anchored" data-anchor-id="inspecter-et-corriger-une-erreur">5. Inspecter, et corriger une erreur</h2>
+<p>Cette cellule doit afficher le nombre de lignes et de colonnes, puis le type de chaque colonne. Elle plante : exécute-la, lis le message d’erreur, et corrige-la.</p>
+<div id="c16" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(livraisons.shape())</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(livraisons.dtypes)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu après correction :</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (5, 3)</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># transporteur        str</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># colis             int64</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># poids_kg        float64</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># dtype: object</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TypeError: 'tuple' object is not callable</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># shape est un ATTRIBUT (une information stockée), pas une méthode : pas de parenthèses.</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(livraisons.shape)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(livraisons.dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</section>
+<section id="series-ou-dataframe" class="level2">
+<h2 class="anchored" data-anchor-id="series-ou-dataframe">6. Series ou DataFrame ?</h2>
+<p>Sans exécuter, devine le type de <code>a</code> et de <code>b</code>, puis vérifie avec <code>type()</code>.</p>
+<div id="c19" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> livraisons[<span class="st">"colis"</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> livraisons[[<span class="st">"colis"</span>]]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> : affiche le type de a et de b</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu :</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;class 'pandas.Series'&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;class 'pandas.DataFrame'&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(b))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Un nom entre crochets → une Series. Une LISTE de noms (même d'un seul) → un DataFrame.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</section>
+<section id="compter-sans-boucle" class="level2">
+<h2 class="anchored" data-anchor-id="compter-sans-boucle">7. Compter sans boucle</h2>
+<p>Combien de livraisons a fait chaque transporteur ? Une seule ligne suffit.</p>
+<div id="c22" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu :</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># transporteur</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Rapido    2</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Colixo    2</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fretex    1</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: count, dtype: int64</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(livraisons[<span class="st">"transporteur"</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</section>
+<section id="axis0-ou-axis1" class="level2">
+<h2 class="anchored" data-anchor-id="axis0-ou-axis1">8. <code>axis=0</code> ou <code>axis=1</code> ?</h2>
+<p>Voici les colis expédiés par trois entrepôts sur trois mois.</p>
+<ol type="1">
+<li>Calcule le <strong>total de chaque mois</strong> (une valeur par colonne).</li>
+<li>Calcule le <strong>total de chaque entrepôt</strong> sur le trimestre (une valeur par ligne).</li>
+</ol>
+<div id="c25" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>expeditions <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"janv"</span>: [<span class="dv">100</span>, <span class="dv">80</span>, <span class="dv">60</span>], <span class="st">"fev"</span>: [<span class="dv">120</span>, <span class="dv">70</span>, <span class="dv">65</span>], <span class="st">"mars"</span>: [<span class="dv">90</span>, <span class="dv">85</span>, <span class="dv">70</span>]},</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Lille"</span>, <span class="st">"Lyon"</span>, <span class="st">"Nantes"</span>],</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu :</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># janv    240</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># fev     255</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># mars    245</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># dtype: int64</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Lille     310</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Lyon      235</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Nantes    195</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># dtype: int64</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(expeditions.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>))   <span class="co"># on « écrase » les lignes : une valeur par colonne</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(expeditions.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>))   <span class="co"># on « écrase » les colonnes : une valeur par ligne</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>🤔 Ici, additionner les colonnes a un sens métier : ce sont trois mesures de même nature (des colis par mois).</p>
+</section>
+<section id="loc-et-iloc" class="level2">
+<h2 class="anchored" data-anchor-id="loc-et-iloc">9. <code>loc</code> et <code>iloc</code></h2>
+<p>Avec le DataFrame <code>expeditions</code> :</p>
+<ol type="1">
+<li>affiche les expéditions de l’entrepôt de <strong>Lyon</strong> en utilisant son <strong>étiquette</strong> ;</li>
+<li>affiche la valeur de la <strong>dernière ligne</strong>, colonne <code>mars</code>, en utilisant les <strong>positions</strong>.</li>
+</ol>
+<div id="c29" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu :</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># janv    80</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fev     70</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># mars    85</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: Lyon, dtype: int64</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 70</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(expeditions.loc[<span class="st">"Lyon"</span>])</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(expeditions.iloc[<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>])   <span class="co"># dernière ligne (-1), troisième colonne (2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</section>
+<section id="chasse-au-bug-la-colonne-qui-disparaît" class="level2">
+<h2 class="anchored" data-anchor-id="chasse-au-bug-la-colonne-qui-disparaît">10. Chasse au bug : la colonne qui disparaît</h2>
+<p>Ce code doit ajouter une colonne <code>poids_moyen</code> (poids par colis), puis l’afficher. Il plante avec une <code>KeyError</code>. Pourquoi ? Corrige-le.</p>
+<div id="c32" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>livraisons.assign(poids_moyen<span class="op">=</span>livraisons[<span class="st">"poids_kg"</span>] <span class="op">/</span> livraisons[<span class="st">"colis"</span>])</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(livraisons[<span class="st">"poids_moyen"</span>].<span class="bu">round</span>(<span class="dv">2</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu après correction :</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 0    2.54</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1    1.60</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2    1.78</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3    3.05</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 4    1.50</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: poids_moyen, dtype: float64</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assign() ne modifie pas le DataFrame : il en RENVOIE un nouveau.</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Le résultat n'était stocké nulle part, la colonne n'existe donc pas dans livraisons.</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>livraisons <span class="op">=</span> livraisons.assign(poids_moyen<span class="op">=</span>livraisons[<span class="st">"poids_kg"</span>] <span class="op">/</span> livraisons[<span class="st">"colis"</span>])</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(livraisons[<span class="st">"poids_moyen"</span>].<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</section>
+<section id="pour-aller-plus-loin-quel-transporteur-charge-le-plus" class="level2">
+<h2 class="anchored" data-anchor-id="pour-aller-plus-loin-quel-transporteur-charge-le-plus">11. Pour aller plus loin : quel transporteur charge le plus ?</h2>
+<p>À partir de <code>livraisons</code>, affiche le <strong>poids moyen par colis</strong> le plus élevé, puis le <strong>nom du transporteur</strong> de cette livraison.</p>
+<p><em>Indice : <code>.max()</code> donne la valeur maximale, et <code>.idxmax()</code> donne l’étiquette de la ligne où elle se trouve.</em></p>
+<div id="c35" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Résultat attendu :</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.05</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fretex</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<details>
+<summary>
+💡 Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plus_lourd <span class="op">=</span> livraisons[<span class="st">"poids_moyen"</span>].<span class="bu">max</span>()</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ligne <span class="op">=</span> livraisons[<span class="st">"poids_moyen"</span>].idxmax()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(plus_lourd, <span class="dv">2</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(livraisons.loc[ligne, <span class="st">"transporteur"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 
 
 </section>
@@ -1287,7 +1409,7 @@ max_samples = 100 →   152536 lignes prédites pour 3 lignes expliquées</code>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/surybang/python_data/blob/main/notebooks/TabICL.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/surybang/python_data/blob/main/notebooks/pandas/01-structures-donnees.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/surybang/python_data/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
