@@ -289,28 +289,44 @@
     "href": "04-pandas/08-projet-supply-chain.html",
     "title": "Projet : analyse exploratoire d’une supply chain",
     "section": "",
-    "text": "Tip\n\n\n\nPour accéder au notebook du projet c’est ici 👇\nVous savez maintenant charger, explorer, filtrer, nettoyer, transformer, regrouper et combiner des données. Il est temps de tout mettre bout à bout sur un vrai jeu de données, avec de vraies questions métier."
+    "text": "Tip\n\n\n\nPour accéder au notebook du projet c’est ici 👇\nVous savez maintenant charger, explorer, filtrer, nettoyer, transformer, regrouper et combiner des données. Il est temps de tout mettre bout à bout sur un vrai jeu de données, avec de vraies questions métier.",
+    "crumbs": [
+      "Pandas pour l'analyse de données",
+      "Projet Supply Chain"
+    ]
   },
   {
     "objectID": "04-pandas/08-projet-supply-chain.html#le-contexte",
     "href": "04-pandas/08-projet-supply-chain.html#le-contexte",
     "title": "Projet : analyse exploratoire d’une supply chain",
     "section": "Le contexte",
-    "text": "Le contexte\nVous venez d’arriver comme analyste chez DataCo Global, une entreprise qui vend des articles de sport, de vêtements et d’électronique dans le monde entier. Votre responsable vous transmet l’export des commandes de 2015 à début 2018 : 180 519 lignes de commande et 27 colonnes. Ses questions :\n\n\n\n\n\n\n\nQuestion\nCe que vous utiliserez\n\n\n\n\nLivrons-nous à l’heure ? Où est le problème ?\ngroupby, agg, pivot_table\n\n\nQuels produits comptent vraiment ?\nl’analyse ABC : cumsum, case_when\n\n\nOù gagne-t-on et où perd-on de l’argent ?\ntaux de marge, pd.cut\n\n\nY a-t-il de la fraude ?\ncrosstab avec normalize\n\n\nComment l’activité évolue-t-elle ?\n.dt.to_period, regroupements à deux niveaux"
+    "text": "Le contexte\nVous venez d’arriver comme analyste chez DataCo Global, une entreprise qui vend des articles de sport, de vêtements et d’électronique dans le monde entier. Votre responsable vous transmet l’export des commandes de 2015 à début 2018 : 180 519 lignes de commande et 27 colonnes. Ses questions :\n\n\n\n\n\n\n\nQuestion\nCe que vous utiliserez\n\n\n\n\nLivrons-nous à l’heure ? Où est le problème ?\ngroupby, agg, pivot_table\n\n\nQuels produits comptent vraiment ?\nl’analyse ABC : cumsum, case_when\n\n\nOù gagne-t-on et où perd-on de l’argent ?\ntaux de marge, pd.cut\n\n\nY a-t-il de la fraude ?\ncrosstab avec normalize\n\n\nComment l’activité évolue-t-elle ?\n.dt.to_period, regroupements à deux niveaux",
+    "crumbs": [
+      "Pandas pour l'analyse de données",
+      "Projet Supply Chain"
+    ]
   },
   {
     "objectID": "04-pandas/08-projet-supply-chain.html#ce-qui-change-par-rapport-aux-exercices",
     "href": "04-pandas/08-projet-supply-chain.html#ce-qui-change-par-rapport-aux-exercices",
     "title": "Projet : analyse exploratoire d’une supply chain",
     "section": "Ce qui change par rapport aux exercices",
-    "text": "Ce qui change par rapport aux exercices\n\nLes données ne sont pas fabriquées pour le cours : certaines surprises n’ont pas de « bonne réponse » toute faite.\nAprès chaque analyse, une cellule ✍️ À toi de conclure vous demande de traduire les chiffres en une phrase pour le métier.\nLe projet se termine par une note de synthèse : trois constats chiffrés, des recommandations et les limites des données."
+    "text": "Ce qui change par rapport aux exercices\n\nLes données ne sont pas fabriquées pour le cours : certaines surprises n’ont pas de « bonne réponse » toute faite.\nAprès chaque analyse, une cellule ✍️ À toi de conclure vous demande de traduire les chiffres en une phrase pour le métier.\nLe projet se termine par une note de synthèse : trois constats chiffrés, des recommandations et les limites des données.",
+    "crumbs": [
+      "Pandas pour l'analyse de données",
+      "Projet Supply Chain"
+    ]
   },
   {
     "objectID": "04-pandas/08-projet-supply-chain.html#la-source",
     "href": "04-pandas/08-projet-supply-chain.html#la-source",
     "title": "Projet : analyse exploratoire d’une supply chain",
     "section": "La source",
-    "text": "La source\nDataCo Smart Supply Chain for Big Data Analysis, F. Constante, F. Silva et A. Pereira (2019), Mendeley Data, DOI 10.17632/8gx2fvg2k6, licence CC BY 4.0. Le notebook utilise une version allégée (27 colonnes sur 53, sans données personnelles)."
+    "text": "La source\nDataCo Smart Supply Chain for Big Data Analysis, F. Constante, F. Silva et A. Pereira (2019), Mendeley Data, DOI 10.17632/8gx2fvg2k6, licence CC BY 4.0. Le notebook utilise une version allégée (27 colonnes sur 53, sans données personnelles).",
+    "crumbs": [
+      "Pandas pour l'analyse de données",
+      "Projet Supply Chain"
+    ]
   },
   {
     "objectID": "04-pandas/08-projet-supply-chain-slides.html#le-contexte",
