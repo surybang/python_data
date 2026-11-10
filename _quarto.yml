@@ -66,6 +66,8 @@ website:
             href: 04-pandas/01-structures-donnees.qmd
           - text: "Charger et explorer"
             href: 04-pandas/02-charger-explorer.qmd
+          - text: "Projet Supply Chain"
+            href: 04-pandas/08-projet-supply-chain.qmd
       - section: "Créer des projets reproductibles"
         href: 05-projet-reproductible/index.qmd
         contents:
